@@ -1,0 +1,652 @@
+{
+ "generatedAt": 1789644966168,
+ "courses": {
+  "welcome-belong": {
+   "title": "Welcome to Belong",
+   "modules": [
+    {
+     "mod": 0,
+     "title": "Why we're here: my story, and the story of Craveiral",
+     "language": "en",
+     "translated": null,
+     "segments": 44,
+     "chars": 4106,
+     "durationSec": 297,
+     "capability": null,
+     "tags": [
+      "land",
+      "years",
+      "built",
+      "every",
+      "about",
+      "everything",
+      "something",
+      "field"
+     ],
+     "regime": null,
+     "summary": "Hello, I'm Pedro. And if you're watching this, it's because you're part of Graverell. Maybe you started this week. Maybe you've been with us for years. Either way, I want to start at the beginning. Because everything we do here, every decision we",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
+     "moments": [
+      {
+       "t0": 51,
+       "teaches": "What is the origin of the name 'Graverell'?",
+       "audit": "verified"
+      },
+      {
+       "t0": 139,
+       "teaches": "What was Graverell primarily built to be?",
+       "audit": "verified"
+      },
+      {
+       "t0": 169,
+       "teaches": "When making decisions about the use of land at Graverell, what should be the primary consideration?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 198,
+       "teaches": "When designing new infrastructure at Graverell, what should be the guiding principle?",
+       "audit": "verified"
+      },
+      {
+       "t0": 139,
+       "teaches": "A new investor is proposing to build a large resort on a nearby plot of land, which would increase revenue for the local",
+       "audit": "verified"
+      },
+      {
+       "t0": 169,
+       "teaches": "A guest is requesting to build a private villa on a plot of land within the Graverell property, which would require clea",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 1,
+     "title": "Our vision, our mission, and the chain",
+     "language": "en",
+     "translated": null,
+     "segments": 104,
+     "chars": 5113,
+     "durationSec": 386,
+     "capability": null,
+     "tags": [
+      "belong",
+      "guests",
+      "guest",
+      "name",
+      "those",
+      "land",
+      "village",
+      "every"
+     ],
+     "regime": null,
+     "summary": "Welcome back. In this module I want to explain Belong. You've seen the word on our materials, in our communication, maybe on my email signature, Belong, giving shape to meaning.",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
+     "moments": [
+      {
+       "t0": 29,
+       "teaches": "What is the core conviction that Belong was founded on?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 109,
+       "teaches": "What is the vision of the organization in one line?",
+       "audit": "verified"
+      },
+      {
+       "t0": 134,
+       "teaches": "What should a worker at Graveral Farmhouse do to contribute to the regeneration of the territory?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 162,
+       "teaches": "How should a team member at the Mesa Ducam restaurant support the circular economy?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 188,
+       "teaches": "A new employee at the laundry service wants to contribute to the circular economy. What should they do?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 109,
+       "teaches": "A guest at the Graveral Farmhouse asks about the organization's vision. How should the staff member respond?",
+       "audit": "verified"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 2,
+     "title": "Our values, in practice",
+     "language": "en",
+     "translated": null,
+     "segments": 85,
+     "chars": 4886,
+     "durationSec": 350,
+     "capability": null,
+     "tags": [
+      "guest",
+      "guests",
+      "real",
+      "sustainability",
+      "something",
+      "financial",
+      "people",
+      "about"
+     ],
+     "regime": null,
+     "summary": "Every company has values. Most of them live on a wall in a meeting room and die there. I want hours to live in your hands, in the decisions you make when nobody's watching, when the day is long, when the guest is difficult, when the easy choice and the right c",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/2",
+     "moments": [
+      {
+       "t0": 27,
+       "teaches": "Why does the trainer prioritize financial sustainability?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 82,
+       "teaches": "What are the three aspects of sustainability mentioned by the trainer?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 56,
+       "teaches": "What should a worker do to protect the mission of Craverell?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 108,
+       "teaches": "How should a worker approach a convoluted process in their work?",
+       "audit": "verified"
+      },
+      {
+       "t0": 135,
+       "teaches": "A guest is complaining about the lack of comfort in their room. What should the worker do?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 162,
+       "teaches": "A new worker is setting up a room for a guest and is unsure how to balance simplicity and comfort. What should they do?",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 3,
+     "title": "Hospitality, the Craveiral way",
+     "language": "en",
+     "translated": null,
+     "segments": 116,
+     "chars": 4944,
+     "durationSec": 380,
+     "capability": null,
+     "tags": [
+      "hospitality",
+      "guest",
+      "service",
+      "check",
+      "those",
+      "guests",
+      "every",
+      "food"
+     ],
+     "regime": null,
+     "summary": "Let's talk about hospitality. The real thing, not the industry, the craft. I want to start with a distinction that changed the way I think about this work. There is a difference between service and hospitality.",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/3",
+     "moments": [
+      {
+       "t0": 29,
+       "teaches": "What is the main difference between service and hospitality?",
+       "audit": "verified"
+      },
+      {
+       "t0": 83,
+       "teaches": "How should guests be referred to, according to the trainer?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 111,
+       "teaches": "What should a staff member do when a guest arrives, according to the trainer?",
+       "audit": "verified"
+      },
+      {
+       "t0": 138,
+       "teaches": "What is a simple way to show hospitality, according to the trainer?",
+       "audit": "verified"
+      },
+      {
+       "t0": 166,
+       "teaches": "A couple has booked a room for their anniversary. What could a staff member do to show hospitality?",
+       "audit": "verified"
+      },
+      {
+       "t0": 194,
+       "teaches": "A guest asks for a recommendation on which beach to visit with their small children. What could a staff member say to sh",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 4,
+     "title": "The guest journey: from first click to farewell",
+     "language": "en",
+     "translated": null,
+     "segments": 78,
+     "chars": 5208,
+     "durationSec": 394,
+     "capability": null,
+     "tags": [
+      "stage",
+      "guests",
+      "every",
+      "guest",
+      "journey",
+      "first",
+      "morning",
+      "long"
+     ],
+     "regime": null,
+     "summary": "Every guest who arrives at Crevoral is on a journey that started long before the M501 brought them to our gate and finishes long after they leave. In this module, I want to walk that old journey with you, stage by stage, because each of you owns a piece of it ",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/4",
+     "moments": [],
+     "questions": 0
+    },
+    {
+     "mod": 5,
+     "title": "The houses, the farm, and the standards we keep",
+     "language": "en",
+     "translated": null,
+     "segments": 58,
+     "chars": 5321,
+     "durationSec": 411,
+     "capability": null,
+     "tags": [
+      "farm",
+      "meters",
+      "every",
+      "square",
+      "pool",
+      "guest",
+      "which",
+      "house"
+     ],
+     "regime": null,
+     "summary": "If you're going to represent Graveral, you need to know Graveral. Properly, in detail. The way you know your own home. This module is a tour. Some of this, you know. I want all of you to know all of it. Start with the big picture. 9 hectares. 38 independent ho",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/5",
+     "moments": [
+      {
+       "t0": 29,
+       "teaches": "What percentage of the land at Graveral is built?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 57,
+       "teaches": "What amenities are shared by all units at Graveral?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 117,
+       "teaches": "What should a team member do when a guest asks about the capacity of a two-bedroom house?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 146,
+       "teaches": "How should a team member respond to a guest's question about the flexibility of a two-bedroom house for a family with ki",
+       "audit": "corrected"
+      },
+      {
+       "t0": 174,
+       "teaches": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Graveral?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 200,
+       "teaches": "A guest is planning a wedding reception for 300 people and wants to know if Graveral has a suitable venue. What would yo",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 6,
+     "title": "FarmTable: where the philosophy becomes food",
+     "language": "en",
+     "translated": null,
+     "segments": 134,
+     "chars": 4998,
+     "durationSec": 383,
+     "capability": null,
+     "tags": [
+      "table",
+      "farm",
+      "about",
+      "guest",
+      "food",
+      "alentejo",
+      "many",
+      "every"
+     ],
+     "regime": null,
+     "summary": "If crevaryl has a soul, you can taste it, literally. This module is about the farm table and about food, which, if you know me at all,",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/6",
+     "moments": [
+      {
+       "t0": 28,
+       "teaches": "What percentage of the food served at the farm is grown on the property?",
+       "audit": "verified"
+      },
+      {
+       "t0": 54,
+       "teaches": "Why does the menu at the farm rotate with the seasons?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 81,
+       "teaches": "How should front-of-house staff approach describing the breakfast options to guests?",
+       "audit": "verified"
+      },
+      {
+       "t0": 161,
+       "teaches": "What information should front-of-house staff be able to provide about the wines on the list?",
+       "audit": "verified"
+      },
+      {
+       "t0": 28,
+       "teaches": "A guest asks where the vegetables in their salad came from. How should you respond?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 133,
+       "teaches": "A family with children asks about activities they can do together. What would be an appropriate suggestion based on the ",
+       "audit": "verified"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 7,
+     "title": "The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture",
+     "language": "en",
+     "translated": null,
+     "segments": 116,
+     "chars": 4507,
+     "durationSec": 349,
+     "capability": null,
+     "tags": [
+      "same",
+      "beach",
+      "farm",
+      "table",
+      "wedding",
+      "every",
+      "constellation",
+      "creviral"
+     ],
+     "regime": null,
+     "summary": "So far, we've mostly stood on the farm. In this module, I want to lift your eyes to the old constellation,",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/7",
+     "moments": [
+      {
+       "t0": 26,
+       "teaches": "What is the concept of the beach bar at Carvalhial?",
+       "audit": "verified"
+      },
+      {
+       "t0": 80,
+       "teaches": "What is the significance of Emesa do Cam in Lisbon?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 53,
+       "teaches": "What should you do when recommending the beach to guests?",
+       "audit": "verified"
+      },
+      {
+       "t0": 133,
+       "teaches": "What is the standard for events and catering at Creviral?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 160,
+       "teaches": "A guest is planning a wedding at Creviral and wants to know what options are available. What should you tell them?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 186,
+       "teaches": "A company is planning a corporate retreat at Creviral and wants to know what activities are available. What should you t",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 8,
+     "title": "When things go wrong: complaints and service recovery",
+     "language": "en",
+     "translated": null,
+     "segments": 121,
+     "chars": 4538,
+     "durationSec": 351,
+     "capability": null,
+     "tags": [
+      "guest",
+      "back",
+      "complaint",
+      "never",
+      "about",
+      "review",
+      "real",
+      "problem"
+     ],
+     "regime": null,
+     "summary": "Let's talk about the moments nobody puts on Instagram. The complaint at the front desk, the dish sent back, the guest who arrives already angry, the review that stings.",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/8",
+     "moments": [
+      {
+       "t0": 25,
+       "teaches": "What is a complaint considered as in this lesson?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 77,
+       "teaches": "What is the first step when a guest is upset?",
+       "audit": "verified"
+      },
+      {
+       "t0": 104,
+       "teaches": "How should you respond when a guest expresses disappointment?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 130,
+       "teaches": "What should you do after acknowledging a guest's disappointment?",
+       "audit": "verified"
+      },
+      {
+       "t0": 156,
+       "teaches": "A guest complains about a cold dish. What should you do?",
+       "audit": "verified"
+      },
+      {
+       "t0": 184,
+       "teaches": "A guest had a problem with their room, but it was resolved. What should you do the next morning?",
+       "audit": "verified"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 9,
+     "title": "Sustainability in daily practice: what the mission asks of you before lunch",
+     "language": "en",
+     "translated": null,
+     "segments": 78,
+     "chars": 4475,
+     "durationSec": 354,
+     "capability": null,
+     "tags": [
+      "every",
+      "farm",
+      "guests",
+      "water",
+      "waste",
+      "better",
+      "about",
+      "regeneration"
+     ],
+     "regime": null,
+     "summary": "We've talked about regeneration as a vision. Now let's bring it down to earth. Literally. Because sustainability at Craverell isn't a chapter in a report.",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/9",
+     "moments": [
+      {
+       "t0": 29,
+       "teaches": "Why is water recycling important at Craverell?",
+       "audit": "verified"
+      },
+      {
+       "t0": 80,
+       "teaches": "What should you do when you see lights on walkways and common areas that are not on schedule?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 29,
+       "teaches": "What should you do if you see a leak in the property?",
+       "audit": "verified"
+      },
+      {
+       "t0": 138,
+       "teaches": "What should the kitchen team do with organic scraps?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 163,
+       "teaches": "A supplier is offering a product at a lower price, but it's not from a local producer. What should you consider?",
+       "audit": "verified"
+      },
+      {
+       "t0": 106,
+       "teaches": "You are about to throw away a glass bottle. What should you do instead?",
+       "audit": "verified"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 10,
+     "title": "How we speak: the Craveiral voice",
+     "language": "en",
+     "translated": null,
+     "segments": 117,
+     "chars": 4134,
+     "durationSec": 335,
+     "capability": null,
+     "tags": [
+      "guests",
+      "words",
+      "about",
+      "place",
+      "voice",
+      "warm",
+      "never",
+      "care"
+     ],
+     "regime": null,
+     "summary": "This module is about words. It might seem like a strange training topic, but you'll use words with guests hundreds of times a day,",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/10",
+     "moments": [
+      {
+       "t0": 29,
+       "teaches": "What tone should the crevaryl voice convey when interacting with guests?",
+       "audit": "verified"
+      },
+      {
+       "t0": 55,
+       "teaches": "How should you say something to a guest if you're unsure how to phrase it?",
+       "audit": "verified"
+      },
+      {
+       "t0": 108,
+       "teaches": "What should you do when speaking with international guests who may not speak perfect English?",
+       "audit": "verified"
+      },
+      {
+       "t0": 159,
+       "teaches": "What can you do to make international guests feel more welcome and connected to the local culture?",
+       "audit": "verified"
+      },
+      {
+       "t0": 184,
+       "teaches": "A guest approaches you and seems hesitant to engage in conversation. What should you do?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 212,
+       "teaches": "You are writing an email to a guest who has booked a stay at the farm. How should you write the email?",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    },
+    {
+     "mod": 11,
+     "title": "Leadership, autonomy, and how we work together",
+     "language": "en",
+     "translated": null,
+     "segments": 130,
+     "chars": 4958,
+     "durationSec": 395,
+     "capability": null,
+     "tags": [
+      "people",
+      "work",
+      "guest",
+      "respect",
+      "real",
+      "never",
+      "mistake",
+      "about"
+     ],
+     "regime": null,
+     "summary": "Last module, and I've saved the most important conversation for the end, how we work together. Not the org chart, the real thing.",
+     "url": "https://academy.edenrise.com/#/play/welcome-belong/11",
+     "moments": [
+      {
+       "t0": 52,
+       "teaches": "What is the first principle of working together according to the trainer?",
+       "audit": "verified"
+      },
+      {
+       "t0": 105,
+       "teaches": "What is the trainer's stance on punishing team members for generous decisions made in good faith?",
+       "audit": "verified"
+      },
+      {
+       "t0": 79,
+       "teaches": "What should a team member do when a guest is in front of them and something needs to be solved?",
+       "audit": "verified"
+      },
+      {
+       "t0": 131,
+       "teaches": "What should a team member do when they catch a mistake early on?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 156,
+       "teaches": "A team member notices that the trainer has made a mistake in a decision. What should they do?",
+       "audit": "corrected"
+      },
+      {
+       "t0": 184,
+       "teaches": "A team member is struggling to meet the high standards set by the trainer. What should they do?",
+       "audit": "corrected"
+      }
+     ],
+     "questions": 6
+    }
+   ]
+  }
+ },
+ "reels": []
+}

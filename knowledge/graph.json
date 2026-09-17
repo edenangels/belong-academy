@@ -1,0 +1,1295 @@
+{
+ "generatedAt": 1789644968261,
+ "nodes": [
+  {
+   "id": "course:welcome-belong",
+   "kind": "course",
+   "title": "Welcome to Belong"
+  },
+  {
+   "id": "module:welcome-belong:0",
+   "kind": "module",
+   "title": "Why we're here: my story, and the story of Craveiral",
+   "course": "welcome-belong",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
+   "seconds": 297
+  },
+  {
+   "id": "concept:land",
+   "kind": "concept",
+   "title": "land"
+  },
+  {
+   "id": "concept:years",
+   "kind": "concept",
+   "title": "years"
+  },
+  {
+   "id": "concept:built",
+   "kind": "concept",
+   "title": "built"
+  },
+  {
+   "id": "concept:every",
+   "kind": "concept",
+   "title": "every"
+  },
+  {
+   "id": "concept:about",
+   "kind": "concept",
+   "title": "about"
+  },
+  {
+   "id": "concept:everything",
+   "kind": "concept",
+   "title": "everything"
+  },
+  {
+   "id": "concept:something",
+   "kind": "concept",
+   "title": "something"
+  },
+  {
+   "id": "concept:field",
+   "kind": "concept",
+   "title": "field"
+  },
+  {
+   "id": "module:welcome-belong:1",
+   "kind": "module",
+   "title": "Our vision, our mission, and the chain",
+   "course": "welcome-belong",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
+   "seconds": 386
+  },
+  {
+   "id": "concept:belong",
+   "kind": "concept",
+   "title": "belong"
+  },
+  {
+   "id": "concept:guests",
+   "kind": "concept",
+   "title": "guests"
+  },
+  {
+   "id": "concept:guest",
+   "kind": "concept",
+   "title": "guest"
+  },
+  {
+   "id": "concept:name",
+   "kind": "concept",
+   "title": "name"
+  },
+  {
+   "id": "concept:those",
+   "kind": "concept",
+   "title": "those"
+  },
+  {
+   "id": "concept:village",
+   "kind": "concept",
+   "title": "village"
+  },
+  {
+   "id": "module:welcome-belong:2",
+   "kind": "module",
+   "title": "Our values, in practice",
+   "course": "welcome-belong",
+   "mod": 2,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/2",
+   "seconds": 350
+  },
+  {
+   "id": "concept:real",
+   "kind": "concept",
+   "title": "real"
+  },
+  {
+   "id": "concept:sustainability",
+   "kind": "concept",
+   "title": "sustainability"
+  },
+  {
+   "id": "concept:financial",
+   "kind": "concept",
+   "title": "financial"
+  },
+  {
+   "id": "concept:people",
+   "kind": "concept",
+   "title": "people"
+  },
+  {
+   "id": "module:welcome-belong:3",
+   "kind": "module",
+   "title": "Hospitality, the Craveiral way",
+   "course": "welcome-belong",
+   "mod": 3,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/3",
+   "seconds": 380
+  },
+  {
+   "id": "concept:hospitality",
+   "kind": "concept",
+   "title": "hospitality"
+  },
+  {
+   "id": "concept:service",
+   "kind": "concept",
+   "title": "service"
+  },
+  {
+   "id": "concept:check",
+   "kind": "concept",
+   "title": "check"
+  },
+  {
+   "id": "concept:food",
+   "kind": "concept",
+   "title": "food"
+  },
+  {
+   "id": "module:welcome-belong:4",
+   "kind": "module",
+   "title": "The guest journey: from first click to farewell",
+   "course": "welcome-belong",
+   "mod": 4,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/4",
+   "seconds": 394
+  },
+  {
+   "id": "concept:stage",
+   "kind": "concept",
+   "title": "stage"
+  },
+  {
+   "id": "concept:journey",
+   "kind": "concept",
+   "title": "journey"
+  },
+  {
+   "id": "concept:first",
+   "kind": "concept",
+   "title": "first"
+  },
+  {
+   "id": "concept:morning",
+   "kind": "concept",
+   "title": "morning"
+  },
+  {
+   "id": "concept:long",
+   "kind": "concept",
+   "title": "long"
+  },
+  {
+   "id": "module:welcome-belong:5",
+   "kind": "module",
+   "title": "The houses, the farm, and the standards we keep",
+   "course": "welcome-belong",
+   "mod": 5,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/5",
+   "seconds": 411
+  },
+  {
+   "id": "concept:farm",
+   "kind": "concept",
+   "title": "farm"
+  },
+  {
+   "id": "concept:meters",
+   "kind": "concept",
+   "title": "meters"
+  },
+  {
+   "id": "concept:square",
+   "kind": "concept",
+   "title": "square"
+  },
+  {
+   "id": "concept:pool",
+   "kind": "concept",
+   "title": "pool"
+  },
+  {
+   "id": "concept:which",
+   "kind": "concept",
+   "title": "which"
+  },
+  {
+   "id": "concept:house",
+   "kind": "concept",
+   "title": "house"
+  },
+  {
+   "id": "module:welcome-belong:6",
+   "kind": "module",
+   "title": "FarmTable: where the philosophy becomes food",
+   "course": "welcome-belong",
+   "mod": 6,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/6",
+   "seconds": 383
+  },
+  {
+   "id": "concept:table",
+   "kind": "concept",
+   "title": "table"
+  },
+  {
+   "id": "concept:alentejo",
+   "kind": "concept",
+   "title": "alentejo"
+  },
+  {
+   "id": "concept:many",
+   "kind": "concept",
+   "title": "many"
+  },
+  {
+   "id": "module:welcome-belong:7",
+   "kind": "module",
+   "title": "The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture",
+   "course": "welcome-belong",
+   "mod": 7,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/7",
+   "seconds": 349
+  },
+  {
+   "id": "concept:same",
+   "kind": "concept",
+   "title": "same"
+  },
+  {
+   "id": "concept:beach",
+   "kind": "concept",
+   "title": "beach"
+  },
+  {
+   "id": "concept:wedding",
+   "kind": "concept",
+   "title": "wedding"
+  },
+  {
+   "id": "concept:constellation",
+   "kind": "concept",
+   "title": "constellation"
+  },
+  {
+   "id": "concept:creviral",
+   "kind": "concept",
+   "title": "creviral"
+  },
+  {
+   "id": "module:welcome-belong:8",
+   "kind": "module",
+   "title": "When things go wrong: complaints and service recovery",
+   "course": "welcome-belong",
+   "mod": 8,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/8",
+   "seconds": 351
+  },
+  {
+   "id": "concept:back",
+   "kind": "concept",
+   "title": "back"
+  },
+  {
+   "id": "concept:complaint",
+   "kind": "concept",
+   "title": "complaint"
+  },
+  {
+   "id": "concept:never",
+   "kind": "concept",
+   "title": "never"
+  },
+  {
+   "id": "concept:review",
+   "kind": "concept",
+   "title": "review"
+  },
+  {
+   "id": "concept:problem",
+   "kind": "concept",
+   "title": "problem"
+  },
+  {
+   "id": "module:welcome-belong:9",
+   "kind": "module",
+   "title": "Sustainability in daily practice: what the mission asks of you before lunch",
+   "course": "welcome-belong",
+   "mod": 9,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/9",
+   "seconds": 354
+  },
+  {
+   "id": "concept:water",
+   "kind": "concept",
+   "title": "water"
+  },
+  {
+   "id": "concept:waste",
+   "kind": "concept",
+   "title": "waste"
+  },
+  {
+   "id": "concept:better",
+   "kind": "concept",
+   "title": "better"
+  },
+  {
+   "id": "concept:regeneration",
+   "kind": "concept",
+   "title": "regeneration"
+  },
+  {
+   "id": "module:welcome-belong:10",
+   "kind": "module",
+   "title": "How we speak: the Craveiral voice",
+   "course": "welcome-belong",
+   "mod": 10,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/10",
+   "seconds": 335
+  },
+  {
+   "id": "concept:words",
+   "kind": "concept",
+   "title": "words"
+  },
+  {
+   "id": "concept:place",
+   "kind": "concept",
+   "title": "place"
+  },
+  {
+   "id": "concept:voice",
+   "kind": "concept",
+   "title": "voice"
+  },
+  {
+   "id": "concept:warm",
+   "kind": "concept",
+   "title": "warm"
+  },
+  {
+   "id": "concept:care",
+   "kind": "concept",
+   "title": "care"
+  },
+  {
+   "id": "module:welcome-belong:11",
+   "kind": "module",
+   "title": "Leadership, autonomy, and how we work together",
+   "course": "welcome-belong",
+   "mod": 11,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/11",
+   "seconds": 395
+  },
+  {
+   "id": "concept:work",
+   "kind": "concept",
+   "title": "work"
+  },
+  {
+   "id": "concept:respect",
+   "kind": "concept",
+   "title": "respect"
+  },
+  {
+   "id": "concept:mistake",
+   "kind": "concept",
+   "title": "mistake"
+  }
+ ],
+ "edges": [
+  {
+   "from": "module:welcome-belong:0",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:land",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:years",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:built",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:everything",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:something",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "concept:field",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:belong",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:name",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:those",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:land",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:village",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:real",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:sustainability",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:something",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:financial",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:people",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:hospitality",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:service",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:check",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:those",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "concept:food",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:stage",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:journey",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:first",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:morning",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "concept:long",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:meters",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:square",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:pool",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:which",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:table",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:food",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:alentejo",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:many",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:same",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:beach",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:table",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:wedding",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:constellation",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "concept:creviral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:back",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:complaint",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:never",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:review",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:real",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "concept:problem",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:every",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:water",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:waste",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:better",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "concept:regeneration",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:words",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:place",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:voice",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:warm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:never",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:care",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "course:welcome-belong",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:people",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:work",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:respect",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:real",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:never",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:mistake",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "concept:about",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "module:welcome-belong:11",
+   "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:7",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:3",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:9",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "module:welcome-belong:9",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "module:welcome-belong:11",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "module:welcome-belong:7",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "module:welcome-belong:11",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "module:welcome-belong:6",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "module:welcome-belong:10",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "module:welcome-belong:11",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "module:welcome-belong:10",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "module:welcome-belong:3",
+   "rel": "similar",
+   "w": 0.805
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "module:welcome-belong:10",
+   "rel": "similar",
+   "w": 0.805
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.764
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:5",
+   "rel": "similar",
+   "w": 0.823
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.822
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:9",
+   "rel": "similar",
+   "w": 0.806
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "module:welcome-belong:5",
+   "rel": "similar",
+   "w": 0.855
+  },
+  {
+   "from": "module:welcome-belong:2",
+   "to": "module:welcome-belong:11",
+   "rel": "similar",
+   "w": 0.83
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "module:welcome-belong:10",
+   "rel": "similar",
+   "w": 0.858
+  },
+  {
+   "from": "module:welcome-belong:3",
+   "to": "module:welcome-belong:4",
+   "rel": "similar",
+   "w": 0.846
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "module:welcome-belong:5",
+   "rel": "similar",
+   "w": 0.761
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.76
+  },
+  {
+   "from": "module:welcome-belong:5",
+   "to": "module:welcome-belong:6",
+   "rel": "similar",
+   "w": 0.798
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.773
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "module:welcome-belong:9",
+   "rel": "similar",
+   "w": 0.768
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.746
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "module:welcome-belong:3",
+   "rel": "similar",
+   "w": 0.739
+  },
+  {
+   "from": "module:welcome-belong:7",
+   "to": "module:welcome-belong:6",
+   "rel": "similar",
+   "w": 0.72
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "module:welcome-belong:11",
+   "rel": "similar",
+   "w": 0.793
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "module:welcome-belong:3",
+   "rel": "similar",
+   "w": 0.755
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.755
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.82
+  },
+  {
+   "from": "module:welcome-belong:9",
+   "to": "module:welcome-belong:5",
+   "rel": "similar",
+   "w": 0.788
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.768
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "module:welcome-belong:9",
+   "rel": "similar",
+   "w": 0.785
+  }
+ ],
+ "stats": {
+  "nodes": {
+   "course": 1,
+   "module": 12,
+   "reel": 0,
+   "concept": 58
+  },
+  "edges": {
+   "in": 12,
+   "about": 96,
+   "related": 12,
+   "similar": 25
+  }
+ },
+ "orphans": []
+}

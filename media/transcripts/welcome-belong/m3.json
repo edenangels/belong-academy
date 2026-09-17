@@ -1,0 +1,594 @@
+{
+ "module": 3,
+ "title": "Hospitality, the Craveiral way",
+ "vimeoId": "1227427000",
+ "vimeoName": "Module 4 - Hospitality, the Craveiral way",
+ "language": "en",
+ "durationSec": 381,
+ "machineTranslated": false,
+ "native": true,
+ "source": "vimeo-api",
+ "generatedAt": 1789638867642,
+ "segments": [
+  {
+   "t0": 0,
+   "t1": 6,
+   "text": "Let's talk about hospitality. The real thing, not the industry, the craft."
+  },
+  {
+   "t0": 6,
+   "t1": 11,
+   "text": "I want to start with a distinction that changed the way I think about this work."
+  },
+  {
+   "t0": 11,
+   "t1": 15,
+   "text": "There is a difference between service and hospitality."
+  },
+  {
+   "t0": 15,
+   "t1": 20,
+   "text": "Service is technical. The food arrives hot. The room is clean."
+  },
+  {
+   "t0": 20,
+   "t1": 23,
+   "text": "The check-in takes five minutes."
+  },
+  {
+   "t0": 23,
+   "t1": 29,
+   "text": "Service is measurable and it's mandatory. We must be excellent at it."
+  },
+  {
+   "t0": 29,
+   "t1": 32,
+   "text": "But hospitality is something else."
+  },
+  {
+   "t0": 32,
+   "t1": 37,
+   "text": "Hospitality is how the guest feels. Service happens to the guest."
+  },
+  {
+   "t0": 37,
+   "t1": 40,
+   "text": "Hospitality happens inside the guest."
+  },
+  {
+   "t0": 40,
+   "t1": 43,
+   "text": "You can have perfect service and zero hospitality."
+  },
+  {
+   "t0": 43,
+   "t1": 45,
+   "text": "We've all been to those hotels."
+  },
+  {
+   "t0": 45,
+   "t1": 50,
+   "text": "Floorless, polished, cold as a hospital corridor."
+  },
+  {
+   "t0": 50,
+   "t1": 54,
+   "text": "And you can have ample service with overwhelming hospitality."
+  },
+  {
+   "t0": 54,
+   "t1": 56,
+   "text": "Think of your grandmother's house."
+  },
+  {
+   "t0": 56,
+   "t1": 59,
+   "text": "The tablecloths might not be pressed,"
+  },
+  {
+   "t0": 59,
+   "t1": 64,
+   "text": "but nobody in history has ever felt unwelcome at their grandmother's table."
+  },
+  {
+   "t0": 64,
+   "t1": 67,
+   "text": "Gravereal has to be both."
+  },
+  {
+   "t0": 67,
+   "t1": 71,
+   "text": "The standards of a great hotel and the feeling of a home."
+  },
+  {
+   "t0": 71,
+   "t1": 74,
+   "text": "Our welcome should say what our brand says."
+  },
+  {
+   "t0": 74,
+   "t1": 79,
+   "text": "Fica. Pertents. Stay. Belong."
+  },
+  {
+   "t0": 79,
+   "t1": 83,
+   "text": "So how do we do that, concretely?"
+  },
+  {
+   "t0": 83,
+   "t1": 87,
+   "text": "First, guests are guests, not customers."
+  },
+  {
+   "t0": 87,
+   "t1": 91,
+   "text": "The word matters. A customer is someone in a transaction."
+  },
+  {
+   "t0": 91,
+   "t1": 94,
+   "text": "A guest is someone in your home."
+  },
+  {
+   "t0": 94,
+   "t1": 97,
+   "text": "When friends come to your house, you don't process them."
+  },
+  {
+   "t0": 97,
+   "t1": 100,
+   "text": "You open the door, you're happy to see them."
+  },
+  {
+   "t0": 100,
+   "t1": 102,
+   "text": "You offer them something to drink."
+  },
+  {
+   "t0": 102,
+   "t1": 105,
+   "text": "You make them feel that their arrival improved your day."
+  },
+  {
+   "t0": 105,
+   "t1": 107,
+   "text": "That's the posture."
+  },
+  {
+   "t0": 107,
+   "t1": 111,
+   "text": "Every arrival, every day, including the day you're tired,"
+  },
+  {
+   "t0": 111,
+   "t1": 115,
+   "text": "including the arrival at 22 hours when you wanted to go home."
+  },
+  {
+   "t0": 115,
+   "t1": 119,
+   "text": "That family drove two and a half hours from Lisbon Airport,"
+  },
+  {
+   "t0": 119,
+   "t1": 122,
+   "text": "probably with children asleep in the back seat."
+  },
+  {
+   "t0": 122,
+   "t1": 124,
+   "text": "Their holiday starts with your face."
+  },
+  {
+   "t0": 124,
+   "t1": 127,
+   "text": "Second, use names."
+  },
+  {
+   "t0": 127,
+   "t1": 131,
+   "text": "From the reservation, from the check-in, learn them."
+  },
+  {
+   "t0": 131,
+   "t1": 135,
+   "text": "Welcome back, Mrs Keller. How was the beach?"
+  },
+  {
+   "t0": 135,
+   "t1": 138,
+   "text": "Costs nothing and is worth everything."
+  },
+  {
+   "t0": 138,
+   "t1": 142,
+   "text": "People spend their whole lives wanting to be recognized."
+  },
+  {
+   "t0": 142,
+   "t1": 145,
+   "text": "In a world of apps and QR codes and self-service kiosks,"
+  },
+  {
+   "t0": 145,
+   "t1": 149,
+   "text": "a person who remembers your name is becoming a luxury."
+  },
+  {
+   "t0": 149,
+   "t1": 152,
+   "text": "We will always offer that luxury."
+  },
+  {
+   "t0": 152,
+   "t1": 154,
+   "text": "Third, anticipate."
+  },
+  {
+   "t0": 154,
+   "t1": 159,
+   "text": "The deepest hospitality answers needs the guest hasn't voiced yet."
+  },
+  {
+   "t0": 159,
+   "t1": 163,
+   "text": "It's cold tonight. Are the fire pits lit before someone asks?"
+  },
+  {
+   "t0": 163,
+   "t1": 166,
+   "text": "A couple booked the owner's house for an anniversary."
+  },
+  {
+   "t0": 166,
+   "t1": 169,
+   "text": "Is there something waiting for them that says we noticed?"
+  },
+  {
+   "t0": 169,
+   "t1": 172,
+   "text": "A child at dinner is melting down."
+  },
+  {
+   "t0": 172,
+   "t1": 176,
+   "text": "Can we bring the pizza a little faster without being asked?"
+  },
+  {
+   "t0": 176,
+   "t1": 179,
+   "text": "Watch, notice, act."
+  },
+  {
+   "t0": 179,
+   "t1": 183,
+   "text": "Anticipation is just attention, plus initiative."
+  },
+  {
+   "t0": 183,
+   "t1": 185,
+   "text": "And both are free."
+  },
+  {
+   "t0": 185,
+   "t1": 189,
+   "text": "Force, know the land, tell the land."
+  },
+  {
+   "t0": 189,
+   "t1": 194,
+   "text": "Every one of you should be able to tell a guest where to watch the sunset."
+  },
+  {
+   "t0": 194,
+   "t1": 197,
+   "text": "Which beach suits small children?"
+  },
+  {
+   "t0": 197,
+   "t1": 200,
+   "text": "Carvalal, by the way, easiest access."
+  },
+  {
+   "t0": 200,
+   "t1": 202,
+   "text": "And our beach bar is right there."
+  },
+  {
+   "t0": 202,
+   "t1": 206,
+   "text": "Where the fishermen's trail is most beautiful, what Medruño is,"
+  },
+  {
+   "t0": 206,
+   "t1": 209,
+   "text": "and why they should try it."
+  },
+  {
+   "t0": 209,
+   "t1": 212,
+   "text": "You are not staff who happen to be in Alentejo."
+  },
+  {
+   "t0": 212,
+   "t1": 215,
+   "text": "You are the guest's connection to this territory."
+  },
+  {
+   "t0": 215,
+   "t1": 218,
+   "text": "That's the belong gesture, remember."
+  },
+  {
+   "t0": 218,
+   "t1": 222,
+   "text": "Bring those who eat closer to those who grow."
+  },
+  {
+   "t0": 222,
+   "t1": 226,
+   "text": "Every conversation is a chance to make that connection."
+  },
+  {
+   "t0": 226,
+   "t1": 231,
+   "text": "Fifth, the small rituals matter more than the grand gestures."
+  },
+  {
+   "t0": 231,
+   "t1": 235,
+   "text": "Guests forget the marble lobby of some five-star palace within a week."
+  },
+  {
+   "t0": 235,
+   "t1": 238,
+   "text": "What they remember for years."
+  },
+  {
+   "t0": 238,
+   "t1": 242,
+   "text": "The waiter who remembered which wine they liked on the second night."
+  },
+  {
+   "t0": 242,
+   "t1": 246,
+   "text": "The housekeeper who arranged the child's stuffed animals on the pillow."
+  },
+  {
+   "t0": 246,
+   "t1": 251,
+   "text": "The receptionist who printed the boarding passes without being asked twice."
+  },
+  {
+   "t0": 252,
+   "t1": 255,
+   "text": "Hospitality is compound interest."
+  },
+  {
+   "t0": 255,
+   "t1": 261,
+   "text": "Tiny deposits made consistently that add up to a feeling of being cared for."
+  },
+  {
+   "t0": 261,
+   "t1": 265,
+   "text": "Let me tell you what I consider the perfect crevary moment."
+  },
+  {
+   "t0": 265,
+   "t1": 268,
+   "text": "A guest once told me a check out."
+  },
+  {
+   "t0": 268,
+   "t1": 270,
+   "text": "And I've never forgotten it."
+  },
+  {
+   "t0": 270,
+   "t1": 272,
+   "text": "She said,"
+  },
+  {
+   "t0": 272,
+   "t1": 275,
+   "text": "Pedro, the strangest thing happened to me here."
+  },
+  {
+   "t0": 275,
+   "t1": 279,
+   "text": "On the third day I stopped taking photographs."
+  },
+  {
+   "t0": 279,
+   "t1": 281,
+   "text": "I asked her what she meant."
+  },
+  {
+   "t0": 281,
+   "t1": 283,
+   "text": "And she said,"
+  },
+  {
+   "t0": 283,
+   "t1": 285,
+   "text": "I realized I wasn't trying to prove I was here."
+  },
+  {
+   "t0": 285,
+   "t1": 287,
+   "text": "I was just here."
+  },
+  {
+   "t0": 287,
+   "t1": 289,
+   "text": "That's it."
+  },
+  {
+   "t0": 289,
+   "t1": 291,
+   "text": "That's the whole job."
+  },
+  {
+   "t0": 291,
+   "t1": 294,
+   "text": "Everything we do, the silence we protect at night,"
+  },
+  {
+   "t0": 294,
+   "t1": 296,
+   "text": "the walkways through the trees,"
+  },
+  {
+   "t0": 296,
+   "t1": 298,
+   "text": "the food from 80 meters away,"
+  },
+  {
+   "t0": 298,
+   "t1": 302,
+   "text": "the fact that nobody is pushing an activity schedule at anyone,"
+  },
+  {
+   "t0": 302,
+   "t1": 305,
+   "text": "all of it is engineered to help a human being arrive."
+  },
+  {
+   "t0": 305,
+   "t1": 307,
+   "text": "Not just check in."
+  },
+  {
+   "t0": 307,
+   "t1": 309,
+   "text": "Arrive."
+  },
+  {
+   "t0": 309,
+   "t1": 311,
+   "text": "In the deepest sense of the word."
+  },
+  {
+   "t0": 311,
+   "t1": 315,
+   "text": "Our guests live in cities under pressure on screens."
+  },
+  {
+   "t0": 315,
+   "t1": 317,
+   "text": "We give them back the rhythm of the land."
+  },
+  {
+   "t0": 317,
+   "t1": 321,
+   "text": "Sunrise, work, food, rest, stars."
+  },
+  {
+   "t0": 321,
+   "t1": 323,
+   "text": "When it works, it's not a holiday."
+  },
+  {
+   "t0": 323,
+   "t1": 325,
+   "text": "It's a repair."
+  },
+  {
+   "t0": 325,
+   "t1": 327,
+   "text": "And you, whatever your role,"
+  },
+  {
+   "t0": 327,
+   "t1": 329,
+   "text": "you're a garden of that repair."
+  },
+  {
+   "t0": 329,
+   "t1": 334,
+   "text": "The housekeeper who works quietly while a guest sleeps late is protecting it."
+  },
+  {
+   "t0": 335,
+   "t1": 338,
+   "text": "The gardener who waves good morning is part of it."
+  },
+  {
+   "t0": 338,
+   "t1": 342,
+   "text": "The waiter who doesn't rush the table under the stars is honoring it."
+  },
+  {
+   "t0": 342,
+   "t1": 345,
+   "text": "One last thing for this model."
+  },
+  {
+   "t0": 345,
+   "t1": 347,
+   "text": "Worms is not servility."
+  },
+  {
+   "t0": 347,
+   "t1": 349,
+   "text": "We are warm."
+  },
+  {
+   "t0": 349,
+   "t1": 350,
+   "text": "We are generous."
+  },
+  {
+   "t0": 350,
+   "t1": 352,
+   "text": "We are attentive."
+  },
+  {
+   "t0": 352,
+   "t1": 355,
+   "text": "And we carry ourselves with dignity always."
+  },
+  {
+   "t0": 355,
+   "t1": 360,
+   "text": "You are professionals in one of the most meaningful crafts there is."
+  },
+  {
+   "t0": 360,
+   "t1": 362,
+   "text": "Taking care of human beings."
+  },
+  {
+   "t0": 362,
+   "t1": 364,
+   "text": "Walk like it."
+  },
+  {
+   "t0": 364,
+   "t1": 366,
+   "text": "Never grovel, never be cold."
+  },
+  {
+   "t0": 366,
+   "t1": 372,
+   "text": "Between those two extremes lives everything I mean by the word hospitality."
+  },
+  {
+   "t0": 372,
+   "t1": 374,
+   "text": "Next model."
+  },
+  {
+   "t0": 374,
+   "t1": 376,
+   "text": "The guest journey."
+  },
+  {
+   "t0": 376,
+   "t1": 380,
+   "text": "From the first click to the last look in the rear view mirror."
+  }
+ ]
+}
