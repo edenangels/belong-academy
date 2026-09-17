@@ -11,7 +11,9 @@ const CATALOG = [
        the Vimeo folder "New with Music" (unlisted; each id carries its h= hash,
        which the player needs for unlisted embeds). Wired 2026-09-17. Titles are
        the trainer's, minus the "Module N -" prefix. Durations are real. */
-    level: 'All levels', learners: 0, ai: true, isNew: true, featured: true, updated: '2026-09', poster: 'media/covers/welcome-belong.svg',
+    level: 'All levels', learners: 0, ai: true, isNew: true, featured: true, updated: '2026-09',
+    /* the card is a frame from module 4 (the garden, the house, sunset — no lettering: the card sets the title itself); the hero is the sunset over the pines from the same module */
+    poster: 'media/covers/welcome-belong.webp', heroArt: 'media/covers/welcome-belong-hero.webp',
     hook: 'Why we\'re here, and how we do it.', hookSub: 'The story, the values, the guest journey — the Craveiral way, in twelve lessons.',
     desc: 'Craveiral\'s onboarding journey: where we come from and why, our vision and values in practice, hospitality the Craveiral way, the guest journey from first click to farewell, the houses and the farm, FarmTable, the constellation of places, what to do when things go wrong, sustainability before lunch, how we speak, and how we lead and work together.',
     modules: [
