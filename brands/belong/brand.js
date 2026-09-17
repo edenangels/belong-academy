@@ -20,6 +20,7 @@
   realm: 'real Belong situations (hosting and making guests feel they belong, seasonal kitchens and tasting, growing and harvesting, caring for nature and place, building community and the circular economy)',
   location: 'Portugal',
   /* Belong's OWN Firebase project (created 2026-07-17). */
+  boardIndexed: true,   /* leaderboard composite index (companyId + xp) deployed 2026-09-17 */
   firebase: {
     apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
     authDomain: 'belong-academy.firebaseapp.com',

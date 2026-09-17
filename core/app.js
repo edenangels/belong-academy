@@ -7,14 +7,49 @@
    different brand's app, which then rendered a path of courses that do not
    exist. The founding brand keeps the legacy key so no live EdenRise learner
    loses local progress; every other brand gets its own. */
-const BRAND_SLUG = (window.BRAND && window.BRAND.id) || 'edenrise';
-const STATE_KEY = BRAND_SLUG === 'edenrise' ? 'edenrise-state-v2' : BRAND_SLUG + '-state-v2';
+const BRAND_SLUG = (window.BRAND && window.BRAND.id) || 'app';
+const STATE_KEY = BRAND_SLUG + '-state-v2';
 /* same reasoning for the sign-in flag: it decided whether the auth gate shows,
    so one academy's session was opening the gate on all of them */
-const MODE_KEY  = BRAND_SLUG === 'edenrise' ? 'eden-auth-mode' : BRAND_SLUG + '-auth-mode';
+/* Brand-declarable so an existing deployment keeps the key its learners
+   already carry. The founding instance's key was 'eden-auth-mode'; renaming
+   it in core would have shown every returning learner the sign-in gate — a
+   silent mass logout dressed as a cleanup. Default is <id>-auth-mode. */
+const MODE_KEY  = (window.BRAND && window.BRAND.authModeKey) || (BRAND_SLUG + '-auth-mode');
 let S;
 try { S = Object.assign({}, structuredClone(DEFAULT_STATE), JSON.parse(localStorage.getItem(STATE_KEY) || '{}')); }
 catch { S = structuredClone(DEFAULT_STATE); }
+/* Saved state outlives the catalogue. When courses are retired, a returning
+   learner still carries their old path and goal in localStorage — the home page
+   was reading "For your goal · Regenerative Steward" for a goal that no longer
+   exists, and stepping through path entries that resolve to nothing. Progress is
+   never touched: it is the one part of this object that is earned. */
+function migrateState() {
+  const before = JSON.stringify([S.goal, S.path, S.assignments]);
+  const goals = (typeof GOAL_PRESETS === 'object' && GOAL_PRESETS) || {};
+  const names = Object.keys(goals);
+  const goalRetired = names.length && !goals[S.goal];
+  if (goalRetired) S.goal = names[0];
+  const known = new Set((typeof CATALOG !== 'undefined' ? CATALOG : []).map(c => c.id));
+  if (Array.isArray(S.path)) {
+    const kept = S.path.filter(id => known.has(id));
+    const preset = (goals[S.goal] || []).filter(id => known.has(id));
+    /* If their GOAL was retired, the path should describe the new goal — pruning
+       alone left a learner on a one-step path when their goal has four. Order
+       follows the preset, but anything they had kept that the preset omits stays
+       appended rather than being taken away from them. */
+    S.path = goalRetired || !kept.length
+      ? preset.concat(kept.filter(id => !preset.includes(id)))
+      : kept;
+  }
+  if (Array.isArray(S.assignments)) S.assignments = S.assignments.filter(a => a && known.has(a.courseId));
+  return JSON.stringify([S.goal, S.path, S.assignments]) !== before;
+}
+/* Boot: persist LOCALLY only. `save` is a const declared below, so calling it
+   here would hit its temporal dead zone — and pushing to the cloud before auth
+   has resolved would write as the wrong user anyway. The cloud copy is corrected
+   by the reloadState() pass, once we know who is signed in. */
+if (migrateState()) { try { localStorage.setItem(STATE_KEY, JSON.stringify(S)); } catch (e) {} }
 const save = () => { localStorage.setItem(STATE_KEY, JSON.stringify(S)); if (window.EdenCloud && window.EdenCloud.push) window.EdenCloud.push(S); };
 
 /* ---------- helpers ---------- */
@@ -37,6 +72,7 @@ const courseMins = c => c.moduleDurations ? c.moduleDurations.reduce((a, b) => a
 const moduleDur = (c, i) => (c.moduleDurations && c.moduleDurations[i]) ? c.moduleDurations[i] + 'm' : '12m';
 /* studio meta (admin-managed, loaded from Firestore courses/__meta) */
 let studioMeta = null;
+let heroIntroDecided = false;   /* hero entrance: one decision per page load, see renderNow */
 const ORIG_COURSES = {};
 const liveList = () => (studioMeta && Array.isArray(studioMeta.live) && studioMeta.live.length) ? studioMeta.live : LIVE_SESSIONS;
 const fmtMins = m => m >= 60 ? `${Math.floor(m / 60)}h ${m % 60 ? (m % 60) + 'm' : ''}`.trim() : `${m}m`;
@@ -88,7 +124,7 @@ function ledgerAppend(type, data = {}) {
       if (type === 'pretest' && L.some(e => e.type === type && e.courseId === data.courseId)) return;
       const core = Object.assign({
         id: Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
-        brandId: BRAND.id || 'edenrise',
+        brandId: BRAND.id || 'app',
         type,
         at: new Date().toISOString(),
         prevHash: L.length ? L[L.length - 1].hash : 'genesis'
@@ -122,6 +158,25 @@ function ledgerAppend(type, data = {}) {
   }
   window.addEventListener('error', e => logErr('err', e.message, (e.filename || '') + ':' + (e.lineno || '')));
   window.addEventListener('unhandledrejection', e => logErr('rej', (e.reason && (e.reason.message || e.reason)) || 'unhandled rejection', ''));
+  /* Exposed so DELIBERATE, non-throwing failures can use the same channel. A
+     refused evidence mirror throws nothing and would otherwise be invisible —
+     which is the whole defect this reporting path exists to close. */
+  window.EdenBeacon = logErr;
+  /* SCALE/OPS: errors also reach the watch worker (academy-watch) so a broken
+     deploy is seen from outside the device. Sampled per signature, sendBeacon,
+     never awaited, never more than 5 per session. */
+  const _sentSig = new Set();
+  const _origLogErr = logErr;
+  logErr = function (kind, msg, src) {
+    try { _origLogErr(kind, msg, src); } catch (e) {}
+    try {
+      const sig = kind + '|' + String(msg).slice(0, 80);
+      if (_sentSig.size >= 5 || _sentSig.has(sig)) return; _sentSig.add(sig);
+      const body = JSON.stringify({ kind, msg: String(msg).slice(0, 300), src: String(src || '').slice(0, 120), v: (document.querySelector('script[src*="core/app.js"]') || {}).src, ua: navigator.userAgent.slice(0, 80), url: location.hash, brand: (window.BRAND && BRAND.id) || '' });
+      (navigator.sendBeacon && navigator.sendBeacon('https://academy-watch.edenrise.workers.dev/beacon', new Blob([body], { type: 'application/json' }))) || fetch('https://academy-watch.edenrise.workers.dev/beacon', { method: 'POST', body, keepalive: true }).catch(() => {});
+    } catch (e) {}
+  };
+  window.EdenBeacon = logErr;
 })();
 
 async function ledgerVerify(L = S.ledger || []) {
@@ -395,7 +450,7 @@ function cardHTML(c, opts = {}) {
     <div class="card-body">
       <h3>${ctitle(c)}</h3>
       <p class="card-hook">${chook(c)}</p>
-      <div class="meta"><span>${tcat(c.cat)}</span><span class="dot"></span><span>${fmtMins(courseMins(c))}</span><span class="dot"></span><span>★ ${c.rating}</span></div>
+      <div class="meta"><span>${tcat(c.cat)}</span><span class="dot"></span><span>${fmtMins(courseMins(c))}</span>${c.rating ? `<span class="dot"></span><span>★ ${c.rating}</span>` : ''}</div>
       ${foot}
     </div>
   </article>`;
@@ -501,6 +556,19 @@ function armRails(root) {
     syncRailPaddles(rail);
   });
 }
+/* The learning loop, made visible where the day starts: lessons watched but
+   unchecked (hours not yet counted — never let that be a surprise), and reviews
+   due (the spaced-repetition queue knocking). Empty when there is nothing —
+   a permanent panel would train people to ignore it. */
+function loopStripHTML() {
+  const pend = pendingCheckCount();
+  const due = reviewsDue().length;
+  if (!pend && !due) return '';
+  return `<div class="loop-strip">
+    ${pend ? `<span class="loop-chip" data-action="resume-check">⚠ ${pend} ${t('checks_chip')}</span>` : ''}
+    ${due ? `<button class="loop-chip rev" data-action="open-reviews">↻ ${due} ${t('rev_chip')}</button>` : ''}
+  </div>`;
+}
 function pathRowHTML() {
   const steps = S.path.slice(0, 6).map(id => {
     const c = courseById(id); if (!c) return '';
@@ -509,7 +577,12 @@ function pathRowHTML() {
     const sub = st === 'done' ? t('completed')
       : st === 'current' ? `${pct}% · ${fmtMins(Math.round(courseMins(c) * (100 - pct) / 100))} ${t('left')}`
       : t('unlocks_after');
-    return `<${st === 'locked' ? 'div' : 'button'} class="pstep ${st}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="open-course" data-id="${id}"`}>
+    /* The FIRST row on the homepage was the only surface still drawing flat
+       boxes while every one of these courses owns a filmed cover. Netflix's
+       numbered row is artwork with the numeral over it, never a list with a
+       bullet — and this row is what a buyer sees before anything else. */
+    const art = c.poster ? ` style="background-image:url('${c.poster}')"` : '';
+    return `<${st === 'locked' ? 'div' : 'button'} class="pstep ${st}${c.poster ? ' has-art' : ''}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="open-course" data-id="${id}"`}${art}>
       <span class="pstep-n">${st === 'done' ? '✓' : n}</span>
       <span class="pstep-t">${esc(ctitle(c))}</span>
       <span class="pstep-s">${sub}</span>
@@ -533,19 +606,32 @@ function renderHome() {
      a flagged `featured` breaks the tie */
   const realOnes = CATALOG.filter(hasRealContent)
     .sort((a, b) => (realModuleCount(b) - realModuleCount(a)) || ((b.featured ? 1 : 0) - (a.featured ? 1 : 0)));
-  const featured = (lastPlayed && courseById(lastPlayed[0]))          /* your own place always wins */
+  /* An explicit tenant pick outranks everything, including the resume slot.
+     A storefront's lead title is an editorial decision, not a function of what
+     this particular viewer happened to open last — and the viewer loses
+     nothing, because "Continue learning" carries their place one row below. */
+  const brandHero = BRAND.heroCourse && courseById(BRAND.heroCourse);
+  const featured = brandHero
+    || (lastPlayed && courseById(lastPlayed[0]))
     || realOnes.find(c => !isDone(c.id)) || realOnes[0]
     || S.path.map(courseById).filter(Boolean).find(c => !isDone(c.id))
     || CATALOG.find(c => c.featured && !isDone(c.id)) || CATALOG.find(c => !isDone(c.id))
     || CATALOG.find(c => c.featured) || CATALOG[0];                                    /* always a real course */
   const featuredCourses = CATALOG.filter(c => c.featured);
   const fp = prog(featured.id);
-  const continuing = CATALOG.filter(c => coursePct(c.id) > 0 && !isDone(c.id));
+  /* The billboard is already the strongest possible pitch for whatever it is
+     showing — and it carries its own Resume button. Repeating that same course
+     in the first row underneath it is the one thing a streaming service never
+     does, and with a small catalogue it happened in three rows at once. Every
+     rail below the hero excludes the hero. Nothing is lost: the hero IS the
+     resume entry for that course. */
+  const notHero = c => c && c.id !== featured.id;
+  const continuing = CATALOG.filter(c => coursePct(c.id) > 0 && !isDone(c.id)).filter(notHero);
   const adminAssigned = S.assignments
     .map(a => { const c = courseById(a.courseId); return c ? Object.assign({}, c, { due: `Due ${a.due}`, required: true }) : null; })
     .filter(Boolean);
   const assigned = [...adminAssigned, ...CATALOG.filter(c => (c.required || c.teamGoal || c.id === 'new-manager') && !adminAssigned.some(a => a.id === c.id))];
-  const trending = [...CATALOG].sort((a, b) => (a.trending || 99) - (b.trending || 99)).slice(0, 6);
+  const trending = [...CATALOG].filter(notHero).sort((a, b) => (a.trending || 99) - (b.trending || 99)).slice(0, 6);
   const recs = CATALOG.filter(c => c.cat === 'Analytics' && !isDone(c.id) && coursePct(c.id) === 0).slice(0, 5);
   const heroSide = S.path.slice(0, 5).map(id => {
     const c = courseById(id);
@@ -569,7 +655,7 @@ function renderHome() {
   return `<div class="page">
   <header class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
-    ${(featured.heroArt || featured.poster) ? `<div class="hero-art" style="background-image:url('${featured.heroArt || featured.poster}')"></div>` : ''}
+    ${(featured.heroArt || featured.poster) ? `<div class="hero-art${featured.heroFit ? ' fit-' + featured.heroFit : ''}" style="background-image:url('${featured.heroArt || featured.poster}')"></div>` : ''}
     <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-fade"></div><div class="hero-rim" aria-hidden="true"></div>
     <div class="hero-content">
       <span class="hero-eyebrow">${t('featured_eyebrow')}</span>
@@ -605,10 +691,12 @@ function renderHome() {
        one job — carry on — and everything here either serves that or teases
        what is next. -->
   ${askBarHTML()}
+  ${recallStripHTML()}
+  ${loopStripHTML()}
   ${railHTML(t('continue_learning'), t('synced_devices'), continuing.map(c => cardHTML(c)), null, 'featured-row')}
   ${pathRowHTML()}
-  ${railHTML(t('assigned_you'), t('from_stewardship'), assigned.map(c => cardHTML(c)))}
-  ${featuredCourses.length ? railHTML(t('featured_h'), t('featured_sub'), featuredCourses.map(c => cardHTML(c))) : ''}
+  ${railHTML(t('assigned_you'), t('from_stewardship'), assigned.filter(notHero).map(c => cardHTML(c)))}
+  ${railHTML(t('featured_h'), t('featured_sub'), featuredCourses.filter(notHero).map(c => cardHTML(c)))}
   ${dailyDropHTML()}
   <section class="path-banner">
     <div class="shimmer"></div>
@@ -631,12 +719,43 @@ function renderHome() {
     <div class="stat"><div class="num">${Object.values(S.progress).filter(p => p.done).length + S.quizzesPassed}</div><div class="lbl">${t('skills_verified')}</div><div class="delta">${S.quizzesPassed ? `▲ ${S.quizzesPassed} ${t('from_quizzes')}` : t('no_data')}</div></div>
     <div class="stat"><div class="num">${avgQuizScore() != null ? avgQuizScore() + '%' : t('no_data')}</div><div class="lbl">${t('avg_score')}</div><div class="delta">${(S.quizScores || []).length ? (S.quizScores.length + ' ' + t('stats_quizzes')) : t('earn_first')}</div></div>
   </section>
+  ${reelsAll().length ? `<section class="rail-section reel-tease">
+    <div class="rail-head"><h2>${t('reel_h')}</h2>
+      <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
+    <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => `
+      <button class="reel-chip" data-action="goto" data-route="#/reels">
+        <div class="reel-chip-art t${toneOf(r.theme || r.id)}">
+          <span>${esc(reelField(r.title))}</span></div>
+        <div class="reel-chip-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${r.seconds || 30}s</div>
+      </button>`).join('')}</div></div>
+  </section>` : ''}
+  ${quickWinsShelfHTML()}
+  ${educatorsBandHTML()}
   ${railHTML(t('trending'), t('community_learning'), trending.map((c, i) => cardHTML(c, { rank: c.trending })))}
   ${railHTML(`${t('because_completed')} “${_lang() === 'pt' ? 'Solo Vivo' : 'Living Soil'}”`, t('ai_recommendations'), recs.map(c => cardHTML(c)))}
   ${footerHTML()}</div>`;
 }
 
 let libFilter = 'All', libQuery = '';
+let libTag = null;
+function topicsHTML() {
+  if (!KNOW) { loadKnowledgeIdx().then(k => { if (k && (location.hash || '').includes('library')) render(); }); return ''; }
+  const cloud = tagCloud(16);
+  if (!cloud.length) return '';
+  const lessons = libTag ? allLessons().filter(l => (l.tags || []).includes(libTag)) : [];
+  return `<div class="topics-band">
+    <div class="ob-eyebrow">${t('topics_h')}</div>
+    <div class="filter-row topics-row">${cloud.map(([tg, n]) =>
+      `<button class="filter-chip tag-chip ${tg === libTag ? 'active' : ''}" data-action="lib-tag" data-tag="${esc(tg)}">#${esc(tg)} <i>${n}</i></button>`).join('')}</div>
+    ${libTag ? `<div class="topic-lessons">${lessons.map(l => `
+      <div class="ask-moment" data-action="play-mod" data-id="${l.course}" data-mod="${l.mod}" role="button" tabindex="0">
+        <span class="am-tc">${Math.round(l.durationSec / 60)}m</span>
+        <div class="am-body"><b>${esc(l.title)}</b><span class="am-course">${esc(l.courseTitle)}</span>
+          <p>${(l.tags || []).slice(0, 5).map(x => '#' + esc(x)).join(' · ')}</p></div>
+        <span class="ask-go">▶</span>
+      </div>`).join('') || `<p class="empty-note">${t('nothing_matches')}</p>`}</div>` : ''}
+  </div>`;
+}
 function renderLibrary() {
   const cats = ['All', ...new Set(CATALOG.map(c => c.cat))];
   let list = CATALOG.filter(c => (libFilter === 'All' || c.cat === libFilter) &&
@@ -647,8 +766,14 @@ function renderLibrary() {
     <div class="lib-search">⌕ <input id="libSearch" placeholder="${t('filter_library')}" value="${esc(libQuery)}"></div>
     <div class="filter-row">${cats.map(c => `<button class="filter-chip ${c === libFilter ? 'active' : ''}" data-action="lib-filter" data-cat="${c}">${c === 'All' ? t('all') : tcat(c)}</button>`).join('')}</div>
     <button class="link-quiet lib-ask" data-action="ai-missing">${t('missing_ask')}</button>
-    <div class="grid">${list.map(c => cardHTML(c)).join('')}</div>
-    ${list.length ? '' : `<p class="empty-note">${t('nothing_matches')}</p>`}
+    ${topicsHTML()}
+    <div class="grid">${list.filter(c => !isHowto(c)).map(c => cardHTML(c)).join('')}</div>
+    ${list.filter(c => !isHowto(c)).length ? '' : `<p class="empty-note">${t('nothing_matches')}</p>`}
+    ${list.some(isHowto) ? `<div class="howto-shelf">
+      <div class="ob-eyebrow">${t('howto_h')}</div>
+      <p class="page-sub" style="margin-top:4px;">${t('howto_sub')}</p>
+      <div class="grid">${list.filter(isHowto).map(c => cardHTML(c)).join('')}</div>
+    </div>` : ''}
   </div>${footerHTML()}</div>`;
 }
 
@@ -672,7 +797,10 @@ function renderPaths() {
   </section>
   <div class="page-pad" style="padding-top:26px;">${journeysSectionHTML()}</div>
   ${railHTML(t('courses_in_path'), t('in_order'), S.path.map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
-  ${railHTML(t('next_paths'), t('next_paths_sub'), ['regen-design', 'capstone-land', 'community-land', 'seasonal-rhythm'].map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
+  ${/* "Where to go next" = whatever is filmed and not already on your path.
+        This was four hard-coded ids, all of which are now deleted, so the rail
+        rendered empty; derived, it stays correct as the library grows. */''}
+  ${railHTML(t('next_paths'), t('next_paths_sub'), CATALOG.filter(c => !S.path.includes(c.id) && hasRealContent(c)).map(c => cardHTML(c)))}
   ${footerHTML()}</div>`;
 }
 
@@ -713,7 +841,7 @@ function renderAnalytics() {
     <section class="stats" style="margin:28px 0 0;">
       <div class="stat"><div class="num">${S.streak || 0}d</div><div class="lbl">${t('learning_streak')}</div><div class="delta">${S.bestStreak ? t('stats_best') + ' ' + S.bestStreak + 'd' : t('no_data')}</div></div>
       <div class="stat"><div class="num">${fmtMins(weekMinutes())}</div><div class="lbl">${t('this_week')}</div><div class="delta">${week[6].v ? '▲ ' + week[6].v + 'm ' + t('stats_today') : t('no_data')}</div></div>
-      <div class="stat"><div class="num">${certs.length}</div><div class="lbl">Certificates</div><div class="delta">${certs.length ? '▲' : t('no_data')}</div></div>
+      <div class="stat"><div class="num">${certs.length}</div><div class="lbl">Training records</div><div class="delta">${certs.length ? '▲' : t('no_data')}</div></div>
       <div class="stat"><div class="num">${S.quizzesPassed}</div><div class="lbl">Quizzes passed</div><div class="delta">${avgQuizScore() != null ? 'avg ' + avgQuizScore() + '%' : t('no_data')}</div></div>
     </section>
     <div class="two-col" style="margin-top:18px;">
@@ -728,7 +856,7 @@ function renderAnalytics() {
         </div>
       </div>
       <div class="chart-card">
-        <h3>Certificates</h3>
+        <h3>Training records</h3>
         ${certs.map(c => `<div class="cert-row"><span class="ci">${svgIcon(c.icon)}</span><span class="ct">${ctitle(c)}</span><span class="cd">★ verified</span></div>`).join('') || '<p class="empty-note">Complete a course to earn your first certificate.</p>'}
       </div>
     </div>
@@ -766,12 +894,18 @@ function renderCourse(id) {
         <span class="m-dur">${t('coming_soon')}</span>
       </div>`;
     }
+    const beside = graphReelsBeside(id, i), rel = graphRelated(id, i);
+    const tg = tagsAt(id + ':' + i);
+    const tags = tg.length ? `<div class="mod-tags">${tg.map(x => `<button class="mod-tag" data-action="tag-seek" data-id="${id}" data-mod="${i}" data-t="${Math.max(0, x.at[0] - 4)}" data-tag="${esc(x.c)}" title="${t('tag_at')} ${x.at.slice(0, 6).map(fmtTc).join(' · ')}">${esc(x.c)}<span>${fmtTc(x.at[0])}</span></button>`).join('')}</div>` : '';
+    const links = (beside.length || rel.length) ? `<div class="mod-links">${
+      beside.length ? `<span class="ml"><span class="ml-k">${t('graph_shorts')}</span> ${beside.map(x => esc(reelField(x.title))).join(' · ')}</span>` : ''}${
+      rel.length ? `<span class="ml"><span class="ml-k">${t('graph_related')}</span> ${rel.map(x => esc(x.title)).join(' · ')}</span>` : ''}</div>` : '';
     return `<div class="module-row ${done ? 'done' : ''} ${isCur ? 'current' : ''}" data-action="play" data-id="${id}" data-mod="${i}">
       <div class="m-num">${done ? '✓' : isCur ? '▶' : i + 1}</div>
       <div class="m-title">${cmods(c)[i] || m}${review ? ' &nbsp;<span class="review-flag">↺ AI re-queued for review</span>' : ''}</div>
       <span class="m-dur">${moduleDur(c, i)}</span>
       <button class="m-play">▶</button>
-    </div>`;
+    ${tags}${links}</div>`;
   }).join('');
   return `<div class="page">
     <div class="course-hero">
@@ -783,10 +917,13 @@ function renderCourse(id) {
             <span class="match">${c.ai ? t('in_ai_rotation') : tcat(c.cat)}</span><span class="sep"></span>
             <span>${c.modules.length} ${t('modules')}</span><span class="sep"></span>
             <span>${fmtMins(courseMins(c))}</span><span class="sep"></span><span>${t(c.level) || c.level}</span>
-            <span class="sep"></span><span>★ ${c.rating} · ${c.learners} ${t('learners')}</span>
+            ${/* A course with no ratings yet must say nothing, not "★ undefined ·
+                   0 learners". Absent proof is fine; invented or broken proof is not. */''}
+            ${c.rating ? `<span class="sep"></span><span>★ ${c.rating}${c.learners ? ` · ${c.learners} ${t('learners')}` : ''}</span>` : ''}
             ${c.updated ? `<span class="sep"></span><span class="fresh-tag">${t('updated_lbl')} ${fmtYm(c.updated)}</span>` : ''}
           </div>
           <h1>${ctitle(c)}</h1>
+          ${eduBylineHTML(c)}
           <p class="course-hook">${chook(c)}</p>
           <p class="desc">${chooksub(c)} ${cdesc(c)}</p>
           <div class="hero-actions">
@@ -943,6 +1080,14 @@ function initAdmin(retries) {
     if (window.EdenForum && EdenForum.listOfficial) EdenForum.listOfficial().then(paintBroadcasts).catch(() => paintBroadcasts([]));
     return;
   }
+  /* COVERAGE READS BANKS THAT ARE LOADED LAZILY.
+     This tab renders synchronously off QUIZ_V2, which is only populated when a
+     learner opens a player or a quiz. So an admin arriving here cold saw
+     "0/42 verified" — for content that was fully verified — and the only honest
+     reading of that number is "regenerate everything". A zero that means NOT
+     LOADED YET must never be displayed as a zero that means NONE EXISTS.
+     Load every bank in both languages first, then paint. */
+  if (adminTab === 'coverage') { loadAllBanks().then(() => { if (adminTab === 'coverage') render(); }); return; }
   if (adminTab === 'content') {
     if (!adminMembers) EdenCloud.listMembers().then(m => { adminMembers = m; if (adminTab === 'content' && !editingCourse) render(); }).catch(() => {});
     return;
@@ -1250,7 +1395,7 @@ async function seedDemo() {
       { id: 'live-soil-clinic', title: 'Field Hours: Live Soil Clinic', host: 'Marta Oliveira · Head of Regeneration', when: fmtDay(next(4)), date: iso(next(4)), desc: 'Bring a photo or sample of your soil — read live, with the first three things to do.', live: false, viewers: 0, grad: 7, icon: 'sprout' },
       { id: 'live-founder-ama', title: 'Founder AMA: Why Regeneration', host: 'João Amaral · Founder', when: fmtDay(next(8)), date: iso(next(8)), desc: 'Unfiltered Q&A on building EdenRise and stewarding land in the Baixo Alentejo.', live: false, viewers: 0, grad: 1, icon: 'tree' }
     ];
-    const assignments = activeAssignments().concat([{ id: 'asg-living-soil-land', courseId: 'living-soil', team: 'land', due: new Date(Date.now() + 14 * day).toISOString().slice(0, 10) }]);
+    const assignments = activeAssignments().concat([{ id: 'asg-fire-truck-land', courseId: 'fire-truck-training', team: 'land', due: new Date(Date.now() + 14 * day).toISOString().slice(0, 10) }]);
     await EdenCloud.saveMeta(Object.assign({}, studioMeta, { live, assignments }));
     studioMeta = Object.assign({}, studioMeta, { live, assignments });
     toast('Demo content seeded', '✓'); render();
@@ -1282,22 +1427,336 @@ function logAsk(q, via) {
   if (S.askLog.length > 50) S.askLog = S.askLog.slice(-50);
   save();
 }
-async function openAsk(q) {
+/* client-side moment search over knowledge/search.json — the same scoring
+   shape as LandFlow's search_lessons, so the app and the walkie-talkie find
+   the same moments for the same words */
+/* knowledge files ride the same ?v= marker as the bundle: a deploy that changes
+   tags.json or search.json must not be served from the previous version's cache */
+function knowledgeV() { const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/); return v ? v[1] : ''; }
+let _searchIdx = null;
+function loadSearchIdx() {
+  if (_searchIdx !== undefined && _searchIdx !== null) return Promise.resolve(_searchIdx);
+  return fetch('knowledge/search.json?v=' + knowledgeV()).then(r => r.ok ? r.json() : [])
+    .then(j => (_searchIdx = j)).catch(() => (_searchIdx = []));
+}
+/* the knowledge manifest — tags, capabilities, per-module metadata. One fetch,
+   powers the Library's Topics browse and the tag chips. */
+let KNOW = null;
+function loadKnowledgeIdx() {
+  if (KNOW) return Promise.resolve(KNOW);
+  return fetch('knowledge/index.json?v=' + knowledgeV()).then(r => r.ok ? r.json() : null)
+    .then(j => (KNOW = j)).catch(() => null);
+}
+function allLessons() {
+  if (!KNOW) return [];
+  const out = [];
+  for (const [cid, c] of Object.entries(KNOW.courses))
+    for (const m of c.modules) out.push(Object.assign({ course: cid, courseTitle: c.title }, m));
+  return out;
+}
+function tagCloud(n) {
+  const freq = {};
+  allLessons().forEach(l => (l.tags || []).forEach(tg => { freq[tg] = (freq[tg] || 0) + 1; }));
+  return Object.entries(freq).sort((a, b) => b[1] - a[1]).slice(0, n || 18);
+}
+const _fold = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+/* ===== RECALL — one engine, three doors ===================================
+   The ask bar, the voice mic and the tutor chat all land here. It searches the
+   real transcripts (knowledge/search.json — every spoken segment with its
+   timecode, lessons and shorts alike), widens the question through the
+   knowledge graph's concepts, and returns MOMENTS: the second in a video where
+   the trainer said the thing. Deterministic and local — it works offline and
+   cannot hallucinate a quote. An AI answer is commentary layered on top of the
+   moments, never the source of them. */
+const _STOP = new Set(('the a an and or of to in on for with is are was were be been it its this that these those you your we our they their he she his her i my me at by from as but not no so if then than do does did have has had will would can could should about into over under what which who how when where why just very really also there here all any some one two get got go going want need like make made thing things'
+  + ' o a os as um uma uns umas e ou de do da dos das em no na nos nas para com por que se nao e sao foi era ser estar esta estao isto isso aquilo eu tu ele ela nos eles elas meu minha seu sua nosso nossa este esta esse essa aquele aquela como quando onde porque mas tambem ja muito mais menos tem ha ao aos pelo pela pelos pelas').split(' '));
+/* Light stemming, EN + PT: enough that "responsibilities" meets "responsibility"
+   and "plantas" meets "planta", conservative enough that "water" stays "water".
+   Everything past this is prefix matching at query time. */
+function _stem(w) {
+  if (w.length <= 3) return w;
+  let x = w;
+  if (/ies$/.test(x)) x = x.slice(0, -3) + 'y';
+  else if (/coes$/.test(x)) x = x.slice(0, -4) + 'cao';
+  else if (/(sses|shes|ches|xes)$/.test(x)) x = x.slice(0, -2);
+  else if (/[^s]s$/.test(x)) x = x.slice(0, -1);
+  if (x.length > 5 && /ing$/.test(x)) x = x.slice(0, -3);
+  else if (x.length > 5 && /ed$/.test(x)) x = x.slice(0, -2);
+  else if (x.length > 7 && /mente$/.test(x)) x = x.slice(0, -5);
+  return x;
+}
+function _tok(text) {
+  return _fold(text).split(/[^a-z0-9]+/).filter(w => w.length >= 3 && !_STOP.has(w)).map(_stem);
+}
+let _recallIdx = null;
+function _conceptTable() {
+  if (!GRAPH || !GRAPH.edges) return [];
+  return GRAPH.nodes.filter(n => n.kind === 'concept').map(n => {
+    const stems = _tok(n.title); if (!stems.length) return null;
+    const keys = new Set(GRAPH.edges.filter(e => e.to === n.id && e.rel === 'about').map(e => e.from.replace(/^module:/, '')));
+    return { title: n.title, stems, keys };
+  }).filter(Boolean);
+}
+function recallIndex() {
+  if (!_searchIdx || !_searchIdx.length) return null;
+  if (_recallIdx) { if (!_recallIdx.concepts.length) _recallIdx.concepts = _conceptTable(); return _recallIdx; }
+  const segs = [], df = {};
+  for (const mod of _searchIdx) {
+    const key = (mod.kind === 'reel' ? 'reel:' : mod.c + ':') + mod.m;
+    const meta = _tok(mod.t + ' ' + mod.ct);
+    for (const [t0, text] of mod.s) {
+      const toks = _tok(text);
+      segs.push({ mod, key, t0, text, toks, meta });
+      for (const w of new Set(toks)) df[w] = (df[w] || 0) + 1;
+    }
+  }
+  const N = segs.length;
+  return (_recallIdx = { segs, idf: w => Math.log(1 + N / (1 + (df[w] || 0))), concepts: _conceptTable() });
+}
+const _tokMatch = (toks, w) => toks.includes(w) ? 1 : (w.length >= 4 && toks.some(x => x.startsWith(w) || (x.length >= 4 && w.startsWith(x)))) ? 0.6 : 0;
+function recall(q, topN) {
+  const idx = recallIndex(); if (!idx) return [];
+  const qs = [...new Set(_tok(q))]; if (!qs.length) return [];
+  const phrase = _fold(q).trim();
+  /* the graph widens the net: a question that names a concept lifts every
+     lesson the graph says is about it — a tie-breaker, never a fabricated hit */
+  const hitConcepts = idx.concepts.filter(c => c.stems.every(cs => qs.some(w => w === cs || (cs.length >= 4 && w.startsWith(cs)) || (w.length >= 4 && cs.startsWith(w)))));
+  const conceptKeys = new Set(); hitConcepts.forEach(c => c.keys.forEach(k => conceptKeys.add(k)));
+  const segs = idx.segs, best = {};
+  const _weakKeys = new Set((typeof weakSpots === 'function' ? weakSpots(6) : []).map(w => w.course + ':' + w.mod));
+  for (let i = 0; i < segs.length; i++) {
+    const sg = segs[i];
+    let score = 0; const why = [];
+    for (const w of qs) {
+      let m = _tokMatch(sg.toks, w);
+      if (!m) { /* spoken sentences straddle segment cuts */
+        const pv = segs[i - 1], nx = segs[i + 1];
+        if ((pv && pv.key === sg.key && _tokMatch(pv.toks, w)) || (nx && nx.key === sg.key && _tokMatch(nx.toks, w))) m = 0.5;
+      }
+      if (m) { score += m * idx.idf(w); why.push(w); }
+      if (sg.meta.includes(w)) score += 0.4;
+    }
+    if (!score) continue;
+    if (phrase.length >= 6 && _fold(sg.text).includes(phrase)) score += 2.5;
+    if (why.length === qs.length && qs.length > 1) score *= 1.3;   /* every word present beats one word often */
+    if (conceptKeys.has(sg.key)) score += 0.8;
+    if (_weakKeys && _weakKeys.has(sg.key)) score += 0.5;   /* a lesson this learner is weak on outranks a tie */
+    const b = best[sg.key];
+    if (!b || score > b.score) best[sg.key] = { score, i, why };
+  }
+  const out = Object.values(best).sort((a, b) => b.score - a.score);
+  const top = out.length ? out[0].score : 0;
+  return out.filter(x => x.score >= 1 && x.score >= top * 0.45).slice(0, topN || 4).map(({ score, i, why }) => {
+    const sg = segs[i], nx = segs[i + 1];
+    const text = (sg.text + ((nx && nx.key === sg.key) ? ' ' + nx.text : '')).replace(/\s+/g, ' ').trim();
+    return { score: +score.toFixed(2), course: sg.mod.c, courseTitle: sg.mod.ct, mod: sg.mod.m, title: sg.mod.t,
+             kind: sg.mod.kind === 'reel' ? 'reel' : 'module', t0: sg.t0, text, why: [...new Set(why)], concepts: hitConcepts.map(c => c.title) };
+  });
+}
+/* the old name stays: LandFlow's search_lessons mirrors this shape */
+function searchMoments(q, topN) { return recall(q, topN); }
+/* ===== MEANING ================================================================
+   The lexical engine finds words. This finds ideas: every ~40-word window of
+   every transcript was embedded with a multilingual model (bge-m3, 1024-d) at
+   build time and quantised to int8 — 1.25 MB for the whole library, fetched
+   once on the first question. The learner's question is embedded through the
+   gateway (one call), and the cosine runs HERE, in the page: 1,216 dot
+   products, under a millisecond. A Portuguese question finds an English
+   window, and "why do people blame each other" finds "whose fault is this"
+   with no word in common. No vector database, nothing to host.
+   Lexical and semantic are FUSED (reciprocal rank), and if the gateway or the
+   network is gone, the lexical engine answers alone — Recall never goes dark. */
+let _vec = null, _vecP = null;
+function loadVectors() {
+  if (_vec) return Promise.resolve(_vec);
+  if (_vecP) return _vecP;
+  return (_vecP = Promise.all([
+    fetch('knowledge/windows.json?v=' + knowledgeV()).then(r => (r.ok ? r.json() : null)),
+    fetch('knowledge/vectors.bin?v=' + knowledgeV()).then(r => (r.ok ? r.arrayBuffer() : null)),
+  ]).then(([meta, buf]) => {
+    if (!meta || !buf || buf.byteLength !== meta.n * meta.dims) return (_vec = false);
+    return (_vec = { n: meta.n, d: meta.dims, q: new Int8Array(buf), s: Float32Array.from(meta.scale), win: meta.win });
+  }).catch(() => (_vec = false)));
+}
+async function embedQuery(text) {
+  const res = await fetch(AI_GATEWAY.replace(/\/$/, '') + '/embed', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ texts: [String(text).slice(0, 500)] }) });
+  if (!res.ok) throw new Error('embed ' + res.status);
+  const d = await res.json(); const v = d.vectors && d.vectors[0]; if (!v) throw new Error('no vector');
+  const f = Float32Array.from(v); let n = 0; for (const x of f) n += x * x; n = Math.sqrt(n) || 1;
+  for (let i = 0; i < f.length; i++) f[i] /= n;
+  return f;
+}
+/* dot of one float query against int8 rows, per-row scale — cosine, since both sides are unit length */
+function dotInt8(V, qv, k) {
+  const { n, d, q, s } = V; const out = [];
+  for (let i = 0; i < n; i++) {
+    let acc = 0; const base = i * d;
+    for (let j = 0; j < d; j++) acc += q[base + j] * qv[j];
+    out.push([acc * s[i], i]);
+  }
+  out.sort((a, b) => b[0] - a[0]);
+  return out.slice(0, k || 12);
+}
+/* reciprocal-rank fusion: two ranked lists of lesson keys → one; a key high in either list wins */
+function rrfFuse(lists, k, weights) {
+  const score = {};
+  lists.forEach((list, li) => { const w = (weights && weights[li] != null) ? weights[li] : 1; list.forEach((key, r) => { score[key] = (score[key] || 0) + w / (60 + r); }); });
+  return Object.entries(score).sort((a, b) => b[1] - a[1]).slice(0, k || 6).map(([key, sc]) => ({ key, sc }));
+}
+function _lessonByKey(key) { return _searchIdx.find(m => ((m.kind === 'reel' ? 'reel:' : m.c + ':') + m.m) === key); }
+async function recallHybrid(q, topN) {
+  const lex = recall(q, 8);
+  let sem = [];
+  try {
+    const [V, qv] = await Promise.all([loadVectors(), embedQuery(q)]);
+    if (V && V.d === qv.length) {
+      const seen = new Set();
+      for (const [cos, i] of dotInt8(V, qv, 24)) {
+        const [key, t0, i0, i1] = V.win[i];
+        if (cos < 0.45 || seen.has(key)) continue; seen.add(key);
+        const mod = _lessonByKey(key); if (!mod) continue;
+        const text = mod.s.slice(i0, i1 + 1).map(x => x[1]).join(' ').replace(/\s+/g, ' ').trim();
+        sem.push({ score: +cos.toFixed(3), course: mod.c, courseTitle: mod.ct, mod: mod.m, title: mod.t, kind: mod.kind === 'reel' ? 'reel' : 'module', t0, text, why: ['≈'], concepts: [], key });
+        if (sem.length >= 8) break;
+      }
+    }
+  } catch (e) { sem = []; }
+  if (!sem.length) return lex.slice(0, topN || 4);
+  const keyOf = m => (m.kind === 'reel' ? 'reel:' : m.course + ':') + m.mod;
+  /* Measured on the live index: meaning ranks better than words in three of
+     four questions, and the lexical score says how much to trust the words —
+     a phrase match scores ~17, a couple of shared common words ~9. */
+  const lexW = Math.max(0.4, Math.min(1, (lex[0] ? lex[0].score : 0) / 16));
+  const fused = rrfFuse([lex.map(keyOf), sem.map(keyOf)], topN || 4, [lexW, 1]);
+  return fused.map(({ key }) => {
+    const a = lex.find(m => keyOf(m) === key), b = sem.find(m => keyOf(m) === key);
+    /* the lexical hit knows the exact second a word was said; the semantic one knows the passage. Prefer the second, keep the meaning tag. */
+    const m = a ? Object.assign({}, a) : Object.assign({}, b);
+    if (a && b) m.why = [...new Set([...a.why, '≈'])];
+    return m;
+  });
+}
+function groundingText(moments) {
+  return moments.slice(0, 5).map(m => `${m.title} (${m.kind === 'reel' ? 'short' : m.courseTitle}) · ${fmtTc(m.t0)}: "${m.text.slice(0, 320)}"`).join('\n');
+}
+/* ---- the free gateway: no key in the browser, grounded in Recall's moments ---- */
+const AI_GATEWAY = (typeof window !== 'undefined' && window.ACADEMY_AI_GATEWAY) || 'https://academy-ai.edenrise.workers.dev/';
+async function gatewayComplete({ messages, grounding, maxTokens }) {
+  const id = currentCourseId(); const c = id && courseById(id);
+  const res = await fetch(AI_GATEWAY, { method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ messages, maxTokens: maxTokens || 400, context: {
+      brand: brandAcademy(), ethos: brandEthos(), course: c ? ctitle(c) : '',
+      topics: [...new Set(CATALOG.map(x => x.cat))].join(', '), grounding: grounding || '' } }) });
+  if (!res.ok) throw new Error('gateway ' + res.status);
+  return res.json();
+}
+/* Streams the gateway's answer into `el` as it is written; resolves with the full text and the model.
+   Falls back to the JSON reply if the gateway did not stream. `onDone` receives the final text. */
+async function gatewayStream({ messages, grounding, maxTokens }, el) {
+  const id = currentCourseId(); const c = id && courseById(id);
+  const res = await fetch(AI_GATEWAY, { method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ stream: true, messages, maxTokens: maxTokens || 400, context: {
+      brand: brandAcademy(), ethos: brandEthos(), course: c ? ctitle(c) : '',
+      topics: [...new Set(CATALOG.map(x => x.cat))].join(', '), grounding: grounding || '' } }) });
+  if (!res.ok) throw new Error('gateway ' + res.status);
+  const model = res.headers.get('X-Model') || '';
+  if (!/text\/event-stream/.test(res.headers.get('content-type') || '')) {
+    const g = await res.json(); if (el) el.textContent = g.reply || ''; return { reply: g.reply || '', model: g.model || model, refused: !!g.refused };
+  }
+  const reader = res.body.getReader(), dec = new TextDecoder(); let buf = '', text = '';
+  for (;;) {
+    const { value, done } = await reader.read(); if (done) break;
+    buf += dec.decode(value, { stream: true });
+    const lines = buf.split('\n'); buf = lines.pop();
+    for (const line of lines) {
+      if (!line.startsWith('data:')) continue;
+      const payload = line.slice(5).trim(); if (!payload || payload === '[DONE]') continue;
+      try { const j = JSON.parse(payload); if (j.response) { text += j.response; if (el) { el.textContent = text; } } } catch (e) {}
+    }
+  }
+  return { reply: text.trim(), model };
+}
+function modelLabelOf(m) { return /llama-3\.3/.test(m || '') ? 'Llama 3.3 70B' : /llama-3\.1/.test(m || '') ? 'Llama 3.1 8B' : /gemini/.test(m || '') ? 'Gemini Flash' : /guard/.test(m || '') ? 'the guard' : (m || 'AI'); }
+/* A question asked out loud is answered out loud — the first two sentences,
+   in the learner's language, and it can be silenced from the modal. */
+function speakBack(text) {
+  if (S.speak === false || typeof speechSynthesis === 'undefined') return;
+  const sentences = String(text).replace(/\*\*/g, '').match(/[^.!?]+[.!?]?/g) || [];
+  const short = sentences.slice(0, 2).join(' ').trim().slice(0, 280); if (!short) return;
+  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(short); u.lang = _lang() === 'pt' ? 'pt-PT' : 'en-GB'; speechSynthesis.speak(u); } catch (e) {}
+}
+function momentsHTML(moments, opts) {
+  if (!moments.length) return '';
+  const compact = opts && opts.compact;
+  return `${compact ? '' : `<div class="ob-eyebrow" style="margin-top:4px;">⏱ ${t('ask_moments')}</div>`}
+    <div class="ask-moments${compact ? ' compact' : ''}">${moments.map(m => `
+      <div class="ask-moment" data-action="${m.kind === 'reel' ? 'ask-reel' : 'ask-moment'}" data-id="${esc(String(m.kind === 'reel' ? m.mod : m.course))}" data-mod="${m.mod}" data-t="${Math.max(0, m.t0 - (m.kind === 'reel' ? 2 : 4))}" role="button" tabindex="0">
+        <span class="am-tc">${fmtTc(m.t0)}</span>
+        <div class="am-body"><b>${esc(m.title)}</b><span class="am-course">${esc(m.courseTitle)}</span>
+          <p>“${esc(m.text.length > 150 ? m.text.slice(0, 150) + '…' : m.text)}”</p></div>
+        <button class="am-link" data-action="copy-link" data-href="${deepLink(m)}" aria-label="${t('link_copy')}" title="${t('link_copy')}">🔗</button>
+        <span class="ask-go">▶</span>
+      </div>`).join('')}</div>`;
+}
+async function openAsk(q, via) {
   q = (q || '').trim(); if (!q) return;
-  logAsk(q, 'ask');
-  if (!aiKey()) { toast(t('studio_need_key'), 'ℹ️'); return; }
+  via = via || 'typed';
+  logAsk(q, via);
   ensureAskModal();
   $('#askQ').textContent = q;
-  const eb = $('#askModal .ob-eyebrow'); if (eb) eb.innerHTML = `✦ ${t('ask_h')} <span class="grounded-inline">· 🔒 ${t('grounded_note')}</span>`;
+  const eb = $('#askModal .ob-eyebrow'); if (eb) eb.innerHTML = `✦ ${t('ask_h')} <span class="grounded-inline">· 🔒 ${t('grounded_note')}</span>${via === 'voice' ? `<button class="ask-speak" data-action="ask-speak" aria-label="${t('ask_speak')}" title="${t('ask_speak')}">${S.speak === false ? '🔇' : '🔊'}</button>` : ''}`;
   $('#askBody').innerHTML = `<div class="studio-status"><span class="orb-spin" style="width:20px;height:20px;"></span> ${t('ask_thinking')}</div>`;
   $('#askModal').classList.add('open');
+  /* MOMENTS FIRST — found locally in the real transcripts, rendered before any
+     model answers, and still there when no model can. The lesson itself is the
+     primary source; the AI is commentary on top of it. */
+  await Promise.all([loadSearchIdx(), loadGraph()]);
+  const want = via === 'voice' ? 5 : 4;
+  /* words first (instant), meaning next (one gateway call): the modal never waits on the network to show something real */
+  let moments = recall(q, want);
+  const keyOf = m => (m.kind === 'reel' ? 'reel:' : m.course + ':') + m.mod;
+  const refine = recallHybrid(q, want).then(h => {
+    if ($('#askQ') && $('#askQ').textContent !== q) return moments;
+    if (h.map(keyOf).join() !== moments.map(keyOf).join()) {
+      moments = h; const old = $('#askBody .ask-moments'); const fresh = document.createElement('div'); fresh.innerHTML = momentsHTML(h, { compact: false });
+      const list = fresh.querySelector('.ask-moments');
+      if (old && list) old.replaceWith(list);
+      else if (!old && h.length) $('#askBody').insertAdjacentHTML('afterbegin', momentsHTML(h));
+    }
+    return moments;
+  }).catch(() => moments);
+  /* the search itself is evidence: what people ask and DON'T find is the
+     course-creation radar — found:0 events are content gaps, in the ledger */
+  ledgerAppend('knowledge_search', { q: q.slice(0, 120), found: moments.length, via, top: moments[0] ? `${moments[0].kind === 'reel' ? 'reel:' : moments[0].course + ':'}${moments[0].mod}@${moments[0].t0}` : null });
+  if (!aiKey()) {
+    $('#askBody').innerHTML = moments.length
+      ? momentsHTML(moments)
+      : `<p class="ask-answer">${t('ask_no_moments')}</p>`;
+    /* No tenant key: the free gateway answers, grounded in the moments above.
+       The quotes are already on screen — the answer is commentary that arrives
+       when it can, and the modal is complete without it. */
+    try {
+      moments = await refine;
+      /* the answer streams into place under the moments; links are resolved once it is complete */
+      $('#askBody').insertAdjacentHTML('beforeend', `<p class="ask-answer streaming" id="askLive"></p>`);
+      const live = $('#askLive');
+      const g = await gatewayStream({ messages: [{ role: 'user', content: q }], grounding: groundingText(moments) + learnerContext(), maxTokens: 350 }, live);
+      if (g && g.reply && $('#askQ') && $('#askQ').textContent === q) {
+        live.classList.remove('streaming'); live.removeAttribute('id');
+        live.innerHTML = linkifyAnswer(g.reply, moments);
+        live.insertAdjacentHTML('afterend', `<div class="ask-model">✦ ${t('ask_by')} ${esc(modelLabelOf(g.model))}</div>`);
+        if (via === 'voice') speakBack(g.reply);
+      } else if (live) live.remove();
+    } catch (e) { const live = $('#askLive'); if (live) live.remove(); if (via === 'voice' && moments.length) speakBack(`${moments[0].title}. ${moments[0].text}`); }
+    return;
+  }
   try {
     const raw = await llmComplete({ maxTokens: 700,
       system: `You are the ${brandAcademy()} guide (${brandShortDesc()}). Answer the member's question warmly and practically, grounded ONLY in the course library below. HONESTY RULE: if the library doesn't cover the question, say so plainly in the answer ("our courses don't cover this yet") and point to the nearest course — never bluff or invent. Reply as raw JSON: {"answer":str(2-4 sentences, concrete),"refs":[{"courseId":str(an id from the library),"why":str(short)}]} — 0-3 refs, best first. ${_lang() === 'pt' ? 'Responde em português europeu.' : ''}\n\nLIBRARY:\n${libraryContext()}${aiGuardrails()}`,
       messages: [{ role: 'user', content: q }] });
     const j = JSON.parse(raw.replace(/^[^{]*/, '').replace(/[^}]*$/, ''));
     const refs = (j.refs || []).map(r => ({ r, c: courseById(r.courseId) })).filter(x => x.c);
-    $('#askBody').innerHTML = `<p class="ask-answer">${esc(j.answer || '')}</p>
+    $('#askBody').innerHTML = `${momentsHTML(moments)}<p class="ask-answer">${linkifyAnswer(j.answer || '', moments)}</p>
       ${refs.length ? `<div class="ob-eyebrow" style="margin-top:16px;">${t('ask_refs')}</div>
       <div class="ask-refs">${refs.map(({ r, c }) => `
         <div class="ask-ref" data-action="ask-ref" data-id="${c.id}" role="button" tabindex="0">
@@ -1306,9 +1765,22 @@ async function openAsk(q) {
           <span class="ask-go">→</span>
         </div>`).join('')}</div>` : ''}
       ${aiModelLabel() ? `<div class="ask-model">✦ ${t('ask_by')} ${esc(aiModelLabel())}</div>` : ''}`;
+    if (via === 'voice') speakBack(j.answer || '');
   } catch (e) {
-    $('#askBody').innerHTML = `<div class="auth-err on">${t('ask_fail')}</div>`;
+    /* the model failed; the lesson quotes still answer */
+    $('#askBody').innerHTML = momentsHTML(moments) || `<div class="auth-err on">${t('ask_fail')}</div>`;
   }
+}
+/* what you asked before is a door back in — the last four, distinct, one tap */
+function recallStripHTML() {
+  const seen = new Set(), recent = [];
+  for (const a of (S.askLog || []).slice().reverse()) {
+    const k = _fold(a.q); if (!a.q || seen.has(k)) continue;
+    seen.add(k); recent.push(a); if (recent.length >= 4) break;
+  }
+  if (!recent.length) return '';
+  return `<section class="page-pad ask-recent"><span class="ask-recent-k">${t('recall_recent')}</span>${recent.map(a =>
+    `<button class="chip ask-again" data-action="ask-again" data-q="${esc(a.q)}">${a.via === 'voice' ? '🎙 ' : ''}${esc(a.q.length > 44 ? a.q.slice(0, 44) + '…' : a.q)}</button>`).join('')}</section>`;
 }
 function askBarHTML() {
   return `<section class="page-pad ask-line-wrap"><div class="ask-line">
@@ -1390,9 +1862,25 @@ function complianceTarget(pf) {
   }
   return Math.round(40 * fte * frac);
 }
+/* The art. 131.º total counts only COUNTABLE hours — job-related training
+   (art. 133.º). Entries marked countable:false are kept in the log (the
+   training happened and the learner should see it) but excluded here, because
+   this figure is the one that goes to the employer's legal report. Entries
+   written before `countable` existed are undefined, and undefined !== false,
+   so history keeps counting rather than silently collapsing. */
 function trainingHours(log) {
   const y = complianceYear();
-  return Math.round((log || []).filter(e => e && new Date(e.at).getFullYear() === y).reduce((a, e) => a + (e.hours || 0), 0) * 10) / 10;
+  return Math.round((log || [])
+    .filter(e => e && new Date(e.at).getFullYear() === y && e.countable !== false)
+    .reduce((a, e) => a + (e.hours || 0), 0) * 10) / 10;
+}
+/* Training that happened but does not count toward the mandate — shown to the
+   learner so the two numbers never silently disagree. */
+function nonCountableHours(log) {
+  const y = complianceYear();
+  return Math.round((log || [])
+    .filter(e => e && new Date(e.at).getFullYear() === y && e.countable === false)
+    .reduce((a, e) => a + (e.hours || 0), 0) * 10) / 10;
 }
 /* expected hours by today if pacing evenly across the year (the ~1h/week line) */
 function trainingPace(target) {
@@ -1403,9 +1891,17 @@ function trainingPace(target) {
 /* ===== Compliance Phase 2: legal documents (DRAFT wording — pending lawyer sign-off, SPEC §6/§9) ===== */
 /* company identity comes from window.EdenCompany (Phase 5); helpers above */
 function ptCourseTitle(id) { const c = courseById(id); return (typeof COURSE_PT !== 'undefined' && COURSE_PT[id] && COURSE_PT[id].title) || (c && c.title) || id; }
-function trainingActions(log, year) {
+/* `lang` defaults to Portuguese because the legal exports (register, Relatório
+   Único annex) are read by a Portuguese inspector whatever language the app is
+   set to. The worker's own printed record passes its document language instead —
+   an English document listing Portuguese action titles is a document that looks
+   assembled rather than issued. */
+function trainingActions(log, year, lang) {
+  const title = id => (lang === 'en'
+    ? ((courseById(id) || {}).title || id)
+    : ptCourseTitle(id));
   const b = {};
-  (log || []).filter(e => new Date(e.at).getFullYear() === year).forEach(e => { const k = ptCourseTitle(e.courseId); b[k] = (b[k] || 0) + (e.hours || 0); });
+  (log || []).filter(e => new Date(e.at).getFullYear() === year).forEach(e => { const k = title(e.courseId); b[k] = (b[k] || 0) + (e.hours || 0); });
   return Object.entries(b).map(([title, h]) => ({ title, hours: Math.round(h * 10) / 10 })).sort((a, b) => b.hours - a.hours);
 }
 async function complianceVerifyCode(pf, year, log) {
@@ -1417,45 +1913,6 @@ function wrapCanvasText(x, text, cx, cy, maxW, lh) {
   const words = text.split(' '); let line = '', y = cy;
   words.forEach(w => { const test = line + w + ' '; if (x.measureText(test).width > maxW && line) { x.fillText(line.trim(), cx, y); line = w + ' '; y += lh; } else line = test; });
   x.fillText(line.trim(), cx, y); return y;
-}
-function trainingCertCanvas(pf, year, code) {
-  const W = 1600, H = 1131, cv = document.createElement('canvas'); cv.width = W; cv.height = H; const x = cv.getContext('2d');
-  x.fillStyle = '#0e140f'; x.fillRect(0, 0, W, H);
-  const g = x.createRadialGradient(W / 2, H * 0.3, 80, W / 2, H / 2, W * 0.8); g.addColorStop(0, 'rgba(200,164,93,.09)'); g.addColorStop(1, 'rgba(200,164,93,0)'); x.fillStyle = g; x.fillRect(0, 0, W, H);
-  x.strokeStyle = 'rgba(200,164,93,.85)'; x.lineWidth = 3; x.strokeRect(46, 46, W - 92, H - 92);
-  x.strokeStyle = 'rgba(200,164,93,.35)'; x.lineWidth = 1; x.strokeRect(60, 60, W - 120, H - 120);
-  x.textAlign = 'center';
-  x.fillStyle = '#c8a45d'; x.font = '600 24px Inter, sans-serif'; try { x.letterSpacing = '10px'; } catch (e) {} x.fillText(companyName().toUpperCase().split('').join(' '), W / 2, 138); try { x.letterSpacing = '0px'; } catch (e) {}
-  x.fillStyle = '#f7f6f1'; x.font = '600 52px "Cormorant Garamond", serif'; x.fillText('Certificado de Frequência', W / 2, 244);
-  x.fillStyle = 'rgba(247,246,241,.7)'; x.font = '400 26px "Cormorant Garamond", serif'; x.fillText('Formação Profissional Contínua', W / 2, 286);
-  const done = trainingHours(S.trainingLog), target = complianceTarget(pf) || 40;
-  x.fillStyle = 'rgba(247,246,241,.55)'; x.font = '400 22px Inter'; x.fillText('Certifica-se que', W / 2, 372);
-  x.fillStyle = '#c8a45d'; x.font = 'italic 600 60px "Cormorant Garamond", serif'; x.fillText(pf.name || '—', W / 2, 442);
-  x.fillStyle = 'rgba(247,246,241,.7)'; x.font = '400 20px Inter'; x.fillText(`NIF ${pf.nif || '—'}${pf.employeeNo ? ' · N.º ' + pf.employeeNo : ''}`, W / 2, 480);
-  x.fillStyle = 'rgba(247,246,241,.85)'; x.font = '400 21px Inter';
-  wrapCanvasText(x, `frequentou ${done} horas de formação profissional contínua no ano de ${year}, ministrada por ${companyName()}${companyNif() ? ' (NIF ' + companyNif() + ')' : ''} ao abrigo do dever de formação previsto nos artigos 130.º a 134.º do Código do Trabalho.`, W / 2, 534, 1080, 30);
-  const acts = trainingActions(S.trainingLog, year).slice(0, 6);
-  x.textAlign = 'left'; let ay = 672;
-  x.fillStyle = 'rgba(200,164,93,.9)'; x.font = '700 13px Inter'; x.fillText('AÇÕES DE FORMAÇÃO · modalidade: formação à distância (e-learning)', 270, ay); ay += 32;
-  x.font = '400 18px Inter';
-  acts.forEach(a => { x.fillStyle = 'rgba(247,246,241,.8)'; x.fillText(a.title.slice(0, 60), 270, ay); x.textAlign = 'right'; x.fillStyle = '#c8a45d'; x.fillText(a.hours + ' h', W - 270, ay); x.textAlign = 'left'; ay += 30; });
-  x.textAlign = 'center';
-  x.strokeStyle = 'rgba(200,164,93,.5)'; x.beginPath(); x.moveTo(W / 2 - 150, 902); x.lineTo(W / 2 + 150, 902); x.stroke();
-  x.fillStyle = '#f7f6f1'; x.font = '600 30px "Cormorant Garamond", serif'; x.fillText(`Total: ${done} h de ${target} h`, W / 2, 948);
-  x.fillStyle = 'rgba(247,246,241,.5)'; x.font = '400 18px Inter'; x.fillText(new Date().toLocaleDateString('pt-PT', { day: 'numeric', month: 'long', year: 'numeric' }), W / 2, 986);
-  x.fillStyle = 'rgba(247,246,241,.4)'; x.font = '400 15px Inter'; x.fillText(`Código de verificação: ${code}`, W / 2, 1040);
-  x.fillStyle = 'rgba(217,179,140,.6)'; x.font = 'italic 400 13px Inter'; x.fillText('Documento comprovativo interno · modelo em validação jurídica', W / 2, 1066);
-  return cv;
-}
-async function downloadTrainingCert() {
-  const pf = S.profile || {};
-  if (!pf.nif) { toast(t('comp_nif_prompt'), '🪪'); location.hash = '#/profile'; return; }
-  const code = await complianceVerifyCode(pf, complianceYear(), S.trainingLog);
-  ledgerAppend('cert_issued', { year: complianceYear(), code });
-  trainingCertCanvas(pf, complianceYear(), code).toBlob(b => {
-    const u = URL.createObjectURL(b); const a = document.createElement('a'); a.href = u; a.download = `certificado-formacao-${pf.nif || 'x'}-${complianceYear()}.png`;
-    document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(u); toast(t('comp_cert_dl'), '');
-  }, 'image/png');
 }
 function csvBlob(rows, name) {
   const csv = rows.map(r => r.map(v => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`).join(',')).join('\r\n');
@@ -1788,6 +2245,7 @@ function verifiedPanelHTML() {
           const conf = ar.applied ? `<div class="vc-how">✅ ${t('vc_confirmed').replace('{c}', ar.confirmed).replace('{a}', ar.applied)}</div>` : '';
           return self + conf; })()}
         <div class="vc-ledger" id="vcLedger">${events} ${t('vc_events')} · <span class="vc-chk">…</span> · <button class="link-quiet" data-action="ev-export">⤓ ${t('ev_export')}</button></div>
+        <div class="vc-how" id="vcSrv"></div>
         <div class="vc-how" id="vcOts">${otsLineHTML()}</div>
       </div>
     </div>
@@ -1807,10 +2265,43 @@ async function paintLedgerCheck() {
     const o = document.getElementById('vcOts');
     if (changed && o) o.innerHTML = otsLineHTML();
   });
+  paintServerTier();
   const el = document.querySelector('#vcLedger .vc-chk'); if (!el) return;
   const r = await ledgerVerify();
   el.textContent = r.ok ? t('vc_intact') : t('vc_broken');
   el.style.color = r.ok ? 'var(--accent-2)' : '#d98a76';
+}
+/* ===== THE SERVER TIER, STATED ==============================================
+   `vc_intact` above is a CLIENT check: it proves the local chain is internally
+   consistent and nothing more. For three weeks it sat next to a server mirror
+   that was rejecting every single write, and the card read exactly the same as
+   it does when everything works — which is how a detected failure became three
+   loop runs of misdiagnosis.
+
+   So the server tier now gets its own line, and it never borrows confidence from
+   the client one. Four distinct states, because collapsing any two of them is
+   the bug: signed out (nothing to mirror), blocked (we know it failed, and
+   since when), complete (the server holds every event), and behind (sync has not
+   caught up — which is normal briefly and a problem if it persists). */
+function paintServerTier() {
+  const el = document.getElementById('vcSrv'); if (!el) return;
+  const S_ = (window.EdenCloud && EdenCloud.ledgerSyncStatus) ? EdenCloud.ledgerSyncStatus() : null;
+  if (!S_ || !S_.signedIn) {
+    el.textContent = t('srv_local');
+    el.style.color = '';
+    return;
+  }
+  if (S_.blocked) {
+    const since = new Date(S_.blocked.firstSeen)
+      .toLocaleDateString(_lang() === 'pt' ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'short' });
+    el.textContent = `⚠ ${t('srv_blocked').replace('{d}', since)}`;
+    el.style.color = '#d98a76';
+    return;
+  }
+  el.style.color = '';
+  el.textContent = (S_.total && S_.mirrored >= S_.total)
+    ? t('srv_ok')
+    : t('srv_behind').replace('{m}', S_.mirrored).replace('{t}', S_.total);
 }
 function compliancePanelHTML() {
   const pf = S.profile || {};
@@ -2008,10 +2499,131 @@ function openPrintDoc(html) {
   w.document.write(html); w.document.close();
 }
 function certFooterNote() {
+  /* Part 4.1 of the legal spec: our output may never be called a `certificado`.
+     The permitted phrasing is the "documento comprovativo" the law itself
+     contemplates for employer-delivered training (art. 131.º/3) — and the
+     counting claim carries its statutory CONDITION: it counts when integrated
+     into the employer's training plan and related to the worker's activity
+     (art. 133.º). Dropping that condition would overstate what this document
+     does. The final clause is Part 4.2's qualifier, which stays until Part 6
+     is signed off by Portuguese counsel. */
   return _lang() === 'pt'
-    ? 'Certificado interno de formação, emitido pela entidade no âmbito da formação contínua (art. 131.º do Código do Trabalho). Não constitui certificação profissional emitida por entidade formadora certificada.'
-    : 'Internal training certificate, issued by the organisation within continuous workplace training (PT Labour Code art. 131). It is not a professional certification issued by an accredited training entity.';
+    ? 'Documento comprovativo de formação interna, emitido pelo empregador no âmbito da formação profissional contínua (art. 131.º/3 do Código do Trabalho). Conta para as 40 horas anuais quando integrado no plano de formação do empregador e relacionado com a atividade do trabalhador. NÃO constitui certificação profissional, não é emitido no SIGO e não é averbado no Passaporte Qualifica. Confirme o enquadramento com o seu consultor jurídico.'
+    : 'Internal training record, issued by the employer within continuous workplace training (PT Labour Code art. 131.º/3). It counts toward the annual 40 hours when integrated into the employer\'s training plan and related to the worker\'s activity. It is NOT a professional certification, is not issued via SIGO, and is not recorded in the worker\'s national qualifications record. Confirm the position with your legal adviser.';
 }
+/* ===== THE COMPLIANCE RECORD — an official document, not a wall certificate ==
+   buildCertHTML() produces a landscape certificate: a frame, a big name, a
+   moment worth pinning up. Right for finishing a course. Wrong for the document
+   an ACT inspector reads, which is why this one is separate rather than another
+   flag on that function.
+
+   An inspector does not want a centred name in 40px. They want the itemised
+   actions behind the hours — which action, what mode, how long — because
+   "37 hours of recorded training" is a claim and the table under it is the
+   evidence. The register CSV has always carried that detail; the printed record
+   did not, and the printed record is the one that gets handed over.
+
+   So: A4 PORTRAIT, the brand's real typefaces rather than Georgia, every action
+   listed with the header repeating across pages, and a verification block that
+   gives the code AND the address to check it at — a code with nowhere to go is
+   decoration.
+
+   PRINT GEOMETRY. The landscape certificate uses `@page { margin: 0 }` with a
+   full-bleed 297×210mm sheet, which most printers cannot reproduce: they scale
+   it down or clip the frame. A document that may be filed and re-printed for
+   years should not depend on borderless printing, so this uses real page
+   margins and lets the content flow. */
+function buildRecordHTML(o) {
+  const pt = _lang() === 'pt';
+  const accent = brandVar('--accent', '#c8a45d');
+  const rows = (o.rows || []).map(r => `<tr><td>${esc(r.title)}</td><td class="mode">${esc(r.mode || '')}</td><td class="h">${esc(String(r.hours))} h</td></tr>`).join('');
+  return `<!doctype html><html lang="${pt ? 'pt' : 'en'}"><head><meta charset="utf-8">
+<title>${esc(o.docTitle)}</title>
+<meta name="author" content="${esc(companyName())}">
+<meta name="subject" content="${esc(o.subject || o.docTitle)}">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 portrait; margin: 16mm 15mm 14mm; }
+  * { margin:0; padding:0; box-sizing:border-box; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
+  body { font-family:Inter,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; font-size:10pt;
+         line-height:1.5; color:#161d18; background:#fff; }
+  .doc { max-width:180mm; margin:0 auto; }
+  .top { display:flex; justify-content:space-between; align-items:flex-start; gap:12mm; padding-bottom:4mm;
+         border-bottom:1.2pt solid ${accent}; }
+  .mark { display:flex; align-items:center; gap:3mm; }
+  .mark svg { height:11mm; width:auto; }
+  .org { font-family:'Cormorant Garamond',Georgia,serif; font-size:14pt; letter-spacing:.2em; text-transform:uppercase; }
+  .org small { display:block; font-family:Inter,sans-serif; font-size:7pt; letter-spacing:.05em;
+               text-transform:none; color:#5d6154; margin-top:1.5mm; }
+  .ref { text-align:right; font-size:7.5pt; color:#5d6154; line-height:1.7; white-space:nowrap; }
+  .ref b { color:#161d18; }
+  h1 { font-family:'Cormorant Garamond',Georgia,serif; font-size:23pt; font-weight:600; margin:8mm 0 1mm; }
+  .sub { font-size:9pt; color:#5d6154; margin-bottom:7mm; }
+  .lede { font-size:7.5pt; letter-spacing:.16em; text-transform:uppercase; color:#5d6154; }
+  .who { font-family:'Cormorant Garamond',Georgia,serif; font-size:21pt; font-weight:600; margin:1mm 0 0; }
+  .whoid { font-size:8.5pt; color:#5d6154; margin:1mm 0 6mm; }
+  .attest { font-size:10pt; }
+  .attest b { font-weight:600; }
+  table { width:100%; border-collapse:collapse; margin-top:6mm; font-size:9.5pt; }
+  thead { display:table-header-group; }
+  thead th { text-align:left; font-size:7pt; letter-spacing:.14em; text-transform:uppercase; color:#5d6154;
+             font-weight:600; padding-bottom:1.8mm; border-bottom:.6pt solid #c9c6ba; }
+  tbody td { padding:2.2mm 0; border-bottom:.4pt solid #e8e6de; vertical-align:top; }
+  tbody tr { break-inside:avoid; }
+  .h { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .mode { color:#5d6154; font-size:8.5pt; }
+  .tot { display:flex; justify-content:space-between; align-items:baseline; margin-top:5mm; padding-top:2.5mm;
+         border-top:1pt solid ${accent}; }
+  .tot .n { font-family:'Cormorant Garamond',Georgia,serif; font-size:17pt; font-weight:600; }
+  .sign { display:flex; gap:16mm; margin-top:14mm; break-inside:avoid; }
+  .sign > div { flex:1; }
+  .line { border-top:.7pt solid #161d18; margin-top:14mm; padding-top:1.8mm; font-size:8pt; color:#5d6154; }
+  .line b { display:block; color:#161d18; font-size:9pt; font-weight:600; }
+  .verify { margin-top:9mm; padding:4mm 5mm; background:#f7f6f1; border-left:2.5pt solid ${accent}; break-inside:avoid; }
+  .verify .code { font-family:ui-monospace,SFMono-Regular,Menlo,'Courier New',monospace; font-size:12.5pt;
+                  letter-spacing:.14em; font-weight:600; margin:1.5mm 0 2mm; word-break:break-all; }
+  .verify p { font-size:8pt; color:#41443a; line-height:1.6; }
+  .prov { font-size:8pt; color:#5d6154; margin-top:5mm; }
+  .prov b { color:#161d18; }
+  .note { margin-top:6mm; padding-top:2.5mm; border-top:.4pt solid #e8e6de; font-size:7pt; color:#7b8079; line-height:1.5; }
+  .print { position:fixed; top:12px; right:12px; font-family:Inter,Helvetica,sans-serif; background:#161d18;
+           color:#fff; border:0; border-radius:8px; padding:9px 16px; cursor:pointer; font-size:13px; }
+  @media screen { body { background:#5c5f57; padding:26px 12px; }
+    .doc { background:#fff; padding:16mm 15mm; box-shadow:0 10px 44px rgba(0,0,0,.34); } }
+  @media print { .print { display:none; } }
+</style></head><body>
+<button class="print" onclick="print()">⤓ ${pt ? 'Imprimir / Guardar PDF' : 'Print / Save as PDF'}</button>
+<div class="doc">
+  <div class="top">
+    <div class="mark">${(window.BRAND && BRAND.logoSvg) || ((document.querySelector('.logo-mark svg') || {}).outerHTML || '')}
+      <div class="org">${esc(companyName())}<small>${o.orgLine || ''}</small></div></div>
+    <div class="ref">${pt ? 'Documento' : 'Document'} <b>${esc((o.code || '').slice(0, 8) || '—')}</b><br>
+      ${pt ? 'Emitido' : 'Issued'} <b>${esc(o.issued)}</b><br>${pt ? 'Exercício' : 'Period'} <b>${esc(String(o.year))}</b></div>
+  </div>
+  <h1>${esc(o.h1)}</h1>
+  <p class="sub">${o.sub}</p>
+  <p class="lede">${pt ? 'Certifica-se que' : 'This certifies that'}</p>
+  <p class="who">${esc(o.who)}</p>
+  <p class="whoid">${o.whoid}</p>
+  <p class="attest">${o.attest}</p>
+  ${rows ? `<table><thead><tr><th>${pt ? 'Ação de formação' : 'Training action'}</th><th>${pt ? 'Modalidade' : 'Mode'}</th><th class="h">${pt ? 'Horas' : 'Hours'}</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
+  <div class="tot"><span>${pt ? 'Total de horas registadas' : 'Total recorded hours'}</span>
+    <span class="n">${esc(String(o.hours))} h ${o.target ? `<span style="font-size:11pt;color:#5d6154">/ ${esc(String(o.target))} h</span>` : ''}</span></div>
+  <div class="sign">
+    <div><div class="line"><b>${esc(companyName())}</b>${pt ? 'Entidade empregadora · formação organizada por' : 'Employer · training organised by'}</div></div>
+    <div><div class="line"><b>${esc(o.issued)}</b>${pt ? 'Data de emissão' : 'Date of issue'}</div></div>
+  </div>
+  ${o.code ? `<div class="verify"><span class="lede">${pt ? 'Código de verificação' : 'Verification code'}</span>
+    <div class="code">${esc(o.code)}</div>
+    <p>${pt
+      ? `Impressão digital SHA-256 do registo de formação que sustenta este documento. Verifique em <b>${esc(o.verifyUrl)}</b> — se um único registo for alterado, o código deixa de coincidir.`
+      : `SHA-256 fingerprint of the training record behind this document. Verify at <b>${esc(o.verifyUrl)}</b> — if any single record is altered, the code no longer matches.`}</p></div>` : ''}
+  ${contentProvider() ? `<div class="prov">${pt ? 'Conteúdo fornecido por' : 'Content supplied by'} <b>${esc(contentProvider())}</b></div>` : ''}
+  <div class="note">${certFooterNote()}</div>
+</div></body></html>`;
+}
+
 function buildCertHTML(o) {
   const accent = brandVar('--accent', '#c8a45d');
   const pt = _lang() === 'pt';
@@ -2036,6 +2648,9 @@ function buildCertHTML(o) {
   ${o.evidence ? `.ev { margin-top:4mm; font-family:'Courier New',monospace; font-size:10px; color:#6a736c; line-height:1.7; } .ev b { color:#3c453e; font-family:Helvetica,Arial,sans-serif; }` : ''}
   .sig { margin-top:auto; margin-bottom:6mm; display:flex; width:100%; justify-content:space-between; align-items:flex-end; font-family:Helvetica,Arial,sans-serif; font-size:11px; color:#57605a; }
   .sig .line { border-top:1px solid #1c2420; padding-top:2mm; width:62mm; text-align:center; }
+  .sig .line .role { font-size:8.5px; color:#8b938c; letter-spacing:.04em; margin-top:1mm; }
+  .prov { font-family:Helvetica,Arial,sans-serif; font-size:9.5px; color:#6a736c; margin-bottom:2mm; letter-spacing:.03em; }
+  .prov b { color:#3c453e; }
   .note { position:absolute; bottom:9.5mm; left:20mm; right:20mm; font-family:Helvetica,Arial,sans-serif; font-size:8px; color:#8b938c; line-height:1.45; }
   .print { position:fixed; top:12px; right:12px; font-family:Helvetica,Arial,sans-serif; background:#161d18; color:#fff; border:0; border-radius:8px; padding:9px 16px; cursor:pointer; font-size:13px; }
   @media print { .print { display:none; } body { background:#faf8f2; } }
@@ -2052,9 +2667,25 @@ function buildCertHTML(o) {
   <div class="what">${esc(o.what)}</div>
   <div class="meta">${o.meta}</div>
   ${o.evidence ? `<div class="ev">${o.evidence}</div>` : ''}
-  <div class="sig"><div>${esc(o.code || '')}</div><div class="line">${esc(companyName())}</div></div>
+  ${/* REQ-L-003: the document is issued in the EMPLOYER's name — that is the
+        signature line — and must NAME any external trainer or content provider.
+        The whole content-supply model (Part 1.2) rests on the employer being the
+        legal deliverer while we are visibly the supplier; leaving the supplier
+        unnamed is what would make it look like a certificate from us. */''}
+  <div class="sig">
+    <div>${esc(o.code || '')}</div>
+    <div class="line">${esc(companyName())}<div class="role">${pt ? 'Entidade empregadora · formação organizada por' : 'Employer · training organised by'}</div></div>
+  </div>
+  ${o.trainer ? `<div class="prov">${pt ? 'Formador' : 'Trainer'} <b>${esc(o.trainer)}</b></div>` : ''}
+  ${contentProvider() ? `<div class="prov">${pt ? 'Conteúdo fornecido por' : 'Content supplied by'} <b>${esc(contentProvider())}</b></div>` : ''}
   <div class="note">${certFooterNote()}${o.extraNote ? ' · ' + o.extraNote : ''}</div>
 </div></body></html>`;
+}
+/* Who supplied the content, if not the employer. Brand config so each tenant
+   states the truth: a client running our library names us; a client that
+   authored its own names no one and the line disappears. */
+function contentProvider() {
+  return (window.BRAND && BRAND.contentProvider) || '';
 }
 function certIdentity() { const pf = S.profile || {}; return pf.name || pf.username || (pf.email || '').split('@')[0] || 'Learner'; }
 function fmtCertDate(d) {
@@ -2067,11 +2698,14 @@ function premiumCourseCert(courseId) {
   const c = courseById(courseId); if (!c || !isDone(courseId)) return;
   const pt = _lang() === 'pt', h = Math.round(courseMins(c) / 6) / 10;
   openPrintDoc(buildCertHTML({
-    docTitle: (pt ? 'Certificado — ' : 'Certificate — ') + ctitle(c),
-    eyebrow: pt ? 'Certificado de Conclusão' : 'Certificate of Completion',
+    docTitle: (pt ? 'Documento Comprovativo — ' : 'Training Record — ') + ctitle(c),
+    eyebrow: pt ? 'Documento Comprovativo de Formação' : 'Record of Training Completed',
     who: certIdentity(),
     did: pt ? 'concluiu com aproveitamento o percurso de formação' : 'has successfully completed the training course',
     what: ctitle(c),
+    /* REQ-L-003 names the trainer, not only the supplying organisation — the
+       educator object is where that name now comes from */
+    trainer: (() => { const e = educatorFor(c); return e ? e.name + (e.external ? (pt ? ' (externo)' : ' (external)') : '') : ''; })(),
     meta: `${h}h · <b>${fmtCertDate(certDate(c.id))}</b>`,
   }));
   ledgerAppend('cert_issued', { courseId, kind: 'course' });
@@ -2082,8 +2716,8 @@ function premiumJourneyCert(id) {
   const doneAt = new Date((S.journeysDone && S.journeysDone[id]) || Date.now());
   const hours = Math.round(j.stages.reduce((a, st) => { const c = courseById(st.course); return a + (c ? courseMins(c) : 0); }, 0) / 6) / 10;
   openPrintDoc(buildCertHTML({
-    docTitle: (pt ? 'Certificado de Percurso — ' : 'Journey Certificate — ') + tjour(j, 'title'),
-    eyebrow: pt ? 'Certificado de Percurso' : 'Journey Certificate',
+    docTitle: (pt ? 'Documento Comprovativo de Percurso — ' : 'Journey Training Record — ') + tjour(j, 'title'),
+    eyebrow: pt ? 'Documento Comprovativo de Percurso' : 'Journey Training Record',
     who: certIdentity(),
     did: pt ? `concluiu o percurso completo (${j.stages.length} etapas)` : `has completed the full journey (${j.stages.length} stages)`,
     what: tjour(j, 'title'),
@@ -2093,19 +2727,31 @@ function premiumJourneyCert(id) {
 }
 async function premiumComplianceCert() {
   const pf = S.profile || {};
-  if (!pf.nif) { toast(t('comp_nif_prompt'), '🪪'); location.hash = '#/profile'; return; }
+  if (!pf.nif) { toast(t('comp_nif_prompt'), '\ud83e\udeaa'); location.hash = '#/profile'; return; }
   const pt = _lang() === 'pt', y = complianceYear();
   const code = await complianceVerifyCode(pf, y, S.trainingLog);
-  ledgerAppend('cert_issued', { year: y, code, kind: 'compliance' });
-  const h = trainingHours(S.trainingLog || []);
-  openPrintDoc(buildCertHTML({
-    docTitle: (pt ? 'Certificado de Formação Contínua ' : 'Continuous Training Certificate ') + y,
-    eyebrow: pt ? 'Formação Contínua · ' + y : 'Continuous Training · ' + y,
+  const h = trainingHours(S.trainingLog || []), target = complianceTarget(pf) || 40;
+  /* EVERY action. The register CSV always carried the itemised detail and the
+     printed record did not — and the printed one is what gets handed over. */
+  const acts = trainingActions(S.trainingLog, y, pt ? 'pt' : 'en');
+  ledgerAppend('cert_issued', { year: y, code, kind: 'compliance', actions: acts.length, hours: h });
+  const issued = new Date().toLocaleDateString(pt ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  openPrintDoc(buildRecordHTML({
+    docTitle: (pt ? 'Documento Comprovativo de Formação Contínua ' : 'Continuous Training Record ') + y,
+    subject: (pt ? 'Formação profissional contínua ' : 'Continuous professional training ') + y,
+    h1: pt ? 'Documento Comprovativo de Formação' : 'Record of Training Completed',
+    sub: pt
+      ? 'Formação profissional cont\u00ednua \u00b7 artigos 130.\u00ba a 134.\u00ba do C\u00f3digo do Trabalho'
+      : 'Continuous professional training \u00b7 Articles 130\u2013134, Portuguese Labour Code',
+    orgLine: pt ? 'Entidade empregadora' : 'Employer',
     who: certIdentity(),
-    did: (pt ? 'NIF ' : 'Tax ID ') + pf.nif + (pt ? ' · realizou no ano de ' + y : ' · completed in ' + y),
-    what: (pt ? `${h} horas de formação registada` : `${h} hours of recorded training`),
-    meta: (pt ? 'Meta legal: <b>40h/ano</b> (art. 131.º CT)' : 'Legal target: <b>40h/yr</b> (PT Labour Code 131)'),
-    code: (pt ? 'Código de verificação: ' : 'Verification code: ') + code,
+    whoid: (pt ? 'NIF ' : 'Tax ID ') + esc(pf.nif) + (pf.employeeNo ? (pt ? ' \u00b7 N.\u00ba de colaborador ' : ' \u00b7 Employee no. ') + esc(pf.employeeNo) : ''),
+    attest: pt
+      ? `frequentou <b>${h} horas</b> de forma\u00e7\u00e3o profissional cont\u00ednua no ano de <b>${y}</b>, ministrada por <b>${esc(companyName())}</b> na modalidade de forma\u00e7\u00e3o \u00e0 dist\u00e2ncia (e-learning).`
+      : `completed <b>${h} hours</b> of continuous professional training during <b>${y}</b>, delivered by <b>${esc(companyName())}</b> by distance learning (e-learning).`,
+    rows: acts.map(a => ({ title: a.title, mode: pt ? 'Forma\u00e7\u00e3o \u00e0 dist\u00e2ncia' : 'e-learning', hours: a.hours })),
+    hours: h, target, year: y, issued, code,
+    verifyUrl: new URL('verify.html', location.href).href,
   }));
 }
 /* THE top tier — only exists when the ledger proves it. */
@@ -2128,7 +2774,7 @@ function downloadVerifiedCert(courseId) {
   ].filter(Boolean);
   openPrintDoc(buildCertHTML({
     docTitle: (pt ? 'Competência Verificada — ' : 'Verified Competency — ') + ctitle(c),
-    eyebrow: pt ? 'Certificado de Competência' : 'Competency Certificate',
+    eyebrow: pt ? 'Comprovativo de Competência' : 'Competency Record',
     tier: pt ? 'Competência Verificada' : 'Verified Competency',
     who: certIdentity(),
     did: pt ? 'demonstrou competência verificada em' : 'has demonstrated verified competency in',
@@ -2715,7 +3361,7 @@ function paintTrends() {
     <div class="chart-card"><h3>Courses completed · last 4 weeks</h3><div class="bars sm">${bars(comps)}</div></div>`;
 }
 function studioTabsHTML() {
-  const tabs = [['cockpit', 'People'], ['content', 'Content'], ['broadcasts', 'Broadcasts'], ['digests', 'Digests'], ['live', 'Live sessions'], ['company', 'Company'], ['settings', 'Settings']];
+  const tabs = [['cockpit', 'People'], ['content', 'Content'], ['capabilities', 'Capabilities'], ['coverage', 'Checks'], ['quickwins', 'Quick wins'], ['broadcasts', 'Broadcasts'], ['digests', 'Digests'], ['live', 'Live sessions'], ['company', 'Company'], ['settings', 'Settings']];
   if (isSuperAdmin()) tabs.push(['companies', 'Companies']);
   return `<div class="comm-pills studio-tabs">${tabs.map(([id, label]) =>
     `<button class="ch-item ${adminTab === id ? 'active' : ''}" data-action="admin-tab" data-tab="${id}"><span>${label}</span></button>`).join('')}</div>`;
@@ -2859,9 +3505,37 @@ function openMemberDetail(uid) {
   addEventListener('keydown', esch);
 }
 function registerRowsFor(pf, log, y) {
-  const rows = [['Trabalhador', 'NIF', 'Ação', 'Módulo', 'Modalidade', 'Data', 'Duração (h)', 'Confirmação']];
+  /* The register is what an ACT inspector reads. It used to state a duration
+     with nothing behind it; it now carries the evidence for that duration —
+     how much of the lesson was played, by what method, and whether the training
+     fell inside normal working hours (art. 226.º/3(d), a payroll consequence).
+     Entries recorded before this shipped have no evidence and say so, rather
+     than being back-filled with a number nobody measured. */
+  const rows = [['Trabalhador', 'NIF', 'Ação', 'Módulo', 'Modalidade', 'Início', 'Fim',
+                 'Duração creditada (h)', 'Carga horária (min)', 'Visto (s)', 'Cobertura',
+                 'Método de evidência', 'Fora do horário', 'Resultado',
+                 'Competências', 'Relacionada com a função (art. 133.º)',
+                 'Regime especial', 'Confirmação']];
   (log || []).filter(e => new Date(e.at).getFullYear() === y).sort((a, b) => a.at - b.at)
-    .forEach(e => rows.push([pf.name || '', pf.nif || '', ptCourseTitle(e.courseId), e.title || '', 'e-learning', new Date(e.at).toLocaleString('pt-PT'), e.hours, e.confirmed ? 'Sim' : '']));
+    .forEach(e => {
+      const v = e.ev || {};
+      rows.push([
+        pf.name || '', pf.nif || '', ptCourseTitle(e.courseId), e.title || '', 'e-learning',
+        v.startedAt ? new Date(v.startedAt).toLocaleString('pt-PT') : new Date(e.at).toLocaleString('pt-PT'),
+        new Date(v.endedAt || e.at).toLocaleString('pt-PT'),
+        e.hours,
+        v.nominalMin != null ? v.nominalMin : '',
+        v.watchedSec != null ? v.watchedSec : '',
+        v.coverage != null ? Math.round(v.coverage * 100) + '%' : 'sem evidência',
+        v.method && v.method !== 'none' ? v.method : 'não registado',
+        v.outsideHours == null ? '' : (v.outsideHours ? 'Sim' : 'Não'),
+        v.check ? (v.check.kind === 'acknowledgment' ? 'Confirmação' : (v.check.score + '/' + v.check.total)) : 'sem avaliação',
+        v.capabilities && v.capabilities.length ? v.capabilities.join(' + ') : '',
+        v.jobRelevant === true ? 'Sim' : v.jobRelevant === false ? 'NÃO — não conta' : 'por confirmar',
+        v.regime ? v.regime + ' (regime próprio — não dispensado)' : '',
+        e.confirmed ? 'Sim' : ''
+      ]);
+    });
   return rows;
 }
 function downloadMemberRegister(uid) {
@@ -3362,7 +4036,7 @@ function adminSettingsHTML() {
 }
 
 function renderAdmin() {
-  const bodies = { cockpit: adminCockpitHTML, content: adminContentHTML, broadcasts: adminBroadcastsHTML, digests: adminDigestsHTML, live: adminLiveHTML, company: adminCompanyHTML, companies: adminCompaniesHTML, settings: adminSettingsHTML };
+  const bodies = { cockpit: adminCockpitHTML, content: adminContentHTML, capabilities: adminCapabilitiesHTML, coverage: adminCoverageHTML, quickwins: adminQuickWinsHTML, broadcasts: adminBroadcastsHTML, digests: adminDigestsHTML, live: adminLiveHTML, company: adminCompanyHTML, companies: adminCompaniesHTML, settings: adminSettingsHTML };
   return `<div class="page"><div class="page-pad">
     <h1 class="page-title">${brandName()} Studio</h1>
     <p class="page-sub">The back office — people, content, broadcasts and the live schedule in one place.</p>
@@ -3456,6 +4130,7 @@ function renderProgress(embedded) {
       <p class="sect-sub sub-auto">${t('story_sub')}</p>
       <div id="storyBody">${S.learnStory && S.learnStory.text && S.learnStory.lang === S.lang ? `<p class="story-text">${esc(S.learnStory.text)}</p><button class="link-quiet" data-action="story-gen">${t('story_refresh')}</button>` : `<button class="btn btn-glass btn-sm" data-action="story-gen">${t('story_btn')}</button>`}</div>
     </div>
+    ${capabilitiesPanelHTML()}
     ${transferPanelHTML()}
     ${verifiedPanelHTML()}
     ${embedded ? '' : compliancePanelHTML()}
@@ -4048,7 +4723,7 @@ function saveProfile() {
 }
 
 /* ---------- router ---------- */
-const routes = { me: renderMe, home: renderHome, library: renderLibrary, paths: renderPaths, live: renderLive, progress: renderProgress, analytics: renderAnalytics, admin: renderAdmin, profile: renderProfile, community: renderCommunity };
+const routes = { reels: renderReels, me: renderMe, home: renderHome, library: renderLibrary, paths: renderPaths, live: renderLive, progress: renderProgress, analytics: renderAnalytics, admin: renderAdmin, profile: renderProfile, community: renderCommunity };
 /* a11y: make clickable non-native elements keyboard-operable */
 function makeFocusable(root) {
   (root || document).querySelectorAll('[data-action]').forEach(el => {
@@ -4118,10 +4793,33 @@ function renderNow() {
   initMotion();
   armRails($('#app'));
   armHeroDepth();
+  /* All three Awwwards winners torn down for this pass — IZANAMI, RISK and Son
+     Daven — skip their entrance on a repeat visit, each via sessionStorage
+     ("__risk_loader_done__", "hasVisited"). An entrance is an introduction; the
+     second time it is a toll. Ours plays once per session, then the hero simply
+     is there. */
+  const heroEl = document.querySelector('#app .hero');
+  if (heroEl) {
+    /* Decided once per page load, never re-read. renderNow runs many times —
+       a cloud sync alone triggers one within a second — and re-reading the
+       flag each time meant a re-render could either restart the entrance from
+       zero or cut it off halfway through its own first play. The entrance now
+       plays on exactly one render: the first of the first load of a session. */
+    if (heroIntroDecided) heroEl.classList.add('hero-settled', 'hero-seen');
+    else {
+      heroIntroDecided = true;
+      let seen = false;
+      try { seen = sessionStorage.getItem('hero-intro') === '1'; } catch (e) {}
+      if (seen) heroEl.classList.add('hero-settled', 'hero-seen');
+      else { try { sessionStorage.setItem('hero-intro', '1'); } catch (e) {} }
+    }
+  }
   setTimeout(() => { const h = document.querySelector('#app .hero'); if (h) h.classList.add('hero-settled'); }, 2200);
   armNavScroll();
   syncOverlayFocus();   /* backstop: never leave #app inert */
   armReveals();
+  if (route === 'reels') armReelFeed();
+  else { document.body.classList.remove('reels-open'); stopReelCheck(); }
   animateCounters();
 }
 /* covers download only as their cards approach the viewport (~1.4MB saved on Library) */
@@ -4170,13 +4868,15 @@ function armReveals() {
       es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); _revealObs.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   }
-  /* GSAP/ScrollTrigger already choreographs .admin-section/.rail on desktop.
-     Running BOTH made two systems fight over the same opacity (class vs inline
-     style) and could flash a section blank before GSAP took over. When GSAP is
-     present it owns those; this observer then covers only what GSAP doesn't
-     (the bento) and acts as the full fallback on mobile, where GSAP never loads. */
-  const gsapOwnsSections = !!(window.gsap && window.ScrollTrigger);
-  const sel = gsapOwnsSections ? '#app .prog-top' : '#app .admin-section, #app .rail, #app .prog-top';
+  /* ONE owner for block reveals, every viewport. This used to hand the sections
+     to GSAP on desktop and keep only the bento here, which meant two systems
+     fighting over the same opacity — a class against an inline style — and the
+     desktop path could leave a rail frozen part-faded forever. The observer is
+     the survivor because it cannot: the hidden state is a class this script
+     adds, so if anything fails the content is simply visible. */
+  const sel = '#app .rail-section, #app .path-banner, #app .stats, #app .module-list,'
+            + '#app .admin-section, #app .chart-card, #app .live-card, #app .two-col,'
+            + '#app .rail, #app .prog-top';
   document.querySelectorAll(sel).forEach(el => {
     if (el.dataset.rev) return;
     el.dataset.rev = '1';
@@ -4204,13 +4904,101 @@ function lazyBackgrounds() {
     if (!ioEverFired) document.querySelectorAll('.thumb[data-bg]').forEach(loadBg);
   }, 2500);
 }
-addEventListener('hashchange', render);
+/* Deep link from outside the app — LandFlow's brain sends people here.
+   #/play/fire-truck-training/1/183 = module 2 of the fire-truck course at 3:03.
+   Consumed once and normalised to the course page underneath the player, so a
+   reload doesn't restart the video mid-air. */
+/* The feed is a scroll-snap column inside its own container; one early
+   scrollIntoView landed before the slides existed. Try until the slide is
+   there, scroll the CONTAINER, then let snap settle it. */
+function scrollToReel(id, tries) {
+  tries = tries == null ? 8 : tries;
+  const sl = document.querySelector(`.reel[data-id="${CSS.escape(id)}"]`);
+  if (!sl) { if (tries > 0) setTimeout(() => scrollToReel(id, tries - 1), 250); return; }
+  const box = sl.closest('.reel-feed, .reel-wrap') || sl.parentElement;
+  try { box.scrollTo({ top: sl.offsetTop, behavior: 'instant' }); } catch (e) {}
+  sl.scrollIntoView({ block: 'start', behavior: 'instant' });
+}
+function handlePlayLink() {
+  const h = location.hash || '';
+  /* a link followed from inside an answer must land ON the video, not under a modal */
+  const closeOverlays = () => { const am = $('#askModal'); if (am) am.classList.remove('open'); try { setTutorOpen(false); } catch (e) {} try { speechSynthesis.cancel(); } catch (e) {} };
+  /* #/reels/<id> — one short, by id. The feed renders and scrolls to it. */
+  const r = h.match(/^#\/reels\/([a-z0-9-]+)/);
+  if (r) {
+    closeOverlays();
+    location.hash = '#/reels';
+    scrollToReel(r[1]);
+    return true;
+  }
+  const m = h.match(/^#\/play\/([a-z0-9-]+)\/(\d+)(?:\/(\d+))?/);
+  if (!m) return false;
+  const [, cid, mod, sec] = m;
+  closeOverlays();
+  ledgerAppend('moment_open', { courseId: cid, mod: +mod, t: sec ? +sec : 0, via: 'link' });
+  location.hash = '#/course/' + cid;
+  setTimeout(() => openPlayer(cid, +mod, sec ? +sec : undefined), 350);
+  return true;
+}
+/* ===== LINKS INTO THE LIBRARY ==============================================
+   Every video has an address: #/play/<course>/<module>/<second> for a lesson,
+   #/reels/<id> for a short. An AI answer that names a lesson becomes a link to
+   it — DETERMINISTICALLY: only titles that exist in the catalogue (or in the
+   moments the answer was grounded on) become links, so the model cannot invent
+   a destination. Anything it names that does not exist stays plain text. */
+function deepLink(m) {
+  return m.kind === 'reel' ? `#/reels/${m.mod}` : `#/play/${m.course}/${m.mod}/${Math.max(0, Math.floor(m.t0 - 4))}`;
+}
+function absLink(hash) { return location.origin + location.pathname + hash; }
+const _reEsc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+function linkTargets(moments) {
+  const out = [];
+  /* grounded moments first — they carry the exact second */
+  for (const m of moments || []) out.push({ label: m.title, href: deepLink(m), kind: m.kind, course: m.course, mod: m.mod });
+  for (const c of CATALOG) {
+    out.push({ label: ctitle(c), href: '#/course/' + c.id, kind: 'course' });
+    cmods(c).forEach((title, i) => { if (title && !(c.moduleMedia && c.moduleMedia[i] && c.moduleMedia[i].type === 'soon')) out.push({ label: title, href: `#/play/${c.id}/${i}`, kind: 'module', course: c.id, mod: i }); });
+  }
+  for (const r of (typeof REELS !== 'undefined' ? REELS : []).filter(r => r.approved)) out.push({ label: reelField(r.title), href: '#/reels/' + r.id, kind: 'reel' });
+  /* longest label first so "Above the Line · Deep Dive" wins over "Above the Line" */
+  const seen = new Set();
+  return out.filter(t => t.label && t.label.length >= 4 && !seen.has(t.label.toLowerCase() + t.href) && seen.add(t.label.toLowerCase() + t.href))
+            .sort((a, b) => b.label.length - a.label.length);
+}
+function linkifyAnswer(text, moments) {
+  let html = esc(text).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+  const holds = [];
+  for (const tgt of linkTargets(moments)) {
+    const label = esc(tgt.label);
+    /* an optional timecode right after the title ("Total Responsibility · 4:32") becomes the seek second */
+    /* an optional parenthetical (the course name) may sit between the title and its timecode */
+    const re = new RegExp(`(?<![\\w>])${_reEsc(label)}(?:\\s*\\([^)]{0,60}\\))?(?:\\s*(?:·|-|–|—|at|às?)\\s*(\\d{1,2}):(\\d{2}))?(?![\\w<])`, 'gi');
+    html = html.replace(re, (whole, mm, ss) => {
+      let href = tgt.href;
+      if (mm != null && tgt.kind !== 'course' && tgt.kind !== 'reel') href = `#/play/${tgt.course}/${tgt.mod}/${Math.max(0, +mm * 60 + +ss - 4)}`;
+      holds.push(`<a class="ai-link" href="${href}" title="${absLink(href)}">${whole}</a>`);
+      return `\u0000${holds.length - 1}\u0000`;
+    });
+  }
+  return html.replace(/\u0000(\d+)\u0000/g, (_, i) => holds[+i]);
+}
+async function copyLink(hash) {
+  const url = absLink(hash);
+  try { await navigator.clipboard.writeText(url); toast(t('link_copied'), '🔗'); }
+  catch (e) { prompt(t('link_copy'), url); }
+}
+addEventListener('hashchange', () => { if (!handlePlayLink()) render(); });
+if (handlePlayLink()) {} 
 
 /* ---------- language (EN / PT) ---------- */
 const NAV_KEYS = { '#/home': 'nav_home', '#/me': 'nav_me', '#/profile': 'nav_settings', '#/library': 'nav_library', '#/paths': 'nav_paths', '#/community': 'nav_community', '#/live': 'nav_live', '#/progress': 'nav_progress', '#/analytics': 'nav_analytics', '#/admin': 'nav_admin' };
 function syncChrome() {
   $$('.nav-links a, .mobile-drawer a').forEach(a => { const k = NAV_KEYS[a.getAttribute('href')]; if (k) a.textContent = t(k); });
-  const search = $('#navSearch'); if (search) search.innerHTML = `⌕&nbsp; ${t('search_ph')} <kbd>⌘K</kbd>`;
+  /* Only the words change. This used to rewrite the field's whole innerHTML on
+     every language sync, which would have thrown away the search glyph and the
+     mic that now live inside it. */
+  const sph = document.querySelector('#navSearch .search-ph'); if (sph) sph.textContent = t('search_ph');
+  const mlab = document.querySelector('.searchbar-mic .mic-label'); if (mlab) mlab.textContent = t('voice_label');
   const org = $('#orgChip'); if (org) org.innerHTML = `<span class="org-dot"></span>${brandName()} · ${BRAND.wordSub || 'Academy'}`;
   const tn = $('#aiTitle'); if (tn) tn.textContent = t('tutor_name');
   /* AI Act Art. 50: people must know they are talking to AI — said plainly,
@@ -4229,8 +5017,8 @@ function syncChrome() {
   const sv = $('#apiKeySave'); if (sv) sv.textContent = t('save');
   const cl = $('#apiKeyClear'); if (cl) cl.textContent = t('use_demo');
   const askBtn = document.querySelector('.player-top .btn[data-action="ai-open"]'); if (askBtn) askBtn.textContent = t('ask_tutor');
-  const nt = $('#notesToggle'); if (nt) nt.textContent = t('notes_transcript');
-  const pc = $('#playerComplete'); if (pc) pc.textContent = t('mark_complete');
+  const nt = $('#notesToggle'); if (nt) { nt.title = t('notes_transcript'); nt.setAttribute('aria-label', t('notes_transcript')); }
+  const pc = $('#playerComplete'); if (pc) pc.innerHTML = `<span class="lbl-long">${esc(t('mark_complete'))}</span><span class="lbl-short">${esc(t('mark_complete_short'))}</span>`;
   $$('.lang-btn').forEach(b => { const on = b.dataset.lang === _lang(); b.classList.toggle('on', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
   document.documentElement.classList.toggle('is-admin', isAdmin());
   updateBell();
@@ -4270,8 +5058,15 @@ const reduceMotion = window.matchMedia && matchMedia('(prefers-reduced-motion: r
 const BLOCK_SEL = '.page, .hero-content > *, .hero-side, .pillar, .rail-section, .path-banner, .stats, .module-list, .admin-section, .chart-card, .live-card, .two-col';
 function forceVisible() {
   document.querySelectorAll(BLOCK_SEL).forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
-  /* scroll-reveal blocks settle too — otherwise a screenshot shows empty space */
-  document.querySelectorAll('.will-reveal').forEach(el => el.classList.add('in'));
+  /* Scroll-reveal blocks settle too — otherwise a screenshot shows empty space.
+     Only the ones ON SCREEN, though: settling all of them meant this 1200ms
+     safety net silently switched the whole scroll cadence off, since every
+     section below the fold arrived pre-revealed. What the reader can see must
+     never be blank; what they have not reached yet still gets its entrance. */
+  document.querySelectorAll('.will-reveal').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) el.classList.add('in');
+  });
 }
 /* GSAP loads on demand — desktop only, never on phones (bandwidth + battery) */
 let motionLibsState = 0; /* 0 none · 1 loading · 2 ready */
@@ -4370,14 +5165,30 @@ function initMotion() {
   if (ST) {
     G.from('.pillar', { y: 14, opacity: 0, stagger: .06, duration: .6, ease: 'power2.out',
       scrollTrigger: { trigger: '.pillars', start: 'top 95%', once: true } });
-    G.utils.toArray('.rail-section, .path-banner, .stats, .module-list, .admin-section, .chart-card, .live-card, .two-col').forEach(el => {
-      G.from(el, { y: 26, opacity: 0, duration: .7, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 92%', once: true } });
-    });
+    /* Block reveals are NOT GSAP's job any more — armReveals() owns them, alone.
+       Two systems animated the same opacity and the seam showed: gsap.from()
+       pre-hides on creation, so whether a rail ever became visible depended on
+       whether it happened to exist in the DOM at the single moment initMotion
+       ran (later renders early-return, arming nothing), and a tween interrupted
+       during scroll-restoration froze its last written value into the style
+       attribute forever — measured 0.38 and 0.61 on two runs, with the top of
+       the page reading as an empty void. The CSS/IntersectionObserver path has
+       neither failure mode: the hidden state is a class, the fallback is
+       visible, and nothing writes inline styles. */
     setTimeout(() => { try { ST.refresh(); } catch (e) {} }, 250);
   }
   /* hard guarantee: nothing stays invisible, even if rAF is frozen */
   setTimeout(forceVisible, 1200);
+  /* Late, targeted rescue: anything ON SCREEN and still part-faded is stuck, not
+     animating — a blanket forceVisible here would instead burn every legitimate
+     below-fold reveal the reader has not reached yet. */
+  setTimeout(() => {
+    document.querySelectorAll(BLOCK_SEL).forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return;
+      if (parseFloat(getComputedStyle(el).opacity) < 1) { el.style.opacity = '1'; el.style.transform = 'none'; }
+    });
+  }, 3000);
 }
 
 /* ---------- player ---------- */
@@ -4479,15 +5290,21 @@ window.addEventListener('popstate', () => {
   if (_popClosing) return;
   if (typeof playerEl !== 'undefined' && playerEl.classList.contains('open')) { _playerPushed = false; closePlayer(true); }
 });
-function openPlayer(courseId, mod) {
+/* startAt (seconds): the moment-anchor. Two callers depend on it — LandFlow's
+   walkie-talkie answers link open_at_moment, and quiz review sends the learner
+   back to the exact passage a missed question came from. */
+let _seekTo = null;
+function openPlayer(courseId, mod, startAt) {
   const c = courseById(courseId);
   if (!c) return;
+  _seekTo = (typeof startAt === 'number' && startAt > 2) ? startAt : null;
   try { history.pushState({ overlay: 'player' }, ''); _playerPushed = true; } catch (e) {}
   if (mod == null) mod = (prog(courseId) && !isDone(courseId)) ? (prog(courseId).mod || 0) : 0;
   mod = Math.min(mod, c.modules.length - 1);
   const media = modMedia(c, mod);
   clearCheckpoint();
   watchedSeconds = 0;
+  watchStart(courseId + ':' + mod, 'pending');
   playing = { courseId, mod };
   if (!prog(courseId)) S.progress[courseId] = { mod, pct: 0 };
   /* what you last opened is what "carry on" must mean — the syllabus order is
@@ -4511,6 +5328,12 @@ function openPlayer(courseId, mod) {
     vimeoWrap.innerHTML = `<iframe src="https://player.vimeo.com/video/${media.id}?${media.h ? 'h=' + media.h + '&' : ''}title=0&byline=0&portrait=0&badge=0&autoplay=1&autopause=0&dnt=1&player_id=0&app_id=58479" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen title="${cmods(c)[mod]}"></iframe>`;
     armVimeo(c, mod);
   } else {
+    if (watchEv) watchEv.method = 'video-timeupdate';
+    if (_seekTo) videoEl.addEventListener('loadedmetadata', function once() {
+      videoEl.removeEventListener('loadedmetadata', once);
+      try { videoEl.currentTime = Math.min(_seekTo, (videoEl.duration || _seekTo) - 1); } catch (e) {}
+      _seekTo = null;
+    });
     videoEl.src = c.video || vidFor(courseId, mod);
     videoEl.play().catch(() => {});
   }
@@ -4518,12 +5341,13 @@ function openPlayer(courseId, mod) {
   $('#playerTitle').textContent = ctitle(c);
   $('#playerSub').textContent = `${t('module')} ${mod + 1} ${t('of')} ${c.modules.length} · ${cmods(c)[mod]}`;
   const pg = $('#playerGoal'); if (pg) { const goal = (takeawaysFor(c, mod) || [])[0] || ''; pg.textContent = goal ? ` ${t('lesson_goal')}: ${goal}` : ''; }
+  const pe = $('#playerEduStrip'); if (pe) pe.innerHTML = eduStripHTML(c, mod);
   $('#playerPills').innerHTML = c.modules.map((m, i) => {
     const p = prog(courseId);
     const mm = modMedia(c, i);
     const soon = mm && mm.type === 'soon';
     const done = isDone(courseId) || (p && !p.done && i < (p.mod || 0));
-    return `<button class="mod-pill ${i === mod ? 'current' : done ? 'done' : ''} ${soon ? 'soon' : ''}" data-action="play" data-id="${courseId}" data-mod="${i}">${done ? '✓ ' : soon ? '🔒 ' : ''}${i + 1}. ${soon ? t('coming_soon') : cmods(c)[i]}</button>`;
+    return `<button class="mod-pill ${i === mod ? 'current' : done ? 'done' : ''} ${soon ? 'soon' : ''}" data-action="play" data-id="${courseId}" data-mod="${i}"><span class="mp-n">${done ? '✓ ' : soon ? '🔒 ' : ''}${i + 1}</span><span class="mp-t">${soon ? t('coming_soon') : cmods(c)[i]}</span></button>`;
   }).join('');
   /* hide "mark complete" for coming-soon lessons */
   /* keep the lesson you are on inside the strip — the fix that matters more
@@ -4543,6 +5367,7 @@ function openPlayer(courseId, mod) {
   }, 260);
   $('#playerComplete').style.display = (media && media.type === 'soon') ? 'none' : '';
   playerEl.classList.add('open');
+  playerChrome.show(true);
   if ($('#notesDrawer').classList.contains('open')) refreshNotesDrawer();
   ledgerAppend('module_start', { courseId, mod });
   maybePretest(c, mod);
@@ -4592,6 +5417,22 @@ function maybePretest(c, mod) {
   };
   drawOne();
 }
+/* ===== CINEMA CHROME =========================================================
+   While the video plays, the title bar and the toolbar are not there. They come
+   back on a tap on the stage, a mouse move, a pause, or the drawer opening —
+   and go again a few seconds after the video resumes. The video is the screen;
+   everything else is a visitor. */
+const playerChrome = (() => {
+  let timer = null, playingNow = false;
+  const el = () => playerEl;
+  const hide = () => { if (!playingNow) return; if ($('#notesDrawer').classList.contains('open')) return; el().classList.add('chrome-hidden'); };
+  const arm = () => { clearTimeout(timer); timer = setTimeout(hide, 3200); };
+  const show = (sticky) => { el().classList.remove('chrome-hidden'); clearTimeout(timer); if (!sticky) arm(); else if (playingNow) arm(); };
+  const toggle = () => { if (el().classList.contains('chrome-hidden')) show(); else hide(); };
+  const onPlay = () => { playingNow = true; arm(); };
+  const onPause = () => { playingNow = false; show(true); };
+  return { show, hide, toggle, arm, onPlay, onPause, get playing() { return playingNow; } };
+})();
 function closePlayer(fromPop) {
   /* if WE pushed the sentinel and the close came from ✕/ESC, consume it so the
      next BACK doesn't mysteriously do nothing */
@@ -4626,106 +5467,109 @@ function clearCheckpoint() {
   if (vimeoPlayer) { try { vimeoPlayer.destroy(); } catch (e) {} vimeoPlayer = null; }
 }
 /* Course-SPECIFIC questions only (the course's own quiz — never QUIZ_BANK).
-   Interrupting a lesson is only earned when the question is about THAT course:
-   pausing a leadership video to ask about soil regeneration teaches people to
-   resent the player. Category/default banks remain fine for the *post-course*
-   quiz, where the learner chose to be quizzed — but they never gate playback. */
+   Used by the post-course quiz and the module-end check. Never gates playback. */
 function courseOwnQuiz(c) {
   const cq = (typeof COURSE_QUIZ !== 'undefined' && COURSE_QUIZ[c.id]) || c.quiz;
   if (!cq) return null;
   const qs = cq[_lang() === 'pt' ? 'pt' : 'en'] || cq.en || cq;
   return (Array.isArray(qs) && qs.length) ? qs : null;
 }
-function checkpointQuestion(c, mod) {
-  const qs = courseOwnQuiz(c);
-  return qs ? qs[mod % qs.length] : null;
-}
 /* Attach to the Vimeo iframe ONCE per module. The <video> element has had an
    'ended' handler since day one; the Vimeo branch never did, so watching a real
    lesson to the end recorded nothing — no progress, no XP, no streak day, and
    no trainingLog entry. trainingLog IS the art. 131.º hour record, so a learner
    could complete a course and the compliance report would show zero hours. */
+/* NOTHING INTERRUPTS PLAYBACK. There used to be a second, older mechanism here:
+   at 50% of any lesson the player paused itself and put a question on top. It
+   predated the end-of-lesson check, and once showModuleCheck() existed the two
+   ran together — so a learner was stopped mid-sentence AND asked again at the
+   end. Watching is not the moment to test; the question belongs after the
+   takeaways, where it is a retrieval cue instead of an ambush. The only thing
+   this handler may now do while a video plays is RECORD (watch-time, progress).
+   If a checkpoint is ever wanted again it goes at the end, not at a percentage. */
 function armVimeo(c, mod) {
-  const key = c.id + ':' + mod;
-  const q = checkpointQuestion(c, mod);
-  const needsCheck = q && !(S.checkpoints || {})[key];
   loadVimeoSDK().then(() => {
     const ifr = vimeoWrap.querySelector('iframe');
     if (!ifr || !window.Vimeo || !playing || playing.courseId !== c.id || playing.mod !== mod) return;
     try { vimeoPlayer = new Vimeo.Player(ifr); } catch (e) { return; }
-    let checkFired = false, done = false;
+    if (_seekTo) { const t = _seekTo; _seekTo = null; vimeoPlayer.setCurrentTime(t).catch(() => {}); }
+    let done = false;
+    if (watchEv && watchEv.key === c.id + ':' + mod) watchEv.method = 'vimeo-timeupdate';
+    vimeoPlayer.on('play', playerChrome.onPlay);
+    vimeoPlayer.on('pause', playerChrome.onPause);
     vimeoPlayer.on('timeupdate', d => {
       if (!d || !playing || playing.courseId !== c.id || playing.mod !== mod) return;
+      if (document.visibilityState === 'visible') watchMark(d.seconds, d.duration);
       /* live progress, so a half-watched lesson is not lost on close */
       const p = prog(c.id); if (p && d.percent) p.pct = Math.max(p.pct || 0, Math.round(d.percent * 100));
-      if (!needsCheck || checkFired || !d.percent || d.percent < 0.5) return;
-      checkFired = true;
-      (S.checkpoints = S.checkpoints || {})[key] = 1; save();
-      vimeoPlayer.pause().catch(() => {});
-      showCheckpoint(q, c);
     });
     vimeoPlayer.on('ended', () => {
       if (done || !playing || playing.courseId !== c.id || playing.mod !== mod) return;
+      /* the same discipline the <video> branch has always had: reaching the end
+         of the timeline is not the same as having watched the lesson, and a
+         scrubbed-through lesson must not mint a compliance hour */
+      if (watchEv && watchEv.dur && watchCoverage() < WATCH_MIN_COVERAGE) { toast(t('watch_more'), 'ℹ️'); return; }
       done = true;
       completeModule(c.id, mod);
     });
   }).catch(() => {});
 }
-function armCheckpoint(c, mod) { armVimeo(c, mod); }
-function showCheckpoint(q, c) {
-  const ov = $('#ckOv'); if (!ov) return;
-  let answered = false;
-  ov.innerHTML = `<div class="ck-card">
-    <div class="ob-eyebrow"> ${t('ck_h')} · ${esc(ctitle(c))}</div>
-    <div class="ck-q">${esc(q.q)}</div>
-    ${q.opts.map((o, i) => `<div class="q-opt" data-ck="${i}" role="button" tabindex="0"><span class="radio"></span><span>${esc(o)}</span></div>`).join('')}
-    <div class="ck-foot"><span class="ck-note" id="ckNote"></span><button class="btn btn-primary btn-sm" id="ckGo" style="display:none;">▶ ${t('ck_continue')}</button></div>
-  </div>`;
-  ov.classList.add('on');
-  ov.querySelectorAll('.q-opt').forEach(el => el.addEventListener('click', () => {
-    if (answered) return; answered = true;
-    const sel = +el.dataset.ck;
-    ov.querySelectorAll('.q-opt').forEach((x, i) => {
-      if (i === q.a) x.classList.add('correct');
-      else if (i === sel) x.classList.add('wrong');
-    });
-    if (sel === q.a) { $('#ckNote').textContent = t('ck_right'); awardXp(5, t('ck_h')); }
-    else {
-      $('#ckNote').textContent = t('ck_wrong');
-      S.missedQ = ((S.missedQ || []).filter(m => m.q !== q.q)).concat({ q: q.q, back: q.opts[q.a], courseId: c.id, at: Date.now() }).slice(-30);
-      save();
-    }
-    $('#ckGo').style.display = '';
-  }));
-  $('#ckGo').addEventListener('click', () => {
-    ov.classList.remove('on'); ov.innerHTML = '';
-    if (vimeoPlayer) vimeoPlayer.play().catch(() => {});
-  });
+/* ---------- notes & transcript ---------- */
+/* ===== REAL TRANSCRIPTS IN THE PLAYER ======================================
+   makeTranscript() used to FABRICATE plausible transcript lines — invented
+   quotes, on the platform whose pitch is provable records. Gone. The drawer
+   now shows the Whisper transcript of the actual lesson: each line clickable
+   (seeks the video), the current line highlighted as the trainer speaks. */
+const _trCache = {};
+function loadTranscript(courseId, mod) {
+  const k = courseId + ':' + mod;
+  if (_trCache[k] !== undefined) return Promise.resolve(_trCache[k]);
+  return fetch('media/transcripts/' + courseId + '/m' + mod + '.json')
+    .then(r => r.ok ? r.json() : null)
+    .then(j => (_trCache[k] = j && j.segments ? j : null))
+    .catch(() => (_trCache[k] = null));
+}
+function seekTo(sec) {
+  if (vimeoPlayer) { vimeoPlayer.setCurrentTime(sec).catch(() => {}); return; }
+  try { videoEl.currentTime = sec; } catch (e) {}
+}
+function fmtTc(t) { return Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0'); }
+let _trSegs = null;
+function trHighlight(pos) {
+  if (!_trSegs || !document.querySelector('#notesDrawer.open')) return;
+  const idx = _trSegs.findIndex(sg => pos >= sg.t0 && pos < sg.t1 + 0.5);
+  if (idx < 0) return;
+  const lines = document.querySelectorAll('#ndTranscript .nd-line');
+  const cur = document.querySelector('#ndTranscript .nd-line.now');
+  if (cur && +cur.dataset.i === idx) return;
+  if (cur) cur.classList.remove('now');
+  const el = lines[idx];
+  if (el) { el.classList.add('now'); el.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
 }
 
-/* ---------- notes & transcript ---------- */
-function makeTranscript(c, mod) {
-  const t = c.modules[mod];
-  return [
-    ['0:00', `Welcome back. This module is “${t}” — by the end you'll be able to apply it in your own work at ${brandName()}.`],
-    ['0:48', `First, the common misconception: most teams treat ${t.toLowerCase()} as a one-off task. It's a habit, not an event.`],
-    ['2:15', `Here's the framework — three parts, and the middle one is where ${c.cat.toLowerCase()} teams usually slip.`],
-    ['4:40', `Quick example from a real ${c.cat.toLowerCase()} case. Notice what changes the moment the owner is named.`],
-    ['7:02', `Practice prompt: pause the video and try this on something you shipped last month.`],
-    ['9:30', `Recap and what's next — the assessment will adapt to how you do on the practice prompt.`]
-  ];
-}
-let notesTimer = 0;
 function refreshNotesDrawer() {
   if (!playing) return;
   const c = courseById(playing.courseId);
-  $('#ndTranscript').innerHTML = makeTranscript(c, playing.mod)
-    .map(([tc, tx]) => `<div class="nd-line"><span class="tc">${tc}</span><span>${tx}</span></div>`).join('');
+  const box = $('#ndTranscript');
+  box.innerHTML = `<div class="nd-line"><span class="tc">…</span><span>${t('tr_loading')}</span></div>`;
+  const want = playing.courseId + ':' + playing.mod;
+  loadTranscript(playing.courseId, playing.mod).then(tr => {
+    if (!playing || playing.courseId + ':' + playing.mod !== want) return;
+    _trSegs = tr ? tr.segments : null;
+    box.innerHTML = tr
+      ? tr.segments.map((sg, i) => `<div class="nd-line" data-i="${i}" data-t="${sg.t0}" role="button" tabindex="0"><span class="tc">${fmtTc(sg.t0)}</span><span>${esc(sg.text)}</span></div>`).join('')
+      : `<div class="nd-line"><span class="tc">–</span><span>${t('tr_none')}</span></div>`;
+    box.querySelectorAll('.nd-line[data-t]').forEach(el =>
+      el.addEventListener('click', () => {
+        ledgerAppend('moment_open', { courseId: playing.courseId, mod: playing.mod, t: +el.dataset.t, via: 'transcript' });
+        seekTo(+el.dataset.t);
+      }));
+  });
   const saved = (S.notes[playing.courseId] || {})[playing.mod] || '';
   $('#ndNotes').value = saved;
   $('#ndSaved').textContent = saved ? '· saved' : '';
 }
-$('#notesToggle').addEventListener('click', () => { refreshNotesDrawer(); $('#notesDrawer').classList.toggle('open'); });
+$('#notesToggle').addEventListener('click', () => { refreshNotesDrawer(); $('#notesDrawer').classList.toggle('open'); playerChrome.show(true); });
 $('#notesClose').addEventListener('click', () => $('#notesDrawer').classList.remove('open'));
 $('#ndNotes').addEventListener('input', e => {
   if (!playing) return;
@@ -4748,6 +5592,16 @@ videoEl.addEventListener('timeupdate', () => {
     clearTimeout(saveTimer); saveTimer = setTimeout(save, 800);
   }
 });
+videoEl.addEventListener('play', playerChrome.onPlay);
+videoEl.addEventListener('pause', playerChrome.onPause);
+/* the stage around the video (the letterbox) is the tap target; the iframe
+   swallows its own taps, which is fine — pausing there brings the chrome back */
+playerEl.addEventListener('pointerdown', e => {
+  if (e.target.closest('.player-top, .player-bottom, .notes-drawer, .player-edu-strip, button, a')) { playerChrome.show(); return; }
+  if (e.target.closest('.player-stage')) playerChrome.toggle();
+});
+playerEl.addEventListener('mousemove', () => { if (matchMedia('(hover: hover)').matches) playerChrome.show(); }, { passive: true });
+playerEl.addEventListener('keydown', () => playerChrome.show());
 videoEl.addEventListener('ended', () => {
   if (!playing) return;
   /* a lesson counts when it was watched, not when the playhead reached the end:
@@ -4756,12 +5610,81 @@ videoEl.addEventListener('ended', () => {
   if (d && w < d * 0.75) { toast(t('watch_more'), 'ℹ️'); return; }
   completeModule(playing.courseId, playing.mod);
 });
-/* measured watch time — only accrues while the tab is visible and the video is
-   actually advancing, which is the same discipline S.mins already uses */
+/* ============ REQ-L-002 · DURATION EVIDENCE =================================
+   The legal spec is explicit: duration evidence must be "segments actually
+   played, not merely opened", and the RAW evidence must be stored, not just a
+   boolean. Two things were wrong here.
+
+   1. This counted WALL-CLOCK seconds while playing. Re-watching the same ten
+      seconds twenty times scored 200s of "training". A union of played RANGES
+      measures distinct content covered, which is what an inspector is actually
+      asking about, and it cannot be inflated by replaying.
+   2. Only the <video> branch had any gate. Every filmed EdenRise course is
+      VIMEO, and that branch completed on 'ended' with no watch test at all — so
+      the hours that reach the art. 131.º ledger for real content had no
+      evidence behind them whatsoever.
+
+   Both players now feed the same recorder. Nothing here decides what is legally
+   sufficient — that is Part 6 Q4, unanswered. This captures the record so the
+   answer can be applied to real data rather than to nothing. */
+const WATCH_MIN_COVERAGE = 0.75;   /* completion gate; NOT a legal threshold */
+let watchEv = null;
+function watchStart(key, method) {
+  watchEv = { key, method, segs: [], last: null, startedAt: Date.now(), dur: 0 };
+}
+/* Extend the open range while playback is contiguous; a jump starts a new one,
+   so scrubbing forward can never manufacture coverage. */
+function watchMark(pos, duration) {
+  if (!watchEv || !isFinite(pos)) return;
+  if (duration && isFinite(duration)) watchEv.dur = duration;
+  trHighlight(pos);
+  const prev = watchEv.last;
+  watchEv.last = pos;
+  if (prev == null) { watchEv.segs.push([pos, pos]); return; }
+  const gap = pos - prev;
+  const open = watchEv.segs[watchEv.segs.length - 1];
+  if (gap >= -0.6 && gap <= 2.5 && open) open[1] = Math.max(open[1], pos);
+  else if (watchEv.segs.length < 400) watchEv.segs.push([pos, pos]);
+}
+function watchMerged() {
+  if (!watchEv) return [];
+  const r = watchEv.segs.filter(x => x[1] > x[0] + 0.2).sort((a, b) => a[0] - b[0]);
+  const out = [];
+  r.forEach(seg => {
+    const last = out[out.length - 1];
+    if (last && seg[0] <= last[1] + 0.75) last[1] = Math.max(last[1], seg[1]);
+    else out.push([seg[0], seg[1]]);
+  });
+  return out.map(x => [Math.round(x[0] * 10) / 10, Math.round(x[1] * 10) / 10]);
+}
+function watchCoveredSec() { return Math.round(watchMerged().reduce((a, x) => a + (x[1] - x[0]), 0)); }
+function watchCoverage() {
+  const d = watchEv && watchEv.dur;
+  return d ? Math.min(1, watchCoveredSec() / d) : 0;
+}
+/* Back-compat: the old scalar is still read by the <video> 'ended' gate. */
 let watchedSeconds = 0;
 videoEl.addEventListener('timeupdate', () => {
-  if (!videoEl.paused && document.visibilityState === 'visible') watchedSeconds += 0.25;
+  if (videoEl.paused || document.visibilityState !== 'visible') return;
+  watchedSeconds += 0.25;
+  watchMark(videoEl.currentTime, videoEl.duration);
 });
+
+/* REQ-L-010 · training inside or outside normal working hours. Hours are paid
+   working time; outside-hours training must be compensated, and ≤2h/day outside
+   hours is not supplementary work (art. 131.º, 226.º/3(d)). That is a payroll
+   consequence for the client, so the record has to say which it was. The window
+   is per-company config — a resort's hours are not an office's. */
+function workWindow() {
+  const o = (window.EdenOrg && EdenOrg.workHours) || {};
+  return { start: o.start != null ? o.start : 8, end: o.end != null ? o.end : 18,
+           days: o.days || [1, 2, 3, 4, 5] };
+}
+function isOutsideWorkingHours(d) {
+  const w = workWindow(), t = d || new Date();
+  const h = t.getHours() + t.getMinutes() / 60;
+  return !(w.days.includes(t.getDay()) && h >= w.start && h < w.end);
+}
 
 /* "what you take with you" — 3 key learnings shown at each module's end (peak-end moment) */
 function takeawaysFor(c, mod) {
@@ -4802,6 +5725,127 @@ function showTakeaways(c, mod, next) {
   $('#takeModal').classList.add('open');
   armUpNext(next);
 }
+/* ===== END-OF-LESSON CHECK — what actually credits the hour ================
+   Reuses the in-video checkpoint overlay so there is one visual language for
+   "answer this". Submission writes the art. 131.º record; skipping leaves the
+   lesson in pendingChecks and credits nothing, which the learner is told
+   plainly rather than discovering at audit time. */
+function showModuleCheck(c, mod, after) {
+  const ov = $('#ckOv'); if (!ov) { creditTraining(c.id, mod, null); if (after) after(); return; }
+  const lang = _lang() === 'pt' ? 'pt' : 'en';
+  const finish = res => { ov.classList.remove('on'); ov.innerHTML = ''; creditTraining(c.id, mod, res); updateXpChip(); if (after) after(); };
+
+  loadQuizV2(c.id).then(() => {
+    /* V2 (transcript-grounded, blind-verified) first; the hand-written bank is
+       the fallback, and the acknowledgment is the floor — never a silent credit. */
+    let qs = v2CheckPair(c.id, mod, lang);
+    if (!qs) {
+      const legacy = moduleCheckQuestions(c, mod);
+      qs = legacy ? legacy.map(q => ({ q: q.q, opts: q.opts, a: q.a, why: null, t0: null, type: 'recall', gen: false, audit: 'authored' })) : null;
+    }
+    if (!qs) {
+      ov.innerHTML = `<div class="ck-card">
+        <div class="ob-eyebrow">${t('mc_eyebrow')} · ${esc(ctitle(c))}</div>
+        <div class="ck-q">${t('mc_ack_q')}</div>
+        <label class="ck-ack"><input type="checkbox" id="mcAck"> <span>${t('mc_ack_label')}</span></label>
+        <div class="ck-foot"><span class="ck-note">${t('mc_ack_note')}</span>
+          <button class="btn btn-primary btn-sm" id="mcGo" disabled>${t('mc_submit')}</button></div>
+      </div>`;
+      ov.classList.add('on');
+      const box = $('#mcAck'), go = $('#mcGo');
+      box.addEventListener('change', () => { go.disabled = !box.checked; });
+      go.addEventListener('click', () => finish({ kind: 'acknowledgment', acknowledged: true, at: Date.now() }));
+      return;
+    }
+
+    const answers = new Array(qs.length).fill(null);
+    const conf = new Array(qs.length).fill(null);   /* true=sure, false=guessing, null=unsaid */
+    const paint = () => {
+      ov.innerHTML = `<div class="ck-card">
+        <div class="ob-eyebrow">${t('mc_eyebrow')} · ${esc(ctitle(c))}</div>
+        <p class="pre-sub">${t('mc_sub')}</p>
+        ${qs.map((q, qi) => `<div class="mc-q">
+          <div class="ck-q">${qi + 1}. ${esc(q.q)}</div>
+          ${q.opts.map((o, oi) => `<div class="q-opt${answers[qi] === oi ? ' sel' : ''}" data-q="${qi}" data-o="${oi}" role="button" tabindex="0"><span class="radio"></span><span>${esc(o)}</span></div>`).join('')}
+          <div class="mc-conf">${t('mc_conf')}
+            <button type="button" class="conf-b${conf[qi] === true ? ' on' : ''}" data-cq="${qi}" data-cv="1">${t('mc_conf_sure')}</button>
+            <button type="button" class="conf-b${conf[qi] === false ? ' on' : ''}" data-cq="${qi}" data-cv="0">${t('mc_conf_guess')}</button>
+          </div>
+        </div>`).join('')}
+        <div class="ck-foot"><span class="ck-note">${t('mc_note')}</span>
+          <button class="btn btn-primary btn-sm" id="mcGo"${answers.some(a => a === null) ? ' disabled' : ''}>${t('mc_submit')}</button></div>
+      </div>`;
+      ov.querySelectorAll('.q-opt').forEach(el => el.addEventListener('click', () => { answers[+el.dataset.q] = +el.dataset.o; paint(); }));
+      ov.querySelectorAll('.conf-b').forEach(el => el.addEventListener('click', () => { conf[+el.dataset.cq] = el.dataset.cv === '1'; paint(); }));
+      const go = $('#mcGo');
+      if (go) go.addEventListener('click', () => {
+        const detail = qs.map((q, i) => ({
+          q: q.q, given: q.opts[answers[i]], correct: q.opts[q.a], ok: answers[i] === q.a,
+          type: q.type, audit: q.audit, conf: conf[i], t0: q.t0
+        }));
+        const score = detail.filter(d => d.ok).length;
+        if (score === qs.length) awardXp(5, t('mc_eyebrow'));
+        S.quizzesPassed = (S.quizzesPassed || 0) + (score === qs.length ? 1 : 0);
+        /* the hour credits on SUBMISSION — the feedback screen that follows is
+           teaching, not a further hurdle */
+        const res = { kind: 'assessment', score, total: qs.length, passed: score === qs.length, detail, at: Date.now() };
+        creditTraining(c.id, mod, res);
+        updateXpChip();
+        detail.forEach((d, i) => { if (!d.ok) scheduleReview(c.id, mod, qs[i]); });
+        /* feedback state: the why, and the way back to the exact moment */
+        ov.innerHTML = `<div class="ck-card">
+          <div class="ob-eyebrow">${t('mc_result')} · ${score}/${qs.length}</div>
+          ${qs.map((q, i) => `<div class="mc-fb ${detail[i].ok ? 'ok' : 'ko'}">
+            <div class="ck-q">${detail[i].ok ? '✓' : '✗'} ${esc(q.q)}</div>
+            ${detail[i].ok ? '' : `<p class="mc-ans">${t('mc_correct_was')} <b>${esc(q.opts[q.a])}</b></p>`}
+            ${q.why ? `<p class="mc-why">${esc(q.why)}</p>` : ''}
+            ${(!detail[i].ok && q.t0 != null) ? `<button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('mc_moment')} ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
+          </div>`).join('')}
+          <div class="ck-foot"><span class="ck-note">${score === qs.length ? t('mc_all_right') : t('mc_recorded')}</span>
+            <button class="btn btn-primary btn-sm" id="mcDone">${t('mc_continue')}</button></div>
+        </div>`;
+        $('#mcDone').addEventListener('click', () => { ov.classList.remove('on'); ov.innerHTML = ''; if (after) after(); });
+      });
+    };
+    paint();
+    ov.classList.add('on');
+  });
+}
+
+/* ===== the review session — due questions, one at a time =================== */
+function openReviewSession() {
+  const due = reviewsDue();
+  if (!due.length) return;
+  const ov = $('#ckOv'); if (!ov) return;
+  const lang = _lang() === 'pt' ? 'pt' : 'en';
+  let i = 0;
+  const step = () => {
+    if (i >= due.length) { ov.classList.remove('on'); ov.innerHTML = ''; toast(t('rev_done'), '✓'); render(); return; }
+    const e = due[i];
+    const v = e.view;
+    if (!v) { i++; step(); return; }
+    ov.innerHTML = `<div class="ck-card">
+      <div class="ob-eyebrow">${t('rev_h')} · ${i + 1}/${due.length}</div>
+      <div class="ck-q">${esc(v.q)}</div>
+      ${v.opts.map((o, oi) => `<div class="q-opt" data-o="${oi}" role="button" tabindex="0"><span class="radio"></span><span>${esc(o)}</span></div>`).join('')}
+      <div class="ck-foot"><span class="ck-note" id="revNote"></span><button class="btn btn-primary btn-sm" id="revNext" style="display:none;">${t('mc_continue')}</button></div>
+    </div>`;
+    ov.classList.add('on');
+    let answered = false;
+    ov.querySelectorAll('.q-opt').forEach(el => el.addEventListener('click', () => {
+      if (answered) return; answered = true;
+      const sel = +el.dataset.o, ok = sel === v.a;
+      ov.querySelectorAll('.q-opt').forEach((x, oi) => { if (oi === v.a) x.classList.add('correct'); else if (oi === sel) x.classList.add('wrong'); });
+      $('#revNote').innerHTML = ok ? t('ck_right') : `${t('mc_correct_was')} <b>${esc(v.opts[v.a])}</b>` +
+        ((v.t0 != null) ? ` · <button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${e.courseId}" data-mod="${e.mod}" data-t="${Math.max(0, Math.floor(v.t0 - 4))}">⏱ ${t('mc_moment')}</button>` : '');
+      reviewOutcome(e, ok);
+      $('#revNext').style.display = '';
+      $('#revNext').addEventListener('click', () => { i++; step(); });
+    }));
+  };
+  step();
+}
+
 /* ---- up-next auto-advance ------------------------------------------------
    Only for a real next lesson: never auto-advance into a quiz, a locked
    "coming soon", or the end of a course. Any keypress, click or hover cancels
@@ -4839,6 +5883,17 @@ function resolveTakeaways(toQuiz) {
   $('#takeModal').classList.remove('open');
   const n = pendingNext; pendingNext = null;
   if (!n) return;
+  /* The check comes BETWEEN the takeaways and whatever is next: the learner has
+     just seen the key learnings, which is the moment the question is a retrieval
+     cue rather than a gotcha — and it is the event that credits the hour. */
+  const lc = n.checkFor;
+  if (lc && !isHowto(courseById(lc.courseId)) && !(S.trainingLog || []).some(e => e.courseId === lc.courseId && e.mod === lc.mod)) {
+    const c = courseById(lc.courseId);
+    if (c) { showModuleCheck(c, lc.mod, () => resolveTakeawaysNext(n, toQuiz)); return; }
+  }
+  resolveTakeawaysNext(n, toQuiz);
+}
+function resolveTakeawaysNext(n, toQuiz) {
   if (toQuiz && n.courseId) { closePlayer(); setTimeout(() => openQuiz(n.courseId), 250); return; }   /* watch → assess loop */
   if (n.kind === 'next') openPlayer(n.courseId, n.mod);
   else if (n.kind === 'soon') { closePlayer(); setTimeout(() => toast(_lang() === 'pt' ? 'É tudo por agora — o resto da jornada está a caminho' : 'That’s every lesson available so far — the rest of the journey is coming soon', ''), 400); }
@@ -4847,16 +5902,1341 @@ function resolveTakeaways(toQuiz) {
     setTimeout(() => { openTutorWith(`${_lang() === 'pt' ? 'Terminou' : 'You finished'} <b>${esc(titleOf(n.courseId))}</b> — ${_lang() === 'pt' ? 'quer o teste de certificação agora? São 3 perguntas.' : 'want the certification quiz now? It’s 3 questions.'}`, ['Quiz me now', 'Build me a path']); }, 700);
   }
 }
+/* ===== REQ-L-020 · JOB RELEVANCE ===========================================
+   art. 133.º: training content must coincide with or relate to the worker's
+   activity. Breach is a contraordenação grave (€612–€9,690). The spec requires
+   this be enforced STRUCTURALLY, not by trust — so relevance is computed from
+   the course's capabilities against the worker's role profile, and recorded on
+   every entry rather than assumed.
+
+   A non-relevant course is NOT blocked. People may learn anything they like;
+   the law only governs what counts toward the mandatory 40 hours. So it is
+   logged, marked countable:false, and excluded from the art. 131.º total. That
+   is the honest split — the training happened, it just is not this obligation. */
+function capabilityFor(c) { try { return (skillsOf(c) || [])[0] || null; } catch (e) { return null; } }
+function roleCapabilities(pf) {
+  const role = (pf || S.profile || {}).role || S.role;
+  const prof = (typeof ROLE_PROFILES !== 'undefined' && ROLE_PROFILES[role]) || null;
+  return prof ? Object.keys(prof.skills || {}) : [];
+}
+function isJobRelevant(c, pf) {
+  const caps = roleCapabilities(pf);
+  /* No role on file yet means we cannot ASSERT relevance. Counting anyway would
+     be the trust-based behaviour the spec rules out; refusing would punish a
+     learner for an admin gap. Recorded as unasserted and counted, flagged for
+     the employer to resolve — see registerRowsFor. */
+  if (!caps.length) return null;
+  const mine = (skillsOf(c) || []);
+  return mine.some(k => caps.includes(k));
+}
+/* ===== YOUR EDUCATOR ========================================================
+   How the premium tier does this: MasterClass makes the instructor the product
+   (a cinematic portrait, not a credit line); Apple Fitness+ and Peloton make
+   the trainer a BROWSE AXIS you feel loyal to; Coursera states credibility in
+   one line. All three agree on the same thing — the teacher is a first-class
+   object with a face, a role and a reason, never a text byline under a title.
+
+   Here it earns more than polish. The educator at a tenant is a COLLEAGUE, so
+   the panel is the mechanism that turns "Patrick explains the ice" into visible
+   standing in the company. Three surfaces, in rising commitment: a byline where
+   you are already looking, a panel on the course page, and a portrait band on
+   home that makes people browsable.
+
+   DISCLOSURE. `presentation:'avatar'` marks a module presented by a synthetic
+   likeness rather than a filmed person. It always renders a visible badge —
+   the learner must never have to wonder whether they watched their colleague or
+   a rendering of them, and AI Act art. 50(4) obliges disclosure of synthetic
+   likeness besides. Same discipline as machineTranslated:true on a transcript.
+   ========================================================================= */
+const EDU_ALL = () => (typeof EDUCATORS === 'object' && EDUCATORS) || {};
+/* module-level educator wins over course-level: one course can carry several
+   experts (the bar lead teaches service, the sommelier teaches the list) */
+function educatorFor(c, mod) {
+  if (!c) return null;
+  const id = (mod != null && c.moduleEducators && c.moduleEducators[mod]) || c.educator;
+  const e = id && EDU_ALL()[id];
+  return e ? Object.assign({ id }, e) : null;
+}
+const eduField = (v) => !v ? '' : (typeof v === 'string' ? v : (v[_lang()] || v.en || ''));
+const eduInitials = (n) => (n || '').trim().split(/\s+/).slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '·';
+/* ===== DETERMINISTIC TONE ==================================================
+   One tone-picker for every tinted tile in the product (educator monograms,
+   reel chips). FNV-1a with the HIGH bits taken, because a plain char-sum
+   clusters badly on real data: it put 4 of 8 Portuguese colleague names on the
+   same tone, and on the reel rail it put two neighbouring chips on the same
+   tone — anagrams and same-letter sets collide by construction. Deterministic
+   is the other half of the requirement: a tile must be the same colour every
+   time the same person sees it, so this is a hash and never a shuffle. */
+const TONES = 5;
+function toneOf(str) {
+  let h = 2166136261;
+  for (const ch of String(str || '')) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  return ((h >>> 16) % TONES) + 1;
+}
+/* a tenant is never blocked on a photoshoot: absent a portrait we render an
+   elegant monogram rather than a grey silhouette */
+function eduAvatarHTML(e, cls) {
+  if (!e) return '';
+  /* the monogram is tinted deterministically from the name: with eight
+     colleagues on the band, identical gradients would read as one blur, and a
+     person's tile must stay the same colour every time they see it. FNV-1a with
+     the high bits taken — a plain char-sum put 4 of 8 Portuguese names on the
+     same tone, which is the collision this is meant to avoid. */
+  const tone = toneOf(e.name);
+  return e.portrait
+    ? `<span class="edu-av ${cls || ''}" style="background-image:url('${e.portrait}')"></span>`
+    : `<span class="edu-av mono t${tone} ${cls || ''}">${esc(eduInitials(e.name))}</span>`;
+}
+function presentationOf(c, mod) {
+  return (c && ((mod != null && c.modulePresentation && c.modulePresentation[mod]) || c.presentation)) || 'filmed';
+}
+function presentationBadge(c, mod) {
+  return presentationOf(c, mod) === 'avatar'
+    ? `<span class="edu-badge synth" title="${esc(t('edu_avatar_note'))}">${t('edu_avatar')}</span>` : '';
+}
+const coursesOfEducator = (id) => CATALOG.filter(c => c.educator === id || (c.moduleEducators || []).includes(id));
+
+/* 1 · BYLINE — where the eye already is (course hero, player header) */
+function eduBylineHTML(c, mod) {
+  const e = educatorFor(c, mod); if (!e) return '';
+  return `<button class="edu-byline" data-action="edu-open" data-edu="${e.id}">
+    ${eduAvatarHTML(e, 'xs')}<span class="edu-nm">${esc(e.name)}</span>${e.role
+      ? `<span class="edu-rl">${esc(eduField(e.role))}</span>` : ''}${presentationBadge(c, mod)}</button>`;
+}
+
+/* 2 · THE STRIP — who teaches THIS module, under the video.
+   Per-module by design: one course can carry several experts (the sommelier
+   teaches the list, the bar lead teaches service), so the strip resolves the
+   module's own educator and falls back to the course's only when unset. */
+function eduStripHTML(c, mod) {
+  const e = educatorFor(c, mod); if (!e) return '';
+  return `<button class="edu-strip" data-action="edu-open" data-edu="${e.id}">
+    ${eduAvatarHTML(e, 'sm')}
+    <span class="edu-nm">${esc(e.name)}</span>
+    ${e.role ? `<span class="edu-rl">${esc(eduField(e.role))}</span>` : ''}
+    ${presentationBadge(c, mod)}
+    <span class="edu-go">${t('edu_about')}</span>
+  </button>`;
+}
+
+/* 3 · THE BAND — educators as a browse axis, the Fitness+/Peloton move */
+function educatorsBandHTML() {
+  const ids = Object.keys(EDU_ALL()).filter(id => coursesOfEducator(id).length);
+  if (!ids.length) return '';
+  return `<section class="rail-section edu-band">
+    <div class="rail-head"><h2>${t('edu_band_h')}</h2></div>
+    <div class="rail-wrap"><div class="rail edu-rail">${ids.map(id => {
+      const e = Object.assign({ id }, EDU_ALL()[id]);
+      return `<button class="edu-tile" data-action="edu-open" data-edu="${id}">
+        ${eduAvatarHTML(e, 'md')}
+        <span class="edu-nm">${esc(e.name)}</span>
+        <span class="edu-rl">${esc(eduField(e.role))}</span>
+      </button>`;
+    }).join('')}</div></div>
+  </section>`;
+}
+
+/* 4 · THE SHEET — everything they teach, in one place */
+function openEducator(id) {
+  const e = Object.assign({ id }, EDU_ALL()[id] || {}); if (!e.name) return;
+  const list = coursesOfEducator(id);
+  document.querySelectorAll('#eduModal').forEach(x => x.remove());
+  const ov = document.createElement('div');
+  ov.className = 'take-overlay open'; ov.id = 'eduModal';
+  ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
+  ov.innerHTML = `<div class="take-card edu-sheet">
+    <button class="modal-x" data-action="edu-close" aria-label="Close">&#10005;</button>
+    <div class="edu-sheet-top">${eduAvatarHTML(e, 'lg')}
+      <div><h3>${esc(e.name)}</h3>
+        <div class="edu-rl">${esc(eduField(e.role))}${e.external ? ` &middot; ${t('edu_external')}` : ''}</div>
+      </div></div>
+    ${eduField(e.line) ? `<p class="edu-line">${esc(eduField(e.line))}</p>` : ''}
+    ${(e.credentials || []).length ? `<ul class="edu-creds">${e.credentials.map(c => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}
+    ${eduField(e.why) ? `<blockquote class="edu-why">${esc(eduField(e.why))}</blockquote>` : ''}
+    ${attributionHTML(e)}
+    ${e.profileUrl ? `<a class="edu-more" href="${esc(e.profileUrl)}" target="_blank" rel="noopener noreferrer">${t('edu_learn_more')} &#8599;</a>` : ''}
+    <div class="edu-sheet-list">${list.map(c => `<button class="module-row" data-action="edu-goto" data-id="${c.id}">
+      <div class="m-title">${esc(ctitle(c))}</div>
+      <span class="m-dur">${fmtMins(courseMins(c))}</span></button>`).join('')}</div>
+  </div>`;
+  document.body.appendChild(ov);
+  ledgerAppend('educator_open', { educator: id, courses: list.length });
+}
+
+/* A quick win plays like a lesson but ends like an invitation: the whole point
+   is the handoff to the course behind it. It writes quickwin_played to the
+   ledger and NOTHING to the training log — thirty seconds is not an hour. */
+function openQuickWin(q) {
+  const d = qwDeeper(q), e = q.educator ? Object.assign({ id: q.educator }, EDU_ALL()[q.educator] || {}) : null;
+  document.querySelectorAll('#qwModal').forEach(x => x.remove());
+  const ov = document.createElement('div');
+  ov.className = 'take-overlay open'; ov.id = 'qwModal';
+  ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
+  const m = q.media || {};
+  ov.innerHTML = `<div class="take-card qw-sheet">
+    <button class="modal-x" data-action="qw-close" aria-label="Close">&#10005;</button>
+    <div class="qw-secs">${q.seconds || 30}s${q.theme ? ` &middot; ${esc(q.theme)}` : ''}</div>
+    <h3>${esc(qwField(q.title))}</h3>
+    ${m.type === 'vimeo' ? `<div class="qw-video"><iframe src="https://player.vimeo.com/video/${esc(m.id)}?${m.h ? 'h=' + esc(m.h) + '&' : ''}title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>`
+      : m.type === 'youtube' ? `<div class="qw-video"><iframe src="https://www.youtube-nocookie.com/embed/${esc(m.id)}?rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>`
+      : `<p class="qw-soon">${t('coming_soon')}</p>`}
+    <p class="qw-line">${esc(qwField(q.line))}</p>
+    ${e && e.name ? `<button class="edu-byline" data-action="edu-open" data-edu="${e.id}">${eduAvatarHTML(e, 'xs')}<span class="edu-nm">${esc(e.name)}</span></button>` : ''}
+    ${attributionHTML(e || {}, sourcesOf(q))}
+    ${d ? `<div class="qw-next">
+        <div class="ob-eyebrow">${d.done ? t('qw_deeper_done') : d.started ? t('qw_deeper_resume') : t('qw_deeper')}</div>
+        <button class="btn btn-primary btn-sm" data-action="qw-goto" data-id="${d.course.id}">${esc(ctitle(d.course))}</button>
+      </div>` : ''}
+  </div>`;
+  document.body.appendChild(ov);
+  ledgerAppend('quickwin_played', { id: q.id, theme: q.theme || null, deeper: q.deeper || null });
+}
+
+/* ===== CURATION CONSOLE — the tenant's menu, in the tenant's words ==========
+   A hundred clips are built; a client approves the ones that sound like them.
+   Pending is the default state and nothing drips from pending, so a clip
+   reaches a team only because someone said yes — never because nobody said no.
+
+   The drip is scheduled here too: cadence, channel and hour. The channel list
+   is honest about what is wired — a client that lives on WhatsApp is told the
+   truth about what it takes rather than shown a switch that does nothing. */
+function adminQuickWinsHTML() {
+  const st = qwState(), pend = qwPending(), ap = qwApproved(), all = QW_ALL();
+  if (!all.length) return `<section class="admin-section"><h2>${t('qw_h')}</h2>
+    <p class="page-sub">${t('qw_none')}</p></section>`;
+  const card = (q, approved) => {
+    const d = qwDeeper(q);
+    return `<div class="qw-cur ${approved ? 'on' : ''}">
+      <div class="qw-cur-body">
+        <div class="qw-secs">${q.seconds || 30}s${q.theme ? ` &middot; ${esc(q.theme)}` : ''}</div>
+        <b>${esc(qwField(q.title))}</b>
+        <span>${esc(qwField(q.line))}</span>
+        ${d ? `<span class="qw-deeper">${t('qw_opens_into')} ${esc(ctitle(d.course))}</span>`
+             : `<span class="qw-nodeep">${t('qw_no_deeper')}</span>`}
+      </div>
+      <div class="qw-cur-acts">
+        <button class="btn btn-glass btn-sm" data-action="qw-approve" data-qw="${q.id}">${t('qw_yes')}</button>
+        <button class="link-quiet" data-action="qw-reject" data-qw="${q.id}">${t('qw_no')}</button>
+      </div></div>`;
+  };
+  const sch = st.schedule || {};
+  return `<section class="admin-section">
+    <h2>${t('qw_h')}</h2>
+    <p class="page-sub">${ap.length} ${t('qw_approved_of')} ${all.length}</p>
+
+    <div class="ob-eyebrow" style="margin-top:20px;">${t('qw_drip')}</div>
+    <div class="qw-sched">
+      <label>${t('qw_cadence')}
+        <select data-action="qw-sched" data-k="cadence">
+          ${['off','daily','2d','weekly'].map(v => `<option value="${v}"${(sch.cadence || 'off') === v ? ' selected' : ''}>${t('qw_c_' + v)}</option>`).join('')}
+        </select></label>
+      <label>${t('qw_channel')}
+        <select data-action="qw-sched" data-k="channel">
+          ${['email','telegram','whatsapp'].map(v => `<option value="${v}"${(sch.channel || 'email') === v ? ' selected' : ''}>${t('qw_ch_' + v)}</option>`).join('')}
+        </select></label>
+      <label>${t('qw_at')}
+        <input type="time" value="${esc(sch.at || '08:00')}" data-action="qw-sched" data-k="at"></label>
+    </div>
+    ${sch.channel === 'whatsapp' ? `<p class="qw-note">${t('qw_wa_note')}</p>` : ''}
+    ${(() => { const n = qwNext(); return n
+      ? `<p class="qw-note">${t('qw_next_up')} <b>${esc(qwField(n.title))}</b>
+           <button class="link-quiet" data-action="qw-send-now" data-qw="${n.id}">${t('qw_send_now')}</button></p>`
+      : `<p class="qw-note">${t('qw_nothing_queued')}</p>`; })()}
+
+    ${pend.length ? `<div class="ob-eyebrow" style="margin-top:24px;">${t('qw_to_review')} (${pend.length})</div>
+      <div class="qw-grid">${pend.map(q => card(q, false)).join('')}</div>` : ''}
+    ${ap.length ? `<div class="ob-eyebrow" style="margin-top:24px;">${t('qw_in_rotation')} (${ap.length})</div>
+      <div class="qw-grid">${ap.map(q => card(q, true)).join('')}</div>` : ''}
+  </section>`;
+}
+
+/* ===== CHECK COVERAGE =======================================================
+   "Every video ends with a question" is a coverage claim, and a coverage claim
+   you cannot see is a coverage claim you do not have. This enumerates every
+   video in the instance — course modules and reels — and reports which have a
+   real, transcript-grounded question and which are falling back.
+
+   A module with no generated bank does not crash: showModuleCheck degrades to an
+   acknowledgment. That is the right failure, and also exactly the silence this
+   audit exists to break — an acknowledgment looks like a check to everyone
+   except the person who wrote it. */
+function checkCoverage() {
+  const rows = [];
+  for (const c of CATALOG) {
+    const bank = (typeof QUIZ_V2 === 'object' && QUIZ_V2[c.id] && QUIZ_V2[c.id].modules) || {};
+    (c.modules || []).forEach((title, mod) => {
+      const qs = bank[mod] || [];
+      const verified = qs.filter(q => (q.verified || q.corrected) && validQuestion(q)).length;
+      const malformed = qs.filter(q => !validQuestion(q)).length;
+      const soon = (modMedia(c, mod) || {}).type === 'soon';
+      rows.push({ kind: 'module', id: c.id + ':' + mod, label: ctitle(c) + ' · ' + (cmods(c)[mod] || title),
+        questions: qs.length, verified, soon,
+        malformed,
+        state: soon ? 'soon' : verified ? 'ok' : malformed ? 'malformed' : qs.length ? 'unverified' : 'none' });
+    });
+  }
+  for (const r of QW_ALL()) {          /* the whole library: an audit that skipped unapproved reels would hide the ones still needing work */
+    const q = reelCheckOf(r);
+    const soon = (r.media || {}).type === 'soon';
+    rows.push({ kind: 'reel', id: r.id, label: reelField(r.title),
+      questions: q ? 1 : 0, verified: q && (q.verified || q.corrected) ? 1 : 0, soon,
+      malformed: r.check && !q ? 1 : 0,
+      state: r.check && !q ? 'malformed' : !q ? 'none' : (q.verified || q.corrected) ? 'ok' : 'unverified' });
+  }
+  return rows;
+}
+/* ===== THE GATE, MADE VISIBLE ===============================================
+   Every question a learner is asked was generated from that module's own
+   transcript, then answered BLIND by a second model against the same transcript.
+   Agreement ships it; disagreement corrects it or throws it away. The correction
+   rate runs 57-70%, which is the whole point — the gate is load-bearing, not
+   decoration.
+
+   Until now that was a claim in a commit message. A buyer evaluating this
+   product is, correctly, sceptical of AI-written assessment: the market is full
+   of content that is technically correct and educationally weak. The answer to
+   that scepticism is not a badge saying "AI verified", it is showing the work —
+   the question, the second of video it came from, the words actually spoken
+   there, and what the audit did.
+
+   It is also honest about its own limits. Older questions were audited before
+   the verifier recorded WHAT it answered, so they can say "checked" but not
+   show the working. Those are labelled as exactly that rather than dressed up
+   to match the newer ones. */
+let covOpen = null;
+let reelOpen = null;   /* which reel has its text lesson expanded */
+
+function adminCoverageHTML() {
+  if (!banksLoaded) {
+    return `<section class="admin-section">
+      <h2>${t('cov_h')}</h2>
+      <p class="page-sub">${t('cov_loading')}</p></section>`;
+  }
+  const rows = checkCoverage();
+  if (!rows.length) return '';
+  const n = k => rows.filter(r => r.state === k).length;
+  const order = { malformed: 0, none: 1, unverified: 2, soon: 3, ok: 4 };
+  return `<section class="admin-section">
+    <h2>${t('cov_h')}</h2>
+    <p class="page-sub">${n('ok')}/${rows.length} ${t('cov_sub')}</p>
+    <p class="sect-sub sub-auto">${t('cov_how')}</p>
+    <div class="cap-list">${rows.sort((a, b) => order[a.state] - order[b.state]).map(r => {
+      const open = covOpen === r.id;
+      const can = r.questions > 0;
+      return `
+      <div class="cap-row ${r.state === 'ok' ? 'cap-proven' : (r.state === 'none' || r.state === 'malformed') ? 'cap-lapsed' : r.state === 'unverified' ? 'cap-expiring' : ''}"
+           ${can ? `data-action="cov-open" data-id="${esc(r.id)}" role="button" tabindex="0"` : ''} style="${can ? 'cursor:pointer' : ''}">
+        <div class="cap-name">${esc(r.label)}${can ? `<span class="cov-caret">${open ? '▾' : '▸'}</span>` : ''}</div>
+        <div class="cap-meta">${r.kind === 'reel' ? t('cov_reel') : t('cov_module')}${r.questions ? ` · ${r.questions}` : ''}</div>
+        <div class="cap-state">${
+          r.state === 'ok' ? t('cov_ok')
+          : r.state === 'unverified' ? t('cov_unverified')
+          : r.state === 'malformed' ? t('cov_malformed')
+          : r.state === 'soon' ? t('coming_soon')
+          : t('cov_none')}</div>
+      </div>${open ? covEvidenceHTML(r) : ''}`;
+    }).join('')}</div>
+  </section>`;
+}
+
+/* the questions behind one row, with the line of video each came from */
+function covEvidenceHTML(r) {
+  const qs = covQuestions(r);
+  if (!qs.length) return `<div class="cov-ev"><p class="empty-note">${t('cov_none')}</p></div>`;
+  const lang = _lang() === 'pt' ? 'pt' : 'en';
+  const [cid, modS] = String(r.id).split(':');
+  /* the segments of the transcript this question was actually grounded in —
+     a PT question came from the PT recording, so quoting the English one here
+     would show a line the question was never written against */
+  const tr = r.kind === 'module' ? (_covTr[covTrKey(cid, +modS)] || null) : null;
+  return `<div class="cov-ev">${qs.map(q => {
+    const L = q[lang] || q.en || {};
+    const bad = !validQuestion(q);
+    const audit = bad ? 'malformed' : q.corrected ? 'corrected' : q.verified ? 'verified' : 'unaudited';
+    /* the words actually spoken at the timestamp this question anchors to */
+    const said = (tr && q.t0 != null)
+      ? (tr.find(s => q.t0 >= s.t0 && q.t0 < s.t1) || tr.find(s => s.t0 >= q.t0) || null) : null;
+    return `<div class="cov-q">
+      <div class="cov-q-head">
+        <span class="cov-audit ${audit}">${
+          audit === 'verified' ? t('cov_a_verified')
+          : audit === 'corrected' ? t('cov_a_corrected')
+          : audit === 'malformed' ? t('cov_malformed') : t('cov_a_unaudited')}</span>
+        ${q.t0 != null ? `<span class="cov-at">${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</span>` : ''}
+        ${q.type ? `<span class="cov-at">${esc(q.type)}</span>` : ''}
+      </div>
+      <div class="cov-stem">${esc(L.q || '—')}</div>
+      ${Array.isArray(L.opts) && Number.isInteger(q.a) && L.opts[q.a] != null
+        ? `<div class="cov-key">${t('cov_key')} <b>${esc(L.opts[q.a])}</b></div>` : ''}
+      ${said ? `<div class="cov-said">${t('cov_said')} <q>${esc(said.text.trim())}</q></div>`
+             : (r.kind === 'module' && q.t0 != null ? `<div class="cov-said cov-wait">${t('cov_loading')}</div>` : '')}
+      ${q.gen ? `<div class="cov-prov">${t('cov_prov')
+          .replace('{m}', esc(q.model || '?')).replace('{s}', esc(q.src || '?'))}${
+          (q.verified || q.corrected) && !q.audit ? ` · ${t('cov_no_trail')}` : ''}</div>`
+        : `<div class="cov-prov">${t('cov_authored')}</div>`}
+    </div>`;
+  }).join('')}</div>`;
+}
+
+/* Language-aware transcript fetch for the evidence view. Separate from
+   _trCache, which holds whole JSON objects for the player and only ever loads
+   the base file — this needs the SEGMENTS of the language the question was
+   generated from, or the quoted line is from a recording the question was never
+   written against. */
+const _covTr = {};
+const covTrKey = (cid, mod) => `${cid}:${mod}:${_lang() === 'pt' ? 'pt' : 'en'}`;
+function covLoadTranscript(cid, mod) {
+  const key = covTrKey(cid, mod);
+  if (_covTr[key] !== undefined) return Promise.resolve(_covTr[key]);
+  const pt = _lang() === 'pt';
+  const tryFiles = pt ? [`m${mod}.pt.json`, `m${mod}.json`] : [`m${mod}.json`];
+  const next = i => i >= tryFiles.length
+    ? (_covTr[key] = null)
+    : fetch(`media/transcripts/${cid}/${tryFiles[i]}`)
+        .then(r => (r.ok ? r.json() : null))
+        .then(j => (j && j.segments ? (_covTr[key] = j.segments) : next(i + 1)))
+        .catch(() => next(i + 1));
+  return Promise.resolve(next(0));
+}
+
+/* the question objects behind a coverage row, whichever kind it is */
+function covQuestions(r) {
+  if (r.kind === 'reel') { const q = reelCheckOf(r.id ? qwById(r.id) : null); return q ? [q] : []; }
+  const [cid, modS] = String(r.id).split(':');
+  const bank = ((QUIZ_V2[cid] || {}).modules) || {};
+  return bank[+modS] || [];
+}
+
+/* ===== THE REEL CHECK — retrieval, not assessment ===========================
+   Every video ends with one question. Not a quiz — ONE question, drawn from what
+   was actually said, asked the moment the clip finishes.
+
+   WHY ONE. Retrieval practice is the best-evidenced way to make something stick,
+   and its power is in the ACT of recalling, not in the number of items. A
+   20-second lesson has one idea; asking three questions about it manufactures
+   two bad ones. The second exposure comes from spaced repetition instead —
+   the same question, days later — which is where the durability actually is.
+
+   WHY IT IS NOT AN ASSESSMENT. A reel check credits no hours and gates nothing.
+   Getting it wrong schedules the question sooner; it is a scheduling event, not
+   a mark. The hour-crediting check lives on course modules and is a different
+   object with a different burden of proof (LEGAL-40H-LINE.md).
+
+   WHEN. It rises when the clip has played once — the natural end, not an
+   interruption — over the reel, which keeps playing behind it. Swiping on
+   dismisses it: a feed that traps you is a feed people stop opening. */
+const reelCheckOf = r => { const q = r && r.check;
+  return validQuestion(q) ? q : null; };            /* malformed = no check at all */
+let reelCheckWatch = null;
+
+/* ===== WHEN A REEL'S CHECK MAY RISE ========================================
+   Only after the clip has played one FULL pass. This used to be
+   setTimeout(..., r.seconds * 1000) armed the moment the reel scrolled into
+   view, which is wall-clock time and therefore wrong in three ways: it ran
+   while the clip was still buffering, it ran while the clip was paused or the
+   phone was face-down, and `seconds` is authored metadata — if the real clip
+   is longer, the question slid up over someone mid-sentence.
+
+   Reels LOOP (`loop` / `loop=1`), so 'ended' never fires. The honest signal is
+   the real playhead: raise when currentTime reaches the real duration. Paused
+   simply means it arrives later, which is the whole point.
+
+   Iframe reels (Vimeo/YouTube background embeds) expose no playhead without
+   loading their SDKs into a feed that must stay light, and 'soon' placeholders
+   have no media at all. Those keep a timer — but it only accrues while the reel
+   is genuinely the active slide and the page is visible, so a backgrounded feed
+   no longer counts as watching. */
+function stopReelCheck() { if (reelCheckWatch) { reelCheckWatch.stop(); reelCheckWatch = null; } }
+function armReelCheck(el, r, vid) {
+  stopReelCheck();
+  if (!reelCheckOf(r) || el.dataset.rcDone || el.querySelector('.rc')) return;
+  const fire = () => { stopReelCheck(); raiseReelCheck(el, r); };
+
+  if (vid) {
+    const onTime = () => {
+      const dur = vid.duration;
+      if (!dur || !isFinite(dur)) return;                  /* metadata not in yet */
+      if (vid.currentTime >= dur - 0.35) fire();
+    };
+    vid.addEventListener('timeupdate', onTime);
+    reelCheckWatch = { stop: () => vid.removeEventListener('timeupdate', onTime) };
+    return;
+  }
+
+  /* No playhead available — accrue only while actually on screen and visible.
+     This deliberately UNDERCOUNTS: the first tick after arming (and after every
+     resume) credits nothing, so the check rises a fraction late rather than a
+     fraction early. Late is invisible; early is the interruption we just spent
+     this function removing. */
+  const need = Math.max(4, (r.seconds || 30)) * 1000;
+  let watched = 0, last = null;
+  const iv = setInterval(() => {
+    const live = document.visibilityState === 'visible'
+      && el.classList.contains('current') && document.body.contains(el);
+    if (!live) { last = null; return; }
+    const now = performance.now();
+    if (last != null) watched += Math.min(now - last, 400);  /* clamp: a resumed tab is not watched time */
+    last = now;
+    if (watched >= need) fire();
+  }, 250);
+  reelCheckWatch = { stop: () => clearInterval(iv) };
+}
+
+function reelCheckHTML(r) {
+  const q = reelCheckOf(r); if (!q) return '';
+  const v = shuffledView(q, _lang());
+  /* the shuffled view is stashed so the answer handler grades the SAME order the
+     learner saw, and the spaced review re-asks it identically months later */
+  S._reelView = S._reelView || {}; S._reelView[r.id] = v;
+  return `<div class="rc" data-rc="${r.id}">
+    <div class="rc-q">${esc(v.q)}</div>
+    <div class="rc-opts">${v.opts.map((o, i) =>
+      `<button class="rc-opt" data-action="rc-answer" data-id="${r.id}" data-i="${i}">${esc(o)}</button>`).join('')}</div>
+    <button class="rc-skip" data-action="rc-skip" data-id="${r.id}">${t('rc_skip')}</button>
+  </div>`;
+}
+function raiseReelCheck(el, r) {
+  if (!reelCheckOf(r) || el.querySelector('.rc') || el.dataset.rcDone) return;
+  const host = el.querySelector('.reel-copy');
+  if (!host) return;
+  el.insertAdjacentHTML('beforeend', reelCheckHTML(r));
+  requestAnimationFrame(() => { const rc = el.querySelector('.rc'); if (rc) rc.classList.add('up'); });
+  ledgerAppend('reel_check_shown', { id: r.id });
+}
+function answerReelCheck(id, picked) {
+  const r = qwById(id), v = (S._reelView || {})[id]; if (!r || !v) return;
+  const el = document.querySelector(`.reel[data-id="${id}"]`); if (!el) return;
+  const rc = el.querySelector('.rc'); if (!rc || rc.dataset.done) return;
+  rc.dataset.done = '1'; el.dataset.rcDone = '1';
+  const right = picked === v.a;
+  [...rc.querySelectorAll('.rc-opt')].forEach((b, i) => {
+    b.disabled = true;
+    if (i === v.a) b.classList.add('right');
+    else if (i === picked) b.classList.add('wrong');
+  });
+  rc.insertAdjacentHTML('beforeend',
+    `<div class="rc-why"><b>${right ? t('rc_right') : t('rc_not_quite')}</b>${v.why ? ' ' + esc(v.why) : ''}</div>`);
+  const skip = rc.querySelector('.rc-skip'); if (skip) skip.textContent = t('rc_next');
+  /* wrong answers come back sooner — the queue is the second exposure, and it is
+     where a 20-second lesson turns into something retained */
+  scheduleReview('reel:' + id, 0, v);
+  if (!right) { const e = (S.reviewQueue || []).find(x => x.k === reviewKey('reel:' + id, v)); if (e) { e.step = 0; e.due = Date.now() + 864e5; } }
+  if (right) awardXp(2, t('reel_h'));
+  ledgerAppend('reel_check', { id, correct: right, audit: v.audit || null });
+  save();
+}
+
+/* ===== THE REEL FEED ========================================================
+   TikTok/Shorts/Reels mechanics — vertical, full-bleed, snap-swipe, autoplay
+   the one in view, loop it — pointed at learning instead of at time.
+
+   IMPLEMENTATION NOTE: the swipe is CSS scroll-snap, not a custom gesture
+   handler. Native scrolling already has the momentum, rubber-banding and
+   accessibility that a hand-rolled touch handler spends months failing to
+   reproduce, and it gives keyboard and wheel for free. An IntersectionObserver
+   decides which reel is "current"; nothing else tracks position.
+
+   THE ONE DELIBERATE DIFFERENCE — THE FEED ENDS.
+   Infinite scroll is engineered for compulsion. Copying it wholesale into a
+   workplace training tool would mean optimising a company's own staff for time
+   spent, on that company's clock, which is not what anyone is buying. So after
+   FEED_PAUSE_AFTER reels the feed offers a way DOWN into a course instead of
+   more feed. The loop stays — repetition is how a 20-second idea sticks — and
+   the bottomlessness goes. A learner can always continue; they just have to
+   choose to, once.
+
+   Reels never credit hours: they are not courses (see REELS in content.js). */
+const FEED_PAUSE_AFTER = 5;
+let feedIdx = -1, feedSeen = [];
+
+/* ===== WHO SEES AN UNAPPROVED REEL =========================================
+   Curation defaults to PENDING — nothing reaches a team because a menu item
+   existed and nobody said no. The DRIP already honoured that (qwApproved()),
+   but the two surfaces a learner actually opens, the home rail and the swipe
+   feed, read the whole library — so a placeholder or an unreviewed clip was in
+   front of the team the moment it landed in content.js. That is the gap this
+   closes.
+
+   reelsAll() is now the LEARNER's view: approved only. Admins — super, or the
+   tenant's own — keep seeing everything, because approving a reel means watching
+   it first, and they see it marked as pending while they do.
+
+   QW_ALL() remains the whole library, and is what curation and the coverage
+   audit read. An ops audit that silently skipped unapproved reels would
+   under-report exactly the ones that still need work. */
+const canCurateReels = () => isAdmin();
+const reelsAll = () => canCurateReels() ? QW_ALL() : qwApproved();
+/* pending is only ever SHOWN to someone who can act on it */
+const reelPending = r => canCurateReels() && !qwPublished(r) && qwState().approved.indexOf(r.id) < 0;
+const reelField = v => eduField(v);
+function reelPoster(r, showHook) {
+  const tone = toneOf(r.theme || r.id);   /* same picker as the rail chip, so a reel keeps one colour in both places */
+  const img = r.poster ? ` style="background-image:url('${esc(r.poster)}')"` : '';
+  return `<div class="reel-poster t${tone}${r.poster ? ' has-art' : ''}"${img}>${
+    showHook ? `<span class="reel-hook">${esc(reelField(r.hook) || reelField(r.title))}</span>` : ''}</div>`;
+}
+/* Media is mounted lazily and only near the active slide (see mountWindow).
+   Mounting every reel up front is what makes a feed unusable: a Vimeo iframe
+   is ~1MB of player JS EACH, so a 100-reel library would try to load ~100MB of
+   players before the first frame. Short MP4s on a CDN with a poster frame are
+   the right shape here — one <video>, preloadable, instantly seekable. Long
+   courses keep Vimeo, where adaptive streaming actually earns its cost. */
+function reelMediaHTML(r, i) {
+  const m = r.media || {};
+  const poster = r.poster ? ` poster="${esc(r.poster)}"` : '';
+  if (m.type === 'mp4')     return `<video class="reel-vid" data-i="${i}" src="${esc(m.src)}"${poster} loop muted playsinline preload="none"></video>`;
+  if (m.type === 'vimeo')   return `<iframe class="reel-vid" data-i="${i}" src="https://player.vimeo.com/video/${esc(m.id)}?${m.h ? 'h=' + esc(m.h) + '&' : ''}background=1&loop=1&muted=1&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>`;
+  if (m.type === 'youtube') return `<iframe class="reel-vid" data-i="${i}" src="https://www.youtube-nocookie.com/embed/${esc(m.id)}?loop=1&mute=1&controls=0&rel=0&playlist=${esc(m.id)}" allow="autoplay" allowfullscreen loading="lazy"></iframe>`;
+  return '';
+}
+function reelSlideHTML(r, i) {
+  const d = qwDeeper(r), e = r.educator ? Object.assign({ id: r.educator }, EDU_ALL()[r.educator] || {}) : null;
+  const saved = (S.reelSaved || []).indexOf(r.id) > -1;
+  const ph = !!r.placeholder;
+  return `<article class="reel" data-i="${i}" data-id="${r.id}">
+    ${reelPoster(r, ph)}
+    <div class="reel-media" data-media="${esc(JSON.stringify(r.media || {}).slice(0, 0))}"></div>
+    <div class="reel-scrim"></div>
+    <div class="reel-rail">
+      <button class="reel-act ${saved ? 'on' : ''}" data-action="reel-save" data-id="${r.id}" aria-label="${t('reel_save')}">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="${saved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3h12a1 1 0 0 1 1 1v16l-7-4-7 4V4a1 1 0 0 1 1-1z"/></svg></button>
+      <button class="reel-act" data-action="reel-mute" aria-label="${t('reel_sound')}">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M17 8.5a5 5 0 0 1 0 7"/><path class="slash" d="M18 8l4 8"/></svg></button>
+    </div>
+    <div class="reel-copy">
+      ${ph ? `<span class="reel-ph">${t('reel_placeholder')}</span>` : ''}
+      <div class="reel-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${r.seconds || 30}s${r.theme ? ` &middot; ${esc(r.theme)}` : ''}</div>
+      <h2>${esc(reelField(r.title))}</h2>
+      ${ph ? '' : `<p>${esc(reelField(r.line))}</p>`}
+      ${/* THE LESSON IN TEXT.
+            A reel is twenty seconds of someone talking. That is a bad format for
+            a noisy tractor cab, a shared phone, a hearing aid, or anyone who
+            simply reads faster than people speak — and on a platform whose whole
+            claim is a provable record, "you had to watch it" is a weak place to
+            keep the content. So every reel carries the same idea as text,
+            written from its own transcript, and a learner can take it either way.
+            Collapsed by default: the feed is the feed, and a wall of text on top
+            of video is neither. */''}
+      ${reelField(r.lesson) ? `<button class="reel-read" data-action="reel-read" data-id="${esc(r.id)}">${reelOpen === r.id ? t('reel_hide') : t('reel_read')}</button>` : ''}
+      ${reelOpen === r.id && reelField(r.lesson) ? `<div class="reel-lesson">${esc(reelField(r.lesson))}${
+          r.videoLang && r.videoLang !== _lang() ? `<span class="reel-vlang">${t('reel_vlang').replace('{l}', r.videoLang.toUpperCase())}</span>` : ''}</div>` : ''}
+      ${e && e.name ? `<button class="edu-byline" data-action="edu-open" data-edu="${e.id}">${eduAvatarHTML(e, 'xs')}<span class="edu-nm">${esc(e.name)}</span></button>` : ''}
+      ${/* A filled button on top of video is a colour block fighting the
+             footage — and it was the demo brand's accent, so it read as a
+             different product. The handoff is the point of a reel, but it is
+             the QUIET point: one line, the course named, an arrow. Type and
+             space, not a slab (law 3, law 8). The stop-slide keeps a real
+             button because there it IS the action, not an aside. */''}
+      ${(() => {
+        /* the graph knows which LESSON this clip sits beside; the course is the
+           fallback, not the answer. "Go deeper → Total Responsibility" is a
+           handoff; "Go deeper → Above the Line" is a shrug. */
+        const b = graphBeside(r.id);
+        if (b) return `<button class="reel-deeper" data-action="reel-goto" data-id="${esc(b.course)}" data-mod="${b.mod}">
+        <span class="rd-verb">${t('reel_beside')}</span>
+        <span class="rd-name">${esc(b.title)}</span>
+        <span class="rd-arrow" aria-hidden="true">&#8250;</span></button>`;
+        return d ? `<button class="reel-deeper" data-action="reel-goto" data-id="${d.course.id}">
+        <span class="rd-verb">${d.done ? t('qw_deeper_done') : d.started ? t('qw_deeper_resume') : t('qw_deeper')}</span>
+        <span class="rd-name">${esc(ctitle(d.course))}</span>
+        <span class="rd-arrow" aria-hidden="true">&#8250;</span></button>` : '';
+      })()}
+    </div>
+  </article>`;
+}
+/* the stop: offered as a slide in the feed, so it arrives the same way
+   everything else does rather than as a modal that interrupts */
+function reelPauseHTML(i) {
+  const next = CATALOG.filter(c => !isDone(c.id) && hasRealContent && hasRealContent(c))[0] || CATALOG[0];
+  return `<article class="reel reel-pause" data-i="${i}" data-pause="1">
+    <div class="reel-copy reel-copy-mid">
+      <div class="reel-meta">${t('reel_pause_eyebrow')}</div>
+      <h2>${t('reel_pause_h')}</h2>
+      <p>${t('reel_pause_sub')}</p>
+      ${next ? `<button class="btn btn-primary btn-sm" data-action="reel-goto" data-id="${next.id}">${t('qw_deeper')} &middot; ${esc(ctitle(next))}</button>` : ''}
+      <button class="link-quiet" data-action="reel-more">${t('reel_keep_watching')}</button>
+    </div>
+  </article>`;
+}
+function renderReels() {
+  const list = reelsAll();
+  if (!list.length) return `<div class="page"><div class="page-pad"><h1 class="page-title">${t('reel_h')}</h1>
+    <p class="page-sub">${t('reel_none')}</p></div></div>`;
+  const slides = [];
+  list.forEach((r, i) => {
+    slides.push(reelSlideHTML(r, slides.length));
+    if ((i + 1) % FEED_PAUSE_AFTER === 0 && i < list.length - 1) slides.push(reelPauseHTML(slides.length));
+  });
+  /* The feed takes the whole screen and the app's chrome steps out of the way:
+     the header and tutor button sat ON TOP of the first build, and the FAB
+     landed on the "go deeper" button. An immersive surface has to actually be
+     immersive, and it has to say how to leave. */
+  return `<div class="reel-wrap">
+    <div class="reel-top">
+      <button class="reel-x" data-action="reel-exit" aria-label="${t('close')}">&#8592;</button>
+      <div class="reel-prog">${slides.map((_, i) => `<span data-p="${i}"></span>`).join('')}</div>
+    </div>
+    <div class="reel-feed" id="reelFeed">${slides.join('')}</div>
+    <div class="reel-hint" id="reelHint" aria-hidden="true"><span></span></div>
+  </div>`;
+}
+/* Which reel is playing is ARITHMETIC, not observation. With scroll-snap the
+   active index is scrollTop / slideHeight, exactly — no thresholds, no
+   intersection callbacks, nothing to miss.
+
+   This started as an IntersectionObserver and never fired once. The cause was
+   worth keeping: IntersectionObserver does not fire in every embedded webview
+   (it never fired here, not even on document.body), so a feed whose core
+   behaviour depended on it would have shipped playing nothing, silently, on
+   whichever devices behave that way. Scroll position is always true. rAF keeps
+   it to one read per frame. */
+function armReelFeed() {
+  const feed = $('#reelFeed'); if (!feed) return;
+  let ticking = false;
+  const sync = () => {
+    ticking = false;
+    const h = feed.clientHeight || 1;
+    const idx = Math.round(feed.scrollTop / h);
+    const slides = feed.children;
+    if (idx === feedIdx) return;
+    feedIdx = idx;
+    for (let i = 0; i < slides.length; i++) {
+      const el = slides[i], on = i === idx;
+      el.classList.toggle('current', on);
+      /* MOUNT WINDOW — media exists only for the active slide and its
+         neighbours; everything else stays a poster. This is what keeps a
+         hundred-reel library the same weight as a three-reel one, and it is
+         also why the next one starts instantly: it is already mounted. */
+      const near = Math.abs(i - idx) <= 1;
+      const box = el.querySelector('.reel-media');
+      if (!box) continue;
+      const r = qwById(el.dataset.id);
+      if (near && r && !box.dataset.on) { box.innerHTML = reelMediaHTML(r, i); box.dataset.on = '1'; }
+      else if (!near && box.dataset.on) { box.innerHTML = ''; delete box.dataset.on; }
+      const v = box.querySelector('video');
+      if (v) {
+        if (on) { v.preload = 'auto'; v.play().catch(() => {}); }
+        else { v.preload = 'metadata'; v.pause(); try { v.currentTime = 0; } catch (e) {} }
+      }
+      /* the check rises when the clip has actually FINISHED a pass — see armReelCheck */
+      if (on) { const rr = qwById(el.dataset.id); if (rr) armReelCheck(el, rr, v); }
+    }
+    const prog = $('.reel-prog');
+    if (prog) [...prog.children].forEach((sp, k) => sp.classList.toggle('on', k <= idx));
+    const hint = $('#reelHint'); if (hint && idx > 0) hint.classList.add('gone');
+    const cur = slides[idx];
+    if (cur && cur.dataset.id && feedSeen.indexOf(cur.dataset.id) < 0) {
+      feedSeen.push(cur.dataset.id);
+      ledgerAppend('reel_view', { id: cur.dataset.id, theme: (qwById(cur.dataset.id) || {}).theme || null, pos: idx });
+    }
+  };
+  /* time-throttled, not rAF-scheduled. rAF is paused in a hidden or
+     backgrounded view, which left the feed's state stale and unverifiable;
+     a handful of class toggles at ~60Hz costs nothing and always runs. */
+  let last = 0;
+  feed.onscroll = () => {
+    const now = Date.now();
+    if (now - last < 60) { if (!ticking) { ticking = true; setTimeout(() => { last = Date.now(); sync(); }, 60); } return; }
+    last = now; sync();
+  };
+  /* keyboard parity with the swipe — a feed reachable only by thumb is a feed
+     half the users cannot reach at all */
+  feed.tabIndex = 0;
+  feed.onkeydown = ev => {
+    if (ev.key !== 'ArrowDown' && ev.key !== 'ArrowUp' && ev.key !== ' ') return;
+    ev.preventDefault();
+    const to = feed.children[Math.max(0, Math.min(feed.children.length - 1,
+      feedIdx + (ev.key === 'ArrowUp' ? -1 : 1)))];
+    if (to) to.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  document.body.classList.add('reels-open');
+  feedIdx = -1; sync();                       /* mount + mark slide 0 on open */
+  try { feed.focus({ preventScroll: true }); } catch (e) {}
+}
+
+/* ===== CAPABILITY GRAPH =====================================================
+   The shift the category made, and the one this platform was already storing
+   the data for without reading it: a CATALOGUE answers "what did they
+   complete"; a GRAPH answers "who can do what, on what evidence, and when does
+   it lapse". Completion is an event. Capability is a state that decays.
+
+   THREE RULES THAT KEEP IT HONEST:
+
+   1 · EVIDENCE-DERIVED, NEVER ASSERTED. A capability exists only because a
+       credited module proved it — no self-rating, no manager tick. Every entry
+       can name the modules and dates behind it, which is also what makes it
+       survivable in an audit.
+
+   2 · THE LEGAL GATE AND THE CAPABILITY GATE ARE DIFFERENT QUESTIONS, and
+       conflating them would be a real defect. `countable:false` means a module
+       did not credit art. 131.º hours because it was not job-relevant to that
+       person — it does NOT mean nothing was learned. So the graph reads every
+       credited module, and the hours ledger keeps its own stricter filter.
+
+   3 · IT LAPSES. A capability proven by a course carrying recertMonths expires
+       on that clock; everything else ages. "Trained in 2023" is not "can do it
+       today", and a graph that cannot say so is a completion report wearing a
+       different hat. */
+const CAP_EXPIRING_DAYS = 45;
+
+function capabilityGraph(st) {
+  const state = st || S;
+  const log = (state.trainingLog || []).slice().sort((a, b) => a.at - b.at);
+  const out = {};
+  for (const e of log) {
+    const caps = (e.ev && e.ev.capabilities && e.ev.capabilities.length)
+      ? e.ev.capabilities
+      : (e.ev && e.ev.capability ? [e.ev.capability] : []);
+    if (!caps.length) continue;
+    const c = courseById(e.courseId);
+    const recert = c && c.recertMonths ? c.recertMonths : null;
+    for (const cap of caps) {
+      const g = out[cap] || (out[cap] = { cap, evidence: [], provenAt: 0, expiresAt: null, scores: [] });
+      g.evidence.push({ courseId: e.courseId, mod: e.mod, title: e.title, at: e.at, countable: e.countable !== false });
+      g.provenAt = Math.max(g.provenAt, e.at);
+      const chk = e.ev && e.ev.check;
+      if (chk && typeof chk.score === 'number' && typeof chk.total === 'number' && chk.total > 0) {
+        g.scores.push(chk.score / chk.total);
+      }
+      /* the LATEST proof governs. Taking the earliest looks more conservative
+         and is simply wrong: recertification exists so that re-proving resets
+         the clock, so a min() would tell someone who retrained yesterday that
+         they had lapsed, and no amount of retraining would ever clear it. A
+         capability lapses when ALL of its evidence has lapsed. */
+      if (recert) {
+        const exp = e.at + recert * 2629800000;
+        g.expiresAt = g.expiresAt == null ? exp : Math.max(g.expiresAt, exp);
+      }
+    }
+  }
+  const now = Date.now();
+  for (const g of Object.values(out)) {
+    g.modules = g.evidence.length;
+    g.score = g.scores.length ? g.scores.reduce((a, b) => a + b, 0) / g.scores.length : null;
+    g.ageDays = Math.floor((now - g.provenAt) / 86400000);
+    if (g.expiresAt == null) g.state = 'proven';
+    else if (g.expiresAt < now) g.state = 'lapsed';
+    else g.state = (g.expiresAt - now) / 86400000 <= CAP_EXPIRING_DAYS ? 'expiring' : 'proven';
+    g.daysLeft = g.expiresAt == null ? null : Math.ceil((g.expiresAt - now) / 86400000);
+    delete g.scores;
+  }
+  return out;
+}
+const capsHeld = (st) => Object.values(capabilityGraph(st)).filter(g => g.state !== 'lapsed').map(g => g.cap);
+
+/* what this person's ROLE asks for, minus what they can prove — the gap that
+   should drive assignment rather than a manager's memory */
+function capabilityGaps(st, pf) {
+  const need = roleCapabilities(pf || (st || S).profile);
+  if (!need.length) return [];
+  const have = capsHeld(st);
+  return need.filter(c => have.indexOf(c) < 0);
+}
+/* the course that would close a gap fastest — first course teaching it */
+const courseForCapability = cap => CATALOG.find(c => (skillsOf(c) || []).indexOf(cap) > -1) || null;
+
+/* REVERSE LOOKUP — the question an operations manager actually asks.
+   "Who can drive the truck?" is unanswerable from a completion report and
+   trivial from a graph. Reads the same member snapshots the cockpit uses. */
+function capabilityHolders(cap) {
+  const out = [];
+  for (const m of (adminMembers || [])) {
+    const g = capabilityGraph(m.state || {})[cap];
+    if (g) out.push({ uid: m.uid, name: (m.profile || {}).name || (m.profile || {}).username || (m.email || '—'), g });
+  }
+  return out.sort((a, b) => (a.g.state === b.g.state ? b.g.provenAt - a.g.provenAt
+    : (a.g.state === 'proven' ? -1 : b.g.state === 'proven' ? 1 : a.g.state === 'expiring' ? -1 : 1)));
+}
+/* every capability the org holds, with how thin the cover is — a capability one
+   person holds is a bus-factor risk, which is the other thing a graph can see */
+function orgCapabilities() {
+  const map = {};
+  for (const m of (adminMembers || [])) {
+    for (const g of Object.values(capabilityGraph(m.state || {}))) {
+      const o = map[g.cap] || (map[g.cap] = { cap: g.cap, proven: 0, expiring: 0, lapsed: 0 });
+      o[g.state]++;
+    }
+  }
+  return Object.values(map).sort((a, b) => (a.proven + a.expiring) - (b.proven + b.expiring));
+}
+
+/* learner-facing: what you can prove, and what your role still asks for.
+   Deliberately not a score or a level — the platform's whole claim is evidence,
+   so each row can name the modules and dates behind it. */
+function capabilitiesPanelHTML() {
+  const g = capabilityGraph(), caps = Object.values(g);
+  const gaps = capabilityGaps();
+  if (!caps.length && !gaps.length) return '';
+  const row = c => `<div class="cap-row cap-${c.state}">
+    <div class="cap-name">${esc(tcap(c.cap))}</div>
+    <div class="cap-meta">${c.modules} ${c.modules === 1 ? t('cap_module') : t('cap_modules')}${
+      c.score != null ? ` · ${Math.round(c.score * 100)}%` : ''}</div>
+    <div class="cap-state">${
+      c.state === 'lapsed'   ? t('cap_lapsed')
+      : c.state === 'expiring' ? `${t('cap_expires_in')} ${c.daysLeft}d`
+      : c.expiresAt          ? `${t('cap_valid')} ${c.daysLeft}d`
+      : `${t('cap_proven')} ${fmtAgo(c.provenAt)}`}</div>
+  </div>`;
+  return `<section class="rail-section">
+    <div class="rail-head"><h2>${t('cap_h')}</h2></div>
+    ${caps.length ? `<div class="cap-list">${caps.sort((a, b) =>
+        (a.state === b.state ? b.provenAt - a.provenAt : a.state === 'lapsed' ? -1 : b.state === 'lapsed' ? 1 : 0))
+      .map(row).join('')}</div>` : `<p class="page-sub">${t('cap_none')}</p>`}
+    ${gaps.length ? `<div class="ob-eyebrow" style="margin-top:22px;">${t('cap_gaps')}</div>
+      <div class="cap-list">${gaps.map(cap => { const c = courseForCapability(cap);
+        return `<div class="cap-row cap-gap">
+          <div class="cap-name">${esc(tcap(cap))}</div>
+          <div class="cap-meta">${c ? esc(ctitle(c)) : t('cap_no_course')}</div>
+          <div class="cap-state">${c ? `<button class="link-quiet" data-action="goto" data-route="#/course/${c.id}">${t('cap_close_gap')}</button>` : ''}</div>
+        </div>`; }).join('')}</div>` : ''}
+  </section>`;
+}
+const tcap = k => { try { return t('skill_' + k) !== 'skill_' + k ? t('skill_' + k) : k; } catch (e) { return k; } }
+const fmtAgo = ts => { const d = Math.floor((Date.now() - ts) / 86400000);
+  return d < 1 ? t('cap_today') : d < 30 ? d + 'd' : Math.round(d / 30) + 'mo'; };
+
+/* manager-facing: the question a completion report cannot answer. */
+function adminCapabilitiesHTML() {
+  if (!adminMembers) return `<section class="admin-section"><h2>${t('cap_org_h')}</h2>
+    <p class="page-sub">${t('loading')}</p></section>`;
+  const org = orgCapabilities();
+  if (!org.length) return `<section class="admin-section"><h2>${t('cap_org_h')}</h2>
+    <p class="page-sub">${t('cap_org_none')}</p></section>`;
+  return `<section class="admin-section">
+    <h2>${t('cap_org_h')}</h2>
+    <p class="page-sub">${t('cap_org_sub')}</p>
+    <div class="cap-list">${org.map(o => {
+      const cover = o.proven + o.expiring;
+      return `<div class="cap-row ${cover === 0 ? 'cap-lapsed' : cover === 1 ? 'cap-expiring' : ''}">
+        <div class="cap-name">${esc(tcap(o.cap))}</div>
+        <div class="cap-meta">${cover === 1 ? t('cap_one_person') : cover === 0 ? t('cap_nobody') : cover + ' ' + t('cap_people')}</div>
+        <div class="cap-state">${o.lapsed ? `${o.lapsed} ${t('cap_lapsed').toLowerCase()}` : ''}
+          <button class="link-quiet" data-action="cap-who" data-cap="${esc(o.cap)}">${t('cap_who')}</button></div>
+      </div>`; }).join('')}</div>
+  </section>`;
+}
+function openCapabilityHolders(cap) {
+  const holders = capabilityHolders(cap);
+  document.querySelectorAll('#capModal').forEach(x => x.remove());
+  const ov = document.createElement('div');
+  ov.className = 'take-overlay open'; ov.id = 'capModal';
+  ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true');
+  ov.innerHTML = `<div class="take-card">
+    <button class="modal-x" data-action="cap-close" aria-label="Close">&#10005;</button>
+    <h3 style="font-family:var(--font-display);font-size:22px;margin:0 0 4px;">${esc(tcap(cap))}</h3>
+    <p class="page-sub">${holders.length} ${holders.length === 1 ? t('cap_holder') : t('cap_holders')}</p>
+    <div class="cap-list">${holders.length ? holders.map(h => `<div class="cap-row cap-${h.g.state}">
+      <div class="cap-name">${esc(h.name)}</div>
+      <div class="cap-meta">${h.g.modules} ${h.g.modules === 1 ? t('cap_module') : t('cap_modules')}</div>
+      <div class="cap-state">${h.g.state === 'lapsed' ? t('cap_lapsed')
+        : h.g.state === 'expiring' ? `${t('cap_expires_in')} ${h.g.daysLeft}d` : t('cap_proven')}</div>
+    </div>`).join('') : `<p class="page-sub">${t('cap_nobody')}</p>`}</div>
+  </div>`;
+  document.body.appendChild(ov);
+  ledgerAppend('capability_query', { capability: cap, holders: holders.length });
+}
+
+/* ===== ATTRIBUTION — a licence obligation, enforced ==========================
+   An academy's standing is rarely one person's: a named trainer, the body whose
+   models they teach under, and the published work a lesson leans on. Permission
+   to use a body's models is normally granted PROVIDED THE BODY IS NAMED, so the
+   attribution is a condition of use, not a credit.
+
+   Hence orgOf(): an educator whose `org` has no agreed licence string returns
+   NOTHING — the affiliation cannot be shown without the wording that makes
+   showing it lawful. Failing closed is the point; the alternative is an editor
+   eventually shipping the logo without the line.
+
+   It must also not overclaim. Naming a body says its MODELS are incorporated;
+   it must never read as though that body's people wrote the lesson. That string
+   lives in ORGS and is not editable per lesson, so the line cannot drift. */
+const ORG_ALL = () => (typeof ORGS === 'object' && ORGS) || {};
+function orgOf(e) {
+  const o = e && e.org && ORG_ALL()[e.org];
+  if (!o) return null;
+  const lic = eduField(o.licence);
+  if (!lic) return null;                 /* no agreed wording → do not display */
+  return Object.assign({ id: e.org, licenceText: lic }, o);
+}
+function sourcesOf(x) { return (x && Array.isArray(x.sources) && x.sources) || []; }
+function attributionHTML(e, extraSources) {
+  const o = orgOf(e), src = (extraSources || []).concat(sourcesOf(e));
+  if (!o && !src.length) return '';
+  return `<div class="attrib">
+    ${o ? `<div class="attrib-lic">${esc(o.licenceText)}${o.url
+        ? ` <a href="${esc(o.url)}" target="_blank" rel="noopener noreferrer">${esc(o.name)} &#8599;</a>` : ''}</div>` : ''}
+    ${src.length ? `<div class="attrib-src"><span class="attrib-lbl">${t('attrib_refs')}</span>${
+      src.map(x => `<span>${esc(x.name)}${x.work ? ' &mdash; ' + esc(x.work) : ''}</span>`).join('')}</div>` : ''}
+  </div>`;
+}
+
+/* ===== QUICK WINS ===========================================================
+   Thirty-second lessons, curated by the tenant and drip-fed to their team.
+
+   They are NOT courses and are not in CATALOG, so they cannot reach
+   creditTraining() at all. Deliberate: `kind:'howto'` is a flag someone could
+   flip, whereas a quick win is a different kind of object. Thirty seconds fails
+   both gates in LEGAL-40H-LINE.md (structure, job-relevance) and must never
+   appear in a training record.
+
+   CURATION is the tenant's, in their own words — the brief carried the client's
+   actual sentences ("it's a bit weird, it's not our culture" / "I like that,
+   that's my style"), so those are the two buttons. Default is PENDING, never
+   approved: nothing reaches a team's group because a menu item existed and
+   nobody said no. */
+const QW_ALL = () => (typeof REELS !== 'undefined' && Array.isArray(REELS) ? REELS
+  : (typeof QUICKWINS !== 'undefined' && Array.isArray(QUICKWINS) ? QUICKWINS : []));
+const qwById = id => QW_ALL().find(q => q.id === id) || null;
+const qwField = (v) => eduField(v);
+function qwState() { S.quickwins = S.quickwins || { approved: [], rejected: [], sent: [] }; return S.quickwins; }
+/* TWO PLACES A REEL CAN BE APPROVED, and only one of them publishes.
+   qwState() lives in S — the individual learner's own local state, which nothing
+   syncs. So a curator clicking approve was only ever approving FOR THEMSELVES:
+   the reel appeared on their device and stayed invisible to the team. That made
+   the curation surface look like it published when it did not.
+
+   `approved: true` in content.js is the tenant's own declaration, it deploys to
+   everyone, and it survives a cleared browser. That is the correct level for
+   "we publish this". Local approve/reject stays, but only decides reels the
+   content file has not already ruled on — a curator's working shortlist, not the
+   publication switch. */
+const qwPublished = q => q.approved === true;
+const qwApproved = () => QW_ALL().filter(q => qwPublished(q) || qwState().approved.indexOf(q.id) > -1);
+const qwPending  = () => QW_ALL().filter(q => !qwPublished(q)
+  && qwState().approved.indexOf(q.id) < 0 && qwState().rejected.indexOf(q.id) < 0);
+
+/* the drip: the next approved clip this audience has not had, wrapping when the
+   menu is exhausted so a schedule never silently stops */
+function qwNext() {
+  const ap = qwApproved(); if (!ap.length) return null;
+  const sent = qwState().sent || [];
+  const unsent = ap.filter(q => sent.indexOf(q.id) < 0);
+  return (unsent.length ? unsent : ap)[0] || null;
+}
+
+/* the pairing that makes a 30-second clip worth building: hook, then depth */
+function qwDeeper(q) {
+  const c = q && q.deeper && courseById(q.deeper);
+  if (!c) return null;
+  return { course: c, started: !!prog(c.id), done: isDone(c.id) };
+}
+function quickWinCardHTML(q) {
+  const d = qwDeeper(q), e = q.educator ? Object.assign({ id: q.educator }, EDU_ALL()[q.educator] || {}) : null;
+  return `<article class="qw-card" data-action="qw-open" data-qw="${q.id}">
+    <div class="qw-secs">${q.seconds || 30}s</div>
+    <h3>${esc(qwField(q.title))}</h3>
+    <p>${esc(qwField(q.line))}</p>
+    ${e && e.name ? `<div class="qw-by">${esc(e.name)}</div>` : ''}
+    ${d ? `<div class="qw-deeper">${d.done ? t('qw_deeper_done') : d.started ? t('qw_deeper_resume') : t('qw_deeper')} &middot; ${esc(ctitle(d.course))}</div>` : ''}
+  </article>`;
+}
+function quickWinsShelfHTML() {
+  const ap = qwApproved(); if (!ap.length) return '';
+  return `<section class="rail-section">
+    <div class="rail-head"><h2>${t('qw_h')}</h2></div>
+    <div class="rail-wrap"><div class="rail">${ap.slice(0, 12).map(quickWinCardHTML).join('')}</div></div>
+  </section>`;
+}
+
+/* ===== FORMATION vs HOW-TO (the Lykke split, 2026-08-06) ====================
+   Two kinds of video live in one academy. FORMATION: structured modules with a
+   declared duration, on the training plan — they run the check and credit
+   art. 131.º hours. HOW-TO: reference clips ("how to operate the pump",
+   "where's the ladder") — the search machine's food, LandFlow's food, always
+   available, and NEVER a claimed training hour. The legal line is structure +
+   plan + record (LEGAL-40H-LINE.md), so the kind is an editorial declaration
+   per course: howto content simply never enters the crediting machinery, which
+   is safer than crediting it and arguing later. */
+const isHowto = c => !!(c && c.kind === 'howto');
+
+/* REQ-L-021 — the regime a course belongs to, if any, and our standing position
+   on it. Never claims the regime is satisfied. */
+function courseRegime(c) {
+  return (typeof COURSE_REGIME !== 'undefined' && COURSE_REGIME[c && c.id]) || null;
+}
+
+/* ===== art. 131.º hour record — REQ-L-001 / 002 / 010 ======================
+   Written ONLY on submission of the end-of-lesson check. The evidence chain the
+   spec asks for has three legs and this joins them: the media was played
+   (segments), a human was present and engaged (assessment), and the content is
+   job-related (capability).
+
+   Hours credit on SUBMISSION, pass or fail. Art. 131.º counts hours of training
+   PROVIDED, not exam success — a worker who sat the lesson and scored badly was
+   still trained, and refusing the hour would under-report real training and
+   make the employer look non-compliant when they are not. The score is stored
+   separately: it is the "resultados" column the Relatório Único Anexo C asks
+   for, which nothing in this product could previously fill. */
+function creditTraining(courseId, mod, assessment) {
+  const c = courseById(courseId); if (!c) return null;
+  /* a how-to clip can never mint an hour — not even by a coding mistake
+     elsewhere; the refusal lives at the ledger's door */
+  if (isHowto(c)) return null;
+  S.trainingLog = S.trainingLog || [];
+  if (S.trainingLog.some(e => e.courseId === courseId && e.mod === mod)) return null;
+  const mins = (c.moduleDurations && c.moduleDurations[mod]) || 12;
+  const live = watchEv && watchEv.key === courseId + ':' + mod;
+  const segs = live ? watchMerged() : [];
+  const dur = (live && watchEv.dur) || 0;
+  const covered = segs.length ? watchCoveredSec() : 0;
+  const coverage = dur ? Math.min(1, covered / dur) : null;
+  const credited = coverage == null ? mins / 60 : (mins / 60) * coverage;
+  const rel = isJobRelevant(c);
+  const entry = {
+    courseId, mod, title: (cmods(c)[mod] || c.modules[mod]),
+    hours: Math.round(credited * 100) / 100,
+    /* art. 133.º gate: only job-related training counts toward the 40 hours */
+    countable: rel !== false,
+    at: Date.now(), confirmed: true,
+    ev: {
+      nominalMin: mins,
+      mediaDurSec: Math.round(dur) || null,
+      watchedSec: covered || null,
+      coverage: coverage == null ? null : Math.round(coverage * 100) / 100,
+      method: (live && watchEv.method) || 'none',
+      segments: segs.slice(0, 60),
+      startedAt: (live && watchEv.startedAt) || null,
+      endedAt: Date.now(),
+      outsideHours: isOutsideWorkingHours(),
+      capability: capabilityFor(c),
+      capabilities: skillsOf(c) || [],
+      roleAtTime: (S.profile || {}).role || S.role || null,
+      jobRelevant: rel,                    /* true | false | null = unasserted */
+      /* REQ-L-021: the regime this content belongs to, and the standing fact
+         that we do not claim to discharge it (Part 6 Q5 unanswered). */
+      regime: courseRegime(c),
+      regimeSatisfied: false,
+      /* the completion check — REQ-L-002's second half */
+      check: assessment || null
+    }
+  };
+  S.trainingLog.push(entry);
+  clearCheckPending(courseId, mod);
+  ledgerAppend('training_credited', {
+    courseId, mod, hours: entry.hours,
+    coverage: entry.ev.coverage, score: assessment ? assessment.score : null,
+    total: assessment ? assessment.total : null, kind: assessment ? assessment.kind : 'none'
+  });
+  save();
+  return entry;
+}
+/* Lessons watched but not yet checked. Kept explicit so a learner is never told
+   they are further along their 40h than the record can support. */
+function markCheckPending(courseId, mod) {
+  if (isHowto(courseById(courseId))) return;   /* nothing pending: nothing owed */
+  const k = courseId + ':' + mod;
+  S.pendingChecks = S.pendingChecks || {};
+  if (!S.trainingLog || !S.trainingLog.some(e => e.courseId === courseId && e.mod === mod)) {
+    if (!S.pendingChecks[k]) { S.pendingChecks[k] = Date.now(); save(); }
+  }
+}
+function clearCheckPending(courseId, mod) {
+  if (S.pendingChecks) { delete S.pendingChecks[courseId + ':' + mod]; }
+}
+function pendingCheckCount() { return Object.keys(S.pendingChecks || {}).length; }
+
+/* ===== QUIZ ENGINE V2 — transcript-grounded banks ===========================
+   knowledge/quizzes/<course>.json: per-module questions GENERATED from the
+   lesson's own Whisper transcript, blind-VERIFIED (a second model answers each
+   question without seeing the key; disagreement corrects or kills it — the
+   first batch had wrong keys on half the questions, so this gate is what makes
+   "generated questions ship everywhere" a sane decision), each anchored to the
+   second of video that teaches it. Loaded lazily; every consumer falls back to
+   the hand-written banks when a course has no V2 file. */
+const QUIZ_V2 = {};
+/* Every bank the catalogue implies, in every language, so a surface that AUDITS
+   coverage is never reading a half-loaded cache. `banksLoaded` is what lets the
+   view distinguish "nothing verified" from "nothing fetched yet" — the two
+   readings differ by everything and looked identical. */
+/* ===== THE KNOWLEDGE GRAPH ================================================
+   knowledge/graph.json — nodes for every course, module, reel and concept, and
+   edges between them: the catalogue verbatim (in, deeper, about) plus two
+   COMPUTED relations from what the trainer actually said — a reel's `beside`
+   (the lesson it sits next to) and module `related` (cross-course). Built by
+   scripts/build-graph.mjs, deterministic, no model calls, so a link is never
+   invented. The app reads it for three things: a reel's handoff names the
+   precise lesson rather than the whole course; a lesson page lists the shorts
+   that sit beside it; and "also covers this" across courses. */
+let GRAPH = null;
+/* concept tags AT TIMESTAMPS (knowledge/tags.json, built by scripts/build-tags.mjs):
+   the graph says a lesson is about ownership; this says it is said at 0:29 */
+let TAGS = null;
+function loadTags() {
+  if (TAGS !== null) return Promise.resolve(TAGS);
+  return fetch('knowledge/tags.json?v=' + knowledgeV()).then(r => (r.ok ? r.json() : null)).then(j => (TAGS = j && j.lessons ? j : false)).catch(() => (TAGS = false));
+}
+const tagsAt = (key, n) => ((TAGS && TAGS.lessons[key]) || []).slice(0, n || 4);
+function loadGraph() {
+  loadTags();
+  if (GRAPH !== null) return Promise.resolve(GRAPH);
+  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/);
+  return fetch('knowledge/graph.json?v=' + (v ? v[1] : ''))
+    .then(r => (r.ok ? r.json() : null)).then(g => (GRAPH = g && g.edges ? g : false)).catch(() => (GRAPH = false));
+}
+const graphNode = id => (GRAPH && GRAPH.nodes.find(n => n.id === id)) || null;
+/* the module a reel sits beside, strongest first */
+function graphBeside(reelId) {
+  if (!GRAPH) return null;
+  const e = GRAPH.edges.filter(x => x.from === 'reel:' + reelId && x.rel === 'beside').sort((a, b) => b.w - a.w)[0];
+  return e ? graphNode(e.to) : null;
+}
+/* the reels that sit beside a module (published only — the gate still applies) */
+function graphReelsBeside(courseId, mod) {
+  if (!GRAPH) return [];
+  const to = `module:${courseId}:${mod}`;
+  return GRAPH.edges.filter(x => x.to === to && x.rel === 'beside')
+    .map(x => qwById(x.from.replace(/^reel:/, ''))).filter(r => r && reelsAll().some(a => a.id === r.id));
+}
+/* modules that cover the same ground, across courses */
+function graphRelated(courseId, mod) {
+  if (!GRAPH) return [];
+  const me = `module:${courseId}:${mod}`;
+  return GRAPH.edges.filter(x => (x.rel === 'related' || x.rel === 'similar') && (x.from === me || x.to === me))
+    .sort((a, b) => b.w - a.w).map(x => graphNode(x.from === me ? x.to : x.from)).filter((n, i, a) => n && a.findIndex(m => m && m.id === n.id) === i).slice(0, 3);
+}
+let banksLoaded = false;
+function loadAllBanks() {
+  /* one bank per course, keyed exactly as the rest of the app keys it
+     (QUIZ_V2[c.id]) — each question carries both languages inside it. There ARE
+     separate <course>.pt.json banks on disk from the native-Portuguese pass, and
+     nothing in this app reads them yet; loading them here would only look
+     thorough. That gap is real and belongs in its own change, not hidden in a
+     preloader. */
+  return Promise.all(CATALOG.map(c => loadQuizV2(c.id)))
+    .then(r => { banksLoaded = true; return r; });
+}
+function loadQuizV2(courseId) {
+  if (QUIZ_V2[courseId] !== undefined) return Promise.resolve(QUIZ_V2[courseId]);
+  /* cache-bust rides the same edrNNN as every other asset — derived from the
+     app script's own src so no separate constant can drift out of step */
+  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/);
+  return fetch('knowledge/quizzes/' + courseId + '.json?v=' + (v ? v[1] : ''))
+    .then(r => r.ok ? r.json() : null)
+    .then(b => (QUIZ_V2[courseId] = b && b.modules ? b : null))
+    .catch(() => (QUIZ_V2[courseId] = null));
+}
+/* Options are shuffled AT RENDER and the key remapped: generated keys cluster
+   on low indices (and humans cluster on C), so fixed order leaks the answer. */
+/* A question whose shape is broken is worse than no question: with a key out of
+   range, shuffledView remaps it to -1 and EVERY answer is marked wrong — the
+   learner is told they failed something they answered correctly, and the blind
+   gate cannot catch it because the gate checks which option is right, not
+   whether the options exist. Generated content will produce this eventually, so
+   the shape is checked before anything is shown. */
+function validQuestion(q, lang) {
+  if (!q) return false;
+  const L = q[lang || _lang()] || q.en;
+  if (!L || typeof L.q !== 'string' || !L.q.trim()) return false;
+  if (!Array.isArray(L.opts) || L.opts.length < 2) return false;
+  if (L.opts.some(o => typeof o !== 'string' || !o.trim())) return false;
+  return Number.isInteger(q.a) && q.a >= 0 && q.a < L.opts.length;
+}
+
+function shuffledView(q, lang) {
+  const L = q[lang] || q.en;
+  /* option count comes from the question, not a constant. Hardcoding four broke
+     the moment a reel shipped a 3-option micro-check: opts[3] was undefined and
+     rendered as the word "undefined" next to three real answers. */
+  const n = (L.opts || []).length;
+  const idx = Array.from({ length: n }, (_, i) => i).sort(() => Math.random() - 0.5);
+  return { q: L.q, opts: idx.map(i => L.opts[i]), a: idx.indexOf(q.a),
+           why: L.why, t0: q.t0, type: q.type, gen: !!q.gen,
+           audit: q.verified ? 'verified' : q.corrected ? 'corrected' : q.gen ? 'unaudited' : 'authored' };
+}
+/* The pair for the hour-crediting check: one recall + one application/scenario,
+   deterministic per module so a retake asks the same thing and records compare. */
+function v2CheckPair(courseId, mod, lang) {
+  const bank = QUIZ_V2[courseId];
+  const qs = bank && bank.modules && bank.modules[mod];
+  if (!qs || !qs.length) return null;
+  const rec = qs.find(x => x.type === 'recall') || qs[0];
+  const app = qs.find(x => x !== rec && (x.type === 'application' || x.type === 'scenario')) || qs.find(x => x !== rec);
+  return [rec, app].filter(Boolean).map(q => shuffledView(q, lang));
+}
+
+/* ===== SPACED REVIEW (SM-2-lite) ============================================
+   A missed question is a scheduling event, not a shame event. Intervals expand
+   1→3→7→16→35 days on success and reset on a lapse. Reviews re-ask the SAME
+   question (same anchor), and XP comes from the retrieval, never the visit. */
+const REVIEW_STEPS = [1, 3, 7, 16, 35];
+function reviewKey(courseId, q) { return courseId + '|' + (q.q || '').slice(0, 80); }
+function scheduleReview(courseId, mod, view) {
+  S.reviewQueue = S.reviewQueue || [];
+  const k = reviewKey(courseId, view);
+  let e = S.reviewQueue.find(x => x.k === k);
+  if (!e) { e = { k, courseId, mod, step: 0, misses: 1 }; S.reviewQueue.push(e); }
+  e.step = 0;
+  /* the WHOLE view is stored — the session re-asks this exact question with
+     these exact options months later, no bank lookup, no language drift */
+  e.view = { q: view.q, opts: view.opts, a: view.a, why: view.why, t0: view.t0 };
+  e.due = Date.now() + REVIEW_STEPS[0] * 864e5;
+  save();
+}
+function reviewOutcome(entry, correct) {
+  if (correct) {
+    entry.step = Math.min(entry.step + 1, REVIEW_STEPS.length - 1);
+    if (entry.step >= REVIEW_STEPS.length - 1 && entry.graduated) {
+      S.reviewQueue = S.reviewQueue.filter(x => x !== entry); save(); return;
+    }
+    if (entry.step === REVIEW_STEPS.length - 1) entry.graduated = true;
+    awardXp(3, t('rev_h'));
+  } else { entry.step = 0; entry.misses = (entry.misses || 1) + 1; }
+  entry.due = Date.now() + REVIEW_STEPS[entry.step] * 864e5;
+  save();
+}
+/* ===== THE LEARNER MODEL ======================================================
+   The review queue already stores every question this learner missed, with the
+   lesson and the second in the video it came from. That IS a model of the
+   learner: the concepts they have not yet got. It reaches the tutor as
+   context (so "what did I get wrong?" has a real answer, with links), and
+   Recall as a lift (a lesson they are weak on outranks a tie). */
+function weakSpots(n) {
+  const out = [];
+  for (const e of (S.reviewQueue || [])) {
+    if (e.graduated || !e.view) continue;
+    const c = courseById(e.courseId); if (!c) continue;
+    const tags = tagsAt(e.courseId + ':' + e.mod, 8);
+    const near = tags.map(x => ({ c: x.c, dt: Math.min(...x.at.map(a => Math.abs(a - (e.view.t0 || 0)))) })).sort((a, b) => a.dt - b.dt).slice(0, 2).map(x => x.c);
+    out.push({ course: e.courseId, mod: e.mod, title: cmods(c)[e.mod] || '', q: e.view.q, t0: e.view.t0 || 0, misses: e.misses || 1, concepts: near, due: e.due });
+  }
+  return out.sort((a, b) => b.misses - a.misses || a.due - b.due).slice(0, n || 6);
+}
+function learnerContext() {
+  const w = weakSpots(5); if (!w.length) return '';
+  return `\n\nWHAT THIS LEARNER HAS MISSED (their review queue — questions they got wrong, with the lesson and second):\n` +
+    w.map(x => `- ${x.title} · ${fmtTc(x.t0)}: "${x.q}"${x.concepts.length ? ' (' + x.concepts.join(', ') + ')' : ''}`).join('\n') +
+    `\nIf they ask what to work on, or what they got wrong, answer from this and name the lesson and second so it becomes a link. Do not mention this list unprompted.`;
+}
+function reviewsDue() { return (S.reviewQueue || []).filter(e => e.due <= Date.now()); }
+
+/* Two questions from the course's OWN bank, chosen deterministically per module
+   so a retake asks the same thing and the record stays comparable. Never the
+   generic category bank: being asked about soil at the end of a fire-truck
+   lesson teaches people the check is noise. */
+function moduleCheckQuestions(c, mod) {
+  const qs = (typeof courseOwnQuiz === 'function' && courseOwnQuiz(c)) || null;
+  if (!qs || !qs.length) return null;
+  const n = Math.min(2, qs.length);
+  const out = [];
+  for (let i = 0; i < n; i++) out.push(qs[(mod * 2 + i) % qs.length]);
+  return out;
+}
+
 function completeModule(courseId, mod) {
   const c = courseById(courseId);
   const p = S.progress[courseId] || (S.progress[courseId] = { mod: 0, pct: 0 });
   p.lastAt = Date.now();
-  /* 40h compliance: credit this lesson's carga horária to the append-only training ledger */
-  if (!(S.trainingLog || (S.trainingLog = [])).some(e => e.courseId === courseId && e.mod === mod)) {
-    const mins = (c.moduleDurations && c.moduleDurations[mod]) || 12;
-    S.trainingLog.push({ courseId, mod, title: (cmods(c)[mod] || c.modules[mod]), hours: Math.round(mins / 60 * 100) / 100, at: Date.now(), confirmed: true });
-  }
+  /* The hour is NOT credited here. Watching advances progress; the art. 131.º
+     record is written only when the learner submits the end-of-lesson check
+     (see creditTraining). Spec REQ-L-002 requires watch-time evidence PLUS a
+     completion check, and our Q4 position is watch-time + assessment +
+     job-relevance — so attendance alone must not mint an hour. */
+  markCheckPending(courseId, mod);
   ledgerAppend('module_complete', { courseId, mod, mins: (c.moduleDurations && c.moduleDurations[mod]) || 12 });
+  /* ONE PRODUCT: the estate's brain learns of this within one message — the completion writes
+     LandFlow's person_shown, and the worker gets the return message in Telegram. Guarded: the
+     Academy must work even if LandFlow is unreachable. */
+  try { window.lfModuleComplete && window.lfModuleComplete(courseId, mod); } catch (e) {}
   if (mod >= c.modules.length - 1) ledgerAppend('course_complete', { courseId });
   if (S.review[courseId] === mod) { delete S.review[courseId]; toast('Review module cleared — nice recovery', '↺'); }
   bumpStreak();
@@ -4867,7 +7247,7 @@ function completeModule(courseId, mod) {
     toast(`${_lang() === 'pt' ? 'Curso concluído' : 'Course complete'}: ${ctitle(c)}`, '🏆');
     awardXp(XP.module + XP.course, 'course complete');
     checkBadges();
-    showTakeaways(c, mod, { kind: 'course-done', courseId });
+    showTakeaways(c, mod, { kind: 'course-done', courseId, checkFor: { courseId, mod } });
   } else {
     const nextMedia = modMedia(c, mod + 1);
     p.mod = mod + 1;
@@ -4875,7 +7255,7 @@ function completeModule(courseId, mod) {
     save();
     awardXp(XP.module, 'module');
     checkBadges();
-    showTakeaways(c, mod, (nextMedia && nextMedia.type === 'soon') ? { kind: 'soon' } : { kind: 'next', courseId, mod: mod + 1 });
+    showTakeaways(c, mod, Object.assign((nextMedia && nextMedia.type === 'soon') ? { kind: 'soon' } : { kind: 'next', courseId, mod: mod + 1 }, { checkFor: { courseId, mod } }));
   }
 }
 
@@ -4910,6 +7290,24 @@ function openQuiz(courseId) {
   const lang = _lang() === 'pt' ? 'pt' : 'en';
   const cq = COURSE_QUIZ[c.id] || c.quiz;
   const staticQ = cq ? (cq[lang] || cq.en || cq) : (QUIZ_BANK[c.cat] || QUIZ_BANK._default);
+  /* V2 outranks BOTH the runtime AI quiz and the static bank: it is grounded in
+     the lesson transcripts and its keys are blind-verified, while the runtime
+     AI quiz is generated on the spot with no verification pass. Interleaved
+     across modules (mixing beats blocking for retention), shuffled options. */
+  const v2 = QUIZ_V2[c.id];
+  if (v2 && v2.modules) {
+    const all = Object.values(v2.modules).flat().filter(q => validQuestion(q, lang)).map(q => shuffledView(q, lang));
+    if (all.length >= 4) {
+      const mix = all.sort(() => Math.random() - 0.5).slice(0, 8);
+      startQuiz(c, mix, false);
+      return;
+    }
+  }
+  if (QUIZ_V2[c.id] === undefined) {
+    /* first open: load the bank, then re-enter — one hop, cached after */
+    loadQuizV2(c.id).then(() => openQuiz(courseId));
+    return;
+  }
   if (aiKey()) {   /* AI-FIRST: rigorous, land-adapted, scenario questions; curated set is the fallback */
     $('#quizModal').classList.add('open');
     $('#quizBody').innerHTML = `<div class="q-center"><div class="orb-spin"></div><p class="m-sub" style="margin-top:16px;">${t('quiz_ai_building')}</p></div>`;
@@ -5019,7 +7417,8 @@ const PALETTE_ACTIONS = [
   { t: 'Regenerate my AI path', icon: '↺', run: () => regenPath() }
 ];
 let palIdx = 0;
-function openPalette() { $('#palette').classList.add('open');
+function openPalette() {
+  loadSearchIdx(); $('#palette').classList.add('open');
   const pr = $('#palResults'); if (pr) pr.setAttribute('role', 'listbox');
   const pi = $('#palInput');
   if (pi) { pi.setAttribute('role', 'combobox'); pi.setAttribute('aria-expanded', 'true');
@@ -5038,18 +7437,38 @@ function startVoiceSearch() {
   openPalette();
   setVoiceUI(true);
   $('#palInput').placeholder = t('voice_hint');
+  let finalTxt = '';
   r.onresult = e => {
     const txt = [...e.results].map(x => x[0].transcript).join(' ').trim();
+    if ([...e.results].some(x => x.isFinal)) finalTxt = txt;
     $('#palInput').value = txt;
     drawPalette(txt);
   };
-  r.onend = () => { voiceRec = null; setVoiceUI(false); };
+  r.onend = () => {
+    voiceRec = null; setVoiceUI(false);
+    /* A spoken sentence is a question for the lessons, not a title lookup —
+       it goes to Recall and comes back as moments and a spoken answer. A
+       single word stays in the palette, where a course title is one tap away. */
+    const said = (finalTxt || ($('#palInput') || {}).value || '').trim();
+    if (said.split(/\s+/).length >= 2) { closePalette(); openAsk(said, 'voice'); }
+  };
   r.onerror = () => { voiceRec = null; setVoiceUI(false); };
   try { r.start(); } catch (e) { voiceRec = null; setVoiceUI(false); }
 }
 function setVoiceUI(on) {
   $$('.mic-btn').forEach(b => { b.classList.toggle('listening', on); b.setAttribute('aria-pressed', on ? 'true' : 'false'); });
   const st = $('#palVoiceState'); if (st) { st.textContent = on ? `● ${t('voice_listening')}` : ''; st.classList.toggle('on', on); }
+  /* The whole field reacts, not just the button — while it is listening the
+     placeholder says so, which is the difference between a mic you hope did
+     something and one you can see is on. */
+  const bar = $('#searchbar'); if (bar) bar.classList.toggle('listening', on);
+  /* The field says it ONCE. Saying "Listening…" in the placeholder and again in
+     the mic label put the same word twice inside one small pill; the label is
+     hidden while listening instead, leaving the icon and its rings. */
+  const ph = document.querySelector('#navSearch .search-ph');
+  if (ph) ph.textContent = on ? t('voice_listening') : t('search_ph');
+  const ml = document.querySelector('.searchbar-mic .mic-label');
+  if (ml) ml.textContent = t('voice_label');
 }
 function closePalette() { $('#palette').classList.remove('open'); }
 /* Forgiving match for the palette: a query matches if its characters appear
@@ -5092,6 +7511,14 @@ function drawPalette(q) {
     `<div class="palette-item" data-pal="course:${c.id}"><span class="pi-icon t-grad-${c.grad}">${svgIcon(c.icon)}</span><div><div>${esc(c.title)}</div><div class="pi-meta">${esc(c.cat)} · ${fmtMins(courseMins(c))} · ★ ${c.rating}</div></div></div>`).join('');
   if (acts.length) html += `<div class="palette-group">Actions</div>` + acts.map((a, i) =>
     `<div class="palette-item" data-pal="act:${PALETTE_ACTIONS.indexOf(a)}"><span class="pi-icon" style="background:var(--surface-2)">${a.icon}</span><div>${a.t}</div></div>`).join('');
+  /* inside-the-lessons hits: the palette searches what the trainer SAYS, not
+     just what the course is called. Index loads on first open; until it has,
+     the group simply isn't there. */
+  if (q.length >= 4 && _searchIdx) {
+    const mm = searchMoments(q, 3);
+    if (mm.length) html += `<div class="palette-group">${t('pal_moments')}</div>` + mm.map(m =>
+      `<div class="palette-item" data-pal="moment:${m.course}:${m.mod}:${Math.max(0, m.t0 - 4)}"><span class="pi-icon" style="background:rgba(166,195,165,.12)">⏱</span><div><div>${esc(m.title)} · <span style="color:var(--text-faint)">${fmtTc(m.t0)}</span></div><div class="pi-sub">“${esc(m.text.slice(0, 70))}…”</div></div></div>`).join('');
+  }
   if (q && aiKey()) html += `<div class="palette-group">✦</div><div class="palette-item" data-pal="ask:${esc(q)}"><span class="pi-icon" style="background:var(--surface-2)">✦</span><div>${t('ask_more')}“${esc(q)}”</div></div>`;
   $('#palResults').innerHTML = html || `<div class="palette-empty">No matches for “${esc(q)}” — try the AI tutor.</div>`;
   highlightPal();
@@ -5115,6 +7542,12 @@ function runPal(el) {
   const kind = _p.slice(0, _i), val = _p.slice(_i + 1);
   closePalette();
   if (kind === 'ask') { openAsk(val); return; }
+  if (kind === 'moment') {
+    const [cid, mod, tt] = val.split(':');
+    ledgerAppend('moment_open', { courseId: cid, mod: +mod, t: +tt, via: 'palette' });
+    openPlayer(cid, +mod, +tt);
+    return;
+  }
   if (kind === 'course') {
     S.palRecents = [val, ...(S.palRecents || []).filter(x => x !== val)].slice(0, 5); save();
     location.hash = '#/course/' + val;
@@ -5150,6 +7583,8 @@ function addMsg(html, who) {
 }
 function botSay(html, delay = 700) {
   tutorEngaged();
+  /* titles named in plain text become links; already-linked HTML is left alone */
+  if (!/<a\s/i.test(html)) { try { html = html.replace(/(^|>)([^<]+)(?=<|$)/g, (w, pre, txt) => pre + linkifyAnswer(txt, []).replace(/&amp;/g, '&')); } catch (e) {} }
   const t = document.createElement('div');
   t.className = 'msg bot typing'; t.innerHTML = '<span></span><span></span><span></span>';
   $('#aiMsgs').appendChild(t); $('#aiMsgs').scrollTop = $('#aiMsgs').scrollHeight;
@@ -5286,17 +7721,38 @@ async function llmComplete({ system, messages, maxTokens, model }) {
   const data = await res.json();
   return (((data.choices || [])[0] || {}).message || {}).content || '…';
 }
-async function askClaude(text) {
-  logAsk(text, 'tutor');
+function tutorGrounding(moments) {
+  return moments && moments.length ? `\n\nFROM THE LESSONS — transcript excerpts with timecodes, found for this message. When relevant, ground your answer in them and point the learner to the video by writing the lesson's EXACT title as given here followed by the timecode (e.g. "Total Responsibility · 4:32") — those become links they can tap. Never claim a lesson says something these excerpts do not:\n${groundingText(moments)}` : '';
+}
+const tutorFmt = (r, moments) => linkifyAnswer(r, moments || []);
+async function askGateway(text, moments) {
   tutorHistory.push({ role: 'user', content: text });
   const typing = document.createElement('div');
   typing.className = 'msg bot typing'; typing.innerHTML = '<span></span><span></span><span></span>';
   $('#aiMsgs').appendChild(typing); $('#aiMsgs').scrollTop = $('#aiMsgs').scrollHeight;
   try {
-    const reply = await llmComplete({ system: buildTutorSystem(), messages: tutorHistory.slice(-12), maxTokens: 700 });
+    const g = await gatewayStream({ messages: tutorHistory.slice(-12), grounding: groundingText(moments) + learnerContext(), maxTokens: 500 }, (typing.classList.remove('typing'), typing));
+    if (!g || !g.reply) throw new Error('empty');
+    tutorHistory.push({ role: 'assistant', content: g.reply });
+    typing.innerHTML = tutorFmt(g.reply, moments) + momentsHTML(moments, { compact: true });
+    $('#aiMsgs').scrollTop = $('#aiMsgs').scrollHeight;
+  } catch (e) {
+    typing.remove(); tutorHistory.pop();
+    /* the gateway is out (quota, offline): the scripted tutor still answers, and the moments still show */
+    if (moments.length) botSay(momentsHTML(moments, { compact: true }), 300);
+    scriptedRespond(text);
+  }
+}
+async function askClaude(text, moments) {
+  tutorHistory.push({ role: 'user', content: text });
+  const typing = document.createElement('div');
+  typing.className = 'msg bot typing'; typing.innerHTML = '<span></span><span></span><span></span>';
+  $('#aiMsgs').appendChild(typing); $('#aiMsgs').scrollTop = $('#aiMsgs').scrollHeight;
+  try {
+    const reply = await llmComplete({ system: buildTutorSystem() + tutorGrounding(moments) + learnerContext(), messages: tutorHistory.slice(-12), maxTokens: 700 });
     tutorHistory.push({ role: 'assistant', content: reply });
     typing.classList.remove('typing');
-    typing.innerHTML = esc(reply).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/\n/g, '<br>');
+    typing.innerHTML = tutorFmt(reply, moments) + momentsHTML(moments || [], { compact: true });
     $('#aiMsgs').scrollTop = $('#aiMsgs').scrollHeight;
   } catch (e) {
     typing.remove();
@@ -5314,8 +7770,15 @@ function tutorRespond(text) {
     setTimeout(() => openQuiz(id || 'leading-data'), 900);
     return;
   }
-  if (aiKey()) { askClaude(text); return; }
-  scriptedRespond(text);
+  /* every door opens on Recall first: the chat answers from the lessons, with
+     the moments it drew on under the reply — tap one and the video opens there */
+  Promise.all([loadSearchIdx(), loadGraph()]).then(async () => {
+    const moments = await recallHybrid(text, 3);
+    logAsk(text, 'chat');
+    ledgerAppend('knowledge_search', { q: text.slice(0, 120), found: moments.length, via: 'chat' });
+    if (aiKey()) askClaude(text, moments);
+    else askGateway(text, moments);
+  });
 }
 
 /* ---- the concierge -------------------------------------------------------
@@ -5427,6 +7890,7 @@ document.addEventListener('click', e => {
     case 'goto': location.hash = route; break;
     case 'play': openPlayer(id, mod != null ? +mod : undefined); break;
     case 'toggle-path':
+      if (isHowto(courseById(id))) { toast(t('howto_no_path'), 'ℹ️'); break; }
       if (inPath(id)) { S.path = S.path.filter(x => x !== id); toast(`Removed from your path`, '－'); }
       else { S.path.push(id); toast(`Added to your AI path — it'll be sequenced after your current step`, '✦'); }
       save(); render(); break;
@@ -5495,6 +7959,18 @@ document.addEventListener('click', e => {
       break;
     }
     case 'admin-tab': adminTab = el.dataset.tab; editingCourse = null; liveDraft = null; render(); initAdmin(); break;
+    case 'cov-open': {
+      /* toggle the evidence drawer; fetch the transcript for the line quote and
+         repaint once it lands, so the quote appears rather than the placeholder */
+      const id = el.dataset.id;
+      covOpen = covOpen === id ? null : id;
+      render();
+      if (covOpen && covOpen.includes(':')) {
+        const [cid, mod] = covOpen.split(':');
+        covLoadTranscript(cid, +mod).then(() => { if (covOpen === id) render(); });
+      }
+      break;
+    }
     case 'ce-open': openCourseEditor(id); break;
     case 'ce-cancel': editingCourse = null; render(); break;
     case 'ce-save': ceSave(); break;
@@ -5540,7 +8016,23 @@ document.addEventListener('click', e => {
       break;
     }
     case 'ask-go': openAsk($('#askInput') && $('#askInput').value); break;
-    case 'ask-close': $('#askModal').classList.remove('open'); break;
+    case 'ask-close': $('#askModal').classList.remove('open'); try { speechSynthesis.cancel(); } catch (e) {} break;
+    case 'ask-again': openAsk(el.dataset.q, 'again'); break;
+    case 'copy-link': copyLink(el.dataset.href); break;
+    case 'ask-speak': { S.speak = S.speak === false; save(); if (S.speak === false) { try { speechSynthesis.cancel(); } catch (e) {} } el.textContent = S.speak === false ? '🔇' : '🔊'; break; }
+    case 'ask-reel': {
+      const am = $('#askModal'); if (am) am.classList.remove('open'); setTutorOpen(false);
+      const rid = el.dataset.id;
+      ledgerAppend('moment_open', { reel: rid, t: +el.dataset.t, via: 'ask' });
+      location.hash = '#/reels';
+      scrollToReel(rid);
+      break;
+    }
+    case 'tag-seek': {
+      ledgerAppend('tag_open', { tag: el.dataset.tag, courseId: el.dataset.id, mod: +el.dataset.mod, t: +el.dataset.t, via: 'lesson' });
+      openPlayer(el.dataset.id, +el.dataset.mod, +el.dataset.t);
+      break;
+    }
     case 'ask-ref': $('#askModal').classList.remove('open'); location.hash = '#/course/' + id; break;
     case 'board-scope': boardScope = el.dataset.v; render(); break;
     case 'flash-open': openFlash(); break;
@@ -5579,6 +8071,60 @@ document.addEventListener('click', e => {
     }
     case 'gdpr-doc': downloadGdprDoc(el.dataset.kind); break;
     case 'member-detail': openMemberDetail(el.dataset.uid); break;
+    case 'reel-read': {
+      const id = el.dataset.id;
+      reelOpen = reelOpen === id ? null : id;
+      if (reelOpen) ledgerAppend('reel_read', { id });
+      render(); armReelFeed();
+      break;
+    }
+    case 'reel-exit': { document.body.classList.remove('reels-open'); stopReelCheck();
+      history.length > 1 ? history.back() : (location.hash = '#/home'); break; }
+    case 'rc-answer': answerReelCheck(el.dataset.id, +el.dataset.i); break;
+    case 'rc-skip': { const rc = el.closest('.rc'); if (rc) rc.classList.remove('up');
+      const sl = el.closest('.reel'); if (sl) sl.dataset.rcDone = '1';
+      setTimeout(() => { if (rc) rc.remove(); }, 320); break; }
+    case 'reel-save': { S.reelSaved = S.reelSaved || [];
+      const id = el.dataset.id, i = S.reelSaved.indexOf(id);
+      if (i > -1) S.reelSaved.splice(i, 1); else S.reelSaved.push(id);
+      save(); ledgerAppend('reel_save', { id, saved: i < 0 }); render(); break; }
+    case 'reel-mute': { const f = $('#reelFeed'); if (!f) break;
+      const on = f.classList.toggle('sound');
+      f.querySelectorAll('video').forEach(v => { v.muted = !on; });
+      const ic = $('#reelMuteIcon'); if (ic) ic.textContent = on ? '\u266b' : '\u266a';
+      break; }
+    case 'reel-goto': { ledgerAppend('reel_to_course', { course: el.dataset.id, from: 'feed' });
+      if (el.dataset.mod != null && el.dataset.mod !== '') { document.body.classList.remove('reels-open'); stopReelCheck(); location.hash = `#/play/${el.dataset.id}/${el.dataset.mod}`; break; }
+      location.hash = '#/course/' + el.dataset.id; break; }
+    case 'reel-more': { ledgerAppend('reel_continue', { after: FEED_PAUSE_AFTER });
+      const p = el.closest('.reel'); const nx = p && p.nextElementSibling;
+      if (nx) nx.scrollIntoView({ behavior: 'smooth', block: 'start' }); break; }
+    case 'cap-who': openCapabilityHolders(el.dataset.cap); break;
+    case 'cap-close': { const v = $('#capModal'); if (v) v.remove(); break; }
+    case 'qw-approve': { const st = qwState(); const id = el.dataset.qw;
+      st.rejected = st.rejected.filter(x => x !== id);
+      if (st.approved.indexOf(id) < 0) st.approved.push(id);
+      save(); ledgerAppend('quickwin_curated', { id, verdict: 'approved' });
+      toast(t('qw_yes_done'), '\u2713'); render(); break; }
+    case 'qw-reject': { const st = qwState(); const id = el.dataset.qw;
+      st.approved = st.approved.filter(x => x !== id);
+      if (st.rejected.indexOf(id) < 0) st.rejected.push(id);
+      save(); ledgerAppend('quickwin_curated', { id, verdict: 'rejected' });
+      render(); break; }
+    case 'qw-sched': { const st = qwState(); st.schedule = st.schedule || {};
+      st.schedule[el.dataset.k] = el.value; save(); render(); break; }
+    case 'qw-send-now': { const q = qwById(el.dataset.qw); if (!q) break;
+      const st = qwState(); if ((st.sent || []).indexOf(q.id) < 0) (st.sent = st.sent || []).push(q.id);
+      save(); ledgerAppend('quickwin_sent', { id: q.id, via: 'manual' });
+      toast(t('qw_sent'), '\u2713'); render(); break; }
+    case 'qw-open': { const q = qwById(el.dataset.qw); if (q) openQuickWin(q); break; }
+    case 'qw-close': { const v = $('#qwModal'); if (v) v.remove(); break; }
+    case 'qw-goto': { const v = $('#qwModal'); if (v) v.remove();
+      ledgerAppend('quickwin_to_course', { course: el.dataset.id });
+      location.hash = '#/course/' + el.dataset.id; break; }
+    case 'edu-open': openEducator(el.dataset.edu); break;
+    case 'edu-close': { const ev = $('#eduModal'); if (ev) ev.remove(); break; }
+    case 'edu-goto': { const ev = $('#eduModal'); if (ev) ev.remove(); location.hash = '#/course/' + el.dataset.id; break; }
     case 'mdet-close': { const mv = $('#mdetModal'); if (mv) mv.remove(); break; }
     case 'mdet-register': downloadMemberRegister(el.dataset.uid); break;
     case 'mdet-exit': downloadExitStatement(el.dataset.uid); break;
@@ -5626,6 +8172,36 @@ document.addEventListener('click', e => {
     case 'pwa-dismiss': localStorage.setItem('eden-pwa-nudged', '1'); const pb2 = $('#pwaBar'); if (pb2) pb2.remove(); break;
     case 'seed-demo': seedDemo(); break;
     case 'voice-search': startVoiceSearch(); break;
+    case 'review-moment': {
+      /* from the check's feedback or a review card: close overlays, reopen the
+         player four seconds before the moment that teaches the answer */
+      const ck = $('#ckOv'); if (ck) { ck.classList.remove('on'); ck.innerHTML = ''; }
+      openPlayer(el.dataset.id, +el.dataset.mod, +el.dataset.t);
+      break;
+    }
+    case 'open-reviews': openReviewSession(); break;
+    case 'ask-moment': {
+      const am = $('#askModal'); if (am) am.classList.remove('open'); setTutorOpen(false);
+      ledgerAppend('moment_open', { courseId: el.dataset.id, mod: +el.dataset.mod, t: +el.dataset.t, via: 'ask' });
+      openPlayer(el.dataset.id, +el.dataset.mod, +el.dataset.t);
+      break;
+    }
+    case 'play-mod': {
+      ledgerAppend('moment_open', { courseId: el.dataset.id, mod: +el.dataset.mod, via: 'topics' });
+      openPlayer(el.dataset.id, +el.dataset.mod);
+      break;
+    }
+    case 'lib-tag': {
+      libTag = libTag === el.dataset.tag ? null : el.dataset.tag;
+      if (libTag) ledgerAppend('tag_open', { tag: libTag });
+      render();
+      break;
+    }
+    case 'resume-check': {
+      const k = Object.keys(S.pendingChecks || {})[0];
+      if (k) { const [cid, mod] = k.split(':'); openPlayer(cid, +mod); }
+      break;
+    }
     case 'save-profile': saveProfile(); break;
     case 'gdpr-export': exportMyData(); break;
     case 'gdpr-delete': deleteMyAccount(); break;
@@ -5861,7 +8437,8 @@ function syncTutorModesUI() {
    learner must never mistake that for a real model answering. */
 function syncTutorFoot() {
   const f = $('#tutorFoot');
-  if (f) f.textContent = t(aiKey() ? 'tutor_foot_live' : 'tutor_foot_demo');
+  /* no tenant key no longer means scripted replies: the free gateway answers. Art. 50 line must say what is true. */
+  if (f) f.textContent = t(aiKey() ? 'tutor_foot_live' : 'tutor_foot_gateway');
 }
 function syncTutorStatus() {
   syncTutorModesUI();
@@ -6019,6 +8596,13 @@ $('#avatarMenu').addEventListener('click', e => {
 window.EdenApp = {
   reloadState() {
     try { S = Object.assign({}, structuredClone(DEFAULT_STATE), JSON.parse(localStorage.getItem(STATE_KEY) || '{}')); } catch (e) {}
+    /* Migrate here TOO. auth.js calls this once Firebase resolves, which means
+       the cloud copy of the state lands after boot — so the boot-time migration
+       was being undone a second later and a signed-in learner kept seeing their
+       retired goal. Whoever re-hydrates S owns migrating it. */
+    /* and push the correction up, so the stale goal stops coming back down on
+       this or any other device the learner signs into */
+    if (migrateState()) save();
     if (S.xp == null) S.xp = seedXp();
     if (!S.badges) S.badges = [];
     checkBadges(true);
@@ -6151,6 +8735,7 @@ function applyPendingJoin() {
     toast((_lang() === 'pt' ? 'Bem-vindo à ' : 'Welcome to ') + companyName() + ' 🏢', '✦'); render();
   }).catch(() => { localStorage.removeItem('eden-join'); toast(_lang() === 'pt' ? 'Código de convite inválido' : 'Invalid invite code', '⚠️'); });
 }
+loadGraph().then(() => { if (GRAPH) render(); });
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   /* AUTO-UPDATE: when a newer version is deployed, the new service worker
      activates (sw.js does skipWaiting + clients.claim) and takes control →
@@ -6164,6 +8749,11 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   }
   addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').then(reg => {
+      /* SCALE/OPS: sw.js already skips waiting and claims clients, and the page
+         reloads once on controllerchange — the missing piece was DISCOVERY: a
+         browser only checks for a new worker on navigation or every 24 h, which
+         is why "hard-refresh" lived in the deploy protocol. Poll every 30 min. */
+      setInterval(() => { try { reg.update(); } catch (e) {} }, 30 * 60e3);
       reg.update().catch(() => {});                          /* check for a newer SW right now */
       setInterval(() => reg.update().catch(() => {}), 1800000);  /* …and every 30 min */
     }).catch(() => {});
@@ -6171,7 +8761,7 @@ if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
 }
 
 /* boot */
-setTimeout(() => { if (boardCache === null) initBoard(); }, 2500);
+/* SCALE: the board is read when a screen needs it (My Learning, Progress, Community), not 2.5 s after every boot */
 if (S.xp == null) S.xp = seedXp();
 if (!S.badges) S.badges = [];
 checkBadges(true);

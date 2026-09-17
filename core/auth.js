@@ -1,4 +1,4 @@
-/* ============ EdenRise Academy — Firebase auth + per-profile cloud sync ============
+/* ============ Academy core — Firebase auth + per-profile cloud sync ============
    Loads the Firebase modular SDK from the gstatic CDN (no build step). Handles
    Google + email/password sign-in, stores each learner's state under users/{uid}
    in Firestore, and bridges to app.js via window.EdenApp / window.EdenCloud.        */
@@ -9,23 +9,22 @@ import {
   createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile,
   sendPasswordResetEmail, sendEmailVerification, deleteUser
 } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js';
-import {
-  getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager,
-  doc, getDoc, getDocs, setDoc, serverTimestamp,
-  collection, addDoc, updateDoc, deleteDoc, onSnapshot, query, where,
-  increment, arrayUnion, arrayRemove
-} from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, getDoc, getDocs, setDoc, serverTimestamp, collection, addDoc, updateDoc, deleteDoc, onSnapshot, query, where, increment, arrayUnion, arrayRemove, orderBy, limit } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
 
-/* Firebase project comes from the active brand (brandkit.js). Each white-label
-   company points at its OWN project; the founding EdenRise values are the fallback. */
+/* Firebase project comes from the active brand (brandkit.js). Each instance
+   points at its OWN project.
+
+   THE FALLBACK FAILS CLOSED — ON PURPOSE. In the founding repo this fell back
+   to EdenRise's live project with a real API key, so an instance whose
+   brand.js was missing or mistyped would silently read and write EdenRise's
+   Firestore, with EdenRise's staff as its superadmins. Cross-tenant leakage
+   should never be the default branch. A PLACEHOLDER key trips BACKEND_READY
+   below and the app runs in honest guest-only preview until a real project is
+   wired — which is also exactly the state a new client should ship in. */
 const firebaseConfig = (window.BRAND && window.BRAND.firebase) || {
-  apiKey: 'AIzaSyBt4pfWRLWUdAjVL8xoEoR7o4wFCjUCUjs',
-  authDomain: 'edenrise-academy.firebaseapp.com',
-  projectId: 'edenrise-academy',
-  storageBucket: 'edenrise-academy.firebasestorage.app',
-  messagingSenderId: '295112713200',
-  appId: '1:295112713200:web:4f3beb0324b9b995383335',
-  measurementId: 'G-SWLQKTVJQS'
+  apiKey: 'PLACEHOLDER_NOT_CONFIGURED',
+  authDomain: '', projectId: '', storageBucket: '',
+  messagingSenderId: '', appId: ''
 };
 
 /* A white-label brand ships with a PLACEHOLDER Firebase key until its own
@@ -57,9 +56,9 @@ if (BACKEND_READY) getRedirectResult(auth).catch(() => {});
    so the saved state is namespaced per brand (the founding brand keeps the
    legacy key). Auth mode is namespaced for the same reason: signing in to one
    academy was marking every other academy on the origin as signed in. */
-const BRAND_SLUG = (window.BRAND && window.BRAND.id) || 'edenrise';
-const KEY  = BRAND_SLUG === 'edenrise' ? 'edenrise-state-v2' : BRAND_SLUG + '-state-v2';
-const MODE = BRAND_SLUG === 'edenrise' ? 'eden-auth-mode' : BRAND_SLUG + '-auth-mode';   // 'firebase' | 'guest' | 'out'
+const BRAND_SLUG = (window.BRAND && window.BRAND.id) || 'app';
+const KEY  = BRAND_SLUG + '-state-v2';
+const MODE = (window.BRAND && window.BRAND.authModeKey) || (BRAND_SLUG + '-auth-mode');   // 'firebase' | 'guest' | 'out'
 const $ = s => document.querySelector(s);
 const T = k => (typeof window.t === 'function' ? window.t(k) : k);
 const isPT = () => (typeof S !== 'undefined' && S.lang === 'pt');
@@ -74,11 +73,11 @@ function showErr(msg) { const e = $('#authErr'); if (e) { e.textContent = msg ||
 /* ---------- state <-> Firestore ---------- */
 function localState() { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } }
 /* ---- multi-tenant helpers ---- */
-const SUPERADMINS = (window.BRAND && window.BRAND.superadmins) || ['admin@edenrise.com', 'info@edenrise.com', 'john@edenrise.com'];
+const SUPERADMINS = (window.BRAND && window.BRAND.superadmins) || [];   /* never inherit another tenant's admins */
 /* The founding tenant of THIS deployment = the active brand. On the EdenRise
    project that is 'edenrise'; on a white-label's own project (e.g. Belong) new
    learners must be stamped with THEIR company, not the founding brand's. */
-const BRAND_ID = (window.BRAND && window.BRAND.id) || 'edenrise';
+const BRAND_ID = (window.BRAND && window.BRAND.id) || 'app';
 const cid = () => ((localState().profile || {}).companyId) || BRAND_ID;
 const isSuperEmail = e => SUPERADMINS.includes((e || '').trim().toLowerCase());
 const metaDocId = c => (c || cid()) === 'edenrise' ? '__meta' : '__meta_' + (c || cid());
@@ -134,6 +133,10 @@ window.EdenCloud = {
     /* top-level profile.companyId is what the rules' myCompany() reads — keep it in step */
     setDoc(doc(db, 'users', u.uid), { state: st, profile: { companyId: p.companyId }, updatedAt: serverTimestamp() }, { merge: true }).catch(() => {});
     const name = p.name || (p.email ? p.email.split('@')[0] : 'Learner');
+    /* the row only changes when XP, streak, name or week fields change — a
+       note typed or a question asked must not cost a leaderboard write */
+    const rowKey = [name, p.username, st.xp, st.streak, p.dept, st.weekStart, st.weekBaseXp].join('|');
+    if (window.EdenCloud._lastRowKey !== rowKey) { window.EdenCloud._lastRowKey = rowKey;
     setDoc(doc(db, 'leaderboard', u.uid), {
       name, username: p.username || '',
       initials: name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'ER',
@@ -141,7 +144,7 @@ window.EdenCloud = {
       joinedAt: p.joinedAt || null, dept: p.dept || null, companyId: p.companyId || BRAND_ID,
       weekStart: st.weekStart || null, weekBaseXp: st.weekBaseXp || 0,
       lastSeen: serverTimestamp(), updatedAt: serverTimestamp()
-    }, { merge: true }).catch(() => {});
+    }, { merge: true }).catch(() => {}); }
     window.EdenCloud.syncLedger();
     window.EdenCloud.pullConfirmations();
   },
@@ -180,12 +183,27 @@ window.EdenCloud = {
   async syncLedger() {
     const u = auth.currentUser; if (!u) return;
     if (window.__ledgerSyncBusy) return; window.__ledgerSyncBusy = true;
+    let blocked = null;                       /* set by any step that could not write */
     try {
       const st = localState();
       const L = st.ledger || [];
       const curKey = 'eden-ledger-synced-' + u.uid;
       let cursor = +(localStorage.getItem(curKey) || 0);
-      if (cursor >= L.length) return;
+      /* ---- events -------------------------------------------------------
+         THE CURSOR GUARDS THIS LOOP ONLY. It used to guard the whole function
+         (`if (cursor >= L.length) return;`), which quietly broke the two steps
+         below for exactly the learner who matters most:
+
+         · a finished learner sits at cursor === L.length permanently, so an
+           anchor write that failed once was never retried again;
+         · an OpenTimestamps proof is upgraded from `pending` to `confirmed`
+           HOURS OR DAYS after the events were mirrored, when Bitcoin confirms
+           the block. By then the early return fired every time, so the confirmed
+           proof — the strongest evidence this product has — was never mirrored
+           server-side at all.
+
+         Both failures are shaped exactly like a completed course, which is why
+         three weeks of silence looked like success. */
       for (let i = cursor; i < L.length; i++) {
         const ev = L[i];
         try {
@@ -201,19 +219,30 @@ window.EdenCloud = {
               const snap = await getDoc(doc(db, 'users', u.uid, 'events', ev.id));
               if (snap.exists()) { cursor = i + 1; localStorage.setItem(curKey, String(cursor)); continue; }
             } catch (e2) { /* read failed too → rules genuinely not live */ }
-            return;   /* rules not deployed yet — nothing lost, retry next flush */
+            blocked = 'events:permission-denied';
+            break;    /* nothing lost, retried next flush — but now RECORDED */
           }
-          return;   /* transient error — stop, retry later */
+          blocked = 'events:' + ((e && e.code) || 'error');
+          break;
         }
       }
-      /* all mirrored → pin the chain head to server time (anchor id = head hash → idempotent) */
+      /* ---- anchor -------------------------------------------------------
+         Only when EVERY event is mirrored. The anchor asserts `count: L.length`
+         — pinning it while events are missing would be a stronger claim than the
+         data supports, and this layer's whole value is that it never does that. */
       const head = L[L.length - 1];
-      if (head && head.hash) {
-        await setDoc(doc(db, 'users', u.uid, 'anchors', head.hash), {
-          headHash: head.hash, count: L.length,
-          brandId: head.brandId || BRAND_ID,
-          recordedAt: serverTimestamp()
-        }).catch(() => {});
+      if (head && head.hash && cursor >= L.length) {
+        try {
+          await setDoc(doc(db, 'users', u.uid, 'anchors', head.hash), {
+            headHash: head.hash, count: L.length,
+            brandId: head.brandId || BRAND_ID,
+            recordedAt: serverTimestamp()
+          });
+        } catch (e) {
+          /* was `.catch(() => {})` — a silent swallow on the one write that makes
+             back-dating detectable */
+          if (!blocked) blocked = 'anchor:' + ((e && e.code) || 'error');
+        }
       }
       /* Bitcoin proofs → create-only mirror. Doc id includes the status, so an
          upgraded proof lands as a NEW doc instead of mutating the pending one
@@ -231,10 +260,66 @@ window.EdenCloud = {
             stampedAt: rec.at, recordedAt: serverTimestamp()
           });
           localStorage.setItem(key, '1');
-        } catch (e) { /* rules not live / already there → harmless, retry later */ }
+        } catch (e) {
+          /* A proof is self-verifying and independent of the events, so it is
+             attempted even when they are blocked — but a CONFIRMED proof that
+             cannot be stored is the single most important failure in this file
+             and is no longer swallowed. */
+          if (!blocked || rec.status === 'confirmed') {
+            blocked = 'proof:' + (rec.status === 'confirmed' ? 'btc:' : '') + ((e && e.code) || 'error');
+          }
+        }
       }
-    } catch (e) { /* never let ledger sync break the app */ }
-    finally { window.__ledgerSyncBusy = false; }
+    } catch (e) {
+      if (!blocked) blocked = 'sync:' + ((e && e.code) || e && e.message || 'error');
+    } finally {
+      window.__ledgerSyncBusy = false;
+      window.EdenCloud.__noteLedgerSync(u, blocked);
+    }
+  },
+  /* ---- R3-1d: the evidence layer must never fail silently -------------------
+     Every branch above preserves data and retries, which is correct — and for
+     three weeks it meant nobody knew the server tier was dark. NIST AU-5 treats
+     the ALERT as the control, and OWASP renamed A09 to "Logging and Alerting
+     Failures" in 2025 for this exact shape of bug.
+
+     Persisted OUTSIDE the state blob, like the cursor, so recording a failure can
+     never clobber the chain it is describing. `firstSeen` is what makes a
+     three-week silence legible after the fact rather than only in the moment. */
+  __noteLedgerSync(u, blocked) {
+    try {
+      const k = 'eden-ledger-blocked-' + u.uid;
+      if (!blocked) { localStorage.removeItem(k); return; }
+      let rec = null;
+      try { rec = JSON.parse(localStorage.getItem(k) || 'null'); } catch (e) {}
+      const now = Date.now();
+      const fresh = !rec || rec.code !== blocked;
+      rec = fresh
+        ? { code: blocked, firstSeen: now, lastSeen: now, count: 1 }
+        : Object.assign(rec, { lastSeen: now, count: (rec.count || 1) + 1 });
+      localStorage.setItem(k, JSON.stringify(rec));
+      /* On the TRANSITION only, put it through the error beacon as well. That
+         buffer rides the ordinary user-state sync — a different rule path from
+         the events subcollection, so it still reaches an admin precisely when
+         the evidence mirror is refused. Without this the learner sees a warning
+         and nobody who could fix it ever does. */
+      if (fresh && window.EdenBeacon) window.EdenBeacon('ledger', 'evidence mirror refused: ' + blocked, 'auth.js/syncLedger');
+    } catch (e) { /* storage full/blocked — the app must still run */ }
+  },
+  /* Read by the admin surface AND by anything that would otherwise claim
+     "server-verified". Health-checks on the ABSENCE of a block, so a missing
+     signal reads as unknown rather than as success. */
+  ledgerSyncStatus() {
+    const u = auth.currentUser;
+    if (!u) return { signedIn: false, blocked: null, mirrored: 0, total: 0 };
+    let rec = null;
+    try { rec = JSON.parse(localStorage.getItem('eden-ledger-blocked-' + u.uid) || 'null'); } catch (e) {}
+    /* mirrored/total are reported so the UI can distinguish "the server has all of
+       it" from "sync has never run" — the absence of an error is not evidence of
+       success, and that conflation is what hid this for three weeks. */
+    const total = ((localState() || {}).ledger || []).length;
+    const mirrored = Math.min(total, +(localStorage.getItem('eden-ledger-synced-' + u.uid) || 0));
+    return { signedIn: true, blocked: rec, mirrored, total };
   },
   /* ---- manager confirmations (R2-18b) ---------------------------------
      A company-scoped, create-only record. The manager's OWN chain is the
@@ -277,8 +362,25 @@ window.EdenCloud = {
        Superadmins keep the unfiltered view, then scope client-side. */
     const u = auth.currentUser;
     const base = collection(db, 'leaderboard');
-    const snap = await getDocs(u && isSuperEmail(u.email) ? base : query(base, where('companyId', '==', cid())));
-    return snap.docs.map(d => Object.assign({ uid: d.id }, d.data())).filter(r => ofCompany(r));
+    /* SCALE. This read used to fetch the WHOLE company collection on every
+       visit to My Learning and 2.5 s after every boot: at 1,000 members that is
+       1,000 document reads per visit, and fifty visits a day exhaust the free
+       plan's read quota for everyone. Two changes:
+       · a per-device cache (10 min) — one read per session, not per visit;
+       · a bounded query — the top BOARD_LIMIT by XP plus the newest joiners —
+         when the tenant has the composite index (companyId + xp), declared in
+         firestore.indexes.json and flagged by BRAND.boardIndexed. Without the
+         index the equality filter alone is still bounded by limit(). */
+    const KEYC = 'edenBoard:' + cid();
+    try { const c = JSON.parse(localStorage.getItem(KEYC) || 'null'); if (c && Date.now() - c.at < 10 * 60e3 && Array.isArray(c.rows)) return c.rows; } catch (e) {}
+    const LIM = 100;
+    const indexed = !!(window.BRAND && BRAND.boardIndexed);
+    let snap;
+    if (u && isSuperEmail(u.email)) snap = await getDocs(indexed ? query(base, orderBy('xp', 'desc'), limit(LIM)) : query(base, limit(LIM)));
+    else snap = await getDocs(indexed ? query(base, where('companyId', '==', cid()), orderBy('xp', 'desc'), limit(LIM)) : query(base, where('companyId', '==', cid()), limit(LIM)));
+    const rows = snap.docs.map(d => Object.assign({ uid: d.id }, d.data())).filter(r => ofCompany(r));
+    try { localStorage.setItem(KEYC, JSON.stringify({ at: Date.now(), rows })); } catch (e) {}
+    return rows;
   },
   async signOut() {
     localStorage.setItem(MODE, 'out');

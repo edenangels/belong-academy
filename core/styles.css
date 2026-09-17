@@ -2196,7 +2196,9 @@ html.os-android body { text-rendering: optimizeLegibility; }
 
 /* ===== in-video checkpoints (edr64) ===== */
 .player-stage { position: relative; }
-.ck-ov { position: absolute; inset: 0; display: none; place-items: center; background: rgba(8,12,9,.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 6; padding: 18px; }
+/* body-level fixed: above the player (z 400) when a lesson ends, and a whole
+   dialog of its own when a review session starts from home */
+.ck-ov { position: fixed; inset: 0; display: none; place-items: center; background: rgba(8,12,9,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 460; padding: 18px; }
 .ck-ov.on { display: grid; }
 .ck-card { width: min(560px, 100%); max-height: 100%; overflow-y: auto; background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 22px 24px; box-shadow: 0 24px 60px rgba(0,0,0,.5); }
 .ck-q { font-family: var(--font-display); font-size: 22px; line-height: 1.35; margin: 8px 0 14px; }
@@ -3590,3 +3592,1057 @@ section.rail-section { margin-top: 72px; }     /* was 52 — the rails ran toget
 @media (prefers-reduced-motion: no-preference) {
   .hero-actions .btn-primary::before { animation: ctaSheen 900ms cubic-bezier(.4,0,.2,1) 1.3s both; }
 }
+/* a hero that has already introduced itself this session does not do it again */
+.hero-seen .hw, .hero-seen .hero-eyebrow, .hero-seen .hero-meta,
+.hero-seen .desc, .hero-seen .hero-actions, .hero-seen .hero-progress,
+.hero-seen .btn-primary::before {
+  animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important;
+}
+
+/* ── PREMIUM LAYER 22 · the frame around the picture ──────────────────────────
+   The hero art was already good; everything touching its edges was not. */
+
+/* 1 · The nav must be readable over ANY tenant's artwork. The scrim was a 66px
+   fade, so the search pill — sitting top-right, exactly where this hero puts
+   its brightest sky — washed out to unreadable. Netflix solves this with a
+   taller, softer top scrim than the bar itself, and it is the reason their
+   nav survives every billboard they ship. */
+nav.topnav::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 0; height: 168px;
+  background: linear-gradient(180deg, rgba(8,12,9,.82) 0%, rgba(8,12,9,.52) 38%, transparent 100%);
+  pointer-events: none; z-index: -1;
+}
+nav.topnav.scrolled::before { opacity: 0; transition: opacity .35s; }
+
+/* the pill carries its own darkness rather than borrowing the page's */
+.search {
+  background: rgba(10,15,11,.52);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border-color: rgba(231,237,227,.16);
+  color: rgba(231,237,227,.72);
+}
+.search:hover { background: rgba(10,15,11,.68); border-color: rgba(231,237,227,.3); }
+
+/* 2 · The billboard used to STOP — a 180px fade to a flat band, and the eye
+   read the seam as the end of the page rather than the start of the rails.
+   A longer fade plus a soft floor lets the art dissolve instead of ending. */
+.hero-fade {
+  height: 320px;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(14,20,15,.35) 42%,
+    rgba(14,20,15,.78) 72%,
+    var(--bg) 100%);
+}
+
+/* 3 · The first rail must PEEK. A homepage whose entire second screen is empty
+   space teaches the reader there is nothing below; Netflix always leaves a row
+   half-visible, and that sliver is what makes the scroll happen. The hero gave
+   up 8vh and the gap between it and the first row lost ~90px. */
+.hero { min-height: 72vh; padding-bottom: 40px; }
+.hero-divider { margin: 22px auto 18px; }
+section.rail-section { margin-top: 40px; }
+.page-pad.ask-line-wrap { margin-top: 2px; margin-bottom: 2px; }
+
+/* ── PREMIUM LAYER 23 · the path row gets its pictures ────────────────────────
+   Every course owns a filmed cover, and this row — the FIRST thing on the
+   homepage, the one a buyer sees before anything else — was the last surface
+   still drawing flat tinted boxes. A streaming service's numbered row is
+   artwork with the numeral over it, never a list with a bullet. */
+.pstep.has-art {
+  background-size: cover; background-position: center;
+  min-height: 132px; align-content: end;
+  border: 1px solid rgba(231,237,227,.08);
+  overflow: hidden; isolation: isolate;
+}
+/* Bottom-weighted so the photograph still breathes at the top of the tile
+   while the title stays readable over ANY tenant's photography — this has to
+   hold for a cover nobody has seen yet, not just for these. */
+.pstep.has-art::after {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(9,13,10,.14) 0%, rgba(9,13,10,.58) 52%, rgba(9,13,10,.92) 100%);
+  transition: background .3s;
+}
+.pstep.has-art:hover, .pstep.has-art:focus-visible { background-color: transparent; }
+.pstep.has-art:hover::after, .pstep.has-art:focus-visible::after {
+  background: linear-gradient(180deg, rgba(9,13,10,.04) 0%, rgba(9,13,10,.46) 52%, rgba(9,13,10,.88) 100%);
+}
+/* a locked step stays a sequence you unlock, not a poster of equal weight */
+.pstep.has-art.locked { opacity: 1; filter: saturate(.5) brightness(.6); }
+.pstep.has-art.locked:hover { filter: saturate(.5) brightness(.6); background-color: transparent; }
+.pstep.has-art .pstep-t { font-size: 14px; text-shadow: 0 1px 12px rgba(0,0,0,.75); }
+.pstep.has-art .pstep-s { color: rgba(231,237,227,.78); text-shadow: 0 1px 10px rgba(0,0,0,.75); }
+.pstep.has-art .pstep-n { background: rgba(9,13,10,.62); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+/* ── PREMIUM LAYER 24 · the header, reduced to what a header is for ──────────
+   Before: seven competing objects — five nav links, an XP chip, a search box,
+   a tenant bubble, a language pair, a bell and an avatar. A bar that busy is a
+   toolbar, not a header, and it fights every billboard behind it.
+   After: menu · identity · search · self. Everything else moved into the panel,
+   which is where a destination list belongs once there is more than a handful. */
+
+/* the menu leads, on every viewport — this used to appear under 900px only */
+.nav-burger {
+  display: inline-flex !important; margin-left: 0; order: -1;
+  width: 40px; height: 40px; border-radius: 12px;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text); cursor: pointer; flex-shrink: 0;
+  align-items: center; justify-content: center;
+  transition: background .22s, border-color .22s;
+}
+.nav-burger:hover { background: rgba(231,237,227,.07); border-color: rgba(231,237,227,.12); }
+.nav-burger:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+/* three hairlines, drawn not iconified, so the middle one can shorten on hover
+   — the smallest possible signal that the control is alive */
+.burger-lines { display: block; width: 18px; }
+.burger-lines i {
+  display: block; height: 1.5px; border-radius: 2px; background: currentColor;
+  transition: width .28s cubic-bezier(.2,.8,.2,1), opacity .22s;
+}
+.burger-lines i + i { margin-top: 4.5px; }
+.burger-lines i:nth-child(1) { width: 18px; }
+.burger-lines i:nth-child(2) { width: 13px; opacity: .8; }
+.burger-lines i:nth-child(3) { width: 18px; }
+.nav-burger:hover .burger-lines i:nth-child(2) { width: 18px; opacity: 1; }
+
+/* what the bar no longer carries */
+.topnav .nav-links,
+.topnav .xp-chip,
+.topnav .org-chip,
+.topnav .lang-toggle,
+.topnav .nav-search-btn,
+.topnav .nav-mic { display: none !important; }
+
+nav.topnav { gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+.nav-right { gap: 10px; margin-left: auto; }
+
+/* ── the search field ──────────────────────────────────────────────────────
+   One object: field and microphone in a single pill, divided by a hairline.
+   A mic sitting loose in a toolbar is read as decoration — inside the search
+   field, past a divider, it can only mean "say it instead of typing it". */
+.searchbar {
+  display: flex; align-items: stretch;
+  background: rgba(10,15,11,.5);
+  border: 1px solid rgba(231,237,227,.13);
+  border-radius: 999px; overflow: hidden;
+  backdrop-filter: blur(16px) saturate(1.25);
+  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  transition: border-color .25s, background .25s, box-shadow .25s;
+}
+.searchbar:hover { border-color: rgba(231,237,227,.24); background: rgba(10,15,11,.62); }
+.searchbar:focus-within { border-color: rgba(166,195,165,.55); box-shadow: 0 0 0 4px rgba(166,195,165,.12); }
+.topnav .search {
+  display: flex; align-items: center; gap: 9px;
+  width: 290px; padding: 0 6px 0 15px; min-height: 40px;
+  background: none; border: 0; border-radius: 0;
+  color: rgba(231,237,227,.62); font-size: 13.5px; cursor: pointer;
+  white-space: nowrap; overflow: hidden;
+}
+.search-ic { width: 16px; height: 16px; flex-shrink: 0; opacity: .75; }
+.search-ph { flex: 1; overflow: hidden; text-overflow: ellipsis; }
+.topnav .search kbd {
+  font-family: var(--font-body); font-size: 10.5px; font-weight: 600;
+  color: rgba(231,237,227,.45); background: rgba(231,237,227,.07);
+  border: 1px solid rgba(231,237,227,.1); border-radius: 5px;
+  padding: 2px 5px; flex-shrink: 0;
+}
+
+/* the microphone — labelled, because an unlabelled glyph is a guess */
+.searchbar-mic {
+  position: relative; display: inline-flex; align-items: center; gap: 6px;
+  padding: 0 15px 0 12px; border: 0; background: none; cursor: pointer;
+  color: var(--accent-2); font-family: var(--font-body);
+  font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  border-left: 1px solid rgba(231,237,227,.12);
+  transition: color .2s, background .2s;
+}
+.searchbar-mic svg { width: 16px; height: 16px; }
+.searchbar-mic:hover { background: rgba(166,195,165,.1); color: #cfe0ce; }
+.searchbar-mic:focus-visible { outline: 2px solid var(--accent-2); outline-offset: -2px; }
+.mic-label { line-height: 1; }
+
+/* listening: the field itself says so. Concentric rings are the one voice
+   idiom every assistant shares, so nobody has to learn ours. */
+.mic-rings { position: absolute; left: 50%; top: 50%; width: 0; height: 0; pointer-events: none; }
+.mic-rings i {
+  position: absolute; left: 50%; top: 50%; width: 34px; height: 34px; margin: -17px 0 0 -17px;
+  border: 1px solid var(--accent-2); border-radius: 50%; opacity: 0; transform: scale(.5);
+}
+.searchbar.listening { border-color: rgba(166,195,165,.6); background: rgba(18,28,19,.78); }
+.searchbar.listening .searchbar-mic { color: #d6e6d5; }
+@media (prefers-reduced-motion: no-preference) {
+  .mic-btn.listening .mic-rings i { animation: micRing 1.9s cubic-bezier(.2,.7,.3,1) infinite; }
+  .mic-btn.listening .mic-rings i:nth-child(2) { animation-delay: .95s; }
+}
+@keyframes micRing {
+  0%   { opacity: .55; transform: scale(.5); }
+  100% { opacity: 0;   transform: scale(1.5); }
+}
+/* reduced motion still gets an unmistakable state, just a still one */
+@media (prefers-reduced-motion: reduce) {
+  .mic-btn.listening { background: rgba(166,195,165,.18); }
+}
+
+/* ── the bell ──────────────────────────────────────────────────────────────
+   It was a 38px filled tile with a border, the same weight as a primary
+   control. A notification bell is a passive indicator: no box until touched. */
+.topnav .bell {
+  width: 38px; height: 38px; border-radius: 12px;
+  background: transparent; border: 1px solid transparent;
+  color: rgba(231,237,227,.6);
+  transition: color .2s, background .2s, border-color .2s;
+}
+.topnav .bell:hover { background: rgba(231,237,227,.07); border-color: rgba(231,237,227,.12); color: var(--text); }
+.topnav .bell svg { width: 18px; height: 18px; }
+.topnav .bell-dot { top: 9px; right: 10px; width: 6px; height: 6px; border-width: 1.5px; }
+
+.topnav .avatar { width: 32px; height: 32px; font-size: 12px; border-width: 1.5px; }
+
+/* ── the panel ─────────────────────────────────────────────────────────────
+   Now the only home for every destination, so it earns real presentation:
+   wider, sectioned, and it slides rather than appears. */
+.mobile-drawer-panel {
+  width: min(340px, 86vw); padding: 20px 18px 26px;
+  background: linear-gradient(180deg, #121a13 0%, #0d130e 100%);
+  border-right: 1px solid rgba(231,237,227,.09);
+  box-shadow: 40px 0 90px rgba(0,0,0,.55);
+}
+.mobile-drawer-head { margin-bottom: 16px; }
+.mobile-drawer-head .org-chip { display: flex; }
+.mobile-drawer .xp-chip { display: inline-flex; margin-bottom: 20px; }
+.md-label {
+  font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(231,237,227,.34); margin: 4px 0 8px 12px;
+}
+.mobile-drawer a {
+  font-size: 15px; padding: 11px 12px; border-radius: 10px;
+  transition: background .18s, color .18s, padding-left .22s;
+}
+.mobile-drawer a:hover { padding-left: 16px; }
+.mobile-drawer a.active { background: rgba(166,195,165,.12); color: var(--text); }
+.md-sep { height: 1px; background: rgba(231,237,227,.09); margin: 16px 4px; }
+.drawer-lang { margin-top: 18px; width: 100%; }
+.drawer-lang .lang-btn { flex: 1; }
+
+/* phones: the field collapses to its glyph, the label would not fit */
+@media (max-width: 720px) {
+  .topnav .search { width: auto; padding-right: 2px; }
+  .topnav .search .search-ph, .topnav .search kbd { display: none; }
+  .mic-label { display: none; }
+  .searchbar-mic { padding: 0 12px; }
+}
+
+/* ── PREMIUM LAYER 25 · key art, for assets that are not full-bleed landscape ─
+   Most course posters are title cards: the name is baked into the picture, so
+   full-bleed they print the course name twice — once in the artwork, once in
+   our own type — and any badge lockup in them fights the palette. When a course
+   ships a photographic PLATE cut out of its poster, frame it as key art: a
+   right-hand panel that dissolves leftwards into the page, so the copy sits on
+   clean darkness and the photograph keeps its own space. */
+.hero-art.fit-key {
+  inset: 0 0 0 auto; width: 62%;
+  /* anchored to the TOP, not centred: the plate is taller than the band, and a
+     centred crop guillotined the subject's head against the nav */
+  background-size: cover; background-position: 100% 8%;
+  opacity: .92;
+  /* Two masks intersected, not one. The horizontal fade alone left the plate
+     ending on a hard horizontal edge along the hero's floor — invisible on the
+     dark left side, obvious under the bright fire on the right. */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.55) 26%, #000 62%),
+    linear-gradient(180deg, #000 62%, transparent 99%);
+  mask-image:
+    linear-gradient(90deg, transparent 0%, rgba(0,0,0,.55) 26%, #000 62%),
+    linear-gradient(180deg, #000 62%, transparent 99%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  transform-origin: 70% 45%;
+}
+/* the plate is an upscale from a 620px crop — a whisper of grain hides the
+   softness the way film does, and costs one composited layer */
+.hero-art.fit-key::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px; opacity: .05; mix-blend-mode: overlay;
+}
+/* it must never crowd the headline on a narrow desktop window */
+@media (max-width: 1100px) {
+  .hero-art.fit-key { width: 74%; opacity: .55;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 55%); }
+}
+@media (max-width: 700px) {
+  .hero-art.fit-key { inset: 0; width: 100%; opacity: .3; background-position: 30% top;
+    -webkit-mask-image: linear-gradient(180deg, #000, transparent 62%);
+    mask-image: linear-gradient(180deg, #000, transparent 62%); }
+}
+
+/* ── PREMIUM LAYER 26 · the panel exists on every viewport ───────────────────
+   The drawer's entire ruleset lived inside @media (max-width:1024px), and a
+   later rule killed it outright above 1025px with !important — correct when it
+   was a phone-only fallback for a desktop nav bar, wrong now that it is the
+   ONLY place the destinations live. Restated unconditionally, and it opens from
+   the LEFT because that is the edge its button sits on. */
+.mobile-drawer {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(6,10,7,.62);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  display: none; opacity: 0; transition: opacity .3s;
+}
+.mobile-drawer.open { display: block !important; opacity: 1; }
+.mobile-drawer-panel {
+  position: absolute; top: 0; right: auto; bottom: 0; left: 0;
+  width: min(340px, 86vw);
+  background: linear-gradient(180deg, #121a13 0%, #0d130e 100%);
+  border-left: 0; border-right: 1px solid rgba(231,237,227,.09);
+  padding: 20px 18px 26px; display: flex; flex-direction: column; gap: 4px;
+  transform: translateX(-100%); transition: transform .38s cubic-bezier(.2,.8,.2,1);
+  box-shadow: 40px 0 90px rgba(0,0,0,.55);
+  overflow-y: auto;
+}
+.mobile-drawer.open .mobile-drawer-panel { transform: translateX(0); }
+.mobile-drawer-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.mobile-drawer-close {
+  width: 34px; height: 34px; border-radius: 10px; flex-shrink: 0;
+  background: transparent; border: 1px solid rgba(231,237,227,.12);
+  color: var(--text-dim); cursor: pointer; font-size: 14px;
+  transition: background .2s, color .2s;
+}
+.mobile-drawer-close:hover { background: rgba(231,237,227,.08); color: var(--text); }
+.mobile-drawer a {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 12px; border-radius: 10px;
+  color: var(--text-dim); text-decoration: none; font-size: 15px; font-weight: 550;
+  transition: background .18s, color .18s, padding-left .22s;
+}
+.mobile-drawer a:hover { background: rgba(231,237,227,.06); color: var(--text); padding-left: 16px; }
+.mobile-drawer a.active { background: rgba(166,195,165,.12); color: var(--accent-2); }
+.md-signout {
+  margin-top: 6px; padding: 11px 12px; border-radius: 10px; text-align: left;
+  background: none; border: 0; color: #e2857a; font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: var(--font-body); transition: background .18s;
+}
+.md-signout:hover { background: rgba(226,133,122,.1); }
+/* a chip should be the width of its content, not of the column it sits in */
+.mobile-drawer .xp-chip { align-self: flex-start; }
+.mobile-drawer-head .org-chip { cursor: default; }
+
+/* ── PREMIUM LAYER 27 · the search field, quieted ────────────────────────────
+   Layer 24 got the STRUCTURE right — one pill, mic inside it — and then shouted
+   it: a bold letterspaced "VOICE" in caps, a boxed ⌘K badge, and a divider rule
+   between the two halves. Three pieces of chrome doing the job of none. What
+   makes a field like this read expensive is restraint: one hairline, one glyph
+   weight, one text colour, and nothing raised above anything else until you
+   touch it. Everything below removes something. */
+
+.searchbar {
+  background: rgba(10,15,11,.34);
+  border-color: rgba(231,237,227,.09);
+  backdrop-filter: blur(20px) saturate(1.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.15);
+}
+.searchbar:hover { background: rgba(10,15,11,.46); border-color: rgba(231,237,227,.16); }
+.searchbar:focus-within {
+  background: rgba(10,15,11,.62);
+  border-color: rgba(166,195,165,.38);
+  box-shadow: 0 0 0 3px rgba(166,195,165,.08);
+}
+
+.topnav .search { width: 268px; padding: 0 4px 0 14px; min-height: 38px; gap: 10px; }
+.search-ic { width: 15px; height: 15px; opacity: .5; stroke-width: 1.3; }
+.search-ph { font-size: 13px; font-weight: 400; color: rgba(231,237,227,.5); letter-spacing: .002em; }
+
+/* the shortcut is a hint, not a key-cap. No box, no border, no fill —
+   just quiet type that a returning user's eye already knows where to find. */
+.topnav .search kbd {
+  background: none; border: 0; padding: 0 2px; border-radius: 0;
+  font-size: 11px; font-weight: 500; letter-spacing: .06em;
+  color: rgba(231,237,227,.3);
+}
+
+/* the microphone: sentence case, normal weight, same colour as the placeholder.
+   It was uppercase-bold-letterspaced in accent green, which made a secondary
+   control the loudest thing in the header. It earns colour on hover and while
+   listening — not before. */
+.searchbar-mic {
+  border-left: 0;                        /* the divider was a line for its own sake */
+  padding: 0 14px 0 8px; gap: 7px;
+  color: rgba(231,237,227,.5);
+  font-size: 13px; font-weight: 400; letter-spacing: 0; text-transform: none;
+}
+.searchbar-mic svg { width: 15px; height: 15px; stroke-width: 1.4; }
+.searchbar-mic:hover { background: none; color: var(--accent-2); }
+.searchbar-mic:focus-visible { outline: 2px solid var(--accent-2); outline-offset: -3px; border-radius: 999px; }
+/* a hairline appears only on hover, to show where the field ends and the
+   microphone begins — the one moment that distinction actually matters */
+.searchbar-mic::before {
+  content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 1px; height: 16px; background: rgba(231,237,227,.14);
+  opacity: 0; transition: opacity .25s;
+}
+.searchbar:hover .searchbar-mic::before,
+.searchbar:focus-within .searchbar-mic::before { opacity: 1; }
+
+/* listening is the ONE state allowed to be loud */
+.searchbar.listening { border-color: rgba(166,195,165,.5); background: rgba(16,26,17,.72); }
+.searchbar.listening .searchbar-mic { color: var(--accent-2); }
+.searchbar.listening .search-ph { color: rgba(166,195,165,.8); }
+
+@media (max-width: 720px) { .searchbar-mic { padding: 0 12px; } }
+
+/* ── PREMIUM LAYER 28 · the listening state, said once ───────────────────────
+   Forcing the state on and LOOKING at it showed two things the rules alone did
+   not: "Listening…" printed twice inside one small pill, and the mic grew a
+   pale chip behind it — an earlier reduced-motion fallback — which broke the
+   single-pill silhouette into two objects exactly when attention matters most.
+   The word belongs in the placeholder; the button keeps only its icon. */
+.searchbar.listening .mic-label { display: none; }
+.searchbar.listening .topnav .search kbd,
+.searchbar.listening kbd { opacity: 0; transition: opacity .2s; }
+.searchbar-mic.listening,
+.searchbar.listening .searchbar-mic { background: none; padding-right: 15px; }
+/* the rings are the whole signal — give them room and keep them inside the pill */
+.searchbar.listening .mic-rings i { border-color: var(--accent-2); }
+
+/* ── the end-of-lesson check — the event that credits an art. 131.º hour ───── */
+.ck-card .mc-q { margin-bottom: 14px; }
+.ck-card .mc-q .ck-q { font-size: 15px; margin-bottom: 8px; }
+.ck-card .q-opt.sel { border-color: var(--accent-2); background: rgba(166,195,165,.12); }
+.ck-card .q-opt.sel .radio { border-color: var(--accent-2); background: var(--accent-2); }
+.ck-ack { display: flex; align-items: flex-start; gap: 10px; margin: 14px 0 4px; cursor: pointer; font-size: 14px; line-height: 1.5; }
+.ck-ack input { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--accent-2); }
+.ck-foot .btn[disabled] { opacity: .45; cursor: not-allowed; }
+/* a lesson watched but unchecked is not a counted hour — say so where the
+   learner sees their progress, not at audit time */
+.check-pending { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 600;
+  color: #e0c98a; background: rgba(200,164,93,.1); border: 1px solid rgba(200,164,93,.3);
+  border-radius: 99px; padding: 5px 12px; margin-top: 10px; }
+
+/* ── quiz v2 — confidence, feedback, review ────────────────────────────────── */
+.mc-conf { display: flex; align-items: center; gap: 8px; margin: 8px 0 2px; font-size: 12px; color: var(--text-faint); }
+.conf-b { border: 1px solid rgba(231,237,227,.14); background: none; color: var(--text-dim);
+  border-radius: 99px; padding: 3px 11px; font-size: 11.5px; cursor: pointer; font-family: var(--font-body);
+  transition: all .2s; }
+.conf-b.on { border-color: var(--accent-2); color: var(--accent-2); background: rgba(166,195,165,.1); }
+.mc-fb { border-left: 2px solid rgba(231,237,227,.12); padding: 8px 0 8px 14px; margin-bottom: 12px; }
+.mc-fb.ok { border-left-color: rgba(166,195,165,.55); }
+.mc-fb.ko { border-left-color: rgba(224,137,122,.55); }
+.mc-fb .ck-q { font-size: 14px; margin-bottom: 4px; }
+.mc-ans { font-size: 13px; color: var(--text-dim); margin: 2px 0 4px; }
+.mc-why { font-size: 13px; color: var(--text-faint); font-style: italic; margin: 2px 0 8px; }
+/* the learning-loop strip under the ask bar — pending checks + due reviews */
+.loop-strip { display: flex; gap: 10px; flex-wrap: wrap; padding: 0 var(--edge); margin: 14px 0 0; }
+.loop-chip { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600;
+  color: #e0c98a; background: rgba(200,164,93,.09); border: 1px solid rgba(200,164,93,.3);
+  border-radius: 99px; padding: 7px 14px; cursor: pointer; transition: background .2s; }
+.loop-chip:hover { background: rgba(200,164,93,.16); }
+.loop-chip.rev { color: var(--accent-2); background: rgba(166,195,165,.09); border-color: rgba(166,195,165,.3); }
+.loop-chip.rev:hover { background: rgba(166,195,165,.16); }
+
+/* ── PREMIUM LAYER 29 · the check, worthy of the moment ─────────────────────
+   This card is where the hour becomes real. It should feel like the platform's
+   most considered surface, not a popup: generous card, calm rhythm, one accent.
+   Everything here refines PREMIUM LAYER 23's bones without new machinery. */
+.ck-card {
+  width: min(600px, 100%); border-radius: 18px; padding: 30px 32px 26px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--bg-2) 92%, #fff 2%), var(--bg-2));
+  border: 1px solid rgba(231,237,227,.11);
+  box-shadow: 0 40px 100px rgba(0,0,0,.6), 0 0 0 1px rgba(0,0,0,.3);
+  animation: ckIn .38s cubic-bezier(.2,.8,.2,1) both;
+}
+@keyframes ckIn { from { opacity: 0; transform: translateY(14px) scale(.985); } }
+@media (prefers-reduced-motion: reduce) { .ck-card { animation: none; } }
+.ck-card .ob-eyebrow { margin-bottom: 6px; }
+.ck-card .pre-sub { margin-bottom: 18px; }
+.ck-card .ck-q { font-size: 16px; line-height: 1.45; font-weight: 600; margin: 0 0 12px; }
+.ck-card .mc-q { margin-bottom: 22px; }
+.ck-card .q-opt {
+  border: 1px solid rgba(231,237,227,.1); border-radius: 12px;
+  padding: 12px 14px; margin-bottom: 8px;
+  transition: border-color .18s, background .18s, transform .18s;
+}
+.ck-card .q-opt:hover { border-color: rgba(231,237,227,.24); transform: translateX(2px); }
+.ck-card .q-opt.sel { transform: none; }
+.ck-card .ck-foot { margin-top: 6px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+.ck-card .ck-note { font-size: 12.5px; }
+/* feedback state: score becomes the headline, spoken in the display face */
+.ck-card .ob-eyebrow b { font-family: var(--font-display); font-size: 1.2em; }
+.mc-fb { border-radius: 0 10px 10px 0; padding: 10px 4px 12px 16px; margin-bottom: 14px; background: rgba(231,237,227,.02); }
+.mc-fb .btn { margin-top: 4px; }
+/* the card breathes inside the viewport; the scrollbar whispers */
+.ck-ov { padding: 24px; }
+.ck-card { max-height: 86vh; scrollbar-width: thin; scrollbar-color: rgba(231,237,227,.18) transparent; }
+.ck-card::-webkit-scrollbar { width: 5px; }
+.ck-card::-webkit-scrollbar-thumb { background: rgba(231,237,227,.16); border-radius: 99px; }
+.ck-card::-webkit-scrollbar-track { background: transparent; }
+
+/* ── moments: the lesson answering in its own voice ────────────────────────── */
+.ask-moments { display: flex; flex-direction: column; gap: 10px; margin: 10px 0 16px; }
+.ask-moment { display: flex; gap: 14px; align-items: flex-start; cursor: pointer;
+  border: 1px solid rgba(231,237,227,.1); border-radius: 12px; padding: 12px 14px;
+  transition: border-color .18s, background .18s; }
+.ask-moment:hover { border-color: rgba(166,195,165,.4); background: rgba(166,195,165,.05); }
+.am-tc { font-family: var(--font-body); font-size: 11.5px; font-weight: 700; color: var(--accent-2);
+  background: rgba(166,195,165,.1); border-radius: 7px; padding: 3px 8px; flex-shrink: 0; margin-top: 2px; }
+.am-body { min-width: 0; flex: 1; }
+.am-body b { font-size: 13.5px; }
+.am-course { font-size: 11.5px; color: var(--text-faint); margin-left: 8px; }
+.am-body p { font-size: 13px; color: var(--text-dim); font-style: italic; margin: 4px 0 0; line-height: 1.5; }
+.ask-moment .ask-go { align-self: center; }
+/* transcript lines: clickable, and the spoken one glows */
+.nd-line[data-t] { cursor: pointer; border-radius: 8px; padding: 5px 8px; margin: 0 -8px; transition: background .15s; }
+.nd-line[data-t]:hover { background: rgba(231,237,227,.05); }
+.nd-line.now { background: rgba(166,195,165,.1); }
+.nd-line.now .tc { color: var(--accent-2); font-weight: 700; }
+
+/* ── topics: the knowledge, browsable ──────────────────────────────────────── */
+.topics-band { margin: 26px 0 6px; }
+.topics-band .ob-eyebrow { margin-bottom: 10px; }
+.topics-row { margin-bottom: 4px; }
+.tag-chip i { font-style: normal; font-size: 10.5px; opacity: .55; margin-left: 4px; }
+.topic-lessons { display: flex; flex-direction: column; gap: 10px; margin: 14px 0 8px; max-width: 720px; }
+/* the quick-answers shelf sits apart from formation — visibly reference, not curriculum */
+.howto-shelf { margin-top: 40px; padding-top: 26px; border-top: 1px solid rgba(231,237,227,.08); }
+
+/* ════════ THE EDUCATOR — rebuilt to DESIGN.md ═════════════════════════════
+   The first cut broke six laws: a bordered card in the player and a bordered
+   pill on the hero (law 3 — separate with space and darkness, not outlines),
+   a box inside the player box (law 4), eight half-pixel type sizes (law 5),
+   a filled-and-bordered disclosure chip (law 7 — a state chip is COLOUR only),
+   an encouragement subtitle under the band header (law 1), and a decorative ◇
+   (law 9). Rebuilt with nothing but type, space and one tonal disc.
+
+   Sizes here are only 11 / 13 / 15 / 18 / 22. Gold stays scarce (law 8): the
+   role is muted, not accented, because it repeats on every tile. */
+
+/* the disc — the only mass in the component */
+.edu-av { border-radius: 50%; background-size: cover; background-position: center;
+  display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.edu-av.mono { font-family: var(--font-display); color: var(--ivory); letter-spacing: .04em; }
+.edu-av.xs { width: 22px; height: 22px; font-size: 11px; }
+.edu-av.sm { width: 34px; height: 34px; font-size: 13px; }
+.edu-av.md { width: 72px; height: 72px; font-size: 22px; }
+.edu-av.lg { width: 60px; height: 60px; font-size: 18px; }
+
+/* tonal, not colour-coded: five low-saturation earths so a team of eight stays
+   legible without importing a second palette into a warm green UI (law 8) */
+.edu-av.mono.t1 { background: #4a5c46; }
+.edu-av.mono.t2 { background: #6b5a45; }
+.edu-av.mono.t3 { background: #4a6670; }
+.edu-av.mono.t4 { background: #7d5f4c; }
+.edu-av.mono.t5 { background: #5f7358; }
+
+/* shared type — one treatment wherever the educator appears */
+.edu-nm { font-size: 15px; color: var(--text); font-weight: 600; }
+.edu-rl { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: .1em; }
+.edu-badge.synth { font-size: 11px; color: #9fc4cd; text-transform: uppercase; letter-spacing: .1em; }
+
+/* hero byline — text on the page, no container */
+.edu-byline { display: inline-flex; align-items: center; gap: 9px; margin: 12px 0 0;
+  padding: 0; background: none; border: 0; cursor: pointer; }
+.edu-byline .edu-nm { border-bottom: 1px solid transparent; transition: border-color .2s; }
+.edu-byline:hover .edu-nm { border-bottom-color: rgba(231,237,227,.35); }
+
+/* module strip — sits between the video and the pills on plain darkness */
+.player-edu-strip:empty { display: none; }
+.edu-strip { display: flex; align-items: center; gap: 12px; width: calc(100% - 56px);
+  margin: 14px 28px 0; padding: 0; background: none; border: 0; cursor: pointer; text-align: left; }
+.edu-strip .edu-go { margin-left: auto; font-size: 13px; color: var(--text-faint);
+  border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.edu-strip:hover .edu-go { color: var(--text-dim); border-bottom-color: rgba(231,237,227,.28); }
+
+/* the band — discs and names, two layers (law 1) */
+.edu-rail { gap: 34px; padding: 4px 0; }
+/* 118px broke "Land & machinery" into a hanging "LAND &" — a tenant writes the
+   role, so the tile has to hold two words of it and clamp anything longer */
+.edu-tile { flex: none; width: 138px; display: flex; flex-direction: column; align-items: center;
+  gap: 4px; background: none; border: 0; padding: 0; cursor: pointer;
+  transition: transform .25s var(--lift); }
+.edu-tile .edu-rl { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; line-height: 1.45; text-wrap: balance; }
+.edu-tile .edu-av { margin-bottom: 8px; transition: filter .25s; }
+.edu-tile .edu-nm, .edu-tile .edu-rl { text-align: center; }
+.edu-tile:hover { transform: translateY(-3px); }
+.edu-tile:hover .edu-av { filter: brightness(1.14); }
+
+/* the sheet — the one place with room for their own words */
+.edu-sheet { max-width: 500px; text-align: left; }
+.edu-sheet-top { display: flex; gap: 16px; align-items: center; }
+.edu-sheet-top h3 { font-family: var(--font-display); font-size: 22px; margin: 0 0 3px; }
+.edu-line { font-size: 15px; color: var(--text-dim); margin: 18px 0 0; line-height: 1.62; }
+.edu-why { font-family: var(--font-display); font-size: 18px; line-height: 1.5; font-style: italic;
+  color: var(--text); margin: 14px 0 0; padding-left: 16px; border-left: 1px solid rgba(200,164,93,.45); }
+.edu-sheet-list { margin-top: 22px; }
+.edu-sheet-list .module-row { width: 100%; background: none; border: 0;
+  border-top: 1px solid var(--line); display: flex; justify-content: space-between; }
+
+@media (max-width: 640px) {
+  .edu-strip { width: calc(100% - 28px); margin: 12px 14px 0; }
+  .edu-rail { gap: 20px; }
+  .edu-tile { width: 112px; }
+  .edu-av.md { width: 60px; height: 60px; font-size: 18px; }
+}
+
+/* ════════ QUICK WINS + ATTRIBUTION ═══════════════════════════════════════
+   Same laws as the educator pass: type and space, no boxes-in-boxes, sizes
+   from 11/13/15/18/22 only, gold scarce. The attribution block is deliberately
+   quiet — it is a licence condition, not a badge to show off. */
+.attrib { margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.attrib-lic { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
+.attrib-lic a { color: var(--accent); text-decoration: none; }
+.attrib-lic a:hover { text-decoration: underline; }
+.attrib-src { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.attrib-src span { font-size: 13px; color: var(--text-faint); }
+.attrib-lbl { text-transform: uppercase; letter-spacing: .1em; font-size: 11px; }
+.edu-creds { margin: 12px 0 0; padding-left: 18px; }
+.edu-creds li { font-size: 13px; color: var(--text-dim); line-height: 1.6; }
+.edu-more { display: inline-block; margin-top: 14px; font-size: 13px; color: var(--accent); text-decoration: none; }
+.edu-more:hover { text-decoration: underline; }
+
+.qw-secs { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--accent); }
+.qw-card { flex: 0 0 260px; scroll-snap-align: start; cursor: pointer; background: none; border: 0;
+  padding: 0; text-align: left; transition: transform .25s var(--lift); }
+.qw-card:hover { transform: translateY(-3px); }
+.qw-card h3 { font-family: var(--font-display); font-size: 18px; margin: 6px 0 4px; color: var(--text); }
+.qw-card p { font-size: 13px; color: var(--text-dim); line-height: 1.55; margin: 0; }
+.qw-by { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); margin-top: 8px; }
+.qw-deeper { font-size: 13px; color: var(--accent-2); margin-top: 6px; }
+.qw-nodeep { font-size: 13px; color: var(--text-faint); }
+
+.qw-sheet { max-width: 560px; text-align: left; }
+.qw-video { position: relative; padding-top: 56.25%; margin: 14px 0; border-radius: 14px; overflow: hidden; }
+.qw-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.qw-line { font-size: 15px; color: var(--text-dim); line-height: 1.62; }
+.qw-next { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+.qw-next .btn { margin-top: 8px; }
+
+.qw-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; margin-top: 12px; }
+.qw-cur { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0;
+  border-top: 1px solid var(--line); }
+.qw-cur.on .qw-cur-body b { color: var(--accent-2); }
+.qw-cur-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.qw-cur-body b { font-size: 15px; }
+.qw-cur-body span { font-size: 13px; color: var(--text-faint); }
+.qw-cur-acts { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; flex: none; }
+.qw-sched { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; }
+.qw-sched label { display: flex; flex-direction: column; gap: 5px; font-size: 11px;
+  text-transform: uppercase; letter-spacing: .1em; color: var(--text-faint); }
+.qw-sched select, .qw-sched input { background: var(--surface); border: 1px solid var(--line);
+  color: var(--text); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
+.qw-note { font-size: 13px; color: var(--text-faint); margin-top: 14px; }
+
+/* ════════ CAPABILITY GRAPH ═══════════════════════════════════════════════
+   Rows, not tiles (law 2/3): a capability is a fact with a date, and the state
+   is carried by one accent on the left edge rather than a coloured box. */
+.cap-list { margin-top: 12px; }
+.cap-row { display: flex; align-items: baseline; gap: 14px; padding: 12px 0 12px 14px;
+  border-top: 1px solid var(--line); border-left: 2px solid transparent; }
+.cap-row:first-child { border-top: 0; }
+.cap-name { flex: 1; min-width: 0; font-size: 15px; color: var(--text); font-weight: 600; }
+.cap-meta { font-size: 13px; color: var(--text-faint); }
+.cap-state { font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-faint); min-width: 108px; text-align: right; }
+.cap-proven { border-left-color: rgba(166,195,165,.55); }
+.cap-proven .cap-state { color: var(--accent-2); }
+.cap-expiring { border-left-color: rgba(200,164,93,.7); }
+.cap-expiring .cap-state { color: var(--accent); }
+.cap-lapsed { border-left-color: rgba(185,133,98,.8); }
+.cap-lapsed .cap-state { color: #d9a07c; }
+.cap-gap { border-left-color: rgba(231,237,227,.16); }
+@media (max-width: 640px) {
+  .cap-row { flex-wrap: wrap; gap: 4px 12px; }
+  .cap-state { min-width: 0; text-align: left; width: 100%; }
+}
+
+/* ════════ THE REEL FEED ══════════════════════════════════════════════════
+   Phone-shaped everywhere: a 9:16 column centred on black, so one set of rules
+   serves a phone and a desktop and the format never lies about itself.
+
+   Immersive means immersive — `body.reels-open` removes the app header and the
+   tutor button, which in the first build sat ON TOP of the feed and dropped the
+   FAB onto the primary CTA.
+
+   Sizes stay on the scale (11/13/15/18/22/30), gold stays scarce, and the only
+   containers are the ones carrying meaning (law 3, law 5, law 8). */
+/* The app chrome is `nav.topnav`, not <header> — the first guess hid nothing
+   and left the burger sitting on top of the feed's own exit button. */
+body.reels-open .topnav,
+body.reels-open header,
+body.reels-open .ai-fab,
+body.reels-open .bottom-nav { display: none !important; }
+body.reels-open { overflow: hidden; }
+
+.reel-wrap { position: fixed; inset: 0; z-index: 260; background: #000; }
+.reel-feed {
+  position: absolute; inset: 0;
+  overflow-y: scroll; scroll-snap-type: y mandatory;
+  scrollbar-width: none; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.reel-feed::-webkit-scrollbar { display: none; }
+.reel {
+  position: relative; height: 100dvh; width: 100%;
+  scroll-snap-align: start; scroll-snap-stop: always;
+  display: flex; align-items: flex-end; justify-content: center; overflow: hidden;
+}
+
+/* ---- the plate: poster first, media on top when mounted ---- */
+.reel-poster, .reel-media {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: min(100vw, calc(100dvh * 9 / 16)); height: 100%;
+}
+.reel-poster { display: grid; place-items: center; padding: 14vh 9vw;
+  background-size: cover; background-position: center; }
+.reel-media:empty { display: none; }
+.reel-vid { width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+.reel-hook {
+  font-family: var(--font-display); font-size: 30px; line-height: 1.22;
+  color: var(--ivory); text-align: center; text-wrap: balance;
+  text-shadow: 0 2px 30px rgba(0,0,0,.4);
+}
+.reel-poster.t1 { background-color: #24331f; background-image: linear-gradient(168deg,#4a5c46,#141d12); }
+.reel-poster.t2 { background-color: #2c231a; background-image: linear-gradient(168deg,#6b5a45,#1d1710); }
+.reel-poster.t3 { background-color: #1b2a2f; background-image: linear-gradient(168deg,#4a6670,#101a1e); }
+.reel-poster.t4 { background-color: #33221a; background-image: linear-gradient(168deg,#7d5f4c,#21150f); }
+.reel-poster.t5 { background-color: #23301f; background-image: linear-gradient(168deg,#5f7358,#131c11); }
+.reel-poster.has-art .reel-hook { display: none; }
+
+.reel-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.5) 26%, rgba(0,0,0,.06) 56%, transparent 72%);
+}
+
+/* ---- top: where you are, and how to leave ---- */
+.reel-top {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%); z-index: 6;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  padding: calc(12px + env(safe-area-inset-top,0px)) 16px 0;
+  display: flex; align-items: center; gap: 14px;
+}
+.reel-x {
+  flex: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+  background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.14);
+  color: #fff; font-size: 16px; backdrop-filter: blur(10px);
+}
+.reel-prog { flex: 1; display: flex; gap: 3px; }
+.reel-prog span {
+  flex: 1; height: 2px; border-radius: 2px; background: rgba(255,255,255,.22);
+  transition: background .35s ease;
+}
+.reel-prog span.on { background: rgba(255,255,255,.85); }
+
+/* ---- copy: one column, generous, never fighting the video ---- */
+.reel-copy {
+  position: relative; z-index: 2;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  padding: 0 20px calc(34px + env(safe-area-inset-bottom,0px));
+  display: flex; flex-direction: column; align-items: flex-start; gap: 9px;
+}
+.reel-copy-mid { justify-content: center; height: 100%; padding-bottom: 0; }
+.reel-copy h2 { font-family: var(--font-display); font-size: 22px; line-height: 1.24;
+  margin: 0; color: #fff; text-wrap: balance; }
+.reel-copy p { font-size: 15px; line-height: 1.55; color: rgba(255,255,255,.8); margin: 0; }
+.reel-meta { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: rgba(255,255,255,.58); }
+.reel-ph { font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: #d9c08c; border: 1px solid rgba(217,192,140,.38); border-radius: 99px; padding: 3px 10px; }
+/* the handoff: a line, not a slab */
+.reel-deeper {
+  margin-top: 8px; padding: 0; background: none; border: 0; cursor: pointer;
+  display: inline-flex; align-items: baseline; gap: 8px; text-align: left;
+  color: #fff; font-size: 15px;
+}
+.reel-deeper .rd-verb { color: rgba(255,255,255,.62); }
+.reel-deeper .rd-name { font-weight: 600; border-bottom: 1px solid rgba(255,255,255,.28);
+  padding-bottom: 1px; transition: border-color .2s; }
+.reel-deeper .rd-arrow { color: rgba(255,255,255,.62); transition: transform .2s var(--lift); }
+.reel-deeper:hover .rd-name { border-bottom-color: rgba(255,255,255,.7); }
+.reel-deeper:hover .rd-arrow { transform: translateX(3px); }
+.reel-copy .edu-byline { margin: 2px 0 0; }
+.reel-copy .edu-nm { color: #fff; }
+
+/* the copy settles as the slide lands — the only motion in the feed */
+.reel-copy > * { opacity: 0; transform: translateY(9px); }
+.reel.current .reel-copy > * { opacity: 1; transform: none;
+  transition: opacity .42s var(--lift), transform .42s var(--lift); }
+.reel.current .reel-copy > *:nth-child(2) { transition-delay: .04s; }
+.reel.current .reel-copy > *:nth-child(3) { transition-delay: .08s; }
+.reel.current .reel-copy > *:nth-child(4) { transition-delay: .12s; }
+.reel.current .reel-copy > *:nth-child(5) { transition-delay: .16s; }
+
+/* ---- actions ---- */
+.reel-rail {
+  position: absolute; right: max(14px, calc((100vw - (100dvh * 9 / 16)) / 2 + 14px));
+  bottom: 30vh; z-index: 3; display: flex; flex-direction: column; gap: 14px;
+}
+.reel-act {
+  width: 42px; height: 42px; border-radius: 50%; cursor: pointer; display: grid; place-items: center;
+  background: rgba(0,0,0,.34); border: 1px solid rgba(255,255,255,.14);
+  color: #fff; backdrop-filter: blur(10px); transition: transform .2s var(--lift), color .2s;
+}
+.reel-act:active { transform: scale(.92); }
+.reel-act.on { color: var(--accent); border-color: rgba(200,164,93,.55); }
+.reel-feed:not(.sound) .reel-act .wave { opacity: 0; }
+.reel-feed.sound .reel-act .slash { opacity: 0; }
+
+.reel-pause { background: radial-gradient(ellipse at 50% 38%, #1d2c20, #050705 72%); }
+.reel-pause .reel-copy-mid { align-items: flex-start; gap: 12px; }
+
+/* ---- first-run affordance ----
+   It lived bottom-centre and landed on top of the handoff line. Left-aligned
+   copy and a centred hint will always fight for the same corner, so the hint
+   moves to the action rail, where nothing else sits, and drops its label — the
+   chevron says it, and one nudging arrow is less noise than two words. */
+.reel-hint {
+  position: absolute; z-index: 5; pointer-events: none;
+  right: max(14px, calc((100vw - (100dvh * 9 / 16)) / 2 + 14px));
+  bottom: calc(30vh - 42px);
+  width: 42px; display: grid; place-items: center;
+  color: rgba(255,255,255,.55); transition: opacity .45s ease;
+}
+.reel-hint.gone { opacity: 0; }
+.reel-hint span {
+  width: 13px; height: 13px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); animation: reelNudge 1.9s ease-in-out infinite;
+}
+.reel-hint.gone { opacity: 0; }
+.reel-hint span {
+  width: 15px; height: 15px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg); animation: reelNudge 1.9s ease-in-out infinite;
+}
+@keyframes reelNudge { 0%,100% { transform: rotate(45deg) translate(0,0); opacity: .5; }
+  50% { transform: rotate(45deg) translate(3px,3px); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-copy > *, .reel.current .reel-copy > * { opacity: 1; transform: none; transition: none; }
+  .reel-hint span { animation: none; }
+  .reel-feed { scroll-behavior: auto; }
+}
+
+/* ---- home tease ---- */
+.reel-chip { flex: 0 0 128px; scroll-snap-align: start; background: none; border: 0; padding: 0;
+  cursor: pointer; transition: transform .25s var(--lift); }
+.reel-chip:hover { transform: translateY(-3px); }
+.reel-chip-art { aspect-ratio: 9/16; border-radius: 14px; display: grid; place-items: center;
+  padding: 15px; overflow: hidden; }
+.reel-chip-art span { font-family: var(--font-display); font-size: 15px; line-height: 1.24;
+  color: var(--ivory); text-align: center; text-wrap: balance; }
+.reel-chip-art.t1 { background: linear-gradient(168deg,#4a5c46,#141d12); }
+.reel-chip-art.t2 { background: linear-gradient(168deg,#6b5a45,#1d1710); }
+.reel-chip-art.t3 { background: linear-gradient(168deg,#4a6670,#101a1e); }
+.reel-chip-art.t4 { background: linear-gradient(168deg,#7d5f4c,#21150f); }
+.reel-chip-art.t5 { background: linear-gradient(168deg,#5f7358,#131c11); }
+.reel-chip-meta { font-size: 11px; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--text-faint); margin-top: 8px; text-align: center; }
+
+/* ---- the reel check: rises over the clip, never traps ---- */
+.rc {
+  position: absolute; left: 50%; bottom: 0; z-index: 7;
+  width: min(100vw, calc(100dvh * 9 / 16));
+  transform: translate(-50%, 100%); opacity: 0;
+  padding: 20px 20px calc(24px + env(safe-area-inset-bottom,0px));
+  background: linear-gradient(to top, rgba(6,8,6,.97), rgba(6,8,6,.9));
+  border-top: 1px solid rgba(231,237,227,.1);
+  transition: transform .34s var(--lift), opacity .34s var(--lift);
+}
+.rc.up { transform: translate(-50%, 0); opacity: 1; }
+.rc-q { font-family: var(--font-display); font-size: 18px; line-height: 1.35; color: #fff; }
+.rc-opts { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
+.rc-opt {
+  text-align: left; padding: 12px 14px; border-radius: 12px; cursor: pointer;
+  background: rgba(231,237,227,.06); border: 1px solid rgba(231,237,227,.12);
+  color: var(--text); font-size: 15px; line-height: 1.4;
+  transition: background .18s, border-color .18s;
+}
+.rc-opt:hover:not(:disabled) { background: rgba(231,237,227,.11); }
+.rc-opt:disabled { cursor: default; }
+.rc-opt.right { border-color: rgba(166,195,165,.65); background: rgba(166,195,165,.14); }
+.rc-opt.wrong { border-color: rgba(185,133,98,.6); background: rgba(185,133,98,.12); }
+.rc-why { font-size: 15px; line-height: 1.55; color: var(--text-dim); margin-top: 13px; }
+.rc-why b { color: var(--text); font-weight: 600; }
+.rc-skip { margin-top: 14px; padding: 0; background: none; border: 0; cursor: pointer;
+  font-size: 13px; color: var(--text-faint); }
+.rc-skip:hover { color: var(--text-dim); }
+@media (prefers-reduced-motion: reduce) { .rc { transition: none; } }
+
+/* ---- PREMIUM LAYER 21 · reel curation state -------------------------------
+   Colour only, inside the meta line that already exists — no second pill on a
+   card that already carries one (DESIGN law 7: colour-only state chip; law 20:
+   a component is not premium because it is decorated). Only a curator ever sees
+   this, because only a curator can act on it. */
+.reel-meta .pend, .reel-chip-meta .pend { color: #d9c08c; }
+
+/* ---- PREMIUM LAYER 22 · the gate, made visible ---------------------------
+   The evidence behind one question: what was asked, the second of video it
+   anchors to, the words spoken there, and what the audit did. Space and one
+   quiet rule do the separating — no cards inside cards (DESIGN law 1: two
+   layers), no second accent (law 8), state carried by colour alone (law 7). */
+.cov-caret { opacity: .45; margin-left: 8px; font-size: 11px; }
+.cov-ev { padding: 2px 0 10px 0; border-left: 1px solid rgba(231,237,227,.10); margin: -2px 0 10px 14px; }
+.cov-q { padding: 12px 0 12px 16px; }
+.cov-q + .cov-q { border-top: 1px solid rgba(231,237,227,.07); }
+.cov-q-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.cov-audit { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; }
+.cov-audit.verified  { color: var(--accent-2); }
+.cov-audit.corrected { color: #d9c08c; }
+.cov-audit.unaudited,
+.cov-audit.malformed { color: #d98a76; }
+.cov-at { font-size: 11px; color: var(--text-faint); letter-spacing: .06em; }
+.cov-stem { font-size: 15px; line-height: 1.5; }
+.cov-key { font-size: 13px; color: var(--text-dim); margin-top: 6px; }
+.cov-said { font-size: 13px; color: var(--text-dim); margin-top: 8px; }
+.cov-said q { font-style: italic; opacity: .9; }
+.cov-wait { opacity: .5; }
+.cov-prov { font-size: 11px; color: var(--text-faint); margin-top: 8px; }
+
+/* ---- PREMIUM LAYER 23 · the reel's text lesson ----------------------------
+   Collapsed by default. Open, it is a quiet card over the video — not a modal,
+   because the clip keeps playing behind it and swiping still works. */
+.reel-read { margin-top: 10px; padding: 0; background: none; border: 0; cursor: pointer;
+  color: rgba(247,246,241,.72); font: inherit; font-size: 13px; letter-spacing: .04em;
+  border-bottom: 1px solid rgba(247,246,241,.28); padding-bottom: 2px; }
+.reel-read:hover { color: #fff; border-bottom-color: rgba(247,246,241,.6); }
+.reel-lesson { margin-top: 12px; padding: 14px 16px; border-radius: 14px;
+  background: rgba(10,14,11,.72); backdrop-filter: blur(14px);
+  font-size: 14.5px; line-height: 1.62; color: rgba(247,246,241,.94); max-width: 34em; }
+.reel-vlang { display: block; margin-top: 10px; font-size: 11px; letter-spacing: .06em;
+  color: rgba(247,246,241,.5); }
+
+/* ---- PREMIUM LAYER 24 · graph links on a lesson row ----------------------
+   One quiet line under the title. Key in the faint tone, values in the dim
+   one; no chips, no icons (law 7, law 9). */
+.mod-links { margin-top: 5px; font-size: 12px; color: var(--text-dim); line-height: 1.5; display: flex; flex-wrap: wrap; gap: 4px 16px; }
+.mod-links .ml-k { color: var(--text-faint); letter-spacing: .04em; margin-right: 4px; }
+
+/* ===== Recall: concept tags at timestamps, recent asks, chat moments ===== */
+.mod-tags { flex-basis: 100%; width: 100%; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.mod-tag { font: inherit; font-size: 11.5px; color: var(--text-dim); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 999px; padding: 3px 9px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; line-height: 1.4; }
+.mod-tag span { color: var(--accent); font-variant-numeric: tabular-nums; }
+.mod-tag:hover, .mod-tag:focus-visible { border-color: var(--accent); color: var(--text); }
+.ask-recent { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding-top: 0; padding-bottom: 6px; }
+.ask-recent-k { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint); margin-right: 2px; }
+.chip.ask-again { cursor: pointer; font: inherit; font-size: 12.5px; }
+.ask-moments.compact { margin: 10px 0 0; gap: 6px; }
+.ask-moments.compact .ask-moment p { display: none; }
+.ask-moments.compact .ask-moment { padding: 6px 0; }
+.ask-speak { background: none; border: none; cursor: pointer; font-size: 14px; margin-left: 8px; vertical-align: middle; }
+@media (max-width: 480px) { .mod-tags { gap: 5px; } .mod-tag { font-size: 11px; padding: 2px 8px; } }
+
+/* ===== links into the library — an answer that names a lesson is a way in ===== */
+.ai-link { color: var(--accent); text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.ai-link:hover, .ai-link:focus-visible { text-decoration-style: solid; }
+.am-link { background: none; border: none; cursor: pointer; font-size: 13px; opacity: .55; padding: 4px; align-self: center; }
+.am-link:hover, .am-link:focus-visible { opacity: 1; }
+
+/* ===== CINEMA PLAYER =========================================================
+   The video is the screen. The stage is black and opaque — nothing from the
+   page underneath shows through — and the chrome (title bar, toolbar, educator
+   strip) fades away while the video plays, returning on a tap, a mouse move or
+   a pause. On phones the video runs edge to edge. Law 3: darkness, not outlines. */
+.player-overlay { background: #000; }
+.player-stage, .stage { background-color: #000; }
+.player-top {
+  position: absolute; left: 0; right: 0; top: 0; z-index: 3;
+  padding: 14px 16px; gap: 12px; align-items: center;
+  background: linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,0));
+  padding-top: max(14px, env(safe-area-inset-top));
+}
+.player-top > div { min-width: 0; }
+.player-top .pt { font-size: 15px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -.01em; }
+.player-top .ps { font-size: 13px; color: var(--text-dim); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-goal { display: none; }
+.player-top .back { width: 38px; height: 38px; flex-shrink: 0; background: rgba(255,255,255,.08); border-color: transparent; }
+.pl-ic {
+  width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,.08); border: 1px solid transparent; color: var(--text); font-size: 16px; cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.pl-ic svg { width: 18px; height: 18px; }
+.pl-ic:hover, .pl-ic:focus-visible { background: rgba(255,255,255,.16); }
+.player-stage { padding: 0; }
+.player-stage video, .vimeo-wrap { box-shadow: none; outline: none; }
+.player-bottom {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 3;
+  padding: 18px 16px; padding-bottom: max(18px, env(safe-area-inset-bottom));
+  gap: 10px; flex-wrap: nowrap;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.78));
+}
+.player-bottom .mod-pills { flex: 1; min-width: 0; }
+.player-bottom .mod-pill { font-size: 13px; padding: 7px 12px; background: rgba(255,255,255,.06); border-color: transparent; }
+.player-bottom .mod-pill.current { box-shadow: none; background: rgba(255,255,255,.14); color: var(--text); }
+.player-bottom .mod-pill.done { box-shadow: none; }
+.player-bottom #playerComplete { flex-shrink: 0; white-space: nowrap; }
+.player-edu-strip { position: absolute; left: 16px; right: 16px; bottom: 84px; z-index: 2; }
+/* the chrome leaves */
+.player-top, .player-bottom, .player-edu-strip { transition: opacity .38s ease, transform .38s ease; }
+.player-overlay.chrome-hidden .player-top { opacity: 0; transform: translateY(-10px); pointer-events: none; }
+.player-overlay.chrome-hidden .player-bottom { opacity: 0; transform: translateY(10px); pointer-events: none; }
+.player-overlay.chrome-hidden .player-edu-strip { opacity: 0; pointer-events: none; }
+@media (hover: hover) { .player-overlay.chrome-hidden .player-stage { cursor: none; } }
+/* desktop: the video is framed on black with room to breathe; phones: edge to edge */
+@media (min-width: 641px) {
+  .player-stage { padding: 0 48px; }
+  .player-stage video, .vimeo-wrap { border-radius: 10px; overflow: hidden; }
+  .player-top { padding: 16px 24px; }
+  .player-bottom { padding: 22px 24px; }
+}
+@media (max-width: 640px) {
+  .player-stage video, .vimeo-wrap { border-radius: 0; }
+  .player-bottom #playerComplete { padding: 9px 14px; }
+}
+@media (prefers-reduced-motion: reduce) { .player-top, .player-bottom, .player-edu-strip { transition: none; } }
+
+/* ===== lesson rows wrap; chips are a quiet second line, not a fifth column ===== */
+.module-row { flex-wrap: wrap; row-gap: 0; }
+.module-row .m-title { min-width: 0; }
+.mod-tags, .mod-links { flex-basis: 100%; width: 100%; padding-left: 52px; }
+.mod-tags { margin-top: 8px; }
+.mod-links { margin-top: 6px; }
+@media (max-width: 640px) {
+  .module-row { gap: 12px; padding: 14px 12px; }
+  .mod-tags, .mod-links { padding-left: 48px; }
+  .mod-tags { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-top: 6px; }
+  .mod-tags::-webkit-scrollbar { display: none; }
+  .mod-tag { flex-shrink: 0; }
+  .mod-tag:nth-child(n+4) { display: none; }
+  .mod-links { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
+  .mod-links .ml { display: inline; }
+}
+/* player toolbar on phones: numbers, with the current lesson's name */
+.mp-n { display: inline-block; }
+.mp-t { margin-left: 5px; }
+@media (max-width: 640px) {
+  .player-bottom .mod-pill { padding: 7px 10px; min-width: 34px; justify-content: center; display: inline-flex; }
+  .player-bottom .mod-pill:not(.current) .mp-t { display: none; }
+  .player-bottom .mod-pill:not(.current) .mp-n { margin: 0; }
+  .player-bottom #playerComplete { font-size: 13px; padding: 8px 12px; }
+}
+.nd-head .back { background: rgba(255,255,255,.08) !important; border: 1px solid transparent; color: var(--text); border-radius: 50%; }
+
+/* ===== moments: a line, not a box (Law 3); on phones a grid so the quote gets the width ===== */
+.ask-moment { border: 0; background: transparent; padding: 12px 4px; border-radius: 10px; transition: background .2s; }
+.ask-moment + .ask-moment { border-top: 1px solid var(--line); border-radius: 0; }
+.ask-moment:hover, .ask-moment:focus-visible { background: var(--surface); }
+.ask-moment .am-body p { margin: 6px 0 0; font-style: italic; color: var(--text-dim); font-size: 13px; line-height: 1.5; }
+@media (max-width: 640px) {
+  .ask-moment { display: grid; grid-template-columns: auto 1fr auto auto; column-gap: 10px; align-items: center; }
+  .ask-moment .am-body { display: contents; }
+  .ask-moment .am-body b { grid-column: 2; }
+  .ask-moment .am-body .am-course { grid-column: 2; display: block; }
+  .ask-moment .am-body p { grid-column: 1 / -1; margin-top: 8px; }
+  .ask-moment .am-link { grid-column: 3; grid-row: 1; }
+  .ask-moment .ask-go { grid-column: 4; grid-row: 1; }
+  .ask-moment .am-tc { grid-row: 1; }
+}
+
+/* ===== pass 5 leftovers ===== */
+.page .page { padding-top: 0; animation: none; }            /* a page inside a page (My learning) opened with 250px of nothing */
+#playerComplete .lbl-short { display: none; }
+@media (max-width: 640px) {
+  #playerComplete .lbl-long { display: none; }
+  #playerComplete .lbl-short { display: inline; }
+  .player-bottom .mod-pill.current { max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .mod-links .ml + .ml::before { content: ' · '; color: var(--text-faint); }
+}
+/* My learning: the tabs are the header — the inner page must not open with a header's 96px of air */
+.me-tabs + .page > .page-pad:first-child, .page .page > .page-pad:first-child { padding-top: 22px; }

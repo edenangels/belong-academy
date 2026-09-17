@@ -7,11 +7,42 @@
 const CATALOG = [
   {
     id: 'welcome-belong', title: 'Welcome to Belong', cat: 'School', grad: 1, icon: 'compass',
-    level: 'All levels', rating: 5.0, learners: 0, isNew: true, featured: true, updated: '2026-07', poster: 'media/covers/welcome-belong.svg',
-    hook: 'Giving shape to meaning.', hookSub: 'Who we are, and how we belong.',
-    desc: 'The Belong story and the way we work — a bond between place and being, and the circular vision that connects hospitality, seasonal food, nature and community. Start here.',
-    modules: ['A bond between place and being', 'The circular vision', 'The four pillars of Belong', 'How we host, grow & belong', 'Your first steps'],
-    moduleDurations: [4, 5, 4, 5, 3]
+    /* THE FIRST REAL COURSE — Craveiral's own onboarding, 12 filmed modules from
+       the Vimeo folder "New with Music" (unlisted; each id carries its h= hash,
+       which the player needs for unlisted embeds). Wired 2026-09-17. Titles are
+       the trainer's, minus the "Module N -" prefix. Durations are real. */
+    level: 'All levels', learners: 0, ai: true, isNew: true, featured: true, updated: '2026-09', poster: 'media/covers/welcome-belong.svg',
+    hook: 'Why we\'re here, and how we do it.', hookSub: 'The story, the values, the guest journey — the Craveiral way, in twelve lessons.',
+    desc: 'Craveiral\'s onboarding journey: where we come from and why, our vision and values in practice, hospitality the Craveiral way, the guest journey from first click to farewell, the houses and the farm, FarmTable, the constellation of places, what to do when things go wrong, sustainability before lunch, how we speak, and how we lead and work together.',
+    modules: [
+      'Why we\'re here: my story, and the story of Craveiral',
+      'Our vision, our mission, and the chain',
+      'Our values, in practice',
+      'Hospitality, the Craveiral way',
+      'The guest journey: from first click to farewell',
+      'The houses, the farm, and the standards we keep',
+      'FarmTable: where the philosophy becomes food',
+      'The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture',
+      'When things go wrong: complaints and service recovery',
+      'Sustainability in daily practice: what the mission asks of you before lunch',
+      'How we speak: the Craveiral voice',
+      'Leadership, autonomy, and how we work together'
+    ],
+    moduleDurations: [5, 6, 6, 6, 7, 7, 6, 6, 6, 6, 6, 7],   /* real Vimeo lengths: 4:57 6:27 5:50 6:21 6:35 6:51 6:24 5:49 5:52 5:54 5:36 6:36 */
+    moduleMedia: [
+      { type: 'vimeo', id: '1221527400', h: 'c3866a3f1f' }   /*  1. Why we're here: my story, and the story of Crave */,
+      { type: 'vimeo', id: '1227370063', h: '65ab173171' }   /*  2. Our vision, our mission, and the chain */,
+      { type: 'vimeo', id: '1227371951', h: '890f287236' }   /*  3. Our values, in practice */,
+      { type: 'vimeo', id: '1227427000', h: '76cf6e7e23' }   /*  4. Hospitality, the Craveiral way */,
+      { type: 'vimeo', id: '1227372746', h: 'c1900e20be' }   /*  5. The guest journey: from first click to farewell */,
+      { type: 'vimeo', id: '1227430198', h: '414021ba4d' }   /*  6. The houses, the farm, and the standards we keep */,
+      { type: 'vimeo', id: '1220166660', h: '7cc9ce409c' }   /*  7. FarmTable: where the philosophy becomes food */,
+      { type: 'vimeo', id: '1225586175', h: '244ba73b9d' }   /*  8. The constellation: Beach Bar, A Mesa do CAM, eve */,
+      { type: 'vimeo', id: '1227372976', h: 'dc0bb4f742' }   /*  9. When things go wrong: complaints and service rec */,
+      { type: 'vimeo', id: '1227373149', h: '1dbdf258c8' }   /* 10. Sustainability in daily practice: what the missi */,
+      { type: 'vimeo', id: '1227413580', h: '0309264292' }   /* 11. How we speak: the Craveiral voice */,
+      { type: 'vimeo', id: '1227665184', h: '467877ad3b' }   /* 12. Leadership, autonomy, and how we work together */
+    ]
   },
   {
     id: 'art-of-hospitality', title: 'The Art of Hospitality', cat: 'Staying & Feeling', grad: 4, icon: 'people',
