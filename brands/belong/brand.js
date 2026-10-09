@@ -21,6 +21,8 @@
   location: 'Portugal',
   /* Belong's OWN Firebase project (created 2026-07-17). */
   boardIndexed: true,   /* leaderboard composite index (companyId + xp) deployed 2026-09-17 */
+  /* the storefront always leads with the filmed course — never with whatever a visitor opened last */
+  heroCourse: 'welcome-belong',
   firebase: {
     apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
     authDomain: 'belong-academy.firebaseapp.com',

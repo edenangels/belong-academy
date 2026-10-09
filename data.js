@@ -43,7 +43,10 @@ const QUIZ_BANK = {
   ]
 };
 
-const PATH_RATIONALES = {
+/* The core indexes PATH_RATIONALES like a plain array (EdenRise ships one in
+   English only). Belong is PT-first, so this is an array whose entries resolve
+   to the learner's language at render time — the core never sees the difference. */
+const _PATH_RATIONALES = {
   en: [
     'Strong first assessment — two intro modules skipped.',
     'Nature moved earlier: your answers showed it\'s your gap.',
@@ -57,6 +60,9 @@ const PATH_RATIONALES = {
     'Capstone mais próximo — os seus resultados dizem que está pronto.'
   ]
 };
+const PATH_RATIONALES = _PATH_RATIONALES.en.map((_, k) => k).reduce((arr, k) => Object.defineProperty(arr, k, {
+  enumerable: true, get: () => ((typeof S !== 'undefined' && S && S.lang === 'pt') ? _PATH_RATIONALES.pt : _PATH_RATIONALES.en)[k]
+}), []);
 
 
 const GOAL_PRESETS = {
@@ -154,7 +160,7 @@ const UI = {
     comm_pinned:'Pinned', comm_official:'Official',
     cert_title:'Certificate of Completion', cert_awarded:'Awarded to', cert_for:'for completing', cert_dl:'Download certificate', cert_li:'Add to LinkedIn', certs_h:'Certificates', certs_sub:'', cert_none:'Finish a course to earn your first certificate.',
     asg_assigned:'Assigned to you', asg_due:'Due', asg_overdue:'Overdue', asg_start:'Start', dept_label:'Department', dept_none:'Choose your department', mod_locked:'Finish the previous module to unlock this one',
-    mis_h:'Field Mission', mis_sub:'Take what you learned onto the land — photo proof earns real XP.', mis_note_ph:'What did you notice? What did you do?', mis_photo:'Add photo proof', mis_submit:'Submit for review', mis_pending:'Submitted — awaiting review', mis_approved:'Mission approved!', mis_claim:'Claim', mis_declined:'Not approved this time — read the brief again and resubmit.', mis_done:'Mission complete', mis_signin:'Sign in to take on field missions', mis_photo_fail:'That photo couldn’t be used — try a JPG or PNG, or a smaller image.',
+    mis_h:'Field Mission', mis_sub:'Take what you learned onto the farm and into the houses — photo proof earns real XP.', mis_note_ph:'What did you notice? What did you do?', mis_photo:'Add photo proof', mis_submit:'Submit for review', mis_pending:'Submitted — awaiting review', mis_approved:'Mission approved!', mis_claim:'Claim', mis_declined:'Not approved this time — read the brief again and resubmit.', mis_done:'Mission complete', mis_signin:'Sign in to take on field missions', mis_photo_fail:'That photo couldn’t be used — try a JPG or PNG, or a smaller image.',
     coach_h:'Practice arena', coach_sub:'A safe place to practice the hard conversation — with an AI playing the other side.', coach_goal:'Your goal', coach_start:'Start the conversation', coach_end:'End & get feedback', coach_again:'Practice again', coach_ph:'Your reply…', coach_score:'Your feedback', coach_thinking:'…', coach_err:'Connection hiccup — your last message wasn’t lost. Send it again, or check the AI key in Settings.',
     rate_h:'How was this course?', rate_thanks:'Thank you — this helps us grow the library.',
     res_h:'Resources', cal_add:'Add to calendar',
@@ -195,14 +201,14 @@ const UI = {
     jour_h:'Journeys', jour_sub:'Structured paths with milestones, field missions and a capstone.', jour_stage:'Stage', jour_mission_tag:'+ field mission', jour_capstone:'Capstone', jour_done:'Journey complete', jour_cert:'Journey certificate', jour_progress:'complete', jour_start:'Begin the journey', jour_continue:'Continue the journey',
     flash_h:'Review deck', flash_sub:'Five quick cards from what you\u2019ve learned — keep it fresh.', flash_flip:'Tap to flip', flash_next:'Next', flash_got:'Got it', flash_done:'Deck done — see you tomorrow', flash_empty:'Finish a course to build your review deck.', flash_open:'Review 5 cards',
     board_all:'All time', board_week:'This week', board_dept:'My department', live_attended:'Attendance counted — enjoy the session!',
-    tour_welcome_t:'Welcome to Belong Academy', tour_welcome_b:'A two-minute walk through your new learning home. You can leave anytime.', tour_path_t:'Your path', tour_path_b:'The AI plans a course sequence toward your goal — start here, and it adapts as you learn.', tour_ask_t:'Ask the Academy', tour_ask_b:'Any question about the land — answered from our own courses, with links to the exact lesson.', tour_comm_t:'Community', tour_comm_b:'Questions, wins and polls with the whole team — organised by learning path.', tour_prog_t:'Your progress', tour_prog_b:'XP, streaks, skills, certificates and field missions — everything you\u2019ve earned lives here.', tour_bell_t:'Gentle nudges', tour_bell_b:'Encouraging reminders, never spam — and you control every channel in your profile.', tour_done_t:'That\u2019s the tour', tour_done_b:'Enjoy the academy — and remember: what you learn here is meant for the land.', tour_next:'Next', tour_back:'Back', tour_skip:'Skip tour', tour_finish:'Begin', tour_replay:'Take the tour',
+    tour_welcome_t:'Welcome to Belong Academy', tour_welcome_b:'A two-minute walk through your new learning home. You can leave anytime.', tour_path_t:'Your path', tour_path_b:'The AI plans a course sequence toward your goal — start here, and it adapts as you learn.', tour_ask_t:'Ask the Academy', tour_ask_b:'Any question about Craveiral — answered from our own courses, with links to the exact lesson.', tour_comm_t:'Community', tour_comm_b:'Questions, wins and polls with the whole team — organised by learning path.', tour_prog_t:'Your progress', tour_prog_b:'XP, streaks, skills, certificates and field missions — everything you\u2019ve earned lives here.', tour_bell_t:'Gentle nudges', tour_bell_b:'Encouraging reminders, never spam — and you control every channel in your profile.', tour_done_t:'That\u2019s the tour', tour_done_b:'Enjoy the academy — and remember: what you learn here is meant for the land.', tour_next:'Next', tour_back:'Back', tour_skip:'Skip tour', tour_finish:'Begin', tour_replay:'Take the tour',
     comp_h:'Training compliance', comp_sub:'Your mandatory continuous-training hours for the year — Portuguese Código do Trabalho, art. 131.º (40h/year).', comp_target:'Annual target', comp_done:'Completed', comp_left:'remaining', comp_ontrack:'On track', comp_behind:'Behind pace', comp_pace_by:'By now, aim for', comp_log:'Credited sessions', comp_none:'No hours credited yet — complete a lesson to begin.', comp_nif_prompt:'Add your NIF and contract details in your profile to activate the legal training record.', comp_confirmed:'Attendance confirmed', comp_h_unit:'h', comp_cert_btn:'Training certificate', comp_reg_btn:'Attendance register', comp_cert_dl:'Certificate downloaded', comp_reg_dl:'Register exported (CSV)', ru_annex_btn:'Relatório Único export',
     prof_nif:'Tax number (NIF)', prof_empno:'Employee no.', prof_contract:'Contract type', prof_fte:'Working time', prof_hire:'Start date',
     contract_permanent:'Permanent', contract_fixed:'Fixed-term', contract_part:'Part-time', fte_full:'Full-time', fte_half:'Part-time (50%)', ck_40h:'40h',
     ready_h:'Role readiness', ready_sub:'', ready_gap:'Biggest gap', ready_rec:'Recommended for this gap', ready_of:'of target', ready_none:'Pick a role on your profile to see your readiness.',
     ask_more:'Ask the Academy: ', dig_h:'This week at Belong', dig_sub:'Two minutes per department — stay connected to the whole.', pwa_t:'Take the academy with you', pwa_b:'Add Belong to your home screen — one tap from anywhere, even offline.', pwa_btn:'Install', pwa_ios:'On iPhone: tap Share, then \u201cAdd to Home Screen\u201d.', comm_pin:'Pin', comm_unpin:'Unpin', comm_delete:'Delete', comm_confirm_del:'Delete this post for everyone?', comm_confirm_del_reply:'Delete this reply?', comm_deleted:'Deleted', comm_privacy:'Your progress is stored in your Belong account (Firestore, EU) and only you — and Belong admins — can see it. Turn nudges on or off anytime in your profile.',
     take_title:'What you take with you', take_sub:'Three things worth keeping from this module.', take_continue:'Keep going →', take_done:'Finish course',
-    match_goal:'For your goal', missing_ask:'Not seeing what you need? →', missing_prompt:'Tell me what you’re looking for — a topic, a problem on the land, a skill — and I’ll find it or flag it for the Belong team to add. Your path only gets smarter when you push back on it.',
+    match_goal:'For your goal', missing_ask:'Not seeing what you need? →', missing_prompt:'Tell me what you’re looking for — a topic, a problem at work, a skill — and I’ll find it or flag it for the Belong team to add. Your path only gets smarter when you push back on it.',
     assigned_tag:'Assigned', chosen_tag:'Your pick',
     voice_listening:'Listening…', voice_hint:'Say it naturally — “what do I do when a guest complains?”', voice_unsupported:'Voice search needs Safari or Chrome', voice_search:'Voice search',
     quiz_q:'Question', quiz_of:'of', quiz_ai_building:'Claude is writing fresh questions from this course…', quiz_ai_tag:'AI-generated from this course', take_quiz:'Take the quiz 🎯',
@@ -217,7 +223,7 @@ const UI = {
     nudge_level_t:'Almost a new level', nudge_level_b:'Just {xp} XP from {lvl} — a quiz gets you there.', nudge_streak_t:'{n}-day streak 🔥', nudge_streak_b:'Do one lesson today to keep it alive.', nudge_lesson_t:'Pick up where you left off', nudge_lesson_b:'“{mod}” in {course} is waiting.', nudge_badge_t:'One course from a badge', nudge_badge_b:'Finish one more course to unlock Grove Keeper', nudge_welcome:'Welcome back, {name}',
     notif_title:'Notifications', notif_sub:'Change anytime.', notif_browser:'Browser notifications', notif_browser_d:'Gentle desktop reminders — works right away.', notif_email:'Email', notif_email_d:'A weekly nudge to your inbox.', notif_whatsapp:'WhatsApp', notif_whatsapp_d:'Streak & leaderboard pings on WhatsApp.', notif_phone_ph:'WhatsApp number (+351…)', notif_soon:'ready once delivery is connected', notif_on:'Notifications on', notif_blocked:'Your browser blocked notifications — enable them in site settings.',
     mail_not_connected:'Email delivery isn’t connected yet — deploy the mailer first', mail_sent:'Encouragement sent', mail_rate_limited:'Already nudged this week — we keep it gentle', mail_no_email:'No email on this account', mail_not_opted:'hasn’t opted into email nudges — consent first', mail_optin_sent:'Welcome email sent — check your inbox 📬', mail_failed:'Couldn’t send — try again in a moment',
-    search_ph:'Search courses, the land…', org:'Belong · Academy',
+    search_ph:'Search courses, the house, the farm…', org:'Belong · Academy',
     featured_eyebrow:'For you', match:'match', modules:'modules', certified:'CERTIFIED', featured_h:'Featured', featured_sub:'Essential programs, front and centre',
     all_levels:'All levels', Beginner:'Beginner', Intermediate:'Intermediate', Advanced:'Advanced', 'All levels':'All levels',
     resume_module:'Resume Module', course_details:'Details', start_learning:'Start learning', start_course:'Start course', rewatch:'Rewatch',
@@ -231,7 +237,7 @@ const UI = {
     ai_path_chip:'AI PATH', required:'REQUIRED', team_goal:'TEAM GOAL', new:'NEW', module:'MODULE', this_week_rank:'THIS WEEK', cert_issued:'cert issued', due:'Due',
     library_title:'Library', courses_tended:'courses', filter_library:'Filter the library…', all:'All', nothing_matches:'Nothing matches — try another filter or ask the AI tutor to find it.',
     in_ai_rotation:'Recommended', learners:'learners', quiz_me:'Quiz me', modules_h:'Modules', tap_module:'', coming_soon:'Coming soon', more_in:'More in', related_courses:'Related courses',
-    ask_tutor:'Ask the tutor', notes_transcript:'Notes & transcript', mark_complete:'✓ Mark module complete', soon_sub:"This lesson is being filmed for the Land Team Journey — we'll let you know the moment it's ready.", play_lesson:'▶ Play lesson',
+    ask_tutor:'Ask the tutor', notes_transcript:'Notes & transcript', mark_complete:'✓ Mark module complete', soon_sub:"This lesson is being filmed for Belong — we'll let you know the moment it's ready.", play_lesson:'▶ Play lesson',
     live_title:'Live', live_sub:'Sessions with real humans — office hours, AMAs and workshops. Replays land in the Library within a day.', watching:'watching', join_now:'Join now', remind_me:'Remind me',
     my_progress:'My Progress', progress_sub:'',
     level_ab:'Lv', xp:'XP', xp_to:'XP to', highest_level:'Highest level — Elder Oak', board_rank:'Leaderboard rank', of:'of', badges_earned:'Badges earned', nice_work:'', earn_first:'Earn your first', courses_finished:'Courses finished',
@@ -497,7 +503,7 @@ const UI = {
     ai_path_chip:'PERCURSO IA', required:'OBRIGATÓRIO', team_goal:'META DE EQUIPA', new:'NOVO', module:'MÓDULO', this_week_rank:'ESTA SEMANA', cert_issued:'certificado emitido', due:'Prazo',
     library_title:'Biblioteca', courses_tended:'cursos', filter_library:'Filtrar a biblioteca…', all:'Todos', nothing_matches:'Nada corresponde — experimente outro filtro ou peça ao tutor de IA.',
     in_ai_rotation:'Em rotação de IA', learners:'alunos', quiz_me:'Testar-me', modules_h:'Módulos', tap_module:'', coming_soon:'Em breve', more_in:'Mais em', related_courses:'Cursos relacionados',
-    ask_tutor:'Perguntar ao tutor', notes_transcript:'Notas e transcrição', mark_complete:'✓ Marcar como concluído', soon_sub:'Esta lição está a ser filmada para a Jornada da Equipa da Terra — avisamos assim que estiver pronta.', play_lesson:'▶ Reproduzir lição',
+    ask_tutor:'Perguntar ao tutor', notes_transcript:'Notas e transcrição', mark_complete:'✓ Marcar como concluído', soon_sub:'Esta lição está a ser filmada para a Belong — avisamos assim que estiver pronta.', play_lesson:'▶ Reproduzir lição',
     live_title:'Ao Vivo', live_sub:'Sessões com pessoas reais — horas abertas, perguntas e respostas e workshops. As gravações ficam na Biblioteca em um dia.', watching:'a assistir', join_now:'Entrar agora', remind_me:'Lembrar-me',
     my_progress:'O Meu Progresso', progress_sub:'',
     level_ab:'Nv', xp:'XP', xp_to:'XP para', highest_level:'Nível máximo — Carvalho Ancião', board_rank:'Posição no ranking', of:'de', badges_earned:'Distintivos ganhos', nice_work:'▲ Bom trabalho', earn_first:'Ganhe o seu primeiro', courses_finished:'Cursos terminados',
@@ -708,7 +714,7 @@ const tnote = n => _lang() === 'pt' ? String(n).replace('modules skipped by AI',
 const DEPTS = [
   { key: 'land', en: 'Land & Gardens', pt: 'Terra e Jardins' },
   { key: 'building', en: 'Building & Maintenance', pt: 'Construção e Manutenção' },
-  { key: 'hospitality', en: 'Malhão Pardo & Hospitality', pt: 'Malhão Pardo e Hospitalidade' },
+  { key: 'hospitality', en: 'Craveiral & Hospitality', pt: 'Craveiral e Hospitalidade' },
   { key: 'animals', en: 'Animal Care', pt: 'Cuidado Animal' },
   { key: 'office', en: 'Office & Leadership', pt: 'Escritório e Liderança' }
 ];
@@ -723,7 +729,7 @@ const MISSIONS = {
     en: { title: 'The sit spot', brief: 'Choose one outdoor spot on the property. Sit there 15 minutes in silence, three days in a row. Note what changes each day — light, sound, life. Photograph your notes or the spot as proof.' },
     pt: { title: 'O lugar de estar', brief: 'Escolha um lugar ao ar livre na propriedade. Sente-se lá 15 minutos em silêncio, três dias seguidos. Anote o que muda a cada dia — luz, som, vida. Fotografe as notas ou o lugar como prova.' } },
   'growing-regenerating': { xp: 150,
-    en: { title: 'From soil to table', brief: 'Harvest (or help harvest) one thing grown on the land and follow it to a guest\'s plate. Photograph the two ends of that journey — the plant and the plate.' },
+    en: { title: 'From soil to table', brief: 'Harvest (or help harvest) one thing grown on the farm and follow it to a guest\'s plate. Photograph the two ends of that journey — the plant and the plate.' },
     pt: { title: 'Da terra à mesa', brief: 'Colha (ou ajude a colher) algo cultivado na propriedade e acompanhe-o até ao prato de um hóspede. Fotografe as duas pontas dessa viagem — a planta e o prato.' } }
 };
 const missionFor = id => { const m = MISSIONS[id]; return m ? Object.assign({ xp: m.xp }, _lang() === 'pt' ? m.pt : m.en) : null; };
