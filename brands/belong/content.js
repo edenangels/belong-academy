@@ -48,51 +48,63 @@ const CATALOG = [
   },
   {
     id: 'art-of-hospitality', title: 'The Art of Hospitality', cat: 'Staying & Feeling', grad: 4, icon: 'people',
-    level: 'All levels', rating: 4.9, learners: 0, isNew: true, featured: true, updated: '2026-07', poster: 'media/covers/art-of-hospitality.svg',
+    level: 'All levels', learners: 0, updated: '2026-07', poster: 'media/covers/art-of-hospitality.svg',
     hook: 'Make anyone feel they belong.', hookSub: 'Presence, warmth, and the craft of welcome.',
     desc: 'Hospitality is more than service — it is the practice of making a guest feel seen, at ease, and part of something. Presence, reading a room, and the small details that quietly say: you belong here.',
     modules: ['The first ninety seconds', 'Presence & attention', 'Reading the room', 'The details that say welcome', 'Hosting under pressure', 'A stay to remember'],
-    moduleDurations: [4, 6, 5, 5, 6, 4]
+    moduleDurations: [4, 6, 5, 5, 6, 4],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 6 }, () => ({ type: 'soon' }))
   },
   {
     id: 'seasonal-table', title: 'The Seasonal Table', cat: 'Growing & Tasting', grad: 6, icon: 'sprout',
-    level: 'Beginner', rating: 4.9, learners: 0, updated: '2026-07', poster: 'media/covers/seasonal-table.svg',
+    level: 'Beginner', learners: 0, updated: '2026-07', poster: 'media/covers/seasonal-table.svg',
     hook: 'Taste the season, plate the place.', hookSub: 'From garden to table, with nothing wasted.',
     desc: 'Cooking and tasting with the seasons — reading what the land gives, building flavour, and setting a table that tells a story. The circular kitchen, where nothing is wasted and everything belongs.',
     modules: ['Reading the season', 'Building flavour', 'The circular kitchen', 'The art of tasting', 'Plating a story', 'Hosting a tasting'],
-    moduleDurations: [5, 7, 6, 6, 5, 5]
+    moduleDurations: [5, 7, 6, 6, 5, 5],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 6 }, () => ({ type: 'soon' }))
   },
   {
     id: 'growing-regenerating', title: 'Growing & Regenerating', cat: 'Growing & Tasting', grad: 7, icon: 'seed',
-    level: 'Beginner', rating: 4.8, learners: 0, updated: '2026-07', poster: 'media/covers/growing-regenerating.svg',
+    level: 'Beginner', learners: 0, updated: '2026-07', poster: 'media/covers/growing-regenerating.svg',
     hook: 'Grow food, give back more.', hookSub: 'The circular economy, rooted in the ground.',
     desc: 'How Belong grows — regenerative practices that feed the table and the soil at once. Composting, seasons, and closing the loop between kitchen, garden and community.',
     modules: ['What regeneration means', 'Growing with the seasons', 'Closing the loop', 'Compost & circularity', 'From garden to guest'],
-    moduleDurations: [5, 6, 5, 5, 4]
+    moduleDurations: [5, 6, 5, 5, 4],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
   },
   {
     id: 'belong-to-nature', title: 'Belong to Nature', cat: 'To Nature', grad: 5, icon: 'tree',
-    level: 'All levels', rating: 4.9, learners: 0, updated: '2026-07', poster: 'media/covers/belong-to-nature.svg',
+    level: 'All levels', learners: 0, updated: '2026-07', poster: 'media/covers/belong-to-nature.svg',
     hook: 'Slow down. Belong to the place.', hookSub: 'Nature connection as the ground of belonging.',
     desc: 'To belong you need ground. A practice of attention outdoors — walking, noticing, and the felt sense of being part of a place rather than passing through it.',
     modules: ['The ground beneath belonging', 'A walk of attention', 'Noticing what a place offers', 'Belonging to a place', 'Sharing nature with guests'],
-    moduleDurations: [4, 5, 5, 4, 4]
+    moduleDurations: [4, 5, 5, 4, 4],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
   },
   {
     id: 'community-circular', title: 'Community & the Circular Way', cat: 'Community', grad: 3, icon: 'people',
-    level: 'Beginner', rating: 4.8, learners: 0, updated: '2026-07', poster: 'media/covers/community-circular.svg',
+    level: 'Beginner', learners: 0, updated: '2026-07', poster: 'media/covers/community-circular.svg',
     hook: 'No one belongs alone.', hookSub: 'Community, the commons, and the circular economy.',
     desc: 'Belong began as a notion of community and a circular economy. How shared spaces, shared work and shared care create the conditions for people — and places — to belong.',
     modules: ['Why community is the point', 'The circular economy, simply', 'Shared spaces & the commons', 'Hosting a community', 'A 90-day belonging plan'],
-    moduleDurations: [4, 5, 5, 5, 4]
+    moduleDurations: [4, 5, 5, 5, 4],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
   }
 ,{
     id: 'ai-literacy', title: 'Working Well with AI', cat: 'School', grad: 4, icon: 'compass', recertMonths: 12,
-    level: 'All levels', rating: 5.0, learners: 0, isNew: true, updated: '2026-07', poster: 'media/covers/ai-literacy.svg',
+    level: 'All levels', learners: 0, updated: '2026-07', poster: 'media/covers/ai-literacy.svg',
     hook: 'AI is in the house now. Use it well.', hookSub: 'The literacy every EU workplace must have — practical, honest, ours.',
     desc: 'The EU AI Act (Article 4) asks every organisation using AI to make sure its people are AI-literate. This is Belong\'s version: what AI is and isn\'t, how to use it honestly around guests and each other, what it does with data, and what the law expects of us.',
     modules: ['What AI Is (and Isn\'t)', 'Working with AI at Belong', 'When AI Is Wrong', 'Guest Data & Privacy', 'The EU AI Act & Us'],
-    moduleDurations: [4, 5, 5, 4, 5]
+    moduleDurations: [4, 5, 5, 4, 5],
+    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
+    moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
   }
 ];
 
