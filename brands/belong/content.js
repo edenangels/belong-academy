@@ -7,6 +7,8 @@
 const CATALOG = [
   {
     id: 'welcome-belong', title: 'Welcome to Belong', cat: 'School', grad: 1, icon: 'compass',
+    outcomes: ['Tell Craveiral\'s story — and why Belong exists', 'Live our values and the Craveiral way of hospitality in every guest moment', 'Handle complaints and recover a guest\'s stay with confidence', 'Speak in the Craveiral voice and lead with autonomy as one team'],
+    outcomes_pt: ['Contar a história do Craveiral — e porque existe a Belong', 'Viver os nossos valores e a hospitalidade à maneira do Craveiral em cada momento com o hóspede', 'Lidar com reclamações e recuperar a estadia de um hóspede com confiança', 'Falar com a voz do Craveiral e liderar com autonomia, como uma equipa'],
     /* THE FIRST REAL COURSE — Craveiral's own onboarding, 12 filmed modules from
        the Vimeo folder "New with Music" (unlisted; each id carries its h= hash,
        which the player needs for unlisted embeds). Wired 2026-09-17. Titles are
