@@ -1,5 +1,5 @@
 {
- "generatedAt": 1789644966168,
+ "generatedAt": 1791970394747,
  "courses": {
   "welcome-belong": {
    "title": "Welcome to Belong",
@@ -15,13 +15,13 @@
      "capability": null,
      "tags": [
       "land",
-      "years",
-      "built",
-      "every",
-      "about",
-      "everything",
-      "something",
-      "field"
+      "field",
+      "eight",
+      "graverell",
+      "soil",
+      "guests",
+      "walkways",
+      "hotel"
      ],
      "regime": null,
      "summary": "Hello, I'm Pedro. And if you're watching this, it's because you're part of Graverell. Maybe you started this week. Maybe you've been with us for years. Either way, I want to start at the beginning. Because everything we do here, every decision we",
@@ -74,10 +74,10 @@
       "guests",
       "guest",
       "name",
-      "those",
       "land",
       "village",
-      "every"
+      "region",
+      "business"
      ],
      "regime": null,
      "summary": "Welcome back. In this module I want to explain Belong. You've seen the word on our materials, in our communication, maybe on my email signature, Belong, giving shape to meaning.",
@@ -128,12 +128,12 @@
      "tags": [
       "guest",
       "guests",
-      "real",
       "sustainability",
-      "something",
       "financial",
-      "people",
-      "about"
+      "craverell",
+      "simplicity",
+      "values",
+      "choice"
      ],
      "regime": null,
      "summary": "Every company has values. Most of them live on a wall in a meeting room and die there. I want hours to live in your hands, in the decisions you make when nobody's watching, when the day is long, when the guest is difficult, when the easy choice and the right c",
@@ -186,10 +186,10 @@
       "guest",
       "service",
       "check",
-      "those",
       "guests",
-      "every",
-      "food"
+      "food",
+      "cold",
+      "house"
      ],
      "regime": null,
      "summary": "Let's talk about hospitality. The real thing, not the industry, the craft. I want to start with a distinction that changed the way I think about this work. There is a difference between service and hospitality.",
@@ -240,12 +240,12 @@
      "tags": [
       "stage",
       "guests",
-      "every",
       "guest",
       "journey",
-      "first",
       "morning",
-      "long"
+      "creveral",
+      "which",
+      "made"
      ],
      "regime": null,
      "summary": "Every guest who arrives at Crevoral is on a journey that started long before the M501 brought them to our gate and finishes long after they leave. In this module, I want to walk that old journey with you, stage by stage, because each of you owns a piece of it ",
@@ -265,12 +265,12 @@
      "tags": [
       "farm",
       "meters",
-      "every",
       "square",
       "pool",
       "guest",
       "which",
-      "house"
+      "house",
+      "houses"
      ],
      "regime": null,
      "summary": "If you're going to represent Graveral, you need to know Graveral. Properly, in detail. The way you know your own home. This module is a tour. Some of this, you know. I want all of you to know all of it. Start with the big picture. 9 hectares. 38 independent ho",
@@ -321,12 +321,12 @@
      "tags": [
       "table",
       "farm",
-      "about",
       "guest",
       "food",
       "alentejo",
-      "many",
-      "every"
+      "kitchen",
+      "cheeses",
+      "local"
      ],
      "regime": null,
      "summary": "If crevaryl has a soul, you can taste it, literally. This module is about the farm table and about food, which, if you know me at all,",
@@ -375,14 +375,14 @@
      "durationSec": 349,
      "capability": null,
      "tags": [
-      "same",
       "beach",
       "farm",
       "table",
       "wedding",
-      "every",
       "constellation",
-      "creviral"
+      "creviral",
+      "land",
+      "hospitality"
      ],
      "regime": null,
      "summary": "So far, we've mostly stood on the farm. In this module, I want to lift your eyes to the old constellation,",
@@ -432,13 +432,13 @@
      "capability": null,
      "tags": [
       "guest",
-      "back",
       "complaint",
-      "never",
-      "about",
       "review",
-      "real",
-      "problem"
+      "complains",
+      "second",
+      "wasn",
+      "three",
+      "team"
      ],
      "regime": null,
      "summary": "Let's talk about the moments nobody puts on Instagram. The complaint at the front desk, the dish sent back, the guest who arrives already angry, the review that stings.",
@@ -487,14 +487,14 @@
      "durationSec": 354,
      "capability": null,
      "tags": [
-      "every",
       "farm",
       "guests",
       "water",
       "waste",
-      "better",
-      "about",
-      "regeneration"
+      "regeneration",
+      "sustainability",
+      "full",
+      "kitchen"
      ],
      "regime": null,
      "summary": "We've talked about regeneration as a vision. Now let's bring it down to earth. Literally. Because sustainability at Craverell isn't a chapter in a report.",
@@ -544,13 +544,13 @@
      "capability": null,
      "tags": [
       "guests",
-      "words",
-      "about",
       "place",
       "voice",
       "warm",
-      "never",
-      "care"
+      "care",
+      "land",
+      "sound",
+      "kitchen"
      ],
      "regime": null,
      "summary": "This module is about words. It might seem like a strange training topic, but you'll use words with guests hundreds of times a day,",
@@ -599,14 +599,13 @@
      "durationSec": 395,
      "capability": null,
      "tags": [
-      "people",
-      "work",
       "guest",
       "respect",
-      "real",
-      "never",
       "mistake",
-      "about"
+      "place",
+      "wrong",
+      "trust",
+      "team"
      ],
      "regime": null,
      "summary": "Last module, and I've saved the most important conversation for the end, how we work together. Not the org chart, the real thing.",

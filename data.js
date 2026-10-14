@@ -72,7 +72,7 @@ const GOAL_PRESETS = {
   'Belong Host': ['welcome-belong', 'art-of-hospitality', 'community-circular'],
   'Seasonal Cook': ['welcome-belong', 'seasonal-table', 'growing-regenerating'],
   'Nature Guide': ['welcome-belong', 'belong-to-nature', 'growing-regenerating'],
-  'Team Lead': ['welcome-belong', 'art-of-hospitality', 'community-circular', 'ai-literacy'],
+  'Team Lead': ['welcome-belong', 'art-of-hospitality', 'community-circular'],
 };
 
 const ROLE_OPTIONS = [
@@ -786,11 +786,10 @@ const JOURNEYS = [
   },
   {
     id: 'rooted-in-place', icon: 'tree', grad: 7, xp: 250,
-    en: { title: 'Rooted in Place', desc: 'Know the land you stand on — nature, growing, and working well with the tools of our time.' },
-    pt: { title: 'Enraizado no Lugar', desc: 'Conhecer a terra onde está — natureza, cultivo e trabalhar bem com as ferramentas do nosso tempo.' },
+    en: { title: 'Rooted in Place', desc: 'Know the place you stand in — its nature, and what the farm gives.' },
+    pt: { title: 'Enraizado no Lugar', desc: 'Conhecer o lugar onde está — a sua natureza e o que a quinta dá.' },
     stages: [
       { course: 'belong-to-nature', mission: true },
-      { course: 'ai-literacy' },
       { course: 'growing-regenerating', capstone: true }
     ]
   }

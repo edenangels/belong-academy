@@ -98,16 +98,6 @@ const CATALOG = [
     /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
     moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
   }
-,{
-    id: 'ai-literacy', title: 'Working Well with AI', cat: 'School', grad: 4, icon: 'compass', recertMonths: 12,
-    level: 'All levels', learners: 0, updated: '2026-07', poster: 'media/covers/ai-literacy.svg',
-    hook: 'AI is in the house now. Use it well.', hookSub: 'The literacy every EU workplace must have — practical, honest, ours.',
-    desc: 'The EU AI Act (Article 4) asks every organisation using AI to make sure its people are AI-literate. This is Belong\'s version: what AI is and isn\'t, how to use it honestly around guests and each other, what it does with data, and what the law expects of us.',
-    modules: ['What AI Is (and Isn\'t)', 'Working with AI at Belong', 'When AI Is Wrong', 'Guest Data & Privacy', 'The EU AI Act & Us'],
-    moduleDurations: [4, 5, 5, 4, 5],
-    /* scripted, not yet filmed — every row reads \"Coming soon\" until the footage lands */
-    moduleMedia: Array.from({ length: 5 }, () => ({ type: 'soon' }))
-  }
 ];
 
 /* No invented sessions (13 Oct 2026, John: no fiction on the storefront). Real ones come from the
@@ -119,18 +109,6 @@ const LIVE_SESSIONS = [];
 const COURSE_HOOKS = {};
 const COURSE_HOOKS_PT = {};
 const COURSE_QUIZ = {
-  'ai-literacy': {
-    en: [
-      { q: 'The Academy AI gives you a confident, detailed answer about a legal deadline. What is the right next move?', opts: ['Trust it — it sounded specific and confident', 'Check it against the official source before acting on it', 'Ask the AI to repeat it to confirm', 'Share it with the house immediately'], a: 1 },
-      { q: 'You want the AI tutor to help you actually LEARN a topic, not just hand you answers. Which is the best use?', opts: ['Ask for the final answer straight away', 'Have it quiz you and explain what you got wrong', 'Copy its summary into your notes unread', 'Avoid the AI entirely'], a: 1 },
-      { q: 'A colleague wants to paste a guest\'s personal data into a public AI chatbot to draft a letter. What do you say?', opts: ['Fine — chatbots are private', 'Only if the letter is short', 'Don\'t — personal data stays inside our GDPR-covered tools; anonymise it first', 'Only paste the NIF, not the name'], a: 2 }
-    ],
-    pt: [
-      { q: 'A IA da Academia dá-lhe uma resposta confiante e detalhada sobre um prazo legal. Qual é o passo certo?', opts: ['Confiar — parecia específica e confiante', 'Verificar na fonte oficial antes de agir', 'Pedir à IA para repetir, para confirmar', 'Partilhar já com a equipa'], a: 1 },
-      { q: 'Quer que o tutor de IA o ajude a APRENDER de verdade, não só a dar respostas. Qual é o melhor uso?', opts: ['Pedir logo a resposta final', 'Pedir que o teste e explique o que errou', 'Copiar o resumo para as notas sem ler', 'Evitar a IA por completo'], a: 1 },
-      { q: 'Um colega quer colar dados pessoais de um hóspede num chatbot público de IA para redigir uma carta. O que diz?', opts: ['Pode ser — os chatbots são privados', 'Só se a carta for curta', 'Não — dados pessoais ficam nas nossas ferramentas cobertas pelo RGPD; anonimizar primeiro', 'Colar só o NIF, não o nome'], a: 2 }
-    ]
-  }
 };
 const TAKEAWAYS = {};
 const COURSE_PT = {};
