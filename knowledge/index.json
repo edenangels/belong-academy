@@ -1,5 +1,5 @@
 {
- "generatedAt": 1791970394747,
+ "generatedAt": 1791975178897,
  "courses": {
   "welcome-belong": {
    "title": "Welcome to Belong",
@@ -15,36 +15,36 @@
      "capability": null,
      "tags": [
       "land",
+      "craveiral",
       "field",
       "eight",
-      "graverell",
       "soil",
       "guests",
       "walkways",
       "hotel"
      ],
      "regime": null,
-     "summary": "Hello, I'm Pedro. And if you're watching this, it's because you're part of Graverell. Maybe you started this week. Maybe you've been with us for years. Either way, I want to start at the beginning. Because everything we do here, every decision we",
+     "summary": "Hello, I'm Pedro. And if you're watching this, it's because you're part of Craveiral. Maybe you started this week. Maybe you've been with us for years. Either way, I want to start at the beginning. Because everything we do here, every decision we",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
      "moments": [
       {
        "t0": 51,
-       "teaches": "What is the origin of the name 'Graverell'?",
+       "teaches": "What is the origin of the name 'Craveiral'?",
        "audit": "verified"
       },
       {
        "t0": 139,
-       "teaches": "What was Graverell primarily built to be?",
+       "teaches": "What was Craveiral primarily built to be?",
        "audit": "verified"
       },
       {
        "t0": 169,
-       "teaches": "When making decisions about the use of land at Graverell, what should be the primary consideration?",
+       "teaches": "When making decisions about the use of land at Craveiral, what should be the primary consideration?",
        "audit": "corrected"
       },
       {
        "t0": 198,
-       "teaches": "When designing new infrastructure at Graverell, what should be the guiding principle?",
+       "teaches": "When designing new infrastructure at Craveiral, what should be the guiding principle?",
        "audit": "verified"
       },
       {
@@ -54,7 +54,7 @@
       },
       {
        "t0": 169,
-       "teaches": "A guest is requesting to build a private villa on a plot of land within the Graverell property, which would require clea",
+       "teaches": "A guest is requesting to build a private villa on a plot of land within the Craveiral property, which would require clea",
        "audit": "corrected"
       }
      ],
@@ -66,7 +66,7 @@
      "language": "en",
      "translated": null,
      "segments": 104,
-     "chars": 5113,
+     "chars": 5119,
      "durationSec": 386,
      "capability": null,
      "tags": [
@@ -76,8 +76,8 @@
       "name",
       "land",
       "village",
-      "region",
-      "business"
+      "craveiral",
+      "region"
      ],
      "regime": null,
      "summary": "Welcome back. In this module I want to explain Belong. You've seen the word on our materials, in our communication, maybe on my email signature, Belong, giving shape to meaning.",
@@ -95,12 +95,12 @@
       },
       {
        "t0": 134,
-       "teaches": "What should a worker at Graveral Farmhouse do to contribute to the regeneration of the territory?",
+       "teaches": "What should a worker at Craveiral Farmhouse do to contribute to the regeneration of the territory?",
        "audit": "corrected"
       },
       {
        "t0": 162,
-       "teaches": "How should a team member at the Mesa Ducam restaurant support the circular economy?",
+       "teaches": "How should a team member at the A Mesa do CAM restaurant support the circular economy?",
        "audit": "corrected"
       },
       {
@@ -110,7 +110,7 @@
       },
       {
        "t0": 109,
-       "teaches": "A guest at the Graveral Farmhouse asks about the organization's vision. How should the staff member respond?",
+       "teaches": "A guest at the Craveiral Farmhouse asks about the organization's vision. How should the staff member respond?",
        "audit": "verified"
       }
      ],
@@ -122,15 +122,15 @@
      "language": "en",
      "translated": null,
      "segments": 85,
-     "chars": 4886,
+     "chars": 4889,
      "durationSec": 350,
      "capability": null,
      "tags": [
       "guest",
       "guests",
       "sustainability",
+      "craveiral",
       "financial",
-      "craverell",
       "simplicity",
       "values",
       "choice"
@@ -151,7 +151,7 @@
       },
       {
        "t0": 56,
-       "teaches": "What should a worker do to protect the mission of Craverell?",
+       "teaches": "What should a worker do to protect the mission of Craveiral?",
        "audit": "corrected"
       },
       {
@@ -178,7 +178,7 @@
      "language": "en",
      "translated": null,
      "segments": 116,
-     "chars": 4944,
+     "chars": 4946,
      "durationSec": 380,
      "capability": null,
      "tags": [
@@ -234,21 +234,21 @@
      "language": "en",
      "translated": null,
      "segments": 78,
-     "chars": 5208,
+     "chars": 5215,
      "durationSec": 394,
      "capability": null,
      "tags": [
       "stage",
       "guests",
+      "craveiral",
       "guest",
       "journey",
       "morning",
-      "creveral",
       "which",
       "made"
      ],
      "regime": null,
-     "summary": "Every guest who arrives at Crevoral is on a journey that started long before the M501 brought them to our gate and finishes long after they leave. In this module, I want to walk that old journey with you, stage by stage, because each of you owns a piece of it ",
+     "summary": "Every guest who arrives at Craveiral is on a journey that started long before the M501 brought them to our gate and finishes long after they leave. In this module, I want to walk that old journey with you, stage by stage, because each of you owns a piece of it",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/4",
      "moments": [],
      "questions": 0
@@ -259,7 +259,7 @@
      "language": "en",
      "translated": null,
      "segments": 58,
-     "chars": 5321,
+     "chars": 5322,
      "durationSec": 411,
      "capability": null,
      "tags": [
@@ -270,20 +270,20 @@
       "guest",
       "which",
       "house",
-      "houses"
+      "craveiral"
      ],
      "regime": null,
-     "summary": "If you're going to represent Graveral, you need to know Graveral. Properly, in detail. The way you know your own home. This module is a tour. Some of this, you know. I want all of you to know all of it. Start with the big picture. 9 hectares. 38 independent ho",
+     "summary": "If you're going to represent Craveiral, you need to know Craveiral. Properly, in detail. The way you know your own home. This module is a tour. Some of this, you know. I want all of you to know all of it. Start with the big picture. 9 hectares. 38 independent ",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/5",
      "moments": [
       {
        "t0": 29,
-       "teaches": "What percentage of the land at Graveral is built?",
+       "teaches": "What percentage of the land at Craveiral is built?",
        "audit": "corrected"
       },
       {
        "t0": 57,
-       "teaches": "What amenities are shared by all units at Graveral?",
+       "teaches": "What amenities are shared by all units at Craveiral?",
        "audit": "corrected"
       },
       {
@@ -298,12 +298,12 @@
       },
       {
        "t0": 174,
-       "teaches": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Graveral?",
+       "teaches": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Craveiral?",
        "audit": "corrected"
       },
       {
        "t0": 200,
-       "teaches": "A guest is planning a wedding reception for 300 people and wants to know if Graveral has a suitable venue. What would yo",
+       "teaches": "A guest is planning a wedding reception for 300 people and wants to know if Craveiral has a suitable venue. What would y",
        "audit": "corrected"
       }
      ],
@@ -315,21 +315,21 @@
      "language": "en",
      "translated": null,
      "segments": 134,
-     "chars": 4998,
+     "chars": 4996,
      "durationSec": 383,
      "capability": null,
      "tags": [
-      "table",
-      "farm",
       "guest",
+      "table",
       "food",
       "alentejo",
+      "farm",
       "kitchen",
-      "cheeses",
-      "local"
+      "farmtable",
+      "cheeses"
      ],
      "regime": null,
-     "summary": "If crevaryl has a soul, you can taste it, literally. This module is about the farm table and about food, which, if you know me at all,",
+     "summary": "If Craveiral has a soul, you can taste it, literally. This module is about the FarmTable and about food, which, if you know me at all,",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/6",
      "moments": [
       {
@@ -371,16 +371,16 @@
      "language": "en",
      "translated": null,
      "segments": 116,
-     "chars": 4507,
+     "chars": 4516,
      "durationSec": 349,
      "capability": null,
      "tags": [
       "beach",
       "farm",
+      "craveiral",
       "table",
       "wedding",
       "constellation",
-      "creviral",
       "land",
       "hospitality"
      ],
@@ -395,7 +395,7 @@
       },
       {
        "t0": 80,
-       "teaches": "What is the significance of Emesa do Cam in Lisbon?",
+       "teaches": "What is the significance of A Mesa do CAM in Lisbon?",
        "audit": "corrected"
       },
       {
@@ -405,17 +405,17 @@
       },
       {
        "t0": 133,
-       "teaches": "What is the standard for events and catering at Creviral?",
+       "teaches": "What is the standard for events and catering at Craveiral?",
        "audit": "corrected"
       },
       {
        "t0": 160,
-       "teaches": "A guest is planning a wedding at Creviral and wants to know what options are available. What should you tell them?",
+       "teaches": "A guest is planning a wedding at Craveiral and wants to know what options are available. What should you tell them?",
        "audit": "corrected"
       },
       {
        "t0": 186,
-       "teaches": "A company is planning a corporate retreat at Creviral and wants to know what activities are available. What should you t",
+       "teaches": "A company is planning a corporate retreat at Craveiral and wants to know what activities are available. What should you ",
        "audit": "corrected"
       }
      ],
@@ -483,7 +483,7 @@
      "language": "en",
      "translated": null,
      "segments": 78,
-     "chars": 4475,
+     "chars": 4478,
      "durationSec": 354,
      "capability": null,
      "tags": [
@@ -493,16 +493,16 @@
       "waste",
       "regeneration",
       "sustainability",
-      "full",
-      "kitchen"
+      "craveiral",
+      "full"
      ],
      "regime": null,
-     "summary": "We've talked about regeneration as a vision. Now let's bring it down to earth. Literally. Because sustainability at Craverell isn't a chapter in a report.",
+     "summary": "We've talked about regeneration as a vision. Now let's bring it down to earth. Literally. Because sustainability at Craveiral isn't a chapter in a report.",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/9",
      "moments": [
       {
        "t0": 29,
-       "teaches": "Why is water recycling important at Craverell?",
+       "teaches": "Why is water recycling important at Craveiral?",
        "audit": "verified"
       },
       {
@@ -544,13 +544,13 @@
      "capability": null,
      "tags": [
       "guests",
+      "craveiral",
       "place",
       "voice",
       "warm",
       "care",
       "land",
-      "sound",
-      "kitchen"
+      "sound"
      ],
      "regime": null,
      "summary": "This module is about words. It might seem like a strange training topic, but you'll use words with guests hundreds of times a day,",
@@ -558,7 +558,7 @@
      "moments": [
       {
        "t0": 29,
-       "teaches": "What tone should the crevaryl voice convey when interacting with guests?",
+       "teaches": "What tone should the Craveiral voice convey when interacting with guests?",
        "audit": "verified"
       },
       {
@@ -595,7 +595,7 @@
      "language": "en",
      "translated": null,
      "segments": 130,
-     "chars": 4958,
+     "chars": 4960,
      "durationSec": 395,
      "capability": null,
      "tags": [

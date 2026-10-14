@@ -1,5 +1,5 @@
 {
- "generatedAt": 1791970394879,
+ "generatedAt": 1791975181084,
  "nodes": [
   {
    "id": "course:welcome-belong",
@@ -21,6 +21,11 @@
    "title": "land"
   },
   {
+   "id": "concept:craveiral",
+   "kind": "concept",
+   "title": "craveiral"
+  },
+  {
    "id": "concept:field",
    "kind": "concept",
    "title": "field"
@@ -29,11 +34,6 @@
    "id": "concept:eight",
    "kind": "concept",
    "title": "eight"
-  },
-  {
-   "id": "concept:graverell",
-   "kind": "concept",
-   "title": "graverell"
   },
   {
    "id": "concept:soil",
@@ -90,11 +90,6 @@
    "title": "region"
   },
   {
-   "id": "concept:business",
-   "kind": "concept",
-   "title": "business"
-  },
-  {
    "id": "module:welcome-belong:2",
    "kind": "module",
    "title": "Our values, in practice",
@@ -112,11 +107,6 @@
    "id": "concept:financial",
    "kind": "concept",
    "title": "financial"
-  },
-  {
-   "id": "concept:craverell",
-   "kind": "concept",
-   "title": "craverell"
   },
   {
    "id": "concept:simplicity",
@@ -197,11 +187,6 @@
    "title": "morning"
   },
   {
-   "id": "concept:creveral",
-   "kind": "concept",
-   "title": "creveral"
-  },
-  {
    "id": "concept:which",
    "kind": "concept",
    "title": "which"
@@ -241,11 +226,6 @@
    "title": "pool"
   },
   {
-   "id": "concept:houses",
-   "kind": "concept",
-   "title": "houses"
-  },
-  {
    "id": "module:welcome-belong:6",
    "kind": "module",
    "title": "FarmTable: where the philosophy becomes food",
@@ -270,14 +250,14 @@
    "title": "kitchen"
   },
   {
+   "id": "concept:farmtable",
+   "kind": "concept",
+   "title": "farmtable"
+  },
+  {
    "id": "concept:cheeses",
    "kind": "concept",
    "title": "cheeses"
-  },
-  {
-   "id": "concept:local",
-   "kind": "concept",
-   "title": "local"
   },
   {
    "id": "module:welcome-belong:7",
@@ -302,11 +282,6 @@
    "id": "concept:constellation",
    "kind": "concept",
    "title": "constellation"
-  },
-  {
-   "id": "concept:creviral",
-   "kind": "concept",
-   "title": "creviral"
   },
   {
    "id": "module:welcome-belong:8",
@@ -460,6 +435,12 @@
   },
   {
    "from": "module:welcome-belong:0",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:0",
    "to": "concept:field",
    "rel": "about",
    "w": 1
@@ -467,12 +448,6 @@
   {
    "from": "module:welcome-belong:0",
    "to": "concept:eight",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:0",
-   "to": "concept:graverell",
    "rel": "about",
    "w": 1
   },
@@ -544,13 +519,13 @@
   },
   {
    "from": "module:welcome-belong:1",
-   "to": "concept:region",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:welcome-belong:1",
-   "to": "concept:business",
+   "to": "concept:region",
    "rel": "about",
    "w": 1
   },
@@ -580,13 +555,13 @@
   },
   {
    "from": "module:welcome-belong:2",
-   "to": "concept:financial",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:welcome-belong:2",
-   "to": "concept:craverell",
+   "to": "concept:financial",
    "rel": "about",
    "w": 1
   },
@@ -682,6 +657,12 @@
   },
   {
    "from": "module:welcome-belong:4",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:4",
    "to": "concept:guest",
    "rel": "about",
    "w": 1
@@ -695,12 +676,6 @@
   {
    "from": "module:welcome-belong:4",
    "to": "concept:morning",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:creveral",
    "rel": "about",
    "w": 1
   },
@@ -766,7 +741,7 @@
   },
   {
    "from": "module:welcome-belong:5",
-   "to": "concept:houses",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
@@ -778,19 +753,13 @@
   },
   {
    "from": "module:welcome-belong:6",
-   "to": "concept:table",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
    "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "concept:table",
    "rel": "about",
    "w": 1
   },
@@ -808,19 +777,25 @@
   },
   {
    "from": "module:welcome-belong:6",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:6",
    "to": "concept:kitchen",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:welcome-belong:6",
-   "to": "concept:cheeses",
+   "to": "concept:farmtable",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:welcome-belong:6",
-   "to": "concept:local",
+   "to": "concept:cheeses",
    "rel": "about",
    "w": 1
   },
@@ -844,6 +819,12 @@
   },
   {
    "from": "module:welcome-belong:7",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:7",
    "to": "concept:table",
    "rel": "about",
    "w": 1
@@ -857,12 +838,6 @@
   {
    "from": "module:welcome-belong:7",
    "to": "concept:constellation",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:creviral",
    "rel": "about",
    "w": 1
   },
@@ -976,13 +951,13 @@
   },
   {
    "from": "module:welcome-belong:9",
-   "to": "concept:full",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:welcome-belong:9",
-   "to": "concept:kitchen",
+   "to": "concept:full",
    "rel": "about",
    "w": 1
   },
@@ -995,6 +970,12 @@
   {
    "from": "module:welcome-belong:10",
    "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:welcome-belong:10",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
@@ -1031,12 +1012,6 @@
   {
    "from": "module:welcome-belong:10",
    "to": "concept:sound",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:kitchen",
    "rel": "about",
    "w": 1
   },
@@ -1098,25 +1073,25 @@
    "from": "module:welcome-belong:1",
    "to": "module:welcome-belong:7",
    "rel": "related",
-   "w": 0.143
+   "w": 0.159
   },
   {
    "from": "module:welcome-belong:1",
    "to": "module:welcome-belong:3",
    "rel": "related",
-   "w": 0.127
+   "w": 0.143
   },
   {
    "from": "module:welcome-belong:1",
    "to": "module:welcome-belong:9",
    "rel": "related",
-   "w": 0.127
+   "w": 0.143
   },
   {
    "from": "module:welcome-belong:2",
    "to": "module:welcome-belong:9",
    "rel": "related",
-   "w": 0.127
+   "w": 0.143
   },
   {
    "from": "module:welcome-belong:2",
@@ -1128,11 +1103,11 @@
    "from": "module:welcome-belong:3",
    "to": "module:welcome-belong:7",
    "rel": "related",
-   "w": 0.143
+   "w": 0.159
   },
   {
    "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:11",
+   "to": "module:welcome-belong:10",
    "rel": "related",
    "w": 0.127
   },
@@ -1140,13 +1115,31 @@
    "from": "module:welcome-belong:4",
    "to": "module:welcome-belong:6",
    "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "module:welcome-belong:5",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "module:welcome-belong:1",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:welcome-belong:6",
+   "to": "module:welcome-belong:9",
+   "rel": "related",
    "w": 0.127
   },
   {
    "from": "module:welcome-belong:7",
    "to": "module:welcome-belong:10",
    "rel": "related",
-   "w": 0.127
+   "w": 0.143
   },
   {
    "from": "module:welcome-belong:8",
@@ -1158,37 +1151,43 @@
    "from": "module:welcome-belong:9",
    "to": "module:welcome-belong:10",
    "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:welcome-belong:11",
+   "to": "module:welcome-belong:3",
+   "rel": "related",
    "w": 0.127
   },
   {
    "from": "module:welcome-belong:0",
    "to": "module:welcome-belong:3",
    "rel": "similar",
-   "w": 0.805
+   "w": 0.809
   },
   {
    "from": "module:welcome-belong:0",
    "to": "module:welcome-belong:10",
    "rel": "similar",
-   "w": 0.805
+   "w": 0.808
   },
   {
    "from": "module:welcome-belong:0",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.764
+   "w": 0.779
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:welcome-belong:2",
+   "rel": "similar",
+   "w": 0.825
   },
   {
    "from": "module:welcome-belong:1",
    "to": "module:welcome-belong:5",
    "rel": "similar",
    "w": 0.823
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.822
   },
   {
    "from": "module:welcome-belong:1",
@@ -1200,7 +1199,7 @@
    "from": "module:welcome-belong:2",
    "to": "module:welcome-belong:5",
    "rel": "similar",
-   "w": 0.855
+   "w": 0.854
   },
   {
    "from": "module:welcome-belong:2",
@@ -1210,39 +1209,39 @@
   },
   {
    "from": "module:welcome-belong:3",
+   "to": "module:welcome-belong:4",
+   "rel": "similar",
+   "w": 0.859
+  },
+  {
+   "from": "module:welcome-belong:3",
    "to": "module:welcome-belong:10",
    "rel": "similar",
    "w": 0.858
   },
   {
-   "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:4",
-   "rel": "similar",
-   "w": 0.846
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "module:welcome-belong:5",
-   "rel": "similar",
-   "w": 0.761
-  },
-  {
    "from": "module:welcome-belong:4",
    "to": "module:welcome-belong:2",
    "rel": "similar",
-   "w": 0.76
+   "w": 0.765
+  },
+  {
+   "from": "module:welcome-belong:4",
+   "to": "module:welcome-belong:10",
+   "rel": "similar",
+   "w": 0.763
   },
   {
    "from": "module:welcome-belong:5",
    "to": "module:welcome-belong:6",
    "rel": "similar",
-   "w": 0.798
+   "w": 0.796
   },
   {
    "from": "module:welcome-belong:6",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.773
+   "w": 0.775
   },
   {
    "from": "module:welcome-belong:6",
@@ -1254,37 +1253,37 @@
    "from": "module:welcome-belong:7",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.746
+   "w": 0.748
   },
   {
    "from": "module:welcome-belong:7",
    "to": "module:welcome-belong:3",
    "rel": "similar",
-   "w": 0.739
+   "w": 0.743
   },
   {
    "from": "module:welcome-belong:7",
    "to": "module:welcome-belong:6",
    "rel": "similar",
-   "w": 0.72
+   "w": 0.719
   },
   {
    "from": "module:welcome-belong:8",
    "to": "module:welcome-belong:11",
    "rel": "similar",
-   "w": 0.793
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "module:welcome-belong:3",
-   "rel": "similar",
-   "w": 0.755
+   "w": 0.794
   },
   {
    "from": "module:welcome-belong:8",
    "to": "module:welcome-belong:2",
    "rel": "similar",
-   "w": 0.755
+   "w": 0.753
+  },
+  {
+   "from": "module:welcome-belong:8",
+   "to": "module:welcome-belong:3",
+   "rel": "similar",
+   "w": 0.753
   },
   {
    "from": "module:welcome-belong:9",
@@ -1296,19 +1295,19 @@
    "from": "module:welcome-belong:9",
    "to": "module:welcome-belong:5",
    "rel": "similar",
-   "w": 0.788
+   "w": 0.789
   },
   {
    "from": "module:welcome-belong:10",
    "to": "module:welcome-belong:2",
    "rel": "similar",
-   "w": 0.768
+   "w": 0.777
   },
   {
    "from": "module:welcome-belong:11",
-   "to": "module:welcome-belong:9",
+   "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.785
+   "w": 0.787
   }
  ],
  "stats": {
@@ -1316,12 +1315,12 @@
    "course": 1,
    "module": 12,
    "reel": 0,
-   "concept": 66
+   "concept": 61
   },
   "edges": {
    "in": 12,
    "about": 95,
-   "related": 12,
+   "related": 16,
    "similar": 25
   }
  },

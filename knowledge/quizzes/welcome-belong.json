@@ -12,18 +12,18 @@
       "A type of farm in Alentejo",
       "A name chosen by the founder's family"
      ],
-     "q": "What is the origin of the name 'Graverell'?",
-     "why": "The name 'Graverell' comes from the Portuguese word for a field of carnations, which is what the land was when the founder first found it."
+     "q": "What is the origin of the name 'Craveiral'?",
+     "why": "The name 'Craveiral' comes from the Portuguese word for a field of carnations, which is what the land was when the founder first found it."
     },
     "pt": {
      "opts": [
       "Uma invenção de marketing",
-      "Um campo de cravos perto de São Teotônio",
+      "Um campo de Craveiral perto de São Teotônio",
       "Um tipo de fazenda no Alentejo",
       "Um nome escolhido pela família do fundador"
      ],
-     "q": "Qual é a origem do nome 'Graverell'?",
-     "why": "O nome 'Graverell' vem da palavra portuguesa para um campo de cravos, que é o que a terra era quando o fundador a encontrou pela primeira vez."
+     "q": "Qual é a origem do nome 'Craveiral'?",
+     "why": "O nome 'Craveiral' vem da palavra portuguesa para um campo de Craveiral, que é o que a terra era quando o fundador a encontrou pela primeira vez."
     },
     "t0": 51,
     "type": "recall",
@@ -42,8 +42,8 @@
       "A farm",
       "A business venture"
      ],
-     "q": "What was Graverell primarily built to be?",
-     "why": "Graverell was built to be a relationship with a piece of land, with the hotel being a way to sustain that relationship."
+     "q": "What was Craveiral primarily built to be?",
+     "why": "Craveiral was built to be a relationship with a piece of land, with the hotel being a way to sustain that relationship."
     },
     "pt": {
      "opts": [
@@ -52,8 +52,8 @@
       "Uma fazenda",
       "Um empreendimento comercial"
      ],
-     "q": "O que foi que o Graverell foi construído principalmente para ser?",
-     "why": "O Graverell foi construído para ser uma relação com um pedaço de terra, com o hotel sendo uma forma de sustentar essa relação."
+     "q": "O que foi que o Craveiral foi construído principalmente para ser?",
+     "why": "O Craveiral foi construído para ser uma relação com um pedaço de terra, com o hotel sendo uma forma de sustentar essa relação."
     },
     "t0": 139,
     "type": "recall",
@@ -72,8 +72,8 @@
       "Preserving the natural beauty of the land",
       "Building more houses"
      ],
-     "q": "When making decisions about the use of land at Graverell, what should be the primary consideration?",
-     "why": "The primary consideration should be preserving the natural beauty of the land, as this is a key part of the Graverell experience and what sets it apart."
+     "q": "When making decisions about the use of land at Craveiral, what should be the primary consideration?",
+     "why": "The primary consideration should be preserving the natural beauty of the land, as this is a key part of the Craveiral experience and what sets it apart."
     },
     "pt": {
      "opts": [
@@ -82,8 +82,8 @@
       "Preservar a beleza natural da terra",
       "Construir mais casas"
      ],
-     "q": "Quando se tomam decisões sobre o uso da terra no Graverell, qual deve ser a consideração principal?",
-     "why": "A consideração principal deve ser preservar a beleza natural da terra, pois esta é uma parte fundamental da experiência do Graverell e o que a distingue."
+     "q": "Quando se tomam decisões sobre o uso da terra no Craveiral, qual deve ser a consideração principal?",
+     "why": "A consideração principal deve ser preservar a beleza natural da terra, pois esta é uma parte fundamental da experiência do Craveiral e o que a distingue."
     },
     "t0": 169,
     "type": "application",
@@ -102,8 +102,8 @@
       "Creating a modern and sleek aesthetic",
       "Prioritizing ease of maintenance"
      ],
-     "q": "When designing new infrastructure at Graverell, what should be the guiding principle?",
-     "why": "The guiding principle should be building in a way that minimizes the impact on the natural environment, as this is in line with the Graverell philosophy of preserving the natural beauty of the land."
+     "q": "When designing new infrastructure at Craveiral, what should be the guiding principle?",
+     "why": "The guiding principle should be building in a way that minimizes the impact on the natural environment, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land."
     },
     "pt": {
      "opts": [
@@ -112,8 +112,8 @@
       "Criar uma estética moderna e elegante",
       "Priorizar a facilidade de manutenção"
      ],
-     "q": "Quando se projeta nova infraestrutura no Graverell, qual deve ser o princípio orientador?",
-     "why": "O princípio orientador deve ser construir de uma forma que minimize o impacto no ambiente natural, pois isso está em linha com a filosofia do Graverell de preservar a beleza natural da terra."
+     "q": "Quando se projeta nova infraestrutura no Craveiral, qual deve ser o princípio orientador?",
+     "why": "O princípio orientador deve ser construir de uma forma que minimize o impacto no ambiente natural, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra."
     },
     "t0": 198,
     "type": "application",
@@ -132,8 +132,8 @@
       "Try to find a compromise that balances economic and environmental concerns",
       "Put the proposal to a community vote"
      ],
-     "q": "A new investor is proposing to build a large resort on a nearby plot of land, which would increase revenue for the local community but also potentially harm the environment. What should the Graverell team do?",
-     "why": "The Graverell team should reject the proposal and prioritize environmental protection, as this is in line with the Graverell philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
+     "q": "A new investor is proposing to build a large resort on a nearby plot of land, which would increase revenue for the local community but also potentially harm the environment. What should the Craveiral team do?",
+     "why": "The Craveiral team should reject the proposal and prioritize environmental protection, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
     },
     "pt": {
      "opts": [
@@ -142,8 +142,8 @@
       "Tentar encontrar um compromisso que equilibre as preocupações econômicas e ambientais",
       "Colocar a proposta em votação na comunidade"
      ],
-     "q": "Um novo investidor está propondo construir um grande resort em um lote de terra próximo, o que aumentaria a receita para a comunidade local, mas também poderia prejudicar o meio ambiente. O que a equipe do Graverell deve fazer?",
-     "why": "A equipe do Graverell deve rejeitar a proposta e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Graverell de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "Um novo investidor está propondo construir um grande resort em um lote de terra próximo, o que aumentaria a receita para a comunidade local, mas também poderia prejudicar o meio ambiente. O que a equipe do Craveiral deve fazer?",
+     "why": "A equipe do Craveiral deve rejeitar a proposta e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
     },
     "t0": 139,
     "type": "scenario",
@@ -162,8 +162,8 @@
       "Offer alternative options that minimize the impact on the environment",
       "Charge the guest a premium for the privilege of building on the land"
      ],
-     "q": "A guest is requesting to build a private villa on a plot of land within the Graverell property, which would require clearing a significant amount of natural vegetation. What should the Graverell team do?",
-     "why": "The Graverell team should reject the request and prioritize environmental protection, as this is in line with the Graverell philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
+     "q": "A guest is requesting to build a private villa on a plot of land within the Craveiral property, which would require clearing a significant amount of natural vegetation. What should the Craveiral team do?",
+     "why": "The Craveiral team should reject the request and prioritize environmental protection, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
     },
     "pt": {
      "opts": [
@@ -172,8 +172,8 @@
       "Oferecer opções alternativas que minimizem o impacto no ambiente",
       "Cobrar do hóspede um prêmio pelo privilégio de construir na terra"
      ],
-     "q": "Um hóspede está solicitando construir uma villa privada em um lote de terra dentro da propriedade do Graverell, o que exigiria limpar uma quantidade significativa de vegetação natural. O que a equipe do Graverell deve fazer?",
-     "why": "A equipe do Graverell deve rejeitar o pedido e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Graverell de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "Um hóspede está solicitando construir uma villa privada em um lote de terra dentro da propriedade do Craveiral, o que exigiria limpar uma quantidade significativa de vegetação natural. O que a equipe do Craveiral deve fazer?",
+     "why": "A equipe do Craveiral deve rejeitar o pedido e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
     },
     "t0": 169,
     "type": "scenario",
@@ -254,7 +254,7 @@
       "Only follow the instructions of their supervisor",
       "Reduce their work hours to minimize their impact"
      ],
-     "q": "What should a worker at Graveral Farmhouse do to contribute to the regeneration of the territory?",
+     "q": "What should a worker at Craveiral Farmhouse do to contribute to the regeneration of the territory?",
      "why": "The worker should actively give back more than they take, by composting and recycling, to contribute to the regeneration of the territory."
     },
     "pt": {
@@ -264,7 +264,7 @@
       "Apenas seguir as instruções do seu supervisor",
       "Reduzir as suas horas de trabalho para minimizar o seu impacto"
      ],
-     "q": "O que um trabalhador da Graveral Farmhouse deve fazer para contribuir para a regeneração do território?",
+     "q": "O que um trabalhador da Craveiral Farmhouse deve fazer para contribuir para a regeneração do território?",
      "why": "O trabalhador deve dar mais do que recebe, através do compostagem e reciclagem, para contribuir para a regeneração do território."
     },
     "t0": 134,
@@ -284,7 +284,7 @@
       "By reducing the number of customers and minimizing the impact",
       "By donating excess food to charity"
      ],
-     "q": "How should a team member at the Mesa Ducam restaurant support the circular economy?",
+     "q": "How should a team member at the A Mesa do CAM restaurant support the circular economy?",
      "why": "The team member should buy products from local producers and reduce waste to support the circular economy."
     },
     "pt": {
@@ -294,7 +294,7 @@
       "Reduzindo o número de clientes e minimizando o impacto",
       "Doando comida excedente para caridade"
      ],
-     "q": "Como um membro da equipa do restaurante Mesa Ducam deve apoiar a economia circular?",
+     "q": "Como um membro da equipa do restaurante A Mesa do CAM deve apoiar a economia circular?",
      "why": "O membro da equipa deve comprar produtos de produtores locais e reduzir os resíduos para apoiar a economia circular."
     },
     "t0": 162,
@@ -344,7 +344,7 @@
       "Say that the vision is to create a sustainable business model",
       "Respond that the vision is to promote social and economic growth"
      ],
-     "q": "A guest at the Graveral Farmhouse asks about the organization's vision. How should the staff member respond?",
+     "q": "A guest at the Craveiral Farmhouse asks about the organization's vision. How should the staff member respond?",
      "why": "The staff member should explain the vision to regenerate the territory through a circular economy to the guest."
     },
     "pt": {
@@ -354,7 +354,7 @@
       "Dizer que a visão é criar um modelo de negócios sustentável",
       "Responder que a visão é promover o crescimento social e económico"
      ],
-     "q": "Um hóspede da Graveral Farmhouse pergunta sobre a visão da organização. Como deve o membro da equipa responder?",
+     "q": "Um hóspede da Craveiral Farmhouse pergunta sobre a visão da organização. Como deve o membro da equipa responder?",
      "why": "O membro da equipa deve explicar a visão de regenerar o território através de uma economia circular ao hóspede."
     },
     "t0": 109,
@@ -436,8 +436,8 @@
       "Ignore financial sustainability and focus on social aspects",
       "Do nothing and let others handle it"
      ],
-     "q": "What should a worker do to protect the mission of Craverell?",
-     "why": "A worker should avoid waste and take care of equipment to protect the mission of Craverell."
+     "q": "What should a worker do to protect the mission of Craveiral?",
+     "why": "A worker should avoid waste and take care of equipment to protect the mission of Craveiral."
     },
     "pt": {
      "opts": [
@@ -446,8 +446,8 @@
       "Ignorar a sustentabilidade financeira e focar nos aspetos sociais",
       "Não fazer nada e deixar que os outros lidem com isso"
      ],
-     "q": "O que um trabalhador deve fazer para proteger a missão da Craverell?",
-     "why": "Um trabalhador deve evitar o desperdício e cuidar do equipamento para proteger a missão da Craverell."
+     "q": "O que um trabalhador deve fazer para proteger a missão da Craveiral?",
+     "why": "Um trabalhador deve evitar o desperdício e cuidar do equipamento para proteger a missão da Craveiral."
     },
     "t0": 56,
     "type": "application",
@@ -493,21 +493,21 @@
      "opts": [
       "Tell the guest that they should have expected a rustic experience",
       "Offer to upgrade the guest to a more luxurious room",
-      "Explain that comfort and modernity are priorities at Craverell and offer to address the issue",
+      "Explain that comfort and modernity are priorities at Craveiral and offer to address the issue",
       "Ignore the guest's complaint and do nothing"
      ],
      "q": "A guest is complaining about the lack of comfort in their room. What should the worker do?",
-     "why": "The worker should explain that comfort and modernity are priorities at Craverell and offer to address the issue."
+     "why": "The worker should explain that comfort and modernity are priorities at Craveiral and offer to address the issue."
     },
     "pt": {
      "opts": [
       "Dizer ao hóspede que devia ter esperado uma experiência rústica",
       "Oferecer para atualizar o hóspede para um quarto mais luxuoso",
-      "Explicar que o conforto e a modernidade são prioridades na Craverell e oferecer para resolver o problema",
+      "Explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema",
       "Ignorar a reclamação do hóspede e não fazer nada"
      ],
      "q": "Um hóspede está a reclamar da falta de conforto no seu quarto. O que o trabalhador deve fazer?",
-     "why": "O trabalhador deve explicar que o conforto e a modernidade são prioridades na Craverell e oferecer para resolver o problema."
+     "why": "O trabalhador deve explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema."
     },
     "t0": 135,
     "type": "scenario",
@@ -740,7 +740,7 @@
       "20%",
       "30%"
      ],
-     "q": "What percentage of the land at Graveral is built?",
+     "q": "What percentage of the land at Craveiral is built?",
      "why": "The correct answer is 4% because the rest of the land is used for the working farm, orchards, vegetable gardens, animals, and pine forest."
     },
     "pt": {
@@ -750,7 +750,7 @@
       "20%",
       "30%"
      ],
-     "q": "Qual percentagem da terra em Graveral está construída?",
+     "q": "Qual percentagem da terra em Craveiral está construída?",
      "why": "A resposta correcta é 4% porque o resto da terra é utilizado para a quinta em funcionamento, pomares, jardins de vegetais, animais e pinhal."
     },
     "t0": 29,
@@ -770,7 +770,7 @@
       "Organic amenities, air conditioning, and private terrace",
       "Proper equipped kitchen, organic amenities, air conditioning, and private terrace"
      ],
-     "q": "What amenities are shared by all units at Graveral?",
+     "q": "What amenities are shared by all units at Craveiral?",
      "why": "The correct answer is proper equipped kitchen, organic amenities, air conditioning, and private terrace because these are the amenities mentioned as being shared by all units."
     },
     "pt": {
@@ -780,7 +780,7 @@
       "Comodidades orgânicas, ar condicionado e terraço privado",
       "Cozinha equipada, comodidades orgânicas, ar condicionado e terraço privado"
      ],
-     "q": "Que comodidades são partilhadas por todas as unidades em Graveral?",
+     "q": "Que comodidades são partilhadas por todas as unidades em Craveiral?",
      "why": "A resposta correcta é cozinha equipada, comodidades orgânicas, ar condicionado e terraço privado porque estas são as comodidades mencionadas como sendo partilhadas por todas as unidades."
     },
     "t0": 57,
@@ -860,7 +860,7 @@
       "The gym",
       "The restaurant"
      ],
-     "q": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Graveral?",
+     "q": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Craveiral?",
      "why": "The correct answer is the nature interpretation center because it hosts yoga twice a week and can seat up to 50 people for a banquet or 80 standing."
     },
     "pt": {
@@ -870,7 +870,7 @@
       "O ginásio",
       "O restaurante"
      ],
-     "q": "Um hóspede está à procura de um local para realizar um retiro de yoga para 50 pessoas. Que faculdade você recomendaria em Graveral?",
+     "q": "Um hóspede está à procura de um local para realizar um retiro de yoga para 50 pessoas. Que faculdade você recomendaria em Craveiral?",
      "why": "A resposta correcta é o centro de interpretação da natureza porque recebe yoga duas vezes por semana e pode acomodar até 50 pessoas para um banquete ou 80 em pé."
     },
     "t0": 174,
@@ -887,20 +887,20 @@
      "opts": [
       "Yes, the playground area can host events up to 300 people",
       "Yes, the terrace with the fire pits can host events up to 300 people",
-      "No, Graveral does not have a venue that can accommodate 300 people",
+      "No, Craveiral does not have a venue that can accommodate 300 people",
       "Maybe, it depends on the time of year and availability"
      ],
-     "q": "A guest is planning a wedding reception for 300 people and wants to know if Graveral has a suitable venue. What would you tell them?",
+     "q": "A guest is planning a wedding reception for 300 people and wants to know if Craveiral has a suitable venue. What would you tell them?",
      "why": "The correct answer is yes, the playground area can host events up to 300 people, because it is mentioned as being able to host events up to 300 banquet style."
     },
     "pt": {
      "opts": [
       "Sim, a área de jogos pode acomodar eventos até 300 pessoas",
       "Sim, o terraço com as fogueiras pode acomodar eventos até 300 pessoas",
-      "Não, Graveral não tem um local que possa acomodar 300 pessoas",
+      "Não, Craveiral não tem um local que possa acomodar 300 pessoas",
       "Talvez, depende da época do ano e da disponibilidade"
      ],
-     "q": "Um hóspede está a planear uma receção de casamento para 300 pessoas e quer saber se Graveral tem um local adequado. O que você lhes diria?",
+     "q": "Um hóspede está a planear uma receção de casamento para 300 pessoas e quer saber se Craveiral tem um local adequado. O que você lhes diria?",
      "why": "A resposta correcta é sim, a área de jogos pode acomodar eventos até 300 pessoas, porque é mencionado como sendo capaz de acomodar eventos até 300 pessoas no estilo banquete."
     },
     "t0": 200,
@@ -1129,23 +1129,23 @@
     "a": 1,
     "en": {
      "opts": [
-      "It's a competitor to Creviral",
+      "It's a competitor to Craveiral",
       "It's a cultural institution that showcases the cuisine of the territory",
       "It's a farm-to-table restaurant only",
       "It's a private event space"
      ],
-     "q": "What is the significance of Emesa do Cam in Lisbon?",
-     "why": "Emesa do Cam is described as a cultural institution that serves the cuisine of the territory, indicating its significance in showcasing the local culture and food."
+     "q": "What is the significance of A Mesa do CAM in Lisbon?",
+     "why": "A Mesa do CAM is described as a cultural institution that serves the cuisine of the territory, indicating its significance in showcasing the local culture and food."
     },
     "pt": {
      "opts": [
-      "É um concorrente do Creviral",
+      "É um concorrente do Craveiral",
       "É uma instituição cultural que mostra a culinária do território",
       "É um restaurante de comida fresca apenas",
       "É um espaço de eventos privados"
      ],
-     "q": "Qual é o significado de Emesa do Cam em Lisboa?",
-     "why": "Emesa do Cam é descrito como uma instituição cultural que serve a culinária do território, indicando seu significado em mostrar a cultura e comida local."
+     "q": "Qual é o significado de A Mesa do CAM em Lisboa?",
+     "why": "A Mesa do CAM é descrito como uma instituição cultural que serve a culinária do território, indicando seu significado em mostrar a cultura e comida local."
     },
     "t0": 80,
     "type": "recall",
@@ -1159,7 +1159,7 @@
     "a": 2,
     "en": {
      "opts": [
-      "Tell them it's not part of the Creviral experience",
+      "Tell them it's not part of the Craveiral experience",
       "Send them to the beach and forget about them",
       "Move them around inside the business, highlighting the beach as part of the overall experience",
       "Charge them extra for the beach access"
@@ -1169,7 +1169,7 @@
     },
     "pt": {
      "opts": [
-      "Dizer-lhes que não faz parte da experiência do Creviral",
+      "Dizer-lhes que não faz parte da experiência do Craveiral",
       "Enviar-lhes para a praia e esquecer deles",
       "Mover-lhes dentro do negócio, destacando a praia como parte da experiência geral",
       "Cobrar-lhes extra pelo acesso à praia"
@@ -1194,8 +1194,8 @@
       "Lower standards for off-site events",
       "Higher standards for on-site events"
      ],
-     "q": "What is the standard for events and catering at Creviral?",
-     "why": "The standard for events and catering at Creviral is the same route to table kitchen, same chain, same care, wherever it happens, to ensure consistency and quality."
+     "q": "What is the standard for events and catering at Craveiral?",
+     "why": "The standard for events and catering at Craveiral is the same route to table kitchen, same chain, same care, wherever it happens, to ensure consistency and quality."
     },
     "pt": {
      "opts": [
@@ -1204,8 +1204,8 @@
       "Padrões mais baixos para eventos fora do local",
       "Padrões mais altos para eventos no local"
      ],
-     "q": "Qual é o padrão para eventos e catering no Creviral?",
-     "why": "O padrão para eventos e catering no Creviral é o mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça, para garantir consistência e qualidade."
+     "q": "Qual é o padrão para eventos e catering no Craveiral?",
+     "why": "O padrão para eventos e catering no Craveiral é o mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça, para garantir consistência e qualidade."
     },
     "t0": 133,
     "type": "application",
@@ -1222,9 +1222,9 @@
       "Only intimate ceremonies under the pines are available",
       "Only full weekend celebrations with the Interpretation Center are available",
       "A range of options are available, from intimate ceremonies to full weekend celebrations",
-      "No weddings are allowed at Creviral"
+      "No weddings are allowed at Craveiral"
      ],
-     "q": "A guest is planning a wedding at Creviral and wants to know what options are available. What should you tell them?",
+     "q": "A guest is planning a wedding at Craveiral and wants to know what options are available. What should you tell them?",
      "why": "A range of options are available, from intimate ceremonies to full weekend celebrations, to accommodate different guest needs and preferences."
     },
     "pt": {
@@ -1232,9 +1232,9 @@
       "Apenas cerimônias íntimas sob os pinheiros estão disponíveis",
       "Apenas celebrações de fim de semana com o Centro de Interpretação estão disponíveis",
       "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana",
-      "Nenhum casamento é permitido no Creviral"
+      "Nenhum casamento é permitido no Craveiral"
      ],
-     "q": "Um hóspede está planejando um casamento no Creviral e quer saber quais opções estão disponíveis. O que deve dizer a eles?",
+     "q": "Um hóspede está planejando um casamento no Craveiral e quer saber quais opções estão disponíveis. O que deve dizer a eles?",
      "why": "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana, para atender às diferentes necessidades e preferências dos hóspedes."
     },
     "t0": 160,
@@ -1254,7 +1254,7 @@
       "Only outdoor activities are available",
       "No activities are available"
      ],
-     "q": "A company is planning a corporate retreat at Creviral and wants to know what activities are available. What should you tell them?",
+     "q": "A company is planning a corporate retreat at Craveiral and wants to know what activities are available. What should you tell them?",
      "why": "A range of activities are available, including nature walks, wellness getaways, and retreats at the Interpretation Center, to cater to different company needs and preferences."
     },
     "pt": {
@@ -1264,7 +1264,7 @@
       "Apenas atividades ao ar livre estão disponíveis",
       "Nenhuma atividade está disponível"
      ],
-     "q": "Uma empresa está planejando um retiro corporativo no Creviral e quer saber quais atividades estão disponíveis. O que deve dizer a eles?",
+     "q": "Uma empresa está planejando um retiro corporativo no Craveiral e quer saber quais atividades estão disponíveis. O que deve dizer a eles?",
      "why": "Uma variedade de atividades estão disponíveis, incluindo caminhadas na natureza, retiros de bem-estar e retiros no Centro de Interpretação, para atender às diferentes necessidades e preferências das empresas."
     },
     "t0": 186,
@@ -1468,7 +1468,7 @@
       "Because it's a chapter in a report",
       "Because it's a small physical action"
      ],
-     "q": "Why is water recycling important at Craverell?",
+     "q": "Why is water recycling important at Craveiral?",
      "why": "Water recycling is important because the region lives with drought as a neighbor."
     },
     "pt": {
@@ -1478,7 +1478,7 @@
       "Porque é um capítulo num relatório",
       "Porque é uma pequena ação física"
      ],
-     "q": "Por que a reciclagem de água é importante em Craverell?",
+     "q": "Por que a reciclagem de água é importante em Craveiral?",
      "why": "A reciclagem de água é importante porque a região vive com a seca como vizinha."
     },
     "t0": 29,
@@ -1650,8 +1650,8 @@
       "Enthusiastic and promotional",
       "Scripted and rehearsed"
      ],
-     "q": "What tone should the crevaryl voice convey when interacting with guests?",
-     "why": "The crevaryl voice should convey a tone that is calm, warm, and unhurried, like the place itself."
+     "q": "What tone should the Craveiral voice convey when interacting with guests?",
+     "why": "The Craveiral voice should convey a tone that is calm, warm, and unhurried, like the place itself."
     },
     "pt": {
      "opts": [
@@ -1660,8 +1660,8 @@
       "Entusiástico e promocional",
       "Escrito e ensaiado"
      ],
-     "q": "Que tom deve transmitir a voz crevaryl quando interage com os hóspedes?",
-     "why": "A voz crevaryl deve transmitir um tom que é calmo, quente e sem pressa, como o local em si."
+     "q": "Que tom deve transmitir a voz Craveiral quando interage com os hóspedes?",
+     "why": "A voz Craveiral deve transmitir um tom que é calmo, quente e sem pressa, como o local em si."
     },
     "t0": 29,
     "type": "recall",
@@ -1801,7 +1801,7 @@
       "Avoid writing the email altogether and instead use a template or automated response"
      ],
      "q": "You are writing an email to a guest who has booked a stay at the farm. How should you write the email?",
-     "why": "You should use a warm and concrete tone, with short sentences, when writing an email to a guest, as this reflects the crevaryl voice and values."
+     "why": "You should use a warm and concrete tone, with short sentences, when writing an email to a guest, as this reflects the Craveiral voice and values."
     },
     "pt": {
      "opts": [
@@ -1811,7 +1811,7 @@
       "Evite escrever o e-mail completamente e use um modelo ou resposta automatizada"
      ],
      "q": "Está escrevendo um e-mail a um hóspede que reservou uma estadia na quinta. Como deve escrever o e-mail?",
-     "why": "Deve usar um tom quente e concreto, com frases curtas, quando escreve um e-mail a um hóspede, pois isso reflete a voz e os valores crevaryl."
+     "why": "Deve usar um tom quente e concreto, com frases curtas, quando escreve um e-mail a um hóspede, pois isso reflete a voz e os valores Craveiral."
     },
     "t0": 212,
     "type": "scenario",
