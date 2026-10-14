@@ -143,5 +143,26 @@ const TAKEAWAYS = {
     ]
   }
 };
-const COURSE_PT = {};
+const COURSE_PT = {
+  'welcome-belong': {
+    title: 'Bem-vindo à Belong',
+    hook: 'Porque estamos aqui, e como fazemos as coisas.',
+    hookSub: 'A história, os valores, a jornada do hóspede — à maneira do Craveiral, em doze lições.',
+    desc: 'A jornada de integração do Craveiral: de onde vimos e porquê, a nossa visão e valores na prática, a hospitalidade à maneira do Craveiral, a jornada do hóspede do primeiro clique à despedida, as casas e a quinta, o FarmTable, a constelação de lugares, o que fazer quando algo corre mal, a sustentabilidade antes do almoço, como falamos e como lideramos e trabalhamos juntos.',
+    modules: [
+      'Porque estamos aqui: a minha história e a história do Craveiral',
+      'A nossa visão, a nossa missão e a cadeia',
+      'Os nossos valores, na prática',
+      'Hospitalidade à maneira do Craveiral',
+      'A jornada do hóspede: do primeiro clique à despedida',
+      'As casas, a quinta e os padrões que mantemos',
+      'FarmTable: onde a filosofia vira comida',
+      'A constelação: Beach Bar, A Mesa do CAM, eventos e um mesmo gesto',
+      'Quando algo corre mal: reclamações e recuperação do serviço',
+      'Sustentabilidade no dia a dia: o que a missão lhe pede antes do almoço',
+      'Como falamos: a voz do Craveiral',
+      'Liderança, autonomia e como trabalhamos juntos'
+    ]
+  }
+};
 const COURSE_SKILLS = {};
