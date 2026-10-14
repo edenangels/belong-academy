@@ -4,6 +4,7 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
 const API = 'https://academy-ai.edenrise.workers.dev';
 const course = process.argv[2]; if (!course) { console.error('usage: build-takeaways.mjs <course>'); process.exit(1); }
+const only = process.argv.includes('--only') ? process.argv[process.argv.indexOf('--only') + 1].split(',').map(Number) : null;
 const brandDir = process.argv.includes('--brand') ? process.argv[process.argv.indexOf('--brand') + 1] : 'brands/belong';
 const contentPath = `${brandDir}/content.js`;
 const src = readFileSync(contentPath, 'utf8');
@@ -17,11 +18,14 @@ async function ask(prompt) {
   const d = await r.json(); if (!d.reply) throw new Error('gateway: ' + JSON.stringify(d).slice(0, 200)); return d.reply;
 }
 const en = [], pt = [];
+const { TAKEAWAYS: OLD } = new Function('window', 'document', src + ';return {TAKEAWAYS: typeof TAKEAWAYS === "undefined" ? {} : TAKEAWAYS};')({}, {});
+const prev = (OLD && OLD[course]) || { en: [], pt: [] };
 for (let i = 0; i < c.modules.length; i++) {
   const f = `media/transcripts/${course}/m${i}.json`;
   if (!existsSync(f)) { en.push(null); pt.push(null); continue; }
+  if (only && !only.includes(i) && prev.en[i]) { en.push(prev.en[i]); pt.push(prev.pt[i]); console.log(`m${i} kept`); continue; }
   const tr = blocks(JSON.parse(readFileSync(f, 'utf8')).segments || []);
-  const prompt = `Below is the transcript of the lesson "${c.modules[i]}" from the course "${c.title}". Write EXACTLY three takeaways a team member should keep from THIS lesson. Each one is a full sentence of 10–20 words that says WHAT to do or remember AND WHY it matters here, using concrete details from the transcript (names, numbers, places). No generic advice, no "in this lesson", no fragments. Spell the place "Craveiral" and the restaurant "A Mesa do CAM". Return ONLY a JSON object: {"en":["...","...","..."],"pt":["...","...","..."]} where "pt" is natural European Portuguese.\n\nTRANSCRIPT:\n${tr}`;
+  const prompt = `Below is the transcript of the lesson "${c.modules[i]}" from the course "${c.title}". Write EXACTLY three takeaways a team member should keep from THIS lesson. Each one is a full sentence of 10–20 words that says WHAT to do or remember AND WHY it matters here, using concrete details from the transcript (names, numbers, places). No generic advice, no "in this lesson", no fragments. Spell the place "Craveiral". Only mention A Mesa do CAM, the beach bar or any number if the transcript itself does. Return ONLY a JSON object: {"en":["...","...","..."],"pt":["...","...","..."]} where "pt" is natural European Portuguese.\n\nTRANSCRIPT:\n${tr}`;
   let got = null;
   for (let attempt = 0; attempt < 3 && !got; attempt++) {
     try { const t = await ask(prompt); const a = t.indexOf('{'), b = t.lastIndexOf('}'); const o = JSON.parse(t.slice(a, b + 1)); if (Array.isArray(o.en) && o.en.length === 3 && Array.isArray(o.pt) && o.pt.length === 3) got = o; } catch (e) { console.error(`m${i} attempt ${attempt + 1}: ${e.message.slice(0, 120)}`); }
