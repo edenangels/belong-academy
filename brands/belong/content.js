@@ -107,7 +107,9 @@ const LIVE_SESSIONS = [];
 /* course maps kept empty — hooks/copy live inline on each course above.
    (Declared so the shared framework helpers resolve.) */
 const COURSE_HOOKS = {};
-const COURSE_HOOKS_PT = {};
+const COURSE_HOOKS_PT = {
+  'welcome-belong': ['Porque estamos aqui, e como fazemos as coisas.', 'A história, os valores, a jornada do hóspede — à maneira do Craveiral, em doze lições.']
+};
 const COURSE_QUIZ = {
 };
 const TAKEAWAYS = {
