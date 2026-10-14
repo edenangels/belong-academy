@@ -110,10 +110,9 @@ const CATALOG = [
   }
 ];
 
-const LIVE_SESSIONS = [
-  { id: 'live-table', title: 'Open Table: Cooking the Season', host: 'The Belong Kitchen', when: 'Thu 19:00 WET', grad: 6, icon: 'sprout', desc: 'A live seasonal kitchen — cook along, taste along, and ask anything about the circular table.' },
-  { id: 'live-welcome', title: 'Belong Circle: A Warm Welcome', host: 'The Belong Community', when: 'Fri 18:00 WET', grad: 4, icon: 'people', desc: 'A gathering for new members — the Belong story, the four pillars, and how to make the most of the Academy.' }
-];
+/* No invented sessions (13 Oct 2026, John: no fiction on the storefront). Real ones come from the
+   studio (studioMeta.live) the day someone schedules one; the page shows an honest empty state. */
+const LIVE_SESSIONS = [];
 
 /* course maps kept empty — hooks/copy live inline on each course above.
    (Declared so the shared framework helpers resolve.) */

@@ -51,7 +51,7 @@
     '--surface': 'rgba(255,240,232,.055)', '--surface-2': 'rgba(255,240,232,.10)',
     '--line': 'rgba(255,240,232,.13)',
     '--text': '#f7efe9', '--text-dim': '#dac6bc', '--text-faint': '#a88d81',
-    '--accent': '#be594d', '--accent-2': '#f8b556', '--glow': 'rgba(190,89,77,.42)',
+    '--accent': '#c8655a'   /* was #be594d: 3.97:1 on the background, below AA for text; this is 4.6:1 */, '--accent-2': '#f8b556', '--glow': 'rgba(200,101,90,.42)',
     '--forest': '#8d907e', '--olive': '#8d907e', '--cork': '#b09189', '--clay': '#be594d',
     '--atlantic': '#759ba3', '--mist': '#cfc7b9', '--ivory': '#f7efe9', '--focus': '#f8b556'
   }

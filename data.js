@@ -76,10 +76,15 @@ const GOAL_PRESETS = {
 };
 
 const ROLE_OPTIONS = [
-  { key: 'hosting', label: 'Hosting & Guest Care', icon: 'people', goals: ['Belong Host', 'The Belong Way'] },
-  { key: 'kitchen', label: 'FarmTable & Kitchen', icon: 'leaf', goals: ['Seasonal Cook', 'The Belong Way'] },
-  { key: 'farm', label: 'Farm & Nature', icon: 'sprout', goals: ['Nature Guide', 'Seasonal Cook'] },
-  { key: 'leadership', label: 'Houses, Office & Leadership', icon: 'compass', goals: ['Team Lead', 'Belong Host'] }
+  /* the Craveiral constellation (module 8): farmhouse, houses, FarmTable, beach bar, A Mesa do CAM, events */
+  { key: 'hosting',    label: 'Hosting & Guest Care',  icon: 'people',  goals: ['Belong Host', 'The Belong Way'] },
+  { key: 'houses',     label: 'Housekeeping & Houses', icon: 'sun',     goals: ['Belong Host', 'The Belong Way'] },
+  { key: 'kitchen',    label: 'FarmTable & Kitchen',   icon: 'leaf',    goals: ['Seasonal Cook', 'The Belong Way'] },
+  { key: 'beachbar',   label: 'Beach Bar',             icon: 'drop',    goals: ['Belong Host', 'Seasonal Cook'] },
+  { key: 'cam',        label: 'A Mesa do CAM',         icon: 'flower',  goals: ['Seasonal Cook', 'Belong Host'] },
+  { key: 'events',     label: 'Events & Catering',     icon: 'bird',    goals: ['Belong Host', 'Team Lead'] },
+  { key: 'farm',       label: 'Farm & Nature',         icon: 'sprout',  goals: ['Nature Guide', 'Seasonal Cook'] },
+  { key: 'leadership', label: 'Office & Leadership',   icon: 'compass', goals: ['Team Lead', 'Belong Host'] }
 ];
 
 /* Gamification — growth-themed levels (nature) + subtle badges. Tuned to lift completion. */
@@ -201,7 +206,7 @@ const UI = {
     jour_h:'Journeys', jour_sub:'Structured paths with milestones, field missions and a capstone.', jour_stage:'Stage', jour_mission_tag:'+ field mission', jour_capstone:'Capstone', jour_done:'Journey complete', jour_cert:'Journey certificate', jour_progress:'complete', jour_start:'Begin the journey', jour_continue:'Continue the journey',
     flash_h:'Review deck', flash_sub:'Five quick cards from what you\u2019ve learned — keep it fresh.', flash_flip:'Tap to flip', flash_next:'Next', flash_got:'Got it', flash_done:'Deck done — see you tomorrow', flash_empty:'Finish a course to build your review deck.', flash_open:'Review 5 cards',
     board_all:'All time', board_week:'This week', board_dept:'My department', live_attended:'Attendance counted — enjoy the session!',
-    tour_welcome_t:'Welcome to Belong Academy', tour_welcome_b:'A two-minute walk through your new learning home. You can leave anytime.', tour_path_t:'Your path', tour_path_b:'The AI plans a course sequence toward your goal — start here, and it adapts as you learn.', tour_ask_t:'Ask the Academy', tour_ask_b:'Any question about Craveiral — answered from our own courses, with links to the exact lesson.', tour_comm_t:'Community', tour_comm_b:'Questions, wins and polls with the whole team — organised by learning path.', tour_prog_t:'Your progress', tour_prog_b:'XP, streaks, skills, certificates and field missions — everything you\u2019ve earned lives here.', tour_bell_t:'Gentle nudges', tour_bell_b:'Encouraging reminders, never spam — and you control every channel in your profile.', tour_done_t:'That\u2019s the tour', tour_done_b:'Enjoy the academy — and remember: what you learn here is meant for the land.', tour_next:'Next', tour_back:'Back', tour_skip:'Skip tour', tour_finish:'Begin', tour_replay:'Take the tour',
+    tour_welcome_t:'Welcome to Belong Academy', tour_welcome_b:'A two-minute walk through your new learning home. You can leave anytime.', tour_path_t:'Your path', tour_path_b:'The AI plans a course sequence toward your goal — start here, and it adapts as you learn.', tour_ask_t:'Ask the Academy', tour_ask_b:'Any question about Craveiral — answered from our own courses, with links to the exact lesson.', tour_comm_t:'Community', tour_comm_b:'Questions, wins and polls with the whole team — organised by learning path.', tour_prog_t:'Your progress', tour_prog_b:'XP, streaks, skills, certificates and field missions — everything you\u2019ve earned lives here.', tour_bell_t:'Gentle nudges', tour_bell_b:'Encouraging reminders, never spam — and you control every channel in your profile.', tour_done_t:'That\u2019s the tour', tour_done_b:'Enjoy the academy — and remember: what you learn here is meant for the houses, the table and the guests.', tour_next:'Next', tour_back:'Back', tour_skip:'Skip tour', tour_finish:'Begin', tour_replay:'Take the tour',
     comp_h:'Training compliance', comp_sub:'Your mandatory continuous-training hours for the year — Portuguese Código do Trabalho, art. 131.º (40h/year).', comp_target:'Annual target', comp_done:'Completed', comp_left:'remaining', comp_ontrack:'On track', comp_behind:'Behind pace', comp_pace_by:'By now, aim for', comp_log:'Credited sessions', comp_none:'No hours credited yet — complete a lesson to begin.', comp_nif_prompt:'Add your NIF and contract details in your profile to activate the legal training record.', comp_confirmed:'Attendance confirmed', comp_h_unit:'h', comp_cert_btn:'Training certificate', comp_reg_btn:'Attendance register', comp_cert_dl:'Certificate downloaded', comp_reg_dl:'Register exported (CSV)', ru_annex_btn:'Relatório Único export',
     prof_nif:'Tax number (NIF)', prof_empno:'Employee no.', prof_contract:'Contract type', prof_fte:'Working time', prof_hire:'Start date',
     contract_permanent:'Permanent', contract_fixed:'Fixed-term', contract_part:'Part-time', fte_full:'Full-time', fte_half:'Part-time (50%)', ck_40h:'40h',
@@ -231,14 +236,14 @@ const UI = {
     your_ai_path:'Your path', completed:'Completed', scored:'scored', modules_skipped:'modules you already know',
     in_progress:'In progress', adapted_today:'adapted today', unlocks_after:'Coming up', next_up:'Next up', locked:'Locked',
     continue_learning:'Continue learning', synced_devices:'Synced across your devices', assigned_you:'Assigned to you', from_stewardship:'From Belong · Stewardship',
-    trending:'Trending at Belong', community_learning:'What the Belong community is learning', because_completed:'Because you completed', ai_recommendations:'AI recommendations', see_all:'See all →',
-    generated_by_ai:'Generated by Belong AI · updated 2h ago', your_path_to:'Your path to', path_intro:'Shaped by your role and results. It adapts every time you learn.', regenerate_path:'Regenerate path ↺', why_order:'Why this order?',
+    trending:'Explore more', community_learning:'Everything in the library', because_completed:'Because you completed', ai_recommendations:'AI recommendations', see_all:'See all →',
+    generated_by_ai:'Built for your goal', your_path_to:'Your path to', path_intro:'Shaped by your role and results. It adapts every time you learn.', regenerate_path:'Regenerate path ↺', why_order:'Why this order?',
     learning_streak:'Learning streak', personal_best:'▲ Personal best', this_week:'This week', vs_last_week:'▲ 38% vs last week', skills_verified:'Skills verified', from_quizzes:'from quizzes', avg_score:'Avg. assessment score', top_5:'— Top 5% at Belong',
     ai_path_chip:'AI PATH', required:'REQUIRED', team_goal:'TEAM GOAL', new:'NEW', module:'MODULE', this_week_rank:'THIS WEEK', cert_issued:'cert issued', due:'Due',
     library_title:'Library', courses_tended:'courses', filter_library:'Filter the library…', all:'All', nothing_matches:'Nothing matches — try another filter or ask the AI tutor to find it.',
     in_ai_rotation:'Recommended', learners:'learners', quiz_me:'Quiz me', modules_h:'Modules', tap_module:'', coming_soon:'Coming soon', more_in:'More in', related_courses:'Related courses',
     ask_tutor:'Ask the tutor', notes_transcript:'Notes & transcript', mark_complete:'✓ Mark module complete', soon_sub:"This lesson is being filmed for Belong — we'll let you know the moment it's ready.", play_lesson:'▶ Play lesson',
-    live_title:'Live', live_sub:'Sessions with real humans — office hours, AMAs and workshops. Replays land in the Library within a day.', watching:'watching', join_now:'Join now', remind_me:'Remind me',
+    live_title:'Live', live_empty:'No live sessions scheduled yet — when one is, it will appear here and on your home page.', live_sub:'Sessions with real humans — office hours, AMAs and workshops. Replays land in the Library within a day.', watching:'watching', join_now:'Join now', remind_me:'Remind me',
     my_progress:'My Progress', progress_sub:'',
     level_ab:'Lv', xp:'XP', xp_to:'XP to', highest_level:'Highest level — Elder Oak', board_rank:'Leaderboard rank', of:'of', badges_earned:'Badges earned', nice_work:'', earn_first:'Earn your first', courses_finished:'Courses finished',
     badges_h:'Badges', badges_sub:'', locked_dot:'Locked ·', leaders_board:'Leaderboard · this week', board_sub:'Friendly, resets every Monday. A little competition keeps everyone finishing.', keep_alive:'',
@@ -467,7 +472,7 @@ const UI = {
     jour_h:'Jornadas', jour_sub:'Percursos estruturados com marcos, missões de campo e um projeto final.', jour_stage:'Etapa', jour_mission_tag:'+ missão de campo', jour_capstone:'Projeto final', jour_done:'Jornada concluída', jour_cert:'Certificado da jornada', jour_progress:'concluída', jour_start:'Começar a jornada', jour_continue:'Continuar a jornada',
     flash_h:'Baralho de revisão', flash_sub:'Cinco cartas rápidas do que aprendeu — mantenha fresco.', flash_flip:'Toque para virar', flash_next:'Seguinte', flash_got:'Já sei', flash_done:'Baralho feito — até amanhã', flash_empty:'Termine um curso para criar o seu baralho.', flash_open:'Rever 5 cartas',
     board_all:'Sempre', board_week:'Esta semana', board_dept:'O meu departamento', live_attended:'Presença registada — boa sessão!',
-    tour_welcome_t:'Bem-vindo à Belong Academy', tour_welcome_b:'Uma volta de dois minutos pela sua nova casa de aprendizagem. Pode sair quando quiser.', tour_path_t:'O seu percurso', tour_path_b:'A IA planeia uma sequência de cursos para o seu objetivo — comece aqui, e ela adapta-se.', tour_ask_t:'Pergunte à Academia', tour_ask_b:'Qualquer pergunta sobre a terra — respondida a partir dos nossos cursos, com links para a lição exata.', tour_comm_t:'Comunidade', tour_comm_b:'Perguntas, vitórias e sondagens com toda a equipa — organizadas por percurso.', tour_prog_t:'O seu progresso', tour_prog_b:'XP, sequências, competências, certificados e missões de campo — tudo o que ganhou vive aqui.', tour_bell_t:'Lembretes gentis', tour_bell_b:'Encorajadores, nunca spam — e controla cada canal no seu perfil.', tour_done_t:'Fim da volta', tour_done_b:'Aproveite a academia — e lembre-se: o que aprende aqui é para a terra.', tour_next:'Seguinte', tour_back:'Voltar', tour_skip:'Saltar', tour_finish:'Começar', tour_replay:'Fazer a visita guiada',
+    tour_welcome_t:'Bem-vindo à Belong Academy', tour_welcome_b:'Uma volta de dois minutos pela sua nova casa de aprendizagem. Pode sair quando quiser.', tour_path_t:'O seu percurso', tour_path_b:'A IA planeia uma sequência de cursos para o seu objetivo — comece aqui, e ela adapta-se.', tour_ask_t:'Pergunte à Academia', tour_ask_b:'Qualquer pergunta sobre a terra — respondida a partir dos nossos cursos, com links para a lição exata.', tour_comm_t:'Comunidade', tour_comm_b:'Perguntas, vitórias e sondagens com toda a equipa — organizadas por percurso.', tour_prog_t:'O seu progresso', tour_prog_b:'XP, sequências, competências, certificados e missões de campo — tudo o que ganhou vive aqui.', tour_bell_t:'Lembretes gentis', tour_bell_b:'Encorajadores, nunca spam — e controla cada canal no seu perfil.', tour_done_t:'Fim da volta', tour_done_b:'Aproveite a academia — e lembre-se: o que aprende aqui é para as casas, a mesa e os hóspedes.', tour_next:'Seguinte', tour_back:'Voltar', tour_skip:'Saltar', tour_finish:'Começar', tour_replay:'Fazer a visita guiada',
     comp_h:'Conformidade de formação', comp_sub:'As suas horas de formação contínua obrigatória do ano — Código do Trabalho, art. 131.º (40h/ano).', comp_target:'Meta anual', comp_done:'Concluídas', comp_left:'em falta', comp_ontrack:'Em dia', comp_behind:'Atrasado', comp_pace_by:'A esta altura, deveria estar em', comp_log:'Sessões creditadas', comp_none:'Ainda sem horas creditadas — conclua uma lição para começar.', comp_nif_prompt:'Adicione o seu NIF e dados do contrato no perfil para ativar o registo legal de formação.', comp_confirmed:'Presença confirmada', comp_h_unit:'h', comp_cert_btn:'Certificado de formação', comp_reg_btn:'Registo de presenças', comp_cert_dl:'Comprovativo transferido', comp_reg_dl:'Registo exportado (CSV)', ru_annex_btn:'Exportar Relatório Único',
     prof_nif:'NIF', prof_empno:'N.º de trabalhador', prof_contract:'Tipo de contrato', prof_fte:'Tempo de trabalho', prof_hire:'Data de início',
     contract_permanent:'Sem termo', contract_fixed:'A termo', contract_part:'Tempo parcial', fte_full:'Tempo inteiro', fte_half:'Tempo parcial (50%)', ck_40h:'40h',
@@ -497,14 +502,14 @@ const UI = {
     your_ai_path:'O seu percurso', completed:'Concluído', scored:'nota', modules_skipped:'módulos ignorados pela IA',
     in_progress:'Em curso', adapted_today:'adaptado hoje', unlocks_after:'A seguir', next_up:'A seguir', locked:'Bloqueado',
     continue_learning:'Continuar a aprender', synced_devices:'Sincronizado nos seus dispositivos', assigned_you:'Atribuído a si', from_stewardship:'De Belong · Zeladoria',
-    trending:'Em Destaque na Belong', community_learning:'O que a comunidade Belong está a aprender', because_completed:'Porque concluiu', ai_recommendations:'Recomendações da IA', see_all:'Ver tudo →',
-    generated_by_ai:'Gerado pela IA da Belong · atualizado há 2h', your_path_to:'O seu percurso para', path_intro:'Moldado pela sua função e resultados. Adapta-se sempre que aprende.', regenerate_path:'Regenerar percurso ↺', why_order:'Porquê esta ordem?',
+    trending:'Explorar mais', community_learning:'Tudo o que está na biblioteca', because_completed:'Porque concluiu', ai_recommendations:'Recomendações da IA', see_all:'Ver tudo →',
+    generated_by_ai:'Construído para o seu objetivo', your_path_to:'O seu percurso para', path_intro:'Moldado pela sua função e resultados. Adapta-se sempre que aprende.', regenerate_path:'Regenerar percurso ↺', why_order:'Porquê esta ordem?',
     learning_streak:'Sequência de estudo', personal_best:'▲ Recorde pessoal', this_week:'Esta semana', vs_last_week:'▲ 38% vs semana passada', skills_verified:'Competências verificadas', from_quizzes:'de questionários', avg_score:'Nota média das avaliações', top_5:'— Top 5% na Belong',
     ai_path_chip:'PERCURSO IA', required:'OBRIGATÓRIO', team_goal:'META DE EQUIPA', new:'NOVO', module:'MÓDULO', this_week_rank:'ESTA SEMANA', cert_issued:'certificado emitido', due:'Prazo',
     library_title:'Biblioteca', courses_tended:'cursos', filter_library:'Filtrar a biblioteca…', all:'Todos', nothing_matches:'Nada corresponde — experimente outro filtro ou peça ao tutor de IA.',
     in_ai_rotation:'Em rotação de IA', learners:'alunos', quiz_me:'Testar-me', modules_h:'Módulos', tap_module:'', coming_soon:'Em breve', more_in:'Mais em', related_courses:'Cursos relacionados',
     ask_tutor:'Perguntar ao tutor', notes_transcript:'Notas e transcrição', mark_complete:'✓ Marcar como concluído', soon_sub:'Esta lição está a ser filmada para a Belong — avisamos assim que estiver pronta.', play_lesson:'▶ Reproduzir lição',
-    live_title:'Ao Vivo', live_sub:'Sessões com pessoas reais — horas abertas, perguntas e respostas e workshops. As gravações ficam na Biblioteca em um dia.', watching:'a assistir', join_now:'Entrar agora', remind_me:'Lembrar-me',
+    live_title:'Ao Vivo', live_empty:'Ainda não há sessões ao vivo marcadas — quando houver, aparecem aqui e na sua página inicial.', live_sub:'Sessões com pessoas reais — horas abertas, perguntas e respostas e workshops. As gravações ficam na Biblioteca em um dia.', watching:'a assistir', join_now:'Entrar agora', remind_me:'Lembrar-me',
     my_progress:'O Meu Progresso', progress_sub:'',
     level_ab:'Nv', xp:'XP', xp_to:'XP para', highest_level:'Nível máximo — Carvalho Ancião', board_rank:'Posição no ranking', of:'de', badges_earned:'Distintivos ganhos', nice_work:'▲ Bom trabalho', earn_first:'Ganhe o seu primeiro', courses_finished:'Cursos terminados',
     badges_h:'Distintivos', badges_sub:'', locked_dot:'Bloqueado ·', leaders_board:'Ranking · esta semana', board_sub:'Amigável, reinicia todas as segundas. Uma competição saudável mantém todos a terminar.', keep_alive:'▲ Mantenha viva',
@@ -692,7 +697,7 @@ const PILLARS_PT = { 'Regenerative':'Regenerativo', 'Rooted':'Enraizado', 'Resto
 const tpillar = l => _lang() === 'pt' ? (PILLARS_PT[l] || l) : l;
 const LEVELS_PT = ['Semente','Rebento','Broto','Muda','Árvore Jovem','Guardião do Bosque','Carvalho Ancião'];
 const tlevel = i => _lang() === 'pt' ? (LEVELS_PT[i] || LEVELS[i].name) : LEVELS[i].name;
-const ROLES_PT = { land:'Terra e Agricultura', nature:'Natureza e Bem-estar', water:'Água e Clima', community:'Comunidade e Lugar' };
+const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', houses:'Limpezas e Casas', kitchen:'FarmTable e Cozinha', beachbar:'Beach Bar', cam:'A Mesa do CAM', events:'Eventos e Catering', farm:'Quinta e Natureza', leadership:'Escritório e Liderança' };
 const trole = r => _lang() === 'pt' ? (ROLES_PT[r.key] || r.label) : r.label;
 const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Belong Host':'Anfitrião Belong', 'Seasonal Cook':'Cozinheiro das Estações', 'Nature Guide':'Guia da Natureza', 'Team Lead':'Líder de Equipa' };
 const tgoal = g => _lang() === 'pt' ? (GOALS_PT[g] || g) : g;
@@ -712,10 +717,13 @@ const tnote = n => _lang() === 'pt' ? String(n).replace('modules skipped by AI',
 
 /* ================= World-class pack: departments, missions, role-play ================= */
 const DEPTS = [
-  { key: 'land', en: 'Land & Gardens', pt: 'Terra e Jardins' },
-  { key: 'building', en: 'Building & Maintenance', pt: 'Construção e Manutenção' },
-  { key: 'hospitality', en: 'Craveiral & Hospitality', pt: 'Craveiral e Hospitalidade' },
-  { key: 'animals', en: 'Animal Care', pt: 'Cuidado Animal' },
+  { key: 'farmhouse', en: 'Farmhouse & Hosting', pt: 'Farmhouse e Receção' },
+  { key: 'houses', en: 'Housekeeping & Houses', pt: 'Limpezas e Casas' },
+  { key: 'farmtable', en: 'FarmTable & Kitchen', pt: 'FarmTable e Cozinha' },
+  { key: 'beachbar', en: 'Beach Bar', pt: 'Beach Bar' },
+  { key: 'cam', en: 'A Mesa do CAM (Lisbon)', pt: 'A Mesa do CAM (Lisboa)' },
+  { key: 'events', en: 'Events & Catering', pt: 'Eventos e Catering' },
+  { key: 'farm', en: 'Farm & Garden', pt: 'Quinta e Horta' },
   { key: 'office', en: 'Office & Leadership', pt: 'Escritório e Liderança' }
 ];
 const tdept = k => { const d = DEPTS.find(x => x.key === k); return d ? (_lang() === 'pt' ? d.pt : d.en) : ''; };
