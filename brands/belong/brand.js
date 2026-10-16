@@ -23,6 +23,11 @@
   boardIndexed: true,   /* leaderboard composite index (companyId + xp) deployed 2026-09-17 */
   /* the storefront always leads with the filmed course — never with whatever a visitor opened last */
   heroCourse: 'welcome-belong',
+  /* TESTING (João, 16 Oct 2026): the "watch the whole video" gate before the recap and the quiz is OFF so
+     the team can test the flow. Set to true (or delete the line) before the real launch. */
+  watchGate: false,
+  /* no tax id, contract, working-time or goal fields on the profile page (João, 16 Oct 2026) */
+  leanProfile: true,
   firebase: {
     apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
     authDomain: 'belong-academy.firebaseapp.com',
@@ -53,6 +58,10 @@
     '--text': '#f7efe9', '--text-dim': '#dac6bc', '--text-faint': '#a88d81',
     '--accent': '#c8655a'   /* was #be594d: 3.97:1 on the background, below AA for text; this is 4.6:1 */, '--accent-2': '#f8b556', '--glow': 'rgba(200,101,90,.42)',
     '--forest': '#8d907e', '--olive': '#8d907e', '--cork': '#b09189', '--clay': '#be594d',
-    '--atlantic': '#759ba3', '--mist': '#cfc7b9', '--ivory': '#f7efe9', '--focus': '#f8b556'
+    '--atlantic': '#759ba3', '--mist': '#cfc7b9', '--ivory': '#f7efe9', '--focus': '#f8b556',
+    /* rgb channels + gradients the shared stylesheet mixes from — without these the chrome tinted EdenRise sage and gold */
+    '--accent-2-rgb': '248,181,86', '--bg-rgb': '33,22,19', '--bg2-rgb': '45,32,28',
+    '--grad-text': 'linear-gradient(95deg, #f3c9b8 0%, #c8655a 45%, #f8b556 100%)',
+    '--orb-grad': 'conic-gradient(from 200deg, #c8655a, #f8b556, #b09189, #c8655a)'
   }
 };

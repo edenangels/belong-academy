@@ -1,0 +1,370 @@
+{
+ "course": "guest-journey",
+ "lang": "default",
+ "modules": {
+  "0": [
+   {
+    "type": "recall",
+    "t0": 32,
+    "a": 1,
+    "en": {
+     "q": "What promise does Craveiral's marketing make to potential guests?",
+     "opts": [
+      "A promise of luxury and high prices",
+      "A promise of a unique experience that the operation will deliver",
+      "A promise of a quick and easy booking process",
+      "A promise of a refund if they don't like it"
+     ],
+     "why": "The promise is that the operation will deliver the experience shown in the marketing."
+    },
+    "pt": {
+     "q": "Que promessa faz a marketing do Craveiral aos potenciais hóspedes?",
+     "opts": [
+      "Uma promessa de luxo e preços elevados",
+      "Uma promessa de uma experiência única que a operação irá entregar",
+      "Uma promessa de um processo de reserva rápido e fácil",
+      "Uma promessa de reembolso se não gostarem"
+     ],
+     "why": "A promessa é que a operação irá entregar a experiência mostrada na marketing."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 90,
+    "a": 1,
+    "en": {
+     "q": "What type of booking does Craveiral favor and why?",
+     "opts": [
+      "Direct bookings, because they are more expensive",
+      "Direct bookings, because more of the value stays in the circle",
+      "Indirect bookings, because they are easier to manage",
+      "Indirect bookings, because they are more common"
+     ],
+     "why": "Craveiral favors direct bookings because more of the value stays in the circle."
+    },
+    "pt": {
+     "q": "Que tipo de reserva o Craveiral prefere e por quê?",
+     "opts": [
+      "Reservas diretas, porque são mais caras",
+      "Reservas diretas, porque mais do valor fica no círculo",
+      "Reservas indiretas, porque são mais fáceis de gerir",
+      "Reservas indiretas, porque são mais comuns"
+     ],
+     "why": "O Craveiral prefere reservas diretas porque mais do valor fica no círculo."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 116,
+    "a": 1,
+    "en": {
+     "q": "What should a worker do during the first 15 minutes of a guest's arrival?",
+     "opts": [
+      "Provide a bureaucratic check-in",
+      "Offer a genuine welcome and a cold drink",
+      "Ask the guest to fill out a survey",
+      "Tell the guest about the rules and regulations"
+     ],
+     "why": "The worker should provide a genuine welcome and a cold drink to set the emotional tone for the entire stay."
+    },
+    "pt": {
+     "q": "O que um trabalhador deve fazer durante os primeiros 15 minutos da chegada de um hóspede?",
+     "opts": [
+      "Fornecer um check-in burocrático",
+      "Oferecer uma saudação genuína e uma bebida fria",
+      "Pedir ao hóspede para preencher um inquérito",
+      "Dizer ao hóspede sobre as regras e regulamentos"
+     ],
+     "why": "O trabalhador deve fornecer uma saudação genuína e uma bebida fria para definir o tom emocional para toda a estadia."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 145,
+    "a": 1,
+    "en": {
+     "q": "What message should workers convey to guests during their stay?",
+     "opts": [
+      "That they should follow the rules and regulations",
+      "That they made the right choice in choosing Craveiral",
+      "That they should try all the activities available",
+      "That they should leave as soon as possible"
+     ],
+     "why": "The message should be that the guest made the right choice in choosing Craveiral, to make them feel welcome and valued."
+    },
+    "pt": {
+     "q": "Que mensagem os trabalhadores devem transmitir aos hóspedes durante a sua estadia?",
+     "opts": [
+      "Que eles devem seguir as regras e regulamentos",
+      "Que eles fizeram a escolha certa ao escolher o Craveiral",
+      "Que eles devem tentar todas as atividades disponíveis",
+      "Que eles devem partir o mais rápido possível"
+     ],
+     "why": "A mensagem deve ser que o hóspede fez a escolha certa ao escolher o Craveiral, para fazê-los se sentir bem-vindos e valorizados."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "verified": true
+   },
+   {
+    "type": "scenario",
+    "t0": 172,
+    "a": 1,
+    "en": {
+     "q": "A guest arrives at Craveiral and is not impressed with the breakfast. What should a worker do?",
+     "opts": [
+      "Tell the guest that they are being too picky",
+      "Offer to make them something else to eat",
+      "Ignore the guest's comment and continue with the day",
+      "Apologize and explain that the breakfast is a statement of identity"
+     ],
+     "why": "The worker should offer to make the guest something else to eat, to ensure that the first morning is perfect and the whole stay tilts towards joy."
+    },
+    "pt": {
+     "q": "Um hóspede chega ao Craveiral e não fica impressionado com o café da manhã. O que um trabalhador deve fazer?",
+     "opts": [
+      "Dizer ao hóspede que ele está sendo muito exigente",
+      "Oferecer fazer algo mais para o hóspede comer",
+      "Ignorar o comentário do hóspede e continuar com o dia",
+      "Pedir desculpas e explicar que o café da manhã é uma declaração de identidade"
+     ],
+     "why": "O trabalhador deve oferecer fazer algo mais para o hóspede comer, para garantir que a primeira manhã seja perfeita e que toda a estadia se incline para a alegria."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 206,
+    "a": 2,
+    "en": {
+     "q": "A guest wants to spend their days at Craveiral doing nothing but relaxing by the pool. What guiding principle should a worker follow?",
+     "opts": [
+      "Encourage the guest to try all the activities available",
+      "Tell the guest that they are missing out on the best experiences",
+      "Follow the principle of freedom and respect the guest's choice",
+      "Call the guest's family to come and join them"
+     ],
+     "why": "The worker should follow the principle of freedom and respect the guest's choice, to ensure that the guest feels valued and has a positive experience."
+    },
+    "pt": {
+     "q": "Um hóspede quer passar os seus dias no Craveiral fazendo nada mais do que relaxar junto à piscina. Que princípio orientador um trabalhador deve seguir?",
+     "opts": [
+      "Encorajar o hóspede a tentar todas as atividades disponíveis",
+      "Dizer ao hóspede que ele está perdendo as melhores experiências",
+      "Seguir o princípio da liberdade e respeitar a escolha do hóspede",
+      "Ligar para a família do hóspede para vir e se juntar a ele"
+     ],
+     "why": "O trabalhador deve seguir o princípio da liberdade e respeitar a escolha do hóspede, para garantir que o hóspede se sinta valorizado e tenha uma experiência positiva."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1792159613463,
+    "corrected": true
+   }
+  ],
+  "1": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "A problem",
+      "A gift",
+      "A review",
+      "A mistake"
+     ],
+     "q": "What is a complaint considered as in this lesson?",
+     "why": "A complaint is considered a gift because it provides information and a second chance to improve."
+    },
+    "pt": {
+     "opts": [
+      "Um problema",
+      "Um presente",
+      "Uma crítica",
+      "Um erro"
+     ],
+     "q": "O que é considerado uma reclamação nesta lição?",
+     "why": "Uma reclamação é considerada um presente porque fornece informações e uma segunda chance para melhorar."
+    },
+    "t0": 25,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "corrected": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Listen completely",
+      "Defend the hotel",
+      "Explain the policy",
+      "Offer a solution"
+     ],
+     "q": "What is the first step when a guest is upset?",
+     "why": "The first step is to listen completely to the guest's concern without interrupting or defending."
+    },
+    "pt": {
+     "opts": [
+      "Ouvir completamente",
+      "Defender o hotel",
+      "Explicar a política",
+      "Oferecer uma solução"
+     ],
+     "q": "Qual é o primeiro passo quando um hóspede está zangado?",
+     "why": "O primeiro passo é ouvir completamente a preocupação do hóspede sem interromper ou defender."
+    },
+    "t0": 77,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Apologize and explain the reason",
+      "Acknowledge the feeling and offer a solution",
+      "Defend the hotel's policy",
+      "Say sorry but..."
+     ],
+     "q": "How should you respond when a guest expresses disappointment?",
+     "why": "You should acknowledge the feeling honestly and apologize without admitting legal fault."
+    },
+    "pt": {
+     "opts": [
+      "Pedir desculpas e explicar o motivo",
+      "Reconhecer o sentimento e oferecer uma solução",
+      "Defender a política do hotel",
+      "Dizer que sim, mas..."
+     ],
+     "q": "Como deve responder quando um hóspede expressa desapontamento?",
+     "why": "Deve reconhecer o sentimento honestamente e pedir desculpas sem admitir culpa legal."
+    },
+    "t0": 104,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Offer a discount",
+      "Explain the hotel's policy",
+      "Fix the problem and provide a gesture of goodwill",
+      "Do nothing"
+     ],
+     "q": "What should you do after acknowledging a guest's disappointment?",
+     "why": "You should fix the problem and provide a gesture of goodwill that is slightly larger than the failure."
+    },
+    "pt": {
+     "opts": [
+      "Oferecer um desconto",
+      "Explicar a política do hotel",
+      "Resolver o problema e oferecer um gesto de boa vontade",
+      "Não fazer nada"
+     ],
+     "q": "O que deve fazer após reconhecer o desapontamento de um hóspede?",
+     "why": "Deve resolver o problema e oferecer um gesto de boa vontade ligeiramente maior do que a falha."
+    },
+    "t0": 130,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Offer a new dish at the same price",
+      "Provide a complimentary dish and a glass of wine",
+      "Explain that the dish is supposed to be cold",
+      "Do nothing"
+     ],
+     "q": "A guest complains about a cold dish. What should you do?",
+     "why": "You should provide a complimentary dish and a glass of wine to show that you value the guest's feedback and want to make it right."
+    },
+    "pt": {
+     "opts": [
+      "Oferecer um novo prato ao mesmo preço",
+      "Fornecer um prato gratuito e um copo de vinho",
+      "Explicar que o prato deve ser frio",
+      "Não fazer nada"
+     ],
+     "q": "Um hóspede reclama sobre um prato frio. O que deve fazer?",
+     "why": "Deve fornecer um prato gratuito e um copo de vinho para mostrar que valoriza o feedback do hóspede e quer consertar."
+    },
+    "t0": 156,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "verified": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Ask how their stay was the night before",
+      "Ignore the guest and focus on new arrivals",
+      "Offer a discount on their next stay",
+      "Do nothing"
+     ],
+     "q": "A guest had a problem with their room, but it was resolved. What should you do the next morning?",
+     "why": "You should ask how their stay was the night before to show that you care about their experience and want to ensure that they are satisfied."
+    },
+    "pt": {
+     "opts": [
+      "Perguntar como foi a estadia na noite anterior",
+      "Ignorar o hóspede e se concentrar nos novos arrivais",
+      "Oferecer um desconto na próxima estadia",
+      "Não fazer nada"
+     ],
+     "q": "Um hóspede teve um problema com o quarto, mas foi resolvido. O que deve fazer na manhã seguinte?",
+     "why": "Deve perguntar como foi a estadia na noite anterior para mostrar que se preocupa com a experiência do hóspede e quer garantir que ele esteja satisfeito."
+    },
+    "t0": 184,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644809529,
+    "verified": true
+   }
+  ]
+ }
+}

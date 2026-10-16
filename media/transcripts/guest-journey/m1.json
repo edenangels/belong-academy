@@ -1,5 +1,5 @@
 {
- "module": 8,
+ "module": 1,
  "title": "When things go wrong: complaints and service recovery",
  "vimeoId": "1227372976",
  "vimeoName": "Module 9 - When things go wrong: complaints and service recovery",
@@ -615,5 +615,10 @@
    "t1": 350.84,
    "text": "What it actually asks of you before lunch."
   }
- ]
+ ],
+ "course": "guest-journey",
+ "splitFrom": {
+  "course": "welcome-belong",
+  "module": 8
+ }
 }

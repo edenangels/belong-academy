@@ -1,0 +1,370 @@
+{
+ "course": "voice-leadership",
+ "lang": "default",
+ "modules": {
+  "0": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Formal and professional",
+      "Calm, warm, and unhurried",
+      "Enthusiastic and promotional",
+      "Scripted and rehearsed"
+     ],
+     "q": "What tone should the Craveiral voice convey when interacting with guests?",
+     "why": "The Craveiral voice should convey a tone that is calm, warm, and unhurried, like the place itself."
+    },
+    "pt": {
+     "opts": [
+      "Formal e profissional",
+      "Calmo, quente e sem pressa",
+      "Entusiástico e promocional",
+      "Escrito e ensaiado"
+     ],
+     "q": "Que tom deve transmitir a voz Craveiral quando interage com os hóspedes?",
+     "why": "A voz Craveiral deve transmitir um tom que é calmo, quente e sem pressa, como o local em si."
+    },
+    "t0": 29,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "verified": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Say it the way you'd say it to a friend's parents visiting your home",
+      "Use a script or a formula",
+      "Be formal and professional",
+      "Avoid saying it altogether"
+     ],
+     "q": "How should you say something to a guest if you're unsure how to phrase it?",
+     "why": "If you're unsure how to say something to a guest, you should say it the way you'd say it to a friend's parents visiting your home."
+    },
+    "pt": {
+     "opts": [
+      "Diga-o da maneira como diria a um amigo cujos pais estão visitando a sua casa",
+      "Use um script ou uma fórmula",
+      "Seja formal e profissional",
+      "Evite dizê-lo completamente"
+     ],
+     "q": "Como deve dizer algo a um hóspede se não tiver certeza de como expressá-lo?",
+     "why": "Se não tiver certeza de como dizer algo a um hóspede, deve dizê-lo da maneira como diria a um amigo cujos pais estão visitando a sua casa."
+    },
+    "t0": 55,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Use complex grammar and vocabulary to impress them",
+      "Speak quickly and efficiently to get the point across",
+      "Keep English simple and warm, and focus on clear goodwill",
+      "Avoid speaking with them altogether"
+     ],
+     "q": "What should you do when speaking with international guests who may not speak perfect English?",
+     "why": "When speaking with international guests, you should keep English simple and warm, and focus on clear goodwill."
+    },
+    "pt": {
+     "opts": [
+      "Use gramática complexa e vocabulário para impressioná-los",
+      "Fale rapidamente e de forma eficiente para transmitir a mensagem",
+      "Mantenha o inglês simples e quente, e foque na boa vontade clara",
+      "Evite falar com eles completamente"
+     ],
+     "q": "O que deve fazer quando fala com hóspedes internacionais que podem não falar inglês perfeito?",
+     "why": "Quando fala com hóspedes internacionais, deve manter o inglês simples e quente, e foque na boa vontade clara."
+    },
+    "t0": 108,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Teach them complex Portuguese phrases and grammar",
+      "Share a little Portuguese when the moment invites it, such as common phrases like 'obrigado' and 'bom dia'",
+      "Avoid speaking with them about the local culture altogether",
+      "Only focus on speaking with them in English"
+     ],
+     "q": "What can you do to make international guests feel more welcome and connected to the local culture?",
+     "why": "You can make international guests feel more welcome and connected to the local culture by sharing a little Portuguese when the moment invites it."
+    },
+    "pt": {
+     "opts": [
+      "Ensine-lhes frases complexas em português e gramática",
+      "Compartilhe um pouco de português quando o momento convida, como frases comuns como 'obrigado' e 'bom dia'",
+      "Evite falar com eles sobre a cultura local completamente",
+      "Apenas se concentre em falar com eles em inglês"
+     ],
+     "q": "O que pode fazer para fazer com que os hóspedes internacionais se sintam mais bem-vindos e conectados à cultura local?",
+     "why": "Pode fazer com que os hóspedes internacionais se sintam mais bem-vindos e conectados à cultura local compartilhando um pouco de português quando o momento convida."
+    },
+    "t0": 159,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Try to force them to talk and be more social",
+      "Respect their boundaries and give them space",
+      "Ignore them and focus on other guests",
+      "Both try to engage them in conversation and respect their boundaries, calibrated to their needs"
+     ],
+     "q": "A guest approaches you and seems hesitant to engage in conversation. What should you do?",
+     "why": "You should both try to engage them in conversation and respect their boundaries, calibrated to their needs, as some guests may want conversation while others may want efficiency and privacy."
+    },
+    "pt": {
+     "opts": [
+      "Tente forçá-los a falar e ser mais sociável",
+      "Respeite os limites deles e dê-lhes espaço",
+      "Ignore-os e foque em outros hóspedes",
+      "Tanto tente engajá-los em conversa quanto respeite os limites deles, calibrado às suas necessidades"
+     ],
+     "q": "Um hóspede se aproxima de você e parece hesitante em se engajar em conversa. O que deve fazer?",
+     "why": "Deve tanto tentar engajá-los em conversa quanto respeite os limites deles, calibrado às suas necessidades, pois alguns hóspedes podem querer conversa enquanto outros podem querer eficiência e privacidade."
+    },
+    "t0": 184,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "corrected": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Use a warm and concrete tone, with short sentences",
+      "Use a formal and professional tone, with complex grammar and vocabulary",
+      "Use a promotional and sales-oriented tone, with emphasis on amenities and features",
+      "Avoid writing the email altogether and instead use a template or automated response"
+     ],
+     "q": "You are writing an email to a guest who has booked a stay at the farm. How should you write the email?",
+     "why": "You should use a warm and concrete tone, with short sentences, when writing an email to a guest, as this reflects the Craveiral voice and values."
+    },
+    "pt": {
+     "opts": [
+      "Use um tom quente e concreto, com frases curtas",
+      "Use um tom formal e profissional, com gramática complexa e vocabulário",
+      "Use um tom promocional e orientado às vendas, com ênfase em comodidades e recursos",
+      "Evite escrever o e-mail completamente e use um modelo ou resposta automatizada"
+     ],
+     "q": "Está escrevendo um e-mail a um hóspede que reservou uma estadia na quinta. Como deve escrever o e-mail?",
+     "why": "Deve usar um tom quente e concreto, com frases curtas, quando escreve um e-mail a um hóspede, pois isso reflete a voz e os valores Craveiral."
+    },
+    "t0": 212,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644508618,
+    "corrected": true
+   }
+  ],
+  "1": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Make all the decisions yourself",
+      "Correct others' decisions rather than making all the decisions",
+      "Wait for permission for every judgment call",
+      "Follow the org chart strictly"
+     ],
+     "q": "What is the first principle of working together according to the trainer?",
+     "why": "The trainer prefers to correct decisions rather than making all of them to encourage autonomy and decision-making among team members."
+    },
+    "pt": {
+     "opts": [
+      "Tomar todas as decisões sozinho",
+      "Corrigir as decisões dos outros em vez de tomar todas as decisões",
+      "Aguardar permissão para cada decisão",
+      "Seguir rigorosamente o organograma"
+     ],
+     "q": "Qual é o primeiro princípio de trabalho em equipe segundo o formador?",
+     "why": "O formador prefere corrigir decisões em vez de tomar todas para encorajar a autonomia e a tomada de decisões entre os membros da equipa."
+    },
+    "t0": 52,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "The trainer will punish team members for generous decisions",
+      "The trainer will never punish team members for generous decisions made in good faith",
+      "The trainer will only punish team members for decisions that cost money",
+      "The trainer will punish team members for decisions that are not approved by a manager"
+     ],
+     "q": "What is the trainer's stance on punishing team members for generous decisions made in good faith?",
+     "why": "The trainer will never punish team members for generous decisions made in good faith to encourage a culture of hospitality and trust."
+    },
+    "pt": {
+     "opts": [
+      "O formador punirá membros da equipa por decisões generosas",
+      "O formador nunca punirá membros da equipa por decisões generosas tomadas de boa fé",
+      "O formador só punirá membros da equipa por decisões que custam dinheiro",
+      "O formador punirá membros da equipa por decisões que não são aprovadas por um gestor"
+     ],
+     "q": "Qual é a posição do formador em relação a punir membros da equipa por decisões generosas tomadas de boa fé?",
+     "why": "O formador nunca punirá membros da equipa por decisões generosas tomadas de boa fé para encorajar uma cultura de hospitalidade e confiança."
+    },
+    "t0": 105,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Wait for permission from a manager",
+      "Solve the problem using the company values as a compass",
+      "Call the trainer for guidance",
+      "Do nothing and let the guest handle it"
+     ],
+     "q": "What should a team member do when a guest is in front of them and something needs to be solved?",
+     "why": "The team member should solve the problem using the company values as a compass to provide good hospitality and service."
+    },
+    "pt": {
+     "opts": [
+      "Aguardar permissão de um gestor",
+      "Resolver o problema usando os valores da empresa como bússola",
+      "Ligar para o formador para orientação",
+      "Não fazer nada e deixar que o hóspede resolva"
+     ],
+     "q": "O que deve fazer um membro da equipa quando um hóspede está na sua frente e algo precisa ser resolvido?",
+     "why": "O membro da equipa deve resolver o problema usando os valores da empresa como bússola para fornecer boa hospitalidade e serviço."
+    },
+    "t0": 79,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Hide the mistake until it becomes a crisis",
+      "Bring the problem to the trainer while it's small",
+      "Try to fix the mistake on their own without telling anyone",
+      "Tell a colleague but not the trainer"
+     ],
+     "q": "What should a team member do when they catch a mistake early on?",
+     "why": "The team member should bring the problem to the trainer while it's small to prevent it from becoming a crisis and to maintain trust."
+    },
+    "pt": {
+     "opts": [
+      "Esconder o erro até que se torne uma crise",
+      "Levar o problema ao formador enquanto ainda é pequeno",
+      "Tentar corrigir o erro sozinho sem dizer a ninguém",
+      "Dizer a um colega mas não ao formador"
+     ],
+     "q": "O que deve fazer um membro da equipa quando detecta um erro precocemente?",
+     "why": "O membro da equipa deve levar o problema ao formador enquanto ainda é pequeno para evitar que se torne uma crise e para manter a confiança."
+    },
+    "t0": 131,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "corrected": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Speak up and tell the trainer about the mistake",
+      "Keep quiet and let the trainer figure it out",
+      "Tell a colleague but not the trainer",
+      "Wait until the mistake becomes a crisis before speaking up"
+     ],
+     "q": "A team member notices that the trainer has made a mistake in a decision. What should they do?",
+     "why": "The team member should speak up and tell the trainer about the mistake to maintain trust and respect."
+    },
+    "pt": {
+     "opts": [
+      "Falar e dizer ao formador sobre o erro",
+      "Manter-se calado e deixar que o formador descubra",
+      "Dizer a um colega mas não ao formador",
+      "Aguardar até que o erro se torne uma crise antes de falar"
+     ],
+     "q": "Um membro da equipa nota que o formador cometeu um erro em uma decisão. O que deve fazer?",
+     "why": "O membro da equipa deve falar e dizer ao formador sobre o erro para manter a confiança e o respeito."
+    },
+    "t0": 156,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "corrected": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Try to meet the standards and ask for help if needed",
+      "Lower their own standards to make it easier",
+      "Ignore the standards and do their own thing",
+      "Complain to colleagues about the high standards"
+     ],
+     "q": "A team member is struggling to meet the high standards set by the trainer. What should they do?",
+     "why": "The team member should try to meet the standards and ask for help if needed to maintain respect for themselves, their colleagues, and the guests."
+    },
+    "pt": {
+     "opts": [
+      "Tentar atingir os padrões e pedir ajuda se necessário",
+      "Baixar os seus próprios padrões para torná-los mais fáceis",
+      "Ignorar os padrões e fazer as coisas à sua maneira",
+      "Queixar-se a colegas sobre os padrões elevados"
+     ],
+     "q": "Um membro da equipa está a ter dificuldades em atingir os padrões elevados estabelecidos pelo formador. O que deve fazer?",
+     "why": "O membro da equipa deve tentar atingir os padrões e pedir ajuda se necessário para manter o respeito por si mesmo, pelos colegas e pelos hóspedes."
+    },
+    "t0": 184,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644546700,
+    "corrected": true
+   }
+  ]
+ }
+}

@@ -1,0 +1,370 @@
+{
+ "course": "craveiral-hospitality",
+ "lang": "default",
+ "modules": {
+  "0": [
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Because it is the most important aspect of sustainability",
+      "Because it is the easiest to achieve",
+      "Because without it, the farm and mission would not survive",
+      "Because it is the most environmentally friendly"
+     ],
+     "q": "Why does the trainer prioritize financial sustainability?",
+     "why": "The trainer prioritizes financial sustainability because without it, the farm and mission would not survive."
+    },
+    "pt": {
+     "opts": [
+      "Porque é o aspeto mais importante da sustentabilidade",
+      "Porque é o mais fácil de alcançar",
+      "Porque sem ela, a quinta e a missão não sobreviveriam",
+      "Porque é a mais friendamente para o ambiente"
+     ],
+     "q": "Por que o formador prioriza a sustentabilidade financeira?",
+     "why": "O formador prioriza a sustentabilidade financeira porque sem ela, a quinta e a missão não sobreviveriam."
+    },
+    "t0": 27,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "corrected": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Financial, environmental, and technological",
+      "Financial, environmental, and social",
+      "Environmental, social, and economic",
+      "Technological, economic, and social"
+     ],
+     "q": "What are the three aspects of sustainability mentioned by the trainer?",
+     "why": "The trainer mentions financial, environmental, and social sustainability as the three aspects of sustainability."
+    },
+    "pt": {
+     "opts": [
+      "Financeira, ambiental e tecnológica",
+      "Financeira, ambiental e social",
+      "Ambiental, social e económica",
+      "Tecnológica, económica e social"
+     ],
+     "q": "Quais são os três aspetos da sustentabilidade mencionados pelo formador?",
+     "why": "O formador menciona a sustentabilidade financeira, ambiental e social como os três aspetos da sustentabilidade."
+    },
+    "t0": 82,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "corrected": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Avoid waste and take care of equipment",
+      "Only focus on environmental sustainability",
+      "Ignore financial sustainability and focus on social aspects",
+      "Do nothing and let others handle it"
+     ],
+     "q": "What should a worker do to protect the mission of Craveiral?",
+     "why": "A worker should avoid waste and take care of equipment to protect the mission of Craveiral."
+    },
+    "pt": {
+     "opts": [
+      "Evitar o desperdício e cuidar do equipamento",
+      "Apenas focar na sustentabilidade ambiental",
+      "Ignorar a sustentabilidade financeira e focar nos aspetos sociais",
+      "Não fazer nada e deixar que os outros lidem com isso"
+     ],
+     "q": "O que um trabalhador deve fazer para proteger a missão da Craveiral?",
+     "why": "Um trabalhador deve evitar o desperdício e cuidar do equipamento para proteger a missão da Craveiral."
+    },
+    "t0": 56,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Leave it as it is and don't question it",
+      "Simplify it without asking anyone",
+      "Question it and ask if there's a reason for its complexity",
+      "Ignore it and focus on other tasks"
+     ],
+     "q": "How should a worker approach a convoluted process in their work?",
+     "why": "A worker should question a convoluted process and ask if there's a reason for its complexity."
+    },
+    "pt": {
+     "opts": [
+      "Deixá-lo como está e não questioná-lo",
+      "Simplificá-lo sem perguntar a ninguém",
+      "Questioná-lo e perguntar se há uma razão para a sua complexidade",
+      "Ignorá-lo e focar em outras tarefas"
+     ],
+     "q": "Como um trabalhador deve abordar um processo complicado no seu trabalho?",
+     "why": "Um trabalhador deve questionar um processo complicado e perguntar se há uma razão para a sua complexidade."
+    },
+    "t0": 108,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Tell the guest that they should have expected a rustic experience",
+      "Offer to upgrade the guest to a more luxurious room",
+      "Explain that comfort and modernity are priorities at Craveiral and offer to address the issue",
+      "Ignore the guest's complaint and do nothing"
+     ],
+     "q": "A guest is complaining about the lack of comfort in their room. What should the worker do?",
+     "why": "The worker should explain that comfort and modernity are priorities at Craveiral and offer to address the issue."
+    },
+    "pt": {
+     "opts": [
+      "Dizer ao hóspede que devia ter esperado uma experiência rústica",
+      "Oferecer para atualizar o hóspede para um quarto mais luxuoso",
+      "Explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema",
+      "Ignorar a reclamação do hóspede e não fazer nada"
+     ],
+     "q": "Um hóspede está a reclamar da falta de conforto no seu quarto. O que o trabalhador deve fazer?",
+     "why": "O trabalhador deve explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema."
+    },
+    "t0": 135,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "corrected": true
+   },
+   {
+    "a": 3,
+    "en": {
+     "opts": [
+      "Add as many amenities as possible to ensure the guest's comfort",
+      "Remove all unnecessary items to ensure simplicity",
+      "Balance simplicity and comfort by providing clear answers and honest food",
+      "Ask a colleague for guidance on how to set up the room"
+     ],
+     "q": "A new worker is setting up a room for a guest and is unsure how to balance simplicity and comfort. What should they do?",
+     "why": "The worker should balance simplicity and comfort by providing clear answers and honest food."
+    },
+    "pt": {
+     "opts": [
+      "Adicionar tantas comodidades quanto possível para garantir o conforto do hóspede",
+      "Remover todos os itens desnecessários para garantir a simplicidade",
+      "Equilibrar a simplicidade e o conforto fornecendo respostas claras e comida honesta",
+      "Perguntar a um colega de trabalho para orientação sobre como preparar o quarto"
+     ],
+     "q": "Um novo trabalhador está a preparar um quarto para um hóspede e está incerto sobre como equilibrar a simplicidade e o conforto. O que ele deve fazer?",
+     "why": "O trabalhador deve equilibrar a simplicidade e o conforto fornecendo respostas claras e comida honesta."
+    },
+    "t0": 162,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644585156,
+    "corrected": true
+   }
+  ],
+  "1": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Service is about how the guest feels, while hospitality is technical",
+      "Service is technical, while hospitality is about how the guest feels",
+      "Service is mandatory, while hospitality is optional",
+      "Service is measurable, while hospitality is not"
+     ],
+     "q": "What is the main difference between service and hospitality?",
+     "why": "Hospitality is about creating a feeling inside the guest, whereas service is about providing technical excellence."
+    },
+    "pt": {
+     "opts": [
+      "O serviço é sobre como o hóspede se sente, enquanto a hospitalidade é técnica",
+      "O serviço é técnico, enquanto a hospitalidade é sobre como o hóspede se sente",
+      "O serviço é obrigatório, enquanto a hospitalidade é opcional",
+      "O serviço é mensurável, enquanto a hospitalidade não é"
+     ],
+     "q": "Qual é a principal diferença entre serviço e hospitalidade?",
+     "why": "A hospitalidade é sobre criar um sentimento dentro do hóspede, enquanto o serviço é sobre fornecer excelência técnica."
+    },
+    "t0": 29,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "As customers",
+      "As clients",
+      "As guests",
+      "As visitors"
+     ],
+     "q": "How should guests be referred to, according to the trainer?",
+     "why": "The trainer emphasizes that guests should be referred to as 'guests', not 'customers', to convey a sense of welcome and hospitality."
+    },
+    "pt": {
+     "opts": [
+      "Como clientes",
+      "Como clientes",
+      "Como hóspedes",
+      "Como visitantes"
+     ],
+     "q": "Como os hóspedes devem ser referidos, de acordo com o treinador?",
+     "why": "O treinador enfatiza que os hóspedes devem ser referidos como 'hóspedes', não 'clientes', para transmitir um sentimento de boas-vindas e hospitalidade."
+    },
+    "t0": 83,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Process them quickly and efficiently",
+      "Ask them to fill out a form",
+      "Offer them something to drink and make them feel welcome",
+      "Tell them about the hotel's policies"
+     ],
+     "q": "What should a staff member do when a guest arrives, according to the trainer?",
+     "why": "The trainer suggests that staff members should make guests feel welcome by offering them something to drink and being happy to see them."
+    },
+    "pt": {
+     "opts": [
+      "Processá-los rapidamente e com eficiência",
+      "Perguntar-lhes para preencher um formulário",
+      "Oferecer-lhes algo para beber e fazê-los se sentir bem-vindos",
+      "Dizer-lhes sobre as políticas do hotel"
+     ],
+     "q": "O que um membro da equipe deve fazer quando um hóspede chega, de acordo com o treinador?",
+     "why": "O treinador sugere que os membros da equipe devem fazer os hóspedes se sentirem bem-vindos, oferecendo-lhes algo para beber e sendo felizes em vê-los."
+    },
+    "t0": 111,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Using a self-service kiosk",
+      "Remembering a guest's name",
+      "Asking a guest to fill out a survey",
+      "Providing a complimentary gift"
+     ],
+     "q": "What is a simple way to show hospitality, according to the trainer?",
+     "why": "The trainer suggests that remembering a guest's name is a simple way to show hospitality and make them feel recognized."
+    },
+    "pt": {
+     "opts": [
+      "Usar um quiosque de autoatendimento",
+      "Lembrar-se do nome de um hóspede",
+      "Perguntar a um hóspede para preencher uma pesquisa",
+      "Fornecer um presente complementar"
+     ],
+     "q": "Qual é uma maneira simples de mostrar hospitalidade, de acordo com o treinador?",
+     "why": "O treinador sugere que lembrar-se do nome de um hóspede é uma maneira simples de mostrar hospitalidade e fazê-los se sentir reconhecidos."
+    },
+    "t0": 138,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Give them a discount on their room rate",
+      "Offer them a complimentary drink",
+      "Leave a surprise gift or note in their room to acknowledge their special occasion",
+      "Tell them about the hotel's amenities"
+     ],
+     "q": "A couple has booked a room for their anniversary. What could a staff member do to show hospitality?",
+     "why": "The trainer suggests that anticipating a guest's needs and showing attention to detail, such as leaving a surprise gift or note, can create a sense of hospitality and make their stay special."
+    },
+    "pt": {
+     "opts": [
+      "Dar-lhes um desconto na taxa do quarto",
+      "Oferecer-lhes um drink complementar",
+      "Deixar um presente ou nota surpresa no quarto para reconhecer a ocasião especial",
+      "Dizer-lhes sobre as comodidades do hotel"
+     ],
+     "q": "Um casal reservou um quarto para o seu aniversário. O que um membro da equipe pode fazer para mostrar hospitalidade?",
+     "why": "O treinador sugere que antecipar as necessidades de um hóspede e mostrar atenção ao detalhe, como deixar um presente ou nota surpresa, pode criar um sentimento de hospitalidade e tornar a estadia especial."
+    },
+    "t0": 166,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Tell them to check the hotel's website for information",
+      "Recommend a beach that is convenient for the hotel, but not necessarily suitable for small children",
+      "Recommend Carvalal beach, explaining that it has easy access and is suitable for small children",
+      "Suggest that they visit a different attraction, such as a museum or park"
+     ],
+     "q": "A guest asks for a recommendation on which beach to visit with their small children. What could a staff member say to show hospitality?",
+     "why": "The trainer suggests that staff members should be knowledgeable about the local area and be able to provide recommendations that show attention to the guest's needs and preferences."
+    },
+    "pt": {
+     "opts": [
+      "Dizer-lhes para verificar o site do hotel para obter informações",
+      "Recomendar uma praia que é conveniente para o hotel, mas não necessariamente adequada para crianças pequenas",
+      "Recomendar a praia de Carvalal, explicando que tem acesso fácil e é adequada para crianças pequenas",
+      "Sugerir que visitem uma atração diferente, como um museu ou parque"
+     ],
+     "q": "Um hóspede pergunta por uma recomendação sobre qual praia visitar com os seus filhos pequenos. O que um membro da equipe pode dizer para mostrar hospitalidade?",
+     "why": "O treinador sugere que os membros da equipe devem ser conhecedores da área local e ser capazes de fornecer recomendações que mostrem atenção às necessidades e preferências do hóspede."
+    },
+    "t0": 194,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644622388,
+    "corrected": true
+   }
+  ]
+ }
+}

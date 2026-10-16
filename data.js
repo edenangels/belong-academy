@@ -66,26 +66,33 @@ const PATH_RATIONALES = _PATH_RATIONALES.en.map((_, k) => k).reduce((arr, k) => 
 
 
 const GOAL_PRESETS = {
-  /* Belong's paths, built from Belong's own courses. The land goals that shipped
-     here were EdenRise's — a template leak a guest could see on the home hero. */
-  'The Belong Way': ['welcome-belong', 'art-of-hospitality', 'seasonal-table', 'community-circular'],
-  'Belong Host': ['welcome-belong', 'art-of-hospitality', 'community-circular'],
-  'Seasonal Cook': ['welcome-belong', 'seasonal-table', 'growing-regenerating'],
-  'Nature Guide': ['welcome-belong', 'belong-to-nature', 'growing-regenerating'],
-  'Team Lead': ['welcome-belong', 'art-of-hospitality', 'community-circular'],
+  /* Belong's paths, built from Belong's six filmed courses. Every path opens with
+     the welcome; the rest follows what the department does all day. */
+  'The Belong Way':      ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'houses-farm-sustainability', 'farm-to-table', 'voice-leadership'],
+  'Belong Host':         ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
+  'Houses & Standards':  ['welcome-belong', 'houses-farm-sustainability', 'craveiral-hospitality', 'guest-journey'],
+  'From Farm to Table':  ['welcome-belong', 'farm-to-table', 'craveiral-hospitality', 'houses-farm-sustainability'],
+  'Rooted in the Land':  ['welcome-belong', 'houses-farm-sustainability', 'farm-to-table'],
+  'Lead the Belong Way': ['welcome-belong', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'],
+  'Safe & Sustainable':  ['welcome-belong', 'houses-farm-sustainability', 'guest-journey', 'voice-leadership']
 };
 
 const ROLE_OPTIONS = [
-  /* the Craveiral constellation (module 8): farmhouse, houses, FarmTable, beach bar, A Mesa do CAM, events */
-  { key: 'hosting',    label: 'Hosting & Guest Care',  icon: 'people',  goals: ['Belong Host', 'The Belong Way'] },
-  { key: 'houses',     label: 'Housekeeping & Houses', icon: 'sun',     goals: ['Belong Host', 'The Belong Way'] },
-  { key: 'kitchen',    label: 'FarmTable & Kitchen',   icon: 'leaf',    goals: ['Seasonal Cook', 'The Belong Way'] },
-  { key: 'beachbar',   label: 'Beach Bar',             icon: 'drop',    goals: ['Belong Host', 'Seasonal Cook'] },
-  { key: 'cam',        label: 'A Mesa do CAM',         icon: 'flower',  goals: ['Seasonal Cook', 'Belong Host'] },
-  { key: 'events',     label: 'Events & Catering',     icon: 'bird',    goals: ['Belong Host', 'Team Lead'] },
-  { key: 'farm',       label: 'Farm & Nature',         icon: 'sprout',  goals: ['Nature Guide', 'Seasonal Cook'] },
-  { key: 'leadership', label: 'Office & Leadership',   icon: 'compass', goals: ['Team Lead', 'Belong Host'] }
+  { key: 'hosting',      label: 'Hosting & Guest Care',             icon: 'people',   goals: ['Belong Host', 'The Belong Way'] },
+  { key: 'housekeeping', label: 'Housekeeping & Houses',            icon: 'sun',      goals: ['Houses & Standards', 'Belong Host'] },
+  { key: 'culinary',     label: 'Culinary & Kitchen',               icon: 'leaf',     goals: ['From Farm to Table', 'The Belong Way'] },
+  { key: 'fnb',          label: 'Food & Beverage Service',          icon: 'basket',   goals: ['From Farm to Table', 'Belong Host'] },
+  { key: 'farm',         label: 'Farm & Nature',                    icon: 'sprout',   goals: ['Rooted in the Land', 'From Farm to Table'] },
+  { key: 'maintenance',  label: 'Maintenance & Property Care',      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable'] },
+  { key: 'wellness',     label: 'Wellness & Experiences',           icon: 'flower',   goals: ['Belong Host', 'Rooted in the Land'] },
+  { key: 'office',       label: 'Office & Administration',          icon: 'compass',  goals: ['Lead the Belong Way', 'The Belong Way'] },
+  { key: 'people',       label: 'People, Culture & Leadership',     icon: 'hands',    goals: ['Lead the Belong Way', 'The Belong Way'] },
+  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'drop',     goals: ['Safe & Sustainable', 'Houses & Standards'] }
 ];
+
+/* roles and goals that shipped before the Final 10 Departments — a stored profile keeps working */
+const ROLE_ALIASES = { houses: 'housekeeping', kitchen: 'culinary', beachbar: 'fnb', cam: 'fnb', events: 'fnb', leadership: 'office', farmhouse: 'hosting', farmtable: 'culinary' };
+const GOAL_ALIASES = { 'Seasonal Cook': 'From Farm to Table', 'Nature Guide': 'Rooted in the Land', 'Team Lead': 'Lead the Belong Way' };
 
 /* Gamification — growth-themed levels (nature) + subtle badges. Tuned to lift completion. */
 const LEVELS = [
@@ -124,7 +131,7 @@ const DEFAULT_STATE = {
   apiKey: '',
   aiModel: 'claude-opus-4-8',
   goal: 'The Belong Way',
-  path: ['welcome-belong', 'art-of-hospitality', 'seasonal-table', 'growing-regenerating', 'belong-to-nature', 'community-circular'],
+  path: ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
   progress: {},      /* truth only — earned, never seeded */
   review: {},
   reminders: [],
@@ -220,7 +227,7 @@ const UI = {
     nudge_refresh_t:'A 2-minute refresher', nudge_refresh_b:'“{course}” was {n} days ago — one look keeps it rooted',
     offline_note:'Offline — your progress is safe on this device and will sync when you’re back', online_note:'Back online — progress synced',
     stats_today:'today', stats_best:'best', stats_quizzes:'quizzes taken', board_grow:'The board grows as the team joins — invite someone', no_data:'—',
-    daily_title:'Today’s question', daily_sub:'Thirty seconds to keep it rooted', daily_from:'from', daily_correct:'Rooted! +10 XP', daily_wrong:'Good try — now it’ll stick.', daily_tomorrow:'Come back tomorrow for the next one', daily_streak:'day streak',
+    daily_title:'Today’s question', daily_open:'Answer it', daily_later:'Later', greet_morning:'Good morning', greet_afternoon:'Good afternoon', greet_evening:'Good evening', nudge_daily_t:'Today’s question is waiting', nudge_daily_b:'Thirty seconds, one question from a lesson you watched.', cal_prev:'Previous month', cal_next:'Next month', pal_ph:'Search, or ask a question…', pal_ask_hint:'Press Enter to ask the lessons', voice_check:'Check the words, then press Enter.', daily_sub:'Thirty seconds to keep it rooted', daily_from:'from', daily_correct:'Rooted! +10 XP', daily_wrong:'Good try — now it’ll stick.', daily_tomorrow:'Come back tomorrow for the next one', daily_streak:'day streak',
     gdpr_title:'Privacy & your data', gdpr_sub:'Export or erase, anytime.', gdpr_export:'Download my data', gdpr_exported:'Your data file is downloading', gdpr_delete:'Delete my account', gdpr_delete_warn:'This permanently erases your account, progress, XP and badges for everyone. Type DELETE to confirm.', gdpr_deleted:'Account deleted. Be well', gdpr_recent_login:'For safety, sign in again first — then delete works.', gdpr_guest_note:'Guest data lives only on this device — deleting clears it here.',
     orgkey_title:'Team AI key', orgkey_sub:'One key for the whole team — every signed-in member gets the tutor, AI quizzes and the Studio automatically. Personal keys (tutor settings) override it.', orgkey_saved:'Team AI key saved — live for everyone signed in',
     studio_title:'AI Course Studio', studio_sub:'Paste a transcript or lesson notes, add the video link — the AI writes the whole bilingual course: modules, invitation, takeaways and quiz. You approve before it goes live.', studio_gen:'Write the course ✦', studio_generating:'Writing the course — modules, takeaways, quiz, both languages…', studio_need_key:'Connect a Claude key first (✦ orb → ⚙ settings) — the Studio writes with your key.', studio_publish:'Publish to Library', studio_draft:'Draft — review before publishing', studio_published:'Published — it’s in everyone’s Library now', studio_video_ph:'Vimeo or YouTube link (optional)', studio_text_ph:'Paste the transcript, notes, or a rich description of the lesson…', studio_title_ph:'Working title (optional)', studio_discard:'Discard', studio_custom:'Published by your team', studio_delete_confirm:'Remove this course for everyone?', studio_failed:'Couldn’t generate — try again (check your key/credits)',
@@ -243,10 +250,10 @@ const UI = {
     library_title:'Library', courses_tended:'courses', filter_library:'Filter the library…', all:'All', nothing_matches:'Nothing matches — try another filter or ask the AI tutor to find it.',
     in_ai_rotation:'Recommended', learners:'learners', quiz_me:'Quiz me', modules_h:'Modules', tap_module:'', coming_soon:'Coming soon', more_in:'More in', related_courses:'Related courses',
     ask_tutor:'Ask the tutor', notes_transcript:'Notes & transcript', mark_complete:'✓ Mark module complete', soon_sub:"This lesson is being filmed for Belong — we'll let you know the moment it's ready.", play_lesson:'▶ Play lesson',
-    live_title:'Live', live_empty:'No live sessions scheduled yet — when one is, it will appear here and on your home page.', live_sub:'Sessions with real humans — office hours, AMAs and workshops. Replays land in the Library within a day.', watching:'watching', join_now:'Join now', remind_me:'Remind me',
+    live_title:'Live', live_empty:'No live workshop scheduled yet. When one is, it appears here, on the calendar and on your home page.', live_sub:'Sessions with real humans — office hours, AMAs and workshops. Replays land in the Library within a day.', watching:'watching', join_now:'Join now', remind_me:'Remind me',
     my_progress:'My Progress', progress_sub:'',
     level_ab:'Lv', xp:'XP', xp_to:'XP to', highest_level:'Highest level — Elder Oak', board_rank:'Leaderboard rank', of:'of', badges_earned:'Badges earned', nice_work:'', earn_first:'Earn your first', courses_finished:'Courses finished',
-    badges_h:'Badges', badges_sub:'', locked_dot:'Locked ·', leaders_board:'Leaderboard · this week', board_sub:'Friendly, resets every Monday. A little competition keeps everyone finishing.', keep_alive:'',
+    badges_h:'Badges', badges_sub:'', locked_dot:'Locked ·', leaders_board:'Leaderboard · this week', board_sub:'Friendly. Only this week’s points reset on Monday; your progress and your path never do.', keep_alive:'',
     you:'you', xp_ahead_1:'is just', xp_ahead_2:'ahead — about {n} lessons', top_board:"You're top of the board this week. Keep the grove growing.", path_points:'',
     ob_welcome:'Welcome to Belong', ob_step:'Step', ob_hi:'Welcome,', ob_pick_handle:"Pick a username — it's how others see you in the community.", ob_role_q:'And what do you do?', ob_q1:'What do you do?', ob_q1_sub:'The AI uses your role to seed your first learning path. You can change everything later.', ob_skip:'Skip — explore on my own', ob_continue:'Continue →',
     ob_destination:'Your destination', ob_q2:'Pick a goal to work toward', ob_q2_sub:'The AI sequences courses toward this goal and re-plans as you prove skills.', ob_build:'Build my path ✦', ob_building:'Building your path to', courses_adaptive:'courses · adaptive', course_adaptive_one:'course · adaptive', courses_ready:'courses ready', course_ready_one:'course ready', track_more:'track & more',
@@ -486,7 +493,7 @@ const UI = {
     nudge_refresh_t:'Uma revisão de 2 minutos', nudge_refresh_b:'“{course}” foi há {n} dias — uma vista de olhos mantém-no enraizado',
     offline_note:'Offline — o seu progresso está seguro neste dispositivo e sincroniza quando voltar', online_note:'De volta online — progresso sincronizado',
     stats_today:'hoje', stats_best:'melhor', stats_quizzes:'testes feitos', board_grow:'O ranking cresce à medida que a equipa entra — convide alguém', no_data:'—',
-    daily_title:'A pergunta de hoje', daily_sub:'Trinta segundos para manter as raízes', daily_from:'de', daily_correct:'Enraizado! +10 XP', daily_wrong:'Boa tentativa — agora vai ficar.', daily_tomorrow:'Volte amanhã para a próxima', daily_streak:'dias seguidos',
+    daily_title:'A pergunta de hoje', daily_open:'Responder', daily_later:'Mais tarde', greet_morning:'Bom dia', greet_afternoon:'Boa tarde', greet_evening:'Boa noite', nudge_daily_t:'A pergunta de hoje está à espera', nudge_daily_b:'Trinta segundos, uma pergunta de uma lição que viu.', cal_prev:'Mês anterior', cal_next:'Mês seguinte', pal_ph:'Pesquisar, ou fazer uma pergunta…', pal_ask_hint:'Enter para perguntar às lições', voice_check:'Confira as palavras e carregue em Enter.', daily_sub:'Trinta segundos para manter as raízes', daily_from:'de', daily_correct:'Enraizado! +10 XP', daily_wrong:'Boa tentativa — agora vai ficar.', daily_tomorrow:'Volte amanhã para a próxima', daily_streak:'dias seguidos',
     gdpr_title:'Privacidade e os seus dados', gdpr_sub:'Exporte ou apague, quando quiser.', gdpr_export:'Descarregar os meus dados', gdpr_exported:'O seu ficheiro de dados está a descarregar', gdpr_delete:'Eliminar a minha conta', gdpr_delete_warn:'Isto apaga permanentemente a sua conta, progresso, XP e distintivos. Escreva DELETE para confirmar.', gdpr_deleted:'Conta eliminada. Fique bem', gdpr_recent_login:'Por segurança, inicie sessão novamente primeiro — depois a eliminação funciona.', gdpr_guest_note:'Os dados de convidado vivem só neste dispositivo — eliminar limpa-os aqui.',
     orgkey_title:'Chave de IA da equipa', orgkey_sub:'Uma chave para toda a equipa — cada membro com sessão iniciada recebe o tutor, os testes IA e o Estúdio automaticamente. Chaves pessoais (definições do tutor) têm prioridade.', orgkey_saved:'Chave de IA da equipa guardada — ativa para todos',
     studio_title:'Estúdio de Cursos IA', studio_sub:'Cole a transcrição ou as notas da lição, junte o link do vídeo — a IA escreve o curso bilingue completo: módulos, convite, aprendizagens e teste. Aprova antes de publicar.', studio_gen:'Escrever o curso ✦', studio_generating:'A escrever o curso — módulos, aprendizagens, teste, nas duas línguas…', studio_need_key:'Ligue primeiro uma chave Claude (✦ orbe → ⚙ definições) — o Estúdio escreve com a sua chave.', studio_publish:'Publicar na Biblioteca', studio_draft:'Rascunho — reveja antes de publicar', studio_published:'Publicado — já está na Biblioteca de todos', studio_video_ph:'Link Vimeo ou YouTube (opcional)', studio_text_ph:'Cole a transcrição, notas, ou uma boa descrição da lição…', studio_title_ph:'Título de trabalho (opcional)', studio_discard:'Descartar', studio_custom:'Publicado pela sua equipa', studio_delete_confirm:'Remover este curso para todos?', studio_failed:'Não foi possível gerar — tente novamente (verifique a chave/créditos)',
@@ -509,10 +516,10 @@ const UI = {
     library_title:'Biblioteca', courses_tended:'cursos', filter_library:'Filtrar a biblioteca…', all:'Todos', nothing_matches:'Nada corresponde — experimente outro filtro ou peça ao tutor de IA.',
     in_ai_rotation:'Em rotação de IA', learners:'alunos', quiz_me:'Testar-me', modules_h:'Módulos', tap_module:'', coming_soon:'Em breve', more_in:'Mais em', related_courses:'Cursos relacionados',
     ask_tutor:'Perguntar ao tutor', notes_transcript:'Notas e transcrição', mark_complete:'✓ Marcar como concluído', soon_sub:'Esta lição está a ser filmada para a Belong — avisamos assim que estiver pronta.', play_lesson:'▶ Reproduzir lição',
-    live_title:'Ao Vivo', live_empty:'Ainda não há sessões ao vivo marcadas — quando houver, aparecem aqui e na sua página inicial.', live_sub:'Sessões com pessoas reais — horas abertas, perguntas e respostas e workshops. As gravações ficam na Biblioteca em um dia.', watching:'a assistir', join_now:'Entrar agora', remind_me:'Lembrar-me',
+    live_title:'Ao Vivo', live_empty:'Ainda não há workshops ao vivo marcados. Quando houver, aparecem aqui, no calendário e na sua página inicial.', live_sub:'Sessões com pessoas reais — horas abertas, perguntas e respostas e workshops. As gravações ficam na Biblioteca em um dia.', watching:'a assistir', join_now:'Entrar agora', remind_me:'Lembrar-me',
     my_progress:'O Meu Progresso', progress_sub:'',
     level_ab:'Nv', xp:'XP', xp_to:'XP para', highest_level:'Nível máximo — Carvalho Ancião', board_rank:'Posição no ranking', of:'de', badges_earned:'Distintivos ganhos', nice_work:'▲ Bom trabalho', earn_first:'Ganhe o seu primeiro', courses_finished:'Cursos terminados',
-    badges_h:'Distintivos', badges_sub:'', locked_dot:'Bloqueado ·', leaders_board:'Ranking · esta semana', board_sub:'Amigável, reinicia todas as segundas. Uma competição saudável mantém todos a terminar.', keep_alive:'▲ Mantenha viva',
+    badges_h:'Distintivos', badges_sub:'', locked_dot:'Bloqueado ·', leaders_board:'Ranking · esta semana', board_sub:'Amigável. Só os pontos desta semana reiniciam à segunda; o seu progresso e o seu percurso nunca.', keep_alive:'▲ Mantenha viva',
     you:'você', xp_ahead_1:'está apenas', xp_ahead_2:'à sua frente — termine um módulo para alcançar', top_board:'Está no topo do ranking esta semana. Continue a fazer crescer o bosque.', path_points:'',
     ob_welcome:'Bem-vindo à Belong', ob_step:'Passo', ob_hi:'Bem-vindo,', ob_pick_handle:'Escolha um nome de utilizador — é assim que os outros o veem na comunidade.', ob_role_q:'E o que faz?', ob_q1:'O que faz?', ob_q1_sub:'A IA usa a sua função para criar o seu primeiro percurso. Pode mudar tudo mais tarde.', ob_skip:'Ignorar — explorar sozinho', ob_continue:'Continuar →',
     ob_destination:'O seu destino', ob_q2:'Escolha um objetivo', ob_q2_sub:'A IA sequencia cursos para este objetivo e replaneia à medida que prova competências.', ob_build:'Criar o meu percurso ✦', ob_building:'A criar o seu percurso para', courses_adaptive:'cursos · adaptativo', course_adaptive_one:'curso · adaptativo', courses_ready:'cursos prontos', course_ready_one:'curso pronto', track_more:'percurso e mais',
@@ -697,9 +704,9 @@ const PILLARS_PT = { 'Regenerative':'Regenerativo', 'Rooted':'Enraizado', 'Resto
 const tpillar = l => _lang() === 'pt' ? (PILLARS_PT[l] || l) : l;
 const LEVELS_PT = ['Semente','Rebento','Broto','Muda','Árvore Jovem','Guardião do Bosque','Carvalho Ancião'];
 const tlevel = i => _lang() === 'pt' ? (LEVELS_PT[i] || LEVELS[i].name) : LEVELS[i].name;
-const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', houses:'Limpezas e Casas', kitchen:'FarmTable e Cozinha', beachbar:'Beach Bar', cam:'A Mesa do CAM', events:'Eventos e Catering', farm:'Quinta e Natureza', leadership:'Escritório e Liderança' };
+const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', housekeeping:'Limpezas e Casas', culinary:'Cozinha e Culinária', fnb:'Serviço de Restaurante e Bar', farm:'Quinta e Natureza', maintenance:'Manutenção e Cuidado da Propriedade', wellness:'Bem-estar e Experiências', office:'Escritório e Administração', people:'Pessoas, Cultura e Liderança', safety:'Segurança e Sustentabilidade' };
 const trole = r => _lang() === 'pt' ? (ROLES_PT[r.key] || r.label) : r.label;
-const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Belong Host':'Anfitrião Belong', 'Seasonal Cook':'Cozinheiro das Estações', 'Nature Guide':'Guia da Natureza', 'Team Lead':'Líder de Equipa' };
+const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Belong Host':'Anfitrião Belong', 'Houses & Standards':'Casas e Padrões', 'From Farm to Table':'Da Quinta à Mesa', 'Rooted in the Land':'Enraizado na Terra', 'Lead the Belong Way':'Liderar à Maneira Belong', 'Safe & Sustainable':'Seguro e Sustentável' };
 const tgoal = g => _lang() === 'pt' ? (GOALS_PT[g] || g) : g;
 const BADGES_PT = {
   'first-steps':['Primeiros Passos','Conclua o seu primeiro módulo'], 'rooted':['Enraizado','Termine o seu primeiro curso'],
@@ -717,26 +724,28 @@ const tnote = n => _lang() === 'pt' ? String(n).replace('modules skipped by AI',
 
 /* ================= World-class pack: departments, missions, role-play ================= */
 const DEPTS = [
-  { key: 'farmhouse', en: 'Farmhouse & Hosting', pt: 'Farmhouse e Receção' },
-  { key: 'houses', en: 'Housekeeping & Houses', pt: 'Limpezas e Casas' },
-  { key: 'farmtable', en: 'FarmTable & Kitchen', pt: 'FarmTable e Cozinha' },
-  { key: 'beachbar', en: 'Beach Bar', pt: 'Beach Bar' },
-  { key: 'cam', en: 'A Mesa do CAM (Lisbon)', pt: 'A Mesa do CAM (Lisboa)' },
-  { key: 'events', en: 'Events & Catering', pt: 'Eventos e Catering' },
-  { key: 'farm', en: 'Farm & Garden', pt: 'Quinta e Horta' },
-  { key: 'office', en: 'Office & Leadership', pt: 'Escritório e Liderança' }
+  { key: 'hosting',      en: 'Hosting & Guest Care',          pt: 'Receção e Cuidado do Hóspede' },
+  { key: 'housekeeping', en: 'Housekeeping & Houses',         pt: 'Limpezas e Casas' },
+  { key: 'culinary',     en: 'Culinary & Kitchen',            pt: 'Cozinha e Culinária' },
+  { key: 'fnb',          en: 'Food & Beverage Service',       pt: 'Serviço de Restaurante e Bar' },
+  { key: 'farm',         en: 'Farm & Nature',                 pt: 'Quinta e Natureza' },
+  { key: 'maintenance',  en: 'Maintenance & Property Care',   pt: 'Manutenção e Cuidado da Propriedade' },
+  { key: 'wellness',     en: 'Wellness & Experiences',        pt: 'Bem-estar e Experiências' },
+  { key: 'office',       en: 'Office & Administration',       pt: 'Escritório e Administração' },
+  { key: 'people',       en: 'People, Culture & Leadership',  pt: 'Pessoas, Cultura e Liderança' },
+  { key: 'safety',       en: 'Safety & Sustainability',       pt: 'Segurança e Sustentabilidade' }
 ];
 const tdept = k => { const d = DEPTS.find(x => x.key === k); return d ? (_lang() === 'pt' ? d.pt : d.en) : ''; };
 
 /* Field Missions — learn online, prove it on the land. One mission per course (photo-proof). */
 const MISSIONS = {
-  'art-of-hospitality': { xp: 150,
+  'craveiral-hospitality': { xp: 150,
     en: { title: 'Three names, three stories', brief: 'Over one shift, learn the names of three guests and one true thing about each — and use the name naturally before they leave. Write the three moments down; photograph your notes as proof.' },
     pt: { title: 'Três nomes, três histórias', brief: 'Num turno, aprenda o nome de três hóspedes e uma coisa verdadeira sobre cada um — e use o nome com naturalidade antes de partirem. Anote os três momentos; fotografe as notas como prova.' } },
-  'belong-to-nature': { xp: 150,
+  'houses-farm-sustainability': { xp: 150,
     en: { title: 'The sit spot', brief: 'Choose one outdoor spot on the property. Sit there 15 minutes in silence, three days in a row. Note what changes each day — light, sound, life. Photograph your notes or the spot as proof.' },
     pt: { title: 'O lugar de estar', brief: 'Escolha um lugar ao ar livre na propriedade. Sente-se lá 15 minutos em silêncio, três dias seguidos. Anote o que muda a cada dia — luz, som, vida. Fotografe as notas ou o lugar como prova.' } },
-  'growing-regenerating': { xp: 150,
+  'farm-to-table': { xp: 150,
     en: { title: 'From soil to table', brief: 'Harvest (or help harvest) one thing grown on the farm and follow it to a guest\'s plate. Photograph the two ends of that journey — the plant and the plate.' },
     pt: { title: 'Da terra à mesa', brief: 'Colha (ou ajude a colher) algo cultivado na propriedade e acompanhe-o até ao prato de um hóspede. Fotografe as duas pontas dessa viagem — a planta e o prato.' } }
 };
@@ -744,7 +753,7 @@ const missionFor = id => { const m = MISSIONS[id]; return m ? Object.assign({ xp
 
 /* AI Role-Play Coach — practice the hard conversation before it happens */
 const ROLEPLAY = {
-  'art-of-hospitality': {
+  'guest-journey': {
     en: { title: 'The cold welcome', persona: 'Clara, a tired arriving guest', opening: 'We booked this months ago. The drive took five hours, the gate code didn\'t work, and now you tell me the room isn\'t ready? This is not what your photos promised.',
       system: 'You are Clara, a guest arriving exhausted at a countryside retreat in Portugal after a long drive. The gate code failed and your room is not ready. You are frustrated but reasonable underneath — you soften ONLY if the host acknowledges the reality first, offers something concrete now (a drink, a seat, a clear time), and makes you feel seen rather than processed. Stay human, replies under 60 words, spoken tone. Never break character, never mention being an AI.',
       goal: 'Turn Clara\'s arrival around — acknowledgement first, then one concrete gesture, then the plan.', rubric: ['Acknowledged before explaining', 'Offered something concrete immediately', 'Left her knowing exactly what happens next'] },
@@ -773,24 +782,27 @@ const skillsOf = c => COURSE_SKILLS[c.id] || [CAT_SKILL[c.cat] || 'nature'];
 
 /* Journeys — structured milestone paths with a capstone */
 const JOURNEYS = [
+  /* A journey is a longer track than a path: a fixed sequence of courses, a
+     field mission to prove it on the ground, and a capstone at the end. */
   {
     id: 'the-host', icon: 'people', grad: 4, xp: 300,
-    en: { title: "The Host's Journey", desc: 'From first welcome to a table that tells a story — the full craft of making people belong.' },
-    pt: { title: 'A Jornada do Anfitrião', desc: 'Do primeiro acolhimento a uma mesa que conta uma história — a arte completa de fazer pertencer.' },
+    en: { title: "The Host's Journey", desc: 'From the first welcome to a complaint turned around: the full craft of making people belong.' },
+    pt: { title: 'A Jornada do Anfitrião', desc: 'Do primeiro acolhimento a uma reclamação resolvida: a arte completa de fazer pertencer.' },
     stages: [
       { course: 'welcome-belong' },
-      { course: 'art-of-hospitality', mission: true },
-      { course: 'seasonal-table' },
-      { course: 'community-circular', capstone: true }
+      { course: 'craveiral-hospitality', mission: true },
+      { course: 'guest-journey' },
+      { course: 'voice-leadership', capstone: true }
     ]
   },
   {
     id: 'rooted-in-place', icon: 'tree', grad: 7, xp: 250,
-    en: { title: 'Rooted in Place', desc: 'Know the place you stand in — its nature, and what the farm gives.' },
-    pt: { title: 'Enraizado no Lugar', desc: 'Conhecer o lugar onde está — a sua natureza e o que a quinta dá.' },
+    en: { title: 'Rooted in Place', desc: 'Know the place you stand in: the houses, the farm, and what reaches the table.' },
+    pt: { title: 'Enraizado no Lugar', desc: 'Conhecer o lugar onde está: as casas, a quinta e o que chega à mesa.' },
     stages: [
-      { course: 'belong-to-nature', mission: true },
-      { course: 'growing-regenerating', capstone: true }
+      { course: 'welcome-belong' },
+      { course: 'houses-farm-sustainability', mission: true },
+      { course: 'farm-to-table', capstone: true }
     ]
   }
 ];

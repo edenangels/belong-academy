@@ -1,0 +1,370 @@
+{
+ "course": "farm-to-table",
+ "lang": "default",
+ "modules": {
+  "0": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Less than 50%",
+      "Over 70%",
+      "Exactly 90%",
+      "Not specified"
+     ],
+     "q": "What percentage of the food served at the farm is grown on the property?",
+     "why": "The transcript states that over 70% of what is served is grown on the property."
+    },
+    "pt": {
+     "opts": [
+      "Menos de 50%",
+      "Mais de 70%",
+      "Exactamente 90%",
+      "Não especificado"
+     ],
+     "q": "Que percentagem da comida servida na quinta é cultivada na propriedade?",
+     "why": "A transcrição afirma que mais de 70% do que é servido é cultivado na propriedade."
+    },
+    "t0": 28,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "verified": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "To follow the latest food trends",
+      "To reduce costs",
+      "Because the farm itself rotates with the seasons",
+      "To cater to different guest preferences"
+     ],
+     "q": "Why does the menu at the farm rotate with the seasons?",
+     "why": "The transcript explains that the menu rotates with the seasons because the farm itself does."
+    },
+    "pt": {
+     "opts": [
+      "Para seguir as últimas tendências alimentares",
+      "Para reduzir custos",
+      "Porque a própria quinta roda com as estações",
+      "Para atender a diferentes preferências dos hóspedes"
+     ],
+     "q": "Por que o menu da quinta roda com as estações?",
+     "why": "A transcrição explica que o menu roda com as estações porque a própria quinta o faz."
+    },
+    "t0": 54,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Rush through the options to save time",
+      "Focus on the prices of each dish",
+      "Describe the dishes as generous, honest, and unhurried",
+      "Only mention the most popular items"
+     ],
+     "q": "How should front-of-house staff approach describing the breakfast options to guests?",
+     "why": "The transcript describes breakfast as a statement of identity and should be presented in a generous, honest, and unhurried manner."
+    },
+    "pt": {
+     "opts": [
+      "Apressar-se a apresentar as opções para economizar tempo",
+      "Focar-se nos preços de cada prato",
+      "Descrever os pratos como generosos, honestos e sem pressa",
+      "Apenas mencionar os itens mais populares"
+     ],
+     "q": "Como devem os funcionários da frente da casa abordar a descrição das opções de pequeno-almoço para os hóspedes?",
+     "why": "A transcrição descreve o pequeno-almoço como uma declaração de identidade e deve ser apresentado de forma generosa, honesta e sem pressa."
+    },
+    "t0": 81,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Only the price and origin",
+      "Three sentences per wine, including where it's from, what it's like, and what it pairs well with",
+      "A detailed history of the vineyard",
+      "The alcohol content and calories per serving"
+     ],
+     "q": "What information should front-of-house staff be able to provide about the wines on the list?",
+     "why": "The transcript suggests that staff should be able to guide guests through the wine list with three sentences per wine."
+    },
+    "pt": {
+     "opts": [
+      "Apenas o preço e a origem",
+      "Três frases por vinho, incluindo de onde é, como é e com o que se harmoniza bem",
+      "Uma história detalhada da vinha",
+      "O teor alcoólico e as calorias por porção"
+     ],
+     "q": "Que informações devem os funcionários da frente da casa ser capazes de fornecer sobre os vinhos da lista?",
+     "why": "A transcrição sugere que os funcionários devem ser capazes de guiar os hóspedes pela lista de vinhos com três frases por vinho."
+    },
+    "t0": 161,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Say they are from a local supermarket",
+      "Explain that they were grown on the property and mention the specific soil and farming practices used",
+      "Tell them you don't know and offer to find out",
+      "Say they are sourced from the nearest city"
+     ],
+     "q": "A guest asks where the vegetables in their salad came from. How should you respond?",
+     "why": "The transcript emphasizes the importance of the farm-to-table philosophy and sourcing food locally."
+    },
+    "pt": {
+     "opts": [
+      "Dizer que são de um supermercado local",
+      "Explicar que foram cultivados na propriedade e mencionar os práticas de solo e agricultura específicas utilizadas",
+      "Dizer que não sabe e oferecer para descobrir",
+      "Dizer que são provenientes da cidade mais próxima"
+     ],
+     "q": "Um hóspede pergunta de onde vêm os legumes na sua salada. Como deve responder?",
+     "why": "A transcrição enfatiza a importância da filosofia da quinta para a mesa e da aquisição de alimentos localmente."
+    },
+    "t0": 28,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "corrected": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Suggest they go for a walk in the nearby town",
+      "Recommend the pizza-making class where children can make their own pizzas",
+      "Tell them about the local museum",
+      "Suggest a game of tennis"
+     ],
+     "q": "A family with children asks about activities they can do together. What would be an appropriate suggestion based on the farm's offerings?",
+     "why": "The transcript mentions the pizza classes as a beloved activity on the property."
+    },
+    "pt": {
+     "opts": [
+      "Sugerir que façam uma caminhada na cidade próxima",
+      "Recomendar a aula de fabrico de pizzas onde as crianças podem fazer as suas próprias pizzas",
+      "Falar sobre o museu local",
+      "Sugerir um jogo de ténis"
+     ],
+     "q": "Uma família com crianças pergunta sobre atividades que podem fazer juntos. Qual seria uma sugestão apropriada com base nas ofertas da quinta?",
+     "why": "A transcrição menciona as aulas de pizza como uma atividade muito apreciada na propriedade."
+    },
+    "t0": 133,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644738034,
+    "verified": true
+   }
+  ],
+  "1": [
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "A luxury restaurant",
+      "A casual, honest food and drink spot",
+      "A surf school only",
+      "A private event space"
+     ],
+     "q": "What is the concept of the beach bar at Carvalhial?",
+     "why": "The beach bar is described as having honest food and drinks, and being a place where surf lessons happen, indicating a casual and welcoming atmosphere."
+    },
+    "pt": {
+     "opts": [
+      "Um restaurante de luxo",
+      "Um local de comida e bebida casual e honesto",
+      "Uma escola de surfe apenas",
+      "Um espaço de eventos privados"
+     ],
+     "q": "Qual é o conceito do bar da praia em Carvalhial?",
+     "why": "O bar da praia é descrito como tendo comida e bebida honestas, e sendo um local onde acontecem aulas de surfe, indicando uma atmosfera casual e acolhedora."
+    },
+    "t0": 26,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "verified": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "It's a competitor to Craveiral",
+      "It's a cultural institution that showcases the cuisine of the territory",
+      "It's a farm-to-table restaurant only",
+      "It's a private event space"
+     ],
+     "q": "What is the significance of A Mesa do CAM in Lisbon?",
+     "why": "A Mesa do CAM is described as a cultural institution that serves the cuisine of the territory, indicating its significance in showcasing the local culture and food."
+    },
+    "pt": {
+     "opts": [
+      "É um concorrente do Craveiral",
+      "É uma instituição cultural que mostra a culinária do território",
+      "É um restaurante de comida fresca apenas",
+      "É um espaço de eventos privados"
+     ],
+     "q": "Qual é o significado de A Mesa do CAM em Lisboa?",
+     "why": "A Mesa do CAM é descrito como uma instituição cultural que serve a culinária do território, indicando seu significado em mostrar a cultura e comida local."
+    },
+    "t0": 80,
+    "type": "recall",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Tell them it's not part of the Craveiral experience",
+      "Send them to the beach and forget about them",
+      "Move them around inside the business, highlighting the beach as part of the overall experience",
+      "Charge them extra for the beach access"
+     ],
+     "q": "What should you do when recommending the beach to guests?",
+     "why": "When recommending the beach, you should move guests around inside the business, highlighting the beach as part of the overall experience, to provide a seamless and integrated experience."
+    },
+    "pt": {
+     "opts": [
+      "Dizer-lhes que não faz parte da experiência do Craveiral",
+      "Enviar-lhes para a praia e esquecer deles",
+      "Mover-lhes dentro do negócio, destacando a praia como parte da experiência geral",
+      "Cobrar-lhes extra pelo acesso à praia"
+     ],
+     "q": "O que deve fazer quando recomendar a praia aos hóspedes?",
+     "why": "Quando recomendar a praia, deve mover os hóspedes dentro do negócio, destacando a praia como parte da experiência geral, para fornecer uma experiência integrada e sem interrupções."
+    },
+    "t0": 53,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "verified": true
+   },
+   {
+    "a": 0,
+    "en": {
+     "opts": [
+      "Same route to table kitchen, same chain, same care, wherever it happens",
+      "Different standards for different events",
+      "Lower standards for off-site events",
+      "Higher standards for on-site events"
+     ],
+     "q": "What is the standard for events and catering at Craveiral?",
+     "why": "The standard for events and catering at Craveiral is the same route to table kitchen, same chain, same care, wherever it happens, to ensure consistency and quality."
+    },
+    "pt": {
+     "opts": [
+      "Mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça",
+      "Padrões diferentes para diferentes eventos",
+      "Padrões mais baixos para eventos fora do local",
+      "Padrões mais altos para eventos no local"
+     ],
+     "q": "Qual é o padrão para eventos e catering no Craveiral?",
+     "why": "O padrão para eventos e catering no Craveiral é o mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça, para garantir consistência e qualidade."
+    },
+    "t0": 133,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "Only intimate ceremonies under the pines are available",
+      "Only full weekend celebrations with the Interpretation Center are available",
+      "A range of options are available, from intimate ceremonies to full weekend celebrations",
+      "No weddings are allowed at Craveiral"
+     ],
+     "q": "A guest is planning a wedding at Craveiral and wants to know what options are available. What should you tell them?",
+     "why": "A range of options are available, from intimate ceremonies to full weekend celebrations, to accommodate different guest needs and preferences."
+    },
+    "pt": {
+     "opts": [
+      "Apenas cerimônias íntimas sob os pinheiros estão disponíveis",
+      "Apenas celebrações de fim de semana com o Centro de Interpretação estão disponíveis",
+      "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana",
+      "Nenhum casamento é permitido no Craveiral"
+     ],
+     "q": "Um hóspede está planejando um casamento no Craveiral e quer saber quais opções estão disponíveis. O que deve dizer a eles?",
+     "why": "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana, para atender às diferentes necessidades e preferências dos hóspedes."
+    },
+    "t0": 160,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "corrected": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "Only team-building activities are available",
+      "A range of activities are available, including nature walks, wellness getaways, and retreats at the Interpretation Center",
+      "Only outdoor activities are available",
+      "No activities are available"
+     ],
+     "q": "A company is planning a corporate retreat at Craveiral and wants to know what activities are available. What should you tell them?",
+     "why": "A range of activities are available, including nature walks, wellness getaways, and retreats at the Interpretation Center, to cater to different company needs and preferences."
+    },
+    "pt": {
+     "opts": [
+      "Apenas atividades de construção de equipe estão disponíveis",
+      "Uma variedade de atividades estão disponíveis, incluindo caminhadas na natureza, retiros de bem-estar e retiros no Centro de Interpretação",
+      "Apenas atividades ao ar livre estão disponíveis",
+      "Nenhuma atividade está disponível"
+     ],
+     "q": "Uma empresa está planejando um retiro corporativo no Craveiral e quer saber quais atividades estão disponíveis. O que deve dizer a eles?",
+     "why": "Uma variedade de atividades estão disponíveis, incluindo caminhadas na natureza, retiros de bem-estar e retiros no Centro de Interpretação, para atender às diferentes necessidades e preferências das empresas."
+    },
+    "t0": 186,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644790027,
+    "corrected": true
+   }
+  ]
+ }
+}

@@ -1,73 +1,19 @@
 {
- "generatedAt": 1791975181084,
+ "generatedAt": 1792159641943,
  "nodes": [
   {
-   "id": "course:welcome-belong",
+   "id": "course:craveiral-hospitality",
    "kind": "course",
-   "title": "Welcome to Belong"
+   "title": "Hospitality, the Craveiral Way"
   },
   {
-   "id": "module:welcome-belong:0",
+   "id": "module:craveiral-hospitality:0",
    "kind": "module",
-   "title": "Why we're here: my story, and the story of Craveiral",
-   "course": "welcome-belong",
+   "title": "Our values, in practice",
+   "course": "craveiral-hospitality",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
-   "seconds": 297
-  },
-  {
-   "id": "concept:land",
-   "kind": "concept",
-   "title": "land"
-  },
-  {
-   "id": "concept:craveiral",
-   "kind": "concept",
-   "title": "craveiral"
-  },
-  {
-   "id": "concept:field",
-   "kind": "concept",
-   "title": "field"
-  },
-  {
-   "id": "concept:eight",
-   "kind": "concept",
-   "title": "eight"
-  },
-  {
-   "id": "concept:soil",
-   "kind": "concept",
-   "title": "soil"
-  },
-  {
-   "id": "concept:guests",
-   "kind": "concept",
-   "title": "guests"
-  },
-  {
-   "id": "concept:walkways",
-   "kind": "concept",
-   "title": "walkways"
-  },
-  {
-   "id": "concept:hotel",
-   "kind": "concept",
-   "title": "hotel"
-  },
-  {
-   "id": "module:welcome-belong:1",
-   "kind": "module",
-   "title": "Our vision, our mission, and the chain",
-   "course": "welcome-belong",
-   "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
-   "seconds": 386
-  },
-  {
-   "id": "concept:belong",
-   "kind": "concept",
-   "title": "belong"
+   "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/0",
+   "seconds": 350
   },
   {
    "id": "concept:guest",
@@ -75,33 +21,19 @@
    "title": "guest"
   },
   {
-   "id": "concept:name",
+   "id": "concept:guests",
    "kind": "concept",
-   "title": "name"
-  },
-  {
-   "id": "concept:village",
-   "kind": "concept",
-   "title": "village"
-  },
-  {
-   "id": "concept:region",
-   "kind": "concept",
-   "title": "region"
-  },
-  {
-   "id": "module:welcome-belong:2",
-   "kind": "module",
-   "title": "Our values, in practice",
-   "course": "welcome-belong",
-   "mod": 2,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/2",
-   "seconds": 350
+   "title": "guests"
   },
   {
    "id": "concept:sustainability",
    "kind": "concept",
    "title": "sustainability"
+  },
+  {
+   "id": "concept:craveiral",
+   "kind": "concept",
+   "title": "craveiral"
   },
   {
    "id": "concept:financial",
@@ -124,12 +56,12 @@
    "title": "choice"
   },
   {
-   "id": "module:welcome-belong:3",
+   "id": "module:craveiral-hospitality:1",
    "kind": "module",
    "title": "Hospitality, the Craveiral way",
-   "course": "welcome-belong",
-   "mod": 3,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/3",
+   "course": "craveiral-hospitality",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/1",
    "seconds": 380
   },
   {
@@ -163,12 +95,90 @@
    "title": "house"
   },
   {
-   "id": "module:welcome-belong:4",
+   "id": "course:farm-to-table",
+   "kind": "course",
+   "title": "FarmTable & the Constellation"
+  },
+  {
+   "id": "module:farm-to-table:0",
+   "kind": "module",
+   "title": "FarmTable: where the philosophy becomes food",
+   "course": "farm-to-table",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/farm-to-table/0",
+   "seconds": 383
+  },
+  {
+   "id": "concept:table",
+   "kind": "concept",
+   "title": "table"
+  },
+  {
+   "id": "concept:alentejo",
+   "kind": "concept",
+   "title": "alentejo"
+  },
+  {
+   "id": "concept:farm",
+   "kind": "concept",
+   "title": "farm"
+  },
+  {
+   "id": "concept:kitchen",
+   "kind": "concept",
+   "title": "kitchen"
+  },
+  {
+   "id": "concept:farmtable",
+   "kind": "concept",
+   "title": "farmtable"
+  },
+  {
+   "id": "concept:cheeses",
+   "kind": "concept",
+   "title": "cheeses"
+  },
+  {
+   "id": "module:farm-to-table:1",
+   "kind": "module",
+   "title": "The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture",
+   "course": "farm-to-table",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/farm-to-table/1",
+   "seconds": 349
+  },
+  {
+   "id": "concept:beach",
+   "kind": "concept",
+   "title": "beach"
+  },
+  {
+   "id": "concept:wedding",
+   "kind": "concept",
+   "title": "wedding"
+  },
+  {
+   "id": "concept:constellation",
+   "kind": "concept",
+   "title": "constellation"
+  },
+  {
+   "id": "concept:land",
+   "kind": "concept",
+   "title": "land"
+  },
+  {
+   "id": "course:guest-journey",
+   "kind": "course",
+   "title": "The Guest Journey"
+  },
+  {
+   "id": "module:guest-journey:0",
    "kind": "module",
    "title": "The guest journey: from first click to farewell",
-   "course": "welcome-belong",
-   "mod": 4,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/4",
+   "course": "guest-journey",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/guest-journey/0",
    "seconds": 394
   },
   {
@@ -197,99 +207,12 @@
    "title": "made"
   },
   {
-   "id": "module:welcome-belong:5",
-   "kind": "module",
-   "title": "The houses, the farm, and the standards we keep",
-   "course": "welcome-belong",
-   "mod": 5,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/5",
-   "seconds": 411
-  },
-  {
-   "id": "concept:farm",
-   "kind": "concept",
-   "title": "farm"
-  },
-  {
-   "id": "concept:meters",
-   "kind": "concept",
-   "title": "meters"
-  },
-  {
-   "id": "concept:square",
-   "kind": "concept",
-   "title": "square"
-  },
-  {
-   "id": "concept:pool",
-   "kind": "concept",
-   "title": "pool"
-  },
-  {
-   "id": "module:welcome-belong:6",
-   "kind": "module",
-   "title": "FarmTable: where the philosophy becomes food",
-   "course": "welcome-belong",
-   "mod": 6,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/6",
-   "seconds": 383
-  },
-  {
-   "id": "concept:table",
-   "kind": "concept",
-   "title": "table"
-  },
-  {
-   "id": "concept:alentejo",
-   "kind": "concept",
-   "title": "alentejo"
-  },
-  {
-   "id": "concept:kitchen",
-   "kind": "concept",
-   "title": "kitchen"
-  },
-  {
-   "id": "concept:farmtable",
-   "kind": "concept",
-   "title": "farmtable"
-  },
-  {
-   "id": "concept:cheeses",
-   "kind": "concept",
-   "title": "cheeses"
-  },
-  {
-   "id": "module:welcome-belong:7",
-   "kind": "module",
-   "title": "The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture",
-   "course": "welcome-belong",
-   "mod": 7,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/7",
-   "seconds": 349
-  },
-  {
-   "id": "concept:beach",
-   "kind": "concept",
-   "title": "beach"
-  },
-  {
-   "id": "concept:wedding",
-   "kind": "concept",
-   "title": "wedding"
-  },
-  {
-   "id": "concept:constellation",
-   "kind": "concept",
-   "title": "constellation"
-  },
-  {
-   "id": "module:welcome-belong:8",
+   "id": "module:guest-journey:1",
    "kind": "module",
    "title": "When things go wrong: complaints and service recovery",
-   "course": "welcome-belong",
-   "mod": 8,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/8",
+   "course": "guest-journey",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/guest-journey/1",
    "seconds": 351
   },
   {
@@ -328,12 +251,41 @@
    "title": "team"
   },
   {
-   "id": "module:welcome-belong:9",
+   "id": "course:houses-farm-sustainability",
+   "kind": "course",
+   "title": "The Houses, the Farm & Sustainability"
+  },
+  {
+   "id": "module:houses-farm-sustainability:0",
+   "kind": "module",
+   "title": "The houses, the farm, and the standards we keep",
+   "course": "houses-farm-sustainability",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/0",
+   "seconds": 411
+  },
+  {
+   "id": "concept:meters",
+   "kind": "concept",
+   "title": "meters"
+  },
+  {
+   "id": "concept:square",
+   "kind": "concept",
+   "title": "square"
+  },
+  {
+   "id": "concept:pool",
+   "kind": "concept",
+   "title": "pool"
+  },
+  {
+   "id": "module:houses-farm-sustainability:1",
    "kind": "module",
    "title": "Sustainability in daily practice: what the mission asks of you before lunch",
-   "course": "welcome-belong",
-   "mod": 9,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/9",
+   "course": "houses-farm-sustainability",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/1",
    "seconds": 354
   },
   {
@@ -357,12 +309,17 @@
    "title": "full"
   },
   {
-   "id": "module:welcome-belong:10",
+   "id": "course:voice-leadership",
+   "kind": "course",
+   "title": "Our Voice & How We Lead"
+  },
+  {
+   "id": "module:voice-leadership:0",
    "kind": "module",
    "title": "How we speak: the Craveiral voice",
-   "course": "welcome-belong",
-   "mod": 10,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/10",
+   "course": "voice-leadership",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/voice-leadership/0",
    "seconds": 335
   },
   {
@@ -391,12 +348,12 @@
    "title": "sound"
   },
   {
-   "id": "module:welcome-belong:11",
+   "id": "module:voice-leadership:1",
    "kind": "module",
    "title": "Leadership, autonomy, and how we work together",
-   "course": "welcome-belong",
-   "mod": 11,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/11",
+   "course": "voice-leadership",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/voice-leadership/1",
    "seconds": 395
   },
   {
@@ -418,9 +375,611 @@
    "id": "concept:trust",
    "kind": "concept",
    "title": "trust"
+  },
+  {
+   "id": "course:welcome-belong",
+   "kind": "course",
+   "title": "Welcome to Belong"
+  },
+  {
+   "id": "module:welcome-belong:0",
+   "kind": "module",
+   "title": "Why we're here: my story, and the story of Craveiral",
+   "course": "welcome-belong",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
+   "seconds": 297
+  },
+  {
+   "id": "concept:field",
+   "kind": "concept",
+   "title": "field"
+  },
+  {
+   "id": "concept:eight",
+   "kind": "concept",
+   "title": "eight"
+  },
+  {
+   "id": "concept:soil",
+   "kind": "concept",
+   "title": "soil"
+  },
+  {
+   "id": "concept:walkways",
+   "kind": "concept",
+   "title": "walkways"
+  },
+  {
+   "id": "concept:hotel",
+   "kind": "concept",
+   "title": "hotel"
+  },
+  {
+   "id": "module:welcome-belong:1",
+   "kind": "module",
+   "title": "Our vision, our mission, and the chain",
+   "course": "welcome-belong",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
+   "seconds": 386
+  },
+  {
+   "id": "concept:belong",
+   "kind": "concept",
+   "title": "belong"
+  },
+  {
+   "id": "concept:name",
+   "kind": "concept",
+   "title": "name"
+  },
+  {
+   "id": "concept:village",
+   "kind": "concept",
+   "title": "village"
+  },
+  {
+   "id": "concept:region",
+   "kind": "concept",
+   "title": "region"
   }
  ],
  "edges": [
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "course:craveiral-hospitality",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:sustainability",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:financial",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:simplicity",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:values",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "concept:choice",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "course:craveiral-hospitality",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:hospitality",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:service",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:check",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:food",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:cold",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "course:farm-to-table",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:table",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:food",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:alentejo",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:kitchen",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:farmtable",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:cheeses",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "course:farm-to-table",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:beach",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:table",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:wedding",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:constellation",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:land",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:hospitality",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "course:guest-journey",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:stage",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:journey",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:morning",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:which",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "concept:made",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "course:guest-journey",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:complaint",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:review",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:complains",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:second",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:wasn",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:three",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "concept:team",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "course:houses-farm-sustainability",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:meters",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:square",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:pool",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:which",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "course:houses-farm-sustainability",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:water",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:waste",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:regeneration",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:sustainability",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "concept:full",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "course:voice-leadership",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:place",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:voice",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:warm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:care",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:land",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "concept:sound",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "course:voice-leadership",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:respect",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:mistake",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:place",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:wrong",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:trust",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "concept:team",
+   "rel": "about",
+   "w": 1
+  },
   {
    "from": "module:welcome-belong:0",
    "to": "course:welcome-belong",
@@ -530,789 +1089,255 @@
    "w": 1
   },
   {
-   "from": "module:welcome-belong:2",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:guests",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:sustainability",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:financial",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:simplicity",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:values",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "concept:choice",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:hospitality",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:service",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:check",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:guests",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:food",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:cold",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "concept:house",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:stage",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:guests",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:journey",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:morning",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:which",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "concept:made",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:meters",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:square",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:pool",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:which",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:house",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:table",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:food",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:alentejo",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:kitchen",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:farmtable",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "concept:cheeses",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:beach",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:table",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:wedding",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:constellation",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:land",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "concept:hospitality",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:complaint",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:review",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:complains",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:second",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:wasn",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:three",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "concept:team",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:guests",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:water",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:waste",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:regeneration",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:sustainability",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "concept:full",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:guests",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:place",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:voice",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:warm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:care",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:land",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "concept:sound",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "course:welcome-belong",
-   "rel": "in",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:guest",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:respect",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:mistake",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:place",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:wrong",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:trust",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "concept:team",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:welcome-belong:0",
-   "to": "module:welcome-belong:11",
-   "rel": "related",
-   "w": 0.159
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:7",
-   "rel": "related",
-   "w": 0.159
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:3",
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:houses-farm-sustainability:1",
    "rel": "related",
    "w": 0.143
   },
   {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:9",
-   "rel": "related",
-   "w": 0.143
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "module:welcome-belong:9",
-   "rel": "related",
-   "w": 0.143
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "module:welcome-belong:11",
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:voice-leadership:1",
    "rel": "related",
    "w": 0.127
   },
   {
-   "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:7",
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:farm-to-table:1",
    "rel": "related",
    "w": 0.159
   },
   {
-   "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:10",
-   "rel": "related",
-   "w": 0.127
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "module:welcome-belong:6",
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:welcome-belong:1",
    "rel": "related",
    "w": 0.143
   },
   {
-   "from": "module:welcome-belong:4",
-   "to": "module:welcome-belong:5",
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:voice-leadership:0",
    "rel": "related",
    "w": 0.127
   },
   {
-   "from": "module:welcome-belong:6",
+   "from": "module:farm-to-table:0",
+   "to": "module:guest-journey:0",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "module:houses-farm-sustainability:1",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:farm-to-table:0",
    "to": "module:welcome-belong:1",
    "rel": "related",
    "w": 0.127
   },
   {
-   "from": "module:welcome-belong:6",
-   "to": "module:welcome-belong:9",
+   "from": "module:farm-to-table:1",
+   "to": "module:welcome-belong:1",
    "rel": "related",
-   "w": 0.127
+   "w": 0.159
   },
   {
-   "from": "module:welcome-belong:7",
-   "to": "module:welcome-belong:10",
-   "rel": "related",
-   "w": 0.143
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "module:welcome-belong:11",
-   "rel": "related",
-   "w": 0.127
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "module:welcome-belong:10",
+   "from": "module:farm-to-table:1",
+   "to": "module:voice-leadership:0",
    "rel": "related",
    "w": 0.143
   },
   {
-   "from": "module:welcome-belong:11",
-   "to": "module:welcome-belong:3",
+   "from": "module:guest-journey:0",
+   "to": "module:houses-farm-sustainability:0",
    "rel": "related",
    "w": 0.127
   },
   {
-   "from": "module:welcome-belong:0",
-   "to": "module:welcome-belong:3",
+   "from": "module:guest-journey:1",
+   "to": "module:voice-leadership:1",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "module:voice-leadership:0",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "module:welcome-belong:1",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "module:welcome-belong:0",
+   "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "module:craveiral-hospitality:1",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.854
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:voice-leadership:1",
+   "rel": "similar",
+   "w": 0.83
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.825
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:guest-journey:0",
+   "rel": "similar",
+   "w": 0.859
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:voice-leadership:0",
+   "rel": "similar",
+   "w": 0.858
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:welcome-belong:0",
    "rel": "similar",
    "w": 0.809
   },
   {
-   "from": "module:welcome-belong:0",
-   "to": "module:welcome-belong:10",
+   "from": "module:farm-to-table:0",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.796
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.775
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "module:houses-farm-sustainability:1",
+   "rel": "similar",
+   "w": 0.768
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.748
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "module:craveiral-hospitality:1",
+   "rel": "similar",
+   "w": 0.743
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "module:farm-to-table:0",
+   "rel": "similar",
+   "w": 0.719
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.765
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "module:voice-leadership:0",
+   "rel": "similar",
+   "w": 0.763
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "module:voice-leadership:1",
+   "rel": "similar",
+   "w": 0.794
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.753
+  },
+  {
+   "from": "module:guest-journey:1",
+   "to": "module:craveiral-hospitality:1",
+   "rel": "similar",
+   "w": 0.753
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.823
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.82
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.806
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.789
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "module:welcome-belong:0",
    "rel": "similar",
    "w": 0.808
+  },
+  {
+   "from": "module:voice-leadership:0",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.777
+  },
+  {
+   "from": "module:voice-leadership:1",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.787
   },
   {
    "from": "module:welcome-belong:0",
    "to": "module:welcome-belong:1",
    "rel": "similar",
    "w": 0.779
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.825
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:5",
-   "rel": "similar",
-   "w": 0.823
-  },
-  {
-   "from": "module:welcome-belong:1",
-   "to": "module:welcome-belong:9",
-   "rel": "similar",
-   "w": 0.806
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "module:welcome-belong:5",
-   "rel": "similar",
-   "w": 0.854
-  },
-  {
-   "from": "module:welcome-belong:2",
-   "to": "module:welcome-belong:11",
-   "rel": "similar",
-   "w": 0.83
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:4",
-   "rel": "similar",
-   "w": 0.859
-  },
-  {
-   "from": "module:welcome-belong:3",
-   "to": "module:welcome-belong:10",
-   "rel": "similar",
-   "w": 0.858
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.765
-  },
-  {
-   "from": "module:welcome-belong:4",
-   "to": "module:welcome-belong:10",
-   "rel": "similar",
-   "w": 0.763
-  },
-  {
-   "from": "module:welcome-belong:5",
-   "to": "module:welcome-belong:6",
-   "rel": "similar",
-   "w": 0.796
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "module:welcome-belong:1",
-   "rel": "similar",
-   "w": 0.775
-  },
-  {
-   "from": "module:welcome-belong:6",
-   "to": "module:welcome-belong:9",
-   "rel": "similar",
-   "w": 0.768
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "module:welcome-belong:1",
-   "rel": "similar",
-   "w": 0.748
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "module:welcome-belong:3",
-   "rel": "similar",
-   "w": 0.743
-  },
-  {
-   "from": "module:welcome-belong:7",
-   "to": "module:welcome-belong:6",
-   "rel": "similar",
-   "w": 0.719
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "module:welcome-belong:11",
-   "rel": "similar",
-   "w": 0.794
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.753
-  },
-  {
-   "from": "module:welcome-belong:8",
-   "to": "module:welcome-belong:3",
-   "rel": "similar",
-   "w": 0.753
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.82
-  },
-  {
-   "from": "module:welcome-belong:9",
-   "to": "module:welcome-belong:5",
-   "rel": "similar",
-   "w": 0.789
-  },
-  {
-   "from": "module:welcome-belong:10",
-   "to": "module:welcome-belong:2",
-   "rel": "similar",
-   "w": 0.777
-  },
-  {
-   "from": "module:welcome-belong:11",
-   "to": "module:welcome-belong:1",
-   "rel": "similar",
-   "w": 0.787
   }
  ],
  "stats": {
   "nodes": {
-   "course": 1,
+   "course": 6,
    "module": 12,
    "reel": 0,
    "concept": 61
