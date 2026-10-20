@@ -12,3 +12,8 @@
 - Profile: no NIF, contract, working-time or goal fields (`leanProfile: true`).
 - Ask moved into the search bar (a question of 3+ words leads the list; Enter asks the lessons). Home lost the ask bar, the daily card and the "For you" eyebrow; library lost the hashtag band. Today's question now waits in the bell and opens a sheet with a time-of-day greeting. Voice no longer submits or speaks back by itself. No copy-link clip in ask results. Palette no longer offers the certification quiz. Live page has a month calendar. Leaderboard copy says only weekly points reset. Emojis stripped from learner surfaces. Drawer lost the XP chip. Footer uses the Belong mark. Channel pills wrap (Members was cut off). My learning page no longer shows two footers. Hero "Belong" no longer clips the g.
 - Open: Rita/Lykke confirm the PT department names; re-enable the watch gate; Lykke proposal; ClickUp module-1 link; seed the community.
+
+## 20 Oct 2026 — Belong staff answer (bel69)
+- Departments now 12: added **Laundry** and **Logistics & Management Control**; "Maintenance & Property Care" is just **Maintenance** (their wording). PT: Lavandaria · Logística e Controlo de Gestão · Manutenção.
+- **Who sees the team's progress:** all team leaders + Lykke + Pedro. Mechanism already exists: Admin console → Settings → company **admin emails** (one per line) — anyone listed gets the Team tab (members, path progress, hours, nudges). Needs their sign-in emails; João adds them as meridante.pt@gmail.com, or sends me the list.
+- Fixed in the shared core: the admin gate was a hard-coded EdenRise email list, so EdenRise staff would have had the Belong admin console. Now each tenant's own `superadmins` from brand.js.

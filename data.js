@@ -83,11 +83,13 @@ const ROLE_OPTIONS = [
   { key: 'culinary',     label: 'Culinary & Kitchen',               icon: 'leaf',     goals: ['From Farm to Table', 'The Belong Way'] },
   { key: 'fnb',          label: 'Food & Beverage Service',          icon: 'basket',   goals: ['From Farm to Table', 'Belong Host'] },
   { key: 'farm',         label: 'Farm & Nature',                    icon: 'sprout',   goals: ['Rooted in the Land', 'From Farm to Table'] },
-  { key: 'maintenance',  label: 'Maintenance & Property Care',      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable'] },
+  { key: 'maintenance',  label: 'Maintenance',                      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable'] },
+  { key: 'laundry',      label: 'Laundry',                          icon: 'drop',     goals: ['Houses & Standards', 'Safe & Sustainable'] },
   { key: 'wellness',     label: 'Wellness & Experiences',           icon: 'flower',   goals: ['Belong Host', 'Rooted in the Land'] },
   { key: 'office',       label: 'Office & Administration',          icon: 'compass',  goals: ['Lead the Belong Way', 'The Belong Way'] },
   { key: 'people',       label: 'People, Culture & Leadership',     icon: 'hands',    goals: ['Lead the Belong Way', 'The Belong Way'] },
-  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'drop',     goals: ['Safe & Sustainable', 'Houses & Standards'] }
+  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'fire',     goals: ['Safe & Sustainable', 'Houses & Standards'] },
+  { key: 'logistics',    label: 'Logistics & Management Control',   icon: 'waves',    goals: ['Lead the Belong Way', 'The Belong Way'] }
 ];
 
 /* roles and goals that shipped before the Final 10 Departments — a stored profile keeps working */
@@ -704,7 +706,7 @@ const PILLARS_PT = { 'Regenerative':'Regenerativo', 'Rooted':'Enraizado', 'Resto
 const tpillar = l => _lang() === 'pt' ? (PILLARS_PT[l] || l) : l;
 const LEVELS_PT = ['Semente','Rebento','Broto','Muda','Árvore Jovem','Guardião do Bosque','Carvalho Ancião'];
 const tlevel = i => _lang() === 'pt' ? (LEVELS_PT[i] || LEVELS[i].name) : LEVELS[i].name;
-const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', housekeeping:'Limpezas e Casas', culinary:'Cozinha e Culinária', fnb:'Serviço de Restaurante e Bar', farm:'Quinta e Natureza', maintenance:'Manutenção e Cuidado da Propriedade', wellness:'Bem-estar e Experiências', office:'Escritório e Administração', people:'Pessoas, Cultura e Liderança', safety:'Segurança e Sustentabilidade' };
+const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', housekeeping:'Limpezas e Casas', culinary:'Cozinha e Culinária', fnb:'Serviço de Restaurante e Bar', farm:'Quinta e Natureza', maintenance:'Manutenção', laundry:'Lavandaria', logistics:'Logística e Controlo de Gestão', wellness:'Bem-estar e Experiências', office:'Escritório e Administração', people:'Pessoas, Cultura e Liderança', safety:'Segurança e Sustentabilidade' };
 const trole = r => _lang() === 'pt' ? (ROLES_PT[r.key] || r.label) : r.label;
 const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Belong Host':'Anfitrião Belong', 'Houses & Standards':'Casas e Padrões', 'From Farm to Table':'Da Quinta à Mesa', 'Rooted in the Land':'Enraizado na Terra', 'Lead the Belong Way':'Liderar à Maneira Belong', 'Safe & Sustainable':'Seguro e Sustentável' };
 const tgoal = g => _lang() === 'pt' ? (GOALS_PT[g] || g) : g;
@@ -729,11 +731,13 @@ const DEPTS = [
   { key: 'culinary',     en: 'Culinary & Kitchen',            pt: 'Cozinha e Culinária' },
   { key: 'fnb',          en: 'Food & Beverage Service',       pt: 'Serviço de Restaurante e Bar' },
   { key: 'farm',         en: 'Farm & Nature',                 pt: 'Quinta e Natureza' },
-  { key: 'maintenance',  en: 'Maintenance & Property Care',   pt: 'Manutenção e Cuidado da Propriedade' },
+  { key: 'maintenance',  en: 'Maintenance',                   pt: 'Manutenção' },
+  { key: 'laundry',      en: 'Laundry',                       pt: 'Lavandaria' },
   { key: 'wellness',     en: 'Wellness & Experiences',        pt: 'Bem-estar e Experiências' },
   { key: 'office',       en: 'Office & Administration',       pt: 'Escritório e Administração' },
   { key: 'people',       en: 'People, Culture & Leadership',  pt: 'Pessoas, Cultura e Liderança' },
-  { key: 'safety',       en: 'Safety & Sustainability',       pt: 'Segurança e Sustentabilidade' }
+  { key: 'safety',       en: 'Safety & Sustainability',       pt: 'Segurança e Sustentabilidade' },
+  { key: 'logistics',    en: 'Logistics & Management Control', pt: 'Logística e Controlo de Gestão' }
 ];
 const tdept = k => { const d = DEPTS.find(x => x.key === k); return d ? (_lang() === 'pt' ? d.pt : d.en) : ''; };
 
