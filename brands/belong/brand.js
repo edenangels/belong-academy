@@ -60,7 +60,7 @@
     '--forest': '#8d907e', '--olive': '#8d907e', '--cork': '#b09189', '--clay': '#be594d',
     '--atlantic': '#759ba3', '--mist': '#cfc7b9', '--ivory': '#f7efe9', '--focus': '#f8b556',
     /* rgb channels + gradients the shared stylesheet mixes from — without these the chrome tinted EdenRise sage and gold */
-    '--accent-2-rgb': '248,181,86', '--bg-rgb': '33,22,19', '--bg2-rgb': '45,32,28',
+    '--tint-rgb': '120,70,60', '--accent-2-rgb': '248,181,86', '--bg-rgb': '33,22,19', '--bg2-rgb': '45,32,28',
     '--grad-text': 'linear-gradient(95deg, #f3c9b8 0%, #c8655a 45%, #f8b556 100%)',
     '--orb-grad': 'conic-gradient(from 200deg, #c8655a, #f8b556, #b09189, #c8655a)'
   }
