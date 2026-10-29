@@ -1,409 +1,376 @@
 {
  "module": 1,
  "title": "Sustainability in daily practice: what the mission asks of you before lunch",
- "vimeoId": "1227373149",
- "vimeoName": "Module 10 - Sustainability in daily practice: what the mission asks of you before lunch",
+ "vimeoId": "1239572871",
+ "vimeoName": "Belong School · Module 10 · Sustainability In Practice",
  "language": "en",
- "durationSec": 354,
+ "durationSec": 362,
  "machineTranslated": false,
  "native": true,
- "source": "vimeo-api",
- "generatedAt": 1789641306355,
+ "source": "vimeo-autogen-captions",
+ "generatedAt": 1793293056360,
+ "course": "houses-farm-sustainability",
+ "lesson": 10,
  "segments": [
   {
-   "t0": 0,
-   "t1": 3.44,
+   "t0": 0.21,
+   "t1": 2.67,
    "text": "We've talked about regeneration as a vision."
   },
   {
-   "t0": 3.44,
-   "t1": 7.2,
-   "text": "Now let's bring it down to earth. Literally."
+   "t0": 3.6,
+   "t1": 9.21,
+   "text": "Now let's bring it down to earth, literally, because sustainability at Craveiral"
   },
   {
-   "t0": 7.2,
-   "t1": 12.24,
-   "text": "Because sustainability at Craveiral isn't a chapter in a report."
+   "t0": 9.93,
+   "t1": 15.81,
+   "text": "isn't a chapter in a report. It's 100 small physical actions every day"
   },
   {
-   "t0": 12.24,
-   "t1": 16,
-   "text": "It's a hundred small physical actions every day,"
+   "t0": 16.41,
+   "t1": 17.19,
+   "text": "done by you."
   },
   {
-   "t0": 16,
-   "t1": 20.8,
-   "text": "done by you. This module is the playbook."
+   "t0": 18.78,
+   "t1": 23.67,
+   "text": "This module is the playbook. Start with water. We're in the Alentejo."
   },
   {
-   "t0": 20.8,
-   "t1": 24.08,
-   "text": "Start with water. We're in the Alentejo."
-  },
-  {
-   "t0": 24.08,
-   "t1": 28.56,
+   "t0": 24.27,
+   "t1": 29.76,
    "text": "Water here is not a utility. It's the limiting factor of"
   },
   {
-   "t0": 28.56,
-   "t1": 32.88,
+   "t0": 29.85,
+   "t1": 33.45,
    "text": "everything. The region lives with drought as a neighbor."
   },
   {
-   "t0": 32.88,
-   "t1": 37.36,
-   "text": "That's why the property recycles water. Why the gardens are planned around what"
+   "t0": 34.11,
+   "t1": 38.49,
+   "text": "That's why the property recycles water, why the gardens are planned around what"
   },
   {
-   "t0": 37.36,
-   "t1": 42.8,
-   "text": "this climate actually gives. Why every drop matters operationally."
+   "t0": 38.55,
+   "t1": 43.59,
+   "text": "this climate actually gives, why every drop matters operationally."
   },
   {
-   "t0": 42.8,
-   "t1": 47.12,
-   "text": "For you this means report every leak the hour you see it."
+   "t0": 44.19,
+   "t1": 49.83,
+   "text": "For you, this means report every leak the hour you see it. A dripping tap is small."
   },
   {
-   "t0": 47.12,
-   "t1": 51.84,
-   "text": "A dripping tap is small. A dripping tap for a month is a scandal."
+   "t0": 50.16,
+   "t1": 54.33,
+   "text": "A dripping tap for a month is a scandal. Housekeeping."
   },
   {
-   "t0": 51.84,
-   "t1": 54.96,
-   "text": "Housekeeping. Washing routines exist for a reason."
+   "t0": 54.54,
+   "t1": 59.55,
+   "text": "Washing routines exist for a reason. Follow the dosing. Full loads, always."
   },
   {
-   "t0": 54.96,
-   "t1": 59.2,
-   "text": "Follow the dosing full loads always. Kitchen."
+   "t0": 60.36,
+   "t1": 65.01,
+   "text": "Kitchen. Thawing under running water is forbidden. Plan ahead instead."
   },
   {
-   "t0": 59.2,
-   "t1": 63.68,
-   "text": "Sewing under running water is forbidden. Plan ahead instead."
+   "t0": 65.7,
+   "t1": 69.9,
+   "text": "None of this is glamorous. All of it is the mission in its workloads."
   },
   {
-   "t0": 63.68,
-   "t1": 67.2,
-   "text": "None of this is glamorous. All of it is the mission"
+   "t0": 70.38,
+   "t1": 76.02,
+   "text": "Energy, same logic. Air conditioning in an empty house is money and carbon"
   },
   {
-   "t0": 67.2,
-   "t1": 70.88,
-   "text": "in its work clothes. Energy. Same logic."
+   "t0": 76.08,
+   "t1": 79.77,
+   "text": "evaporating together. Check, switch off, close."
   },
   {
-   "t0": 70.88,
-   "t1": 75.76,
-   "text": "Air conditioning in an empty house is money and carbon evaporating together."
+   "t0": 80.61,
+   "t1": 83.4,
+   "text": "Lights on walkways and common areas have their schedules."
   },
   {
-   "t0": 75.76,
-   "t1": 80.4,
-   "text": "Check, switch off, close. Lights on walkways and common areas have their"
+   "t0": 83.73,
+   "t1": 89.46,
+   "text": "If you see waste, flag it. The heated indoor pool is one of our biggest energy"
   },
   {
-   "t0": 80.4,
-   "t1": 85.92,
-   "text": "schedules. If you see waste, flag it. The heated indoor pool is one of our"
+   "t0": 89.52,
+   "t1": 94.95,
+   "text": "commitments. We spend it gladly for guest comfort, which is exactly why we don't"
   },
   {
-   "t0": 85.92,
-   "t1": 90.4,
-   "text": "biggest energy commitments. We spend it gladly for guest comfort."
+   "t0": 95.01,
+   "t1": 100.83,
+   "text": "waste a watt elsewhere. Waste, and here I want to change how you"
   },
   {
-   "t0": 90.4,
-   "t1": 94.4,
-   "text": "Which is exactly why we don't waste a watt elsewhere."
+   "t0": 100.92,
+   "t1": 104.7,
+   "text": "see it. At Craveiral, there's no such thing as throwing away."
   },
   {
-   "t0": 94.4,
-   "t1": 98.48,
-   "text": "Waste. And here I want to change how you see it."
+   "t0": 105.57,
+   "t1": 111.06,
+   "text": "There is only routing. Organic scraps route to compost, and compost routes to the"
   },
   {
-   "t0": 98.48,
-   "t1": 102,
-   "text": "At Craveiral there's no such thing as throwing away."
+   "t0": 111.15,
+   "t1": 113.76,
+   "text": "farm, and the farm routes to the kitchen."
   },
   {
-   "t0": 102,
-   "t1": 106,
-   "text": "There is only rooting. Organic scraps root to compost"
+   "t0": 114.33,
+   "t1": 118.41,
+   "text": "You're not discarding a carrot top, you're sending it on a round trip."
   },
   {
-   "t0": 106,
-   "t1": 110.64,
-   "text": "and compost roots to the farm and the farm roots to the kitchen."
+   "t0": 119.07,
+   "t1": 124.77,
+   "text": "Glass, plastic, paper, oil. Each has its stream, and mixing"
   },
   {
-   "t0": 110.64,
-   "t1": 115.36,
-   "text": "You're not discarding a carrot top. You're sending it on a round trip."
+   "t0": 124.8,
+   "t1": 127.98,
+   "text": "streams out of laziness breaks the circle we brag about."
   },
   {
-   "t0": 115.36,
-   "t1": 121.76,
-   "text": "Glass, plastic, paper, oil. Each has its stream and mixing streams out of"
+   "t0": 128.94,
+   "t1": 134.52,
+   "text": "And before anything becomes waste at all, ask the better question: why did we"
   },
   {
-   "t0": 121.76,
-   "t1": 126.64,
-   "text": "laziness breaks the circle we brag about. And before anything becomes"
+   "t0": 134.67,
+   "t1": 138.18,
+   "text": "over-order, overproduce, over-portion?"
   },
   {
-   "t0": 126.64,
-   "t1": 130.72,
-   "text": "waste at all ask the better question. Why did we"
+   "t0": 139.08,
+   "t1": 144.18,
+   "text": "The cheapest waste to manage is the one that never happens. Kitchen team."
   },
   {
-   "t0": 130.72,
-   "t1": 137.6,
-   "text": "overorder, overproduce, over portion? The cheapest ways to manage is the one that"
+   "t0": 145.41,
+   "t1": 150.12,
+   "text": "You know this better than anyone. Full use of the animal, full use of the"
   },
   {
-   "t0": 137.6,
-   "t1": 143.36,
-   "text": "never happens. Kitchen team. You know this better than anyone."
+   "t0": 150.18,
+   "t1": 154.29,
+   "text": "vegetable, preservation and fermentation when the garden overwhelms us."
   },
   {
-   "t0": 143.36,
-   "t1": 146.72,
-   "text": "Full use of the animal, full use of the vegetable,"
+   "t0": 154.95,
+   "t1": 160.83,
+   "text": "Peak season abundance becoming a winter jam is the most delicious form of"
   },
   {
-   "t0": 146.72,
-   "t1": 150.48,
-   "text": "preservation and fermentation when the garden overwhelms us."
+   "t0": 160.89,
+   "t1": 166.86,
+   "text": "accounting I know. Purchasing. Every euro we spend is a vote for the world"
   },
   {
-   "t0": 150.48,
-   "t1": 154.32,
-   "text": "Peek, season, abundance, becoming a winter jam"
+   "t0": 166.92,
+   "t1": 171.48,
+   "text": "we want. Local first, seasonal first, real first."
   },
   {
-   "t0": 154.32,
-   "t1": 158.16,
-   "text": "is the most delicious form of accounting I know."
+   "t0": 172.26,
+   "t1": 177.42,
+   "text": "When we buy from the honey producer 20 minutes away, from the Vicentino vineyards,"
   },
   {
-   "t0": 158.16,
-   "t1": 163.28,
-   "text": "Purchasing. Every euro we spend is a vote for the world we want."
+   "t0": 177.51,
+   "t1": 183.27,
+   "text": "from the fishermen on this coast, the money stays in the territory and comes back"
   },
   {
-   "t0": 163.28,
-   "t1": 169.52,
-   "text": "Local first, seasonal first, real first. When we buy from the honey producer 20"
+   "t0": 183.33,
+   "t1": 189.03,
+   "text": "to us as a stronger, more beautiful region that gets across Europe to visit."
   },
   {
-   "t0": 169.52,
-   "t1": 172.88,
-   "text": "minutes away from the Vicentino vineyards from the"
+   "t0": 190.41,
+   "t1": 195.45,
+   "text": "When a supplier decision is yours to influence, ask the belong questions."
   },
   {
-   "t0": 172.88,
-   "t1": 177.52,
-   "text": "fishermen on this coast. The money stays in the territory"
+   "t0": 196.38,
+   "t1": 201.24,
+   "text": "Does this strengthen the territory? Does the value circulate here?"
   },
   {
-   "t0": 177.52,
-   "t1": 181.6,
-   "text": "and comes back to us as a stronger more beautiful region"
+   "t0": 202.23,
+   "t1": 207.75,
+   "text": "The answer isn't always yes. Sometimes there's no local option, and financial"
   },
   {
-   "t0": 181.6,
-   "t1": 187.12,
-   "text": "that guests cross Europe to visit. When a supplier decision is yours to"
+   "t0": 207.81,
+   "t1": 212.52,
+   "text": "sustainability is a value too. But the question must always be asked."
   },
   {
-   "t0": 187.12,
-   "t1": 192.32,
-   "text": "influence, ask the belong questions. Does this strengthen the"
+   "t0": 213.03,
+   "t1": 214.47,
+   "text": "The farm and the land."
   },
   {
-   "t0": 192.32,
-   "t1": 196.4,
-   "text": "territory? Does the value circulate here?"
+   "t0": 215.79,
+   "t1": 221.31,
+   "text": "4% built, 96% alive, and the 96%"
   },
   {
-   "t0": 196.4,
-   "t1": 201.04,
-   "text": "The answer isn't always yes. Sometimes there's no local option"
+   "t0": 221.4,
+   "t1": 222.39,
+   "text": "needs allies."
   },
   {
-   "t0": 201.04,
-   "t1": 204.32,
-   "text": "and financial sustainability is a value too."
+   "t0": 223.71,
+   "t1": 227.79,
+   "text": "Stay on the walkways and paths and help guests do the same gently."
   },
   {
-   "t0": 204.32,
-   "t1": 209.68,
-   "text": "But the question must always be asked. The farm and the land."
+   "t0": 228.57,
+   "t1": 233.91,
+   "text": "If your work touches the land, gardening, maintenance, the farm itself, you already"
   },
   {
-   "t0": 209.68,
-   "t1": 217.6,
-   "text": "4% built, 96% alive and the 96% needs allies."
+   "t0": 233.97,
+   "t1": 238.17,
+   "text": "know. No shortcuts with chemicals. Soil is capital."
   },
   {
-   "t0": 217.6,
-   "t1": 221.36,
-   "text": "Stay on the walkways and paths and help guests do the same."
+   "t0": 238.56,
+   "t1": 241.41,
+   "text": "We feed it or we lose it. And guests."
   },
   {
-   "t0": 221.36,
-   "t1": 225.36,
-   "text": "Gently. If your work touches the land, gardening,"
+   "t0": 242.64,
+   "t1": 245.34,
+   "text": "Here's the delicate part. We never lecture."
   },
   {
-   "t0": 225.36,
-   "t1": 228.96,
-   "text": "maintenance, the farm itself, you already know"
-  },
-  {
-   "t0": 228.96,
-   "t1": 234.72,
-   "text": "no shortcuts with chemicals, soil is capital, we feed it or we lose it"
-  },
-  {
-   "t0": 234.72,
-   "t1": 240,
-   "text": "and guests. Here's the delicate part we never lecture."
-  },
-  {
-   "t0": 240,
-   "t1": 244.08,
+   "t0": 246.6,
+   "t1": 249.72,
    "text": "Nobody drove from Lisbon to be scolded about towels."
   },
   {
-   "t0": 244.08,
-   "t1": 248.88,
+   "t0": 250.68,
+   "t1": 254.82,
    "text": "Our way is to make the sustainable choice the beautiful choice."
   },
   {
-   "t0": 248.88,
-   "t1": 252.88,
-   "text": "The organic amenities smell better. The seasonal dish"
+   "t0": 255.48,
+   "t1": 257.49,
+   "text": "The organic amenities smell better."
   },
   {
-   "t0": 252.88,
-   "t1": 257.44,
-   "text": "is the best thing on the menu. The walk to the beach is lovelier than the"
+   "t0": 258.18,
+   "t1": 261.42,
+   "text": "The seasonal dish is the best thing on the menu."
   },
   {
-   "t0": 257.44,
-   "t1": 262.08,
-   "text": "drive. When guests ask and they ask more every"
+   "t0": 262.23,
+   "t1": 264.9,
+   "text": "The walk to the beach is lovelier than the drive."
   },
   {
-   "t0": 262.08,
-   "t1": 265.28,
-   "text": "year, especially our international guests,"
+   "t0": 265.8,
+   "t1": 271.62,
+   "text": "When guests ask, and they ask more every year, especially our international guests,"
   },
   {
-   "t0": 265.28,
-   "t1": 271.84,
+   "t0": 272.55,
+   "t1": 278.46,
    "text": "answer with pride and specifics. The 4%, the 70% from the farm,"
   },
   {
-   "t0": 271.84,
-   "t1": 276.16,
+   "t0": 279.03,
+   "t1": 282.84,
    "text": "the compost circle, the laundry that serves the village."
   },
   {
-   "t0": 276.16,
-   "t1": 281.28,
-   "text": "Specifics, not slogans. The difference between greenwashing and the real"
+   "t0": 283.38,
+   "t1": 289.26,
+   "text": "Specifics, not slogans. The difference between greenwashing and the real thing is"
   },
   {
-   "t0": 281.28,
-   "t1": 284.96,
-   "text": "thing is that the real thing has numbers and mud"
+   "t0": 289.32,
+   "t1": 294.9,
+   "text": "that the real thing has numbers and mud on its boots. Why am I this insistent?"
   },
   {
-   "t0": 284.96,
-   "t1": 291.36,
-   "text": "on its boots. Why am I dis insistent? Because coherence is our old brand."
+   "t0": 295.8,
+   "t1": 297.63,
+   "text": "Because coherence is our old brand."
   },
   {
-   "t0": 291.44,
-   "t1": 296.08,
-   "text": "The moment a guest catches a gap between what we preach and what we do,"
+   "t0": 298.53,
+   "t1": 303.45,
+   "text": "The moment a guest catches a gap between what we preach and what we do, the"
   },
   {
-   "t0": 296.08,
-   "t1": 300.64,
-   "text": "the regeneration speech next to an overflowing mixed bin."
+   "t0": 303.48,
+   "t1": 307.11,
+   "text": "regeneration speech next to an overflowing mixed bin,"
   },
   {
-   "t0": 300.64,
-   "t1": 305.36,
-   "text": "We're not a farm hotel anymore. We're a marketing exercise with chickens."
+   "t0": 308.49,
+   "t1": 313.47,
+   "text": "we're not a farm hotel anymore. We're a marketing exercise with chickens. I refuse."
   },
   {
-   "t0": 305.36,
-   "t1": 310.16,
-   "text": "I refuse and I can only refuse with your hands because I'm not the one holding"
+   "t0": 314.19,
+   "t1": 318.06,
+   "text": "And I can only refuse with your hands because I'm not the one holding the hose, the"
   },
   {
-   "t0": 310.16,
-   "t1": 314,
-   "text": "the hose, the thermostat or the purchase order."
+   "t0": 318.12,
+   "t1": 321.93,
+   "text": "thermostat, or the purchase order. You are."
   },
   {
-   "t0": 314,
-   "t1": 318,
-   "text": "You are. Sustainability at Craveiral is the sum"
+   "t0": 322.62,
+   "t1": 328.26,
+   "text": "Sustainability at Craveiral is the sum of who noticed, who bothered, who did it"
   },
   {
-   "t0": 318,
-   "t1": 321.12,
-   "text": "of who noticed, who bothered, who did it properly"
+   "t0": 328.32,
+   "t1": 332.94,
+   "text": "properly when nobody was checking. One test, and it's yours to keep."
   },
   {
-   "t0": 321.12,
-   "t1": 326.4,
-   "text": "when nobody was checking. One test and it's yours to keep."
+   "t0": 333.81,
+   "t1": 339.72,
+   "text": "At the end of any shift, ask, \"Did the place end my shift a little better"
   },
   {
-   "t0": 326.4,
-   "t1": 330.48,
-   "text": "At the end of any shift, ask. Did the place"
+   "t0": 339.78,
+   "t1": 345.51,
+   "text": "or a little worse because I was here?\" Regeneration is just that question"
   },
   {
-   "t0": 330.48,
-   "t1": 333.92,
-   "text": "end my shift a little better or a little worse?"
-  },
-  {
-   "t0": 333.92,
-   "t1": 338.16,
-   "text": "Because I was here. Regeneration is just that question"
-  },
-  {
-   "t0": 338.16,
-   "t1": 343.04,
+   "t0": 345.66,
+   "t1": 350.16,
    "text": "asked by enough people, answered honestly every single day."
   },
   {
-   "t0": 343.12,
-   "t1": 347.92,
-   "text": "Next module, how we speak. The words we use with guests"
+   "t0": 350.94,
+   "t1": 356.58,
+   "text": "Next module, how we speak, the words we use with guests and with each"
   },
   {
-   "t0": 347.92,
-   "t1": 353.6,
-   "text": "and with each other and why they matter more than you think."
+   "t0": 356.67,
+   "t1": 360.21,
+   "text": "other, and why they matter more than you think."
   }
- ],
- "course": "houses-farm-sustainability",
- "splitFrom": {
-  "course": "welcome-belong",
-  "module": 9
- }
+ ]
 }

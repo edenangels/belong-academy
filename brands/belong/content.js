@@ -5,7 +5,7 @@
    h= hash, which the player needs). One course was twelve lessons long until
    16 Oct 2026; João asked three times for the videos to be spread across the
    path, so the lessons are now paired by theme so each course fits a
-   department. Lesson numbers below are the trainer's original numbering.
+   department. lesson numbers below are the trainer's original numbering. 29 Oct 2026: the twelve lessons were re-cut by the trainer (Vimeo folder 'Revised Course 1'); ids, hashes and transcripts follow the revised cut.
 ============================================================================ */
 const CATALOG = [
   {
@@ -19,8 +19,30 @@ const CATALOG = [
     modules: ['Why we\'re here: my story, and the story of Craveiral', 'Our vision, our mission, and the chain'],
     moduleDurations: [5,6],
     moduleMedia: [
-      {"type":"vimeo","id":"1221527400","h":"c3866a3f1f"}   /* lesson  1 · Why we're here: my story, and the story of Crave */,
-      {"type":"vimeo","id":"1227370063","h":"65ab173171"}   /* lesson  2 · Our vision, our mission, and the chain */
+      {"type":"vimeo","id":"1239551152","h":"6a36628b37"}   /* lesson  1 · Why we're here: my story, and the story of Crave */,
+      {"type":"vimeo","id":"1239565028","h":"700ca88458"}   /* lesson  2 · Our vision, our mission, and the chain */
+    ]
+  },
+  {
+    id: 'craveiral-places', title: 'Craveiral: One Single House', cat: 'School', grad: 8, icon: 'sun',
+    outcomes: ['Know every unit well enough to answer a guest without hesitating', 'Keep the Craveiral standard when the register changes, from the restaurant to the beach bar', 'Lead an experience on purpose and recover a stay when something goes wrong'],
+    outcomes_pt: ['Conhecer cada unidade o suficiente para responder a um hóspede sem hesitar', 'Manter o padrão Craveiral quando o registo muda, do restaurante ao bar da praia', 'Conduzir uma experiência com intenção e recuperar uma estadia quando algo corre mal'],
+    /* the trainer's second filmed course (Vimeo folder "Onboarding Course (8 Modules)", 27-28 Oct 2026): a visit to each unit of the operation */
+    level: 'All levels', learners: 0, ai: true, updated: '2026-10',
+    poster: 'media/covers/craveiral-places.webp',
+    hook: 'Five units, one house.', hookSub: 'Every place a guest meets Craveiral, and the standard that holds them together.',
+    desc: 'A visit to each unit of the operation: the houses and their standards, FarmTable, the beach bar at Carvalhal, the shop, the São Teotónio laundry, the experiences we lead, and the wellbeing a stay should leave behind, with what to do when something goes wrong.',
+    modules: ['One single house', 'The houses', 'FarmTable', 'Bar da Praia do Carvalhal', 'The Shop', 'The São Teotónio laundry', 'Experiential tourism', 'Wellbeing and service recovery'],
+    moduleDurations: [5, 5, 5, 5, 5, 5, 5, 5],
+    moduleMedia: [
+      {"type":"vimeo","id":"1239805951","h":"ab466a94ba"},
+      {"type":"vimeo","id":"1239898003","h":"3ae5a9716c"},
+      {"type":"vimeo","id":"1239916698","h":"4529ab5e02"},
+      {"type":"vimeo","id":"1240256891","h":"23ecd03405"},
+      {"type":"vimeo","id":"1240301456","h":"969e280865"},
+      {"type":"vimeo","id":"1240302267","h":"4a3d7f35ff"},
+      {"type":"vimeo","id":"1240314382","h":"67936379d1"},
+      {"type":"vimeo","id":"1240315976","h":"3b29fbe389"}
     ]
   },
   {
@@ -34,8 +56,8 @@ const CATALOG = [
     modules: ['Our values, in practice', 'Hospitality, the Craveiral way'],
     moduleDurations: [6,6],
     moduleMedia: [
-      {"type":"vimeo","id":"1227371951","h":"890f287236"}   /* lesson  3 · Our values, in practice */,
-      {"type":"vimeo","id":"1227427000","h":"76cf6e7e23"}   /* lesson  4 · Hospitality, the Craveiral way */
+      {"type":"vimeo","id":"1239566179","h":"693ad10860"}   /* lesson  3 · Our values, in practice */,
+      {"type":"vimeo","id":"1239567226","h":"b4245824f3"}   /* lesson  4 · Hospitality, the Craveiral way */
     ]
   },
   {
@@ -49,8 +71,8 @@ const CATALOG = [
     modules: ['The guest journey: from first click to farewell', 'When things go wrong: complaints and service recovery'],
     moduleDurations: [7,6],
     moduleMedia: [
-      {"type":"vimeo","id":"1227372746","h":"c1900e20be"}   /* lesson  5 · The guest journey: from first click to farewell */,
-      {"type":"vimeo","id":"1227372976","h":"dc0bb4f742"}   /* lesson  9 · When things go wrong: complaints and service rec */
+      {"type":"vimeo","id":"1239567973","h":"452b414663"}   /* lesson  5 · The guest journey: from first click to farewell */,
+      {"type":"vimeo","id":"1239572261","h":"1cc93eb1ad"}   /* lesson  9 · When things go wrong: complaints and service rec */
     ]
   },
   {
@@ -64,8 +86,8 @@ const CATALOG = [
     modules: ['The houses, the farm, and the standards we keep', 'Sustainability in daily practice: what the mission asks of you before lunch'],
     moduleDurations: [7,6],
     moduleMedia: [
-      {"type":"vimeo","id":"1227430198","h":"414021ba4d"}   /* lesson  6 · The houses, the farm, and the standards we keep */,
-      {"type":"vimeo","id":"1227373149","h":"1dbdf258c8"}   /* lesson 10 · Sustainability in daily practice: what the missi */
+      {"type":"vimeo","id":"1239569429","h":"868ac20262"}   /* lesson  6 · The houses, the farm, and the standards we keep */,
+      {"type":"vimeo","id":"1239572871","h":"3b3afccf13"}   /* lesson 10 · Sustainability in daily practice: what the missi */
     ]
   },
   {
@@ -79,8 +101,8 @@ const CATALOG = [
     modules: ['FarmTable: where the philosophy becomes food', 'The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture'],
     moduleDurations: [6,6],
     moduleMedia: [
-      {"type":"vimeo","id":"1220166660","h":"7cc9ce409c"}   /* lesson  7 · FarmTable: where the philosophy becomes food */,
-      {"type":"vimeo","id":"1225586175","h":"244ba73b9d"}   /* lesson  8 · The constellation: Beach Bar, A Mesa do CAM, eve */
+      {"type":"vimeo","id":"1239570763","h":"176d32ebe2"}   /* lesson  7 · FarmTable: where the philosophy becomes food */,
+      {"type":"vimeo","id":"1239571082","h":"918e28be91"}   /* lesson  8 · The constellation: Beach Bar, A Mesa do CAM, eve */
     ]
   },
   {
@@ -94,8 +116,8 @@ const CATALOG = [
     modules: ['How we speak: the Craveiral voice', 'Leadership, autonomy, and how we work together'],
     moduleDurations: [6,7],
     moduleMedia: [
-      {"type":"vimeo","id":"1227413580","h":"0309264292"}   /* lesson 11 · How we speak: the Craveiral voice */,
-      {"type":"vimeo","id":"1227665184","h":"467877ad3b"}   /* lesson 12 · Leadership, autonomy, and how we work together */
+      {"type":"vimeo","id":"1239574205","h":"474cc23f3c"}   /* lesson 11 · How we speak: the Craveiral voice */,
+      {"type":"vimeo","id":"1239574902","h":"acbbcc066e"}   /* lesson 12 · Leadership, autonomy, and how we work together */
     ]
   }
 ];
@@ -105,7 +127,7 @@ const CATALOG = [
 const LIVE_SESSIONS = [];
 
 const COURSE_HOOKS = {};
-const COURSE_HOOKS_PT = {"welcome-belong":["Porque estamos aqui, e como fazemos as coisas.","A história do Craveiral, e a visão, a missão e a cadeia por trás da Belong."],"craveiral-hospitality":["Hóspedes como amigos, não como clientes.","Os nossos valores na prática, e a hospitalidade que faz as pessoas sentirem que pertencem."],"guest-journey":["Do primeiro clique à despedida.","Cada passo de uma estadia, e o que fazer quando algo corre mal."],"houses-farm-sustainability":["Conhecer o lugar. Manter os padrões.","Nove hectares, trinta e oito casas, uma quinta, e o que a missão lhe pede todos os dias."],"farm-to-table":["Onde a filosofia vira comida.","FarmTable, o beach bar, A Mesa do CAM e os eventos: um mesmo gesto."],"voice-leadership":["Calma, calorosa, honesta.","Como falamos com os hóspedes, e como lideramos com autonomia, como uma equipa."]};
+const COURSE_HOOKS_PT = {"craveiral-places":["Cinco unidades, uma só casa.","Cada lugar onde um hóspede encontra o Craveiral, e o padrão que os mantém juntos."],"welcome-belong":["Porque estamos aqui, e como fazemos as coisas.","A história do Craveiral, e a visão, a missão e a cadeia por trás da Belong."],"craveiral-hospitality":["Hóspedes como amigos, não como clientes.","Os nossos valores na prática, e a hospitalidade que faz as pessoas sentirem que pertencem."],"guest-journey":["Do primeiro clique à despedida.","Cada passo de uma estadia, e o que fazer quando algo corre mal."],"houses-farm-sustainability":["Conhecer o lugar. Manter os padrões.","Nove hectares, trinta e oito casas, uma quinta, e o que a missão lhe pede todos os dias."],"farm-to-table":["Onde a filosofia vira comida.","FarmTable, o beach bar, A Mesa do CAM e os eventos: um mesmo gesto."],"voice-leadership":["Calma, calorosa, honesta.","Como falamos com os hóspedes, e como lideramos com autonomia, como uma equipa."]};
 const COURSE_QUIZ = {};
 /* generated from the lesson transcripts by scripts/build-takeaways.mjs (2026-10-14), re-keyed per course 2026-10-16; edit freely */
 const TAKEAWAYS = {
@@ -144,7 +166,25 @@ const TAKEAWAYS = {
    ["Solve guest problems using Belong values as a compass at Craveiral","Speak early about mistakes to avoid crises and maintain trust","Maintain high standards to respect guests, colleagues, and yourself"]],
   "pt": [["Use um tom calmo e quente quando fala com os hóspedes no Craveiral porque isso importa para a nossa voz de marca","Diga como diria a pais de um amigo que visita a sua casa para soar respeitoso e real","Prometa o que controlamos como cuidado e honestidade quando fala com os hóspedes para evitar promessas excessivas"],
    ["Resolva problemas de hóspedes utilizando os valores da Belong como bússola no Craveiral","Fale cedo sobre erros para evitar crises e manter a confiança","Mantenha padrões elevados para respeitar hóspedes, colegas e a si mesmo"]]
+ },
+ "craveiral-places": {
+  "en": [["See each house as a single unit to match the guest's perspective at Craveiral","Regenerate the territory through circular economy to care for people and land","Ensure consistency across units to fulfill the promise of Craveiral"],
+   ["Know Craveiral's houses by heart to confidently answer guest queries and build trust","Remember every house has a properly equipped kitchen and private terrace to ensure guest comfort","Details are everything at Craveiral, as they reflect the promise of care and coherence with the farm's values"],
+   ["Emphasize local ingredients at Craveiral because they taste better and support the community","Explain the story behind each dish to enhance the guest experience at FarmTable","Prioritize presence over efficiency when serving guests to create a unique atmosphere"],
+   ["Maintain high standards at Bar da Praia do Carvalhal because it represents Craveiral to new guests","Communicate wait times clearly to settle complaints before they exist at the beach bar","Reduce physical discomfort for guests at the beach by providing shade and cold water"],
+   ["Remember to recommend shop products as you would to a friend to build genuine relationships with guests at Craveiral.","Recall that sharing a product's origin story turns a souvenir into a meaningful relationship with the guest.","Know that honesty about a product's origin gives it value and preserves the relationship with the guest."],
+   ["Remember correct sorting to prevent damage before washing at Craveiral","Maintain machines on schedule to conserve water and energy efficiently","Treat all laundry customers with same courtesy, including villagers, on principle"],
+   ["Lead harvests intentionally using four dimensions at Craveiral","Offer guests choices instead of a set program at Craveiral","Set expectations within the first 90 seconds of arrival at Craveiral"],
+   ["Reduce friction to enhance guest wellbeing at Craveiral.","Ensure total blackout for better sleep quality.","Acknowledge complaints immediately without defending."]],
+  "pt": [["Veja cada casa como uma unidade única para corresponder à perspetiva do hóspede em Craveiral","Regenere o território através da economia circular para cuidar das pessoas e da terra","Certifique-se da consistência entre as unidades para cumprir a promessa de Craveiral"],
+   ["Conheça as casas do Craveiral de cor para responder com confiança às perguntas dos hóspedes e estabelecer confiança","Lembre-se de que cada casa tem uma cozinha bem equipada e uma varanda privada para garantir o conforto dos hóspedes","Os detalhes são tudo no Craveiral, pois refletem a promessa de cuidado e coerência com os valores da quinta"],
+   ["Destaque os ingredientes locais em Craveiral porque têm melhor sabor e apoiam a comunidade","Explique a história por trás de cada prato para melhorar a experiência do hóspede na FarmTable","Priorize a presença sobre a eficiência ao servir os hóspedes para criar uma atmosfera única"],
+   ["Mantenha os padrões elevados no Bar da Praia do Carvalhal porque representa o Craveiral para novos hóspedes","Comunique os tempos de espera de forma clara para resolver reclamações antes que elas existam no bar da praia","Reduza o desconforto físico dos hóspedes na praia fornecendo sombra e água fria"],
+   ["Lembre-se de recomendar produtos da loja como faria a um amigo para construir relações genuínas com os hóspedes em Craveiral.","Recorde que partilhar a história de origem de um produto transforma um souvenir numa relação significativa com o hóspede.","Saiba que a honestidade sobre a origem de um produto lhe dá valor e preserva a relação com o hóspede."],
+   ["Lembre-se da correta separação para prevenir danos antes da lavagem em Craveiral","Mantenha as máquinas de acordo com um calendário para conservar água e energia de forma eficiente","Trate todos os clientes de lavanderia com a mesma cortesia, incluindo os habitantes da vila, por princípio"],
+   ["Lidar as colheitas de forma intencional utilizando quatro dimensões em Craveiral","Oferecer opções aos hóspedes em vez de um programa definido em Craveiral","Estabelecer expectativas nos primeiros 90 segundos de chegada a Craveiral"],
+   ["Reduzir a fricção para melhorar o bem-estar do hóspede em Craveiral.","Garantir blackout total para melhor qualidade do sono.","Reconhecer as reclamações imediatamente sem se defender."]]
  }
 };
-const COURSE_PT = {"welcome-belong":{"title":"Bem-vindo à Belong","hook":"Porque estamos aqui, e como fazemos as coisas.","hookSub":"A história do Craveiral, e a visão, a missão e a cadeia por trás da Belong.","desc":"De onde vem a Belong e porquê: a história do fundador e a história do Craveiral, depois a visão, a missão e a cadeia que transforma uma quinta numa economia circular.","modules":["Porque estamos aqui: a minha história e a história do Craveiral","A nossa visão, a nossa missão e a cadeia"]},"craveiral-hospitality":{"title":"Hospitalidade à Maneira do Craveiral","hook":"Hóspedes como amigos, não como clientes.","hookSub":"Os nossos valores na prática, e a hospitalidade que faz as pessoas sentirem que pertencem.","desc":"Os valores da Belong tal como aparecem em decisões reais, de evitar o desperdício a ser você mesmo com os hóspedes, e a hospitalidade à maneira do Craveiral: nomes, antecipação e pequenos gestos de cuidado.","modules":["Os nossos valores, na prática","Hospitalidade à maneira do Craveiral"]},"guest-journey":{"title":"A Jornada do Hóspede","hook":"Do primeiro clique à despedida.","hookSub":"Cada passo de uma estadia, e o que fazer quando algo corre mal.","desc":"Todo o arco de uma estadia, do primeiro e-mail ao último adeus, e os momentos que a decidem: os primeiros quinze minutos, uma promessa cumprida e uma reclamação transformada em lealdade.","modules":["A jornada do hóspede: do primeiro clique à despedida","Quando algo corre mal: reclamações e recuperação do serviço"]},"houses-farm-sustainability":{"title":"As Casas, a Quinta e a Sustentabilidade","hook":"Conhecer o lugar. Manter os padrões.","hookSub":"Nove hectares, trinta e oito casas, uma quinta, e o que a missão lhe pede todos os dias.","desc":"A propriedade como um todo: as casas e o seu caráter, a quinta que alimenta o restaurante, os padrões que mantemos, e os hábitos diários de água, energia e desperdício que tornam a missão real.","modules":["As casas, a quinta e os padrões que mantemos","Sustentabilidade no dia a dia: o que a missão lhe pede antes do almoço"]},"farm-to-table":{"title":"FarmTable e a Constelação","hook":"Onde a filosofia vira comida.","hookSub":"FarmTable, o beach bar, A Mesa do CAM e os eventos: um mesmo gesto.","desc":"Porque a maior parte do que servimos cresce na propriedade, como o menu sazonal e os fornecedores locais contam a história do lugar, e como o beach bar, A Mesa do CAM e os eventos levam o mesmo gesto.","modules":["FarmTable: onde a filosofia vira comida","A constelação: Beach Bar, A Mesa do CAM, eventos e um mesmo gesto"]},"voice-leadership":{"title":"A Nossa Voz e Como Lideramos","hook":"Calma, calorosa, honesta.","hookSub":"Como falamos com os hóspedes, e como lideramos com autonomia, como uma equipa.","desc":"A voz do Craveiral, calma e calorosa, a prometer só o que controlamos, e a forma como trabalhamos: os valores como bússola, autonomia com padrões elevados, e falar cedo sobre os erros.","modules":["Como falamos: a voz do Craveiral","Liderança, autonomia e como trabalhamos juntos"]}};
+const COURSE_PT = {"craveiral-places":{"title":"Craveiral: Uma Só Casa","hook":"Cinco unidades, uma só casa.","hookSub":"Cada lugar onde um hóspede encontra o Craveiral, e o padrão que os mantém juntos.","desc":"Uma visita a cada unidade da operação: as casas e os seus padrões, o FarmTable, o bar da praia do Carvalhal, a loja, a lavandaria de São Teotónio, as experiências que conduzimos, e o bem-estar que uma estadia deve deixar, com o que fazer quando algo corre mal.","modules":["Uma só casa","As casas","FarmTable","Bar da Praia do Carvalhal","A Loja","A Lavandaria de São Teotónio","Turismo experiencial","Bem-estar e recuperação do serviço"]},"welcome-belong":{"title":"Bem-vindo à Belong","hook":"Porque estamos aqui, e como fazemos as coisas.","hookSub":"A história do Craveiral, e a visão, a missão e a cadeia por trás da Belong.","desc":"De onde vem a Belong e porquê: a história do fundador e a história do Craveiral, depois a visão, a missão e a cadeia que transforma uma quinta numa economia circular.","modules":["Porque estamos aqui: a minha história e a história do Craveiral","A nossa visão, a nossa missão e a cadeia"]},"craveiral-hospitality":{"title":"Hospitalidade à Maneira do Craveiral","hook":"Hóspedes como amigos, não como clientes.","hookSub":"Os nossos valores na prática, e a hospitalidade que faz as pessoas sentirem que pertencem.","desc":"Os valores da Belong tal como aparecem em decisões reais, de evitar o desperdício a ser você mesmo com os hóspedes, e a hospitalidade à maneira do Craveiral: nomes, antecipação e pequenos gestos de cuidado.","modules":["Os nossos valores, na prática","Hospitalidade à maneira do Craveiral"]},"guest-journey":{"title":"A Jornada do Hóspede","hook":"Do primeiro clique à despedida.","hookSub":"Cada passo de uma estadia, e o que fazer quando algo corre mal.","desc":"Todo o arco de uma estadia, do primeiro e-mail ao último adeus, e os momentos que a decidem: os primeiros quinze minutos, uma promessa cumprida e uma reclamação transformada em lealdade.","modules":["A jornada do hóspede: do primeiro clique à despedida","Quando algo corre mal: reclamações e recuperação do serviço"]},"houses-farm-sustainability":{"title":"As Casas, a Quinta e a Sustentabilidade","hook":"Conhecer o lugar. Manter os padrões.","hookSub":"Nove hectares, trinta e oito casas, uma quinta, e o que a missão lhe pede todos os dias.","desc":"A propriedade como um todo: as casas e o seu caráter, a quinta que alimenta o restaurante, os padrões que mantemos, e os hábitos diários de água, energia e desperdício que tornam a missão real.","modules":["As casas, a quinta e os padrões que mantemos","Sustentabilidade no dia a dia: o que a missão lhe pede antes do almoço"]},"farm-to-table":{"title":"FarmTable e a Constelação","hook":"Onde a filosofia vira comida.","hookSub":"FarmTable, o beach bar, A Mesa do CAM e os eventos: um mesmo gesto.","desc":"Porque a maior parte do que servimos cresce na propriedade, como o menu sazonal e os fornecedores locais contam a história do lugar, e como o beach bar, A Mesa do CAM e os eventos levam o mesmo gesto.","modules":["FarmTable: onde a filosofia vira comida","A constelação: Beach Bar, A Mesa do CAM, eventos e um mesmo gesto"]},"voice-leadership":{"title":"A Nossa Voz e Como Lideramos","hook":"Calma, calorosa, honesta.","hookSub":"Como falamos com os hóspedes, e como lideramos com autonomia, como uma equipa.","desc":"A voz do Craveiral, calma e calorosa, a prometer só o que controlamos, e a forma como trabalhamos: os valores como bússola, autonomia com padrões elevados, e falar cedo sobre os erros.","modules":["Como falamos: a voz do Craveiral","Liderança, autonomia e como trabalhamos juntos"]}};
 const COURSE_SKILLS = {};

@@ -68,13 +68,13 @@ const PATH_RATIONALES = _PATH_RATIONALES.en.map((_, k) => k).reduce((arr, k) => 
 const GOAL_PRESETS = {
   /* Belong's paths, built from Belong's six filmed courses. Every path opens with
      the welcome; the rest follows what the department does all day. */
-  'The Belong Way':      ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'houses-farm-sustainability', 'farm-to-table', 'voice-leadership'],
-  'Belong Host':         ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
-  'Houses & Standards':  ['welcome-belong', 'houses-farm-sustainability', 'craveiral-hospitality', 'guest-journey'],
-  'From Farm to Table':  ['welcome-belong', 'farm-to-table', 'craveiral-hospitality', 'houses-farm-sustainability'],
-  'Rooted in the Land':  ['welcome-belong', 'houses-farm-sustainability', 'farm-to-table'],
-  'Lead the Belong Way': ['welcome-belong', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'],
-  'Safe & Sustainable':  ['welcome-belong', 'houses-farm-sustainability', 'guest-journey', 'voice-leadership']
+  'The Belong Way':      ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'houses-farm-sustainability', 'farm-to-table', 'voice-leadership'],
+  'Belong Host':         ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
+  'Houses & Standards':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'craveiral-hospitality', 'guest-journey'],
+  'From Farm to Table':  ['welcome-belong', 'craveiral-places', 'farm-to-table', 'craveiral-hospitality', 'houses-farm-sustainability'],
+  'Rooted in the Land':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'farm-to-table'],
+  'Lead the Belong Way': ['welcome-belong', 'craveiral-places', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'],
+  'Safe & Sustainable':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'guest-journey', 'voice-leadership']
 };
 
 const ROLE_OPTIONS = [
@@ -133,7 +133,7 @@ const DEFAULT_STATE = {
   apiKey: '',
   aiModel: 'claude-opus-4-8',
   goal: 'The Belong Way',
-  path: ['welcome-belong', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
+  path: ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
   progress: {},      /* truth only — earned, never seeded */
   review: {},
   reminders: [],
@@ -794,6 +794,7 @@ const JOURNEYS = [
     pt: { title: 'A Jornada do Anfitrião', desc: 'Do primeiro acolhimento a uma reclamação resolvida: a arte completa de fazer pertencer.' },
     stages: [
       { course: 'welcome-belong' },
+      { course: 'craveiral-places' },
       { course: 'craveiral-hospitality', mission: true },
       { course: 'guest-journey' },
       { course: 'voice-leadership', capstone: true }

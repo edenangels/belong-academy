@@ -1,5 +1,5 @@
 {
- "generatedAt": 1792159641943,
+ "generatedAt": 1793293667534,
  "nodes": [
   {
    "id": "course:craveiral-hospitality",
@@ -62,7 +62,7 @@
    "course": "craveiral-hospitality",
    "mod": 1,
    "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/1",
-   "seconds": 380
+   "seconds": 379
   },
   {
    "id": "concept:hospitality",
@@ -75,14 +75,14 @@
    "title": "service"
   },
   {
-   "id": "concept:check",
-   "kind": "concept",
-   "title": "check"
-  },
-  {
    "id": "concept:food",
    "kind": "concept",
    "title": "food"
+  },
+  {
+   "id": "concept:check",
+   "kind": "concept",
+   "title": "check"
   },
   {
    "id": "concept:cold",
@@ -93,6 +93,308 @@
    "id": "concept:house",
    "kind": "concept",
    "title": "house"
+  },
+  {
+   "id": "course:craveiral-places",
+   "kind": "course",
+   "title": "Craveiral: One Single House"
+  },
+  {
+   "id": "module:craveiral-places:0",
+   "kind": "module",
+   "title": "One single house",
+   "course": "craveiral-places",
+   "mod": 0,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/0",
+   "seconds": 287
+  },
+  {
+   "id": "concept:five",
+   "kind": "concept",
+   "title": "five"
+  },
+  {
+   "id": "concept:garden",
+   "kind": "concept",
+   "title": "garden"
+  },
+  {
+   "id": "concept:craveral",
+   "kind": "concept",
+   "title": "craveral"
+  },
+  {
+   "id": "concept:land",
+   "kind": "concept",
+   "title": "land"
+  },
+  {
+   "id": "concept:farm",
+   "kind": "concept",
+   "title": "farm"
+  },
+  {
+   "id": "concept:units",
+   "kind": "concept",
+   "title": "units"
+  },
+  {
+   "id": "module:craveiral-places:1",
+   "kind": "module",
+   "title": "The houses",
+   "course": "craveiral-places",
+   "mod": 1,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/1",
+   "seconds": 309
+  },
+  {
+   "id": "concept:meters",
+   "kind": "concept",
+   "title": "meters"
+  },
+  {
+   "id": "concept:standard",
+   "kind": "concept",
+   "title": "standard"
+  },
+  {
+   "id": "concept:room",
+   "kind": "concept",
+   "title": "room"
+  },
+  {
+   "id": "concept:promise",
+   "kind": "concept",
+   "title": "promise"
+  },
+  {
+   "id": "module:craveiral-places:2",
+   "kind": "module",
+   "title": "FarmTable",
+   "course": "craveiral-places",
+   "mod": 2,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/2",
+   "seconds": 302
+  },
+  {
+   "id": "concept:table",
+   "kind": "concept",
+   "title": "table"
+  },
+  {
+   "id": "concept:three",
+   "kind": "concept",
+   "title": "three"
+  },
+  {
+   "id": "concept:kitchen",
+   "kind": "concept",
+   "title": "kitchen"
+  },
+  {
+   "id": "concept:cheeses",
+   "kind": "concept",
+   "title": "cheeses"
+  },
+  {
+   "id": "concept:local",
+   "kind": "concept",
+   "title": "local"
+  },
+  {
+   "id": "concept:tomato",
+   "kind": "concept",
+   "title": "tomato"
+  },
+  {
+   "id": "module:craveiral-places:3",
+   "kind": "module",
+   "title": "Bar da Praia do Carvalhal",
+   "course": "craveiral-places",
+   "mod": 3,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/3",
+   "seconds": 287
+  },
+  {
+   "id": "concept:beach",
+   "kind": "concept",
+   "title": "beach"
+  },
+  {
+   "id": "concept:nobody",
+   "kind": "concept",
+   "title": "nobody"
+  },
+  {
+   "id": "concept:water",
+   "kind": "concept",
+   "title": "water"
+  },
+  {
+   "id": "concept:coast",
+   "kind": "concept",
+   "title": "coast"
+  },
+  {
+   "id": "concept:informal",
+   "kind": "concept",
+   "title": "informal"
+  },
+  {
+   "id": "concept:register",
+   "kind": "concept",
+   "title": "register"
+  },
+  {
+   "id": "module:craveiral-places:4",
+   "kind": "module",
+   "title": "The Shop",
+   "course": "craveiral-places",
+   "mod": 4,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/4",
+   "seconds": 278
+  },
+  {
+   "id": "concept:shop",
+   "kind": "concept",
+   "title": "shop"
+  },
+  {
+   "id": "concept:honey",
+   "kind": "concept",
+   "title": "honey"
+  },
+  {
+   "id": "concept:origin",
+   "kind": "concept",
+   "title": "origin"
+  },
+  {
+   "id": "concept:place",
+   "kind": "concept",
+   "title": "place"
+  },
+  {
+   "id": "concept:second",
+   "kind": "concept",
+   "title": "second"
+  },
+  {
+   "id": "concept:producer",
+   "kind": "concept",
+   "title": "producer"
+  },
+  {
+   "id": "concept:only",
+   "kind": "concept",
+   "title": "only"
+  },
+  {
+   "id": "module:craveiral-places:5",
+   "kind": "module",
+   "title": "The São Teotónio laundry",
+   "course": "craveiral-places",
+   "mod": 5,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/5",
+   "seconds": 292
+  },
+  {
+   "id": "concept:which",
+   "kind": "concept",
+   "title": "which"
+  },
+  {
+   "id": "concept:laundry",
+   "kind": "concept",
+   "title": "laundry"
+  },
+  {
+   "id": "concept:unit",
+   "kind": "concept",
+   "title": "unit"
+  },
+  {
+   "id": "concept:village",
+   "kind": "concept",
+   "title": "village"
+  },
+  {
+   "id": "concept:linen",
+   "kind": "concept",
+   "title": "linen"
+  },
+  {
+   "id": "concept:sleep",
+   "kind": "concept",
+   "title": "sleep"
+  },
+  {
+   "id": "module:craveiral-places:6",
+   "kind": "module",
+   "title": "Experiential tourism",
+   "course": "craveiral-places",
+   "mod": 6,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/6",
+   "seconds": 303
+  },
+  {
+   "id": "concept:peak",
+   "kind": "concept",
+   "title": "peak"
+  },
+  {
+   "id": "concept:harvest",
+   "kind": "concept",
+   "title": "harvest"
+  },
+  {
+   "id": "concept:four",
+   "kind": "concept",
+   "title": "four"
+  },
+  {
+   "id": "concept:rule",
+   "kind": "concept",
+   "title": "rule"
+  },
+  {
+   "id": "concept:seconds",
+   "kind": "concept",
+   "title": "seconds"
+  },
+  {
+   "id": "concept:moment",
+   "kind": "concept",
+   "title": "moment"
+  },
+  {
+   "id": "module:craveiral-places:7",
+   "kind": "module",
+   "title": "Wellbeing and service recovery",
+   "course": "craveiral-places",
+   "mod": 7,
+   "url": "https://academy.edenrise.com/#/play/craveiral-places/7",
+   "seconds": 312
+  },
+  {
+   "id": "concept:wellbeing",
+   "kind": "concept",
+   "title": "wellbeing"
+  },
+  {
+   "id": "concept:hour",
+   "kind": "concept",
+   "title": "hour"
+  },
+  {
+   "id": "concept:team",
+   "kind": "concept",
+   "title": "team"
+  },
+  {
+   "id": "concept:leaves",
+   "kind": "concept",
+   "title": "leaves"
   },
   {
    "id": "course:farm-to-table",
@@ -106,37 +408,12 @@
    "course": "farm-to-table",
    "mod": 0,
    "url": "https://academy.edenrise.com/#/play/farm-to-table/0",
-   "seconds": 383
-  },
-  {
-   "id": "concept:table",
-   "kind": "concept",
-   "title": "table"
+   "seconds": 382
   },
   {
    "id": "concept:alentejo",
    "kind": "concept",
    "title": "alentejo"
-  },
-  {
-   "id": "concept:farm",
-   "kind": "concept",
-   "title": "farm"
-  },
-  {
-   "id": "concept:kitchen",
-   "kind": "concept",
-   "title": "kitchen"
-  },
-  {
-   "id": "concept:farmtable",
-   "kind": "concept",
-   "title": "farmtable"
-  },
-  {
-   "id": "concept:cheeses",
-   "kind": "concept",
-   "title": "cheeses"
   },
   {
    "id": "module:farm-to-table:1",
@@ -145,12 +422,7 @@
    "course": "farm-to-table",
    "mod": 1,
    "url": "https://academy.edenrise.com/#/play/farm-to-table/1",
-   "seconds": 349
-  },
-  {
-   "id": "concept:beach",
-   "kind": "concept",
-   "title": "beach"
+   "seconds": 348
   },
   {
    "id": "concept:wedding",
@@ -161,11 +433,6 @@
    "id": "concept:constellation",
    "kind": "concept",
    "title": "constellation"
-  },
-  {
-   "id": "concept:land",
-   "kind": "concept",
-   "title": "land"
   },
   {
    "id": "course:guest-journey",
@@ -197,11 +464,6 @@
    "title": "morning"
   },
   {
-   "id": "concept:which",
-   "kind": "concept",
-   "title": "which"
-  },
-  {
    "id": "concept:made",
    "kind": "concept",
    "title": "made"
@@ -231,24 +493,9 @@
    "title": "complains"
   },
   {
-   "id": "concept:second",
-   "kind": "concept",
-   "title": "second"
-  },
-  {
    "id": "concept:wasn",
    "kind": "concept",
    "title": "wasn"
-  },
-  {
-   "id": "concept:three",
-   "kind": "concept",
-   "title": "three"
-  },
-  {
-   "id": "concept:team",
-   "kind": "concept",
-   "title": "team"
   },
   {
    "id": "course:houses-farm-sustainability",
@@ -262,12 +509,7 @@
    "course": "houses-farm-sustainability",
    "mod": 0,
    "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/0",
-   "seconds": 411
-  },
-  {
-   "id": "concept:meters",
-   "kind": "concept",
-   "title": "meters"
+   "seconds": 410
   },
   {
    "id": "concept:square",
@@ -286,12 +528,7 @@
    "course": "houses-farm-sustainability",
    "mod": 1,
    "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/1",
-   "seconds": 354
-  },
-  {
-   "id": "concept:water",
-   "kind": "concept",
-   "title": "water"
+   "seconds": 360
   },
   {
    "id": "concept:waste",
@@ -321,11 +558,6 @@
    "mod": 0,
    "url": "https://academy.edenrise.com/#/play/voice-leadership/0",
    "seconds": 335
-  },
-  {
-   "id": "concept:place",
-   "kind": "concept",
-   "title": "place"
   },
   {
    "id": "concept:voice",
@@ -435,11 +667,6 @@
    "title": "name"
   },
   {
-   "id": "concept:village",
-   "kind": "concept",
-   "title": "village"
-  },
-  {
    "id": "concept:region",
    "kind": "concept",
    "title": "region"
@@ -526,12 +753,6 @@
   },
   {
    "from": "module:craveiral-hospitality:1",
-   "to": "concept:check",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:craveiral-hospitality:1",
    "to": "concept:guests",
    "rel": "about",
    "w": 1
@@ -539,6 +760,12 @@
   {
    "from": "module:craveiral-hospitality:1",
    "to": "concept:food",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "concept:check",
    "rel": "about",
    "w": 1
   },
@@ -555,6 +782,438 @@
    "w": 1
   },
   {
+   "from": "module:craveiral-places:0",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:five",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:garden",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:craveral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:land",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "concept:units",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:meters",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:standard",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:guests",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:room",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "concept:promise",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:table",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:three",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:kitchen",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:cheeses",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:local",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "concept:tomato",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:beach",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:craveiral",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:nobody",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:water",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:coast",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:informal",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "concept:register",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:shop",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:honey",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:origin",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:place",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:second",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:producer",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "concept:only",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:which",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:laundry",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:unit",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:village",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:house",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:linen",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "concept:sleep",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:peak",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:harvest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:four",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:only",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:rule",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:seconds",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "concept:moment",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "course:craveiral-places",
+   "rel": "in",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:guest",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:wellbeing",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:sleep",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:hour",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:team",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:three",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:leaves",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "concept:second",
+   "rel": "about",
+   "w": 1
+  },
+  {
    "from": "module:farm-to-table:0",
    "to": "course:farm-to-table",
    "rel": "in",
@@ -562,13 +1221,19 @@
   },
   {
    "from": "module:farm-to-table:0",
-   "to": "concept:guest",
+   "to": "concept:table",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:farm-to-table:0",
-   "to": "concept:table",
+   "to": "concept:farm",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:0",
+   "to": "concept:guest",
    "rel": "about",
    "w": 1
   },
@@ -586,25 +1251,19 @@
   },
   {
    "from": "module:farm-to-table:0",
-   "to": "concept:farm",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:farm-to-table:0",
    "to": "concept:kitchen",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:farm-to-table:0",
-   "to": "concept:farmtable",
+   "to": "concept:cheeses",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:farm-to-table:0",
-   "to": "concept:cheeses",
+   "to": "concept:local",
    "rel": "about",
    "w": 1
   },
@@ -628,12 +1287,6 @@
   },
   {
    "from": "module:farm-to-table:1",
-   "to": "concept:craveiral",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:farm-to-table:1",
    "to": "concept:table",
    "rel": "about",
    "w": 1
@@ -647,6 +1300,12 @@
   {
    "from": "module:farm-to-table:1",
    "to": "concept:constellation",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
@@ -682,13 +1341,13 @@
   },
   {
    "from": "module:guest-journey:0",
-   "to": "concept:craveiral",
+   "to": "concept:guest",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:guest-journey:0",
-   "to": "concept:guest",
+   "to": "concept:craveiral",
    "rel": "about",
    "w": 1
   },
@@ -706,13 +1365,13 @@
   },
   {
    "from": "module:guest-journey:0",
-   "to": "concept:which",
+   "to": "concept:made",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:guest-journey:0",
-   "to": "concept:made",
+   "to": "concept:which",
    "rel": "about",
    "w": 1
   },
@@ -820,7 +1479,7 @@
   },
   {
    "from": "module:houses-farm-sustainability:0",
-   "to": "concept:craveiral",
+   "to": "concept:craveral",
    "rel": "about",
    "w": 1
   },
@@ -838,6 +1497,12 @@
   },
   {
    "from": "module:houses-farm-sustainability:1",
+   "to": "concept:waste",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:houses-farm-sustainability:1",
    "to": "concept:guests",
    "rel": "about",
    "w": 1
@@ -845,12 +1510,6 @@
   {
    "from": "module:houses-farm-sustainability:1",
    "to": "concept:water",
-   "rel": "about",
-   "w": 1
-  },
-  {
-   "from": "module:houses-farm-sustainability:1",
-   "to": "concept:waste",
    "rel": "about",
    "w": 1
   },
@@ -940,13 +1599,13 @@
   },
   {
    "from": "module:voice-leadership:1",
-   "to": "concept:guest",
+   "to": "concept:respect",
    "rel": "about",
    "w": 1
   },
   {
    "from": "module:voice-leadership:1",
-   "to": "concept:respect",
+   "to": "concept:guest",
    "rel": "about",
    "w": 1
   },
@@ -976,6 +1635,12 @@
   },
   {
    "from": "module:voice-leadership:1",
+   "to": "concept:promise",
+   "rel": "about",
+   "w": 1
+  },
+  {
+   "from": "module:voice-leadership:1",
    "to": "concept:team",
    "rel": "about",
    "w": 1
@@ -994,7 +1659,7 @@
   },
   {
    "from": "module:welcome-belong:0",
-   "to": "concept:craveiral",
+   "to": "concept:craveral",
    "rel": "about",
    "w": 1
   },
@@ -1078,7 +1743,7 @@
   },
   {
    "from": "module:welcome-belong:1",
-   "to": "concept:craveiral",
+   "to": "concept:craveral",
    "rel": "about",
    "w": 1
   },
@@ -1092,13 +1757,19 @@
    "from": "module:craveiral-hospitality:0",
    "to": "module:houses-farm-sustainability:1",
    "rel": "related",
-   "w": 0.143
+   "w": 0.127
   },
   {
    "from": "module:craveiral-hospitality:0",
    "to": "module:voice-leadership:1",
    "rel": "related",
    "w": 0.127
+  },
+  {
+   "from": "module:craveiral-hospitality:1",
+   "to": "module:craveiral-places:0",
+   "rel": "related",
+   "w": 0.176
   },
   {
    "from": "module:craveiral-hospitality:1",
@@ -1110,47 +1781,107 @@
    "from": "module:craveiral-hospitality:1",
    "to": "module:welcome-belong:1",
    "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "module:welcome-belong:1",
+   "rel": "related",
+   "w": 0.212
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "module:craveiral-places:5",
+   "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "related",
+   "w": 0.429
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "module:craveiral-places:2",
+   "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "module:craveiral-places:3",
+   "rel": "related",
    "w": 0.143
   },
   {
-   "from": "module:craveiral-hospitality:1",
-   "to": "module:voice-leadership:0",
+   "from": "module:craveiral-places:2",
+   "to": "module:farm-to-table:0",
+   "rel": "related",
+   "w": 0.481
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "module:craveiral-places:3",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "module:farm-to-table:0",
+   "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "module:craveiral-places:3",
    "rel": "related",
    "w": 0.127
   },
   {
-   "from": "module:farm-to-table:0",
-   "to": "module:guest-journey:0",
+   "from": "module:craveiral-places:5",
+   "to": "module:craveiral-places:3",
    "rel": "related",
    "w": 0.143
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "module:guest-journey:1",
+   "rel": "related",
+   "w": 0.159
   },
   {
    "from": "module:farm-to-table:0",
    "to": "module:houses-farm-sustainability:1",
    "rel": "related",
-   "w": 0.127
-  },
-  {
-   "from": "module:farm-to-table:0",
-   "to": "module:welcome-belong:1",
-   "rel": "related",
-   "w": 0.127
-  },
-  {
-   "from": "module:farm-to-table:1",
-   "to": "module:welcome-belong:1",
-   "rel": "related",
-   "w": 0.159
+   "w": 0.143
   },
   {
    "from": "module:farm-to-table:1",
    "to": "module:voice-leadership:0",
    "rel": "related",
+   "w": 0.159
+  },
+  {
+   "from": "module:farm-to-table:1",
+   "to": "module:welcome-belong:1",
+   "rel": "related",
    "w": 0.143
   },
   {
    "from": "module:guest-journey:0",
-   "to": "module:houses-farm-sustainability:0",
+   "to": "module:craveiral-places:3",
+   "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "module:craveiral-places:1",
+   "rel": "related",
+   "w": 0.127
+  },
+  {
+   "from": "module:guest-journey:0",
+   "to": "module:farm-to-table:0",
    "rel": "related",
    "w": 0.127
   },
@@ -1158,6 +1889,12 @@
    "from": "module:guest-journey:1",
    "to": "module:voice-leadership:1",
    "rel": "related",
+   "w": 0.143
+  },
+  {
+   "from": "module:houses-farm-sustainability:0",
+   "to": "module:guest-journey:0",
+   "rel": "related",
    "w": 0.127
   },
   {
@@ -1167,10 +1904,10 @@
    "w": 0.143
   },
   {
-   "from": "module:houses-farm-sustainability:1",
-   "to": "module:welcome-belong:1",
+   "from": "module:voice-leadership:0",
+   "to": "module:craveiral-hospitality:1",
    "rel": "related",
-   "w": 0.143
+   "w": 0.127
   },
   {
    "from": "module:voice-leadership:1",
@@ -1179,28 +1916,22 @@
    "w": 0.159
   },
   {
-   "from": "module:voice-leadership:1",
-   "to": "module:craveiral-hospitality:1",
-   "rel": "related",
-   "w": 0.127
-  },
-  {
    "from": "module:craveiral-hospitality:0",
    "to": "module:houses-farm-sustainability:0",
    "rel": "similar",
-   "w": 0.854
+   "w": 0.844
+  },
+  {
+   "from": "module:craveiral-hospitality:0",
+   "to": "module:craveiral-places:1",
+   "rel": "similar",
+   "w": 0.839
   },
   {
    "from": "module:craveiral-hospitality:0",
    "to": "module:voice-leadership:1",
    "rel": "similar",
-   "w": 0.83
-  },
-  {
-   "from": "module:craveiral-hospitality:0",
-   "to": "module:welcome-belong:1",
-   "rel": "similar",
-   "w": 0.825
+   "w": 0.835
   },
   {
    "from": "module:craveiral-hospitality:1",
@@ -1212,61 +1943,175 @@
    "from": "module:craveiral-hospitality:1",
    "to": "module:voice-leadership:0",
    "rel": "similar",
-   "w": 0.858
+   "w": 0.851
   },
   {
    "from": "module:craveiral-hospitality:1",
-   "to": "module:welcome-belong:0",
+   "to": "module:craveiral-places:1",
    "rel": "similar",
-   "w": 0.809
+   "w": 0.816
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "module:craveiral-places:1",
+   "rel": "similar",
+   "w": 0.905
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.885
+  },
+  {
+   "from": "module:craveiral-places:0",
+   "to": "module:welcome-belong:1",
+   "rel": "similar",
+   "w": 0.844
+  },
+  {
+   "from": "module:craveiral-places:1",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.942
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "module:farm-to-table:0",
+   "rel": "similar",
+   "w": 0.956
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.828
+  },
+  {
+   "from": "module:craveiral-places:2",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.806
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "module:farm-to-table:1",
+   "rel": "similar",
+   "w": 0.793
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "module:craveiral-hospitality:1",
+   "rel": "similar",
+   "w": 0.789
+  },
+  {
+   "from": "module:craveiral-places:3",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.777
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.827
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "module:craveiral-places:1",
+   "rel": "similar",
+   "w": 0.813
+  },
+  {
+   "from": "module:craveiral-places:4",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.81
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.793
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "module:craveiral-places:1",
+   "rel": "similar",
+   "w": 0.784
+  },
+  {
+   "from": "module:craveiral-places:5",
+   "to": "module:craveiral-places:4",
+   "rel": "similar",
+   "w": 0.777
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "module:guest-journey:0",
+   "rel": "similar",
+   "w": 0.813
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "module:craveiral-hospitality:1",
+   "rel": "similar",
+   "w": 0.794
+  },
+  {
+   "from": "module:craveiral-places:6",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.783
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "module:guest-journey:1",
+   "rel": "similar",
+   "w": 0.879
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "module:voice-leadership:1",
+   "rel": "similar",
+   "w": 0.805
+  },
+  {
+   "from": "module:craveiral-places:7",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.79
   },
   {
    "from": "module:farm-to-table:0",
    "to": "module:houses-farm-sustainability:0",
    "rel": "similar",
-   "w": 0.796
+   "w": 0.794
   },
   {
    "from": "module:farm-to-table:0",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.775
+   "w": 0.783
   },
   {
-   "from": "module:farm-to-table:0",
-   "to": "module:houses-farm-sustainability:1",
+   "from": "module:farm-to-table:1",
+   "to": "module:craveiral-places:0",
    "rel": "similar",
-   "w": 0.768
+   "w": 0.756
   },
   {
    "from": "module:farm-to-table:1",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.748
-  },
-  {
-   "from": "module:farm-to-table:1",
-   "to": "module:craveiral-hospitality:1",
-   "rel": "similar",
-   "w": 0.743
-  },
-  {
-   "from": "module:farm-to-table:1",
-   "to": "module:farm-to-table:0",
-   "rel": "similar",
-   "w": 0.719
+   "w": 0.755
   },
   {
    "from": "module:guest-journey:0",
-   "to": "module:craveiral-hospitality:0",
+   "to": "module:craveiral-places:1",
    "rel": "similar",
-   "w": 0.765
-  },
-  {
-   "from": "module:guest-journey:0",
-   "to": "module:voice-leadership:0",
-   "rel": "similar",
-   "w": 0.763
+   "w": 0.793
   },
   {
    "from": "module:guest-journey:1",
@@ -1276,21 +2121,9 @@
   },
   {
    "from": "module:guest-journey:1",
-   "to": "module:craveiral-hospitality:0",
+   "to": "module:craveiral-places:1",
    "rel": "similar",
-   "w": 0.753
-  },
-  {
-   "from": "module:guest-journey:1",
-   "to": "module:craveiral-hospitality:1",
-   "rel": "similar",
-   "w": 0.753
-  },
-  {
-   "from": "module:houses-farm-sustainability:0",
-   "to": "module:welcome-belong:1",
-   "rel": "similar",
-   "w": 0.823
+   "w": 0.769
   },
   {
    "from": "module:houses-farm-sustainability:1",
@@ -1302,51 +2135,69 @@
    "from": "module:houses-farm-sustainability:1",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.806
+   "w": 0.813
   },
   {
    "from": "module:houses-farm-sustainability:1",
-   "to": "module:houses-farm-sustainability:0",
+   "to": "module:craveiral-places:0",
    "rel": "similar",
-   "w": 0.789
+   "w": 0.793
   },
   {
    "from": "module:voice-leadership:0",
    "to": "module:welcome-belong:0",
    "rel": "similar",
-   "w": 0.808
+   "w": 0.809
   },
   {
    "from": "module:voice-leadership:0",
    "to": "module:craveiral-hospitality:0",
    "rel": "similar",
-   "w": 0.777
+   "w": 0.793
   },
   {
    "from": "module:voice-leadership:1",
    "to": "module:welcome-belong:1",
    "rel": "similar",
-   "w": 0.787
+   "w": 0.799
   },
   {
    "from": "module:welcome-belong:0",
-   "to": "module:welcome-belong:1",
+   "to": "module:craveiral-hospitality:1",
    "rel": "similar",
-   "w": 0.779
+   "w": 0.808
+  },
+  {
+   "from": "module:welcome-belong:0",
+   "to": "module:craveiral-places:0",
+   "rel": "similar",
+   "w": 0.775
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:craveiral-hospitality:0",
+   "rel": "similar",
+   "w": 0.832
+  },
+  {
+   "from": "module:welcome-belong:1",
+   "to": "module:houses-farm-sustainability:0",
+   "rel": "similar",
+   "w": 0.824
   }
  ],
  "stats": {
   "nodes": {
-   "course": 6,
-   "module": 12,
+   "course": 7,
+   "module": 20,
    "reel": 0,
-   "concept": 61
+   "concept": 91
   },
   "edges": {
-   "in": 12,
-   "about": 95,
-   "related": 16,
-   "similar": 25
+   "in": 20,
+   "about": 160,
+   "related": 27,
+   "similar": 45
   }
  },
  "orphans": []

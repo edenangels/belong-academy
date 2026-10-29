@@ -1,689 +1,596 @@
 {
  "module": 0,
  "title": "FarmTable: where the philosophy becomes food",
- "vimeoId": "1220166660",
- "vimeoName": "Module 7 - FarmTable: where the philosophy becomes food",
+ "vimeoId": "1239570763",
+ "vimeoName": "Belong School · Module 7 · The FarmTable",
  "language": "en",
  "durationSec": 384,
  "machineTranslated": false,
  "native": true,
- "source": "vimeo-api",
- "generatedAt": 1789639493383,
+ "source": "vimeo-autogen-captions",
+ "generatedAt": 1793293056361,
+ "course": "farm-to-table",
+ "lesson": 7,
  "segments": [
   {
-   "t0": 0,
-   "t1": 5.12,
-   "text": "If Craveiral has a soul, you can taste it, literally."
+   "t0": 0.1,
+   "t1": 2.86,
+   "text": "If Craveiral has a soul, you can taste it,"
   },
   {
-   "t0": 5.12,
-   "t1": 8.6,
-   "text": "This module is about the FarmTable and about food,"
+   "t0": 3.54,
+   "t1": 4.12,
+   "text": "literally."
   },
   {
-   "t0": 8.6,
-   "t1": 11.32,
-   "text": "which, if you know me at all,"
+   "t0": 5.22,
+   "t1": 8.96,
+   "text": "This module is about the farm table and about food, which"
   },
   {
-   "t0": 11.32,
-   "t1": 13.04,
-   "text": "you know is the part of this project"
+   "t0": 9.48,
+   "t1": 13.38,
+   "text": "if you know me at all, you know is the part of this project I could"
   },
   {
-   "t0": 13.04,
-   "t1": 17.12,
-   "text": "I could talk about for six hours instead of 10 minutes."
+   "t0": 13.44,
+   "t1": 16.08,
+   "text": "talk about for six hours instead of 10 minutes."
   },
   {
-   "t0": 17.12,
-   "t1": 18.44,
+   "t0": 17.18,
+   "t1": 18.26,
    "text": "I'll restrain myself."
   },
   {
-   "t0": 19.6,
-   "t1": 21.76,
-   "text": "Let me start with the philosophy,"
+   "t0": 19.68,
+   "t1": 23.56,
+   "text": "Let me start with the philosophy, and it fits in one sentence."
   },
   {
-   "t0": 21.76,
-   "t1": 24.2,
-   "text": "and it fits in one sentence."
-  },
-  {
-   "t0": 24.2,
-   "t1": 26.64,
+   "t0": 24.28,
+   "t1": 26.46,
    "text": "Before the plate, there is a grower."
   },
   {
-   "t0": 27.64,
-   "t1": 29.88,
+   "t0": 27.74,
+   "t1": 29.24,
    "text": "Everything else follows from that."
   },
   {
-   "t0": 29.88,
-   "t1": 34.68,
-   "text": "Over 70% of what we serve is grown on this property."
+   "t0": 29.96,
+   "t1": 33.5,
+   "text": "Over 70% of what we serve is grown on this"
   },
   {
-   "t0": 34.68,
-   "t1": 37.36,
-   "text": "The vegetables ripened in our soil."
+   "t0": 33.54,
+   "t1": 36.42,
+   "text": "property. The vegetables ripened in our soil."
   },
   {
-   "t0": 37.36,
-   "t1": 39.32,
-   "text": "The herbs were cut this morning."
+   "t0": 37.42,
+   "t1": 41.3,
+   "text": "The herbs were cut this morning. The eggs were laid today by"
   },
   {
-   "t0": 39.32,
-   "t1": 41.08,
-   "text": "The eggs were laid today."
+   "t0": 41.36,
+   "t1": 44.98,
+   "text": "hens you can walk over and meet. What we don't grow, we"
   },
   {
-   "t0": 41.08,
-   "t1": 43.72,
-   "text": "By hens, you can walk over and meet."
+   "t0": 45.1,
+   "t1": 46.54,
+   "text": "source as close as possible."
   },
   {
-   "t0": 43.72,
-   "t1": 47.32,
-   "text": "What we don't grow, we source as close as possible."
+   "t0": 47.38,
+   "t1": 51.1,
+   "text": "Cheeses from the region, fish from this coast, wines from"
   },
   {
-   "t0": 47.32,
-   "t1": 50.6,
-   "text": "Cheeses from the region, fish from this coast,"
+   "t0": 51.14,
+   "t1": 55.08,
+   "text": "Alentejo, and from the Vicentino vineyards up the road, Medronho from"
   },
   {
-   "t0": 50.6,
-   "t1": 51.92,
-   "text": "wines from Alentejo,"
+   "t0": 55.14,
+   "t1": 58.78,
+   "text": "the local distillery. The menu rotates with the seasons because the"
   },
   {
-   "t0": 51.92,
-   "t1": 54.36,
-   "text": "and from the Vicentino vineyards up the road,"
+   "t0": 58.86,
+   "t1": 60.46,
+   "text": "farm rotates with the seasons."
   },
   {
-   "t0": 54.36,
-   "t1": 56.8,
-   "text": "medroneo from the local distillery."
-  },
-  {
-   "t0": 56.8,
-   "t1": 58.36,
-   "text": "The menu rotates with the seasons"
-  },
-  {
-   "t0": 58.36,
-   "t1": 61.36,
-   "text": "because the farm rotates with the seasons."
-  },
-  {
-   "t0": 61.36,
-   "t1": 64.24,
+   "t0": 61.4,
+   "t1": 63.86,
    "text": "And that's not a limitation, it's the entire point."
   },
   {
-   "t0": 64.24,
-   "t1": 65.72,
-   "text": "A tomato in August here"
+   "t0": 64.28,
+   "t1": 68.22,
+   "text": "A tomato in August here tastes like a different food from a supermarket tomato"
   },
   {
-   "t0": 65.72,
-   "t1": 66.96,
-   "text": "tastes like a different food"
+   "t0": 68.26,
+   "t1": 68.84,
+   "text": "in January."
   },
   {
-   "t0": 66.96,
-   "t1": 69.72,
-   "text": "from a supermarket tomato in January."
+   "t0": 69.78,
+   "t1": 73.44,
+   "text": "Our guests come, in part, to remember what food"
   },
   {
-   "t0": 69.72,
-   "t1": 72.24,
-   "text": "Our guests come, in part,"
+   "t0": 73.54,
+   "t1": 77.48,
+   "text": "actually tastes like. This is what root to table means when we"
   },
   {
-   "t0": 72.24,
-   "t1": 75.08,
-   "text": "to remember what food actually tastes like."
+   "t0": 77.56,
+   "t1": 81.46,
+   "text": "say it. Not a marketing garnish, a supply chain you"
   },
   {
-   "t0": 75.08,
-   "t1": 78.6,
-   "text": "This is what root to table means when we say it."
+   "t0": 81.5,
+   "t1": 82.92,
+   "text": "can walk in five minutes."
   },
   {
-   "t0": 78.6,
-   "t1": 80.52,
-   "text": "Not a marketing garnish."
+   "t0": 83.78,
+   "t1": 86.84,
+   "text": "Breakfast. I said it before and I'll say it again."
   },
   {
-   "t0": 80.52,
-   "t1": 83.76,
-   "text": "A supply chain you can walk in five minutes."
-  },
-  {
-   "t0": 83.76,
-   "t1": 84.96,
-   "text": "Breakfast."
-  },
-  {
-   "t0": 84.96,
-   "t1": 87.48,
-   "text": "I said it before and I'll say it again."
-  },
-  {
-   "t0": 87.48,
-   "t1": 90.36,
+   "t0": 87.5,
+   "t1": 89.68,
    "text": "Breakfast is a statement of identity."
   },
   {
    "t0": 90.36,
-   "t1": 93.16,
-   "text": "Housemade breads, our own preserves,"
+   "t1": 94.16,
+   "text": "House-made breads, our own preserves, local cheeses,"
   },
   {
-   "t0": 93.16,
-   "t1": 94.4,
-   "text": "local cheeses,"
+   "t0": 94.56,
+   "t1": 95.84,
+   "text": "farm eggs cooked to order,"
   },
   {
-   "t0": 94.4,
-   "t1": 96.68,
-   "text": "farm eggs cooked to order."
+   "t0": 96.74,
+   "t1": 98.78,
+   "text": "generous, honest, unhurried."
   },
   {
-   "t0": 96.68,
-   "t1": 99.76,
-   "text": "Generous, honest, unhurried."
+   "t0": 99.8,
+   "t1": 103.4,
+   "text": "Many guests will tell you at checkout that breakfast was their favorite part of the"
   },
   {
-   "t0": 99.76,
-   "t1": 101.56,
-   "text": "Many guests will tell you a check out"
+   "t0": 103.46,
+   "t1": 107.34,
+   "text": "day. That's normal, and it's a compliment to protect."
   },
   {
-   "t0": 101.56,
-   "t1": 104.28,
-   "text": "that breakfast was their favorite part of the day."
-  },
-  {
-   "t0": 104.28,
-   "t1": 105.64,
-   "text": "That's normal."
-  },
-  {
-   "t0": 105.64,
-   "t1": 108.24,
-   "text": "And it's a compliment to protect."
-  },
-  {
-   "t0": 108.24,
-   "t1": 112.2,
+   "t0": 108.26,
+   "t1": 111.52,
    "text": "Lunch and dinner, seasonal, simple, satisfying."
   },
   {
-   "t0": 112.2,
-   "t1": 115.92,
+   "t0": 112.28,
+   "t1": 115.38,
    "text": "Dishes with character, prepared with care and creativity."
   },
   {
-   "t0": 115.92,
-   "t1": 118.24,
-   "text": "Indoors in the light filled dining room"
+   "t0": 115.94,
+   "t1": 119.82,
+   "text": "Indoors in the light-filled dining room, or outside on the terrace with"
   },
   {
-   "t0": 118.24,
-   "t1": 119.72,
-   "text": "or outside on the terrace"
+   "t0": 119.86,
+   "t1": 121.92,
+   "text": "the garden and the Alentejo evening."
   },
   {
-   "t0": 119.72,
-   "t1": 122.88,
-   "text": "with the garden and the Alentejo evening."
-  },
-  {
-   "t0": 122.88,
-   "t1": 124.76,
+   "t0": 122.9,
+   "t1": 123.88,
    "text": "And the pizzas."
   },
   {
-   "t0": 124.76,
-   "t1": 126.32,
-   "text": "Let's talk about the pizzas"
+   "t0": 124.74,
+   "t1": 127.88,
+   "text": "Let's talk about the pizzas, because guests certainly will."
   },
   {
-   "t0": 126.32,
-   "t1": 128.56,
-   "text": "because guests certainly will."
+   "t0": 128.58,
+   "t1": 132.1,
+   "text": "The outdoor wood-fired oven is one of the most beloved things on this"
   },
   {
-   "t0": 128.56,
-   "t1": 130.28,
-   "text": "The outdoor wood-fired oven"
+   "t0": 132.16,
+   "t1": 135.94,
+   "text": "property. Sun-ripened tomatoes, just-picked"
   },
   {
-   "t0": 130.28,
-   "t1": 133.32,
-   "text": "is one of the most beloved things on this property."
+   "t0": 135.98,
+   "t1": 138.84,
+   "text": "herbs, local cheeses, fire."
   },
   {
-   "t0": 133.32,
-   "t1": 137,
-   "text": "Sun-ripened tomatoes, just-picked herbs,"
+   "t0": 139.84,
+   "t1": 143.78,
+   "text": "Children make their own in the pizza classes and eat their creation with a"
   },
   {
-   "t0": 137,
-   "t1": 139.8,
-   "text": "local cheeses, fire."
+   "t0": 143.84,
+   "t1": 145.14,
+   "text": "pride you can photograph."
   },
   {
-   "t0": 139.8,
-   "t1": 142.32,
-   "text": "Children make their own in the pizza classes"
-  },
-  {
-   "t0": 142.32,
-   "t1": 146.12,
-   "text": "and eat their creation with the pride you can photograph."
-  },
-  {
-   "t0": 146.12,
-   "t1": 149.28,
+   "t0": 146.2,
+   "t1": 148.5,
    "text": "Never look down on the pizza because it's humble."
   },
   {
-   "t0": 149.28,
-   "t1": 152.88,
-   "text": "The wood-fired pizza on a summer evening."
+   "t0": 149.32,
+   "t1": 153.24,
+   "text": "The wood-fired pizza on a summer evening, kids"
   },
   {
-   "t0": 152.88,
-   "t1": 157.12,
-   "text": "Kids running on the grass, fire pits starting to glow."
+   "t0": 153.3,
+   "t1": 155.94,
+   "text": "running on the grass, fire pits starting to glow."
   },
   {
-   "t0": 157.12,
-   "t1": 161.24,
-   "text": "That image is Craveiral, working at full power."
+   "t0": 157.14,
+   "t1": 160.34,
+   "text": "That image is Craveiral working at full power."
   },
   {
-   "t0": 161.24,
-   "t1": 163.96,
-   "text": "Wine, you know my weakness."
+   "t0": 161.3,
+   "t1": 165.04,
+   "text": "Wine. You know my weakness. Our list celebrates"
   },
   {
-   "t0": 163.96,
-   "t1": 166.52,
-   "text": "Our list celebrates Alentejo."
+   "t0": 165.1,
+   "t1": 165.74,
+   "text": "Alentejo,"
   },
   {
-   "t0": 166.52,
-   "t1": 171.32,
-   "text": "The bold reds, the balanced whites, the artisanal blends."
+   "t0": 166.56,
+   "t1": 170.28,
+   "text": "the bold reds, the balanced whites, the artisanal blends."
   },
   {
-   "t0": 171.32,
-   "t1": 173.56,
-   "text": "And I want every front-of-house person"
+   "t0": 171.34,
+   "t1": 175.18,
+   "text": "And I want every front of house person to be able to guide a guest through"
   },
   {
-   "t0": 173.56,
-   "t1": 177.76,
-   "text": "to be able to guide a guest through it without fear."
+   "t0": 175.24,
+   "t1": 176.78,
+   "text": "it without fear."
   },
   {
-   "t0": 177.76,
-   "t1": 179.8,
-   "text": "You don't need to be a sommelier."
+   "t0": 177.8,
+   "t1": 181.68,
+   "text": "You don't need to be a sommelier. You need three sentences per wine."
   },
   {
-   "t0": 179.8,
-   "t1": 182.16,
-   "text": "You need three sentences per wine,"
+   "t0": 182.2,
+   "t1": 185.86,
+   "text": "Where it's from, what it's like, what it loves to be"
   },
   {
-   "t0": 182.16,
-   "t1": 184.88,
-   "text": "where it's from, what it's like,"
+   "t0": 185.94,
+   "t1": 186.66,
+   "text": "eaten with."
   },
   {
-   "t0": 184.88,
-   "t1": 187.52,
-   "text": "what it loves to be eaten with."
+   "t0": 187.62,
+   "t1": 191.32,
+   "text": "This white comes from vineyards near the coast, 20 minutes from"
   },
   {
-   "t0": 187.52,
-   "t1": 190.52,
-   "text": "This white comes from vineyards near the coast,"
+   "t0": 191.36,
+   "t1": 191.62,
+   "text": "here."
   },
   {
-   "t0": 190.52,
-   "t1": 192.72,
-   "text": "20 minutes from here."
+   "t0": 192.8,
+   "t1": 196.68,
+   "text": "It's fresh, a little saline, and it's exactly what"
   },
   {
-   "t0": 192.72,
-   "t1": 195.2,
-   "text": "It's fresh, a little saline."
+   "t0": 196.74,
+   "t1": 197.7,
+   "text": "the fish wants."
   },
   {
-   "t0": 195.2,
-   "t1": 198.52,
-   "text": "And it's exactly what the fish wants."
+   "t0": 198.58,
+   "t1": 202.46,
+   "text": "That's it. That sentence sells the wine, honors the"
   },
   {
-   "t0": 198.52,
-   "t1": 199.8,
-   "text": "That's it."
+   "t0": 202.5,
+   "t1": 206.1,
+   "text": "winemaker, and deepens the guest's connection to the territory."
   },
   {
-   "t0": 199.8,
-   "t1": 203.48,
-   "text": "That sentence sells the wine, honors the winemaker,"
-  },
-  {
-   "t0": 203.48,
-   "t1": 206.76,
-   "text": "and deepens the guest's connection to the territory."
-  },
-  {
-   "t0": 206.76,
-   "t1": 208.76,
+   "t0": 206.88,
+   "t1": 207.92,
    "text": "Three sentences."
   },
   {
-   "t0": 208.76,
-   "t1": 212.88,
-   "text": "And fermentation, preservation, the old arts."
+   "t0": 208.78,
+   "t1": 210.82,
+   "text": "And fermentation, preservation,"
   },
   {
-   "t0": 212.88,
-   "t1": 216.12,
-   "text": "Our preserves, our jams, the pickles,"
+   "t0": 211.64,
+   "t1": 215.58,
+   "text": "the old arts. Our preserves, our jams, the pickles,"
   },
   {
-   "t0": 216.12,
-   "t1": 220.12,
+   "t0": 216.2,
+   "t1": 219.26,
    "text": "the way we extend the garden's abundance across the seasons."
   },
   {
-   "t0": 220.12,
-   "t1": 222.76,
+   "t0": 220.22,
+   "t1": 221.98,
    "text": "This is ancestral intelligence."
   },
   {
-   "t0": 222.76,
-   "t1": 226.84,
+   "t0": 222.82,
+   "t1": 226.18,
    "text": "The circular economy existed in every Alentejo pantry"
   },
   {
-   "t0": 226.84,
-   "t1": 230.08,
+   "t0": 226.98,
+   "t1": 229.16,
    "text": "long before anyone gave it a name."
   },
   {
-   "t0": 230.08,
-   "t1": 232.84,
-   "text": "When you explain to a guest that this jam exists"
+   "t0": 230.14,
+   "t1": 234.06,
+   "text": "When you explain to a guest that this jam exists because the orchard gave us"
   },
   {
-   "t0": 232.84,
-   "t1": 235.16,
-   "text": "because the orchard gave us more fruit in July"
+   "t0": 234.12,
+   "t1": 236.46,
+   "text": "more fruit in July than we could serve fresh,"
   },
   {
-   "t0": 235.16,
-   "t1": 237.48,
-   "text": "than we could serve fresh,"
-  },
-  {
-   "t0": 237.48,
-   "t1": 240.32,
+   "t0": 237.54,
+   "t1": 239.56,
    "text": "you're teaching regeneration with a spoon."
   },
   {
-   "t0": 240.32,
-   "t1": 243.28,
-   "text": "Now, service at the FarmTable."
+   "t0": 240.42,
+   "t1": 242.42,
+   "text": "Now, service at the farm table."
   },
   {
-   "t0": 243.28,
-   "t1": 245.96,
-   "text": "A few principles I hold hard."
+   "t0": 243.34,
+   "t1": 245.32,
+   "text": "A few principles I hold are:"
   },
   {
-   "t0": 245.96,
-   "t1": 248.56,
-   "text": "Never rush a table."
+   "t0": 246.12,
+   "t1": 247.46,
+   "text": "never rush a table."
   },
   {
-   "t0": 248.56,
-   "t1": 250.96,
-   "text": "We are the antidote to the city,"
+   "t0": 248.66,
+   "t1": 252.32,
+   "text": "We are the antidote to the city, and the long meal is the"
   },
   {
-   "t0": 250.96,
-   "t1": 254.36,
-   "text": "and the long meal is the ceremony of this place."
+   "t0": 252.38,
+   "t1": 253.6,
+   "text": "ceremony of this place."
   },
   {
-   "t0": 254.4,
-   "t1": 257.36,
-   "text": "The table under the stars, the second bottle,"
+   "t0": 254.44,
+   "t1": 258.24,
+   "text": "The table under the stars, the second bottle, the conversation that"
   },
   {
-   "t0": 257.36,
-   "t1": 259.8,
-   "text": "the conversation that stretches."
+   "t0": 258.3,
+   "t1": 258.82,
+   "text": "stretches,"
   },
   {
-   "t0": 259.8,
-   "t1": 261.16,
-   "text": "Protect it."
+   "t0": 259.84,
+   "t1": 262.86,
+   "text": "protect it. Efficiency matters in the kitchen."
   },
   {
-   "t0": 261.16,
-   "t1": 263.24,
-   "text": "Efficiency matters in the kitchen."
-  },
-  {
-   "t0": 263.24,
-   "t1": 266.52,
+   "t0": 263.26,
+   "t1": 265.66,
    "text": "At the table, presence matters more."
   },
   {
-   "t0": 266.52,
-   "t1": 268.16,
+   "t0": 266.56,
+   "t1": 267.36,
    "text": "Tell the chain."
   },
   {
-   "t0": 268.16,
-   "t1": 271.2,
-   "text": "Every dish has a story, and the story is true."
+   "t0": 268.26,
+   "t1": 271.82,
+   "text": "Every dish has a story, and the story is true. Use it."
   },
   {
-   "t0": 271.2,
-   "t1": 272.64,
-   "text": "Use it."
-  },
-  {
-   "t0": 272.64,
-   "t1": 275.48,
+   "t0": 272.68,
+   "t1": 274.46,
    "text": "Not a lecture, one line."
   },
   {
-   "t0": 275.48,
-   "t1": 278.52,
+   "t0": 275.52,
+   "t1": 278,
    "text": "The courgettes are from the garden, picked this morning."
   },
   {
-   "t0": 278.52,
-   "t1": 280.76,
+   "t0": 278.64,
+   "t1": 279.92,
    "text": "One line changes the meal."
   },
   {
-   "t0": 280.76,
-   "t1": 283.84,
+   "t0": 280.8,
+   "t1": 282.32,
    "text": "Honesty about what we are."
   },
   {
-   "t0": 283.84,
-   "t1": 287.36,
+   "t0": 283.9,
+   "t1": 286.66,
    "text": "We're not a gastronomic temple with tweezers and foam."
   },
   {
-   "t0": 287.36,
-   "t1": 291.88,
+   "t0": 287.46,
+   "t1": 291.18,
    "text": "We are honest, excellent, soulful cooking from a working farm."
   },
   {
-   "t0": 291.88,
-   "t1": 294.36,
+   "t0": 292.02,
+   "t1": 293.42,
    "text": "Own that identity with pride."
   },
   {
-   "t0": 294.36,
-   "t1": 298.48,
+   "t0": 294.46,
+   "t1": 297.54,
    "text": "The guest who wants a Michelin performance has other addresses."
   },
   {
-   "t0": 298.48,
-   "t1": 302.32,
-   "text": "The guest who wants to taste the territory has us."
+   "t0": 298.58,
+   "t1": 301.52,
+   "text": "The guest who wants to taste a territory has us."
   },
   {
-   "t0": 302.32,
-   "t1": 306.16,
+   "t0": 302.38,
+   "t1": 305.38,
    "text": "And there are many, many more of the second kind."
   },
   {
-   "t0": 306.16,
-   "t1": 310.64,
+   "t0": 306.36,
+   "t1": 309.22,
    "text": "Dietary needs are hospitality, not hassle."
   },
   {
-   "t0": 310.68,
-   "t1": 313.52,
-   "text": "Allergies, intolerances, vegetarians,"
+   "t0": 310.76,
+   "t1": 314.48,
+   "text": "Allergies, intolerances, vegetarians, children who eat"
   },
   {
-   "t0": 313.52,
-   "t1": 316.6,
-   "text": "children who eat nothing but pasta."
+   "t0": 314.54,
+   "t1": 315.56,
+   "text": "nothing but pasta."
   },
   {
-   "t0": 316.6,
-   "t1": 321.2,
+   "t0": 316.74,
+   "t1": 320.02,
    "text": "Every one of these is a person hoping not to be a problem."
   },
   {
-   "t0": 321.2,
-   "t1": 323.64,
+   "t0": 321.32,
+   "t1": 322.82,
    "text": "Make them feel like they're not."
   },
   {
-   "t0": 323.64,
-   "t1": 327.08,
-   "text": "The kitchen that improvises a beautiful vegetarian plate"
+   "t0": 323.72,
+   "t1": 327.44,
+   "text": "The kitchen that improvises a beautiful vegetarian plate without"
   },
   {
-   "t0": 327.08,
-   "t1": 332.4,
-   "text": "without sighing has just won a family's loyalty forever."
+   "t0": 327.52,
+   "t1": 330.96,
+   "text": "sighing has just won a family's loyalty"
   },
   {
-   "t0": 332.4,
-   "t1": 335.76,
-   "text": "And remember, the FarmTable is also the village's table."
+   "t0": 331.04,
+   "t1": 331.56,
+   "text": "forever."
   },
   {
-   "t0": 335.76,
-   "t1": 339.68,
-   "text": "In a sense, the restaurant, the events, the catering"
+   "t0": 332.46,
+   "t1": 335.98,
+   "text": "And remember, the farm table is also the village's table, in a"
   },
   {
-   "t0": 339.72,
-   "t1": 342.88,
-   "text": "that takes our kitchen to weddings and companies."
+   "t0": 336.06,
+   "t1": 339.9,
+   "text": "sense. The restaurant, the events, the catering that"
   },
   {
-   "t0": 342.88,
-   "t1": 345.92,
-   "text": "A maize du camp taking this territory's cuisine"
+   "t0": 339.96,
+   "t1": 342.08,
+   "text": "takes our kitchen to weddings and companies."
   },
   {
-   "t0": 345.92,
-   "t1": 347.76,
-   "text": "to a museum in Lisbon."
+   "t0": 342.94,
+   "t1": 346.66,
+   "text": "A mesa do campo taking this territory's cuisine to a museum in"
   },
   {
-   "t0": 347.76,
-   "t1": 351.2,
-   "text": "One kitchen philosophy, many tables."
+   "t0": 346.72,
+   "t1": 350.38,
+   "text": "Lisbon. One kitchen philosophy, many tables."
   },
   {
-   "t0": 351.2,
-   "t1": 353.68,
-   "text": "The gesture, always the same."
+   "t0": 351.26,
+   "t1": 355.24,
+   "text": "The gesture, always the same. Bring those who eat closer"
   },
   {
-   "t0": 353.68,
-   "t1": 357.08,
-   "text": "Bring those who eat closer to those who grow."
+   "t0": 355.3,
+   "t1": 356.1,
+   "text": "to those who grow."
   },
   {
-   "t0": 357.08,
-   "t1": 359.84,
-   "text": "Last thought for this model."
+   "t0": 357.16,
+   "t1": 358.86,
+   "text": "Last thought for this module."
   },
   {
-   "t0": 359.84,
-   "t1": 362.72,
+   "t0": 360.02,
+   "t1": 361.9,
    "text": "Food is where trust becomes physical."
   },
   {
-   "t0": 362.72,
-   "t1": 365.88,
-   "text": "A guest answers their hunger three times a day."
+   "t0": 362.78,
+   "t1": 365,
+   "text": "A guest entrusts their hunger three times a day."
   },
   {
-   "t0": 365.88,
-   "t1": 369.2,
+   "t0": 365.9,
+   "t1": 368.26,
    "text": "There's something ancient and intimate about that."
   },
   {
-   "t0": 369.24,
-   "t1": 372.12,
-   "text": "Feed people like you, mean it."
+   "t0": 369.34,
+   "t1": 371.36,
+   "text": "Feed people like you mean it."
   },
   {
-   "t0": 372.12,
-   "t1": 374.44,
+   "t0": 372.18,
+   "t1": 373.7,
    "text": "Because here, we do."
   },
   {
-   "t0": 374.44,
-   "t1": 377.6,
-   "text": "Next module, the constellation beyond the farm,"
+   "t0": 374.54,
+   "t1": 378.34,
+   "text": "Next module, the constellation beyond the farm, the beach bar,"
   },
   {
-   "t0": 377.6,
-   "t1": 380.72,
-   "text": "the beach bar, Lisbon, events."
+   "t0": 378.64,
+   "t1": 379.76,
+   "text": "Lisbon, events,"
   },
   {
-   "t0": 380.72,
-   "t1": 382.68,
-   "text": "And how it all holds together."
+   "t0": 380.8,
+   "t1": 382.44,
+   "text": "and how it all holds together."
   }
- ],
- "course": "farm-to-table",
- "splitFrom": {
-  "course": "welcome-belong",
-  "module": 6
- }
+ ]
 }

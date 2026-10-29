@@ -1,604 +1,346 @@
 {
  "module": 0,
  "title": "How we speak: the Craveiral voice",
- "vimeoId": "1227413580",
- "vimeoName": "Module 11 - How we speak: the Craveiral voice",
+ "vimeoId": "1239574205",
+ "vimeoName": "Belong School · Module 11 · How We Speak",
  "language": "en",
  "durationSec": 336,
  "machineTranslated": false,
  "native": true,
- "source": "vimeo-api",
- "generatedAt": 1789640043099,
+ "source": "vimeo-autogen-captions",
+ "generatedAt": 1793293056364,
+ "course": "voice-leadership",
+ "lesson": 11,
  "segments": [
   {
-   "t0": 0,
-   "t1": 3.04,
-   "text": "This module is about words."
+   "t0": 0.18,
+   "t1": 5.76,
+   "text": "This module is about words. It might seem like a strange training topic,"
   },
   {
-   "t0": 3.04,
-   "t1": 6.4,
-   "text": "It might seem like a strange training topic,"
+   "t0": 6.57,
+   "t1": 11.16,
+   "text": "but you'll use words with guests hundreds of times a day, and the words we choose"
   },
   {
-   "t0": 6.4,
-   "t1": 9.92,
-   "text": "but you'll use words with guests hundreds of times a day,"
+   "t0": 11.19,
+   "t1": 14.37,
+   "text": "are as much a part of Craveiral as the pine trees."
   },
   {
-   "t0": 9.92,
-   "t1": 13.28,
-   "text": "and the words we choose are as much a part of Craveiral"
+   "t0": 15.57,
+   "t1": 19.41,
+   "text": "A place that talks about the rhythm of the land in the tone of an airport"
   },
   {
-   "t0": 13.28,
-   "t1": 15.36,
-   "text": "as the pine trees."
+   "t0": 19.47,
+   "t1": 22.29,
+   "text": "announcement is a place at war with itself."
   },
   {
-   "t0": 15.36,
-   "t1": 18.2,
-   "text": "A place that talks about the rhythm of the land"
+   "t0": 23.52,
+   "t1": 29.4,
+   "text": "So, the Craveiral voice. The principle first: our voice"
   },
   {
-   "t0": 18.2,
-   "t1": 20.6,
-   "text": "in the tone of an airport announcement"
+   "t0": 29.46,
+   "t1": 34.26,
+   "text": "is calm, warm, concrete, and unhurried, like the place."
   },
   {
-   "t0": 20.6,
-   "t1": 23.28,
-   "text": "is a place at war with itself."
+   "t0": 35.31,
+   "t1": 39.57,
+   "text": "We don't gush, we don't perform enthusiasm, we don't sound like a script."
   },
   {
-   "t0": 23.28,
-   "t1": 28.84,
-   "text": "So the Craveiral voice, the principal first."
+   "t0": 40.14,
+   "t1": 45.42,
+   "text": "We sound like a person from this land who is glad you came and knows things worth"
   },
   {
-   "t0": 28.84,
-   "t1": 33.4,
-   "text": "Our voice is calm, warm, concrete and unhurried,"
+   "t0": 45.48,
+   "t1": 51.27,
+   "text": "knowing. That's it. If you're ever unsure how to say something, say it the way"
   },
   {
-   "t0": 33.4,
-   "t1": 35.12,
-   "text": "like the place."
+   "t0": 51.3,
+   "t1": 57.24,
+   "text": "you'd say it to a friend's parents visiting your home. Respectful, warm, real."
   },
   {
-   "t0": 35.12,
-   "t1": 37.96,
-   "text": "We don't gush, we don't perform enthusiasm,"
+   "t0": 57.96,
+   "t1": 63.69,
+   "text": "Now, some vocabulary, because small word choices carry the whole philosophy."
   },
   {
-   "t0": 37.96,
-   "t1": 39.96,
-   "text": "we don't sound like a script,"
-  },
-  {
-   "t0": 39.96,
-   "t1": 43.96,
-   "text": "we sound like a person from this land who is glad you came,"
-  },
-  {
-   "t0": 43.96,
-   "t1": 46,
-   "text": "and knows things worth knowing."
-  },
-  {
-   "t0": 46,
-   "t1": 47.64,
-   "text": "That's it."
-  },
-  {
-   "t0": 47.64,
-   "t1": 49.96,
-   "text": "If you're ever unsure how to say something,"
-  },
-  {
-   "t0": 49.96,
-   "t1": 54.8,
-   "text": "say it the way you'd say it to a friend's parents visiting your home."
-  },
-  {
-   "t0": 54.8,
-   "t1": 57.76,
-   "text": "Respectful, warm, real."
-  },
-  {
-   "t0": 57.8,
-   "t1": 60.04,
-   "text": "Now, some vocabulary,"
-  },
-  {
-   "t0": 60.04,
-   "t1": 64.64,
-   "text": "because small word choices carry the old philosophy."
-  },
-  {
-   "t0": 64.64,
-   "t1": 70,
+   "t0": 64.8,
+   "t1": 68.91,
    "text": "We say houses, not units or rooms."
   },
   {
-   "t0": 70,
-   "t1": 73.48,
-   "text": "Guests sleep in a house with a kitchen and a terrace."
+   "t0": 70.2,
+   "t1": 74.97,
+   "text": "Guests sleep in a house with a kitchen and a terrace. The word should honor that."
   },
   {
-   "t0": 73.48,
-   "t1": 75.84,
-   "text": "The word should honor that."
+   "t0": 75.99,
+   "t1": 80.19,
+   "text": "We say guests, never clients or customers. We covered why."
   },
   {
-   "t0": 75.84,
-   "t1": 79.04,
-   "text": "We say guests, never clients or customers."
+   "t0": 80.73,
+   "t1": 86.55,
+   "text": "We say the farm because it is one. A real working farm, not grounds or"
   },
   {
-   "t0": 79.04,
-   "t1": 80.6,
-   "text": "We covered why."
+   "t0": 86.61,
+   "t1": 92.19,
+   "text": "landscaping. We say the farm table, and we talk about dishes by where they came"
   },
   {
-   "t0": 80.6,
-   "t1": 83.64,
-   "text": "We say the farm, because it is one."
+   "t0": 92.25,
+   "t1": 97.83,
+   "text": "from, not just what they are. And notice the words the brand lives by."
   },
   {
-   "t0": 83.64,
-   "t1": 87.92,
-   "text": "A real working farm, not grounds or landscaping."
+   "t0": 98.55,
+   "t1": 104.4,
+   "text": "Belong, stay, the rhythm of the land, root to table, the chain."
   },
   {
-   "t0": 87.92,
-   "t1": 89.96,
-   "text": "We say the FarmTable,"
+   "t0": 105.33,
+   "t1": 109.02,
+   "text": "Use them naturally when they're true, never as decoration."
   },
   {
-   "t0": 89.96,
-   "t1": 92.96,
-   "text": "and we talk about dishes by where they came from,"
+   "t0": 109.65,
+   "t1": 115.59,
+   "text": "The same care applies in reverse. Words we avoid: anything that makes us"
   },
   {
-   "t0": 92.96,
-   "t1": 95.28,
-   "text": "not just what they are."
+   "t0": 115.65,
+   "t1": 120.75,
+   "text": "sound like a resort chain. Amenity, property features, valued guest."
   },
   {
-   "t0": 95.28,
-   "t1": 98.36,
-   "text": "And notice the words the brand lives by."
-  },
-  {
-   "t0": 98.36,
-   "t1": 102.24,
-   "text": "Belong, stay, the rhythm of the land,"
-  },
-  {
-   "t0": 102.24,
-   "t1": 105.04,
-   "text": "root to table, the chain."
-  },
-  {
-   "t0": 105.04,
-   "t1": 107.56,
-   "text": "Use them naturally when they're true,"
-  },
-  {
-   "t0": 107.56,
-   "t1": 109.48,
-   "text": "never as decoration."
-  },
-  {
-   "t0": 109.48,
-   "t1": 112.76,
-   "text": "The same care applies in reverse."
-  },
-  {
-   "t0": 112.8,
-   "t1": 114.28,
-   "text": "Words we avoid,"
-  },
-  {
-   "t0": 114.28,
-   "t1": 117.24,
-   "text": "anything that makes us sound like a resort chain,"
-  },
-  {
-   "t0": 117.24,
-   "t1": 121.2,
-   "text": "amenity, property features, valued guests."
-  },
-  {
-   "t0": 121.2,
-   "t1": 123.48,
+   "t0": 121.35,
+   "t1": 123.39,
    "text": "Corporate language is a wall between two people."
   },
   {
-   "t0": 123.48,
-   "t1": 126.12,
-   "text": "Our whole project is taking walls down"
+   "t0": 123.63,
+   "t1": 128.16,
+   "text": "Our whole project is taking walls down. And avoid over-promising words."
   },
   {
-   "t0": 126.12,
-   "t1": 128.36,
-   "text": "and avoid over-promising words."
+   "t0": 128.52,
+   "t1": 133.74,
+   "text": "Perfect, guaranteed, always. The Alentejo has weather. Farms have seasons."
   },
   {
-   "t0": 128.36,
-   "t1": 130.92,
-   "text": "Perfect, guaranteed, always."
+   "t0": 133.98,
+   "t1": 139.41,
+   "text": "Kitchens have nights. Promise what we control: care, honesty, effort."
   },
   {
-   "t0": 130.92,
-   "t1": 133.8,
-   "text": "The Elantejo has weather, farms of seasons,"
+   "t0": 140.28,
+   "t1": 144.99,
+   "text": "Those we can always deliver. Speaking with international guests, and most of our"
   },
   {
-   "t0": 133.8,
-   "t1": 135.56,
-   "text": "kitchens of nights."
+   "t0": 145.05,
+   "t1": 150.18,
+   "text": "guests are international. German, Dutch, French, British, American."
   },
   {
-   "t0": 135.56,
-   "t1": 140.08,
-   "text": "Promise what we control, care, honesty, effort."
+   "t0": 150.75,
+   "t1": 154.89,
+   "text": "Three notes. First, keep English simple and warm."
   },
   {
-   "t0": 140.08,
-   "t1": 142.28,
-   "text": "Those we can always deliver."
+   "t0": 155.43,
+   "t1": 158.85,
+   "text": "You don't need perfect grammar, you need clear goodwill."
   },
   {
-   "t0": 142.32,
-   "t1": 144.2,
-   "text": "Speaking with international guests,"
+   "t0": 159.39,
+   "t1": 164.37,
+   "text": "A genuine, let me find out for you, beats fluent evasion in any language."
   },
   {
-   "t0": 144.2,
-   "t1": 146.92,
-   "text": "and most of our guests are international,"
+   "t0": 165.24,
+   "t1": 168.78,
+   "text": "Second, teach a little Portuguese when the moment invites it."
   },
   {
-   "t0": 146.92,
-   "t1": 150.48,
-   "text": "German, Dutch, French, British, American."
+   "t0": 169.47,
+   "t1": 175.05,
+   "text": "Guests love leaving with obrigado, bom dia, the story of the word Craveiral itself."
   },
   {
-   "t0": 150.48,
-   "t1": 151.96,
-   "text": "Three notes."
+   "t0": 175.86,
+   "t1": 179.19,
+   "text": "A field of carnations. It's a gift that costs nothing."
   },
   {
-   "t0": 151.96,
-   "t1": 155.28,
-   "text": "First, keep English simple and warm."
-  },
-  {
-   "t0": 155.28,
-   "t1": 159.24,
-   "text": "You don't need perfect grammar, you need clear, goodwill."
-  },
-  {
-   "t0": 159.24,
-   "t1": 161.6,
-   "text": "A genuine, let me find out for you,"
-  },
-  {
-   "t0": 161.6,
-   "t1": 164.96,
-   "text": "beats fluent evasion in any language."
-  },
-  {
-   "t0": 164.96,
-   "t1": 167.36,
-   "text": "Second, teach a little Portuguese"
-  },
-  {
-   "t0": 167.36,
-   "t1": 169.32,
-   "text": "when the moment invites it."
-  },
-  {
-   "t0": 169.32,
-   "t1": 172.36,
-   "text": "Guests love living with obrigado, bom dia,"
-  },
-  {
-   "t0": 172.36,
-   "t1": 175.72,
-   "text": "the story of the word Craveiral itself."
-  },
-  {
-   "t0": 175.72,
-   "t1": 177.56,
-   "text": "A field of carnations."
-  },
-  {
-   "t0": 177.56,
-   "t1": 179.84,
-   "text": "It's a gift that costs nothing."
-  },
-  {
-   "t0": 179.84,
-   "t1": 184.44,
+   "t0": 180,
+   "t1": 183.84,
    "text": "Third, cultures differ in what warmth looks like."
   },
   {
-   "t0": 184.44,
-   "t1": 186.8,
-   "text": "Some guests want conversation."
+   "t0": 184.65,
+   "t1": 189,
+   "text": "Some guests want conversation. Others want efficiency and privacy."
   },
   {
-   "t0": 186.8,
-   "t1": 189.64,
-   "text": "Others want efficiency and privacy."
+   "t0": 189.81,
+   "t1": 195.06,
+   "text": "Both deserve the same care, calibrated. Reading that difference is a skill."
   },
   {
-   "t0": 189.64,
-   "t1": 193.32,
-   "text": "Both deserve the same care, calibrated."
+   "t0": 195.78,
+   "t1": 199.56,
+   "text": "Watch your most experienced colleagues do it. Writing."
   },
   {
-   "t0": 193.32,
-   "t1": 195.56,
-   "text": "Reading that difference is a skill,"
+   "t0": 200.4,
+   "t1": 204.42,
+   "text": "Some of you write to guests, emails, messages, responses to questions."
   },
   {
-   "t0": 195.56,
-   "t1": 198.76,
-   "text": "watch your most experienced colleagues do it."
+   "t0": 205.05,
+   "t1": 208.38,
+   "text": "Same voice on paper. Short sentences."
   },
   {
-   "t0": 198.8,
-   "t1": 200.2,
-   "text": "Writing."
-  },
-  {
-   "t0": 200.2,
-   "t1": 203.16,
-   "text": "Some of you write to guests' emails, messages,"
-  },
-  {
-   "t0": 203.16,
-   "t1": 204.88,
-   "text": "responses to questions."
-  },
-  {
-   "t0": 204.88,
-   "t1": 208.76,
-   "text": "Same voice on paper, short sentences."
-  },
-  {
-   "t0": 208.76,
-   "t1": 212.36,
+   "t0": 208.92,
+   "t1": 211.86,
    "text": "Warm but never syrupy, always concrete."
   },
   {
-   "t0": 212.36,
-   "t1": 215.44,
-   "text": "Not we look forward to welcoming you"
+   "t0": 212.52,
+   "t1": 218.22,
+   "text": "Not, we look forward to welcoming you soon, as an empty formula, but,"
   },
   {
-   "t0": 215.44,
-   "t1": 217.84,
-   "text": "soon as an empty formula."
+   "t0": 218.76,
+   "t1": 222.03,
+   "text": "\"The pool is heated in October and the trails are at their best."
   },
   {
-   "t0": 217.84,
-   "t1": 220.4,
-   "text": "But the pool is heated in October"
+   "t0": 222.87,
+   "t1": 228.3,
+   "text": "You're coming at a lovely time.\" One true, specific sentence outperforms three"
   },
   {
-   "t0": 220.4,
-   "t1": 222.76,
-   "text": "and the trails are at their best."
+   "t0": 228.36,
+   "t1": 233.73,
+   "text": "ornamental ones, every time. And how we speak to each other."
   },
   {
-   "t0": 222.76,
-   "t1": 224.8,
-   "text": "You're coming at a lovely time."
-  },
-  {
-   "t0": 224.8,
-   "t1": 226.88,
-   "text": "One true, specific sentence"
-  },
-  {
-   "t0": 226.88,
-   "t1": 230.08,
-   "text": "outperforms three ornamental ones."
-  },
-  {
-   "t0": 230.08,
-   "t1": 231.76,
-   "text": "Every time."
-  },
-  {
-   "t0": 231.76,
-   "t1": 233.88,
-   "text": "And how we speak to each other."
-  },
-  {
-   "t0": 234.84,
-   "t1": 239.64,
+   "t0": 234.99,
+   "t1": 238.83,
    "text": "Because the internal voice becomes the external one, always."
   },
   {
-   "t0": 239.64,
-   "t1": 241.96,
-   "text": "Teams that speak to each other with respect"
+   "t0": 239.76,
+   "t1": 243.66,
+   "text": "Teams that speak to each other with respect serve guests with grace."
   },
   {
-   "t0": 241.96,
-   "t1": 244.48,
-   "text": "serve guests with grace."
+   "t0": 244.62,
+   "t1": 249.21,
+   "text": "Teams that bark at each other backstage leak that tension into the dining room"
   },
   {
-   "t0": 244.48,
-   "t1": 246.68,
-   "text": "Teams that bark at each other backstage"
+   "t0": 249.3,
+   "t1": 253.32,
+   "text": "within a week. Guests feel it before they can name it."
   },
   {
-   "t0": 246.68,
-   "t1": 250.88,
-   "text": "leak that tension into the dining room within a week."
+   "t0": 254.16,
+   "t1": 259.86,
+   "text": "So, no shouting culture, not even in the kitchen at full throttle. Direct is good."
   },
   {
-   "t0": 250.88,
-   "t1": 253.88,
-   "text": "Guests feel it before they can name it."
+   "t0": 260.67,
+   "t1": 264.42,
+   "text": "Sharp is fine under pressure. Disrespectful is never fine."
   },
   {
-   "t0": 253.88,
-   "t1": 255.96,
-   "text": "So, no shouting culture,"
+   "t0": 265.23,
+   "t1": 271.02,
+   "text": "Disagree openly, decide, move. I'd rather hear an honest, this"
   },
   {
-   "t0": 255.96,
-   "t1": 258.6,
-   "text": "not even in the kitchen at full throttle."
+   "t0": 271.11,
+   "t1": 275.7,
+   "text": "isn't working, in a team meeting than a polite silence that costs us a season."
   },
   {
-   "t0": 258.6,
-   "t1": 260.4,
-   "text": "Direct is good."
+   "t0": 276.75,
+   "t1": 281.61,
+   "text": "One more thing. How we talk about Craveiral when we're not at Craveiral."
   },
   {
-   "t0": 260.4,
-   "t1": 262.52,
-   "text": "Sharp is fine under pressure."
+   "t0": 282.69,
+   "t1": 287.13,
+   "text": "Each of you is the brand at a dinner table, on your own social media, in the"
   },
   {
-   "t0": 262.52,
-   "t1": 265.08,
-   "text": "Disrespectful is never fine."
+   "t0": 287.19,
+   "t1": 292.62,
+   "text": "village café. I'm not going to police that. I wouldn't want to."
   },
   {
-   "t0": 265.08,
-   "t1": 268.64,
-   "text": "Disagree openly, decide, move."
+   "t0": 293.37,
+   "t1": 297.75,
+   "text": "I'll only say, the stories you tell about this place are the most credible"
   },
   {
-   "t0": 269.52,
-   "t1": 270.76,
-   "text": "At rather ear and honest,"
+   "t0": 297.81,
+   "t1": 302.49,
+   "text": "marketing we will ever have. Infinitely more than anything we buy."
   },
   {
-   "t0": 270.76,
-   "t1": 272.6,
-   "text": "this isn't working in a team meeting"
+   "t0": 303.45,
+   "t1": 308.22,
+   "text": "Tell the true ones, including the funny ones, especially the funny ones."
   },
   {
-   "t0": 272.6,
-   "t1": 275.72,
-   "text": "than a polite silence that costs us a season."
+   "t0": 309.42,
+   "t1": 314.73,
+   "text": "Words, in the end, are hospitality's smallest unit. A stay is thousands of them."
   },
   {
-   "t0": 276.56,
-   "t1": 278,
-   "text": "One more thing."
-  },
-  {
-   "t0": 278,
-   "t1": 281.64,
-   "text": "How we talk about Craveiral when we're not at Craveiral."
-  },
-  {
-   "t0": 282.52,
-   "t1": 285.44,
-   "text": "Each of you is the brand at a dinner table"
-  },
-  {
-   "t0": 285.44,
-   "t1": 288.68,
-   "text": "on your own social media in the Village Café."
-  },
-  {
-   "t0": 288.68,
-   "t1": 291.48,
-   "text": "I'm not going to police that."
-  },
-  {
-   "t0": 291.48,
-   "t1": 293.2,
-   "text": "I wouldn't want to."
-  },
-  {
-   "t0": 293.2,
-   "t1": 296.64,
-   "text": "I'll only say, the stories you tell about this place"
-  },
-  {
-   "t0": 296.64,
-   "t1": 300.16,
-   "text": "are the most credible marketing we will ever have."
-  },
-  {
-   "t0": 300.16,
-   "t1": 303.32,
-   "text": "Infinately more than anything we buy."
-  },
-  {
-   "t0": 303.32,
-   "t1": 305.24,
-   "text": "Tell the true ones."
-  },
-  {
-   "t0": 305.24,
-   "t1": 308.36,
-   "text": "Including the funny ones, especially the funny ones."
-  },
-  {
-   "t0": 309.24,
-   "t1": 313,
-   "text": "Words in the end are hospitality's smallest unit."
-  },
-  {
-   "t0": 313,
-   "t1": 315.28,
-   "text": "A stay is thousands of them."
-  },
-  {
-   "t0": 315.28,
-   "t1": 319.04,
+   "t0": 315.48,
+   "t1": 318.63,
    "text": "Choose them the way the kitchen chooses tomatoes."
   },
   {
-   "t0": 319.04,
-   "t1": 321.92,
-   "text": "In season, close to home and real."
+   "t0": 319.23,
+   "t1": 321.93,
+   "text": "In season, close to home, and real."
   },
   {
-   "t0": 322.8,
-   "t1": 324.44,
+   "t0": 323.04,
+   "t1": 324.3,
    "text": "Last module coming up,"
   },
   {
-   "t0": 325.4,
-   "t1": 328.24,
+   "t0": 325.53,
+   "t1": 327.9,
    "text": "and it's the one I care most about getting right."
   },
   {
-   "t0": 328.24,
-   "t1": 330.8,
-   "text": "How we lead, how we work together,"
+   "t0": 328.38,
+   "t1": 332.16,
+   "text": "How we lead, how we work together, and what I expect from you."
   },
   {
-   "t0": 330.8,
-   "t1": 333.08,
-   "text": "and what I expect from you."
-  },
-  {
-   "t0": 333.08,
-   "t1": 335.08,
+   "t0": 333.21,
+   "t1": 335.04,
    "text": "And you should expect from me."
   }
- ],
- "course": "voice-leadership",
- "splitFrom": {
-  "course": "welcome-belong",
-  "module": 10
- }
+ ]
 }

@@ -1,0 +1,1253 @@
+{
+ "course": "craveiral-places",
+ "lang": "default",
+ "modules": {
+  "0": [
+   {
+    "type": "recall",
+    "t0": 28,
+    "a": 1,
+    "en": {
+     "q": "How should staff view the multiple units of Craveral?",
+     "opts": [
+      "As separate entities",
+      "As a single, cohesive house",
+      "As a hotel with a garden",
+      "As a working farm"
+     ],
+     "why": "Staff should view the units as one single house because that is how the guest sees it."
+    },
+    "pt": {
+     "q": "Como devem os funcionários ver as várias unidades do Craveral?",
+     "opts": [
+      "Como entidades separadas",
+      "Como uma casa única e coesa",
+      "Como um hotel com um jardim",
+      "Como uma quinta em funcionamento"
+     ],
+     "why": "Os funcionários devem ver as unidades como uma casa única porque é assim que o hóspede a vê."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293132748,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 54,
+    "a": 1,
+    "en": {
+     "q": "What is the main purpose of Craveral's hospitality?",
+     "opts": [
+      "To run a hotel with a pretty garden",
+      "To regenerate the territory through circular economy",
+      "To provide a service to the local community",
+      "To make a profit"
+     ],
+     "why": "The main purpose of Craveral's hospitality is to regenerate the territory through circular economy."
+    },
+    "pt": {
+     "q": "Qual é o principal objetivo da hospitalidade do Craveral?",
+     "opts": [
+      "Gerir um hotel com um jardim bonito",
+      "Regenerar o território através da economia circular",
+      "Fornecer um serviço à comunidade local",
+      "Obter lucro"
+     ],
+     "why": "O principal objetivo da hospitalidade do Craveral é regenerar o território através da economia circular."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293132748,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 113,
+    "a": 1,
+    "en": {
+     "q": "What should staff do to ensure a consistent guest experience?",
+     "opts": [
+      "Apply different standards to each unit",
+      "Ensure consistency across all units",
+      "Focus on individual unit performance",
+      "Ignore guest feedback"
+     ],
+     "why": "Staff should ensure consistency across all units to provide a consistent guest experience."
+    },
+    "pt": {
+     "q": "O que devem os funcionários fazer para garantir uma experiência consistente para os hóspedes?",
+     "opts": [
+      "Aplicar padrões diferentes a cada unidade",
+      "Garantir a consistência em todas as unidades",
+      "Focar-se no desempenho individual de cada unidade",
+      "Ignorar os comentários dos hóspedes"
+     ],
+     "why": "Os funcionários devem garantir a consistência em todas as unidades para fornecer uma experiência consistente para os hóspedes."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293132748,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 196,
+    "a": 1,
+    "en": {
+     "q": "How should staff approach waste management?",
+     "opts": [
+      "Reduce waste, but not at the expense of profit",
+      "Eliminate waste entirely",
+      "Manage waste, but not as a priority",
+      "Ignore waste management"
+     ],
+     "why": "Staff should eliminate waste entirely, as everything wasted is considered a loss."
+    },
+    "pt": {
+     "q": "Como devem os funcionários abordar a gestão de resíduos?",
+     "opts": [
+      "Reduzir os resíduos, mas não às expensas do lucro",
+      "Eliminar completamente os resíduos",
+      "Gerir os resíduos, mas não como prioridade",
+      "Ignorar a gestão de resíduos"
+     ],
+     "why": "Os funcionários devem eliminar completamente os resíduos, pois tudo o que é desperdiçado é considerado uma perda."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293132748,
+    "corrected": true
+   }
+  ],
+  "1": [
+   {
+    "type": "recall",
+    "t0": 33,
+    "a": 1,
+    "en": {
+     "q": "What are the main characteristics that the independent houses in Craveiral share?",
+     "opts": [
+      "Sustainability, modern design, and international cuisine",
+      "Sustainability, local craft, and a nod to Portuguese heritage",
+      "Luxury, high-tech amenities, and large private pools",
+      "Rural setting, traditional architecture, and limited amenities"
+     ],
+     "why": "The correct answer is based on the transcript, which states that the houses share the same DNA, including sustainability, local craft, and a nod to Portuguese heritage."
+    },
+    "pt": {
+     "q": "Quais são as principais características que as casas independentes em Craveiral partilham?",
+     "opts": [
+      "Sustentabilidade, design moderno e cozinha internacional",
+      "Sustentabilidade, artesanato local e uma referência à herança portuguesa",
+      "Luxo, amenidades de alta tecnologia e piscinas privadas grandes",
+      "Ambiente rural, arquitetura tradicional e amenidades limitadas"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que afirma que as casas partilham o mesmo DNA, incluindo sustentabilidade, artesanato local e uma referência à herança portuguesa."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "corrected": true
+   },
+   {
+    "type": "recall",
+    "t0": 60,
+    "a": 1,
+    "en": {
+     "q": "What type of accommodation is suitable for up to four guests and has one bedroom?",
+     "opts": [
+      "Studio",
+      "Farm house",
+      "Farm loft",
+      "Two-bedroom house"
+     ],
+     "why": "The correct answer is based on the transcript, which states that farm houses have one bedroom and can accommodate up to four guests."
+    },
+    "pt": {
+     "q": "Que tipo de alojamento é adequado para até quatro hóspedes e tem um quarto?",
+     "opts": [
+      "Estúdio",
+      "Casa de fazenda",
+      "Sobrado de fazenda",
+      "Casa de dois quartos"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que afirma que as casas de fazenda têm um quarto e podem acomodar até quatro hóspedes."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 118,
+    "a": 2,
+    "en": {
+     "q": "A guest asks if a two-bedroom house can accommodate their family with children. What should you do?",
+     "opts": [
+      "Provide a vague answer, such as 'Yes, I think so'",
+      "Ask the guest for more information about their family before answering",
+      "Provide a precise answer, including details about the house's layout and amenities",
+      "Tell the guest that the house is not suitable for families with children"
+     ],
+     "why": "The correct answer is based on the transcript, which emphasizes the importance of providing precise and confident answers to build trust with guests."
+    },
+    "pt": {
+     "q": "Um hóspede pergunta se uma casa de dois quartos pode acomodar a sua família com filhos. O que você deve fazer?",
+     "opts": [
+      "Fornecer uma resposta vaga, como 'Sim, acho que sim'",
+      "Perguntar ao hóspede mais informações sobre a sua família antes de responder",
+      "Fornecer uma resposta precisa, incluindo detalhes sobre o layout e as amenidades da casa",
+      "Dizer ao hóspede que a casa não é adequada para famílias com filhos"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que enfatiza a importância de fornecer respostas precisas e confiantes para construir confiança com os hóspedes."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 200,
+    "a": 0,
+    "en": {
+     "q": "What is the importance of maintaining a high standard of cleanliness and amenities in the houses and shared spaces?",
+     "opts": [
+      "It is important to maintain a high standard to keep the promise made to past guests and to build trust with future guests",
+      "It is not necessary to maintain a high standard, as guests will not notice small details",
+      "It is only important to maintain a high standard in the shared spaces, not in the individual houses",
+      "It is too time-consuming and expensive to maintain a high standard, so it is not worth the effort"
+     ],
+     "why": "The correct answer is based on the transcript, which states that every detail right keeps the promise made to past guests and builds trust with future guests."
+    },
+    "pt": {
+     "q": "Qual é a importância de manter um alto padrão de limpeza e amenidades nas casas e espaços compartilhados?",
+     "opts": [
+      "É importante manter um alto padrão para cumprir a promessa feita aos hóspedes anteriores e construir confiança com os hóspedes futuros",
+      "Não é necessário manter um alto padrão, pois os hóspedes não notarão pequenos detalhes",
+      "É importante manter um alto padrão apenas nos espaços compartilhados, não nas casas individuais",
+      "É muito demorado e caro manter um alto padrão, por isso não vale a pena o esforço"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que afirma que cada detalhe correcto mantém a promessa feita aos hóspedes anteriores e constrói confiança com os hóspedes futuros."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 118,
+    "a": 2,
+    "en": {
+     "q": "A guest asks if a farm loft can accommodate three adults. What should you do?",
+     "opts": [
+      "Tell the guest that the farm loft can accommodate three adults, as it has a large bedroom",
+      "Ask the guest if they are willing to pay for an extra bed, as the farm loft is only suitable for two guests",
+      "Explain to the guest that the farm loft is only suitable for two guests, but you can offer alternative accommodation options",
+      "Tell the guest that you need to check the availability of the farm loft and will get back to them later"
+     ],
+     "why": "The correct answer is based on the transcript, which states that farm lofts are suitable for two guests, and you should provide precise and confident answers to build trust with guests."
+    },
+    "pt": {
+     "q": "Um hóspede pergunta se um sobrado de fazenda pode acomodar três adultos. O que você deve fazer?",
+     "opts": [
+      "Dizer ao hóspede que o sobrado de fazenda pode acomodar três adultos, pois tem um quarto grande",
+      "Perguntar ao hóspede se eles estão dispostos a pagar por uma cama extra, pois o sobrado de fazenda é apenas adequado para dois hóspedes",
+      "Explicar ao hóspede que o sobrado de fazenda é apenas adequado para dois hóspedes, mas você pode oferecer opções de alojamento alternativas",
+      "Dizer ao hóspede que você precisa verificar a disponibilidade do sobrado de fazenda e entrará em contato com eles mais tarde"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que afirma que os sobrados de fazenda são adequados para dois hóspedes, e você deve fornecer respostas precisas e confiantes para construir confiança com os hóspedes."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 200,
+    "a": 0,
+    "en": {
+     "q": "A guest arrives at their house and finds that the kitchen is not clean and the amenities are not complete. What should you do?",
+     "opts": [
+      "Apologize to the guest and offer to clean the kitchen and provide the missing amenities immediately",
+      "Tell the guest that the kitchen and amenities are not included in the price of the house",
+      "Offer the guest a discount on their stay, but do not take any action to address the issue",
+      "Tell the guest that they should have checked the house before arriving and it is not your responsibility"
+     ],
+     "why": "The correct answer is based on the transcript, which states that every detail wrong breaks the promise made to past guests, and you should take immediate action to address any issues and maintain a high standard."
+    },
+    "pt": {
+     "q": "Um hóspede chega à sua casa e encontra que a cozinha não está limpa e as amenidades não estão completas. O que você deve fazer?",
+     "opts": [
+      "Pedir desculpas ao hóspede e oferecer limpar a cozinha e fornecer as amenidades em falta imediatamente",
+      "Dizer ao hóspede que a cozinha e as amenidades não estão incluídas no preço da casa",
+      "Oferecer ao hóspede um desconto na sua estadia, mas não tomar nenhuma ação para resolver o problema",
+      "Dizer ao hóspede que eles deveriam ter verificado a casa antes de chegar e não é sua responsabilidade"
+     ],
+     "why": "A resposta correcta baseia-se na transcrição, que afirma que cada detalhe errado quebra a promessa feita aos hóspedes anteriores, e você deve tomar ação imediata para resolver qualquer problema e manter um alto padrão."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293180657,
+    "corrected": true
+   }
+  ],
+  "2": [
+   {
+    "type": "recall",
+    "t0": 30,
+    "a": 1,
+    "en": {
+     "q": "What percentage of the food served at Craveiral is grown on the farm?",
+     "opts": [
+      "Less than 50%",
+      "More than 70%",
+      "Exactly 90%",
+      "None of it"
+     ],
+     "why": "The transcript states that more than 70% of what they serve is born on the farm."
+    },
+    "pt": {
+     "q": "Que percentagem da comida servida em Craveiral é cultivada na quinta?",
+     "opts": [
+      "Menos de 50%",
+      "Mais de 70%",
+      "Exactamente 90%",
+      "Nenhuma"
+     ],
+     "why": "A transcrição afirma que mais de 70% do que servem é nascido na quinta."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293204942,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 163,
+    "a": 1,
+    "en": {
+     "q": "How many sentences are needed to describe a wine to a guest?",
+     "opts": [
+      "One sentence",
+      "Three sentences",
+      "Five sentences",
+      "It depends on the wine"
+     ],
+     "why": "The transcript states that three sentences are needed to describe a wine."
+    },
+    "pt": {
+     "q": "Quantas frases são necessárias para descrever um vinho a um convidado?",
+     "opts": [
+      "Uma frase",
+      "Três frases",
+      "Cinco frases",
+      "Depende do vinho"
+     ],
+     "why": "A transcrição afirma que três frases são necessárias para descrever um vinho."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293204942,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 189,
+    "a": 1,
+    "en": {
+     "q": "What should a server do if a table is taking a long time to finish their meal?",
+     "opts": [
+      "Rush them to finish",
+      "Let them take their time",
+      "Offer to take their plates away",
+      "Call the manager"
+     ],
+     "why": "The transcript states that one of the principles is to never rush a table."
+    },
+    "pt": {
+     "q": "O que um servidor deve fazer se uma mesa está demorando muito tempo para terminar a refeição?",
+     "opts": [
+      "Apressá-los a terminar",
+      "Deixá-los tomar o seu tempo",
+      "Oferecer para levar os pratos",
+      "Chamar o gerente"
+     ],
+     "why": "A transcrição afirma que um dos princípios é nunca apressar uma mesa."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293204942,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 189,
+    "a": 1,
+    "en": {
+     "q": "How should a server describe the story behind a dish to a guest?",
+     "opts": [
+      "In a long, detailed lecture",
+      "In one line, briefly",
+      "Not at all, it's not important",
+      "Only if the guest asks"
+     ],
+     "why": "The transcript states that the story should be told in one line, briefly."
+    },
+    "pt": {
+     "q": "Como um servidor deve descrever a história por trás de um prato a um convidado?",
+     "opts": [
+      "Em uma longa e detalhada palestra",
+      "Em uma linha, brevemente",
+      "De forma alguma, não é importante",
+      "Apenas se o convidado perguntar"
+     ],
+     "why": "A transcrição afirma que a história deve ser contada em uma linha, brevemente."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293204942,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 30,
+    "a": 0,
+    "en": {
+     "q": "A guest asks where the cheese on their plate comes from. What should the server respond?",
+     "opts": [
+      "It's from a local farm",
+      "It's from a supermarket",
+      "It's from a different country",
+      "I don't know"
+     ],
+     "why": "The transcript states that they buy cheese from the region."
+    },
+    "pt": {
+     "q": "Um convidado pergunta de onde vem o queijo no seu prato. O que o servidor deve responder?",
+     "opts": [
+      "É de uma quinta local",
+      "É de um supermercado",
+      "É de um país diferente",
+      "Não sei"
+     ],
+     "why": "A transcrição afirma que compram queijo da região."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293204942,
+    "corrected": true
+   }
+  ],
+  "3": [
+   {
+    "type": "recall",
+    "t0": 28,
+    "a": 1,
+    "en": {
+     "q": "What does 'informal' mean in the context of the Bar da Praia do Carvalhal?",
+     "opts": [
+      "A lower standard of service",
+      "No linen tablecloth and no formal address",
+      "A badly washed glass or a long wait",
+      "A more formal atmosphere"
+     ],
+     "why": "Informal means a more relaxed atmosphere, but not a lower standard of service."
+    },
+    "pt": {
+     "q": "O que significa 'informal' no contexto do Bar da Praia do Carvalhal?",
+     "opts": [
+      "Um padrão de serviço mais baixo",
+      "Nenhum guardanapo de linho e nenhum tratamento formal",
+      "Um copo mal lavado ou uma longa espera",
+      "Uma atmosfera mais formal"
+     ],
+     "why": "Informal significa uma atmosfera mais relaxada, mas não um padrão de serviço mais baixo."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 54,
+    "a": 1,
+    "en": {
+     "q": "What is the relationship between the register and the standard at the Bar da Praia do Carvalhal?",
+     "opts": [
+      "The register and the standard are the same thing",
+      "The register changes, but the standard does not",
+      "The standard changes, but the register does not",
+      "Both the register and the standard are flexible"
+     ],
+     "why": "The register changes, but the standard does not, meaning that while the atmosphere may be more informal, the level of service remains high."
+    },
+    "pt": {
+     "q": "Qual é a relação entre o registo e o padrão no Bar da Praia do Carvalhal?",
+     "opts": [
+      "O registo e o padrão são a mesma coisa",
+      "O registo muda, mas o padrão não",
+      "O padrão muda, mas o registo não",
+      "Tanto o registo como o padrão são flexíveis"
+     ],
+     "why": "O registo muda, mas o padrão não, significando que enquanto a atmosfera pode ser mais informal, o nível de serviço permanece alto."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 188,
+    "a": 1,
+    "en": {
+     "q": "How can you settle 90% of complaints before they exist at the Bar da Praia do Carvalhal?",
+     "opts": [
+      "By ignoring the customer's wait time",
+      "By communicating the wait time and offering water",
+      "By providing a discount on the customer's order",
+      "By apologizing for the wait time after the customer has complained"
+     ],
+     "why": "Communicating the wait time and offering water can help manage customer expectations and reduce complaints."
+    },
+    "pt": {
+     "q": "Como pode resolver 90% das reclamações antes que elas existam no Bar da Praia do Carvalhal?",
+     "opts": [
+      "Ignorando o tempo de espera do cliente",
+      "Comunicando o tempo de espera e oferecendo água",
+      "Providenciando um desconto na encomenda do cliente",
+      "Pedindo desculpas pelo tempo de espera após o cliente ter reclamado"
+     ],
+     "why": "Comunicar o tempo de espera e oferecer água pode ajudar a gerenciar as expectativas do cliente e reduzir reclamações."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 134,
+    "a": 1,
+    "en": {
+     "q": "How can you effectively communicate the origin of the menu items at the Bar da Praia do Carvalhal?",
+     "opts": [
+      "By giving a long lecture on the beach",
+      "By stating the origin in a simple sentence at the counter",
+      "By providing a detailed brochure on the menu items",
+      "By not mentioning the origin at all"
+     ],
+     "why": "Stating the origin in a simple sentence at the counter can help customers understand the story behind the menu items without feeling overwhelmed."
+    },
+    "pt": {
+     "q": "Como pode comunicar eficazmente a origem dos itens do menu no Bar da Praia do Carvalhal?",
+     "opts": [
+      "Dando uma longa palestra na praia",
+      "Afirmar a origem em uma frase simples no balcão",
+      "Fornecer um folheto detalhado sobre os itens do menu",
+      "Não mencionar a origem de forma alguma"
+     ],
+     "why": "Afirmar a origem em uma frase simples no balcão pode ajudar os clientes a entender a história por trás dos itens do menu sem se sentir sobrecarregados."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 160,
+    "a": 1,
+    "en": {
+     "q": "A guest asks for recommendations on what to do during their stay. What should you suggest?",
+     "opts": [
+      "Sending them to a different beach",
+      "Recommending a morning on the farm, lunch and afternoon at Carvalhal, and dinner under the stars back home",
+      "Telling them to explore the surrounding area on their own",
+      "Suggesting they stay on the farm the entire time"
+     ],
+     "why": "Recommending a morning on the farm, lunch and afternoon at Carvalhal, and dinner under the stars back home provides a well-rounded experience and shows that you have thought about their day."
+    },
+    "pt": {
+     "q": "Um hóspede pergunta por recomendações sobre o que fazer durante a sua estadia. O que você deve sugerir?",
+     "opts": [
+      "Enviá-los para uma praia diferente",
+      "Recomendar uma manhã na quinta, almoço e tarde em Carvalhal, e jantar sob as estrelas de volta para casa",
+      "Dizer-lhes para explorar a área circundante por conta própria",
+      "Sugerir que fiquem na quinta o tempo todo"
+     ],
+     "why": "Recomendar uma manhã na quinta, almoço e tarde em Carvalhal, e jantar sob as estrelas de volta para casa fornece uma experiência completa e mostra que você pensou no dia deles."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "verified": true
+   },
+   {
+    "type": "scenario",
+    "t0": 81,
+    "a": 2,
+    "en": {
+     "q": "A guest has a bad experience at the Bar da Praia do Carvalhal. What is the potential impact on the business?",
+     "opts": [
+      "It will have no impact on the business",
+      "It will only affect the guest's opinion of the bar",
+      "It may close doors to potential future customers",
+      "It will only affect the guest's opinion of the farm"
+     ],
+     "why": "A bad experience at the Bar da Praia do Carvalhal may close doors to potential future customers, as it can create a negative impression of the Craveiral brand."
+    },
+    "pt": {
+     "q": "Um hóspede tem uma má experiência no Bar da Praia do Carvalhal. Qual é o impacto potencial nos negócios?",
+     "opts": [
+      "Não terá impacto nos negócios",
+      "Apenas afetará a opinião do hóspede sobre o bar",
+      "Pode fechar portas para potenciais clientes futuros",
+      "Apenas afetará a opinião do hóspede sobre a quinta"
+     ],
+     "why": "Uma má experiência no Bar da Praia do Carvalhal pode fechar portas para potenciais clientes futuros, pois pode criar uma impressão negativa da marca Craveiral."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293235728,
+    "corrected": true
+   }
+  ],
+  "4": [
+   {
+    "type": "recall",
+    "t0": 2,
+    "a": 1,
+    "en": {
+     "q": "What is the shop at Craviol often misunderstood as?",
+     "opts": [
+      "A place that sells local products",
+      "A small shop with a tight margin that sells souvenirs",
+      "A restaurant that serves farm-to-table food",
+      "A museum that showcases the farm's history"
+     ],
+     "why": "The shop is often seen as just a place that sells souvenirs, but it is actually a representation of the territory condensed and portable."
+    },
+    "pt": {
+     "q": "Como é que a loja no Craviol é frequentemente mal interpretada?",
+     "opts": [
+      "Um local que vende produtos locais",
+      "Uma pequena loja com uma margem apertada que vende souvenirs",
+      "Um restaurante que serve comida de fazenda para mesa",
+      "Um museu que mostra a história da fazenda"
+     ],
+     "why": "A loja é frequentemente vista como apenas um local que vende souvenirs, mas na verdade é uma representação do território condensado e portátil."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293278829,
+    "corrected": true
+   },
+   {
+    "type": "recall",
+    "t0": 62,
+    "a": 1,
+    "en": {
+     "q": "What is the sales technique that turns a souvenir into a relationship?",
+     "opts": [
+      "Comparing prices with other shops",
+      "Telling a story about the product's origin",
+      "Recommending products based on personal preference",
+      "Pushing the guest to buy more"
+     ],
+     "why": "One sentence about origin turns a souvenir into a relationship, making the product more meaningful and personal to the guest."
+    },
+    "pt": {
+     "q": "Qual é a técnica de vendas que transforma um souvenir em uma relação?",
+     "opts": [
+      "Comparar preços com outras lojas",
+      "Contar uma história sobre a origem do produto",
+      "Recomendar produtos com base na preferência pessoal",
+      "Incentivar o hóspede a comprar mais"
+     ],
+     "why": "Uma frase sobre a origem transforma um souvenir em uma relação, tornando o produto mais significativo e pessoal para o hóspede."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293278829,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 116,
+    "a": 1,
+    "en": {
+     "q": "What should you do when a guest hesitates after you recommend a product?",
+     "opts": [
+      "Continue to persuade them to buy it",
+      "Stop and respect their decision",
+      "Offer a discount to convince them",
+      "Recommend a different product"
+     ],
+     "why": "A 'No, thank you' taken naturally preserves the relationship, so it's best to stop and respect the guest's decision."
+    },
+    "pt": {
+     "q": "O que você deve fazer quando um hóspede hesita após você recomendar um produto?",
+     "opts": [
+      "Continuar a persuadi-los a comprá-lo",
+      "Parar e respeitar a sua decisão",
+      "Oferecer um desconto para convencê-los",
+      "Recomendar um produto diferente"
+     ],
+     "why": "Um 'Não, obrigado' aceito naturalmente preserva a relação, então é melhor parar e respeitar a decisão do hóspede."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293278829,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 146,
+    "a": 2,
+    "en": {
+     "q": "What should you do if a product is not organic, but you want to highlight its origin?",
+     "opts": [
+      "Say it is organic to make it sound better",
+      "Don't mention the origin to avoid confusion",
+      "Say it is not organic, but highlight the local production",
+      "Recommend a different product that is organic"
+     ],
+     "why": "Honesty about origin is what gives origin its value, so it's best to say it is not organic, but highlight the local production."
+    },
+    "pt": {
+     "q": "O que você deve fazer se um produto não é orgânico, mas você quer destacar a sua origem?",
+     "opts": [
+      "Dizer que é orgânico para fazer com que soe melhor",
+      "Não mencionar a origem para evitar confusão",
+      "Dizer que não é orgânico, mas destacar a produção local",
+      "Recomendar um produto diferente que é orgânico"
+     ],
+     "why": "A honestidade sobre a origem é o que dá valor à origem, então é melhor dizer que não é orgânico, mas destacar a produção local."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293278829,
+    "verified": true
+   },
+   {
+    "type": "scenario",
+    "t0": 175,
+    "a": 1,
+    "en": {
+     "q": "You notice that one of the shelves in the shop is dusty and disorganized. What should you do?",
+     "opts": [
+      "Leave it for someone else to clean",
+      "Clean it immediately to maintain the shop's standards",
+      "Tell a guest that it's not a big deal and they can still buy from the shelf",
+      "Wait until the end of the day to clean it"
+     ],
+     "why": "A small shop does not forgive disorder, so it's best to clean it immediately to maintain the shop's standards."
+    },
+    "pt": {
+     "q": "Você nota que uma das prateleiras da loja está empoeirada e desorganizada. O que você deve fazer?",
+     "opts": [
+      "Deixá-la para alguém mais limpar",
+      "Limpar imediatamente para manter os padrões da loja",
+      "Dizer a um hóspede que não é um grande problema e que eles ainda podem comprar da prateleira",
+      "Esperar até o final do dia para limpar"
+     ],
+     "why": "Uma pequena loja não perdoa a desordem, então é melhor limpar imediatamente para manter os padrões da loja."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293278829,
+    "verified": true
+   }
+  ],
+  "5": [
+   {
+    "type": "recall",
+    "t0": 83,
+    "a": 2,
+    "en": {
+     "q": "What is the most decisive well-being indicator of a stay at Craveiral?",
+     "opts": [
+      "The quality of the amenities",
+      "The view from the room",
+      "The quality of sleep",
+      "The variety of dishes"
+     ],
+     "why": "The quality of sleep is the most decisive well-being indicator of a stay, as it is directly affected by the laundry service."
+    },
+    "pt": {
+     "q": "Qual é o indicador de bem-estar mais decisivo de uma estadia no Craveiral?",
+     "opts": [
+      "A qualidade das comodidades",
+      "A vista do quarto",
+      "A qualidade do sono",
+      "A variedade de pratos"
+     ],
+     "why": "A qualidade do sono é o indicador de bem-estar mais decisivo de uma estadia, pois é diretamente afetada pelo serviço de lavanderia."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "corrected": true
+   },
+   {
+    "type": "recall",
+    "t0": 114,
+    "a": 0,
+    "en": {
+     "q": "What are the four standards measured in the laundry service?",
+     "opts": [
+      "Correct sorting, stain protocol, traceability, and rejection",
+      "Water and energy consumption, machine maintenance, and courtesy",
+      "Quality of sleep, guest satisfaction, and amenities",
+      "View from the room, variety of dishes, and quality of towels"
+     ],
+     "why": "The four standards measured in the laundry service are correct sorting, stain protocol, traceability, and rejection."
+    },
+    "pt": {
+     "q": "Quais são os quatro padrões medidos no serviço de lavanderia?",
+     "opts": [
+      "Classificação correta, protocolo de manchas, rastreabilidade e rejeição",
+      "Consumo de água e energia, manutenção de máquinas e cortesia",
+      "Qualidade do sono, satisfação do hóspede e comodidades",
+      "Vista do quarto, variedade de pratos e qualidade de toalhas"
+     ],
+     "why": "Os quatro padrões medidos no serviço de lavanderia são classificação correta, protocolo de manchas, rastreabilidade e rejeição."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 142,
+    "a": 3,
+    "en": {
+     "q": "What should a worker do when they find a piece of linen with a hole or a set stain?",
+     "opts": [
+      "Try to repair the hole or remove the stain",
+      "Return the piece to the bed",
+      "Report the issue to the supervisor",
+      "Reject the piece and remove it from circulation"
+     ],
+     "why": "The worker should reject the piece and remove it from circulation to maintain the standard of quality and avoid compromising the guest's sleep."
+    },
+    "pt": {
+     "q": "O que um trabalhador deve fazer quando encontra uma peça de roupa com um buraco ou uma mancha fixa?",
+     "opts": [
+      "Tentar reparar o buraco ou remover a mancha",
+      "Devolver a peça à cama",
+      "Relatar o problema ao supervisor",
+      "Rejeitar a peça e removê-la da circulação"
+     ],
+     "why": "O trabalhador deve rejeitar a peça e removê-la da circulação para manter o padrão de qualidade e evitar comprometer o sono do hóspede."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "verified": true
+   },
+   {
+    "type": "application",
+    "t0": 169,
+    "a": 2,
+    "en": {
+     "q": "How should a worker operate the washing machines to reduce energy consumption?",
+     "opts": [
+      "Run the machines at the highest temperature",
+      "Use a half load instead of a full load",
+      "Use measured dosing and run the machines at the right temperature",
+      "Run the machines continuously without maintenance"
+     ],
+     "why": "The worker should use measured dosing and run the machines at the right temperature to reduce energy consumption and maintain efficiency."
+    },
+    "pt": {
+     "q": "Como um trabalhador deve operar as máquinas de lavar para reduzir o consumo de energia?",
+     "opts": [
+      "Executar as máquinas na temperatura mais alta",
+      "Usar uma carga parcial em vez de uma carga completa",
+      "Usar dosagem medida e executar as máquinas na temperatura certa",
+      "Executar as máquinas continuamente sem manutenção"
+     ],
+     "why": "O trabalhador deve usar dosagem medida e executar as máquinas na temperatura certa para reduzir o consumo de energia e manter a eficiência."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "verified": true
+   },
+   {
+    "type": "scenario",
+    "t0": 195,
+    "a": 2,
+    "en": {
+     "q": "A neighbor brings in a bag of washing to the laundry service. How should the worker treat this customer?",
+     "opts": [
+      "Provide a faster service since they are a neighbor",
+      "Charge a lower price since they are not a hotel guest",
+      "Treat them with the same courtesy and service as a hotel guest",
+      "Refuse to serve them since they are not a hotel guest"
+     ],
+     "why": "The worker should treat the neighbor with the same courtesy and service as a hotel guest, as the laundry service is open to the village and aims to integrate with the community."
+    },
+    "pt": {
+     "q": "Um vizinho traz uma sacola de roupa para o serviço de lavanderia. Como o trabalhador deve tratar este cliente?",
+     "opts": [
+      "Fornecer um serviço mais rápido since são um vizinho",
+      "Cobrar um preço mais baixo since não são um hóspede do hotel",
+      "Tratá-los com a mesma cortesia e serviço que um hóspede do hotel",
+      "Recusar-se a servir-lhes since não são um hóspede do hotel"
+     ],
+     "why": "O trabalhador deve tratar o vizinho com a mesma cortesia e serviço que um hóspede do hotel, pois o serviço de lavanderia está aberto à vila e visa integrar-se com a comunidade."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 30,
+    "a": 2,
+    "en": {
+     "q": "A hotel in the Costa Vicentina is considering outsourcing its laundry service to an industrial operator in a city an hour away. What would be the likely consequences of this decision?",
+     "opts": [
+      "The hotel would reduce its carbon footprint and support the local community",
+      "The hotel would create jobs and stimulate the local economy",
+      "The hotel would lose the opportunity to create local employment and circulate money in the parish",
+      "The hotel would improve its laundry service and increase guest satisfaction"
+     ],
+     "why": "The hotel would likely lose the opportunity to create local employment and circulate money in the parish, as the laundry service would be outsourced to a distant location."
+    },
+    "pt": {
+     "q": "Um hotel na Costa Vicentina está considerando terceirizar o seu serviço de lavanderia para um operador industrial em uma cidade a uma hora de distância. Quais seriam as consequências prováveis desta decisão?",
+     "opts": [
+      "O hotel reduziria a sua pegada de carbono e apoiaria a comunidade local",
+      "O hotel criaria empregos e estimularia a economia local",
+      "O hotel perderia a oportunidade de criar emprego local e circular dinheiro na freguesia",
+      "O hotel melhoraria o seu serviço de lavanderia e aumentaria a satisfação dos hóspedes"
+     ],
+     "why": "O hotel provavelmente perderia a oportunidade de criar emprego local e circular dinheiro na freguesia, pois o serviço de lavanderia seria terceirizado para um local distante."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293310677,
+    "corrected": true
+   }
+  ],
+  "6": [
+   {
+    "type": "recall",
+    "t0": 2,
+    "a": 2,
+    "en": {
+     "q": "What is the main difference between an activity and an experience?",
+     "opts": [
+      "The equipment used",
+      "The time of day",
+      "What the guests take away",
+      "The script followed"
+     ],
+     "why": "An experience is something the guests take away, whereas an activity is something they do."
+    },
+    "pt": {
+     "q": "Qual é a principal diferença entre uma atividade e uma experiência?",
+     "opts": [
+      "O equipamento utilizado",
+      "A hora do dia",
+      "O que os convidados levam consigo",
+      "O guião seguido"
+     ],
+     "why": "Uma experiência é algo que os convidados levam consigo, enquanto uma atividade é algo que eles fazem."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293362686,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 29,
+    "a": 0,
+    "en": {
+     "q": "What are the four dimensions of any moment offered to guests?",
+     "opts": [
+      "Aesthetic, Educational, Escapist, Entertainment",
+      "Aesthetic, Educational, Escapist, Relaxation",
+      "Aesthetic, Fun, Escapist, Entertainment",
+      "Aesthetic, Educational, Fun, Relaxation"
+     ],
+     "why": "The four dimensions are Aesthetic, Educational, Escapist, and Entertainment, which are the registers from research into the experience economy."
+    },
+    "pt": {
+     "q": "Quais são as quatro dimensões de qualquer momento oferecido aos convidados?",
+     "opts": [
+      "Estética, Educativa, Escapista, Entretenimento",
+      "Estética, Educativa, Escapista, Relaxamento",
+      "Estética, Diversão, Escapista, Entretenimento",
+      "Estética, Educativa, Diversão, Relaxamento"
+     ],
+     "why": "As quatro dimensões são Estética, Educativa, Escapista e Entretenimento, que são os registros da pesquisa sobre a economia da experiência."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293362686,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 115,
+    "a": 1,
+    "en": {
+     "q": "How can you increase the value a guest puts on an experience?",
+     "opts": [
+      "By providing a strict schedule",
+      "By giving them a choice in what to do",
+      "By offering only one activity",
+      "By not allowing them to participate"
+     ],
+     "why": "Giving guests a choice in what to do increases the value they put on an experience, as it allows them to feel more involved and invested."
+    },
+    "pt": {
+     "q": "Como pode aumentar o valor que um convidado atribui a uma experiência?",
+     "opts": [
+      "Fornecendo um cronograma rigoroso",
+      "Dando-lhes uma escolha no que fazer",
+      "Oferecendo apenas uma atividade",
+      "Não permitindo que eles participem"
+     ],
+     "why": "Dar aos convidados uma escolha no que fazer aumenta o valor que eles atribuem a uma experiência, pois permite que eles se sintam mais envolvidos e investidos."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293362686,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 174,
+    "a": 2,
+    "en": {
+     "q": "A guest arrives at the farm and seems hesitant to participate in the activities. What should you do?",
+     "opts": [
+      "Try to convince them to join in",
+      "Ignore their hesitation and continue with the schedule",
+      "Ask them if they have any questions or concerns",
+      "Tell them they have to participate"
+     ],
+     "why": "Asking guests if they have any questions or concerns shows that you care about their experience and are willing to listen to their needs."
+    },
+    "pt": {
+     "q": "Um convidado chega à fazenda e parece hesitante em participar das atividades. O que deve fazer?",
+     "opts": [
+      "Tentar convencê-los a se juntar",
+      "Ignorar sua hesitação e continuar com o cronograma",
+      "Perguntar se eles têm alguma dúvida ou preocupação",
+      "Dizer-lhes que eles têm que participar"
+     ],
+     "why": "Perguntar aos convidados se eles têm alguma dúvida ou preocupação mostra que você se preocupa com sua experiência e está disposto a ouvir suas necessidades."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293362686,
+    "corrected": true
+   }
+  ],
+  "7": [
+   {
+    "type": "recall",
+    "t0": 29,
+    "a": 1,
+    "en": {
+     "q": "What is the primary source of wellbeing offered by the farm and school?",
+     "opts": [
+      "What we add to the guest's experience",
+      "What we avoid and what we fix fast",
+      "The dose of nature alone",
+      "The quality of sleep alone"
+     ],
+     "why": "Most of the wellbeing offered does not come from what is added, but from what is avoided and fixed quickly."
+    },
+    "pt": {
+     "q": "Qual é a principal fonte de bem-estar oferecida pela quinta e escola?",
+     "opts": [
+      "O que adicionamos à experiência do hóspede",
+      "O que evitamos e o que corrigimos rapidamente",
+      "A dose de natureza sozinha",
+      "A qualidade do sono sozinha"
+     ],
+     "why": "A maior parte do bem-estar oferecido não vem do que é adicionado, mas do que é evitado e corrigido rapidamente."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293384910,
+    "verified": true
+   },
+   {
+    "type": "recall",
+    "t0": 57,
+    "a": 2,
+    "en": {
+     "q": "What is the purpose of having 9 hectares with 4% build?",
+     "opts": [
+      "To provide more accommodation options",
+      "To increase the farm's revenue",
+      "To encourage guests to leave the house and explore nature",
+      "To reduce the farm's maintenance costs"
+     ],
+     "why": "The 9 hectares with 4% build are only worth it if the guest leaves the house to explore and connect with nature."
+    },
+    "pt": {
+     "q": "Qual é o propósito de ter 9 hectares com 4% de construção?",
+     "opts": [
+      "Fornecer mais opções de alojamento",
+      "Aumentar a receita da quinta",
+      "Encorajar os hóspedes a sair da casa e explorar a natureza",
+      "Reduzir os custos de manutenção da quinta"
+     ],
+     "why": "Os 9 hectares com 4% de construção só valem a pena se o hóspede sai da casa para explorar e se conectar com a natureza."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293384910,
+    "corrected": true
+   },
+   {
+    "type": "application",
+    "t0": 83,
+    "a": 2,
+    "en": {
+     "q": "What should you do if a guest is having trouble sleeping due to maintenance noise?",
+     "opts": [
+      "Offer them a pair of earplugs",
+      "Tell them to sleep in a different room",
+      "Schedule maintenance noise at an agreed hour",
+      "Do nothing, it's not your problem"
+     ],
+     "why": "Maintenance noise should be scheduled at an agreed hour to minimize disruptions to guests' sleep."
+    },
+    "pt": {
+     "q": "O que deve fazer se um hóspede estiver tendo dificuldade em dormir devido ao ruído de manutenção?",
+     "opts": [
+      "Oferecer-lhe um par de tampões para os ouvidos",
+      "Dizer-lhe para dormir em um quarto diferente",
+      "Agendar o ruído de manutenção em um horário acordado",
+      "Não fazer nada, não é problema seu"
+     ],
+     "why": "O ruído de manutenção deve ser agendado em um horário acordado para minimizar as interrupções no sono dos hóspedes."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293384910,
+    "verified": true
+   },
+   {
+    "type": "scenario",
+    "t0": 166,
+    "a": 2,
+    "en": {
+     "q": "A guest approaches you with a complaint about their room not being cleaned. What do you do first?",
+     "opts": [
+      "Tell them to fill out a complaint form",
+      "Explain that the cleaning staff is short-staffed",
+      "Acknowledge their complaint immediately and without defending",
+      "Offer them a discount on their stay"
+     ],
+     "why": "The first step in handling a complaint is to acknowledge it immediately and without defending, to show that you're taking the guest's concern seriously."
+    },
+    "pt": {
+     "q": "Um hóspede se aproxima de você com uma reclamação sobre o seu quarto não ter sido limpo. O que você faz primeiro?",
+     "opts": [
+      "Dizer-lhe para preencher um formulário de reclamação",
+      "Explicar que o pessoal de limpeza está com falta de mão de obra",
+      "Reconhecer a reclamação imediatamente e sem se defender",
+      "Oferecer-lhe um desconto na sua estadia"
+     ],
+     "why": "O primeiro passo para lidar com uma reclamação é reconhecer imediatamente e sem se defender, para mostrar que você está levando a preocupação do hóspede a sério."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293384910,
+    "corrected": true
+   },
+   {
+    "type": "scenario",
+    "t0": 198,
+    "a": 1,
+    "en": {
+     "q": "A guest reports a problem with their meal, but it's not your department's responsibility. What do you do?",
+     "opts": [
+      "Tell them to talk to the chef",
+      "Take responsibility for resolving the issue",
+      "Offer them a complimentary dessert",
+      "Do nothing, it's not your problem"
+     ],
+     "why": "Even if the issue is not your department's responsibility, you should take ownership of it and follow through until it's resolved, to ensure the guest's satisfaction."
+    },
+    "pt": {
+     "q": "Um hóspede relata um problema com a sua refeição, mas não é responsabilidade do seu departamento. O que você faz?",
+     "opts": [
+      "Dizer-lhe para falar com o chef",
+      "Assumir a responsabilidade por resolver a questão",
+      "Oferecer-lhe um dessert gratuito",
+      "Não fazer nada, não é problema seu"
+     ],
+     "why": "Mesmo que a questão não seja responsabilidade do seu departamento, você deve assumir a responsabilidade e seguir em frente até que seja resolvida, para garantir a satisfação do hóspede."
+    },
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1793293384910,
+    "corrected": true
+   }
+  ]
+ },
+ "reviewed": "2026-10-29 manual read against the autogen transcripts; 7 ungrounded questions removed"
+}
