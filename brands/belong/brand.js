@@ -8,6 +8,7 @@
   id: 'belong',
   name: 'Belong',
   academy: 'Belong Academy',
+  company: 'Belong',   /* the name on certificates and documents ("Trained by Belong") */
   tagline: 'Giving Shape to Meaning',
   title: 'Belong Academy — Giving Shape to Meaning',
   ogDesc: 'Learn the Belong way — hospitality, seasonal food, nature and community, from a school born of a circular vision.',
