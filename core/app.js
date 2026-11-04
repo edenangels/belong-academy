@@ -660,7 +660,7 @@ function renderHome() {
   const _last = lastPlayed && courseById(lastPlayed[0]);
   const _inProgress = _last && !isDone(_last.id) && coursePct(_last.id) > 0;
   const brandHero = _pin && !isDone(_pin.id) && !_inProgress ? _pin : null;   /* the pin leads for a fresh learner; a course in progress leads for everyone else */
-  const featured = brandHero
+  let featured = brandHero
     || (_last && !isDone(_last.id) ? _last : null)
     || realOnes.find(c => !isDone(c.id)) || realOnes[0]
     || S.path.map(courseById).filter(Boolean).find(c => !isDone(c.id))
@@ -698,7 +698,10 @@ function renderHome() {
       <div class="step-node ${nodeCls}">${node}</div>
       <div class="step-info"><div class="t">${ctitle(c)}</div><div class="s">${sub}</div></div></div>`;
   }).join('');
-  const words = ctitle(featured).split(' ');
+  /* curriculum: the hero features the module holding the learner's next lesson, named with its course */
+  const _H = window.curHero ? window.curHero(featured) : null;
+  if (_H) { featured = courseById(_H.source) || featured; }
+  const words = (_H ? _H.title : ctitle(featured)).split(' ');
   const lastWord = words.pop();
 
   return `<div class="page">
@@ -707,24 +710,25 @@ function renderHome() {
     ${(featured.heroArt || featured.poster) ? `<div class="hero-art${featured.heroFit ? ' fit-' + featured.heroFit : ''}" style="background-image:url('${featured.heroArt || featured.poster}')"></div>` : ''}
     <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-fade"></div><div class="hero-rim" aria-hidden="true"></div>
     <div class="hero-content">
+      ${_H ? _H.eyebrow : ''}
       <h1 class="hero-h1">${words.map((wd, i) => `<span class="hw" style="--i:${i}">${esc(wd)}</span>`).join(' ')} <span class="hw grad-text" style="--i:${words.length}">${esc(lastWord)}</span></h1>
       <!-- THREE facts, like a Netflix billboard. Was five plus a boxed chip:
            goal-match, modules, duration, level, CERTIFIED. Level and the
            certified badge are on the course page where they matter. -->
       <div class="hero-meta">
-        <span>${featured.modules.length} ${t('modules')}</span><span class="sep"></span>
-        <span>${fmtMins(courseMins(featured))}</span><span class="sep"></span>
+        <span>${_H ? _H.count : featured.modules.length + ' ' + t('modules')}</span><span class="sep"></span>
+        <span>${_H ? _H.time : fmtMins(courseMins(featured))}</span><span class="sep"></span>
         <span class="match">${t('match_goal')} · ${tgoal(S.goal)}</span>
       </div>
       <!-- ONE line, not two. The hook sells; the sub-hook repeated it. -->
-      <p class="desc"><span class="hook-line">${chook(featured)}</span></p>
+      <p class="desc"><span class="hook-line">${_H ? esc(_H.hook) : chook(featured)}</span></p>
       <div class="hero-actions">
-        <button class="btn btn-primary" data-action="play" data-id="${featured.id}">▶&nbsp; ${isDone(featured.id) ? t('rewatch') : fp && fp.mod != null ? `${t('resume_module')} ${fp.mod + 1}` : t('start_learning')}</button>
-        <button class="btn btn-glass" data-action="open-course" data-id="${featured.id}">${t('course_details') || 'Details'}</button>
+        ${_H ? _H.play + _H.details : `<button class="btn btn-primary" data-action="play" data-id="${featured.id}">▶&nbsp; ${isDone(featured.id) ? t('rewatch') : fp && fp.mod != null ? `${t('resume_module')} ${fp.mod + 1}` : t('start_learning')}</button>
+        <button class="btn btn-glass" data-action="open-course" data-id="${featured.id}">${t('course_details') || 'Details'}</button>`}
       </div>
       <div class="hero-progress">
-        <div class="track"><div class="fill" style="width:${coursePct(featured.id)}%"></div></div>
-        <span>${coursePct(featured.id)}% ${t('complete')} · ${t('est')} ${fmtMins(Math.round(courseMins(featured) * (100 - coursePct(featured.id)) / 100))} ${t('left')}</span>
+        <div class="track"><div class="fill" style="width:${_H ? _H.pct : coursePct(featured.id)}%"></div></div>
+        <span>${_H ? _H.progress : `${coursePct(featured.id)}% ${t('complete')} · ${t('est')} ${fmtMins(Math.round(courseMins(featured) * (100 - coursePct(featured.id)) / 100))} ${t('left')}`}</span>
       </div>
     </div>
   </header>
@@ -763,7 +767,7 @@ function renderHome() {
   </section>` : ''}
   ${quickWinsShelfHTML()}
   ${educatorsBandHTML()}
-  ${railHTML(t('trending'), t('community_learning'), trending.map((c, i) => cardHTML(c, { rank: c.trending })))}
+  ${window.curExploreHTML ? window.curExploreHTML() : railHTML(t('trending'), t('community_learning'), trending.map((c, i) => cardHTML(c, { rank: c.trending })))}
   ${railHTML(`${t('because_completed')} “${_lang() === 'pt' ? 'Solo Vivo' : 'Living Soil'}”`, t('ai_recommendations'), recs.map(c => cardHTML(c)))}
   ${footerHTML()}</div>`;
 }
@@ -1520,7 +1524,7 @@ function logAsk(q, via) {
    the same moments for the same words */
 /* knowledge files ride the same ?v= marker as the bundle: a deploy that changes
    tags.json or search.json must not be served from the previous version's cache */
-function knowledgeV() { const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/); return v ? v[1] : ''; }
+function knowledgeV() { const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=([a-z]+\d+)/); return v ? v[1] : ''; }
 let _searchIdx = null;
 function loadSearchIdx() {
   if (_searchIdx !== undefined && _searchIdx !== null) return Promise.resolve(_searchIdx);
@@ -2420,25 +2424,25 @@ function compliancePanelHTML() {
   const behind = done < pace - 1;
   const dateFmt = ts => new Date(ts).toLocaleDateString(_lang() === 'pt' ? 'pt-PT' : 'en-GB', { day: 'numeric', month: 'short' });
   return `<div class="admin-section comp-panel">
-    <h2> ${t('comp_h')} · ${complianceYear()}</h2>
+    <h2>${t('comp_h')} · ${complianceYear()}</h2>
     <p class="sect-sub sub-auto">${t('comp_sub')}</p>
-    <div class="ready-wrap">
-      <div class="jour-ring lg" style="background:conic-gradient(${behind ? 'var(--warn, #d9b38c)' : 'var(--accent-2)'} ${pct * 3.6}deg, rgba(231,237,227,.12) 0)"><span>${done}<small style="font-size:11px">/${target}h</small></span></div>
-      <div class="ready-rows" style="gap:6px;">
-        <div class="between"><span class="sk-name">${t('comp_done')}</span> <b>${done} ${t('comp_h_unit')}</b></div>
-        <div class="between"><span class="sk-name">${t('comp_target')}</span><b>${target} ${t('comp_h_unit')}</b></div>
-        <div class="between"><span class="sk-name">${t('comp_left')}</span><b>${Math.max(0, Math.round((target - done) * 10) / 10)} ${t('comp_h_unit')}</b></div>
-        <div class="comp-status ${behind ? 'behind' : 'ok'}">${behind ? `⚠ ${t('comp_behind')} · ${t('comp_pace_by')} ${pace}h` : `● ${t('comp_ontrack')}`}</div>
+    <div class="comp-grid">
+      <div class="comp-ring" style="--p:${pct * 3.6}deg;--c:${behind ? 'var(--warn, #d9b38c)' : 'var(--accent)'}"><span><b>${done}</b><small>/ ${target} ${t('comp_h_unit')}</small></span></div>
+      <div class="comp-figs">
+        <div><span>${t('comp_done')}</span><b>${done} ${t('comp_h_unit')}</b></div>
+        <div><span>${t('comp_target')}</span><b>${target} ${t('comp_h_unit')}</b></div>
+        <div><span>${t('comp_left')}</span><b>${Math.max(0, Math.round((target - done) * 10) / 10)} ${t('comp_h_unit')}</b></div>
       </div>
+      <div class="comp-status ${behind ? 'behind' : 'ok'}">${behind ? `${t('comp_behind')} · ${t('comp_pace_by')} ${pace}h` : t('comp_ontrack')}</div>
     </div>
-    ${!pf.nif ? `<div class="comp-note" data-action="goto" data-route="#/profile" role="button" tabindex="0">🪪 ${t('comp_nif_prompt')} →</div>` : ''}
+    ${!pf.nif && !BRAND.leanProfile ? `<div class="comp-note" data-action="goto" data-route="#/profile" role="button" tabindex="0">${t('comp_nif_prompt')} →</div>` : ''}
     <div class="ob-eyebrow" style="margin-top:16px;">${t('comp_log')}</div>
-    ${log.length ? `<div class="comp-log">${log.slice(0, 8).map(e => `<div class="comp-row"><span class="cl-t">${esc(e.title || '')}</span><span class="cl-meta">${dateFmt(e.at)} · ${e.hours}${t('comp_h_unit')} ${e.confirmed ? '· ✓' : ''}</span></div>`).join('')}</div>` : `<p class="empty-note" style="text-align:left;padding:6px 0;">${t('comp_none')}</p>`}
+    ${log.length ? `<div class="comp-log">${log.slice(0, 8).map(e => `<div class="comp-row"><span class="cl-t">${esc(e.title || (window.CUR && e.courseId && courseById(e.courseId) ? CUR.lTitle(e.courseId, e.mod) : ''))}</span><span class="cl-meta">${dateFmt(e.at)} · ${e.hours}${t('comp_h_unit')} ${e.confirmed ? '· ✓' : ''}</span></div>`).join('')}</div>` : `<p class="empty-note" style="text-align:left;padding:6px 0;">${t('comp_none')}</p>`}
     ${log.length ? `<div class="row wrapf gap-3" style="margin-top:16px;">
       <button class="btn btn-primary btn-sm" data-action="comp-cert"> ${t('comp_cert_btn')}</button>
       <button class="btn btn-glass btn-sm" data-action="hour-log"> ${t('hourlog_btn')}</button>
       <button class="btn btn-glass btn-sm" data-action="comp-register">⤓ ${t('comp_reg_btn')}</button>
-      <button class="btn btn-glass btn-sm" data-action="art4-self">🤖 ${t('art4_btn')}</button>
+      <button class="btn btn-glass btn-sm" data-action="art4-self">${t('art4_btn')}</button>
     </div>` : ''}
   </div>`;
 }
@@ -4216,12 +4220,13 @@ function renderMe() {
   if (meTab === 'progress') body = renderProgress(true);
   /* the learner's own legal record — complianceHTML() is the MANAGER's view of
      the whole team and renders nothing for a learner */
-  else if (meTab === 'record') body = `${compliancePanelHTML()}${verifiedPanelHTML()}${certsSectionHTML()}`;
+  else if (meTab === 'record') body = `<div class="page-pad me-record">${compliancePanelHTML()}${verifiedPanelHTML()}${certsSectionHTML()}</div>`;   /* inside the page column (it ran off the left edge, 4 Nov 2026) */
   else body = `${pathBodyHTML()}${digestsSectionHTML()}`;
   return `<div class="page"><div class="page-pad">
     <h1 class="page-title">${t('me_h')}</h1>
     <p class="page-sub">${esc(displayName())}${S.profile && S.profile.dept ? ' · ' + esc(tdept(S.profile.dept)) : ''}</p>
-    ${(() => { const live = CATALOG.filter(cc => !isComingSoon(cc)); const done = live.filter(cc => isDone(cc.id)).length; return `<p class="me-sum"><b>${done}</b> ${t('of')} ${live.length} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; })()}
+    ${(() => { if (window.CUR) { const n = CUR.courses.length, d = CUR.courses.filter(co => CUR.courseStats(co.id).complete).length; return `<p class="me-sum"><b>${d}</b> ${t('of')} ${n} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; }
+      const live = CATALOG.filter(cc => !isComingSoon(cc)); const done = live.filter(cc => isDone(cc.id)).length; return `<p class="me-sum"><b>${done}</b> ${t('of')} ${live.length} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; })()}
     </div>${bar}${body}${footerHTML()}</div>`;
 }
 function renderProgress(embedded) {
@@ -4952,7 +4957,9 @@ function renderNow() {
   $$('.nav-links a, .mobile-drawer a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === `#/${route}`));
   syncChrome();
   if (route !== 'community') teardownCommunity();
-  $('#app').innerHTML = route === 'course' ? renderCourse(param) : route === 'journey' ? renderJourney(param) : (routes[route] || renderHome)();
+  /* curriculum layer (core/curriculum.js): #/course/<course|module>, #/module/<id> */
+  const _cur = window.curRoute ? window.curRoute(route, param) : null;
+  $('#app').innerHTML = _cur || (route === 'course' ? renderCourse(param) : route === 'journey' ? renderJourney(param) : (routes[route] || renderHome)());
   makeFocusable($('#app'));
   lazyBackgrounds();
   if (route === 'community') initCommunity();
@@ -5551,6 +5558,7 @@ function openPlayer(courseId, mod, startAt) {
     const done = isDone(courseId) || (p && !p.done && i < (p.mod || 0));
     return `<button class="mod-pill ${i === mod ? 'current' : done ? 'done' : ''} ${soon ? 'soon' : ''}" data-action="play" data-id="${courseId}" data-mod="${i}"><span class="mp-n">${done ? '✓ ' : soon ? '🔒 ' : ''}${i + 1}</span><span class="mp-t">${soon ? t('coming_soon') : cmods(c)[i]}</span></button>`;
   }).join('');
+  if (window.curPlayer) window.curPlayer(c, mod);   /* course › module › lesson context, the module's lessons, prev/next */
   /* hide "mark complete" for coming-soon lessons */
   /* keep the lesson you are on inside the strip — the fix that matters more
      than any affordance, because you always see where you are.
@@ -5923,12 +5931,14 @@ function showTakeaways(c, mod, next) {
   pendingNext = next;
   $('#takeList').innerHTML = takeawaysFor(c, mod).map((x, i) =>
     `<div class="take-item" style="animation-delay:${.15 + i * .18}s"><span class="take-num">${i + 1}</span><p>${x}</p></div>`).join('');
-  $('#takeMod').textContent = `${cmods(c)[mod]} · ${ctitle(c)}`;
+  $('#takeMod').textContent = window.CUR
+    ? `${CUR.lTitle(c.id, mod)} · ${CUR.mTitle(CUR.moduleOfLesson(c.id, mod))}`
+    : `${cmods(c)[mod]} · ${ctitle(c)}`;
   $('#takeTitle').textContent = t('take_title');
   $('#takeSub').textContent = t('take_sub');
   const _cd = !!(next && next.kind === 'course-done');
-  const _noQuiz = _cd && BRAND.certOnCompletion;
-  const _go = $('#takeGo'); _go.textContent = _noQuiz ? t('take_done') : _cd ? t('take_quiz') : t('take_continue'); _go.dataset.action = _noQuiz ? 'take-go' : _cd ? 'take-quiz' : 'take-go';
+  const _noQuiz = (_cd && BRAND.certOnCompletion) || (_cd && !!window.CUR) || (next && next.kind === 'cur-course-end');
+  const _go = $('#takeGo'); _go.textContent = (next && next.goLabel) || (_noQuiz ? t('take_done') : _cd ? t('take_quiz') : t('take_continue')); _go.dataset.action = _noQuiz ? 'take-go' : _cd ? 'take-quiz' : 'take-go';
   if (next && next.kind === 'course-done') {
     /* no star rating: stars told Pedro nothing (John, 4 Nov 2026) */
     $('#takeList').innerHTML += `<div class="take-extra">
@@ -5950,7 +5960,8 @@ function showTakeaways(c, mod, next) {
    "answer this". Submission writes the art. 131.º record; skipping leaves the
    lesson in pendingChecks and credits nothing, which the learner is told
    plainly rather than discovering at audit time. */
-function showModuleCheck(c, mod, after) {
+function showModuleCheck(c, mod, after, opts) {
+  const retake = !!(opts && opts.retake);
   const ov = $('#ckOv'); if (!ov) { creditTraining(c.id, mod, null); if (after) after(); return; }
   const lang = _lang() === 'pt' ? 'pt' : 'en';
   const finish = res => { ov.classList.remove('on'); ov.innerHTML = ''; creditTraining(c.id, mod, res); updateXpChip(); if (after) after(); };
@@ -5958,7 +5969,7 @@ function showModuleCheck(c, mod, after) {
   loadQuizV2(c.id).then(() => {
     /* V2 (transcript-grounded, blind-verified) first; the hand-written bank is
        the fallback, and the acknowledgment is the floor — never a silent credit. */
-    let qs = v2CheckPair(c.id, mod, lang);
+    let qs = v2CheckPair(c.id, mod, lang, retake ? (((S.checkRetakes || {})[c.id + ':' + mod] || []).length + 1) : 0);
     if (!qs) {
       const legacy = moduleCheckQuestions(c, mod);
       qs = legacy ? legacy.map(q => ({ q: q.q, opts: q.opts, a: q.a, why: null, t0: null, type: 'recall', gen: false, audit: 'authored' })) : null;
@@ -6006,7 +6017,12 @@ function showModuleCheck(c, mod, after) {
         /* the hour credits on SUBMISSION — the feedback screen that follows is
            teaching, not a further hurdle */
         const res = { kind: 'assessment', score, total: qs.length, passed: score === qs.length, detail, at: Date.now() };
-        creditTraining(c.id, mod, res);
+        if (retake) {
+          S.checkRetakes = S.checkRetakes || {}; const k = c.id + ':' + mod;
+          (S.checkRetakes[k] = S.checkRetakes[k] || []).push({ score, total: qs.length, at: res.at });
+          ledgerAppend('check_retake', { courseId: c.id, mod, score, total: qs.length });
+          save();
+        } else creditTraining(c.id, mod, res);
         updateXpChip();
         detail.forEach((d, i) => { if (!d.ok) scheduleReview(c.id, mod, qs[i]); });
         /* feedback state: the why, and the way back to the exact moment */
@@ -6129,6 +6145,7 @@ function showCertEarned(courseId) {
   try { makeFocusable(ov); } catch (e) {}
 }
 function resolveTakeawaysNext(n, toQuiz) {
+  if (window.curAfter && window.curAfter(n)) return;   /* curriculum: the course result card */
   if (toQuiz && n.courseId) { closePlayer(); setTimeout(() => openQuiz(n.courseId), 250); return; }   /* watch → assess loop */
   if (n.kind === 'next') { _openPaused = true; openPlayer(n.courseId, n.mod); }   /* the learner presses play; nothing starts on its own after a check */
   else if (n.kind === 'end') closePlayer();
@@ -7217,7 +7234,9 @@ function creditTraining(courseId, mod, assessment) {
   const dur = (live && watchEv.dur) || 0;
   const covered = segs.length ? watchCoveredSec() : 0;
   const coverage = dur ? Math.min(1, covered / dur) : null;
-  const credited = coverage == null ? mins / 60 : (mins / 60) * coverage;
+  /* No watch evidence = no credited time. Answering the questions proves the questions, not the minutes
+     (5 Nov 2026). The nominal length stays on the entry as ev.nominalMin for the record. */
+  const credited = coverage == null ? 0 : (mins / 60) * coverage;
   const rel = isJobRelevant(c);
   const entry = {
     courseId, mod, title: (cmods(c)[mod] || c.modules[mod]),
@@ -7306,7 +7325,7 @@ const tagsAt = (key, n) => ((TAGS && TAGS.lessons[key]) || []).slice(0, n || 4);
 function loadGraph() {
   loadTags();
   if (GRAPH !== null) return Promise.resolve(GRAPH);
-  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/);
+  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=([a-z]+\d+)/);
   return fetch('knowledge/graph.json?v=' + (v ? v[1] : ''))
     .then(r => (r.ok ? r.json() : null)).then(g => (GRAPH = g && g.edges ? g : false)).catch(() => (GRAPH = false));
 }
@@ -7346,7 +7365,7 @@ function loadQuizV2(courseId) {
   if (QUIZ_V2[courseId] !== undefined) return Promise.resolve(QUIZ_V2[courseId]);
   /* cache-bust rides the same edrNNN as every other asset — derived from the
      app script's own src so no separate constant can drift out of step */
-  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=(edr\d+)/);
+  const v = ((document.querySelector('script[src*="core/app.js"]') || {}).src || '').match(/v=([a-z]+\d+)/);
   return fetch('knowledge/quizzes/' + courseId + '.json?v=' + (v ? v[1] : ''))
     .then(r => r.ok ? r.json() : null)
     .then(b => (QUIZ_V2[courseId] = b && b.modules ? b : null))
@@ -7382,10 +7401,12 @@ function shuffledView(q, lang) {
 }
 /* The pair for the hour-crediting check: one recall + one application/scenario,
    deterministic per module so a retake asks the same thing and records compare. */
-function v2CheckPair(courseId, mod, lang) {
+function v2CheckPair(courseId, mod, lang, attempt) {
   const bank = QUIZ_V2[courseId];
-  const qs = bank && bank.modules && bank.modules[mod];
+  let qs = bank && bank.modules && bank.modules[mod];
   if (!qs || !qs.length) return null;
+  /* a retake rotates to the lesson's other questions, so it is not the same two again */
+  if (attempt && qs.length > 2) { const k = (attempt * 2) % qs.length; qs = [...qs.slice(k), ...qs.slice(0, k)]; }
   const rec = qs.find(x => x.type === 'recall') || qs[0];
   const app = qs.find(x => x !== rec && (x.type === 'application' || x.type === 'scenario')) || qs.find(x => x !== rec);
   return [rec, app].filter(Boolean).map(q => shuffledView(q, lang));
@@ -7482,18 +7503,18 @@ function completeModule(courseId, mod) {
     p.done = true; p.pct = 100; delete p.mod;
     p.doneAt = p.doneAt || Date.now();   /* spaced-repetition anchor */
     save();
-    toast(`${_lang() === 'pt' ? 'Curso concluído' : 'Course complete'}: ${ctitle(c)}`, '🏆');
+    if (!window.CUR) toast(`${_lang() === 'pt' ? 'Curso concluído' : 'Course complete'}: ${ctitle(c)}`, '🏆');
     awardXp(XP.module + XP.course, 'course complete');
     checkBadges();
-    showTakeaways(c, mod, { kind: 'course-done', courseId, checkFor: { courseId, mod } });
+    { let nx = { kind: 'course-done', courseId, checkFor: { courseId, mod } }; if (window.curNext) nx = window.curNext(courseId, mod, nx); showTakeaways(c, mod, nx); }
   } else {
     const nextMedia = modMedia(c, mod + 1);
     p.mod = mod + 1;
     if (!_wasDone) p.pct = Math.round((p.mod / coreN(c)) * 100);
     save();
-    awardXp(XP.module, 'module');
+    awardXp(XP.module, window.CUR ? CUR.L('lesson_one') : 'module');
     checkBadges();
-    showTakeaways(c, mod, Object.assign(mod >= c.modules.length - 1 ? { kind: 'end' } : (nextMedia && nextMedia.type === 'soon') ? { kind: 'soon' } : { kind: 'next', courseId, mod: mod + 1 }, { checkFor: { courseId, mod } }));
+    { let nx = Object.assign(mod >= c.modules.length - 1 ? { kind: 'end' } : (nextMedia && nextMedia.type === 'soon') ? { kind: 'soon' } : { kind: 'next', courseId, mod: mod + 1 }, { checkFor: { courseId, mod } }); if (window.curNext) nx = window.curNext(courseId, mod, nx); showTakeaways(c, mod, nx); }
   }
 }
 

@@ -33,8 +33,9 @@
   watchGate: false,
   /* no tax id, contract, working-time or goal fields on the profile page (João, 16 Oct 2026) */
   leanProfile: true,
-  /* João + John, 4 Nov 2026: the lesson checks ARE the assessment — finishing a course issues its certificate, no recap quiz */
-  certOnCompletion: true,
+  /* 5 Nov 2026: certificates are COURSE level (core/curriculum.js), issued when every required lesson is
+     completed and the lesson-question assessment reaches the pass mark. No per-module certificate. */
+  certOnCompletion: false,
   /* the video ending opens the check; no separate "Mark module complete" button */
   markComplete: false,
   firebase: {

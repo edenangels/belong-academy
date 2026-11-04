@@ -1,0 +1,511 @@
+/* ============================================================================
+   CURRICULUM LAYER — Academy → Courses → Modules → Lessons
+   ----------------------------------------------------------------------------
+   Loaded after core/app.js. It does nothing unless the tenant's content file
+   defines CURRICULUM, so EdenRise and Taipa are unaffected.
+
+   THE MODEL
+   · A CATALOG item is a MODULE (or the source of several, see `lessons:[]`).
+     It keeps its id, so every learner record stays valid.
+   · A LESSON is one video of an item, identified "<item id>:<index>" — the
+     exact key learner records already use (trainingLog, ledger, progress).
+   · A COURSE groups modules and owns the outcomes, the published requirements
+     and the certificate.
+
+   WHAT IS MEASURED, KEPT APART
+   · Content progress  — lessons completed / required lessons.
+                         A lesson is completed when its questions were answered
+                         (the moment that records training time), or when the
+                         whole item was finished under the previous rules.
+   · Assessment score  — right answers / questions across the course, best
+                         attempt per lesson. Retakes allowed; history kept.
+   · Pass mark         — CURRICULUM.passMark (70%).
+   · Certificate       — every required lesson completed AND score ≥ pass mark.
+   · Estimated time    — video minutes + ~1 minute of questions per lesson.
+   · Recorded training — the hours in the training log, which credit only what
+                         the player saw being watched.
+
+   MIGRATION: nothing stored is rewritten. Retakes add S.checkRetakes only.
+   Earlier per-module certificate records stay as historical awards with their
+   original scope (Record tab). Delete CURRICULUM to revert.
+============================================================================ */
+(function () {
+  if (typeof CURRICULUM === 'undefined' || !CURRICULUM || !Array.isArray(CURRICULUM.courses)) return;
+  const PT = () => _lang() === 'pt';
+  const PASS = CURRICULUM.passMark || 70;
+
+  /* ---------- copy (EN / PT-PT) ---------- */
+  const STR = {
+    course: ['Course', 'Curso'], courses: ['Courses', 'Cursos'], module: ['Module', 'Módulo'], modules: ['modules', 'módulos'],
+    module_one: ['module', 'módulo'], lesson: ['Lesson', 'Lição'], lessons: ['Lessons', 'Lições'], lessons_lc: ['lessons', 'lições'], lesson_one: ['lesson', 'lição'],
+    academy: ['Academy', 'Academia'], est_time: ['Estimated time', 'Tempo estimado'], left: ['left', 'em falta'],
+    est_note: ['videos plus about a minute of questions per lesson', 'vídeos e cerca de um minuto de perguntas por lição'],
+    recorded: ['Recorded training time', 'Tempo de formação registado'], progress: ['Progress', 'Progresso'],
+    completed: ['Completed', 'Concluído'], assess_passed: ['Assessment passed', 'Avaliação aprovada'], cert_earned: ['Certificate earned', 'Comprovativo obtido'],
+    not_started: ['Not started', 'Por começar'], in_progress: ['In progress', 'Em curso'],
+    outcomes_h: ['What you will be able to do', 'O que vai conseguir fazer'], audience_h: ['Who it is for', 'Para quem é'], prereq_h: ['Before you start', 'Antes de começar'],
+    req_h: ['Assessment and completion', 'Avaliação e conclusão'],
+    req_1: ['Complete every required lesson: watch it and answer its two questions.', 'Concluir todas as lições obrigatórias: ver e responder às duas perguntas.'],
+    req_2: ['Assessment: the questions at the end of each lesson. Pass mark {p}% across the course; your best attempt at each lesson counts, and you can retake any lesson\'s questions.', 'Avaliação: as perguntas no fim de cada lição. Nota mínima de {p}% no curso; conta a melhor tentativa em cada lição, e pode repetir as perguntas de qualquer lição.'],
+    req_3: ['Certificate: issued for the course once both are met.', 'Comprovativo: emitido para o curso quando as duas condições estão cumpridas.'],
+    req_note: ['Optional lessons do not count towards completion or the assessment.', 'As lições opcionais não contam para a conclusão nem para a avaliação.'],
+    cert_h: ['Certificate', 'Comprovativo'], cert_dl: ['Download certificate', 'Transferir comprovativo'],
+    cert_locked: ['Not earned yet. It is issued when every required lesson is completed and the assessment is passed.', 'Ainda não obtido. É emitido quando todas as lições obrigatórias estão concluídas e a avaliação aprovada.'],
+    score_lbl: ['Assessment score', 'Resultado da avaliação'], pass_lbl: ['pass mark', 'nota mínima'], answered: ['questions answered', 'perguntas respondidas'],
+    not_yet_passed: ['Below the pass mark: retake the questions of the lessons marked "Retake".', 'Abaixo da nota mínima: repita as perguntas das lições marcadas "Repetir".'],
+    start: ['Start', 'Começar'], resume: ['Continue', 'Continuar'], start_lesson: ['Start lesson', 'Começar a lição'], continue_lesson: ['Continue learning', 'Continuar a aprender'],
+    rewatch: ['Watch again', 'Ver de novo'], next_module: ['Continue to next module', 'Continuar para o módulo seguinte'], next_course: ['Next course', 'Curso seguinte'],
+    retake: ['Retake', 'Repetir'], questions: ['questions', 'perguntas'], optional: ['Optional', 'Opcional'],
+    q_pending: ['Questions pending', 'Perguntas por responder'], watched: ['Watched', 'Visto'],
+    in_course: ['Part of', 'Parte de'], module_done: ['Module complete', 'Módulo concluído'], course_done: ['Course complete', 'Curso concluído'],
+    explore_sub: ['Courses', 'Cursos'], lib_courses_sub: ['Each course is a full learning experience with its own certificate.', 'Cada curso é uma experiência de formação completa, com o seu comprovativo.'],
+    lib_modules_h: ['All modules', 'Todos os módulos'], lib_modules_sub: ['Filter by topic. Every module belongs to a course.', 'Filtre por tema. Cada módulo pertence a um curso.'],
+    prev: ['Previous lesson', 'Lição anterior'], next: ['Next lesson', 'Lição seguinte'], back_module: ['Module', 'Módulo'],
+    result_h: ['Course complete', 'Curso concluído'], result_cert: ['Your certificate is ready.', 'O seu comprovativo está pronto.'],
+    result_retake: ['Retake the questions you missed to reach the pass mark.', 'Repita as perguntas que falhou para chegar à nota mínima.'],
+    go_course: ['Open the course', 'Abrir o curso'], close: ['Close', 'Fechar'],
+    hist_h: ['Earlier records', 'Registos anteriores'],
+    hist_sub: ['Issued under the rules in force at the time, with their original scope. They are kept as they were.', 'Emitidos com as regras em vigor na altura, com o âmbito original. Mantêm-se como foram emitidos.'],
+    hist_scope: ['Module record', 'Registo de módulo'], hist_flag: ['For review: below the current {p}% pass mark, or issued without an assessment score.', 'A rever: abaixo da nota mínima atual de {p}%, ou emitido sem resultado de avaliação.'],
+    course_certs_h: ['Course certificates', 'Comprovativos de curso'], none_yet: ['None yet. Complete a course and pass its assessment.', 'Ainda nenhum. Conclua um curso e passe a avaliação.'],
+    modules_of: ['modules', 'módulos'], see_course: ['See the course', 'Ver o curso'], your_path: ['Your path', 'O seu percurso']
+  };
+  const L = (k, vars) => { const v = (STR[k] || [k, k])[PT() ? 1 : 0]; return vars ? v.replace(/\{(\w+)\}/g, (_, n) => vars[n]) : v; };
+
+  /* ---------- model ---------- */
+  const courses = CURRICULUM.courses;
+  const modules = [];
+  courses.forEach(co => co.modules.forEach(m => {
+    const src = m.source || m.id, item = courseById(src); if (!item) return;
+    modules.push({ id: m.id, courseId: co.id, source: src, item, lessons: m.lessons || item.modules.map((_, i) => i), optional: m.optional || [], def: m });
+  }));
+  const courseOf = id => courses.find(c => c.id === id) || null;
+  const moduleOf = id => modules.find(m => m.id === id) || null;
+  const modulesOfCourse = id => modules.filter(m => m.courseId === id);
+  const moduleOfLesson = (src, i) => modules.find(m => m.source === src && m.lessons.includes(i)) || null;
+  const lkey = (src, i) => src + ':' + i;
+  const cTitle = co => (PT() && co.pt && co.pt.title) || co.title;
+  const cField = (co, f) => (PT() && co.pt && co.pt[f]) || co[f];
+  const mTitle = m => m.def.title ? ((PT() && m.def.pt && m.def.pt.title) || m.def.title) : ctitle(m.item);
+  const mOutcome = m => m.def.outcome ? ((PT() && m.def.pt && m.def.pt.outcome) || m.def.outcome) : (((PT() && m.item.outcomes_pt) || m.item.outcomes || [])[0] || chook(m.item));
+  const lTitle = (src, i) => { const o = CURRICULUM.lessonTitles && CURRICULUM.lessonTitles[lkey(src, i)]; return (o && (PT() ? o.pt : o.en)) || cmods(courseById(src))[i] || courseById(src).modules[i]; };
+  const lMins = (src, i) => { const c = courseById(src); return (c.moduleDurations && c.moduleDurations[i]) || 6; };
+  const isOptional = (m, i) => m.optional.includes(i);
+
+  /* ---------- lesson state ---------- */
+  const logEntry = (src, i) => (S.trainingLog || []).find(e => e && e.courseId === src && e.mod === i);
+  const watched = (src, i) => (S.ledger || []).some(e => e.type === 'module_complete' && e.courseId === src && e.mod === i);
+  const lessonDone = (src, i) => !!logEntry(src, i) || isDone(src);
+  function attempts(src, i) {
+    const out = [], e = logEntry(src, i), ck = e && e.ev && e.ev.check;
+    if (ck && ck.kind === 'assessment' && ck.total) out.push({ score: ck.score, total: ck.total, at: ck.at || e.at });
+    ((S.checkRetakes || {})[lkey(src, i)] || []).forEach(a => out.push(a));
+    return out;
+  }
+  const best = (src, i) => attempts(src, i).reduce((b, a) => (!b || a.score / a.total > b.score / b.total) ? a : b, null);
+
+  /* ---------- module / course state ---------- */
+  function moduleStats(m) {
+    const req = m.lessons.filter(i => !isOptional(m, i));
+    const done = req.filter(i => lessonDone(m.source, i)).length;
+    const minsAll = m.lessons.reduce((a, i) => a + lMins(m.source, i) + 1, 0);
+    const minsLeft = req.filter(i => !lessonDone(m.source, i)).reduce((a, i) => a + lMins(m.source, i) + 1, 0);
+    return { lessons: m.lessons.length, required: req.length, done, complete: req.length > 0 && done === req.length, pct: req.length ? Math.round(done / req.length * 100) : 0, mins: minsAll, minsLeft, started: m.lessons.some(i => lessonDone(m.source, i) || watched(m.source, i)) };
+  }
+  function courseStats(id) {
+    const ms = modulesOfCourse(id);
+    const req = ms.flatMap(m => m.lessons.filter(i => !isOptional(m, i)).map(i => [m.source, i]));
+    const done = req.filter(([s, i]) => lessonDone(s, i)).length;
+    let right = 0, total = 0, answered = 0, assessable = 0;
+    req.forEach(([s, i]) => { const b = best(s, i); assessable++; if (b) { answered++; right += b.score; total += b.total; } });
+    const score = total ? Math.round(right / total * 100) : null;
+    const recordedH = (S.trainingLog || []).filter(e => e && ms.some(m => m.source === e.courseId && m.lessons.includes(e.mod))).reduce((a, e) => a + (e.hours || 0), 0);
+    const complete = req.length > 0 && done === req.length;
+    const passed = score != null && answered === assessable && score >= PASS;
+    const lastAt = Math.max(0, ...req.map(([s, i]) => { const e = logEntry(s, i); return e ? e.at : 0; }));
+    return { modules: ms.length, lessons: req.length, done, complete, pct: req.length ? Math.round(done / req.length * 100) : 0,
+      mins: ms.reduce((a, m) => a + moduleStats(m).mins, 0), minsLeft: ms.reduce((a, m) => a + moduleStats(m).minsLeft, 0),
+      recordedH, score, answered, assessable, passed, eligible: complete && passed, completedAt: complete ? (lastAt || Date.now()) : null };
+  }
+  /* the next lesson to open in a course (first incomplete required, in order), else null */
+  function nextInCourse(id) {
+    for (const m of modulesOfCourse(id)) for (const i of m.lessons) if (!isOptional(m, i) && !lessonDone(m.source, i)) return { m, i };
+    return null;
+  }
+  /* the learner's path, as modules: each path item expands into its modules, in curriculum order */
+  function pathModules() {
+    const out = [];
+    (S.path || []).forEach(id => modules.filter(m => m.source === id).forEach(m => { if (!out.includes(m)) out.push(m); }));
+    return out;
+  }
+  function nextLessonGlobal() {
+    for (const m of pathModules()) for (const i of m.lessons) if (!isOptional(m, i) && !lessonDone(m.source, i)) return { m, i };
+    for (const co of courses) { const n = nextInCourse(co.id); if (n) return n; }
+    return null;
+  }
+  window.CUR = { courses, modules, courseOf, moduleOf, modulesOfCourse, moduleOfLesson, moduleStats, courseStats, nextInCourse, nextLessonGlobal, pathModules, lessonDone, best, attempts, L, cTitle, mTitle, lTitle, PASS };
+
+  /* ---------- small renderers ---------- */
+  const bar = pct => `<div class="cur-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`;
+  const posterStyle = (src, pos) => src ? ` data-bg="${src}"${pos ? ` style="background-position:${pos}"` : ''}` : '';
+  const typeTag = (k, extra) => `<span class="cur-type">${L(k)}${extra ? ` · ${esc(extra)}` : ''}</span>`;
+  function stateLabel(st) {
+    if (st.eligible) return `<span class="cur-state ok">✓ ${L('cert_earned')}</span>`;
+    if (st.complete) return `<span class="cur-state ok">✓ ${L('completed')}</span>`;
+    if (st.done) return `<span class="cur-state">${L('in_progress')} · ${st.pct}%</span>`;
+    return '';
+  }
+  function courseCardHTML(co) {
+    const st = courseStats(co.id);
+    return `<article class="card cur-card" data-action="goto" data-route="#/course/${co.id}">
+      <div class="thumb t-grad-1 ${co.poster ? 'has-poster' : ''}"${posterStyle(co.poster, co.posterPos)}></div>
+      <div class="card-body">
+        ${typeTag('course')}
+        <h3>${esc(cTitle(co))}</h3>
+        <p class="card-hook">${esc(cField(co, 'promise'))}</p>
+        <div class="meta"><span>${st.modules} ${L('modules')}</span><span class="dot"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+        ${st.done ? bar(st.pct) : ''}
+        ${stateLabel(st)}
+      </div>
+    </article>`;
+  }
+  function moduleCardHTML(m) {
+    const st = moduleStats(m), co = courseOf(m.courseId), pos = m.item.posterPos;
+    return `<article class="card cur-card" data-action="goto" data-route="#/module/${m.id}">
+      <div class="thumb t-grad-${m.item.grad} ${m.item.poster ? 'has-poster' : ''}"${posterStyle(m.item.poster, pos)}></div>
+      <div class="card-body">
+        ${typeTag('module', cTitle(co))}
+        <h3>${esc(mTitle(m))}</h3>
+        <p class="card-hook">${esc(mOutcome(m))}</p>
+        <div class="meta"><span>${st.lessons} ${st.lessons === 1 ? L('lesson_one') : L('lessons_lc')}</span><span class="dot"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+        ${st.done && !st.complete ? bar(st.pct) : ''}
+        ${st.complete ? `<span class="cur-state ok">✓ ${L('completed')}</span>` : ''}
+      </div>
+    </article>`;
+  }
+  const crumbs = parts => `<nav class="cur-crumbs" aria-label="Breadcrumb">${parts.map((p, k) => p.href && k < parts.length - 1 ? `<a href="${p.href}">${esc(p.t)}</a>` : `<span${k === parts.length - 1 ? ' aria-current="page"' : ''}>${esc(p.t)}</span>`).join('<span class="sep" aria-hidden="true">›</span>')}</nav>`;
+
+  function lessonRowHTML(m, i, n) {
+    const done = lessonDone(m.source, i), b = best(m.source, i), opt = isOptional(m, i), w = watched(m.source, i);
+    const nx = nextInCourse(m.courseId), isNext = nx && nx.m === m && nx.i === i;
+    const q = b ? `<span class="cur-q ${b.score === b.total ? 'ok' : ''}">${b.score}/${b.total} ${L('questions')}</span>` : (w && !done ? `<span class="cur-q">${L('q_pending')}</span>` : '');
+    const retake = b && b.score < b.total ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('retake')}</button>` : '';
+    return `<div class="module-row cur-lesson ${done ? 'done' : ''} ${isNext ? 'current' : ''}" data-action="play" data-id="${m.source}" data-mod="${i}">
+      <div class="m-num">${done ? '✓' : isNext ? '▶' : n}</div>
+      <div class="m-title">${esc(lTitle(m.source, i))}${opt ? ` <span class="cur-opt">${L('optional')}</span>` : ''}${q || retake ? `<div class="cur-lmeta">${q}${retake}</div>` : ''}</div>
+      <span class="m-dur">${lMins(m.source, i)} min</span>
+      <button class="m-play" aria-label="${L('lesson')} ${n}">▶</button>
+    </div>`;
+  }
+
+  /* ---------- course overview ---------- */
+  function renderCourseOverview(id) {
+    const co = courseOf(id); if (!co) return null;
+    const st = courseStats(id), nx = nextInCourse(id), ms = modulesOfCourse(id);
+    const outcomes = cField(co, 'outcomes') || [];
+    const aud = cField(co, 'audience'), pre = cField(co, 'prerequisites');
+    const primary = nx ? `<button class="btn btn-primary" data-action="play" data-id="${nx.m.source}" data-mod="${nx.i}">▶&nbsp; ${st.done ? L('resume') : L('start')}: ${esc(lTitle(nx.m.source, nx.i))}</button>`
+      : `<button class="btn btn-primary" data-action="goto" data-route="#/module/${ms[0].id}">▶&nbsp; ${L('rewatch')}</button>`;
+    const certBtn = st.eligible ? `<button class="btn btn-glass" data-action="cur-cert" data-id="${id}">⤓ ${L('cert_dl')}</button>` : '';
+    return `<div class="page">
+      <div class="course-hero">
+        <div class="bg t-grad-1"${co.poster ? ` style="background-image:url('${co.poster}');background-size:cover;background-position:center"` : ''}></div>
+        <div class="course-hero-inner">
+          ${co.poster ? `<div class="course-poster has-poster" style="background-image:url('${co.poster}')${co.posterPos ? `;background-position:${co.posterPos}` : ''}"></div>` : ''}
+          <div class="course-info">
+            ${crumbs([{ t: brandAcademy(), href: '#/home' }, { t: cTitle(co) }])}
+            <div class="hero-meta">${typeTag('course')}<span class="sep"></span><span>${st.modules} ${L('modules')} · ${st.lessons} ${L('lessons_lc')}</span><span class="sep"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+            <h1>${esc(cTitle(co))}</h1>
+            <p class="course-hook">${esc(cField(co, 'promise'))}</p>
+            <p class="desc">${esc(cField(co, 'desc'))}</p>
+            <div class="hero-actions">${primary}${certBtn}</div>
+            <div class="cur-status">
+              ${bar(st.pct)}
+              <span>${L('progress')} ${st.pct}% · ${st.done}/${st.lessons} ${L('lessons_lc')}${st.minsLeft ? ` · ${fmtMins(st.minsLeft)} ${L('left')}` : ''}</span>
+              <span class="cur-chips">${st.complete ? `<span class="cur-state ok">✓ ${L('completed')}</span>` : ''}${st.passed ? `<span class="cur-state ok">✓ ${L('assess_passed')}</span>` : ''}${st.eligible ? `<span class="cur-state ok">✓ ${L('cert_earned')}</span>` : ''}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="course-intro cur-intro">
+        <div class="ci-col"><h2>${L('outcomes_h')}</h2><ul class="ci-list">${outcomes.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+          ${aud ? `<h3 class="cur-h3">${L('audience_h')}</h3><p class="cur-p">${esc(aud)}</p>` : ''}
+          ${pre ? `<h3 class="cur-h3">${L('prereq_h')}</h3><p class="cur-p">${esc(pre)}</p>` : ''}</div>
+        <div class="ci-col"><h2>${L('req_h')}</h2><ol class="ci-steps"><li>${L('req_1')}</li><li>${L('req_2', { p: PASS })}</li><li>${L('req_3')}</li></ol>
+          <p class="ci-note">${L('req_note')}</p>
+          <div class="cur-assess">
+            <div><span>${L('score_lbl')}</span><b>${st.score != null ? st.score + '%' : '—'}</b><small>${L('pass_lbl')} ${PASS}% · ${st.answered}/${st.assessable} ${L('answered')}</small></div>
+            <div><span>${L('recorded')}</span><b>${fmtMins(Math.round(st.recordedH * 60))}</b><small>${L('est_time')} ${fmtMins(st.mins)} (${L('est_note')})</small></div>
+          </div>
+          ${st.score != null && st.answered === st.assessable && !st.passed ? `<p class="cur-warn">${L('not_yet_passed')}</p>` : ''}
+          <h3 class="cur-h3">${L('cert_h')}</h3>
+          <p class="cur-p">${st.eligible ? `✓ ${L('cert_earned')} · ${fmtCertDate(new Date(st.completedAt))}` : L('cert_locked')}</p>
+          ${certBtn}
+        </div>
+      </section>
+      <div class="rail-head" style="margin-top:14px;"><h2>${L('courses') === 'Cursos' ? 'Módulos' : 'Modules'}</h2></div>
+      <div class="cur-modules">${ms.map((m, k) => {
+        const s = moduleStats(m);
+        return `<details class="cur-module"${s.done && !s.complete ? ' open' : (k === 0 && !st.done ? ' open' : '')}>
+          <summary><span class="cur-mnum">${s.complete ? '✓' : k + 1}</span><span class="cur-mtitle"><b>${esc(mTitle(m))}</b><small>${esc(mOutcome(m))}</small></span>
+            <span class="cur-mmeta">${s.lessons} ${s.lessons === 1 ? L('lesson_one') : L('lessons_lc')} · ${fmtMins(s.mins)}${s.done ? ` · ${s.pct}%` : ''}</span></summary>
+          <div class="module-list cur-inner">${m.lessons.map((i, n) => lessonRowHTML(m, i, n + 1)).join('')}</div>
+          <a class="cur-open" href="#/module/${m.id}">${L('module')}: ${esc(mTitle(m))} →</a>
+        </details>`; }).join('')}</div>
+      ${footerHTML()}</div>`;
+  }
+
+  /* ---------- module detail ---------- */
+  function renderModulePage(id) {
+    const m = moduleOf(id); if (!m) return null;
+    const c = m.item, co = courseOf(m.courseId), st = moduleStats(m);
+    const ms = modulesOfCourse(m.courseId), k = ms.indexOf(m), nextM = ms[k + 1];
+    const nx = m.lessons.find(i => !isOptional(m, i) && !lessonDone(m.source, i));
+    const first = m.lessons[0];
+    const primary = nx != null
+      ? `<button class="btn btn-primary" data-action="play" data-id="${m.source}" data-mod="${nx}">▶&nbsp; ${st.started ? L('resume') : L('start_lesson')}: ${esc(lTitle(m.source, nx))}</button>`
+      : `<button class="btn btn-primary" data-action="play" data-id="${m.source}" data-mod="${first}">▶&nbsp; ${L('rewatch')}</button>`;
+    const nextBtn = nextM && st.complete ? `<button class="btn btn-glass" data-action="goto" data-route="#/module/${nextM.id}">${L('next_module')} →</button>` : '';
+    const optNote = m.def.optionalNote ? ((PT() && m.def.pt && m.def.pt.optionalNote) || m.def.optionalNote) : '';
+    return `<div class="page">
+      <div class="course-hero">
+        <div class="bg t-grad-${c.grad}"${(c.heroArt || c.poster) ? ` style="background-image:url('${c.heroArt || c.poster}');background-size:cover;background-position:center"` : ''}></div>
+        <div class="course-hero-inner">
+          ${c.poster ? `<div class="course-poster has-poster" style="background-image:url('${c.poster}')${c.posterPos ? `;background-position:${c.posterPos}` : ''}"></div>` : `<div class="course-poster t-grad-${c.grad}">${svgIcon(c.icon)}</div>`}
+          <div class="course-info">
+            ${crumbs([{ t: brandAcademy(), href: '#/home' }, { t: cTitle(co), href: '#/course/' + co.id }, { t: mTitle(m) }])}
+            <div class="hero-meta">${typeTag('module', `${k + 1}/${ms.length}`)}<span class="sep"></span><span>${st.lessons} ${st.lessons === 1 ? L('lesson_one') : L('lessons_lc')}</span><span class="sep"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+            <h1>${esc(mTitle(m))}</h1>
+            ${eduBylineHTML(c)}
+            <p class="course-hook">${esc(mOutcome(m))}</p>
+            <div class="hero-actions">${primary}${nextBtn}</div>
+            <div class="cur-status">${bar(st.pct)}<span>${L('progress')} ${st.pct}% · ${st.done}/${st.required} ${L('lessons_lc')}${st.minsLeft ? ` · ${fmtMins(st.minsLeft)} ${L('left')}` : ''}</span>${st.complete ? `<span class="cur-state ok">✓ ${L('completed')}</span>` : ''}</div>
+            <p class="cur-in">${L('in_course')} <a href="#/course/${co.id}">${esc(cTitle(co))}</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="rail-head cur-lessons-head" style="margin-top:14px;"><h2>${L('lessons')}</h2>${optNote ? `<span class="hint">${esc(optNote)}</span>` : ''}</div>
+      <div class="module-list">${m.lessons.map((i, n) => lessonRowHTML(m, i, n + 1)).join('')}</div>
+      <div class="page-pad" style="padding-top:0;">${resourcesHTML(c)}${missionCardHTML(c)}${coachCardHTML(c)}</div>
+      ${railHTML(`${L('module')}s · ${esc(cTitle(co))}`, L('see_course'), ms.filter(x => x !== m).map(moduleCardHTML), '#/course/' + co.id)}
+      ${footerHTML()}</div>`;
+  }
+
+  /* ---------- routing: #/course/<course|module>, #/module/<module> ---------- */
+  window.curRoute = (route, param) => {
+    if (route === 'module') return renderModulePage(param);
+    if (route !== 'course') return null;
+    if (courseOf(param)) return renderCourseOverview(param);
+    if (moduleOf(param)) { history.replaceState(null, '', '#/module/' + param); return renderModulePage(param); }
+    /* an item split into several modules (old link): the module holding the next lesson */
+    const ms = modules.filter(m => m.source === param);
+    if (ms.length) { const m = ms.find(x => !moduleStats(x).complete) || ms[0]; history.replaceState(null, '', '#/module/' + m.id); return renderModulePage(m.id); }
+    return null;
+  };
+
+  /* ---------- cards everywhere: an item card becomes a module card ---------- */
+  const _cardHTML = cardHTML;
+  window.cardHTML = cardHTML = function (c, opts) {
+    const ms = modules.filter(m => m.source === c.id);
+    if (ms.length === 1) return moduleCardHTML(ms[0]);
+    if (ms.length > 1) return courseCardHTML(courseOf(ms[0].courseId));
+    return _cardHTML(c, opts);
+  };
+  window.curCourseCardHTML = courseCardHTML;
+  /* the router captured the original library renderer by reference */
+  if (typeof routes === 'object') { routes.library = function () { return renderLibrary(); }; }
+  /* My learning → Your path: the stepper lists modules (with their course), not items */
+  window.pathStepperHTML = pathStepperHTML = function () {
+    const pm = pathModules(); const cur = pm.find(m => !moduleStats(m).complete);
+    return `<div class="stepper">${pm.map(m => {
+      const s = moduleStats(m), st = s.complete ? 'done' : m === cur ? 'current' : 'locked';
+      const node = st === 'done' ? '✓' : st === 'current' ? '▶' : svgIcon(m.item.icon);
+      const sub = st === 'done' ? L('completed') : st === 'current' ? `${L('in_progress')} · ${s.pct}%` : t('unlocks_after');
+      return `<div class="seg ${st}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}><div class="snode">${node}</div><div class="sl">${esc(mTitle(m))}</div><div class="sd">${sub}</div></div>`;
+    }).join('')}</div>`;
+  };
+
+  /* ---------- home: path row of modules, Explore more = courses ---------- */
+  window.pathRowHTML = pathRowHTML = function () {
+    const pm = pathModules().slice(0, 8); if (!pm.length) return '';
+    const cur = pm.find(m => !moduleStats(m).complete);
+    const steps = pm.map((m, k) => {
+      const s = moduleStats(m), st = s.complete ? 'done' : m === cur ? 'current' : 'locked';
+      const tag = st === 'locked' ? 'div' : 'button', art = m.item.poster ? ` style="background-image:url('${m.item.poster}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"` : '';
+      const sub = st === 'done' ? L('completed') : st === 'current' ? `${s.pct}% · ${fmtMins(s.minsLeft)} ${L('left')}` : t('unlocks_after');
+      return `<${tag} class="pstep ${st}${m.item.poster ? ' has-art' : ''}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}${art}>
+        <span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>
+        <span class="pstep-type">${L('module')} · ${esc(cTitle(courseOf(m.courseId)))}</span>
+        <span class="pstep-t">${esc(mTitle(m))}</span>
+        <span class="pstep-s">${sub}</span>
+        ${st === 'current' ? `<span class="pstep-bar"><i style="width:${s.pct}%"></i></span>` : ''}
+      </${tag}>`;
+    }).join('');
+    return `<section class="rail-section path-row-section">
+      <div class="rail-head"><h2>${L('your_path')}</h2><a class="see-all" href="#/paths">${t('see_all')}</a></div>
+      <div class="path-row">${steps}</div>
+    </section>`;
+  };
+  window.curExploreHTML = () => railHTML(t('trending'), L('explore_sub'), courses.map(courseCardHTML), '#/library');
+  /* hero: whatever it features, say which course and module it belongs to, and open the next lesson */
+  window.curHero = featured => {
+    const n = nextLessonGlobal(); if (!n) return null;
+    const m = n.m, co = courseOf(m.courseId), st = moduleStats(m);
+    return {
+      source: m.source, title: mTitle(m), hook: mOutcome(m),
+      count: `${st.lessons} ${st.lessons === 1 ? L('lesson_one') : L('lessons_lc')}`, time: `${L('est_time')} ${fmtMins(st.mins)}`,
+      pct: st.pct, progress: `${L('module')} ${st.pct}% · ${fmtMins(st.minsLeft)} ${L('left')}`,
+      eyebrow: `<span class="hero-eyebrow cur-hero-ctx">${L('course')}: ${esc(cTitle(co))} · ${L('module')} ${modulesOfCourse(co.id).indexOf(m) + 1} ${t('of')} ${modulesOfCourse(co.id).length}</span>`,
+      play: `<button class="btn btn-primary" data-action="play" data-id="${m.source}" data-mod="${n.i}">▶&nbsp; ${st.started ? L('continue_lesson') : L('start_lesson')}: ${esc(lTitle(m.source, n.i))}</button>`,
+      details: `<button class="btn btn-glass" data-action="goto" data-route="#/module/${m.id}">${L('module')}</button>`
+    };
+  };
+
+  /* ---------- library: courses first, then modules by category ---------- */
+  window.renderLibrary = renderLibrary = function () {
+    const cats = ['All', ...new Set(modules.map(m => m.item.cat))];
+    const q = (libQuery || '').toLowerCase();
+    const ml = modules.filter(m => (libFilter === 'All' || m.item.cat === libFilter) && (!q || (mTitle(m) + ' ' + mOutcome(m) + ' ' + cTitle(courseOf(m.courseId)) + ' ' + tcat(m.item.cat)).toLowerCase().includes(q)));
+    const cl = courses.filter(co => !q || (cTitle(co) + ' ' + cField(co, 'promise') + ' ' + cField(co, 'desc')).toLowerCase().includes(q));
+    return `<div class="page"><div class="page-pad">
+      <h1 class="page-title">${t('library_title')}</h1>
+      <p class="page-sub">${courses.length} ${L('courses').toLowerCase()} · ${modules.length} ${L('modules')}</p>
+      <div class="lib-search">⌕ <input id="libSearch" placeholder="${t('filter_library')}" value="${esc(libQuery)}"></div>
+      <h2 class="sect-h cur-sect">${L('courses')}</h2><p class="page-sub" style="margin-top:2px">${L('lib_courses_sub')}</p>
+      <div class="grid">${cl.map(courseCardHTML).join('')}</div>
+      <h2 class="sect-h cur-sect">${L('lib_modules_h')}</h2><p class="page-sub" style="margin-top:2px">${L('lib_modules_sub')}</p>
+      <div class="filter-row">${cats.map(c => `<button class="filter-chip ${c === libFilter ? 'active' : ''}" data-action="lib-filter" data-cat="${c}">${c === 'All' ? t('all') : tcat(c)}</button>`).join('')}</div>
+      <div class="grid">${ml.map(moduleCardHTML).join('')}</div>
+      ${ml.length || cl.length ? '' : `<p class="empty-note">${t('nothing_matches')}</p>`}
+    </div>${footerHTML()}</div>`;
+  };
+
+  /* ---------- player: course › module context, the module's lessons, prev / next ---------- */
+  function lessonSeq(courseId) { return modulesOfCourse(courseId).flatMap(m => m.lessons.map(i => ({ m, i }))); }
+  window.curPlayer = (c, mod) => {
+    const m = moduleOfLesson(c.id, mod); if (!m) return;
+    const co = courseOf(m.courseId), pos = m.lessons.indexOf(mod);
+    const pt = $('#playerTitle'), ps = $('#playerSub');
+    if (pt) pt.innerHTML = `<a href="#/course/${co.id}" class="cur-pl-link" data-action="cur-pl-go" data-route="#/course/${co.id}">${esc(cTitle(co))}</a> <span aria-hidden="true">›</span> <a href="#/module/${m.id}" class="cur-pl-link" data-action="cur-pl-go" data-route="#/module/${m.id}">${esc(mTitle(m))}</a>`;
+    if (ps) ps.textContent = `${L('lesson')} ${pos + 1} ${t('of')} ${m.lessons.length} · ${lTitle(c.id, mod)}${lessonDone(c.id, mod) ? ' · ✓ ' + L('completed') : ''}`;
+    const pills = $('#playerPills');
+    if (pills) pills.innerHTML = m.lessons.map((i, n) => `<button class="mod-pill ${i === mod ? 'current' : lessonDone(c.id, i) ? 'done' : ''}" data-action="play" data-id="${c.id}" data-mod="${i}"><span class="mp-n">${lessonDone(c.id, i) ? '✓ ' : ''}${n + 1}</span> ${esc(lTitle(c.id, i))}</button>`).join('');
+    const seq = lessonSeq(co.id), at = seq.findIndex(x => x.m === m && x.i === mod), prev = seq[at - 1], next = seq[at + 1];
+    let nav = $('#curPlNav');
+    if (!nav) { nav = document.createElement('div'); nav.id = 'curPlNav'; nav.className = 'cur-pl-nav'; const pb = document.querySelector('.player-bottom'); if (pb) pb.insertBefore(nav, pb.firstChild); }
+    nav.innerHTML = `<button class="pl-ic" ${prev ? `data-action="play" data-id="${prev.m.source}" data-mod="${prev.i}"` : 'disabled'} aria-label="${L('prev')}" title="${L('prev')}">‹</button>
+      <button class="pl-ic" ${next ? `data-action="play" data-id="${next.m.source}" data-mod="${next.i}"` : 'disabled'} aria-label="${L('next')}" title="${next && next.m !== m ? L('next_module') : L('next')}">›</button>`;
+  };
+
+  /* ---------- end of a lesson: the next lesson in curriculum order, no overview screens between ---------- */
+  window.curNext = (src, mod, next) => {
+    const m = moduleOfLesson(src, mod); if (!m) return next;
+    const seq = lessonSeq(m.courseId), at = seq.findIndex(x => x.m === m && x.i === mod);
+    const after = seq.slice(at + 1).find(x => !lessonDone(x.m.source, x.i) && !(x.m.source === src && x.i === mod)) || seq[at + 1];
+    const base = { checkFor: next && next.checkFor };
+    if (after) return Object.assign(base, { kind: 'next', courseId: after.m.source, mod: after.i, goLabel: after.m !== m ? L('next_module') : null });
+    return Object.assign(base, { kind: 'cur-course-end', programId: m.courseId, courseId: src });
+  };
+  window.curModuleToast = (src, mod) => {
+    const m = moduleOfLesson(src, mod); if (!m) return;
+    if (moduleStats(m).complete) toast(`${L('module_done')}: ${mTitle(m)}`, '✓');
+  };
+  /* after the last lesson's questions: the course result */
+  window.curAfter = n => {
+    if (n.kind !== 'cur-course-end') return false;
+    closePlayer();
+    setTimeout(() => showCourseResult(n.programId), 300);
+    return true;
+  };
+  function showCourseResult(id) {
+    const co = courseOf(id), st = courseStats(id); if (!co) return;
+    if (st.complete) ledgerAppend('program_complete', { programId: id, score: st.score });
+    let ov = $('#certEarned');
+    if (!ov) { ov = document.createElement('div'); ov.id = 'certEarned'; ov.className = 'ck-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); document.body.appendChild(ov); }
+    ov.innerHTML = `<div class="ck-card cert-earned">
+      <div class="ce-seal" aria-hidden="true">${svgIcon('flower')}</div>
+      <div class="ob-eyebrow">${st.eligible ? L('cert_earned') : st.complete ? L('result_h') : L('in_progress')}</div>
+      <h2 class="ce-title">${esc(cTitle(co))}</h2>
+      <p class="ce-meta">${st.done}/${st.lessons} ${L('lessons_lc')} · ${L('score_lbl')} ${st.score != null ? st.score + '%' : '—'} (${L('pass_lbl')} ${PASS}%)</p>
+      <p class="ce-meta">${st.eligible ? L('result_cert') : st.complete ? L('result_retake') : ''}</p>
+      <div class="ce-actions">
+        ${st.eligible ? `<button class="btn btn-primary" data-action="cur-cert" data-id="${id}">⤓ ${L('cert_dl')}</button>` : ''}
+        <button class="btn btn-glass" data-action="ce-next" data-id="${id}">${L('go_course')}</button>
+      </div></div>`;
+    ov.classList.add('on');
+    try { makeFocusable(ov); } catch (e) {}
+  }
+  window.showCourseResult = showCourseResult;
+
+  /* ---------- certificates: course level ---------- */
+  function courseCert(id) {
+    const co = courseOf(id), st = courseStats(id); if (!co) return;
+    if (!st.eligible) { toast(L('cert_locked'), 'ℹ'); location.hash = '#/course/' + id; return; }
+    const pt = PT();
+    openPrintDoc(buildCertHTML({
+      docTitle: (pt ? 'Documento Comprovativo — ' : 'Training Record — ') + cTitle(co),
+      eyebrow: pt ? 'Documento Comprovativo de Formação' : 'Record of Training Completed',
+      who: certIdentity(),
+      did: pt ? 'concluiu o curso de formação' : 'has completed the training course',
+      what: cTitle(co),
+      facts: [
+        { k: pt ? 'Módulos' : 'Modules', v: String(st.modules) },
+        { k: pt ? 'Lições' : 'Lessons', v: String(st.lessons) },
+        { k: pt ? 'Tempo registado' : 'Recorded training', v: fmtMins(Math.round(st.recordedH * 60)) },
+        { k: pt ? 'Avaliação' : 'Assessment', v: `${st.score}% (${pt ? 'mín.' : 'pass'} ${PASS}%)` },
+        { k: pt ? 'Concluído a' : 'Completed', v: fmtCertDate(new Date(st.completedAt)) }
+      ],
+      meta: ''
+    }));
+    ledgerAppend('cert_issued', { programId: id, kind: 'program', score: st.score });
+  }
+  window.curCourseCert = courseCert;
+
+  /* Record tab: course certificates, then earlier per-module records as they were issued */
+  function historical() {
+    const out = [];
+    (S.ledger || []).filter(e => e.type === 'cert_issued' && e.kind === 'course' && e.courseId).forEach(e => {
+      if (!out.some(x => x.courseId === e.courseId)) out.push({ courseId: e.courseId, at: Date.parse(e.at) || e.at, score: e.score });
+    });
+    Object.entries(S.certs || {}).forEach(([cid, r]) => { if (r && r.passed && !out.some(x => x.courseId === cid)) out.push({ courseId: cid, at: r.at, score: r.score, quiz: true }); });
+    return out.filter(x => courseById(x.courseId));
+  }
+  window.CUR.historical = historical;
+  window.certsSectionHTML = certsSectionHTML = function () {
+    const earned = courses.filter(co => courseStats(co.id).eligible);
+    const hist = historical();
+    return `<div class="admin-section">
+      <h2>${L('course_certs_h')}</h2>
+      ${earned.length ? `<div class="cert-grid">${earned.map(co => `<div class="cert-card"><div class="cert-art"><span>✦</span><b>${esc(cTitle(co))}</b><span class="cert-d">${fmtCertDate(new Date(courseStats(co.id).completedAt))}</span></div>
+        <div class="cert-actions"><button class="btn btn-glass btn-sm" data-action="cur-cert" data-id="${co.id}">⤓ ${L('cert_dl')}</button></div></div>`).join('')}</div>`
+        : `<p class="empty-note" style="text-align:left;padding:8px 0;">${L('none_yet')}</p>`}
+      ${hist.length ? `<h3 class="cur-h3" style="margin-top:22px">${L('hist_h')}</h3><p class="sect-sub">${L('hist_sub')}</p>
+        <div class="cur-hist">${hist.map(h => { const flag = h.score == null || h.score < PASS; const it = courseById(h.courseId); return `<div class="cur-hrow">
+          <span><b>${esc(ctitle(it))}</b><small>${L('hist_scope')} · ${new Date(h.at).toLocaleDateString(PT() ? 'pt-PT' : 'en-GB')}${h.score != null ? ' · ' + h.score + '%' : ''}</small>
+          ${flag && isAdmin() ? `<em class="cur-flag">${L('hist_flag', { p: PASS })}</em>` : ''}</span>
+          <button class="btn btn-glass btn-sm" data-action="cur-hist-dl" data-id="${h.courseId}">⤓</button></div>`; }).join('')}</div>` : ''}
+    </div>`;
+  };
+  /* a historical record re-opens exactly as it was scoped: the module, its own date and score */
+  window.curHistoricalCert = id => {
+    const h = historical().find(x => x.courseId === id), c = courseById(id); if (!h || !c) return;
+    const pt = PT();
+    openPrintDoc(buildCertHTML({
+      docTitle: (pt ? 'Registo anterior — ' : 'Earlier record — ') + ctitle(c),
+      eyebrow: pt ? 'Registo de módulo (anterior)' : 'Module record (earlier rules)',
+      who: certIdentity(), did: pt ? 'concluiu o módulo' : 'completed the module', what: ctitle(c),
+      facts: [{ k: pt ? 'Âmbito' : 'Scope', v: pt ? 'Módulo' : 'Module' }, ...(h.score != null ? [{ k: pt ? 'Resultado' : 'Score', v: h.score + '%' }] : []), { k: pt ? 'Emitido a' : 'Issued', v: fmtCertDate(new Date(h.at)) }],
+      meta: '', extraNote: pt ? 'Registo histórico emitido com as regras anteriores; não é um comprovativo de curso.' : 'Historical record issued under earlier rules; not a course certificate.'
+    }));
+  };
+
+  /* ---------- actions ---------- */
+  document.addEventListener('click', e => {
+    const el = e.target.closest('[data-action^="cur-"]'); if (!el) return;
+    const a = el.dataset.action;
+    if (a === 'cur-cert') { e.preventDefault(); e.stopPropagation(); courseCert(el.dataset.id); }
+    else if (a === 'cur-hist-dl') { e.preventDefault(); e.stopPropagation(); window.curHistoricalCert(el.dataset.id); }
+    else if (a === 'cur-retake') { e.preventDefault(); e.stopPropagation(); const c = courseById(el.dataset.id); if (c) showModuleCheck(c, +el.dataset.mod, () => render(), { retake: true }); }
+    else if (a === 'cur-pl-go') { e.preventDefault(); e.stopPropagation(); closePlayer(); setTimeout(() => { location.hash = el.dataset.route; }, 50); }
+  }, true);
+})();

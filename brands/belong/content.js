@@ -13,7 +13,7 @@ const CATALOG = [
     outcomes: ['Tell Craveiral\'s story, and why Belong exists', 'Explain the vision, the mission and the chain in your own words', 'See why local suppliers and the land come first in every decision'],
     outcomes_pt: ['Contar a história do Craveiral, e porque existe a Belong', 'Explicar a visão, a missão e a cadeia por palavras suas', 'Perceber porque os fornecedores locais e a terra vêm primeiro em cada decisão'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09', featured: true,
-    poster: 'media/covers/welcome-belong.webp', heroArt: 'media/covers/welcome-belong-hero.webp',
+    poster: 'media/covers/welcome-belong.webp', posterPos: 'left center', heroArt: 'media/covers/welcome-belong-hero.webp',
     hook: 'Why we\'re here, and how we do it.', hookSub: 'The story of Craveiral, and the vision, mission and chain behind Belong.',
     desc: 'Where Belong comes from and why: the founder\'s story and the story of Craveiral, then the vision, the mission and the chain that turns a farmhouse into a circular economy.',
     modules: ['Why we\'re here: my story, and the story of Craveiral', 'Our vision, our mission, and the chain'],
@@ -188,3 +188,103 @@ const TAKEAWAYS = {
 };
 const COURSE_PT = {"craveiral-places":{"title":"Craveiral: Uma Só Casa","hook":"Cinco unidades, uma só casa.","hookSub":"Cada lugar onde um hóspede encontra o Craveiral, e o padrão que os mantém juntos.","desc":"Uma visita a cada unidade da operação: as casas e os seus padrões, o FarmTable, o bar da praia do Carvalhal, a loja, a lavandaria de São Teotónio, as experiências que conduzimos, e o bem-estar que uma estadia deve deixar, com o que fazer quando algo corre mal.","modules":["Uma só casa","As casas","FarmTable","Bar da Praia do Carvalhal","A Loja","A Lavandaria de São Teotónio","Turismo experiencial","Bem-estar e recuperação do serviço"]},"welcome-belong":{"title":"Bem-vindo à Belong","hook":"Porque estamos aqui, e como fazemos as coisas.","hookSub":"A história do Craveiral, e a visão, a missão e a cadeia por trás da Belong.","desc":"De onde vem a Belong e porquê: a história do fundador e a história do Craveiral, depois a visão, a missão e a cadeia que transforma uma quinta numa economia circular.","modules":["Porque estamos aqui: a minha história e a história do Craveiral","A nossa visão, a nossa missão e a cadeia"]},"craveiral-hospitality":{"title":"Hospitalidade à Maneira do Craveiral","hook":"Hóspedes como amigos, não como clientes.","hookSub":"Os nossos valores na prática, e a hospitalidade que faz as pessoas sentirem que pertencem.","desc":"Os valores da Belong tal como aparecem em decisões reais, de evitar o desperdício a ser você mesmo com os hóspedes, e a hospitalidade à maneira do Craveiral: nomes, antecipação e pequenos gestos de cuidado.","modules":["Os nossos valores, na prática","Hospitalidade à maneira do Craveiral"]},"guest-journey":{"title":"A Jornada do Hóspede","hook":"Do primeiro clique à despedida.","hookSub":"Cada passo de uma estadia, e o que fazer quando algo corre mal.","desc":"Todo o arco de uma estadia, do primeiro e-mail ao último adeus, e os momentos que a decidem: os primeiros quinze minutos, uma promessa cumprida e uma reclamação transformada em lealdade.","modules":["A jornada do hóspede: do primeiro clique à despedida","Quando algo corre mal: reclamações e recuperação do serviço"]},"houses-farm-sustainability":{"title":"As Casas, a Quinta e a Sustentabilidade","hook":"Conhecer o lugar. Manter os padrões.","hookSub":"Nove hectares, trinta e oito casas, uma quinta, e o que a missão lhe pede todos os dias.","desc":"A propriedade como um todo: as casas e o seu caráter, a quinta que alimenta o restaurante, os padrões que mantemos, e os hábitos diários de água, energia e desperdício que tornam a missão real.","modules":["As casas, a quinta e os padrões que mantemos","Sustentabilidade no dia a dia: o que a missão lhe pede antes do almoço"]},"farm-to-table":{"title":"FarmTable e a Constelação","hook":"Onde a filosofia vira comida.","hookSub":"FarmTable, o beach bar, A Mesa do CAM e os eventos: um mesmo gesto.","desc":"Porque a maior parte do que servimos cresce na propriedade, como o menu sazonal e os fornecedores locais contam a história do lugar, e como o beach bar, A Mesa do CAM e os eventos levam o mesmo gesto.","modules":["FarmTable: onde a filosofia vira comida","A constelação: Beach Bar, A Mesa do CAM, eventos e um mesmo gesto"]},"voice-leadership":{"title":"A Nossa Voz e Como Lideramos","hook":"Calma, calorosa, honesta.","hookSub":"Como falamos com os hóspedes, e como lideramos com autonomia, como uma equipa.","desc":"A voz do Craveiral, calma e calorosa, a prometer só o que controlamos, e a forma como trabalhamos: os valores como bússola, autonomia com padrões elevados, e falar cedo sobre os erros.","modules":["Como falamos: a voz do Craveiral","Liderança, autonomia e como trabalhamos juntos"]}};
 const COURSE_SKILLS = {};
+
+/* ===== CURRICULUM — Academy → Courses → Modules → Lessons (agreed 5 Nov 2026) ==========
+   Each CATALOG item above is a MODULE and keeps its id; each of its videos is a LESSON,
+   identified by "<item id>:<index>" exactly as learner records already store it. Nothing
+   in a learner's history is renamed or rewritten — courses and modules are a layer on top,
+   so deleting this block (and core/curriculum.js) restores the previous academy.
+   Categories ("School", "Staying & Feeling"…) stay as discovery labels only.
+   Grouping is grounded in the transcripts: culture and values for everyone → Foundations;
+   procedural guest-service and standards material → a separate course; Pedro's unit-by-unit
+   tour → its own course, split by learning outcome. Two lessons of that tour re-teach
+   lessons in "Guest Experience & Our Standards" (FarmTable 37% shared phrasing, the houses
+   28%); they are OPTIONAL there so no learning requirement is counted twice — which
+   recording to keep is Pedro's call (flagged in docs/CONTENT-MAP.md). */
+const CURRICULUM = {
+  passMark: 70,   /* % across a course's lesson questions (best attempt per lesson) */
+  courses: [
+    {
+      id: 'belong-foundations',
+      title: 'Belong & Craveiral Foundations',
+      promise: 'Who we are, what we believe, and how we welcome.',
+      desc: 'Where Belong and Craveiral come from, the values behind every decision, the Craveiral way of hospitality, how we speak to guests and how we work together. The shared ground for everyone at Craveiral, in every department.',
+      outcomes: ['Tell the story of Craveiral and explain why Belong exists', 'Explain the vision, the mission and the chain in your own words', 'Live the Belong values and the Craveiral way of hospitality with every guest', 'Speak in the Craveiral voice and work with autonomy as one team'],
+      audience: 'Everyone joining Craveiral or Belong, in any department.',
+      prerequisites: '',
+      poster: 'media/covers/welcome-belong.webp', posterPos: 'left center',
+      modules: [
+        { id: 'welcome-belong' },
+        { id: 'craveiral-hospitality' },
+        { id: 'voice-leadership' }
+      ],
+      pt: {
+        title: 'Fundamentos Belong e Craveiral',
+        promise: 'Quem somos, em que acreditamos e como acolhemos.',
+        desc: 'De onde vêm a Belong e o Craveiral, os valores por trás de cada decisão, a hospitalidade à maneira do Craveiral, como falamos com os hóspedes e como trabalhamos juntos. A base comum para toda a gente no Craveiral, em todos os departamentos.',
+        outcomes: ['Contar a história do Craveiral e explicar porque existe a Belong', 'Explicar a visão, a missão e a cadeia por palavras suas', 'Viver os valores da Belong e a hospitalidade à maneira do Craveiral com cada hóspede', 'Falar com a voz do Craveiral e trabalhar com autonomia, como uma equipa'],
+        audience: 'Toda a gente que entra no Craveiral ou na Belong, em qualquer departamento.'
+      }
+    },
+    {
+      id: 'guest-standards',
+      title: 'Guest Experience & Our Standards',
+      promise: 'Deliver the stay we promise, keep the standard, and recover when it slips.',
+      desc: 'The practical side of the work: every stage of a guest\'s stay and what to do when something goes wrong, the houses, the farm and the standards we keep, the daily sustainability routines, and the food and places guests meet across the Craveiral constellation.',
+      outcomes: ['Keep the promises made to guests from the first email to the farewell', 'Handle a complaint in sequence and recover the stay with a fix bigger than expected', 'Know the houses and the farm well enough to answer any guest, and keep their standards', 'Practise the daily water, energy and waste routines', 'Tell the story of what we grow and serve, and recommend the rest of the constellation'],
+      audience: 'Guest-facing and operations teams: hosting, housekeeping, kitchen, food and beverage, maintenance, laundry.',
+      prerequisites: 'Belong & Craveiral Foundations is recommended first.',
+      poster: 'media/covers/guest-journey.webp',
+      modules: [
+        { id: 'guest-journey' },
+        { id: 'houses-farm-sustainability' },
+        { id: 'farm-to-table' }
+      ],
+      pt: {
+        title: 'Experiência do Hóspede e os Nossos Padrões',
+        promise: 'Entregar a estadia que prometemos, manter o padrão e recuperar quando falha.',
+        desc: 'O lado prático do trabalho: cada fase da estadia de um hóspede e o que fazer quando algo corre mal, as casas, a quinta e os padrões que mantemos, as rotinas diárias de sustentabilidade, e a comida e os lugares que os hóspedes encontram na constelação do Craveiral.',
+        outcomes: ['Cumprir as promessas feitas aos hóspedes, do primeiro e-mail à despedida', 'Tratar uma reclamação pela ordem certa e recuperar a estadia com uma solução maior do que a esperada', 'Conhecer as casas e a quinta para responder a qualquer hóspede, e manter os seus padrões', 'Praticar as rotinas diárias de água, energia e resíduos', 'Contar a história do que cultivamos e servimos, e recomendar o resto da constelação'],
+        audience: 'Equipas de contacto com o hóspede e de operação: receção, limpezas, cozinha, restaurante e bar, manutenção, lavandaria.',
+        prerequisites: 'Recomenda-se fazer primeiro os Fundamentos Belong e Craveiral.'
+      }
+    },
+    {
+      id: 'one-single-house',
+      title: 'Craveiral: One Single House',
+      promise: 'Five units, one house, and one standard across them.',
+      desc: 'A tour of every place a guest meets Craveiral, from the houses and FarmTable to the beach bar, the shop and the São Teotónio laundry, followed by how we lead experiences and care for a guest\'s wellbeing, including when something goes wrong.',
+      outcomes: ['See the five units as one house, as the guest does', 'Know each unit well enough to answer a guest and keep its standard', 'Lead an experience on purpose and recover a stay when something goes wrong'],
+      audience: 'Everyone at Craveiral, especially guest-facing teams.',
+      prerequisites: 'Belong & Craveiral Foundations is recommended first.',
+      poster: 'media/covers/craveiral-places.webp',
+      modules: [
+        { id: 'csh-one-house', source: 'craveiral-places', lessons: [0],
+          title: 'One House, Five Units', outcome: 'See the five units as one house, and explain the circular chain that links garden, kitchen and compost.',
+          pt: { title: 'Uma Casa, Cinco Unidades', outcome: 'Ver as cinco unidades como uma só casa, e explicar a cadeia circular que liga a horta, a cozinha e o composto.' } },
+        { id: 'csh-units', source: 'craveiral-places', lessons: [1, 2, 3, 4, 5], optional: [1, 2],
+          title: 'The Units', outcome: 'Answer guests confidently about the houses, FarmTable, the beach bar, the shop and the laundry, and keep each unit\'s standard.',
+          optionalNote: 'Optional here: "The houses" and "FarmTable" cover the same ground as lessons in Guest Experience & Our Standards.',
+          pt: { title: 'As Unidades', outcome: 'Responder com confiança sobre as casas, o FarmTable, o bar da praia, a loja e a lavandaria, e manter o padrão de cada unidade.',
+                optionalNote: 'Opcional aqui: "As casas" e "FarmTable" cobrem o mesmo terreno de lições em Experiência do Hóspede e os Nossos Padrões.' } },
+        { id: 'csh-care', source: 'craveiral-places', lessons: [6, 7],
+          title: 'Experiences & Care', outcome: 'Lead an experience through its four registers, protect a guest\'s wellbeing, and recover a stay when something goes wrong.',
+          pt: { title: 'Experiências e Cuidado', outcome: 'Conduzir uma experiência pelos seus quatro registos, proteger o bem-estar do hóspede e recuperar uma estadia quando algo corre mal.' } }
+      ],
+      pt: {
+        title: 'Craveiral: Uma Só Casa',
+        promise: 'Cinco unidades, uma só casa, e um só padrão em todas.',
+        desc: 'Uma visita a cada lugar onde um hóspede encontra o Craveiral, das casas e do FarmTable ao bar da praia, à loja e à lavandaria de São Teotónio, seguida de como conduzimos experiências e cuidamos do bem-estar do hóspede, incluindo quando algo corre mal.',
+        outcomes: ['Ver as cinco unidades como uma só casa, como o hóspede as vê', 'Conhecer cada unidade o suficiente para responder a um hóspede e manter o seu padrão', 'Conduzir uma experiência com intenção e recuperar uma estadia quando algo corre mal'],
+        audience: 'Toda a gente no Craveiral, sobretudo as equipas de contacto com o hóspede.',
+        prerequisites: 'Recomenda-se fazer primeiro os Fundamentos Belong e Craveiral.'
+      }
+    }
+  ],
+  /* the two Welcome videos as lessons (agreed titles) */
+  lessonTitles: {
+    'welcome-belong:0': { en: 'My story and the story of Craveiral', pt: 'A minha história e a história do Craveiral' },
+    'welcome-belong:1': { en: 'Our vision, our mission and the chain', pt: 'A nossa visão, a nossa missão e a cadeia' }
+  }
+};
+

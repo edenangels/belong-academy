@@ -8,7 +8,7 @@
     "en": {
      "opts": [
       "A marketing invention",
-      "A field of carnations near São Teotônio",
+      "A field of carnations near São Teotónio",
       "A type of farm in Alentejo",
       "A name chosen by the founder's family"
      ],
@@ -18,7 +18,7 @@
     "pt": {
      "opts": [
       "Uma invenção de marketing",
-      "Um campo de Craveiral perto de São Teotônio",
+      "Um campo de Craveiral perto de São Teotónio",
       "Um tipo de fazenda no Alentejo",
       "Um nome escolhido pela família do fundador"
      ],
@@ -64,7 +64,7 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
       "Maximizing profit per square meter",
@@ -124,7 +124,7 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 1,
     "en": {
      "opts": [
       "Accept the proposal and prioritize the economic benefits",
@@ -154,7 +154,7 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 1,
     "en": {
      "opts": [
       "Approve the request and prioritize the guest's desires",

@@ -3570,18 +3570,20 @@ section.rail-section { margin-top: 72px; }     /* was 52 — the rails ran toget
 .hero-rim {
   position: absolute; left: 0; right: 0; bottom: 0; height: 1px; z-index: 4;
   background: color-mix(in srgb, var(--accent-2) 70%, #fff);
-  -webkit-mask-image: radial-gradient(ellipse 220px 200px at var(--rim-x, 12%) 50%,
+  -webkit-mask-image: radial-gradient(ellipse 220px 200px at var(--rim-x, 50%) 50%,
     #000 0%, #0009 30%, #0003 50%, #0000 70%);
-          mask-image: radial-gradient(ellipse 220px 200px at var(--rim-x, 12%) 50%,
+          mask-image: radial-gradient(ellipse 220px 200px at var(--rim-x, 50%) 50%,
     #000 0%, #0009 30%, #0003 50%, #0000 70%);
   opacity: 0; pointer-events: none;
 }
 @media (prefers-reduced-motion: no-preference) {
-  .hero-rim { animation: rimIn 1.5s cubic-bezier(.455,.03,.515,.955) .4s both, rimTravel 9s cubic-bezier(.455,.03,.515,.955) 1.6s infinite alternate; }
+  .hero-rim { animation: rimIn 1.5s cubic-bezier(.455,.03,.515,.955) .4s both, rimTravel 6s ease-in-out 1.6s infinite alternate; }
 }
 @keyframes rimIn { 0% { opacity: 0; } 20% { opacity: .85; } 100% { opacity: 1; } }
-@keyframes rimTravel { from { --rim-x: 8%; } to { --rim-x: 78%; } }
-@property --rim-x { syntax: '<percentage>'; inherits: false; initial-value: 12%; }
+/* centred: the light stays at the middle of the seam and breathes a little
+   either side, instead of sweeping from edge to edge. */
+@keyframes rimTravel { from { --rim-x: 44%; } to { --rim-x: 56%; } }
+@property --rim-x { syntax: '<percentage>'; inherits: false; initial-value: 50%; }
 
 /* ══ PREMIUM LAYER 21 — corrections, from six teardowns read out of shipped code ══
    Five sites were read at source level (Stripe, Linear, Apple, Vercel, Framer,
@@ -4822,3 +4824,99 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 }
 
 .ai-fab.dodge { opacity: 0; pointer-events: none; transform: scale(.85); }   /* something clickable is under it */
+
+/* ===== curriculum layer: Course → Module → Lesson (5 Nov 2026) ===== */
+.cur-type { display: inline-block; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+.card-body .cur-type { margin-bottom: 4px; }
+.cur-card .meta { flex-wrap: wrap; }
+.cur-bar { height: 4px; border-radius: 99px; background: var(--surface-2); overflow: hidden; margin-top: 10px; }
+.cur-bar i { display: block; height: 100%; background: var(--accent); border-radius: inherit; }
+.cur-state { display: inline-block; margin-top: 8px; font-size: 13px; color: var(--text-dim); }
+.cur-state.ok { color: var(--accent); font-weight: 600; }
+.cur-crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; color: var(--text-faint); margin-bottom: 10px; }
+.cur-crumbs a { color: var(--text-dim); text-decoration: none; } .cur-crumbs a:hover { color: var(--text); text-decoration: underline; }
+.cur-crumbs .sep { opacity: .6; } .cur-crumbs [aria-current] { color: var(--text); }
+.cur-status { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 18px; font-size: 14px; color: var(--text-dim); max-width: 640px; }
+.cur-status .cur-bar { flex: 1 1 100%; margin-top: 0; }
+.cur-status .cur-state { margin-top: 0; }
+.cur-chips { display: flex; gap: 12px; flex-wrap: wrap; }
+.cur-in { margin-top: 10px; font-size: 14px; color: var(--text-faint); } .cur-in a { color: var(--text-dim); }
+.cur-h3 { font-family: var(--font-display); font-size: 17px; font-weight: 600; margin: 18px 0 6px; }
+.cur-p { color: var(--text-dim); font-size: 15px; line-height: 1.55; }
+.cur-assess { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.cur-assess > div { padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px; display: grid; gap: 3px; }
+.cur-assess span { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint); }
+.cur-assess b { font-size: 22px; font-family: var(--font-display); } .cur-assess small { color: var(--text-faint); font-size: 12px; line-height: 1.4; }
+.cur-warn { margin-top: 12px; color: var(--accent); font-size: 14px; }
+.cur-modules { padding: 0 var(--edge); display: grid; gap: 10px; margin-top: 6px; max-width: calc(var(--content-w) + 0px); }
+.cur-module { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.cur-module summary { list-style: none; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px 18px; cursor: pointer; }
+.cur-module summary::-webkit-details-marker { display: none; }
+.cur-module summary:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.cur-mnum { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--surface-2); font-weight: 600; color: var(--accent); }
+.cur-mtitle { display: grid; gap: 3px; } .cur-mtitle b { font-size: 16px; } .cur-mtitle small { color: var(--text-faint); font-size: 13px; line-height: 1.45; }
+.cur-mmeta { color: var(--text-faint); font-size: 13px; white-space: nowrap; }
+.cur-module[open] summary { border-bottom: 1px solid var(--line); }
+.cur-inner { margin: 0 !important; padding: 6px 10px 2px !important; max-width: none !important; }
+.cur-open { display: inline-block; margin: 6px 18px 14px; font-size: 14px; color: var(--accent); text-decoration: none; }
+.cur-lmeta { display: flex; gap: 10px; align-items: center; margin-top: 4px; }
+.cur-q { font-size: 12px; color: var(--text-faint); } .cur-q.ok { color: var(--accent); }
+.cur-retake { background: none; border: 1px solid var(--line); color: var(--text-dim); border-radius: 99px; padding: 2px 10px; font-size: 12px; cursor: pointer; }
+.cur-retake:hover { color: var(--text); border-color: var(--accent); }
+.cur-opt { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); border: 1px solid var(--line); border-radius: 99px; padding: 1px 7px; margin-left: 6px; vertical-align: 2px; }
+.cur-sect { margin-top: 28px; }
+.cur-hero-ctx { display: inline-block; margin-bottom: 10px; }
+.pstep-type { font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pstep.has-art .pstep-type { color: rgba(255,255,255,.75); }
+.cur-pl-link { color: inherit; text-decoration: none; } .cur-pl-link:hover { text-decoration: underline; }
+.cur-pl-nav { display: flex; gap: 6px; }
+.cur-pl-nav .pl-ic[disabled] { opacity: .35; cursor: default; }
+.cur-hist { display: grid; gap: 8px; margin-top: 10px; }
+.cur-hrow { display: flex; justify-content: space-between; gap: 12px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; }
+.cur-hrow span { display: grid; gap: 2px; } .cur-hrow small { color: var(--text-faint); font-size: 12px; } .cur-flag { font-size: 12px; color: var(--accent); font-style: normal; }
+@media (max-width: 1024px) { .cur-modules { padding: 0 40px; } }
+@media (max-width: 699px) { .cur-modules { padding: 0 18px; } .cur-assess { grid-template-columns: 1fr; } .cur-module summary { grid-template-columns: auto 1fr; } .cur-mmeta { grid-column: 2; } }
+
+/* ===== Record tab as cards in the page column (5 Nov 2026) ===== */
+.me-record { padding-top: 28px !important; display: grid; gap: 18px; max-width: calc(var(--content-w) - 2 * var(--gutter)); }
+.me-record .admin-section { margin: 0; padding: 26px 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; }
+.me-record .admin-section h2 { font-family: var(--font-display); font-size: 24px; margin: 0 0 6px; }
+.me-record .sect-sub { color: var(--text-faint); font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+.comp-grid { display: grid; grid-template-columns: auto 1fr; gap: 14px 28px; align-items: center; }
+.comp-ring { width: 118px; height: 118px; border-radius: 50%; display: grid; place-items: center;
+  background: conic-gradient(var(--c) var(--p), var(--surface-2) 0); position: relative; }
+.comp-ring::before { content: ''; position: absolute; inset: 9px; border-radius: 50%; background: var(--bg-2); }
+.comp-ring span { position: relative; display: grid; justify-items: center; line-height: 1.1; }
+.comp-ring b { font-family: var(--font-display); font-size: 32px; } .comp-ring small { font-size: 12px; color: var(--text-faint); }
+.comp-figs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-left: 1px solid var(--line); }
+.comp-figs > div { display: grid; gap: 4px; padding: 4px 20px; border-right: 1px solid var(--line); } .comp-figs > div:last-child { border-right: 0; }
+.comp-figs span { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-faint); }
+.comp-figs b { font-family: var(--font-display); font-size: 24px; font-weight: 600; }
+.comp-grid .comp-status { grid-column: 2; margin: 0; padding-left: 20px; font-size: 14px; }
+.me-record .ob-eyebrow { margin-top: 22px !important; }
+.me-record .comp-row { padding: 11px 0; }
+.me-record .empty-note { color: var(--text-faint); font-size: 14px; padding: 10px 0 0 !important; border: 0; }
+@media (max-width: 699px) {
+  .me-record .admin-section { padding: 20px 18px; }
+  .comp-grid { grid-template-columns: 1fr; justify-items: start; }
+  .comp-figs { border-left: 0; width: 100%; } .comp-figs > div { padding: 4px 12px 4px 0; }
+  .comp-grid .comp-status { grid-column: 1; padding-left: 0; }
+}
+
+/* Record tab at phone width: the grid track grew to the longest nowrap session
+   title (438px on a 390px screen), clipping dates and the certificate card. */
+.me-record { grid-template-columns: minmax(0, 1fr); }
+.me-record .comp-row .cl-t { min-width: 0; flex: 1; }
+@media (max-width: 560px) {
+  .me-record .admin-section { padding: 20px 18px; }
+  .comp-figs > div { padding: 4px 10px; }
+  .comp-figs > div:first-child { padding-left: 0; }
+  .comp-figs { border-left: 0; }
+}
+.me-record .row.wrapf { display: flex; flex-wrap: wrap; gap: 10px; }
+/* module page at phone width: the optional-lessons note sat beside the heading
+   in a cramped column; stack it underneath. */
+@media (max-width: 560px) {
+  .cur-lessons-head { flex-wrap: wrap; }
+  .cur-lessons-head .hint { flex-basis: 100%; margin: 4px 0 0; }
+}
