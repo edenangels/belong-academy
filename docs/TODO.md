@@ -26,3 +26,11 @@
 ## 4 Nov 2026 — round 3 (meeting + John's video) → bel74
 Shipped: rails contained in the content column (the "off to the right" row), small path row on home (big path box gone), no Regenerate, steps ahead locked, Paths merged into My learning (tabs: Your path · Progress · Record), example questions in the search, no course stars, commitment has Skip, resume to the exact second (p.pos saved every 15s), the gradient "g" (background-clip box now extends below the baseline), bigger takeaways line. Belong flags: certOnCompletion (lesson checks = assessment, no 8-question recap), markComplete:false. PT: no "certificado" left.
 Waiting on Pedro/Lykke: docs/GOALS-PROPOSAL.md (5 meta-goals, 2-3 per department, no-repeat rule, naming Programme > Module > Lesson). Not built until they answer its 5 questions. Twin recordings flagged there: One Single House lessons 2 (FarmTable) and 1 (the houses) repeat onboarding lessons.
+
+## 4 Nov 2026 — launch prep (bel77)
+- Watch gate ON again (testing over). Account menu: "Reset demo data" removed (learners could wipe their own progress), "Change role & goal" replaces "Redo onboarding", menu translated.
+- Certificate earned card at the end of every course (certOnCompletion); course length in minutes.
+- Resume: newest playback position wins when two devices are on the same lesson (pos.at). Needs one real account on two devices to confirm end-to-end.
+- Goal cards show total time + lesson count instead of "N courses ready". My learning opens with "X of 7 courses finished · N XP".
+- 27 misheard spellings of Craveiral fixed in transcripts + quizzes; knowledge index rebuilt.
+- docs/quiz-review/Belong-Quiz-Review.html: all 113 lesson-check questions (PT + EN, keyed answer marked, approve/change box) for Pedro to sign off.

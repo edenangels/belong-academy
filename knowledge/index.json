@@ -1,5 +1,5 @@
 {
- "generatedAt": 1793293661655,
+ "generatedAt": 1793787642465,
  "courses": {
   "craveiral-hospitality": {
    "title": "Hospitality, the Craveiral Way",
@@ -66,7 +66,7 @@
      "language": "en",
      "translated": null,
      "segments": 78,
-     "chars": 4994,
+     "chars": 4996,
      "durationSec": 379,
      "capability": null,
      "tags": [
@@ -127,7 +127,7 @@
      "language": "en",
      "translated": null,
      "segments": 58,
-     "chars": 3654,
+     "chars": 3658,
      "durationSec": 287,
      "capability": null,
      "tags": [
@@ -135,7 +135,7 @@
       "garden",
       "house",
       "guest",
-      "craveral",
+      "craveiral",
       "land",
       "farm",
       "units"
@@ -146,12 +146,12 @@
      "moments": [
       {
        "t0": 28,
-       "teaches": "How should staff view the multiple units of Craveral?",
+       "teaches": "How should staff view the multiple units of Craveiral?",
        "audit": "verified"
       },
       {
        "t0": 54,
-       "teaches": "What is the main purpose of Craveral's hospitality?",
+       "teaches": "What is the main purpose of Craveiral's hospitality?",
        "audit": "corrected"
       },
       {
@@ -336,7 +336,7 @@
      "language": "en",
      "translated": null,
      "segments": 57,
-     "chars": 3620,
+     "chars": 3622,
      "durationSec": 278,
      "capability": null,
      "tags": [
@@ -350,12 +350,12 @@
       "only"
      ],
      "regime": null,
-     "summary": "The shop is the most misunderstood thing at Craviol. Seen as a place that sells souvenirs, it is a small shop with a tight margin. Seen as what it actually is, the territory condensed and portable.",
+     "summary": "The shop is the most misunderstood thing at Craveiral. Seen as a place that sells souvenirs, it is a small shop with a tight margin. Seen as what it actually is, the territory condensed and portable.",
      "url": "https://academy.edenrise.com/#/play/craveiral-places/4",
      "moments": [
       {
        "t0": 2,
-       "teaches": "What is the shop at Craviol often misunderstood as?",
+       "teaches": "What is the shop at Craveiral often misunderstood as?",
        "audit": "corrected"
       },
       {
@@ -779,7 +779,7 @@
      "language": "en",
      "translated": null,
      "segments": 80,
-     "chars": 5330,
+     "chars": 5334,
      "durationSec": 410,
      "capability": null,
      "tags": [
@@ -790,10 +790,10 @@
       "guest",
       "which",
       "house",
-      "craveral"
+      "craveiral"
      ],
      "regime": null,
-     "summary": "If you're going to represent Craveral, you need to know Craveral properly, in detail, the way you know your own home. This module is a tour. Some of this you know. I want all of you to know all of it.",
+     "summary": "If you're going to represent Craveiral, you need to know Craveiral properly, in detail, the way you know your own home. This module is a tour. Some of this you know. I want all of you to know all of it.",
      "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/0",
      "moments": [
       {
@@ -1013,12 +1013,12 @@
      "language": "en",
      "translated": null,
      "segments": 63,
-     "chars": 4087,
+     "chars": 4091,
      "durationSec": 297,
      "capability": null,
      "tags": [
       "land",
-      "craveral",
+      "craveiral",
       "field",
       "eight",
       "soil",
@@ -1027,7 +1027,7 @@
       "hotel"
      ],
      "regime": null,
-     "summary": "Hello, I'm Pedro, and if you're watching this, it's because you're part of Craveral. Maybe you started this week, maybe you've been with us for years. Either way, I want to start at the beginning.",
+     "summary": "Hello, I'm Pedro, and if you're watching this, it's because you're part of Craveiral. Maybe you started this week, maybe you've been with us for years. Either way, I want to start at the beginning.",
      "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
      "moments": [
       {
@@ -1069,7 +1069,7 @@
      "language": "en",
      "translated": null,
      "segments": 77,
-     "chars": 5141,
+     "chars": 5145,
      "durationSec": 386,
      "capability": null,
      "tags": [
@@ -1079,7 +1079,7 @@
       "name",
       "land",
       "village",
-      "craveral",
+      "craveiral",
       "region"
      ],
      "regime": null,

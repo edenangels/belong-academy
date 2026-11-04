@@ -8,7 +8,7 @@
     "t0": 28,
     "a": 1,
     "en": {
-     "q": "How should staff view the multiple units of Craveral?",
+     "q": "How should staff view the multiple units of Craveiral?",
      "opts": [
       "As separate entities",
       "As a single, cohesive house",
@@ -18,7 +18,7 @@
      "why": "Staff should view the units as one single house because that is how the guest sees it."
     },
     "pt": {
-     "q": "Como devem os funcionários ver as várias unidades do Craveral?",
+     "q": "Como devem os funcionários ver as várias unidades do Craveiral?",
      "opts": [
       "Como entidades separadas",
       "Como uma casa única e coesa",
@@ -38,24 +38,24 @@
     "t0": 54,
     "a": 1,
     "en": {
-     "q": "What is the main purpose of Craveral's hospitality?",
+     "q": "What is the main purpose of Craveiral's hospitality?",
      "opts": [
       "To run a hotel with a pretty garden",
       "To regenerate the territory through circular economy",
       "To provide a service to the local community",
       "To make a profit"
      ],
-     "why": "The main purpose of Craveral's hospitality is to regenerate the territory through circular economy."
+     "why": "The main purpose of Craveiral's hospitality is to regenerate the territory through circular economy."
     },
     "pt": {
-     "q": "Qual é o principal objetivo da hospitalidade do Craveral?",
+     "q": "Qual é o principal objetivo da hospitalidade do Craveiral?",
      "opts": [
       "Gerir um hotel com um jardim bonito",
       "Regenerar o território através da economia circular",
       "Fornecer um serviço à comunidade local",
       "Obter lucro"
      ],
-     "why": "O principal objetivo da hospitalidade do Craveral é regenerar o território através da economia circular."
+     "why": "O principal objetivo da hospitalidade do Craveiral é regenerar o território através da economia circular."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -646,7 +646,7 @@
     "t0": 2,
     "a": 1,
     "en": {
-     "q": "What is the shop at Craviol often misunderstood as?",
+     "q": "What is the shop at Craveiral often misunderstood as?",
      "opts": [
       "A place that sells local products",
       "A small shop with a tight margin that sells souvenirs",
@@ -656,7 +656,7 @@
      "why": "The shop is often seen as just a place that sells souvenirs, but it is actually a representation of the territory condensed and portable."
     },
     "pt": {
-     "q": "Como é que a loja no Craviol é frequentemente mal interpretada?",
+     "q": "Como é que a loja no Craveiral é frequentemente mal interpretada?",
      "opts": [
       "Um local que vende produtos locais",
       "Uma pequena loja com uma margem apertada que vende souvenirs",
