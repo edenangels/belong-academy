@@ -27,7 +27,9 @@
     pt: ['Como recebo um hóspede à chegada?', 'O que faço quando um hóspede se queixa?', 'De onde vem a comida que servimos?']
   },
   heroCourse: 'welcome-belong',
-  /* watch gate ON again (4 Nov 2026): a lesson's check opens only after ~75% of it was actually watched */
+  /* TESTING (João, 5 Nov 2026): the watch-the-whole-video gate is OFF so the team can try every feature.
+     Delete this line before the real launch. */
+  watchGate: false,
   /* no tax id, contract, working-time or goal fields on the profile page (João, 16 Oct 2026) */
   leanProfile: true,
   /* João + John, 4 Nov 2026: the lesson checks ARE the assessment — finishing a course issues its certificate, no recap quiz */
