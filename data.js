@@ -66,35 +66,43 @@ const PATH_RATIONALES = _PATH_RATIONALES.en.map((_, k) => k).reduce((arr, k) => 
 
 
 const GOAL_PRESETS = {
-  /* Belong's paths, built from Belong's six filmed courses. Every path opens with
-     the welcome; the rest follows what the department does all day. */
-  'The Belong Way':      ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'houses-farm-sustainability', 'farm-to-table', 'voice-leadership'],
-  'Belong Host':         ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
+  /* Belong's paths, built from the filmed courses. Every path opens with the welcome.
+     4 Nov 2026: "Belong Host" merged into "The Belong Way" — João and John saw them as the same goal. */
+  'The Belong Way':      ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
   'Houses & Standards':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'craveiral-hospitality', 'guest-journey'],
   'From Farm to Table':  ['welcome-belong', 'craveiral-places', 'farm-to-table', 'craveiral-hospitality', 'houses-farm-sustainability'],
   'Rooted in the Land':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'farm-to-table'],
   'Lead the Belong Way': ['welcome-belong', 'craveiral-places', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'],
   'Safe & Sustainable':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'guest-journey', 'voice-leadership']
 };
+/* what each goal means, in one line, and the icon that tells it apart on the goal step */
+const GOAL_INFO = {
+  'The Belong Way':      { icon: 'people',   en: 'Welcome every guest the Craveiral way, from first click to farewell.', pt: 'Receber cada hóspede à maneira do Craveiral, do primeiro clique à despedida.' },
+  'Houses & Standards':  { icon: 'sun',      en: 'Know every house and keep the standard guests trust.', pt: 'Conhecer cada casa e manter o padrão em que os hóspedes confiam.' },
+  'From Farm to Table':  { icon: 'leaf',     en: 'Tell the story of what we grow, cook and serve.', pt: 'Contar a história do que cultivamos, cozinhamos e servimos.' },
+  'Rooted in the Land':  { icon: 'sprout',   en: 'Understand the farm, the place, and how the circle closes.', pt: 'Perceber a quinta, o lugar, e como o círculo se fecha.' },
+  'Lead the Belong Way': { icon: 'compass',  en: 'Lead with autonomy, speak early, and grow your team.', pt: 'Liderar com autonomia, falar cedo e fazer crescer a equipa.' },
+  'Safe & Sustainable':  { icon: 'drop',     en: 'Look after water, energy, people and the property every day.', pt: 'Cuidar da água, da energia, das pessoas e da propriedade todos os dias.' }
+};
 
 const ROLE_OPTIONS = [
-  { key: 'hosting',      label: 'Hosting & Guest Care',             icon: 'people',   goals: ['Belong Host', 'The Belong Way'] },
-  { key: 'housekeeping', label: 'Housekeeping & Houses',            icon: 'sun',      goals: ['Houses & Standards', 'Belong Host'] },
-  { key: 'culinary',     label: 'Culinary & Kitchen',               icon: 'leaf',     goals: ['From Farm to Table', 'The Belong Way'] },
-  { key: 'fnb',          label: 'Food & Beverage Service',          icon: 'basket',   goals: ['From Farm to Table', 'Belong Host'] },
-  { key: 'farm',         label: 'Farm & Nature',                    icon: 'sprout',   goals: ['Rooted in the Land', 'From Farm to Table'] },
-  { key: 'maintenance',  label: 'Maintenance',                      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable'] },
-  { key: 'laundry',      label: 'Laundry',                          icon: 'drop',     goals: ['Houses & Standards', 'Safe & Sustainable'] },
-  { key: 'wellness',     label: 'Wellness & Experiences',           icon: 'flower',   goals: ['Belong Host', 'Rooted in the Land'] },
-  { key: 'office',       label: 'Office & Administration',          icon: 'compass',  goals: ['Lead the Belong Way', 'The Belong Way'] },
-  { key: 'people',       label: 'People, Culture & Leadership',     icon: 'hands',    goals: ['Lead the Belong Way', 'The Belong Way'] },
-  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'fire',     goals: ['Safe & Sustainable', 'Houses & Standards'] },
-  { key: 'logistics',    label: 'Logistics & Management Control',   icon: 'waves',    goals: ['Lead the Belong Way', 'The Belong Way'] }
+  { key: 'hosting',      label: 'Hosting & Guest Care',             icon: 'people',   goals: ['The Belong Way', 'Houses & Standards', 'Lead the Belong Way'] },
+  { key: 'housekeeping', label: 'Housekeeping & Houses',            icon: 'sun',      goals: ['Houses & Standards', 'The Belong Way', 'Safe & Sustainable'] },
+  { key: 'culinary',     label: 'Culinary & Kitchen',               icon: 'leaf',     goals: ['From Farm to Table', 'The Belong Way', 'Rooted in the Land'] },
+  { key: 'fnb',          label: 'Food & Beverage Service',          icon: 'basket',   goals: ['From Farm to Table', 'The Belong Way', 'Lead the Belong Way'] },
+  { key: 'farm',         label: 'Farm & Nature',                    icon: 'sprout',   goals: ['Rooted in the Land', 'From Farm to Table', 'Safe & Sustainable'] },
+  { key: 'maintenance',  label: 'Maintenance',                      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable', 'Lead the Belong Way'] },
+  { key: 'laundry',      label: 'Laundry',                          icon: 'drop',     goals: ['Houses & Standards', 'Safe & Sustainable', 'The Belong Way'] },
+  { key: 'wellness',     label: 'Wellness & Experiences',           icon: 'flower',   goals: ['The Belong Way', 'Rooted in the Land', 'Lead the Belong Way'] },
+  { key: 'office',       label: 'Office & Administration',          icon: 'compass',  goals: ['Lead the Belong Way', 'The Belong Way', 'Safe & Sustainable'] },
+  { key: 'people',       label: 'People, Culture & Leadership',     icon: 'hands',    goals: ['Lead the Belong Way', 'The Belong Way', 'Rooted in the Land'] },
+  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'fire',     goals: ['Safe & Sustainable', 'Houses & Standards', 'Lead the Belong Way'] },
+  { key: 'logistics',    label: 'Logistics & Management Control',   icon: 'waves',    goals: ['Lead the Belong Way', 'Safe & Sustainable', 'Houses & Standards'] }
 ];
 
 /* roles and goals that shipped before the Final 10 Departments — a stored profile keeps working */
 const ROLE_ALIASES = { houses: 'housekeeping', kitchen: 'culinary', beachbar: 'fnb', cam: 'fnb', events: 'fnb', leadership: 'office', farmhouse: 'hosting', farmtable: 'culinary' };
-const GOAL_ALIASES = { 'Seasonal Cook': 'From Farm to Table', 'Nature Guide': 'Rooted in the Land', 'Team Lead': 'Lead the Belong Way' };
+const GOAL_ALIASES = { 'Belong Host': 'The Belong Way', 'Seasonal Cook': 'From Farm to Table', 'Nature Guide': 'Rooted in the Land', 'Team Lead': 'Lead the Belong Way' };
 
 /* Gamification — growth-themed levels (nature) + subtle badges. Tuned to lift completion. */
 const LEVELS = [
@@ -258,7 +266,7 @@ const UI = {
     badges_h:'Badges', badges_sub:'', locked_dot:'Locked ·', leaders_board:'Leaderboard · this week', board_sub:'Friendly. Only this week’s points reset on Monday; your progress and your path never do.', keep_alive:'',
     you:'you', xp_ahead_1:'is just', xp_ahead_2:'ahead — about {n} lessons', top_board:"You're top of the board this week. Keep the grove growing.", path_points:'',
     ob_welcome:'Welcome to Belong', ob_step:'Step', ob_hi:'Welcome,', ob_pick_handle:"Pick a username — it's how others see you in the community.", ob_role_q:'And what do you do?', ob_q1:'What do you do?', ob_q1_sub:'The AI uses your role to seed your first learning path. You can change everything later.', ob_skip:'Skip — explore on my own', ob_continue:'Continue →',
-    ob_destination:'Your destination', ob_q2:'Pick a goal to work toward', ob_q2_sub:'The AI sequences courses toward this goal and re-plans as you prove skills.', ob_build:'Build my path ✦', ob_building:'Building your path to', courses_adaptive:'courses · adaptive', course_adaptive_one:'course · adaptive', courses_ready:'courses ready', course_ready_one:'course ready', track_more:'track & more',
+    ob_destination:'Your destination', ob_q2:'Pick a goal to work toward', ob_q2_sub:'Your path is built around it.', ob_build:'Build my path ✦', ob_building:'Building your path to', courses_adaptive:'courses · adaptive', course_adaptive_one:'course · adaptive', courses_ready:'courses ready', course_ready_one:'course ready', track_more:'track & more',
     ai_hello:'How can I help you today?', how_answers:'How it answers',
     tutor_foot_live:'AI · answers can be wrong · grounded in your courses',
     tutor_foot_demo:'Demo · scripted replies · grounded in your courses',
@@ -524,7 +532,7 @@ const UI = {
     badges_h:'Distintivos', badges_sub:'', locked_dot:'Bloqueado ·', leaders_board:'Ranking · esta semana', board_sub:'Amigável. Só os pontos desta semana reiniciam à segunda; o seu progresso e o seu percurso nunca.', keep_alive:'▲ Mantenha viva',
     you:'você', xp_ahead_1:'está apenas', xp_ahead_2:'à sua frente — termine um módulo para alcançar', top_board:'Está no topo do ranking esta semana. Continue a fazer crescer o bosque.', path_points:'',
     ob_welcome:'Bem-vindo à Belong', ob_step:'Passo', ob_hi:'Bem-vindo,', ob_pick_handle:'Escolha um nome de utilizador — é assim que os outros o veem na comunidade.', ob_role_q:'E o que faz?', ob_q1:'O que faz?', ob_q1_sub:'A IA usa a sua função para criar o seu primeiro percurso. Pode mudar tudo mais tarde.', ob_skip:'Ignorar — explorar sozinho', ob_continue:'Continuar →',
-    ob_destination:'O seu destino', ob_q2:'Escolha um objetivo', ob_q2_sub:'A IA sequencia cursos para este objetivo e replaneia à medida que prova competências.', ob_build:'Criar o meu percurso ✦', ob_building:'A criar o seu percurso para', courses_adaptive:'cursos · adaptativo', course_adaptive_one:'curso · adaptativo', courses_ready:'cursos prontos', course_ready_one:'curso pronto', track_more:'percurso e mais',
+    ob_destination:'O seu destino', ob_q2:'Escolha um objetivo', ob_q2_sub:'O seu percurso é construído à volta dele.', ob_build:'Criar o meu percurso ✦', ob_building:'A criar o seu percurso para', courses_adaptive:'cursos · adaptativo', course_adaptive_one:'curso · adaptativo', courses_ready:'cursos prontos', course_ready_one:'curso pronto', track_more:'percurso e mais',
     ai_hello:'Como posso ajudar hoje?', how_answers:'Como responde',
     tutor_foot_live:'IA · as respostas podem conter erros · baseadas nos seus cursos',
     tutor_foot_demo:'Demo · respostas guionadas · baseadas nos seus cursos',
@@ -708,7 +716,7 @@ const LEVELS_PT = ['Semente','Rebento','Broto','Muda','Árvore Jovem','Guardião
 const tlevel = i => _lang() === 'pt' ? (LEVELS_PT[i] || LEVELS[i].name) : LEVELS[i].name;
 const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', housekeeping:'Limpezas e Casas', culinary:'Cozinha e Culinária', fnb:'Serviço de Restaurante e Bar', farm:'Quinta e Natureza', maintenance:'Manutenção', laundry:'Lavandaria', logistics:'Logística e Controlo de Gestão', wellness:'Bem-estar e Experiências', office:'Escritório e Administração', people:'Pessoas, Cultura e Liderança', safety:'Segurança e Sustentabilidade' };
 const trole = r => _lang() === 'pt' ? (ROLES_PT[r.key] || r.label) : r.label;
-const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Belong Host':'Anfitrião Belong', 'Houses & Standards':'Casas e Padrões', 'From Farm to Table':'Da Quinta à Mesa', 'Rooted in the Land':'Enraizado na Terra', 'Lead the Belong Way':'Liderar à Maneira Belong', 'Safe & Sustainable':'Seguro e Sustentável' };
+const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Houses & Standards':'Casas e Padrões', 'From Farm to Table':'Da Quinta à Mesa', 'Rooted in the Land':'Enraizado na Terra', 'Lead the Belong Way':'Liderar à Maneira Belong', 'Safe & Sustainable':'Seguro e Sustentável' };
 const tgoal = g => _lang() === 'pt' ? (GOALS_PT[g] || g) : g;
 const BADGES_PT = {
   'first-steps':['Primeiros Passos','Conclua o seu primeiro módulo'], 'rooted':['Enraizado','Termine o seu primeiro curso'],
