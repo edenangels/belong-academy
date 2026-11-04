@@ -4929,3 +4929,48 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
   font: inherit; font-size: 14px; cursor: pointer; text-align: left; transition: border-color .2s, background .2s; }
 .auth-test-btn:hover, .auth-test-btn:focus-visible { border-color: color-mix(in srgb, var(--accent) 55%, transparent); background: var(--surface-2, var(--surface)); }
 .auth-test-btn span { font-size: 12px; color: var(--text-faint); }
+
+/* ── admin Team view (core/team.js) ── */
+.cur-team .tm-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.cur-team .tm-stats > div { padding: 16px 18px; display: grid; gap: 4px; border-right: 1px solid var(--line); }
+.cur-team .tm-stats > div:last-child { border-right: 0; }
+.cur-team .tm-stats b { font-family: var(--font-display); font-size: 30px; font-weight: 500; line-height: 1; }
+.cur-team .tm-stats span { font-size: 12px; color: var(--text-faint); }
+.cur-team .tm-stats .warn b { color: var(--warn, #d9b38c); }
+.tm-feed { display: grid; margin-top: 8px; }
+.tm-ev { display: flex; align-items: center; gap: 12px; padding: 11px 4px; border-top: 1px solid var(--line); cursor: pointer; font-size: 14px; color: var(--text-dim); }
+.tm-ev:hover, .tm-ev:focus-visible { background: color-mix(in srgb, var(--text) 4%, transparent); outline: none; }
+.tm-ev b { color: var(--text); font-weight: 600; }
+.tm-ev small { display: block; font-size: 12px; color: var(--text-faint); margin-top: 2px; }
+.tm-ev.cert b:last-of-type { color: var(--accent-2); }
+.tm-ev .mi, .tm-feed .mi { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; color: #fff; }
+.tm-when { font-size: 12px; color: var(--text-faint); white-space: nowrap; }
+.tm-now b { display: block; font-weight: 600; font-size: 13.5px; color: var(--text); }
+.tm-now small { display: block; font-size: 12px; color: var(--text-faint); margin-top: 2px; line-height: 1.35; }
+.tm-pct { display: flex; align-items: center; gap: 8px; } .tm-pct .track { flex: 1; } .tm-pct span { font-size: 12px; color: var(--text-faint); }
+.tm-courses { display: flex; gap: 4px; margin-top: 7px; }
+.tm-co { flex: 1; height: 4px; border-radius: 3px; background: color-mix(in srgb, var(--text) 12%, transparent); overflow: hidden; }
+.tm-co i { display: block; height: 100%; background: var(--accent); }
+.tm-co.done i { background: var(--accent-2); } .tm-co.cert { box-shadow: 0 0 0 1px var(--accent-2); }
+.tm-score.ok { color: var(--accent-2); font-weight: 600; } .tm-score.low { color: var(--warn, #d9b38c); font-weight: 600; }
+.tm-faint { color: var(--text-faint); }
+.tm-drawer-now { font-size: 13.5px; color: var(--text-dim); margin: 6px 0 10px; }
+.tm-courses-list { display: grid; gap: 8px; }
+.tm-course { border: 1px solid var(--line); border-radius: 12px; padding: 10px 14px; }
+.tm-course summary { display: flex; justify-content: space-between; gap: 12px; cursor: pointer; font-size: 14px; list-style: none; }
+.tm-course summary::-webkit-details-marker { display: none; }
+.tm-course summary span { font-size: 12px; color: var(--text-faint); text-align: right; }
+.tm-mod { display: flex; align-items: center; gap: 10px; padding: 7px 0 0; font-size: 13px; color: var(--text-dim); }
+.tm-mod small { color: var(--text-faint); }
+.tm-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--text-faint); flex: 0 0 9px; }
+.tm-dot.part { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 40%, transparent); }
+.tm-dot.done { border-color: var(--accent-2); background: var(--accent-2); }
+@media (max-width: 760px) {
+  .cur-team .tm-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cur-team .tm-stats > div { border-bottom: 1px solid var(--line); }
+  .cur-team .tm-stats > div:nth-child(2n) { border-right: 0; }
+}
+.team-table .tm-now { min-width: 190px; max-width: 300px; }
+.team-table { scrollbar-color: color-mix(in srgb, var(--text) 18%, transparent) transparent; scrollbar-width: thin; }
+.team-table th, .team-table td { padding-left: 10px; padding-right: 10px; }
+.team-table td { vertical-align: middle; }

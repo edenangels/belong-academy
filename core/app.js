@@ -3647,7 +3647,7 @@ function openMemberDetail(uid) {
         ${issues.length ? `<div class="comp-status behind"> ${issues.map(i => `${esc(i.course)} ${i.state === 'expired' ? 'expired' : 'expires in ' + i.days + 'd'}`).join(' · ')}</div>` : ''}
       </div></div>
     <div class="ob-eyebrow" style="margin-top:16px;">Training log · ${complianceYear()}</div>
-    ${log.length ? `<div class="comp-log">${log.slice(0, 8).map(e => `<div class="comp-row"><span class="cl-t">${esc(e.title || '')}</span><span class="cl-meta">${new Date(e.at).toLocaleDateString('pt-PT')} · ${e.hours}h</span></div>`).join('')}</div>` : `<p class="empty-note" style="text-align:left;padding:6px 0;">No credited hours yet.</p>`}
+    ${log.length ? `<div class="comp-log">${log.slice(0, 8).map(e => `<div class="comp-row"><span class="cl-t">${esc(e.title || (window.CUR && e.courseId && courseById(e.courseId) ? CUR.lTitle(e.courseId, e.mod) : ''))}</span><span class="cl-meta">${new Date(e.at).toLocaleDateString('pt-PT')} · ${e.hours}h</span></div>`).join('')}</div>` : `<p class="empty-note" style="text-align:left;padding:6px 0;">No credited hours yet.</p>`}
     <div class="row wrapf gap-3" style="margin-top:16px;">
       <button class="btn btn-primary btn-sm" data-action="nudge" data-uid="${esc(s.uid)}" data-name="${esc(s.name)}">Nudge</button>
       <button class="btn btn-glass btn-sm" data-action="mdet-register" data-uid="${esc(s.uid)}">⤓ Registo CSV</button>
