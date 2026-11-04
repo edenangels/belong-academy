@@ -59,7 +59,7 @@
     q_pending: ['Questions pending', 'Perguntas por responder'], watched: ['Watched', 'Visto'],
     in_course: ['Part of', 'Parte de'], module_done: ['Module complete', 'Módulo concluído'], course_done: ['Course complete', 'Curso concluído'],
     explore_sub: ['Courses', 'Cursos'], lib_courses_sub: ['Each course is a full learning experience with its own certificate.', 'Cada curso é uma experiência de formação completa, com o seu comprovativo.'],
-    lib_modules_h: ['All modules', 'Todos os módulos'], lib_modules_sub: ['Filter by topic. Every module belongs to a course.', 'Filtre por tema. Cada módulo pertence a um curso.'],
+    lib_modules_h: ['All modules', 'Todos os módulos'], lib_modules_sub: ['Filter by department to see what is useful in each team. Every module belongs to a course.', 'Filtre por departamento para ver o que é útil em cada equipa. Cada módulo pertence a um curso.'],
     prev: ['Previous lesson', 'Lição anterior'], next: ['Next lesson', 'Lição seguinte'], back_module: ['Module', 'Módulo'],
     result_h: ['Course complete', 'Curso concluído'], result_cert: ['Your certificate is ready.', 'O seu comprovativo está pronto.'],
     result_retake: ['Retake the questions you missed to reach the pass mark.', 'Repita as perguntas que falhou para chegar à nota mínima.'],
@@ -363,9 +363,14 @@
 
   /* ---------- library: courses first, then modules by category ---------- */
   window.renderLibrary = renderLibrary = function () {
-    const cats = ['All', ...new Set(modules.map(m => m.item.cat))];
+    /* department categories when the curriculum defines them; the item's own label otherwise */
+    const DC = CURRICULUM.categories || null;
+    const catsOf = m => DC ? (m.def.cats || []) : [m.item.cat];
+    const catName = k => { if (!DC) return tcat(k); const c = DC.find(x => x.key === k); return c ? (PT() ? c.pt : c.en) : k; };
+    const cats = ['All', ...(DC ? DC.map(c => c.key).filter(k => modules.some(m => catsOf(m).includes(k))) : [...new Set(modules.map(m => m.item.cat))])];
+    if (!cats.includes(libFilter)) libFilter = 'All';
     const q = (libQuery || '').toLowerCase();
-    const ml = modules.filter(m => (libFilter === 'All' || m.item.cat === libFilter) && (!q || (mTitle(m) + ' ' + mOutcome(m) + ' ' + cTitle(courseOf(m.courseId)) + ' ' + tcat(m.item.cat)).toLowerCase().includes(q)));
+    const ml = modules.filter(m => (libFilter === 'All' || catsOf(m).includes(libFilter)) && (!q || (mTitle(m) + ' ' + mOutcome(m) + ' ' + cTitle(courseOf(m.courseId)) + ' ' + catsOf(m).map(catName).join(' ')).toLowerCase().includes(q)));
     const cl = courses.filter(co => !q || (cTitle(co) + ' ' + cField(co, 'promise') + ' ' + cField(co, 'desc')).toLowerCase().includes(q));
     return `<div class="page"><div class="page-pad">
       <h1 class="page-title">${t('library_title')}</h1>
@@ -374,7 +379,7 @@
       <h2 class="sect-h cur-sect">${L('courses')}</h2><p class="page-sub" style="margin-top:2px">${L('lib_courses_sub')}</p>
       <div class="grid">${cl.map(courseCardHTML).join('')}</div>
       <h2 class="sect-h cur-sect">${L('lib_modules_h')}</h2><p class="page-sub" style="margin-top:2px">${L('lib_modules_sub')}</p>
-      <div class="filter-row">${cats.map(c => `<button class="filter-chip ${c === libFilter ? 'active' : ''}" data-action="lib-filter" data-cat="${c}">${c === 'All' ? t('all') : tcat(c)}</button>`).join('')}</div>
+      <div class="filter-row">${cats.map(c => `<button class="filter-chip ${c === libFilter ? 'active' : ''}" data-action="lib-filter" data-cat="${c}">${c === 'All' ? t('all') : catName(c)}</button>`).join('')}</div>
       <div class="grid">${ml.map(moduleCardHTML).join('')}</div>
       ${ml.length || cl.length ? '' : `<p class="empty-note">${t('nothing_matches')}</p>`}
     </div>${footerHTML()}</div>`;

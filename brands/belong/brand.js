@@ -33,11 +33,25 @@
   watchGate: false,
   /* no tax id, contract, working-time or goal fields on the profile page (João, 16 Oct 2026) */
   leanProfile: true,
-  /* 5 Nov 2026: certificates are COURSE level (core/curriculum.js), issued when every required lesson is
+  /* 4 Nov 2026: certificates are COURSE level (core/curriculum.js), issued when every required lesson is
      completed and the lesson-question assessment reaches the pass mark. No per-module certificate. */
   certOnCompletion: false,
   /* the video ending opens the check; no separate "Mark module complete" button */
   markComplete: false,
+  /* 'local' = the internal database in core/localdb.js (accounts on this device, no Firebase).
+     For a real deploy with accounts across devices, set 'firebase' — the config below is kept. */
+  backend: 'local',
+  /* meeting 4 Nov 2026: the "knowledge verified · from quizzes" count is clutter; scores live on the course page */
+  hideVerifiedStat: true,
+  /* local mode only: test accounts shown on the sign-in card (no passwords; this device only) */
+  localSeed: {
+    adminEmails: ['admin@belong.test'],
+    accounts: [
+      { email: 'admin@belong.test',   name: 'Admin (test)',           role: 'admin' },
+      { email: 'leader@belong.test',  name: 'Team leader (test)',     role: 'leader',  dept: 'hosting' },
+      { email: 'learner@belong.test', name: 'Learner (test)',         role: 'learner', dept: 'housekeeping' }
+    ]
+  },
   firebase: {
     apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
     authDomain: 'belong-academy.firebaseapp.com',

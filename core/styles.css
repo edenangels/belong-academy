@@ -4920,3 +4920,12 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
   .cur-lessons-head { flex-wrap: wrap; }
   .cur-lessons-head .hint { flex-basis: 100%; margin: 4px 0 0; }
 }
+
+/* local database mode: one-tap test accounts on the sign-in card */
+.auth-test { margin: 4px 0 14px; display: grid; gap: 8px; }
+.auth-test-h { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint); }
+.auth-test-btn { display: flex; justify-content: space-between; align-items: center; gap: 12px; width: 100%;
+  padding: 11px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  font: inherit; font-size: 14px; cursor: pointer; text-align: left; transition: border-color .2s, background .2s; }
+.auth-test-btn:hover, .auth-test-btn:focus-visible { border-color: color-mix(in srgb, var(--accent) 55%, transparent); background: var(--surface-2, var(--surface)); }
+.auth-test-btn span { font-size: 12px; color: var(--text-faint); }

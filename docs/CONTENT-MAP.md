@@ -1,6 +1,6 @@
 # Belong Academy — content map (Academy → Courses → Modules → Lessons)
 
-Branch `restructure-hierarchy`, release `bel89`. Not published. The source of
+Branch `restructure-hierarchy`, release `bel93`. Not published. The source of
 truth is `CURRICULUM` in `brands/belong/content.js`; the engine is
 `core/curriculum.js`. Deleting the `CURRICULUM` block (or not loading
 `core/curriculum.js`) returns the app to the previous item-based screens. Nothing
@@ -106,6 +106,44 @@ reads. Each key was changed to match its explanation:
 The resort and villa answers are value judgements made by the generator. Pedro
 should confirm them. "São Teotônio" was changed to European Portuguese "São Teotónio".
 
+## Library categories, by department (meeting, 4 Nov 2026)
+
+The categories used to come from the videos (School, Staying & Feeling, To Nature,
+Growing & Tasting, Community). They are now grouped by who each module is useful
+to. A worker outside maintenance can tap Maintenance and see what is relevant
+there. These are discovery labels only, and a module can sit in several. They
+were assigned from the 20 transcripts: a vocabulary score per department was the
+hint, then each module was judged by hand.
+
+| Category | Modules |
+|---|---|
+| For everyone | Welcome to Belong · Hospitality, the Craveiral Way · Our Voice & How We Lead · One House, Five Units |
+| Hosting & Guest Care | Hospitality, the Craveiral Way · The Guest Journey · Experiences & Care |
+| Houses & Housekeeping | The Houses, the Farm & Sustainability · The Units (houses, laundry) |
+| Kitchen & Bar | FarmTable & the Constellation · The Units (FarmTable, Beach Bar) |
+| Land & Farm | Welcome to Belong · The Houses, the Farm & Sustainability · FarmTable & the Constellation |
+| Maintenance | The Houses, the Farm & Sustainability · The Units |
+| Team leaders | Our Voice & How We Lead |
+
+Gap: no video is about maintenance itself. The Maintenance tab shows the
+house-standards material until one is recorded.
+
+## Backend switch: internal database, or Firebase
+
+`BRAND.backend` in `brands/belong/brand.js` controls it.
+
+- `'local'` (current setting) loads `core/localdb.js`.
+  - Sign-in, My learning, Admin team progress, forum and missions all run on one
+    store in this browser, with no Firebase calls.
+  - Three test accounts appear on the sign-in card: Admin, Team leader and
+    Learner. They have no passwords. New accounts can still be created with
+    email and password.
+  - Accounts live on **this device only**. They are not shared between phones
+    and laptops.
+- `'firebase'` loads `core/auth.js` exactly as before. The Firebase config is kept
+  in `brand.js`. Switch to this before a deploy where real staff sign in from their
+  own devices.
+
 ## Gaps (not solved here)
 
 1. There is no course-level final assessment. The lesson questions act as the
@@ -116,3 +154,5 @@ should confirm them. "São Teotônio" was changed to European Portuguese "São T
    are unknown. The admin flag on Earlier records will show them once it's live.
 5. `watchGate: false` and the visible "Mark lesson complete" button are testing
    settings. Turn them back on before real learners use the Academy.
+6. `backend: 'local'` is also a testing setting. Published like this, every
+   device would be its own island of accounts.

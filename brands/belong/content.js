@@ -214,9 +214,9 @@ const CURRICULUM = {
       prerequisites: '',
       poster: 'media/covers/welcome-belong.webp', posterPos: 'left center',
       modules: [
-        { id: 'welcome-belong' },
-        { id: 'craveiral-hospitality' },
-        { id: 'voice-leadership' }
+        { id: 'welcome-belong', cats: ['everyone', 'land'] },
+        { id: 'craveiral-hospitality', cats: ['everyone', 'hosting'] },
+        { id: 'voice-leadership', cats: ['everyone', 'leaders'] }
       ],
       pt: {
         title: 'Fundamentos Belong e Craveiral',
@@ -236,9 +236,9 @@ const CURRICULUM = {
       prerequisites: 'Belong & Craveiral Foundations is recommended first.',
       poster: 'media/covers/guest-journey.webp',
       modules: [
-        { id: 'guest-journey' },
-        { id: 'houses-farm-sustainability' },
-        { id: 'farm-to-table' }
+        { id: 'guest-journey', cats: ['hosting'] },
+        { id: 'houses-farm-sustainability', cats: ['houses', 'maintenance', 'land'] },
+        { id: 'farm-to-table', cats: ['kitchen', 'land'] }
       ],
       pt: {
         title: 'Experiência do Hóspede e os Nossos Padrões',
@@ -259,15 +259,15 @@ const CURRICULUM = {
       prerequisites: 'Belong & Craveiral Foundations is recommended first.',
       poster: 'media/covers/craveiral-places.webp',
       modules: [
-        { id: 'csh-one-house', source: 'craveiral-places', lessons: [0],
+        { id: 'csh-one-house', source: 'craveiral-places', lessons: [0], cats: ['everyone'],
           title: 'One House, Five Units', outcome: 'See the five units as one house, and explain the circular chain that links garden, kitchen and compost.',
           pt: { title: 'Uma Casa, Cinco Unidades', outcome: 'Ver as cinco unidades como uma só casa, e explicar a cadeia circular que liga a horta, a cozinha e o composto.' } },
-        { id: 'csh-units', source: 'craveiral-places', lessons: [1, 2, 3, 4, 5], optional: [1, 2],
+        { id: 'csh-units', source: 'craveiral-places', lessons: [1, 2, 3, 4, 5], optional: [1, 2], cats: ['houses', 'kitchen', 'maintenance'],
           title: 'The Units', outcome: 'Answer guests confidently about the houses, FarmTable, the beach bar, the shop and the laundry, and keep each unit\'s standard.',
           optionalNote: 'Optional here: "The houses" and "FarmTable" cover the same ground as lessons in Guest Experience & Our Standards.',
           pt: { title: 'As Unidades', outcome: 'Responder com confiança sobre as casas, o FarmTable, o bar da praia, a loja e a lavandaria, e manter o padrão de cada unidade.',
                 optionalNote: 'Opcional aqui: "As casas" e "FarmTable" cobrem o mesmo terreno de lições em Experiência do Hóspede e os Nossos Padrões.' } },
-        { id: 'csh-care', source: 'craveiral-places', lessons: [6, 7],
+        { id: 'csh-care', source: 'craveiral-places', lessons: [6, 7], cats: ['hosting'],
           title: 'Experiences & Care', outcome: 'Lead an experience through its four registers, protect a guest\'s wellbeing, and recover a stay when something goes wrong.',
           pt: { title: 'Experiências e Cuidado', outcome: 'Conduzir uma experiência pelos seus quatro registos, proteger o bem-estar do hóspede e recuperar uma estadia quando algo corre mal.' } }
       ],
@@ -282,6 +282,19 @@ const CURRICULUM = {
     }
   ],
   /* the two Welcome videos as lessons (agreed titles) */
+  /* Library categories = who the module is useful to, by department (meeting, 4 Nov 2026:
+     "department/utility based", so someone outside maintenance can see what is relevant
+     there). Discovery labels only; a module can sit in several. Assigned from the 20
+     transcripts — docs/CONTENT-MAP.md lists the reasoning per module. */
+  categories: [
+    { key: 'everyone',    en: 'For everyone',          pt: 'Para todos' },
+    { key: 'hosting',     en: 'Hosting & Guest Care',  pt: 'Receção e Cuidado do Hóspede' },
+    { key: 'houses',      en: 'Houses & Housekeeping', pt: 'Casas e Limpezas' },
+    { key: 'kitchen',     en: 'Kitchen & Bar',         pt: 'Cozinha e Bar' },
+    { key: 'land',        en: 'Land & Farm',           pt: 'Terra e Quinta' },
+    { key: 'maintenance', en: 'Maintenance',           pt: 'Manutenção' },
+    { key: 'leaders',     en: 'Team leaders',          pt: 'Chefes de equipa' }
+  ],
   lessonTitles: {
     'welcome-belong:0': { en: 'My story and the story of Craveiral', pt: 'A minha história e a história do Craveiral' },
     'welcome-belong:1': { en: 'Our vision, our mission and the chain', pt: 'A nossa visão, a nossa missão e a cadeia' }
