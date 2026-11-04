@@ -22,12 +22,20 @@
   /* Belong's OWN Firebase project (created 2026-07-17). */
   boardIndexed: true,   /* leaderboard composite index (companyId + xp) deployed 2026-09-17 */
   /* the storefront always leads with the filmed course — never with whatever a visitor opened last */
+  askExamples: {
+    en: ['How do I welcome a guest on arrival?', 'What do I do when a guest complains?', 'Where does the food we serve come from?'],
+    pt: ['Como recebo um hóspede à chegada?', 'O que faço quando um hóspede se queixa?', 'De onde vem a comida que servimos?']
+  },
   heroCourse: 'welcome-belong',
   /* TESTING (João, 16 Oct 2026): the "watch the whole video" gate before the recap and the quiz is OFF so
      the team can test the flow. Set to true (or delete the line) before the real launch. */
   watchGate: false,
   /* no tax id, contract, working-time or goal fields on the profile page (João, 16 Oct 2026) */
   leanProfile: true,
+  /* João + John, 4 Nov 2026: the lesson checks ARE the assessment — finishing a course issues its certificate, no recap quiz */
+  certOnCompletion: true,
+  /* the video ending opens the check; no separate "Mark module complete" button */
+  markComplete: false,
   firebase: {
     apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
     authDomain: 'belong-academy.firebaseapp.com',
