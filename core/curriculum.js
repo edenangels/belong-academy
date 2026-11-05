@@ -56,10 +56,11 @@
     start: ['Start', 'Começar'], resume: ['Continue', 'Continuar'], start_lesson: ['Start lesson', 'Começar a lição'], continue_lesson: ['Continue learning', 'Continuar a aprender'],
     rewatch: ['Watch again', 'Ver de novo'], next_module: ['Continue to next module', 'Continuar para o módulo seguinte'], next_course: ['Next course', 'Curso seguinte'],
     retake: ['Retake', 'Repetir'], questions: ['questions', 'perguntas'], optional: ['Optional', 'Opcional'],
-    q_pending: ['Questions pending', 'Perguntas por responder'], watched: ['Watched', 'Visto'],
+    q_pending: ['Questions pending', 'Perguntas por responder'], answer_q: ['Answer the questions', 'Responder às perguntas'],
+    unanswered: ['{n} required lesson(s) still need their questions answered before the certificate.', 'Faltam responder às perguntas de {n} lição(ões) obrigatória(s) para o comprovativo.'], watched: ['Watched', 'Visto'],
     in_course: ['Part of', 'Parte de'], module_done: ['Module complete', 'Módulo concluído'], course_done: ['Course complete', 'Curso concluído'],
     explore_sub: ['Courses', 'Cursos'], lib_courses_sub: ['Each course is a full learning experience with its own certificate.', 'Cada curso é uma experiência de formação completa, com o seu comprovativo.'],
-    lib_modules_h: ['All modules', 'Todos os módulos'], lib_modules_sub: ['Filter by department to see what is useful in each team. Every module belongs to a course.', 'Filtre por departamento para ver o que é útil em cada equipa. Cada módulo pertence a um curso.'],
+    lib_other_h: ['Other courses', 'Outros cursos'], lib_modules_h: ['All modules', 'Todos os módulos'], lib_modules_sub: ['Filter by department to see what is useful in each team. Every module belongs to a course.', 'Filtre por departamento para ver o que é útil em cada equipa. Cada módulo pertence a um curso.'],
     prev: ['Previous lesson', 'Lição anterior'], next: ['Next lesson', 'Lição seguinte'], back_module: ['Module', 'Módulo'],
     result_h: ['Course complete', 'Curso concluído'], result_cert: ['Your certificate is ready.', 'O seu comprovativo está pronto.'],
     result_retake: ['Retake the questions you missed to reach the pass mark.', 'Repita as perguntas que falhou para chegar à nota mínima.'],
@@ -95,7 +96,13 @@
   /* ---------- lesson state ---------- */
   const logEntry = (src, i) => (S.trainingLog || []).find(e => e && e.courseId === src && e.mod === i);
   const watched = (src, i) => (S.ledger || []).some(e => e.type === 'module_complete' && e.courseId === src && e.mod === i);
-  const lessonDone = (src, i) => !!logEntry(src, i) || isDone(src);
+  /* A lesson is done when its check is recorded. The item-level `done` flag is set when the item's LAST
+     lesson is watched, so read as "every lesson done" it let a learner who opened a module's last lesson
+     first complete the whole module. It is kept only for records made before the curriculum existed
+     (CURRICULUM.since), so earlier learners keep the progress they had. */
+  const SINCE = Date.parse(CURRICULUM.since || '2026-11-05T00:00:00Z');
+  const legacyDone = src => { const p = (S.progress || {})[src]; return !!(p && p.done && (!p.doneAt || p.doneAt < SINCE)); };
+  const lessonDone = (src, i) => !!logEntry(src, i) || legacyDone(src);
   function attempts(src, i) {
     const out = [], e = logEntry(src, i), ck = e && e.ev && e.ev.check;
     if (ck && ck.kind === 'assessment' && ck.total) out.push({ score: ck.score, total: ck.total, at: ck.at || e.at });
@@ -122,10 +129,10 @@
     const recordedH = (S.trainingLog || []).filter(e => e && ms.some(m => m.source === e.courseId && m.lessons.includes(e.mod))).reduce((a, e) => a + (e.hours || 0), 0);
     const complete = req.length > 0 && done === req.length;
     const passed = score != null && answered === assessable && score >= PASS;
-    const lastAt = Math.max(0, ...req.map(([s, i]) => { const e = logEntry(s, i); return e ? e.at : 0; }));
+    const lastAt = Math.max(0, ...req.map(([s, i]) => Math.max(0, ...attempts(s, i).map(a => +new Date(a.at) || 0), (logEntry(s, i) || {}).at || 0)));
     return { modules: ms.length, lessons: req.length, done, complete, pct: req.length ? Math.round(done / req.length * 100) : 0,
       mins: ms.reduce((a, m) => a + moduleStats(m).mins, 0), minsLeft: ms.reduce((a, m) => a + moduleStats(m).minsLeft, 0),
-      recordedH, score, answered, assessable, passed, eligible: complete && passed, completedAt: complete ? (lastAt || Date.now()) : null };
+      recordedH, score, answered, assessable, passed, eligible: complete && passed, completedAt: complete ? (lastAt || null) : null };
   }
   /* the next lesson to open in a course (first incomplete required, in order), else null */
   function nextInCourse(id) {
@@ -143,7 +150,16 @@
     for (const co of courses) { const n = nextInCourse(co.id); if (n) return n; }
     return null;
   }
-  window.CUR = { courses, modules, courseOf, moduleOf, modulesOfCourse, moduleOfLesson, moduleStats, courseStats, nextInCourse, nextLessonGlobal, pathModules, lessonDone, best, attempts, L, cTitle, mTitle, lTitle, PASS };
+  /* Analytics: average progress per library category (department) the learner has touched */
+  function categoryProgress() {
+    const cats = CURRICULUM.categories || [];
+    return cats.map(c => {
+      const ms = modules.filter(m => (m.def.cats || []).includes(c.key)); if (!ms.length) return null;
+      const st = ms.map(moduleStats); if (!st.some(x => x.done || x.started)) return null;
+      return [PT() ? c.pt : c.en, Math.round(st.reduce((a, x) => a + x.pct, 0) / st.length)];
+    }).filter(Boolean);
+  }
+  window.CUR = { categoryProgress, courses, modules, courseOf, moduleOf, modulesOfCourse, moduleOfLesson, moduleStats, courseStats, nextInCourse, nextLessonGlobal, pathModules, lessonDone, best, attempts, L, cTitle, mTitle, lTitle, PASS };
 
   /* ---------- small renderers ---------- */
   const bar = pct => `<div class="cur-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`;
@@ -189,7 +205,8 @@
     const done = lessonDone(m.source, i), b = best(m.source, i), opt = isOptional(m, i), w = watched(m.source, i);
     const nx = nextInCourse(m.courseId), isNext = nx && nx.m === m && nx.i === i;
     const q = b ? `<span class="cur-q ${b.score === b.total ? 'ok' : ''}">${b.score}/${b.total} ${L('questions')}</span>` : (w && !done ? `<span class="cur-q">${L('q_pending')}</span>` : '');
-    const retake = b && b.score < b.total ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('retake')}</button>` : '';
+    const retake = b && b.score < b.total ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('retake')}</button>`
+      : (done && !b && !opt ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('answer_q')}</button>` : '');
     return `<div class="module-row cur-lesson ${done ? 'done' : ''} ${isNext ? 'current' : ''}" data-action="play" data-id="${m.source}" data-mod="${i}">
       <div class="m-num">${done ? '✓' : isNext ? '▶' : n}</div>
       <div class="m-title">${esc(lTitle(m.source, i))}${opt ? ` <span class="cur-opt">${L('optional')}</span>` : ''}${q || retake ? `<div class="cur-lmeta">${q}${retake}</div>` : ''}</div>
@@ -201,7 +218,8 @@
   /* ---------- course overview ---------- */
   function renderCourseOverview(id) {
     const co = courseOf(id); if (!co) return null;
-    const st = courseStats(id), nx = nextInCourse(id), ms = modulesOfCourse(id);
+    const ms = modulesOfCourse(id); if (!ms.length) return null;   /* a course whose modules all failed to resolve */
+    const st = courseStats(id), nx = nextInCourse(id);
     const outcomes = cField(co, 'outcomes') || [];
     const aud = cField(co, 'audience'), pre = cField(co, 'prerequisites');
     const primary = nx ? `<button class="btn btn-primary" data-action="play" data-id="${nx.m.source}" data-mod="${nx.i}">▶&nbsp; ${st.done ? L('resume') : L('start')}: ${esc(lTitle(nx.m.source, nx.i))}</button>`
@@ -238,6 +256,7 @@
             <div><span>${L('recorded')}</span><b>${fmtMins(Math.round(st.recordedH * 60))}</b><small>${L('est_time')} ${fmtMins(st.mins)} (${L('est_note')})</small></div>
           </div>
           ${st.score != null && st.answered === st.assessable && !st.passed ? `<p class="cur-warn">${L('not_yet_passed')}</p>` : ''}
+          ${st.done > 0 && st.answered < st.assessable ? `<p class="cur-warn">${L('unanswered', { n: st.assessable - st.answered })}</p>` : ''}
           <h3 class="cur-h3">${L('cert_h')}</h3>
           <p class="cur-p">${st.eligible ? `✓ ${L('cert_earned')} · ${fmtCertDate(new Date(st.completedAt))}` : L('cert_locked')}</p>
           ${certBtn}
@@ -381,6 +400,10 @@
       <h2 class="sect-h cur-sect">${L('lib_modules_h')}</h2><p class="page-sub" style="margin-top:2px">${L('lib_modules_sub')}</p>
       <div class="filter-row">${cats.map(c => `<button class="filter-chip ${c === libFilter ? 'active' : ''}" data-action="lib-filter" data-cat="${c}">${c === 'All' ? t('all') : catName(c)}</button>`).join('')}</div>
       <div class="grid">${ml.map(moduleCardHTML).join('')}</div>
+      ${(() => { /* items outside the curriculum (e.g. made in Course Studio) still need a home */
+        const extra = CATALOG.filter(c => !c.hidden && !modules.some(m => m.source === c.id) && (!q || (ctitle(c) + ' ' + (c.desc || '')).toLowerCase().includes(q)));
+        return extra.length ? `<h2 class="sect-h cur-sect">${L('lib_other_h')}</h2><div class="grid">${extra.map(c => cardHTML(c)).join('')}</div>` : '';
+      })()}
       ${ml.length || cl.length ? '' : `<p class="empty-note">${t('nothing_matches')}</p>`}
     </div>${footerHTML()}</div>`;
   };

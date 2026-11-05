@@ -39,7 +39,17 @@
   }
   function commit() { try { localStorage.setItem(DBKEY, JSON.stringify(db())); } catch (e) { console.warn('[localdb] could not save', e); } }
   /* another tab wrote the store: drop the cached copy */
-  window.addEventListener('storage', e => { if (e.key === DBKEY) mem = null; });
+  /* Test accounts (no password) work only on a development host. On a deployed site they are hidden and
+     refused, so a published preview never offers one-tap admin. */
+  const DEV_HOST = /^(localhost|127\.0\.0\.1|\[::1\])$|\.localhost$|\.test$/.test(location.hostname);
+  /* another tab wrote the store: drop the cached copy; if it signed a different account in or out,
+     reload this tab, so it never writes one person's progress into another person's account */
+  let bootSession;
+  window.addEventListener('storage', e => {
+    if (e.key !== DBKEY) return;
+    mem = null;
+    if (bootSession !== undefined && db().session !== bootSession) location.reload();
+  });
 
   const id = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
   const now = () => Date.now();
@@ -80,7 +90,10 @@
   /* ---------- session ---------- */
   function park() {   /* write the live learner state back to the signed-in account */
     const u = me(); if (!u) return;
-    u.state = localState(); u.updatedAt = now();
+    const st = localState();
+    /* the state key belongs to someone else (a session switched under this tab): never cross-write */
+    if (st.profile && st.profile.uid && st.profile.uid !== u.uid) return;
+    u.state = st; u.updatedAt = now();
     u.profile = Object.assign({}, u.profile, (u.state.profile || {}), { uid: u.uid, email: u.email });
     commit();
   }
@@ -98,7 +111,7 @@
     const u = me(), p = (localState().profile || {});
     const name = p.name || (u && u.name) || 'Learner';
     return { authorUid: u ? u.uid : null, authorName: name, authorHandle: p.username || (u ? u.email.split('@')[0] : ''),
-      authorInitials: name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'BA' };
+      authorInitials: typeof initialsOf === 'function' ? initialsOf(name) : name.slice(0, 2).toUpperCase() };
   }
   const company = () => Object.assign({ id: cid() }, db().companies[cid()] || { name: (window.BRAND && (BRAND.company || BRAND.name)) || cid(), status: 'active', adminEmails: [] });
 
@@ -124,10 +137,13 @@
     async listBoard() {
       return Object.values(db().users).filter(u => ofCompany(u.profile)).map(u => {
         const s = u.uid === (me() || {}).uid ? localState() : (u.state || {});
-        return { uid: u.uid, name: (s.profile && s.profile.name) || u.name, xp: s.xp || 0, streak: s.streak || 0, companyId: (u.profile || {}).companyId || BRAND_ID, lastSeen: u.lastSeen || u.updatedAt };
+        const nm = (s.profile && s.profile.name) || u.name;
+        return { uid: u.uid, name: nm, initials: typeof initialsOf === 'function' ? initialsOf(nm) : '', username: (s.profile && s.profile.username) || '', dept: (u.profile && u.profile.dept) || (s.profile && s.profile.dept) || null, xp: s.xp || 0, streak: s.streak || 0, companyId: (u.profile || {}).companyId || BRAND_ID, lastSeen: u.lastSeen || u.updatedAt };
       });
     },
     async signOut() { park(); db().session = null; commit(); localStorage.setItem(MODE, 'out'); localStorage.removeItem(KEY); location.reload(); },
+    /* Reset demo: wipe the signed-in account's progress, keep who they are */
+    resetMine() { const u = me(); if (!u) return; u.state = { profile: Object.assign({}, (u.state || {}).profile) }; u.updatedAt = now(); commit(); },
     async updateName(name) { const u = me(); if (u && name) { u.name = name; commit(); } },
     async deleteAccount() {
       const u = me(); if (!u) throw new Error('not-signed-in');
@@ -265,10 +281,10 @@
   function testButtons() {
     const d = db(), admins = company().adminEmails || [];
     const seeded = Object.values(d.users).filter(u => u.seeded);
-    if (!seeded.length) return '';
+    if (!seeded.length || !DEV_HOST) return '';
     return `<div class="auth-test"><div class="auth-test-h" id="authTestH"></div>${seeded.map(u => {
       const adm = admins.includes(u.email) || SUPERADMINS.includes(u.email);
-      return `<button type="button" class="auth-test-btn" data-uid="${u.uid}"><b>${u.name.replace(/</g, '&lt;')}</b><span>${adm ? 'Admin' : (u.role === 'leader' ? (isPT() ? 'Chefe de equipa' : 'Team leader') : (isPT() ? 'Formando' : 'Learner'))}</span></button>`;
+      return `<button type="button" class="auth-test-btn" data-uid="${u.uid}"><b>${u.name.replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch])}</b><span>${adm ? 'Admin' : (u.role === 'leader' ? (isPT() ? 'Chefe de equipa' : 'Team leader') : (isPT() ? 'Formando' : 'Learner'))}</span></button>`;
     }).join('')}</div>`;
   }
   function wire() {
@@ -276,7 +292,7 @@
     ['#authGoogle', '.auth-divider', '#authForgot'].forEach(s => { const el = g.querySelector(s); if (el) el.style.display = 'none'; });
     const form = $('#authForm');
     form.insertAdjacentHTML('beforebegin', testButtons());
-    g.querySelectorAll('.auth-test-btn').forEach(b => b.addEventListener('click', () => { const u = db().users[b.dataset.uid]; if (u) enter(u); }));
+    g.querySelectorAll('.auth-test-btn').forEach(b => b.addEventListener('click', () => { const u = db().users[b.dataset.uid]; if (u && DEV_HOST) enter(u); }));
     refresh();
     form.addEventListener('submit', async e => {
       e.preventDefault(); showErr('');
@@ -288,7 +304,7 @@
         if (pass.length < 6) { showErr(isPT() ? 'A palavra-passe precisa de pelo menos 6 caracteres.' : 'Use at least 6 characters.'); return; }
         if (!$('#authConsent').checked) { showErr(T('auth_consent_req')); return; }
         if (!name) { showErr(isPT() ? 'Introduza o seu nome.' : 'Please enter your name.'); return; }
-        if (found && !found.seeded) { showErr(w.taken); return; }
+        if (found) { showErr(w.taken); return; }   /* a seeded test account cannot be claimed by signing up with its email */
         const u = found || { uid: 'u-' + id(), email, createdAt: now() };
         u.salt = id(); u.pass = await hash(pass, u.salt); u.name = name; u.seeded = false; u.updatedAt = now();
         u.consent = true; u.consentAt = now(); u.consentVia = 'password';
@@ -297,6 +313,7 @@
         d.users[u.uid] = u; commit(); enter(u); return;
       }
       if (!found) { showErr(w.noAcc); return; }
+      if (!found.pass && !DEV_HOST) { showErr(w.noAcc); return; }   /* password-less test accounts: development host only */
       if (found.pass && await hash(pass, found.salt) !== found.pass) { showErr(w.badPw); return; }
       enter(found);
     });
@@ -308,6 +325,7 @@
   /* ---------- boot ---------- */
   seed();
   function boot() {
+    bootSession = db().session;
     wire();
     const u = me(), mode = localStorage.getItem(MODE);
     window.EdenCloud.loadCompany();

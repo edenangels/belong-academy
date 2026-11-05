@@ -13,7 +13,7 @@
   title: 'Belong Academy — Giving Shape to Meaning',
   ogDesc: 'Learn the Belong way — hospitality, seasonal food, nature and community, from a school born of a circular vision.',
   twDesc: 'Belong Academy — staying & feeling, growing & tasting, to nature. Learn by doing.',
-  domain: 'meridante-dev.github.io/belong-academy',
+  domain: 'belong-academy.pages.dev',
   hostnames: [],   /* single-brand deploy — the loader falls back to the only registered brand */
   lang: 'en',
   ethos: 'Belong, a community and school born in 2012 from a bond between place and being — giving shape to meaning across hospitality (staying & feeling), seasonal gastronomy (growing & tasting), nature (to nature) and a circular economy. The Academy teaches the Belong way: the craft of hospitality and presence, seasonal cooking and tasting, growing and regenerating, nature connection, and building community.',

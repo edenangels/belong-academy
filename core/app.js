@@ -150,6 +150,8 @@ function ledgerAppend(type, data = {}) {
       /* idempotent event kinds — never double-record the same fact */
       if (type === 'module_complete' && L.some(e => e.type === type && e.courseId === data.courseId && e.mod === data.mod)) return;
       if (type === 'course_complete' && L.some(e => e.type === type && e.courseId === data.courseId)) return;
+      /* a course result card and a certificate download are facts once, not once per view (they fed the Team feed) */
+      if ((type === 'program_complete' || type === 'cert_issued') && data.programId && L.some(e => e.type === type && e.programId === data.programId)) return;
       if (type === 'consent_given' && L.some(e => e.type === type)) return;
       if (type === 'pretest' && L.some(e => e.type === type && e.courseId === data.courseId)) return;
       const core = Object.assign({
@@ -893,7 +895,7 @@ function renderAnalytics() {
   const week = minutesLast7();
   const max = Math.max(...week.map(w => w.v), 1);
   /* real skill picture: completion per category the learner has touched */
-  const cats = [...new Set(CATALOG.map(c => c.cat))].map(cat => {
+  const cats = (window.CUR && CUR.categoryProgress) ? CUR.categoryProgress() : [...new Set(CATALOG.map(c => c.cat))].map(cat => {
     const all = CATALOG.filter(c => c.cat === cat);
     const touched = all.filter(c => coursePct(c.id) > 0);
     if (!touched.length) return null;
@@ -901,17 +903,17 @@ function renderAnalytics() {
   }).filter(Boolean).sort((a, b) => b[1] - a[1]);
   const certs = CATALOG.filter(c => isDone(c.id));
   return `<div class="page"><div class="page-pad">
-    <h1 class="page-title">Analytics</h1>
+    <h1 class="page-title">${_lang() === 'pt' ? 'Análise' : 'Analytics'}</h1>
     <p class="page-sub">${t('analytics_sub')}</p>
     <section class="stats" style="margin:28px 0 0;">
       <div class="stat"><div class="num">${S.streak || 0}d</div><div class="lbl">${t('learning_streak')}</div><div class="delta">${S.bestStreak ? t('stats_best') + ' ' + S.bestStreak + 'd' : t('no_data')}</div></div>
       <div class="stat"><div class="num">${fmtMins(weekMinutes())}</div><div class="lbl">${t('this_week')}</div><div class="delta">${week[6].v ? '▲ ' + week[6].v + 'm ' + t('stats_today') : t('no_data')}</div></div>
-      <div class="stat"><div class="num">${certs.length}</div><div class="lbl">Training records</div><div class="delta">${certs.length ? '▲' : t('no_data')}</div></div>
-      <div class="stat"><div class="num">${S.quizzesPassed}</div><div class="lbl">Quizzes passed</div><div class="delta">${avgQuizScore() != null ? 'avg ' + avgQuizScore() + '%' : t('no_data')}</div></div>
+      <div class="stat"><div class="num">${certs.length}</div><div class="lbl">${_lang() === 'pt' ? 'Registos de formação' : 'Training records'}</div><div class="delta">${certs.length ? '▲' : t('no_data')}</div></div>
+      <div class="stat"><div class="num">${S.quizzesPassed}</div><div class="lbl">${_lang() === 'pt' ? 'Questionários aprovados' : 'Quizzes passed'}</div><div class="delta">${avgQuizScore() != null ? (_lang() === 'pt' ? 'média ' : 'avg ') + avgQuizScore() + '%' : t('no_data')}</div></div>
     </section>
     <div class="two-col" style="margin-top:18px;">
       <div class="chart-card">
-        <h3>Minutes learned · last 7 days</h3>
+        <h3>${_lang() === 'pt' ? 'Minutos de estudo · últimos 7 dias' : 'Minutes learned · last 7 days'}</h3>
         <div class="bars">${week.map((w, i) => `
           <div class="bar-col">
             <span class="bv">${w.v || ''}</span>
@@ -921,13 +923,13 @@ function renderAnalytics() {
         </div>
       </div>
       <div class="chart-card">
-        <h3>Training records</h3>
+        <h3>${_lang() === 'pt' ? 'Registos de formação' : 'Training records'}</h3>
         ${certs.map(c => `<div class="cert-row"><span class="ci">${svgIcon(c.icon)}</span><span class="ct">${ctitle(c)}</span><span class="cd">★ verified</span></div>`).join('') || '<p class="empty-note">Complete a course to earn your first certificate.</p>'}
       </div>
     </div>
     <div class="chart-card">
-      <h3>Category progress · from your real activity</h3>
-      ${cats.map(([n, v]) => `<div class="skill-row"><span class="sn">${n}</span><div class="track"><div class="fill" style="width:${v}%"></div></div><span class="sv">${v}%</span></div>`).join('') || '<p class="empty-note">Start a course and your picture builds here.</p>'}
+      <h3>${_lang() === 'pt' ? 'Progresso por departamento · da sua atividade real' : (window.CUR && CUR.categoryProgress ? 'Progress by department · from your real activity' : 'Category progress · from your real activity')}</h3>
+      ${cats.map(([n, v]) => `<div class="skill-row"><span class="sn">${n}</span><div class="track"><div class="fill" style="width:${v}%"></div></div><span class="sv">${v}%</span></div>`).join('') || `<p class="empty-note">${_lang() === 'pt' ? 'Comece um curso e o seu quadro vai-se construindo aqui.' : 'Start a course and your picture builds here.'}</p>`}
     </div>
   </div>${footerHTML()}</div>`;
 }
@@ -1107,11 +1109,15 @@ async function emailNudgeMember(uid, btn) {
 
 /* ---------- Leader's Cockpit (real member data) ---------- */
 let adminMembers = null;
+/* initials from the letters of a name ("Admin (test)" → "AT"); the brand's first letter when there is no name.
+   The fallback used to be a hard-coded 'ER' (EdenRise) on every tenant. */
+const initialsOf = name => (String(name || '').replace(/[^\p{L}\s]/gu, ' ').trim().split(/\s+/).filter(Boolean).map(w => w[0]).join('').slice(0, 2).toUpperCase())
+  || String((typeof BRAND !== 'undefined' && (BRAND.company || BRAND.name)) || 'A').charAt(0).toUpperCase();
 function memberSummary(m) {
   const st = m.state || {}, pf = m.profile || {};
   const compHours = trainingHours(st.trainingLog || []), compTarget = complianceTarget(pf) || 40;
   const name = pf.name || (pf.email ? pf.email.split('@')[0] : 'Learner');
-  const initials = name.trim().split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'ER';
+  const initials = initialsOf(name);
   const path = st.path || [], prg = st.progress || {};
   const doneInPath = path.filter(id => prg[id] && prg[id].done).length;
   const pathPct = path.length ? Math.round(doneInPath / path.length * 100) : 0;
@@ -4540,7 +4546,7 @@ function channelPillsHTML() {
   </div>`;
 }
 const isOnline = m => Date.now() - tsMillis(m.lastSeen) < 150000;
-function memberDot(m) { return `<span class="m-ava ${isOnline(m) ? 'online' : ''}" data-action="member-card" data-uid="${m.uid}" title="${esc(m.name || '')}">${esc(m.initials || 'ER')}</span>`; }
+function memberDot(m) { return `<span class="m-ava ${isOnline(m) ? 'online' : ''}" data-action="member-card" data-uid="${m.uid}" title="${esc(m.name || '')}">${esc(m.initials || initialsOf(m.name))}</span>`; }
 function sidebarHTML() {
   const board = (boardCache || []).slice().sort((x, y) => (y.xp || 0) - (x.xp || 0));
   const online = (boardCache || []).filter(isOnline);
@@ -4608,7 +4614,7 @@ function postCardHTML(p) {
   const isDisc = p.kind === 'discussion' && p.title;
   const rc = p.replyCount || 0;
   return `<article class="post ${isDisc ? 'is-disc' : ''} ${p.pinned ? 'pinned' : ''}"${isDisc ? ` data-action="comm-open" data-id="${p.id}"` : ''}>
-    <div class="post-av" data-action="member-card" data-handle="${esc(p.authorHandle || '')}">${esc(p.authorInitials || 'ER')}</div>
+    <div class="post-av" data-action="member-card" data-handle="${esc(p.authorHandle || '')}">${esc(p.authorInitials || initialsOf(p.authorName))}</div>
     <div class="post-main">
       <div class="post-head">${p.official ? `<span class="off-badge">✦ ${brandName()} · ${t('comm_official')}</span>` : ''}${p.pinned ? `<span class="pin-badge">${t('comm_pinned')}</span>` : ''}<b>${esc(p.authorName || 'Learner')}</b>${p.authorHandle ? `<span class="post-handle" data-action="member-card" data-handle="${esc(p.authorHandle)}">@${esc(p.authorHandle)}</span>` : ''}<span class="post-time">\u00b7 ${timeAgo(p.createdAt)}</span></div>
       ${isDisc ? `<div class="post-title">${esc(p.title)}</div>` : ''}
@@ -4627,7 +4633,7 @@ function postCardHTML(p) {
 function replyHTML(r, postId) {
   const liked = r.likedBy && myUid() && r.likedBy.includes(myUid());
   return `<div class="reply">
-    <div class="post-av sm" data-action="member-card" data-handle="${esc(r.authorHandle || '')}">${esc(r.authorInitials || 'ER')}</div>
+    <div class="post-av sm" data-action="member-card" data-handle="${esc(r.authorHandle || '')}">${esc(r.authorInitials || initialsOf(r.authorName))}</div>
     <div class="post-main">
       <div class="post-head"><b>${esc(r.authorName || 'Learner')}</b>${r.authorHandle ? `<span class="post-handle" data-action="member-card" data-handle="${esc(r.authorHandle)}">@${esc(r.authorHandle)}</span>` : ''}<span class="post-time">\u00b7 ${timeAgo(r.createdAt)}</span></div>
       <div class="post-body">${richBody(r.body)}</div>
@@ -4700,7 +4706,7 @@ function showMemberCard(el) {
   const lv = levelFor(m.xp || 0);
   const card = document.createElement('div');
   card.className = 'member-card-pop';
-  card.innerHTML = `<div class="mc-head"><span class="m-ava lg ${isOnline(m) ? 'online' : ''}">${esc(m.initials || 'ER')}</span>
+  card.innerHTML = `<div class="mc-head"><span class="m-ava lg ${isOnline(m) ? 'online' : ''}">${esc(m.initials || initialsOf(m.name))}</span>
     <div><b>${esc(m.name || 'Learner')}</b>${m.username ? `<span class="post-handle">@${esc(m.username)}</span>` : ''}</div></div>
     <div class="mc-stats"><span>${tlevel(lv.idx)} · Lv ${lv.idx + 1}</span><span>${m.xp || 0} XP</span><span>${svgIcon('fire')} ${m.streak || 0}</span></div>
     ${m.joinedAt ? `<div class="mc-since">${t('comm_member_since')} ${new Date(tsMillis(m.joinedAt)).toLocaleDateString(_lang() === 'pt' ? 'pt-PT' : 'en-GB', { month: 'long', year: 'numeric' })}</div>` : ''}
@@ -7405,10 +7411,14 @@ function v2CheckPair(courseId, mod, lang, attempt) {
   const bank = QUIZ_V2[courseId];
   let qs = bank && bank.modules && bank.modules[mod];
   if (!qs || !qs.length) return null;
-  /* a retake rotates to the lesson's other questions, so it is not the same two again */
-  if (attempt && qs.length > 2) { const k = (attempt * 2) % qs.length; qs = [...qs.slice(k), ...qs.slice(0, k)]; }
-  const rec = qs.find(x => x.type === 'recall') || qs[0];
-  const app = qs.find(x => x !== rec && (x.type === 'application' || x.type === 'scenario')) || qs.find(x => x !== rec);
+  /* one recall + one applied question. A retake takes the NEXT question of each type (attempt n → the n-th
+     of each, wrapping), so it is never the same two again. Banks are ordered by type, so rotating the
+     whole list (the previous approach) landed on the same pair on the first retake. */
+  const n = attempt || 0;
+  const recs = qs.filter(x => x.type === 'recall'), apps = qs.filter(x => x.type === 'application' || x.type === 'scenario');
+  const rec = recs.length ? recs[n % recs.length] : qs[n % qs.length];
+  const appPool = apps.length ? apps : qs.filter(x => x !== rec);
+  const app = appPool.length ? appPool[n % appPool.length] : null;
   return [rec, app].filter(Boolean).map(q => shuffledView(q, lang));
 }
 
@@ -8605,7 +8615,14 @@ document.addEventListener('click', e => {
     }
     case 'me-tab': meTab = el.dataset.v; if (location.hash.startsWith('#/paths')) { location.hash = '#/me'; } else render(); break;
     case 'cockpit-retry': initAdmin(); break;
-    case 'reset-demo': { try { Object.keys(localStorage).filter(k => k.startsWith(BRAND_SLUG)).forEach(k => localStorage.removeItem(k)); } catch (e) {} localStorage.removeItem(STATE_KEY); location.hash = '#/home'; location.reload(); break; }
+    case 'reset-demo': {
+      /* resets THIS person's progress only. The local database (every account) and the sign-in mode survive;
+         with the local backend the account's stored copy is cleared too, or the reload would restore it. */
+      const keep = new Set([BRAND_SLUG + '-localdb-v1', AUTH_MODE_KEY]);
+      try { if (window.EdenCloud && EdenCloud.resetMine) EdenCloud.resetMine(); } catch (e) {}
+      try { Object.keys(localStorage).filter(k => k.startsWith(BRAND_SLUG) && !keep.has(k)).forEach(k => localStorage.removeItem(k)); } catch (e) {}
+      localStorage.removeItem(STATE_KEY); location.hash = '#/home'; location.reload(); break;
+    }
   }
 });
 

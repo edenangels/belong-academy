@@ -693,7 +693,7 @@ section.rail-section { margin-top: 52px; }
 .cert-row .ci { font-size: 22px; }
 .cert-row .ct { flex: 1; font-size: 13px; font-weight: 600; }
 .cert-row .cd { font-size: 11px; color: var(--text-faint); }
-.two-col { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+.two-col { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 18px; }
 
 /* ---------- PLAYER ---------- */
 .player-overlay {
@@ -1094,7 +1094,7 @@ footer .links button:hover { color: var(--text); }
 @media (max-width: 1100px) {
   .hero-side { display: none; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  .two-col { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 1024px) {
   nav.topnav { padding: 12px 18px; gap: 14px; }
@@ -4974,3 +4974,5 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .team-table { scrollbar-color: color-mix(in srgb, var(--text) 18%, transparent) transparent; scrollbar-width: thin; }
 .team-table th, .team-table td { padding-left: 10px; padding-right: 10px; }
 .team-table td { vertical-align: middle; }
+/* a long lesson title in the start button (PT especially) wraps instead of running off the edge */
+.course-hero .hero-actions .btn { max-width: 100%; white-space: normal; text-align: left; height: auto; min-height: 48px; line-height: 1.3; }

@@ -24,7 +24,7 @@
   /* every CUR helper reads the global learner state S; evaluate one member's state in its place */
   function withState(st, fn) {
     /* a member's stored state can predate fields the app fills in on load */
-    const prev = S; S = Object.assign({ progress: {}, trainingLog: [], ledger: [], checkRetakes: {}, path: [] }, st || {});
+    const prev = S; S = Object.assign({ progress: {}, trainingLog: [], ledger: [], checkRetakes: {}, path: [] }, st || {}, { lang: prev && prev.lang });   /* titles in the admin's language, not the member's */
     try { return fn(); } finally { S = prev; }
   }
   const ms = v => typeof v === 'number' ? v : (v ? Date.parse(v) || 0 : 0);
