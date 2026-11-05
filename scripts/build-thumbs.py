@@ -13,10 +13,20 @@ from PIL import Image
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'media', 'covers')
 os.makedirs(os.path.join(ROOT, 'sm'), exist_ok=True)
 for f in sorted(glob.glob(os.path.join(ROOT, '*.webp'))):
-    if f.endswith('-hero.webp'):
+    if f.endswith('-hero.webp') or f.endswith('-hero-phone.webp'):
         continue
     im = Image.open(f).convert('RGB')
     w, h = im.size
     out = os.path.join(ROOT, 'sm', os.path.basename(f))
     im.resize((640, round(h * 640 / w)), Image.LANCZOS).save(out, 'WEBP', quality=80, method=6)
+    print(os.path.relpath(out, os.path.join(ROOT, '..', '..')), os.path.getsize(f), '->', os.path.getsize(out))
+
+# phone hero crop: see the PHONE HERO CROP note at the end of core/styles.css
+POS_X, CROP_W = 0.62, 1070
+for f in sorted(glob.glob(os.path.join(ROOT, '*-hero.webp'))):
+    im = Image.open(f).convert('RGB')
+    w, h = im.size
+    left = round(POS_X * (w - CROP_W))
+    out = f[:-len('.webp')] + '-phone.webp'
+    im.crop((left, 0, left + CROP_W, h)).save(out, 'WEBP', quality=80, method=6)
     print(os.path.relpath(out, os.path.join(ROOT, '..', '..')), os.path.getsize(f), '->', os.path.getsize(out))

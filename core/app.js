@@ -714,7 +714,7 @@ function renderHome() {
   return `<div class="page">
   <header class="hero">
     <div class="hero-bg"></div><div class="hero-grid"></div>
-    ${(featured.heroArt || featured.poster) ? `<div class="hero-art${featured.heroFit ? ' fit-' + featured.heroFit : ''}" style="background-image:url('${featured.heroArt || featured.poster}')"></div>` : ''}
+    ${(featured.heroArt || featured.poster) ? `<div class="hero-art${featured.heroFit ? ' fit-' + featured.heroFit : ''}" style="background-image:url('${featured.heroArt || featured.poster}')${!featured.heroFit && /-hero\.webp$/.test(featured.heroArt || '') ? `;--hero-phone:url('${new URL(featured.heroArt.replace(/\.webp$/, '-phone.webp'), location.href).href}')` : ''}"></div>` : ''}
     <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-fade"></div><div class="hero-rim" aria-hidden="true"></div>
     <div class="hero-content">
       ${_H ? _H.eyebrow : ''}

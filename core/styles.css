@@ -5020,3 +5020,15 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 @media (max-width: 560px) { .reel-thumb .rt-title { bottom: 30px; } .reel-thumb .rt-time { left: 12px; bottom: 11px; } }
 /* hero context line over a photo: legible on any image (it was the dark accent on a busy picture) */
 .hero .cur-hero-ctx { color: color-mix(in srgb, var(--accent-2) 55%, #fff); text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 0 18px rgba(0,0,0,.45); }
+
+/* PHONE HERO CROP. On a portrait phone the hero shows the photograph cover-
+   fitted by HEIGHT at background-position 62% 46%, so ~36% of a 1920px-wide
+   heroArt is ever on screen. <name>-hero-phone.webp is that same photograph
+   cropped to a 1070x1080 window placed so that, at 62% and for any box up to
+   ~1:1, it frames EXACTLY the pixels the full file did (left edge =
+   0.62 x (1920 - 1070) = 527). Built by scripts/build-thumbs.py. If the hero's
+   background-position or the phone hero's proportions change, rebuild it.
+   The query (<= 640px wide, w/h <= 5/8, hero >= 64vh) keeps the box <= 0.98:1. */
+@media (max-width: 640px) and (max-aspect-ratio: 5/8) {
+  .hero-art[style*="--hero-phone"] { background-image: var(--hero-phone) !important; }
+}
