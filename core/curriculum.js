@@ -70,6 +70,7 @@
     hist_scope: ['Module record', 'Registo de módulo'], hist_flag: ['For review: below the current {p}% pass mark, or issued without an assessment score.', 'A rever: abaixo da nota mínima atual de {p}%, ou emitido sem resultado de avaliação.'],
     course_certs_h: ['Course certificates', 'Comprovativos de curso'], none_yet: ['None yet. Complete a course and pass its assessment.', 'Ainda nenhum. Conclua um curso e passe a avaliação.'],
     modules_of: ['modules', 'módulos'],
+    mods_in_path: ['Modules in your path', 'Módulos do seu percurso'], next_courses: ['Where to go next', 'Para onde ir a seguir'],
     videos: ['videos', 'vídeos'], video_one: ['video', 'vídeo'],
     see_more: ['See more', 'Ver mais'], see_less: ['Show less', 'Mostrar menos'],
     about_course: ['About this course', 'Sobre este curso'], chapters: ['Chapters', 'Capítulos'],
@@ -423,6 +424,14 @@
       <div class="rail-head"><h2>${L('your_path')}</h2><a class="see-all" href="#/paths">${t('see_all')}</a></div>
       <div class="path-row">${steps}</div>
     </section>`;
+  };
+  /* My learning: the path as MODULES only (an item split into several modules used to surface as its course card),
+     and "where to go next" as the courses not yet started */
+  window.curPathRailsHTML = () => {
+    const pm = pathModules();
+    const rest = courses.filter(co => !modulesOfCourse(co.id).some(m => pm.includes(m)) && !courseStats(co.id).complete);
+    return railHTML(L('mods_in_path'), t('in_order'), pm.map(moduleCardHTML), '#/library')
+      + (rest.length ? railHTML(L('next_courses'), L('courses'), rest.map(courseCardHTML), '#/library') : '');
   };
   window.curExploreHTML = () => railHTML(t('trending'), L('explore_sub'), courses.map(courseCardHTML), '#/library');
   /* hero: whatever it features, say which course and module it belongs to, and open the next lesson */

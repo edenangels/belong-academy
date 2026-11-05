@@ -846,11 +846,11 @@ function pathBodyHTML() {
   ${/* Journeys left My learning (João + Pedro, 5 Nov 2026): one hierarchy only, courses → modules → lessons.
         What sits here instead is the learner's own unfinished business: the questions to fix. */''}
   ${window.curFixHTML ? `<div class="page-pad" style="padding-top:22px;">${curFixHTML()}</div>` : ''}
-  ${railHTML(t('courses_in_path'), t('in_order'), S.path.map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
+  ${window.curPathRailsHTML ? curPathRailsHTML() : railHTML(t('courses_in_path'), t('in_order'), S.path.map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
   ${/* "Where to go next" = whatever is filmed and not already on your path.
         This was four hard-coded ids, all of which are now deleted, so the rail
         rendered empty; derived, it stays correct as the library grows. */''}
-  ${railHTML(t('next_paths'), t('next_paths_sub'), CATALOG.filter(c => !S.path.includes(c.id) && hasRealContent(c)).map(c => cardHTML(c)))}`;
+  ${window.curPathRailsHTML ? '' : railHTML(t('next_paths'), t('next_paths_sub'), CATALOG.filter(c => !S.path.includes(c.id) && hasRealContent(c)).map(c => cardHTML(c)))}`;
 }
 
 /* João, 16 Oct 2026: "need a calendar for this section, so we know when the
