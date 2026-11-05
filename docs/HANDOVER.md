@@ -28,18 +28,21 @@ The structure is **Academy → Courses → Modules → Lessons**:
 
 ## Reels
 
-- **What's there:** twelve ~30-second vertical reels. Reels 01–11 are the "Belong shorts"
-  series (Vimeo folder 31166999, female voice), one Belong idea each: Vision, Mission,
-  Sustainability, Simplicity, Comfort, Modernity, Freedom, Authenticity, Community,
-  Creativity, Wellbeing. The twelfth is the earlier Vision narration over estate footage,
-  kept at the end as a bonus. All are approved, so every learner sees them.
+- **What's there:** eleven ~30-second vertical reels, streamed straight from Vimeo (no video
+  files live in the academy). Ten are the "Belong shorts" series (Vimeo folder 31166999,
+  female voice): Vision, Mission, Simplicity, Comfort, Modernity, Freedom, Authenticity,
+  Community, Creativity, Wellbeing. The eleventh is the earlier Vision narration over estate
+  footage, kept at the end as a bonus. All are approved, so every learner sees them.
+- **Reel 03 · Sustainability** was removed from the Vimeo folder. Its copy and question are
+  ready in `REELS_AWAITING_VIDEO` (content.js): add the new Vimeo id and hash and move it
+  back into `REELS` after Mission.
 - **Where they appear:** the Home "Reels" row shows them as thumbnails. Tapping one opens a
   full-screen swipe feed at that reel, with sound, save, a short text version and the link
   to the deeper lesson. One question rises at the end of each reel.
 - **Hours:** reels never credit training hours.
-- **To add one:** add an entry to `REELS` in `brands/belong/content.js`, with an MP4 and a
-  poster in `media/reels/` (720×1280 H.264 around 800 kbps, +faststart; poster is a WebP
-  frame that shows the reel's opening caption).
+- **To add one:** upload it to the Vimeo folder (unlisted, embeddable), then add an entry to
+  `REELS` with `media: { type: 'vimeo', id, h }` (the `h=` hash from the video's share link)
+  and its Vimeo thumbnail as `poster`. The feed drives the player through the Vimeo SDK.
 
 ## Speed (AutoResearch, 5 Nov 2026)
 

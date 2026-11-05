@@ -202,10 +202,10 @@ const COURSE_SKILLS = {};
    28%); they are OPTIONAL there so no learning requirement is counted twice — which
    recording to keep is Pedro's call (flagged in docs/CONTENT-MAP.md). */
 /* ===== REELS — short vertical reels (9:16, ~30 s), the swipe feed at #/reels ==========
-   Source: Vimeo folder "Belong shorts". Served as small MP4s from media/reels/ (720p, sound,
-   faststart) rather than the Vimeo player: the feed's sound button and its end-of-reel
-   check only work on a <video>, and a muted background iframe would play a narrated
-   reel in silence. vimeoId is kept so the master can be found again.
+   Source: Vimeo folder "Belong shorts". Streamed straight from Vimeo (nothing is stored in
+   the academy): media.id + media.h (the unlisted-video hash) feed the Vimeo player, which
+   the feed drives through the Player SDK for sound, play/pause and the end-of-reel check.
+   The poster is the video's Vimeo thumbnail.
    A reel never credits training hours (it is not in CATALOG); `deeper` points at the
    lesson where the same idea lives at depth. Copy and checks are written from each
    reel's own captions, quoted in `lesson`. */
@@ -223,7 +223,7 @@ const REELS = [
     check: { type: 'recall', a: 1,
       en: { q: "What is Belong's vision?", opts: ['To run the best hotel in the countryside', 'To regenerate the territory through a circular economy', 'To grow every ingredient the kitchen uses'], why: 'The reel states it directly: to regenerate the territory through a circular economy. What the land gives returns to the land.' },
       pt: { q: 'Qual é a visão da Belong?', opts: ['Gerir o melhor hotel do campo', 'Regenerar o território através de uma economia circular', 'Produzir todos os ingredientes que a cozinha usa'], why: 'O reel di-lo diretamente: regenerar o território através de uma economia circular. O que a terra dá volta à terra.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-vision.mp4' }, poster: 'media/reels/belong-vision.webp',
+    media: { type: 'vimeo', id: '1243785831', h: '885586e570' }, poster: 'https://i.vimeocdn.com/video/2222411869-8b024d4396aa657cbb1b6ac2f3fb91f08c6f08d01532704a2d519cc985eee48e-d_720x1280',
     approved: true,
     deeper: 'welcome-belong' },
   { id: 'belong-mission', seconds: 34, vimeoId: '1243785928',
@@ -236,22 +236,9 @@ const REELS = [
     check: { type: 'recall', a: 2,
       en: { q: 'Which four things does the mission connect?', opts: ['Rooms, restaurant, shop and spa', 'Marketing, sales, service and reviews', 'Farming, hospitality, food and nature'], why: 'The mission is to connect four things that rarely travel together: farming, hospitality, food and nature.' },
       pt: { q: 'Que quatro coisas liga a missão?', opts: ['Quartos, restaurante, loja e spa', 'Marketing, vendas, serviço e avaliações', 'Agricultura, hospitalidade, comida e natureza'], why: 'A missão é ligar quatro coisas que raramente andam juntas: agricultura, hospitalidade, comida e natureza.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-mission.mp4' }, poster: 'media/reels/belong-mission.webp',
+    media: { type: 'vimeo', id: '1243785928', h: '89a75ee7a9' }, poster: 'https://i.vimeocdn.com/video/2222412139-cf8eca182c7bbf832a1bc0955fd920669c28f216538d310bec839ca96505c224-d_720x1280',
     approved: true,
     deeper: 'welcome-belong' },
-  { id: 'belong-sustainability', seconds: 32, vimeoId: '1243786077',
-    title: { en: 'Sustainability on three legs', pt: 'Sustentabilidade em três pernas' },
-    hook:  { en: 'Three legs, and none of them stands alone.', pt: 'Três pernas, e nenhuma se aguenta sozinha.' },
-    line:  { en: 'A project that does not turn a profit regenerates nothing. It closes.', pt: 'Um projeto que não dá lucro não regenera nada. Fecha.' },
-    lesson: { en: 'We speak of sustainability on three legs. Environmental: water, soil, waste, energy. Social: local jobs and wages that hold up a life. And financial, the one usually left out of the conversation. Here, profit is the condition for doing the rest well.',
-              pt: 'Falamos de sustentabilidade em três pernas. Ambiental: água, solo, resíduos, energia. Social: emprego local e salários que sustentam uma vida. E financeira, a que costuma ficar fora da conversa. Aqui, o lucro é a condição para fazer bem o resto.' },
-    videoLang: 'en',
-    check: { type: 'recall', a: 0,
-      en: { q: 'Which leg of sustainability is usually left out of the conversation?', opts: ['Financial', 'Environmental', 'Social'], why: 'The reel names it: financial. A project that does not turn a profit regenerates nothing. It closes.' },
-      pt: { q: 'Que perna da sustentabilidade costuma ficar fora da conversa?', opts: ['A financeira', 'A ambiental', 'A social'], why: 'O reel diz qual é: a financeira. Um projeto que não dá lucro não regenera nada. Fecha.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-sustainability.mp4' }, poster: 'media/reels/belong-sustainability.webp',
-    approved: true,
-    deeper: 'houses-farm-sustainability' },
   { id: 'belong-simplicity', seconds: 30, vimeoId: '1243786227',
     title: { en: 'Knowing what to take away', pt: 'Saber o que tirar' },
     hook:  { en: 'Simplicity is not doing less.', pt: 'Simplicidade não é fazer menos.' },
@@ -262,7 +249,7 @@ const REELS = [
     check: { type: 'recall', a: 2,
       en: { q: 'What do we ask before adding anything?', opts: ['Is it in the budget?', 'Will guests photograph it?', 'Does this serve the guest, or does it serve us?'], why: 'Before we add anything, we ask whether it serves the guest or serves us. If the answer hesitates, it does not go in.' },
       pt: { q: 'O que perguntamos antes de acrescentar alguma coisa?', opts: ['Cabe no orçamento?', 'Os hóspedes vão fotografá-lo?', 'Isto serve o hóspede ou serve-nos a nós?'], why: 'Antes de acrescentarmos alguma coisa, perguntamos se serve o hóspede ou se nos serve a nós. Se a resposta hesita, não entra.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-simplicity.mp4' }, poster: 'media/reels/belong-simplicity.webp',
+    media: { type: 'vimeo', id: '1243786227', h: '6f09c98b10' }, poster: 'https://i.vimeocdn.com/video/2222412490-3711481a2b75e26cea879ddc64ce84051769faf899c8d067691333338cfcbd78-d_720x1280',
     approved: true,
     deeper: 'craveiral-hospitality' },
   { id: 'belong-comfort', seconds: 29, vimeoId: '1243786323',
@@ -275,7 +262,7 @@ const REELS = [
     check: { type: 'recall', a: 1,
       en: { q: 'How is country comfort felt?', opts: ['As luxury that announces itself', 'As the absence of friction', 'As a full programme of activities'], why: 'Urban luxury announces itself; country comfort is felt as the absence of friction.' },
       pt: { q: 'Como se sente o conforto do campo?', opts: ['Como um luxo que se anuncia', 'Como ausência de atrito', 'Como um programa cheio de atividades'], why: 'O luxo urbano anuncia-se; o conforto do campo sente-se como ausência de atrito.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-comfort.mp4' }, poster: 'media/reels/belong-comfort.webp',
+    media: { type: 'vimeo', id: '1243786323', h: '97c82f276a' }, poster: 'https://i.vimeocdn.com/video/2222412667-312497e4792f344825e7152e69fcd019287a9652b478815302e412b12dcd1016-d_720x1280',
     approved: true,
     deeper: 'craveiral-hospitality' },
   { id: 'belong-modernity', seconds: 32, vimeoId: '1243786407',
@@ -288,7 +275,7 @@ const REELS = [
     check: { type: 'recall', a: 0,
       en: { q: 'Why does Craveiral use old techniques?', opts: ['Because they work', 'Because they look charming', 'Because guests expect a period setting'], why: 'We use old techniques because they work, not because they look charming. Craveiral is not a museum of rural life.' },
       pt: { q: 'Porque usa o Craveiral técnicas antigas?', opts: ['Porque funcionam', 'Porque parecem pitorescas', 'Porque os hóspedes esperam um cenário de época'], why: 'Usamos técnicas antigas porque funcionam, não porque parecem pitorescas. O Craveiral não é um museu da vida rural.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-modernity.mp4' }, poster: 'media/reels/belong-modernity.webp',
+    media: { type: 'vimeo', id: '1243786407', h: 'b44a414547' }, poster: 'https://i.vimeocdn.com/video/2222412801-11c72e3dc8866e974e585c51aadccf6d9f62ed3ca578acb6a0b344ae76208fbf-d_720x1280',
     approved: true,
     deeper: 'houses-farm-sustainability' },
   { id: 'belong-freedom', seconds: 32, vimeoId: '1243786556',
@@ -301,7 +288,7 @@ const REELS = [
     check: { type: 'recall', a: 1,
       en: { q: 'For the team, what does freedom mean?', opts: ['Asking a manager before every decision', 'Whoever is in front of the guest decides in the moment, and is backed for it', 'Following the same script with every guest'], why: 'Whoever is standing in front of the guest decides in the moment and is backed for it. An imperfect decision in time beats a perfect one that arrives late.' },
       pt: { q: 'Para a equipa, o que significa liberdade?', opts: ['Perguntar a um responsável antes de cada decisão', 'Quem está à frente do hóspede decide no momento, e tem o apoio da equipa', 'Seguir o mesmo guião com todos os hóspedes'], why: 'Quem está à frente do hóspede decide no momento e tem o apoio da equipa. Mais vale uma decisão imperfeita a tempo do que uma perfeita que chega tarde.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-freedom.mp4' }, poster: 'media/reels/belong-freedom.webp',
+    media: { type: 'vimeo', id: '1243786556', h: 'f1fc608533' }, poster: 'https://i.vimeocdn.com/video/2222412927-2e9e13774de6800d470697586ecc1ff76523b60b46c32cad3f263ac30b29b1b2-d_720x1280',
     approved: true,
     deeper: 'voice-leadership' },
   { id: 'belong-authenticity', seconds: 28, vimeoId: '1243786646',
@@ -314,7 +301,7 @@ const REELS = [
     check: { type: 'recall', a: 2,
       en: { q: 'The garden gave no tomatoes this week. What happens?', opts: ['We buy some in so the menu stays the same', 'We leave them off and say nothing', 'There are none on the plate, and we tell the guest so'], why: 'What we show is what exists. No tomatoes from the garden means no tomatoes on the plate, and we tell the guest so.' },
       pt: { q: 'A horta não deu tomates esta semana. O que acontece?', opts: ['Compramos fora para o menu ficar igual', 'Tiramo-los do prato e não dizemos nada', 'Não há tomates no prato, e dizemos isso ao hóspede'], why: 'O que mostramos é o que existe. Sem tomates da horta, não há tomates no prato, e dizemos isso ao hóspede.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-authenticity.mp4' }, poster: 'media/reels/belong-authenticity.webp',
+    media: { type: 'vimeo', id: '1243786646', h: 'ee8d37ac3d' }, poster: 'https://i.vimeocdn.com/video/2222413035-6790f72748df4fb6dbd10a43f16d53e99b63a7d0e38c74a47dfaf669e09cd9db-d_720x1280',
     approved: true,
     deeper: 'farm-to-table' },
   { id: 'belong-community', seconds: 29, vimeoId: '1243786755',
@@ -327,7 +314,7 @@ const REELS = [
     check: { type: 'recall', a: 0,
       en: { q: 'What question does the community fairly ask us?', opts: ['What has this project brought here?', 'When will the resort open to the public?', 'How many guests come each year?'], why: 'The question this community asks is a fair one: what has this project brought here? Every year we need a better answer.' },
       pt: { q: 'Que pergunta justa nos faz a comunidade?', opts: ['O que trouxe este projeto até aqui?', 'Quando é que o resort abre ao público?', 'Quantos hóspedes vêm por ano?'], why: 'A pergunta que esta comunidade nos faz é justa: o que trouxe este projeto até aqui? Todos os anos precisamos de uma resposta melhor.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-community.mp4' }, poster: 'media/reels/belong-community.webp',
+    media: { type: 'vimeo', id: '1243786755', h: 'fc72a33550' }, poster: 'https://i.vimeocdn.com/video/2222413255-d4ce80f80d9419ee00f6826914d458f9c697363f7e57106e80934c616453ddaa-d_720x1280',
     approved: true,
     deeper: 'welcome-belong' },
   { id: 'belong-creativity', seconds: 32, vimeoId: '1243786821',
@@ -340,7 +327,7 @@ const REELS = [
     check: { type: 'recall', a: 1,
       en: { q: 'How do the menu and the garden relate?', opts: ['The garden is planted to match the menu', 'The menu follows the garden', 'They are planned separately'], why: 'The menu follows the garden, not the other way around. Creativity is solving with what is at hand.' },
       pt: { q: 'Qual é a relação entre o menu e a horta?', opts: ['A horta é plantada para o menu', 'O menu segue a horta', 'São planeados em separado'], why: 'O menu segue a horta, e não o contrário. Criatividade é resolver com o que há à mão.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-creativity.mp4' }, poster: 'media/reels/belong-creativity.webp',
+    media: { type: 'vimeo', id: '1243786821', h: '64e06cebb1' }, poster: 'https://i.vimeocdn.com/video/2222413338-792abfdec78717dfb5a6342eb89b9d78946cad8f3425b4bfdaa9bf2c63a169f2-d_720x1280',
     approved: true,
     deeper: 'farm-to-table' },
   { id: 'belong-wellbeing', seconds: 30, vimeoId: '1243786939',
@@ -353,7 +340,7 @@ const REELS = [
     check: { type: 'recall', a: 2,
       en: { q: 'What is the wellbeing of the team, in this reel?', opts: ['A nice benefit when the season allows', 'Something that comes after the guest experience', 'Infrastructure: it is what makes the guest experience possible'], why: 'It is not a nice benefit. It is infrastructure, and it comes before the guest experience because it makes it possible.' },
       pt: { q: 'Neste reel, o que é o bem-estar da equipa?', opts: ['Um benefício simpático quando a época o permite', 'Algo que vem depois da experiência do hóspede', 'Infraestrutura: é o que torna possível a experiência do hóspede'], why: 'Não é um benefício simpático. É infraestrutura, e vem antes da experiência do hóspede porque é o que a torna possível.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-wellbeing.mp4' }, poster: 'media/reels/belong-wellbeing.webp',
+    media: { type: 'vimeo', id: '1243786939', h: '903deb8393' }, poster: 'https://i.vimeocdn.com/video/2222413542-a26dcb2537856cc76a00fa28e554ec53d773eb51c50ac2b438920c8faaf8f2f6-d_720x1280',
     approved: true,
     deeper: 'voice-leadership' },
   /* the earlier Vision narration over real estate footage, kept as a bonus at the end (Vimeo "Animated and Belong Footage reel");
@@ -368,9 +355,28 @@ const REELS = [
     check: { type: 'recall', a: 0,
       en: { q: 'In the circular economy, what does the house do with what it takes?', opts: ['It gives it back', 'It keeps it for later seasons', 'It sells it to guests'], why: 'The reel says it plainly: what the house takes, the house gives back. What the land gives returns to the land.' },
       pt: { q: 'Na economia circular, o que faz a casa com o que tira?', opts: ['Devolve-o', 'Guarda-o para as próximas estações', 'Vende-o aos hóspedes'], why: 'O reel di-lo claramente: o que a casa tira, a casa devolve. O que a terra dá volta à terra.' } },
-    media: { type: 'mp4', src: 'media/reels/belong-vision-estate.mp4' }, poster: 'media/reels/belong-vision-estate.webp',
+    media: { type: 'vimeo', id: '1242451537', h: '646e32f44e' }, poster: 'https://i.vimeocdn.com/video/2220703378-7481cea324b737db63bb4411ae7067f6eaf3dd2129e8ebaac691d08095da36d7-d_720x1280',
     approved: true,
     deeper: 'welcome-belong' },
+];
+
+/* Reel 03 · Sustainability was removed from the Vimeo folder (it was 1243786077). Its copy is
+   kept here, ready: give it the new vimeoId and its `h` hash, then move it back into REELS
+   after belong-mission. */
+const REELS_AWAITING_VIDEO = [
+  { id: 'belong-sustainability', seconds: 32, vimeoId: '1243786077',
+    title: { en: 'Sustainability on three legs', pt: 'Sustentabilidade em três pernas' },
+    hook:  { en: 'Three legs, and none of them stands alone.', pt: 'Três pernas, e nenhuma se aguenta sozinha.' },
+    line:  { en: 'A project that does not turn a profit regenerates nothing. It closes.', pt: 'Um projeto que não dá lucro não regenera nada. Fecha.' },
+    lesson: { en: 'We speak of sustainability on three legs. Environmental: water, soil, waste, energy. Social: local jobs and wages that hold up a life. And financial, the one usually left out of the conversation. Here, profit is the condition for doing the rest well.',
+              pt: 'Falamos de sustentabilidade em três pernas. Ambiental: água, solo, resíduos, energia. Social: emprego local e salários que sustentam uma vida. E financeira, a que costuma ficar fora da conversa. Aqui, o lucro é a condição para fazer bem o resto.' },
+    videoLang: 'en',
+    check: { type: 'recall', a: 0,
+      en: { q: 'Which leg of sustainability is usually left out of the conversation?', opts: ['Financial', 'Environmental', 'Social'], why: 'The reel names it: financial. A project that does not turn a profit regenerates nothing. It closes.' },
+      pt: { q: 'Que perna da sustentabilidade costuma ficar fora da conversa?', opts: ['A financeira', 'A ambiental', 'A social'], why: 'O reel diz qual é: a financeira. Um projeto que não dá lucro não regenera nada. Fecha.' } },
+    media: { type: 'vimeo', id: '', h: '' }, poster: '',
+    approved: true,
+    deeper: 'houses-farm-sustainability' },
 ];
 
 const CURRICULUM = {

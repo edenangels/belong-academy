@@ -6641,10 +6641,17 @@ let reelCheckWatch = null;
    is genuinely the active slide and the page is visible, so a backgrounded feed
    no longer counts as watching. */
 function stopReelCheck() { if (reelCheckWatch) { reelCheckWatch.stop(); reelCheckWatch = null; } }
-function armReelCheck(el, r, vid) {
+function armReelCheck(el, r, vid, vimeo) {
   stopReelCheck();
   if (!reelCheckOf(r) || el.dataset.rcDone || el.querySelector('.rc')) return;
   const fire = () => { stopReelCheck(); raiseReelCheck(el, r); };
+
+  if (vimeo) {
+    const onTime = d => { if (d && d.duration && d.seconds >= d.duration - 0.35) fire(); };
+    vimeo.on('timeupdate', onTime);
+    reelCheckWatch = { stop: () => { try { vimeo.off('timeupdate', onTime); } catch (e) {} } };
+    return;
+  }
 
   if (vid) {
     const onTime = () => {
@@ -6781,7 +6788,9 @@ function reelMediaHTML(r, i) {
   const m = r.media || {};
   const poster = r.poster ? ` poster="${esc(r.poster)}"` : '';
   if (m.type === 'mp4')     return `<video class="reel-vid" data-i="${i}" src="${esc(m.src)}"${poster} loop muted playsinline preload="none"></video>`;
-  if (m.type === 'vimeo')   return `<iframe class="reel-vid" data-i="${i}" src="https://player.vimeo.com/video/${esc(m.id)}?${m.h ? 'h=' + esc(m.h) + '&' : ''}background=1&loop=1&muted=1&title=0&byline=0&portrait=0&dnt=1" allow="autoplay; fullscreen" allowfullscreen loading="lazy"></iframe>`;
+  /* Vimeo: a real player with its own chrome hidden (controls=0), driven by the Player SDK.
+     NOT background=1: background mode forces silence, and a narrated reel must be able to speak. */
+  if (m.type === 'vimeo')   return `<iframe class="reel-vid reel-vm" data-i="${i}" src="https://player.vimeo.com/video/${esc(m.id)}?${m.h ? 'h=' + esc(m.h) + '&' : ''}controls=0&autoplay=0&muted=1&loop=1&playsinline=1&autopause=0&title=0&byline=0&portrait=0&keyboard=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture" title="${esc(reelField(r.title))}" tabindex="-1"></iframe>`;
   if (m.type === 'youtube') return `<iframe class="reel-vid" data-i="${i}" src="https://www.youtube-nocookie.com/embed/${esc(m.id)}?loop=1&mute=1&controls=0&rel=0&playlist=${esc(m.id)}" allow="autoplay" allowfullscreen loading="lazy"></iframe>`;
   return '';
 }
@@ -6886,6 +6895,26 @@ function renderReels() {
    behaviour depended on it would have shipped playing nothing, silently, on
    whichever devices behave that way. Scroll position is always true. rAF keeps
    it to one read per frame. */
+/* Vimeo reels: one SDK player per mounted iframe (dropped with the iframe when it leaves the
+   mount window). The current slide plays from the start with the feed's sound setting; its
+   neighbours stay paused at 0 so the next swipe starts instantly. */
+const reelPlayers = new WeakMap();
+function reelVimeo(ifr, on, el) {
+  loadVimeoSDK().then(() => {
+    if (!window.Vimeo || !document.body.contains(ifr)) return;
+    let pl = reelPlayers.get(ifr);
+    if (!pl) { try { pl = new Vimeo.Player(ifr); } catch (e) { return; } reelPlayers.set(ifr, pl); }
+    if (!on) { pl.pause().catch(() => {}); pl.setCurrentTime(0).catch(() => {}); return; }
+    const sound = !!($('#reelFeed') && $('#reelFeed').classList.contains('sound'));
+    const still = () => el.classList.contains('current') && document.body.contains(ifr);
+    /* if sound is refused (no gesture yet), fall back to muted. Every step re-checks that this is
+       still the current slide: a swipe's pause() rejects a pending play(), and restarting then
+       would leave the old reel playing under the new one. */
+    pl.setMuted(!sound).then(() => still() ? pl.play() : null)
+      .catch(() => { if (still()) pl.setMuted(true).then(() => still() ? pl.play() : null).catch(() => {}); });
+    const r = qwById(el.dataset.id); if (r && el.classList.contains('current')) armReelCheck(el, r, null, pl);
+  }).catch(() => {});
+}
 function armReelFeed() {
   const feed = $('#reelFeed'); if (!feed) return;
   let ticking = false;
@@ -6914,8 +6943,10 @@ function armReelFeed() {
         if (on) { v.preload = 'auto'; v.play().catch(() => {}); }
         else { v.preload = 'metadata'; v.pause(); try { v.currentTime = 0; } catch (e) {} }
       }
+      const vm = box.querySelector('iframe.reel-vm');
       /* the check rises when the clip has actually FINISHED a pass — see armReelCheck */
-      if (on) { const rr = qwById(el.dataset.id); if (rr) armReelCheck(el, rr, v); }
+      if (vm) reelVimeo(vm, on, el);
+      else if (on) { const rr = qwById(el.dataset.id); if (rr) armReelCheck(el, rr, v); }
     }
     const prog = $('.reel-prog');
     if (prog) [...prog.children].forEach((sp, k) => sp.classList.toggle('on', k <= idx));
@@ -8443,6 +8474,9 @@ document.addEventListener('click', e => {
     case 'reel-mute': { const f = $('#reelFeed'); if (!f) break;
       const on = f.classList.toggle('sound');
       f.querySelectorAll('video').forEach(v => { v.muted = !on; });
+      f.querySelectorAll('iframe.reel-vm').forEach(ifr => { const pl = reelPlayers.get(ifr); if (!pl) return;
+        const cur = ifr.closest('.reel') && ifr.closest('.reel').classList.contains('current');
+        pl.setMuted(!on).then(() => on ? pl.setVolume(1) : null).then(() => cur ? pl.play() : null).catch(() => {}); });
       const ic = $('#reelMuteIcon'); if (ic) ic.textContent = on ? '\u266b' : '\u266a';
       break; }
     case 'reel-goto': { ledgerAppend('reel_to_course', { course: el.dataset.id, from: 'feed' });
