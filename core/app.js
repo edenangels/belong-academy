@@ -843,7 +843,9 @@ function pathBodyHTML() {
     </div>
     ${pathStepperHTML()}
   </section>
-  <div class="page-pad" style="padding-top:26px;">${journeysSectionHTML()}</div>
+  ${/* Journeys left My learning (João + Pedro, 5 Nov 2026): one hierarchy only, courses → modules → lessons.
+        What sits here instead is the learner's own unfinished business: the questions to fix. */''}
+  ${window.curFixHTML ? `<div class="page-pad" style="padding-top:22px;">${curFixHTML()}</div>` : ''}
   ${railHTML(t('courses_in_path'), t('in_order'), S.path.map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
   ${/* "Where to go next" = whatever is filmed and not already on your path.
         This was four hard-coded ids, all of which are now deleted, so the rail
@@ -3193,9 +3195,36 @@ function missionCardHTML(c) {
   return `<div class="admin-section mission-card">
     <h2> ${t('mis_h')} <span class="mis-xp">+${m.xp} XP</span></h2>
     <p class="sect-sub sub-auto">${t('mis_sub')}</p>
-    <div class="mis-brief"><b>${esc(m.title)}</b><p>${esc(m.brief)}</p></div>
+    <div class="mis-brief"><b>${esc(m.title)}</b>${m.brief ? `<p>${esc(m.brief)}</p>` : ''}${m.deliver ? `<p class="mis-deliver"><span>${t('mis_admin_deliver')}</span> ${esc(m.deliver)}</p>` : ''}</div>
     ${body}
   </div>`;
+}
+/* Admins set (or clear) a course's field mission: a real task with a real deliverable. Saved in
+   the org config, so every learner of the company sees the same one. */
+function missionAdminHTML(courseId) {
+  if (!isAdmin()) return '';
+  const m = ((window.EdenOrg && EdenOrg.missions) || {})[courseId] || {};
+  return `<details class="admin-section mis-admin"${m.title ? '' : ''}>
+    <summary><b>${t('mis_admin_h')}</b><span class="sect-sub" style="display:inline;margin-left:8px;">${m.title ? esc(m.title) : t('mis_admin_none')}</span></summary>
+    <p class="sect-sub sub-auto">${t('mis_admin_sub')}</p>
+    <label class="mis-lbl">${t('mis_admin_title')}<input class="auth-input" id="misT" maxlength="80" value="${attr(m.title || '')}"></label>
+    <label class="mis-lbl">${t('mis_admin_brief')}<textarea class="comm-input" id="misB" rows="3" maxlength="600">${esc(m.brief || '')}</textarea></label>
+    <label class="mis-lbl">${t('mis_admin_deliver')}<input class="auth-input" id="misD" maxlength="140" value="${attr(m.deliver || '')}"></label>
+    <label class="mis-lbl mis-xp-l">XP<input class="auth-input" id="misX" type="number" min="0" max="500" step="10" value="${+m.xp || 100}"></label>
+    <div class="mis-actions"><button class="btn btn-primary btn-sm" data-action="mis-set" data-id="${courseId}">${t('mis_admin_save')}</button>
+      ${m.title ? `<button class="btn btn-glass btn-sm" data-action="mis-clear" data-id="${courseId}">${t('mis_admin_clear')}</button>` : ''}</div>
+  </details>`;
+}
+window.missionAdminHTML = missionAdminHTML;
+function saveMissionDef(courseId, def) {
+  if (!(window.EdenCloud && EdenCloud.saveOrgConfig)) { toast(t('mail_failed'), '⚠️'); return; }
+  const all = Object.assign({}, (window.EdenOrg && EdenOrg.missions) || {});
+  if (def) all[courseId] = def; else delete all[courseId];
+  EdenCloud.saveOrgConfig({ missions: all }).then(() => {
+    window.EdenOrg = Object.assign({}, window.EdenOrg, { missions: all });
+    ledgerAppend('mission_set', { courseId, cleared: !def });
+    toast(def ? t('mis_admin_saved') : t('mis_admin_cleared'), '✓'); render();
+  }).catch(() => toast(t('mail_failed'), '⚠️'));
 }
 function compressPhoto(file, cb) {
   const img = new Image();
@@ -3249,7 +3278,7 @@ function submitMission(courseId) {
   }).catch(() => toast(_lang() === 'pt' ? 'Não foi possível submeter' : 'Could not submit', '⚠️'));
 }
 function claimMission(id, courseId) {
-  const m = MISSIONS[courseId];
+  const m = missionFor(courseId);
   EdenMissions.claim(id).then(() => {
     const mine = (myMissions || []).find(x => x.id === id); if (mine) mine.claimed = true;
     awardXp((m && m.xp) || 100, t('mis_h'));
@@ -3426,11 +3455,12 @@ function paintMissions(list) {
   const el = $('#missionQueue'); if (!el) return;
   el.innerHTML = list.length ? list.map(m => {
     const c = courseById(m.courseId);
-    const mis = MISSIONS[m.courseId];
+    const co = window.CUR && CUR.courses.find(x => x.id === m.courseId);
+    const mis = missionFor(m.courseId);
     return `<div class="mq-row">
       ${m.photo ? `<img class="mq-photo" src="${m.photo}" alt="proof">` : `<span class="ci t-grad-${c ? c.grad : 1}">${svgIcon(c ? c.icon : 'leaf')}</span>`}
-      <div class="ct"><b>${esc(m.authorName || 'Learner')} · ${c ? esc(c.title) : m.courseId}</b>
-        <span>${esc((mis && mis.en.title) || '')}${m.note ? ' — “' + esc(m.note.slice(0, 140)) + '”' : ''} · ${timeAgo(m.createdAt)}</span></div>
+      <div class="ct"><b>${esc(m.authorName || 'Learner')} · ${co ? esc(CUR.cTitle(co)) : c ? esc(c.title) : m.courseId}</b>
+        <span>${esc((mis && mis.title) || '')}${m.note ? ' — “' + esc(m.note.slice(0, 140)) + '”' : ''} · ${timeAgo(m.createdAt)}</span></div>
       <button class="btn btn-primary btn-sm" data-action="mis-review" data-id="${m.id}" data-ok="1">✓ Approve</button>
       <button class="btn btn-glass btn-sm" data-action="mis-review" data-id="${m.id}" data-ok="0">Decline</button>
     </div>`;
@@ -6001,7 +6031,8 @@ function showTakeaways(c, mod, next) {
    lesson in pendingChecks and credits nothing, which the learner is told
    plainly rather than discovering at audit time. */
 function showModuleCheck(c, mod, after, opts) {
-  const retake = !!(opts && opts.retake);
+  const fix = (opts && opts.fix) || null;            /* { base, wrong }: re-ask only the missed questions */
+  const retake = !!(opts && opts.retake) || !!fix;
   const ov = $('#ckOv'); if (!ov) { creditTraining(c.id, mod, null); if (after) after(); return; }
   const lang = _lang() === 'pt' ? 'pt' : 'en';
   const finish = res => { ov.classList.remove('on'); ov.innerHTML = ''; creditTraining(c.id, mod, res); updateXpChip(); if (after) after(); };
@@ -6009,7 +6040,15 @@ function showModuleCheck(c, mod, after, opts) {
   loadQuizV2(c.id).then(() => {
     /* V2 (transcript-grounded, blind-verified) first; the hand-written bank is
        the fallback, and the acknowledgment is the floor — never a silent credit. */
-    let qs = v2CheckPair(c.id, mod, lang, retake ? (((S.checkRetakes || {})[c.id + ':' + mod] || []).length + 1) : 0);
+    let qs = null;
+    if (fix) {
+      /* the same questions the learner got wrong (found in the bank by their text in either language),
+         options reshuffled; anything not found falls back to a normal retake */
+      const bank = (QUIZ_V2[c.id] && QUIZ_V2[c.id].modules && QUIZ_V2[c.id].modules[mod]) || [];
+      const found = fix.wrong.map(d => bank.find(q => (q.en && q.en.q === d.q) || (q.pt && q.pt.q === d.q))).filter(Boolean);
+      if (found.length === fix.wrong.length) qs = found.map(q => shuffledView(q, lang));
+    }
+    if (!qs) qs = v2CheckPair(c.id, mod, lang, retake ? (((S.checkRetakes || {})[c.id + ':' + mod] || []).length + 1) : 0);
     if (!qs) {
       const legacy = moduleCheckQuestions(c, mod);
       qs = legacy ? legacy.map(q => ({ q: q.q, opts: q.opts, a: q.a, why: null, t0: null, type: 'recall', gen: false, audit: 'authored' })) : null;
@@ -6033,14 +6072,15 @@ function showModuleCheck(c, mod, after, opts) {
     const conf = new Array(qs.length).fill(null);   /* true=sure, false=guessing, null=unsaid */
     const paint = () => {
       ov.innerHTML = `<div class="ck-card">
-        <div class="ob-eyebrow">${t('mc_eyebrow')} · ${esc(ctitle(c))}</div>
-        <p class="pre-sub">${t('mc_sub')}</p>
+        <div class="ob-eyebrow">${fix ? t('fix_eyebrow') : t('mc_eyebrow')} · ${esc(ctitle(c))}</div>
+        <p class="pre-sub">${fix ? t('fix_sub_ck') : t('mc_sub')}</p>
         ${qs.map((q, qi) => `<div class="mc-q">
           <div class="ck-q">${qi + 1}. ${esc(q.q)}</div>
+          ${fix && q.t0 != null ? `<button class="fix-moment" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('fix_watch')} · ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
           ${q.opts.map((o, oi) => `<div class="q-opt${answers[qi] === oi ? ' sel' : ''}" data-q="${qi}" data-o="${oi}" role="button" tabindex="0"><span class="radio"></span><span>${esc(o)}</span></div>`).join('')}
           ${/* no "How sure are you?" row: João + John, 5 Nov 2026, redundant */''}
         </div>`).join('')}
-        <div class="ck-foot"><span class="ck-note">${t('mc_note')}</span>
+        <div class="ck-foot"><span class="ck-note">${fix ? '' : t('mc_note')}</span>
           <button class="btn btn-primary btn-sm" id="mcGo"${answers.some(a => a === null) ? ' disabled' : ''}>${t('mc_submit')}</button></div>
       </div>`;
       ov.querySelectorAll('.q-opt').forEach(el => el.addEventListener('click', () => { answers[+el.dataset.q] = +el.dataset.o; paint(); }));
@@ -6051,30 +6091,39 @@ function showModuleCheck(c, mod, after, opts) {
           q: q.q, given: q.opts[answers[i]], correct: q.opts[q.a], ok: answers[i] === q.a,
           type: q.type, audit: q.audit, conf: conf[i], t0: q.t0
         }));
-        const score = detail.filter(d => d.ok).length;
-        if (score === qs.length) awardXp(5, t('mc_eyebrow'));
-        S.quizzesPassed = (S.quizzesPassed || 0) + (score === qs.length ? 1 : 0);
+        let score = detail.filter(d => d.ok).length;
+        /* a fix scores the WHOLE lesson: the earlier right answers stand, the fixed ones are added */
+        let full = null, fullTotal = qs.length;
+        if (fix) {
+          const right = new Set(fix.wrong.filter((w, i) => detail[i] && detail[i].ok).map(w => w.q));
+          full = fix.base.detail.map(d => right.has(d.q) ? Object.assign({}, d, { ok: true, fixedAt: Date.now() }) : d);
+          score = full.filter(d => d.ok).length; fullTotal = fix.base.total;
+        }
+        if (!fix && score === qs.length) awardXp(5, t('mc_eyebrow'));
+        if (fix && score === fullTotal) awardXp(3, t('fix_eyebrow'));
+        S.quizzesPassed = (S.quizzesPassed || 0) + (!fix && score === qs.length ? 1 : 0);
         /* the hour credits on SUBMISSION — the feedback screen that follows is
            teaching, not a further hurdle */
         const res = { kind: 'assessment', score, total: qs.length, passed: score === qs.length, detail, at: Date.now() };
         if (retake) {
           S.checkRetakes = S.checkRetakes || {}; const k = c.id + ':' + mod;
-          (S.checkRetakes[k] = S.checkRetakes[k] || []).push({ score, total: qs.length, at: res.at });
-          ledgerAppend('check_retake', { courseId: c.id, mod, score, total: qs.length });
+          /* the detail is kept so a later fix knows exactly which questions are still wrong */
+          (S.checkRetakes[k] = S.checkRetakes[k] || []).push({ score, total: fullTotal, at: res.at, detail: full || detail, fix: !!fix });
+          ledgerAppend(fix ? 'check_fix' : 'check_retake', { courseId: c.id, mod, score, total: fullTotal });
           save();
         } else creditTraining(c.id, mod, res);
         updateXpChip();
         detail.forEach((d, i) => { if (!d.ok) scheduleReview(c.id, mod, qs[i]); });
         /* feedback state: the why, and the way back to the exact moment */
         ov.innerHTML = `<div class="ck-card">
-          <div class="ob-eyebrow">${t('mc_result')} · ${score}/${qs.length}</div>
+          <div class="ob-eyebrow">${t('mc_result')} · ${score}/${fullTotal}</div>
           ${qs.map((q, i) => `<div class="mc-fb ${detail[i].ok ? 'ok' : 'ko'}">
             <div class="ck-q">${detail[i].ok ? '✓' : '✗'} ${esc(q.q)}</div>
             ${detail[i].ok ? '' : `<p class="mc-ans">${t('mc_correct_was')} <b>${esc(q.opts[q.a])}</b></p>`}
             ${q.why ? `<p class="mc-why">${esc(q.why)}</p>` : ''}
             ${(!detail[i].ok && q.t0 != null) ? `<button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('mc_moment')} ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
           </div>`).join('')}
-          <div class="ck-foot"><span class="ck-note">${score === qs.length ? t('mc_all_right') : t('mc_recorded')}</span>
+          <div class="ck-foot"><span class="ck-note">${score === fullTotal ? t('mc_all_right') : t('mc_recorded')}</span>
             <button class="btn btn-primary btn-sm" id="mcDone">${t('mc_continue')}</button></div>
         </div>`;
         $('#mcDone').addEventListener('click', () => { ov.classList.remove('on'); ov.innerHTML = ''; if (after) after(); });
@@ -8558,6 +8607,13 @@ document.addEventListener('click', e => {
     case 'pwa-dismiss': localStorage.setItem('eden-pwa-nudged', '1'); const pb2 = $('#pwaBar'); if (pb2) pb2.remove(); break;
     case 'seed-demo': seedDemo(); break;
     case 'voice-search': startVoiceSearch(); break;
+    case 'mis-set': {
+      const title = ($('#misT') && $('#misT').value || '').trim();
+      if (!title) { if ($('#misT')) $('#misT').focus(); break; }
+      saveMissionDef(el.dataset.id, { title, brief: ($('#misB').value || '').trim(), deliver: ($('#misD').value || '').trim(),
+        xp: Math.max(0, Math.min(500, +($('#misX').value) || 100)), by: myEmail(), at: Date.now() });
+      break; }
+    case 'mis-clear': saveMissionDef(el.dataset.id, null); break;
     case 'review-moment': {
       const ck = $('#ckOv');
       const same = playing && playing.courseId === el.dataset.id && playing.mod === +el.dataset.mod && playerEl.classList.contains('open');
@@ -8566,7 +8622,7 @@ document.addEventListener('click', e => {
            folds into a bottom sheet while the lesson replays, with a way back */
         ck.classList.add('peek');
         if (!ck.querySelector('.ck-back')) {
-          const b = document.createElement('button'); b.className = 'btn btn-primary btn-sm ck-back'; b.textContent = t('mc_back_result');
+          const b = document.createElement('button'); b.className = 'btn btn-glass btn-sm ck-back'; b.textContent = t('mc_back_result');
           b.addEventListener('click', () => { ck.classList.remove('peek'); try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {} try { videoEl.pause(); } catch (e) {} });
           if (ck.firstElementChild) ck.firstElementChild.prepend(b);
         }

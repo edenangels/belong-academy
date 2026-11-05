@@ -1,0 +1,876 @@
+{
+  "welcome-belong": {
+    "0": {
+      "summary": {
+        "en": "Pedro, Craveiral's founder, tells how a Lisbon lawyer found a field of carnations near São Teotónio in 2010 and opened Craveiral in 2018. He explains why the land comes first and the hotel second, why only 4% of the nine hectares is built, and the idea behind the team's work: we do not own the land, we belong to it.",
+        "pt": "Pedro, fundador do Craveiral, conta como um advogado de Lisboa encontrou um campo de cravos perto de São Teotónio em 2010 e abriu o Craveiral em 2018. Explica porque é que a terra vem primeiro e o hotel depois, porque só 4% dos nove hectares estão construídos e a ideia por trás do trabalho da equipa: não somos donos da terra, pertencemos-lhe."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Who Pedro is",
+          "pt": "Quem é o Pedro"
+        },
+        {
+          "t": 58,
+          "en": "A field of carnations",
+          "pt": "Um campo de cravos"
+        },
+        {
+          "t": 98,
+          "en": "Eight years to open",
+          "pt": "Oito anos até abrir"
+        },
+        {
+          "t": 135,
+          "en": "Land first, hotel second",
+          "pt": "Primeiro a terra, depois o hotel"
+        },
+        {
+          "t": 158,
+          "en": "Only 4% built",
+          "pt": "Apenas 4% construído"
+        },
+        {
+          "t": 215,
+          "en": "We belong to the land",
+          "pt": "Pertencemos à terra"
+        },
+        {
+          "t": 267,
+          "en": "Was it worth it",
+          "pt": "Valeu a pena"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "Pedro explains Belong, the brand that links Craveiral, the beach bar, A Mesa do CAM, events, the shop and the laundry. He unpacks the vision of regenerating the territory through a circular economy, the mission of connecting people through agriculture, gastronomy, hospitality and nature, and why the team should tell the chain behind every dish.",
+        "pt": "Pedro explica a Belong, a marca que liga o Craveiral, o bar de praia, A Mesa do CAM, os eventos, a loja e a lavandaria. Desenvolve a visão de regenerar o território através de uma economia circular, a missão de ligar as pessoas pela agricultura, gastronomia, hospitalidade e natureza, e porque é que a equipa deve contar a cadeia por trás de cada prato."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "What Belong means",
+          "pt": "O que significa Belong"
+        },
+        {
+          "t": 62,
+          "en": "One brand, many places",
+          "pt": "Uma marca, vários lugares"
+        },
+        {
+          "t": 115,
+          "en": "The vision: regenerate the territory",
+          "pt": "A visão: regenerar o território"
+        },
+        {
+          "t": 169,
+          "en": "How the circular economy works",
+          "pt": "Como funciona a economia circular"
+        },
+        {
+          "t": 220,
+          "en": "The mission: connection",
+          "pt": "A missão: criar ligação"
+        },
+        {
+          "t": 273,
+          "en": "The chain, not the name",
+          "pt": "A cadeia, não o nome"
+        },
+        {
+          "t": 351,
+          "en": "More than working at a hotel",
+          "pt": "Mais do que trabalhar num hotel"
+        }
+      ]
+    }
+  },
+  "craveiral-hospitality": {
+    "0": {
+      "summary": {
+        "en": "Pedro goes through Craveiral's values as tools for daily decisions: financial, environmental and social sustainability, simplicity, comfort and modernity, freedom and authenticity, creativity and community integration, and wellbeing. He ends with what to do when values conflict: think about the long game, and ask when unsure.",
+        "pt": "Pedro percorre os valores do Craveiral como ferramentas para as decisões do dia a dia: sustentabilidade financeira, ambiental e social, simplicidade, conforto e modernidade, liberdade e autenticidade, criatividade e integração na comunidade, e bem-estar. Termina com o que fazer quando os valores entram em conflito: pensar a longo prazo e perguntar em caso de dúvida."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Values as everyday tools",
+          "pt": "Valores como ferramentas diárias"
+        },
+        {
+          "t": 26,
+          "en": "Sustainability, financial first",
+          "pt": "Sustentabilidade, a financeira primeiro"
+        },
+        {
+          "t": 94,
+          "en": "Simplicity, comfort and modernity",
+          "pt": "Simplicidade, conforto e modernidade"
+        },
+        {
+          "t": 176,
+          "en": "Freedom and authenticity",
+          "pt": "Liberdade e autenticidade"
+        },
+        {
+          "t": 225,
+          "en": "Creativity and community integration",
+          "pt": "Criatividade e integração na comunidade"
+        },
+        {
+          "t": 265,
+          "en": "Wellbeing for guests and team",
+          "pt": "Bem-estar de hóspedes e equipa"
+        },
+        {
+          "t": 300,
+          "en": "When values collide",
+          "pt": "Quando os valores entram em conflito"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "Pedro separates service, which is technical and measurable, from hospitality, which is how the guest feels. He gives five practices: treat guests as guests, use their names, anticipate needs, know and share the territory, and keep the small rituals. He closes with a guest's story about truly arriving, and why warmth is never servility.",
+        "pt": "Pedro distingue o serviço, que é técnico e mensurável, da hospitalidade, que é a forma como o hóspede se sente. Apresenta cinco práticas: tratar os hóspedes como hóspedes e não como clientes, usar os seus nomes, antecipar necessidades, conhecer e partilhar o território, e manter os pequenos rituais. Fecha com a história de uma hóspede e explica porque é que calor humano nunca é servilismo."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Service versus hospitality",
+          "pt": "Serviço versus hospitalidade"
+        },
+        {
+          "t": 83,
+          "en": "Guests, not customers",
+          "pt": "Hóspedes, não clientes"
+        },
+        {
+          "t": 152,
+          "en": "Anticipate needs",
+          "pt": "Antecipar necessidades"
+        },
+        {
+          "t": 186,
+          "en": "Know the land, tell the land",
+          "pt": "Conhecer a terra e contá-la"
+        },
+        {
+          "t": 226,
+          "en": "Small rituals over grand gestures",
+          "pt": "Pequenos rituais, não grandes gestos"
+        },
+        {
+          "t": 261,
+          "en": "The perfect Craveiral moment",
+          "pt": "O momento Craveiral perfeito"
+        },
+        {
+          "t": 342,
+          "en": "Warmth is not servility",
+          "pt": "Calor humano não é servilismo"
+        }
+      ]
+    }
+  },
+  "craveiral-places": {
+    "0": {
+      "summary": {
+        "en": "This lesson asks the team to see Craveiral's five units as one single house, because that is how guests see it. It explains the circular chain from garden to kitchen to compost, why consistency across units is the promise, why regeneration must work as a business, and the six things every guest should feel.",
+        "pt": "Esta lição pede à equipa que veja as cinco unidades do Craveiral como uma só casa, porque é assim que o hóspede a vê. Explica a cadeia circular da horta à cozinha e ao composto, porque é que a consistência entre unidades é a promessa, porque é que a regeneração tem de funcionar como negócio e as seis coisas que cada hóspede deve sentir."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Seeing one single house",
+          "pt": "Ver uma só casa"
+        },
+        {
+          "t": 68,
+          "en": "A chain you can walk",
+          "pt": "Uma cadeia que se percorre a pé"
+        },
+        {
+          "t": 106,
+          "en": "Five units, one promise",
+          "pt": "Cinco unidades, uma promessa"
+        },
+        {
+          "t": 141,
+          "en": "Beyond the farm",
+          "pt": "Para além da quinta"
+        },
+        {
+          "t": 179,
+          "en": "Regeneration as a business",
+          "pt": "A regeneração como negócio"
+        },
+        {
+          "t": 220,
+          "en": "Six things the guest feels",
+          "pt": "Seis coisas que o hóspede sente"
+        },
+        {
+          "t": 253,
+          "en": "The one question to ask",
+          "pt": "A pergunta a fazer"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "A tour of the 38 houses and shared spaces: house types and sizes, the three pools, the wellness deck, the interpretation center and event capacities. It explains why precise answers build guest trust, why a house made ready is a promise kept, and why details, including guests' sleep, are never small.",
+        "pt": "Uma visita às 38 casas e aos espaços comuns: tipologias e áreas, as três piscinas, o deck de bem-estar, o centro de interpretação e a capacidade para eventos. Explica porque é que respostas precisas criam confiança, porque é que uma casa preparada é uma promessa cumprida e porque é que os detalhes, incluindo o sono do hóspede, nunca são pequenos."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Know the houses like home",
+          "pt": "Conhecer as casas como a nossa"
+        },
+        {
+          "t": 26,
+          "en": "What every house has",
+          "pt": "O que cada casa tem"
+        },
+        {
+          "t": 60,
+          "en": "The house types",
+          "pt": "As tipologias"
+        },
+        {
+          "t": 107,
+          "en": "Why precise answers matter",
+          "pt": "Porque contam as respostas precisas"
+        },
+        {
+          "t": 144,
+          "en": "The shared spaces",
+          "pt": "Os espaços comuns"
+        },
+        {
+          "t": 188,
+          "en": "Details are not small",
+          "pt": "Os detalhes não são pequenos"
+        },
+        {
+          "t": 277,
+          "en": "Be the second kind",
+          "pt": "Ser do segundo tipo"
+        }
+      ]
+    },
+    "2": {
+      "summary": {
+        "en": "FarmTable is where Craveiral's philosophy becomes food: more than 70% of what is served is grown on the property, and the rest comes from as close as possible. The lesson covers breakfast, lunch and dinner, the wood-oven pizzas, presenting wine in three sentences, and four service principles, including never rushing a table.",
+        "pt": "O FarmTable é onde a filosofia do Craveiral se torna comida: mais de 70% do que se serve é cultivado na propriedade e o resto vem do mais perto possível. A lição aborda o pequeno-almoço, o almoço e o jantar, as pizzas do forno a lenha, apresentar um vinho em três frases e quatro princípios de serviço, incluindo nunca apressar uma mesa."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Before the plate, a grower",
+          "pt": "Antes do prato, quem cultiva"
+        },
+        {
+          "t": 15,
+          "en": "Over 70% grown here",
+          "pt": "Mais de 70% cultivado aqui"
+        },
+        {
+          "t": 69,
+          "en": "Breakfast as identity",
+          "pt": "O pequeno-almoço como identidade"
+        },
+        {
+          "t": 90,
+          "en": "Lunch, dinner and the pizzas",
+          "pt": "Almoço, jantar e as pizzas"
+        },
+        {
+          "t": 136,
+          "en": "Wine in three sentences",
+          "pt": "O vinho em três frases"
+        },
+        {
+          "t": 178,
+          "en": "Four service principles",
+          "pt": "Quatro princípios de serviço"
+        },
+        {
+          "t": 264,
+          "en": "One kitchen, many tables",
+          "pt": "Uma cozinha, muitas mesas"
+        }
+      ]
+    },
+    "3": {
+      "summary": {
+        "en": "Bar da Praia do Carvalhal is Craveiral's philosophy in a more informal register, with the same standard. For many beachgoers the bar is their only contact with Craveiral. The lesson covers telling a product's origin in five seconds, the ideal day's rhythm, communicating wait times, comfort in the sun, and keeping the protected beach clean.",
+        "pt": "O Bar da Praia do Carvalhal é a filosofia do Craveiral num registo mais informal, com o mesmo padrão. Para muitas pessoas na praia, o bar é o único contacto com o Craveiral. A lição aborda contar a origem de um produto em cinco segundos, o ritmo do dia ideal, comunicar tempos de espera, o conforto ao sol e manter limpa uma praia em área protegida."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Philosophy in flip-flops",
+          "pt": "A filosofia de chinelos"
+        },
+        {
+          "t": 33,
+          "en": "Register changes, standard does not",
+          "pt": "Muda o registo, não o padrão"
+        },
+        {
+          "t": 66,
+          "en": "The bar is Craveiral",
+          "pt": "O bar é o Craveiral"
+        },
+        {
+          "t": 97,
+          "en": "Origin in five seconds",
+          "pt": "A origem em cinco segundos"
+        },
+        {
+          "t": 136,
+          "en": "The perfect day's rhythm",
+          "pt": "O ritmo do dia perfeito"
+        },
+        {
+          "t": 174,
+          "en": "Time, sun and water",
+          "pt": "Tempo, sol e água"
+        },
+        {
+          "t": 221,
+          "en": "Leaving the beach better",
+          "pt": "Deixar a praia melhor"
+        }
+      ]
+    },
+    "4": {
+      "summary": {
+        "en": "The shop is the territory condensed and portable: local wines, honey, olive oil, soaps and more, almost all from producers within half an hour. The lesson covers telling the origin of each product, why the shop often shapes the last memory of a stay, never pushing or overstating, keeping shelves in order, and noting what guests say.",
+        "pt": "A loja é o território condensado e portátil: vinhos locais, mel, azeite, sabonetes e mais, quase tudo de produtores a menos de meia hora. A lição aborda contar a origem de cada produto, porque é que a loja muitas vezes marca a última memória da estadia, nunca pressionar nem exagerar, manter as prateleiras em ordem e registar o que os hóspedes dizem."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "The territory, condensed and portable",
+          "pt": "O território, condensado e portátil"
+        },
+        {
+          "t": 26,
+          "en": "What the shop carries",
+          "pt": "O que a loja vende"
+        },
+        {
+          "t": 56,
+          "en": "One sentence about origin",
+          "pt": "Uma frase sobre a origem"
+        },
+        {
+          "t": 98,
+          "en": "The last impression",
+          "pt": "A última impressão"
+        },
+        {
+          "t": 130,
+          "en": "No pushing, no inflating",
+          "pt": "Sem pressionar, sem exagerar"
+        },
+        {
+          "t": 174,
+          "en": "The shop's physical standard",
+          "pt": "O padrão físico da loja"
+        },
+        {
+          "t": 210,
+          "en": "A listening tool",
+          "pt": "Uma ferramenta para ouvir"
+        }
+      ]
+    },
+    "5": {
+      "summary": {
+        "en": "The São Teotónio laundry serves both Craveiral and the village, keeping jobs and money local instead of sending linen to a distant industrial operator. The lesson covers why linen matters so much to guests' sleep, four standards for handling it, saving water and energy, treating village customers equally, and looking after a demanding, low-visibility team.",
+        "pt": "A lavandaria de São Teotónio serve o Craveiral e a aldeia, mantendo emprego e dinheiro na terra em vez de enviar a roupa para um operador industrial distante. A lição aborda o peso da roupa no sono do hóspede, quatro padrões de tratamento, poupar água e energia, tratar por igual os clientes da aldeia e cuidar de uma equipa com trabalho exigente e pouco visível."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Circular economy, no metaphor",
+          "pt": "Economia circular sem metáforas"
+        },
+        {
+          "t": 35,
+          "en": "The alternative we avoided",
+          "pt": "A alternativa que evitámos"
+        },
+        {
+          "t": 65,
+          "en": "Linen and the guest's sleep",
+          "pt": "A roupa e o sono do hóspede"
+        },
+        {
+          "t": 105,
+          "en": "Four standards for linen",
+          "pt": "Quatro padrões para a roupa"
+        },
+        {
+          "t": 142,
+          "en": "Water and energy",
+          "pt": "Água e energia"
+        },
+        {
+          "t": 180,
+          "en": "Serving the village",
+          "pt": "Servir a aldeia"
+        },
+        {
+          "t": 220,
+          "en": "Caring for the laundry team",
+          "pt": "Cuidar da equipa da lavandaria"
+        }
+      ]
+    },
+    "6": {
+      "summary": {
+        "en": "This lesson explains the difference between an activity and an experience, and gives tools to lead one on purpose: the four registers (aesthetic, educational, escapist, entertainment), offering choice instead of a program, the first 90 seconds of arrival, a deliberate peak and a warm farewell, and knowing the land rather than a script.",
+        "pt": "Esta lição explica a diferença entre uma atividade e uma experiência e dá ferramentas para conduzir uma de forma intencional: os quatro registos (estético, educativo, evasão, entretenimento), oferecer escolha em vez de programa, os primeiros 90 segundos da chegada, um ponto alto deliberado e uma despedida calorosa, e conhecer a terra em vez de um guião."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Activity versus experience",
+          "pt": "Atividade versus experiência"
+        },
+        {
+          "t": 34,
+          "en": "The four registers",
+          "pt": "Os quatro registos"
+        },
+        {
+          "t": 70,
+          "en": "Applying them to the harvest",
+          "pt": "Aplicar à colheita"
+        },
+        {
+          "t": 111,
+          "en": "Choice instead of a program",
+          "pt": "Escolha em vez de programa"
+        },
+        {
+          "t": 146,
+          "en": "The first 90 seconds",
+          "pt": "Os primeiros 90 segundos"
+        },
+        {
+          "t": 183,
+          "en": "The peak and the end",
+          "pt": "O ponto alto e o fim"
+        },
+        {
+          "t": 225,
+          "en": "Knowing the land, not the script",
+          "pt": "Conhecer a terra, não o guião"
+        }
+      ]
+    },
+    "7": {
+      "summary": {
+        "en": "This lesson links guest wellbeing with service recovery. It covers the levers of wellbeing (time in nature, sleep, choice, quiet and pace), the situations that cause most complaints, and a four-step protocol: acknowledge, own, resolve within the hour, close the loop. It ends with treating the team as the team should treat guests.",
+        "pt": "Esta lição liga o bem-estar do hóspede à recuperação do serviço. Aborda as alavancas do bem-estar (contacto com a natureza, sono, escolha, silêncio e ritmo), as situações que geram a maioria das reclamações e um protocolo em quatro passos: reconhecer, assumir, resolver dentro de uma hora e fechar o ciclo. Termina com tratar a equipa como se espera que a equipa trate o hóspede."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Wellbeing and recovery, linked",
+          "pt": "Bem-estar e recuperação, ligados"
+        },
+        {
+          "t": 33,
+          "en": "A dose of nature",
+          "pt": "Uma dose de natureza"
+        },
+        {
+          "t": 68,
+          "en": "Sleep, choice and quiet",
+          "pt": "Sono, escolha e silêncio"
+        },
+        {
+          "t": 147,
+          "en": "What must never happen",
+          "pt": "O que nunca pode acontecer"
+        },
+        {
+          "t": 183,
+          "en": "The four-step protocol",
+          "pt": "O protocolo em quatro passos"
+        },
+        {
+          "t": 230,
+          "en": "Speed and proportionate gestures",
+          "pt": "Rapidez e gestos proporcionais"
+        },
+        {
+          "t": 277,
+          "en": "Treating the team well",
+          "pt": "Tratar bem a equipa"
+        }
+      ]
+    }
+  },
+  "farm-to-table": {
+    "0": {
+      "summary": {
+        "en": "Pedro presents FarmTable: over 70% of what is served is grown on the property and the rest is sourced as close as possible. He covers breakfast as a statement of identity, lunch, dinner and the wood-fired pizzas, guiding guests through wine in three sentences, preserves, and the principles of service at the table.",
+        "pt": "Pedro apresenta o FarmTable: mais de 70% do que se serve é cultivado na propriedade e o resto vem do mais perto possível. Fala do pequeno-almoço como afirmação de identidade, do almoço, do jantar e das pizzas do forno a lenha, de como apresentar um vinho em três frases, das conservas e dos princípios do serviço à mesa."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Before the plate, a grower",
+          "pt": "Antes do prato, quem cultiva"
+        },
+        {
+          "t": 29,
+          "en": "Over 70% from the farm",
+          "pt": "Mais de 70% da quinta"
+        },
+        {
+          "t": 83,
+          "en": "Breakfast as identity",
+          "pt": "O pequeno-almoço como identidade"
+        },
+        {
+          "t": 108,
+          "en": "Lunch, dinner and pizzas",
+          "pt": "Almoço, jantar e pizzas"
+        },
+        {
+          "t": 161,
+          "en": "Wine and preserves",
+          "pt": "Vinho e conservas"
+        },
+        {
+          "t": 240,
+          "en": "Service at the farm table",
+          "pt": "O serviço à mesa"
+        },
+        {
+          "t": 332,
+          "en": "One kitchen, many tables",
+          "pt": "Uma cozinha, muitas mesas"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "Pedro widens the view beyond the farm to the Belong constellation: Bar da Praia do Carvalhal, A Mesa do CAM at the Gulbenkian in Lisbon, catering, weddings and corporate retreats. He explains why recommending other units is hospitality, not selling, how to test decisions against the Belong gesture, and why growth must regenerate something.",
+        "pt": "Pedro alarga o olhar para além da quinta, para a constelação Belong: o Bar da Praia do Carvalhal, A Mesa do CAM na Gulbenkian em Lisboa, o catering, os casamentos e os retiros de empresas. Explica porque é que recomendar outras unidades é hospitalidade e não venda, como testar decisões com o gesto Belong e porque é que o crescimento tem de regenerar algo."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "The whole constellation",
+          "pt": "Toda a constelação"
+        },
+        {
+          "t": 14,
+          "en": "Bar da Praia do Carvalhal",
+          "pt": "Bar da Praia do Carvalhal"
+        },
+        {
+          "t": 71,
+          "en": "A Mesa do CAM in Lisbon",
+          "pt": "A Mesa do CAM em Lisboa"
+        },
+        {
+          "t": 113,
+          "en": "Catering and events",
+          "pt": "Catering e eventos"
+        },
+        {
+          "t": 139,
+          "en": "Weddings and retreats",
+          "pt": "Casamentos e retiros"
+        },
+        {
+          "t": 207,
+          "en": "Why cross-recommendation matters",
+          "pt": "Porque importa recomendar"
+        },
+        {
+          "t": 282,
+          "en": "How Belong grows",
+          "pt": "Como a Belong cresce"
+        }
+      ]
+    }
+  },
+  "guest-journey": {
+    "0": {
+      "summary": {
+        "en": "Pedro walks through the guest's journey in eight stages, from dreaming and booking to arrival, the first morning, the days, friction points, farewell and what comes after. He explains what matters at each stage and asks every team member to locate their own role on the journey, because everyone carries the guest's trust.",
+        "pt": "Pedro percorre a jornada do hóspede em oito etapas, do sonho e da reserva à chegada, à primeira manhã, aos dias, aos pontos de atrito, à despedida e ao que vem depois. Explica o que importa em cada etapa e pede a cada colaborador que situe a sua função nessa jornada, porque todos transportam a confiança do hóspede."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "The dream and the promise",
+          "pt": "O sonho e a promessa"
+        },
+        {
+          "t": 66,
+          "en": "Booking and the time before",
+          "pt": "A reserva e o tempo antes"
+        },
+        {
+          "t": 109,
+          "en": "Arrival and first morning",
+          "pt": "A chegada e a primeira manhã"
+        },
+        {
+          "t": 185,
+          "en": "The days and freedom",
+          "pt": "Os dias e a liberdade"
+        },
+        {
+          "t": 238,
+          "en": "Friction points",
+          "pt": "Pontos de atrito"
+        },
+        {
+          "t": 293,
+          "en": "Farewell and after",
+          "pt": "A despedida e o depois"
+        },
+        {
+          "t": 355,
+          "en": "Where each role fits",
+          "pt": "O lugar de cada função"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "This lesson treats complaints as useful information and a second chance. Pedro sets out a method: listen fully, acknowledge the feeling without saying \"but\", fix it slightly bigger than the failure, follow up, and report every complaint. He also covers unfair complaints, abuse toward the team, responding to reviews, and a recovery done well.",
+        "pt": "Esta lição trata as reclamações como informação útil e uma segunda oportunidade. Pedro apresenta um método: ouvir até ao fim, reconhecer o sentimento sem dizer \"mas\", resolver um pouco acima da falha, acompanhar e registar todas as reclamações. Aborda também reclamações injustas, agressões à equipa, resposta a avaliações e uma recuperação bem feita."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Moments nobody posts",
+          "pt": "Momentos que ninguém publica"
+        },
+        {
+          "t": 25,
+          "en": "A complaint is a gift",
+          "pt": "Uma reclamação é uma oferta"
+        },
+        {
+          "t": 68,
+          "en": "Listen and acknowledge",
+          "pt": "Ouvir e reconhecer"
+        },
+        {
+          "t": 132,
+          "en": "Fix it bigger than expected",
+          "pt": "Resolver acima do esperado"
+        },
+        {
+          "t": 171,
+          "en": "Follow up and report",
+          "pt": "Acompanhar e registar"
+        },
+        {
+          "t": 219,
+          "en": "Unfair complaints and reviews",
+          "pt": "Reclamações injustas e avaliações"
+        },
+        {
+          "t": 285,
+          "en": "A family's recovery story",
+          "pt": "A história de uma família"
+        }
+      ]
+    }
+  },
+  "houses-farm-sustainability": {
+    "0": {
+      "summary": {
+        "en": "A detailed tour of Craveiral: nine hectares, 38 houses and their types, the pools, wellness deck and event spaces, the farm that supplies over 70% of the kitchen, the shop and the São Teotónio laundry. Pedro explains why precise answers create trust and why standards are promises in which no detail is small.",
+        "pt": "Uma visita detalhada ao Craveiral: nove hectares, 38 casas e as suas tipologias, as piscinas, o deck de bem-estar e os espaços de eventos, a quinta que fornece mais de 70% da cozinha, a loja e a lavandaria de São Teotónio. Pedro explica porque é que respostas precisas criam confiança e porque é que os padrões são promessas em que nenhum detalhe é pequeno."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "The big picture",
+          "pt": "A visão geral"
+        },
+        {
+          "t": 38,
+          "en": "The houses and types",
+          "pt": "As casas e tipologias"
+        },
+        {
+          "t": 125,
+          "en": "Confidence sells, vagueness kills",
+          "pt": "A precisão gera confiança"
+        },
+        {
+          "t": 154,
+          "en": "The shared spaces",
+          "pt": "Os espaços comuns"
+        },
+        {
+          "t": 204,
+          "en": "The farm is not decoration",
+          "pt": "A quinta não é decoração"
+        },
+        {
+          "t": 252,
+          "en": "The shop and the laundry",
+          "pt": "A loja e a lavandaria"
+        },
+        {
+          "t": 297,
+          "en": "Standards as promises",
+          "pt": "Padrões como promessas"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "Pedro turns sustainability into daily actions: reporting leaks and saving water, switching off wasted energy, routing waste to the right stream, buying local and seasonal first, protecting the land, and talking with guests about sustainability with specifics, never lectures. He closes with one test for the end of every shift.",
+        "pt": "Pedro transforma a sustentabilidade em ações diárias: comunicar fugas e poupar água, evitar desperdício de energia, encaminhar os resíduos para o destino certo, comprar primeiro o local e sazonal, proteger a terra e falar de sustentabilidade com os hóspedes com dados concretos, nunca com sermões. Fecha com um teste para o fim de cada turno."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "From vision to daily practice",
+          "pt": "Da visão à prática diária"
+        },
+        {
+          "t": 18,
+          "en": "Water, the limiting factor",
+          "pt": "Água, o fator limitante"
+        },
+        {
+          "t": 70,
+          "en": "Energy without waste",
+          "pt": "Energia sem desperdício"
+        },
+        {
+          "t": 95,
+          "en": "No throwing away, only routing",
+          "pt": "Nada se deita fora, encaminha-se"
+        },
+        {
+          "t": 160,
+          "en": "Purchasing as a vote",
+          "pt": "Comprar é votar"
+        },
+        {
+          "t": 213,
+          "en": "The land and the guests",
+          "pt": "A terra e os hóspedes"
+        },
+        {
+          "t": 289,
+          "en": "Coherence and the shift test",
+          "pt": "Coerência e o teste do turno"
+        }
+      ]
+    }
+  },
+  "voice-leadership": {
+    "0": {
+      "summary": {
+        "en": "This lesson defines the Craveiral voice: calm, warm, concrete and unhurried. It covers the words we use (houses, guests, the farm) and the ones we avoid, speaking with international guests, writing to guests with specific sentences, how the team speaks to each other, and how to talk about Craveiral outside work.",
+        "pt": "Esta lição define a voz do Craveiral: calma, calorosa, concreta e sem pressa. Aborda as palavras que usamos (casas, hóspedes, a quinta) e as que evitamos, como falar com hóspedes estrangeiros, escrever aos hóspedes com frases concretas, como a equipa fala entre si e como falar do Craveiral fora do trabalho."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "Why words matter",
+          "pt": "Porque importam as palavras"
+        },
+        {
+          "t": 23,
+          "en": "Calm, warm, concrete, unhurried",
+          "pt": "Calma, calorosa, concreta, sem pressa"
+        },
+        {
+          "t": 57,
+          "en": "Words we use",
+          "pt": "As palavras que usamos"
+        },
+        {
+          "t": 109,
+          "en": "Words we avoid",
+          "pt": "As palavras que evitamos"
+        },
+        {
+          "t": 140,
+          "en": "Speaking with international guests",
+          "pt": "Falar com hóspedes estrangeiros"
+        },
+        {
+          "t": 195,
+          "en": "The same voice in writing",
+          "pt": "A mesma voz por escrito"
+        },
+        {
+          "t": 228,
+          "en": "How we speak to each other",
+          "pt": "Como falamos entre nós"
+        }
+      ]
+    },
+    "1": {
+      "summary": {
+        "en": "In the final lesson, Pedro sets out how the team works together: solve guest problems on the spot and tell the manager after, bring mistakes early instead of hiding them, treat high standards as respect, grow careers from within, and protect wellbeing. He closes by retelling how a field of carnations became Craveiral.",
+        "pt": "Na última lição, Pedro explica como a equipa trabalha em conjunto: resolver os problemas do hóspede no momento e informar a chefia depois, comunicar os erros cedo em vez de os esconder, encarar padrões elevados como respeito, crescer profissionalmente dentro da casa e proteger o bem-estar. Fecha recordando como um campo de cravos se tornou o Craveiral."
+      },
+      "chapters": [
+        {
+          "t": 0,
+          "en": "How we work together",
+          "pt": "Como trabalhamos juntos"
+        },
+        {
+          "t": 46,
+          "en": "Solve it, tell after",
+          "pt": "Resolver e informar depois"
+        },
+        {
+          "t": 111,
+          "en": "Hiding mistakes is the problem",
+          "pt": "O problema é esconder o erro"
+        },
+        {
+          "t": 169,
+          "en": "Standards as respect",
+          "pt": "Padrões como respeito"
+        },
+        {
+          "t": 220,
+          "en": "Growing people, not just vegetables",
+          "pt": "Fazer crescer pessoas, não só legumes"
+        },
+        {
+          "t": 278,
+          "en": "Wellbeing is non-negotiable",
+          "pt": "O bem-estar não é negociável"
+        },
+        {
+          "t": 331,
+          "en": "From a field to a team",
+          "pt": "De um campo a uma equipa"
+        }
+      ]
+    }
+  }
+}

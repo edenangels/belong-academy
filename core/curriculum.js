@@ -52,7 +52,7 @@
     cert_h: ['Certificate', 'Comprovativo'], cert_dl: ['Download certificate', 'Transferir comprovativo'],
     cert_locked: ['Not earned yet. It is issued when every required lesson is completed and the assessment is passed.', 'Ainda não obtido. É emitido quando todas as lições obrigatórias estão concluídas e a avaliação aprovada.'],
     score_lbl: ['Assessment score', 'Resultado da avaliação'], pass_lbl: ['pass mark', 'nota mínima'], answered: ['questions answered', 'perguntas respondidas'],
-    not_yet_passed: ['Below the pass mark: retake the questions of the lessons marked "Retake".', 'Abaixo da nota mínima: repita as perguntas das lições marcadas "Repetir".'],
+    not_yet_passed: ['Below the pass mark: fix the questions you missed in the lessons marked "Fix".', 'Abaixo da nota mínima: corrija as perguntas que falhou nas lições marcadas "Corrigir".'],
     start: ['Start', 'Começar'], resume: ['Continue', 'Continuar'], start_lesson: ['Start lesson', 'Começar a lição'], continue_lesson: ['Continue learning', 'Continuar a aprender'],
     rewatch: ['Watch again', 'Ver de novo'], next_module: ['Continue to next module', 'Continuar para o módulo seguinte'], next_course: ['Next course', 'Curso seguinte'],
     retake: ['Retake', 'Repetir'], questions: ['questions', 'perguntas'], optional: ['Optional', 'Opcional'],
@@ -69,7 +69,16 @@
     hist_sub: ['Issued under the rules in force at the time, with their original scope. They are kept as they were.', 'Emitidos com as regras em vigor na altura, com o âmbito original. Mantêm-se como foram emitidos.'],
     hist_scope: ['Module record', 'Registo de módulo'], hist_flag: ['For review: below the current {p}% pass mark, or issued without an assessment score.', 'A rever: abaixo da nota mínima atual de {p}%, ou emitido sem resultado de avaliação.'],
     course_certs_h: ['Course certificates', 'Comprovativos de curso'], none_yet: ['None yet. Complete a course and pass its assessment.', 'Ainda nenhum. Conclua um curso e passe a avaliação.'],
-    modules_of: ['modules', 'módulos'], see_course: ['See the course', 'Ver o curso'], your_path: ['Your path', 'O seu percurso']
+    modules_of: ['modules', 'módulos'],
+    videos: ['videos', 'vídeos'], video_one: ['video', 'vídeo'],
+    see_more: ['See more', 'Ver mais'], see_less: ['Show less', 'Mostrar menos'],
+    about_course: ['About this course', 'Sobre este curso'], chapters: ['Chapters', 'Capítulos'],
+    next_in_course: ['Next in this course', 'A seguir neste curso'], more_modules: ['Other modules in this course', 'Outros módulos deste curso'],
+    fix_one: ['Fix 1 mistake', 'Corrigir 1 erro'], fix_n: ['Fix {n} mistakes', 'Corrigir {n} erros'],
+    fix_h: ['Fix your mistakes', 'Corrija os seus erros'],
+    fix_sub: ['Only the questions you missed. Each one has the moment in the video where the answer is: watch that bit, then answer again. Your best result counts.', 'Só as perguntas que falhou. Cada uma tem o momento do vídeo onde está a resposta: veja esse trecho e responda de novo. Conta o seu melhor resultado.'],
+    fix_none: ['No mistakes to fix. Every question you answered is right.', 'Não há erros para corrigir. Todas as perguntas que respondeu estão certas.'],
+    fix_item: ['{n} to fix', '{n} para corrigir'], see_course: ['See the course', 'Ver o curso'], your_path: ['Your path', 'O seu percurso']
   };
   const L = (k, vars) => { const v = (STR[k] || [k, k])[PT() ? 1 : 0]; return vars ? v.replace(/\{(\w+)\}/g, (_, n) => vars[n]) : v; };
 
@@ -110,6 +119,33 @@
     return out;
   }
   const best = (src, i) => attempts(src, i).reduce((b, a) => (!b || a.score / a.total > b.score / b.total) ? a : b, null);
+  /* The questions still wrong in this lesson: from the best attempt that kept its per-question detail
+     (first submissions always do; fixes and retakes do from bel115). null = nothing known to fix. */
+  function misses(src, i) {
+    const e = logEntry(src, i), ck = e && e.ev && e.ev.check;
+    const all = [];
+    if (ck && ck.kind === 'assessment' && ck.total && Array.isArray(ck.detail)) all.push({ score: ck.score, total: ck.total, detail: ck.detail });
+    ((S.checkRetakes || {})[lkey(src, i)] || []).forEach(a => { if (Array.isArray(a.detail)) all.push(a); });
+    if (!all.length) return null;
+    const b = all.reduce((x, a) => (!x || a.score / a.total >= x.score / x.total) ? a : x, null);
+    const wrong = b.detail.filter(d => !d.ok);
+    return wrong.length ? { base: b, wrong } : null;
+  }
+  /* lesson summaries + chapters, written from each transcript; fetched once, after first paint */
+  let LMETA = null, lmetaAsked = false;
+  function lessonMeta(src, i) {
+    if (!lmetaAsked) {
+      lmetaAsked = true;
+      const v = ((document.querySelector('script[src*="curriculum.js"]') || {}).src || '').match(/v=(\w+)/);
+      fetch('knowledge/lessons.json' + (v ? '?v=' + v[1] : '')).then(r => r.ok ? r.json() : null).then(j => {
+        if (!j) return; LMETA = j;
+        if (/^#\/(course|module)\//.test(location.hash) && typeof render === 'function') render();
+      }).catch(() => {});
+    }
+    return LMETA && LMETA[src] && LMETA[src][String(i)] || null;
+  }
+  const lThumb = (src, i) => { const b = (typeof LESSON_THUMBS !== 'undefined' && LESSON_THUMBS[lkey(src, i)]) || ''; return b ? b + '_320x180' : ''; };
+  const tc = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
 
   /* ---------- module / course state ---------- */
   function moduleStats(m) {
@@ -130,7 +166,8 @@
     const complete = req.length > 0 && done === req.length;
     const passed = score != null && answered === assessable && score >= PASS;
     const lastAt = Math.max(0, ...req.map(([s, i]) => Math.max(0, ...attempts(s, i).map(a => +new Date(a.at) || 0), (logEntry(s, i) || {}).at || 0)));
-    return { modules: ms.length, lessons: req.length, done, complete, pct: req.length ? Math.round(done / req.length * 100) : 0,
+    const unanswered = req.filter(([s, i]) => lessonDone(s, i) && !best(s, i)).length;   /* done, but no questions on record */
+    return { unanswered, modules: ms.length, lessons: req.length, done, complete, pct: req.length ? Math.round(done / req.length * 100) : 0,
       mins: ms.reduce((a, m) => a + moduleStats(m).mins, 0), minsLeft: ms.reduce((a, m) => a + moduleStats(m).minsLeft, 0),
       recordedH, score, answered, assessable, passed, eligible: complete && passed, completedAt: complete ? (lastAt || null) : null };
   }
@@ -159,7 +196,7 @@
       return [PT() ? c.pt : c.en, Math.round(st.reduce((a, x) => a + x.pct, 0) / st.length)];
     }).filter(Boolean);
   }
-  window.CUR = { categoryProgress, courses, modules, courseOf, moduleOf, modulesOfCourse, moduleOfLesson, moduleStats, courseStats, nextInCourse, nextLessonGlobal, pathModules, lessonDone, best, attempts, L, cTitle, mTitle, lTitle, PASS };
+  window.CUR = { misses, categoryProgress, courses, modules, courseOf, moduleOf, modulesOfCourse, moduleOfLesson, moduleStats, courseStats, nextInCourse, nextLessonGlobal, pathModules, lessonDone, best, attempts, L, cTitle, mTitle, lTitle, PASS };
 
   /* ---------- small renderers ---------- */
   const bar = pct => `<div class="cur-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`;
@@ -171,6 +208,7 @@
     if (st.done) return `<span class="cur-state">${L('in_progress')} · ${st.pct}%</span>`;
     return '';
   }
+  const vids = co => modulesOfCourse(co.id).reduce((a, m) => a + m.lessons.length, 0);
   function courseCardHTML(co) {
     const st = courseStats(co.id);
     return `<article class="card cur-card" data-action="goto" data-route="#/course/${co.id}">
@@ -179,7 +217,7 @@
         ${typeTag('course')}
         <h3>${esc(cTitle(co))}</h3>
         <p class="card-hook">${esc(cField(co, 'promise'))}</p>
-        <div class="meta"><span>${st.modules} ${L('modules')}</span><span class="dot"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+        <div class="meta"><span>${st.modules} ${L('modules')}</span><span class="dot"></span><span>${vids(co)} ${L('videos')}</span><span class="dot"></span><span>${fmtMins(st.mins)}</span></div>
         ${st.done ? bar(st.pct) : ''}
         ${stateLabel(st)}
       </div>
@@ -193,7 +231,7 @@
         ${typeTag('module', cTitle(co))}
         <h3>${esc(mTitle(m))}</h3>
         <p class="card-hook">${esc(mOutcome(m))}</p>
-        <div class="meta"><span>${st.lessons} ${st.lessons === 1 ? L('lesson_one') : L('lessons_lc')}</span><span class="dot"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
+        <div class="meta"><span>${st.lessons} ${st.lessons === 1 ? L('video_one') : L('videos')}</span><span class="dot"></span><span>${fmtMins(st.mins)}</span></div>
         ${st.done && !st.complete ? bar(st.pct) : ''}
         ${st.complete ? `<span class="cur-state ok">✓ ${L('completed')}</span>` : ''}
       </div>
@@ -204,14 +242,25 @@
   function lessonRowHTML(m, i, n) {
     const done = lessonDone(m.source, i), b = best(m.source, i), opt = isOptional(m, i), w = watched(m.source, i);
     const nx = nextInCourse(m.courseId), isNext = nx && nx.m === m && nx.i === i;
+    const ms = misses(m.source, i);
     const q = b ? `<span class="cur-q ${b.score === b.total ? 'ok' : ''}">${b.score}/${b.total} ${L('questions')}</span>` : (w && !done ? `<span class="cur-q">${L('q_pending')}</span>` : '');
-    const retake = b && b.score < b.total ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('retake')}</button>`
+    /* missed questions → a focused fix (only those, with the moment); no known detail → the old retake */
+    const act = ms ? `<button class="cur-fix" data-action="cur-fix" data-id="${m.source}" data-mod="${i}">${ms.wrong.length === 1 ? L('fix_one') : L('fix_n', { n: ms.wrong.length })}</button>`
+      : b && b.score < b.total ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('retake')}</button>`
       : (done && !b && !opt ? `<button class="cur-retake" data-action="cur-retake" data-id="${m.source}" data-mod="${i}">${L('answer_q')}</button>` : '');
-    return `<div class="module-row cur-lesson ${done ? 'done' : ''} ${isNext ? 'current' : ''}" data-action="play" data-id="${m.source}" data-mod="${i}">
-      <div class="m-num">${done ? '✓' : isNext ? '▶' : n}</div>
-      <div class="m-title">${esc(lTitle(m.source, i))}${opt ? ` <span class="cur-opt">${L('optional')}</span>` : ''}${q || retake ? `<div class="cur-lmeta">${q}${retake}</div>` : ''}</div>
-      <span class="m-dur">${lMins(m.source, i)} min</span>
-      <button class="m-play" aria-label="${L('lesson')} ${n}">▶</button>
+    const meta = lessonMeta(m.source, i), th = lThumb(m.source, i), did = `cl-${m.source}-${i}`;
+    const sum = meta && meta.summary ? (PT() ? meta.summary.pt : meta.summary.en) : '';
+    const chs = meta && Array.isArray(meta.chapters) ? meta.chapters : [];
+    return `<div class="cl ${done ? 'done' : ''} ${isNext ? 'current' : ''}">
+      <button class="cl-main" data-action="play" data-id="${m.source}" data-mod="${i}" aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}">
+        <span class="cl-thumb"${th ? ` style="background-image:url('${th}')"` : ''}><span class="cl-len">${lMins(m.source, i)} min</span>${done ? '<span class="cl-tick" aria-hidden="true">✓</span>' : ''}</span>
+        <span class="cl-text"><span class="cl-n">${L('lesson')} ${n}${opt ? ` · ${L('optional')}` : ''}${isNext ? ` · ${L('resume')}` : ''}</span><b>${esc(lTitle(m.source, i))}</b>${q ? `<span class="cl-q">${q}</span>` : ''}</span>
+      </button>
+      <span class="cl-side">${act}${sum || chs.length ? `<button class="cl-more" data-action="cur-more" aria-expanded="false" aria-controls="${did}" aria-label="${L('see_more')}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>` : ''}</span>
+      ${sum || chs.length ? `<div class="cl-detail" id="${did}" hidden>
+        ${sum ? `<p class="cl-sum">${esc(sum)}</p>` : ''}
+        ${chs.length ? `<div class="cl-ch-h">${L('chapters')}</div><ol class="cl-chs">${chs.map(c => `<li><button data-action="review-moment" data-id="${m.source}" data-mod="${i}" data-t="${c.t}"><span class="cl-tc">${tc(c.t)}</span><span>${esc(PT() ? c.pt : c.en)}</span></button></li>`).join('')}</ol>` : ''}
+      </div>` : ''}
     </div>`;
   }
 
@@ -235,16 +284,19 @@
             <div class="hero-meta">${typeTag('course')}<span class="sep"></span><span>${st.modules} ${L('modules')} · ${st.lessons} ${L('lessons_lc')}</span><span class="sep"></span><span>${L('est_time')} ${fmtMins(st.mins)}</span></div>
             <h1>${esc(cTitle(co))}</h1>
             <p class="course-hook">${esc(cField(co, 'promise'))}</p>
-            <p class="desc">${esc(cField(co, 'desc'))}</p>
             <div class="hero-actions">${primary}${certBtn}</div>
             <div class="cur-status">
               ${bar(st.pct)}
               <span>${L('progress')} ${st.pct}% · ${st.done}/${st.lessons} ${L('lessons_lc')}${st.minsLeft ? ` · ${fmtMins(st.minsLeft)} ${L('left')}` : ''}</span>
               <span class="cur-chips">${st.complete ? `<span class="cur-state ok">✓ ${L('completed')}</span>` : ''}${st.passed ? `<span class="cur-state ok">✓ ${L('assess_passed')}</span>` : ''}${st.eligible ? `<span class="cur-state ok">✓ ${L('cert_earned')}</span>` : ''}</span>
             </div>
+            ${st.score != null && st.answered === st.assessable && !st.passed ? `<p class="cur-warn">${L('not_yet_passed')}</p>` : ''}
+            ${st.unanswered ? `<p class="cur-warn">${L('unanswered', { n: st.unanswered })}</p>` : ''}
           </div>
         </div>
       </div>
+      <details class="cur-about"><summary><span>${L('about_course')}</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <p class="cur-p cur-about-desc">${esc(cField(co, 'desc'))}</p>
       <section class="course-intro cur-intro">
         <div class="ci-col"><h2>${L('outcomes_h')}</h2><ul class="ci-list">${outcomes.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
           ${aud ? `<h3 class="cur-h3">${L('audience_h')}</h3><p class="cur-p">${esc(aud)}</p>` : ''}
@@ -255,13 +307,10 @@
             <div><span>${L('score_lbl')}</span><b>${st.score != null ? st.score + '%' : '—'}</b><small>${L('pass_lbl')} ${PASS}% · ${st.answered}/${st.assessable} ${L('answered')}</small></div>
             <div><span>${L('recorded')}</span><b>${fmtMins(Math.round(st.recordedH * 60))}</b><small>${L('est_time')} ${fmtMins(st.mins)} (${L('est_note')})</small></div>
           </div>
-          ${st.score != null && st.answered === st.assessable && !st.passed ? `<p class="cur-warn">${L('not_yet_passed')}</p>` : ''}
-          ${st.done > 0 && st.answered < st.assessable ? `<p class="cur-warn">${L('unanswered', { n: st.assessable - st.answered })}</p>` : ''}
           <h3 class="cur-h3">${L('cert_h')}</h3>
           <p class="cur-p">${st.eligible ? `✓ ${L('cert_earned')} · ${fmtCertDate(new Date(st.completedAt))}` : L('cert_locked')}</p>
-          ${certBtn}
         </div>
-      </section>
+      </section></details>
       <div class="rail-head" style="margin-top:14px;"><h2>${L('courses') === 'Cursos' ? 'Módulos' : 'Modules'}</h2></div>
       <div class="cur-modules">${ms.map((m, k) => {
         const s = moduleStats(m);
@@ -271,6 +320,7 @@
           <div class="module-list cur-inner">${m.lessons.map((i, n) => lessonRowHTML(m, i, n + 1)).join('')}</div>
           <a class="cur-open" href="#/module/${m.id}">${L('module')}: ${esc(mTitle(m))} →</a>
         </details>`; }).join('')}</div>
+      <div class="page-pad" style="padding-top:0;">${missionCardHTML({ id })}${window.missionAdminHTML ? missionAdminHTML(id) : ''}</div>
       ${footerHTML()}</div>`;
   }
 
@@ -305,8 +355,13 @@
       </div>
       <div class="rail-head cur-lessons-head" style="margin-top:14px;"><h2>${L('lessons')}</h2>${optNote ? `<span class="hint">${esc(optNote)}</span>` : ''}</div>
       <div class="module-list">${m.lessons.map((i, n) => lessonRowHTML(m, i, n + 1)).join('')}</div>
-      <div class="page-pad" style="padding-top:0;">${resourcesHTML(c)}${missionCardHTML(c)}${coachCardHTML(c)}</div>
-      ${railHTML(`${L('module')}s · ${esc(cTitle(co))}`, L('see_course'), ms.filter(x => x !== m).map(moduleCardHTML), '#/course/' + co.id)}
+      <div class="page-pad" style="padding-top:0;">${resourcesHTML(c)}${coachCardHTML(c)}</div>
+      ${(() => { /* what comes after this module in its course; the last module points to the next course */
+        const after = ms.slice(k + 1);
+        if (after.length) return railHTML(L('next_in_course'), L('see_course'), after.map(moduleCardHTML), '#/course/' + co.id);
+        const ci = courses.indexOf(co), nc = courses[ci + 1];
+        return nc ? railHTML(L('next_course'), cTitle(nc), [courseCardHTML(nc)], '#/course/' + nc.id) : '';
+      })()}
       ${footerHTML()}</div>`;
   }
 
@@ -503,6 +558,17 @@
     return out.filter(x => courseById(x.courseId));
   }
   window.CUR.historical = historical;
+  window.curFixHTML = function () {
+    const items = [];
+    modules.forEach(m => m.lessons.forEach(i => { const x = misses(m.source, i); if (x) items.push({ m, i, n: x.wrong.length }); }));
+    if (!items.length) return '';
+    return `<section class="admin-section cur-fixbox">
+      <h2>${L('fix_h')}</h2><p class="sect-sub sub-auto">${L('fix_sub')}</p>
+      ${items.map(x => `<div class="cur-fixrow"><span class="cl-thumb sm"${lThumb(x.m.source, x.i) ? ` style="background-image:url('${lThumb(x.m.source, x.i)}')"` : ''}></span>
+        <span class="cf-t"><b>${esc(lTitle(x.m.source, x.i))}</b><small>${esc(cTitle(courseOf(x.m.courseId)))} · ${esc(mTitle(x.m))}</small></span>
+        <button class="btn btn-primary btn-sm" data-action="cur-fix" data-id="${x.m.source}" data-mod="${x.i}">${x.n === 1 ? L('fix_one') : L('fix_n', { n: x.n })}</button></div>`).join('')}
+    </section>`;
+  };
   window.certsSectionHTML = certsSectionHTML = function () {
     const earned = courses.filter(co => courseStats(co.id).eligible);
     const hist = historical();
@@ -537,6 +603,14 @@
     const a = el.dataset.action;
     if (a === 'cur-cert') { e.preventDefault(); e.stopPropagation(); courseCert(el.dataset.id); }
     else if (a === 'cur-hist-dl') { e.preventDefault(); e.stopPropagation(); window.curHistoricalCert(el.dataset.id); }
+    else if (a === 'cur-more') { e.preventDefault(); e.stopPropagation();
+      const d = document.getElementById(el.getAttribute('aria-controls')); if (!d) return;
+      const open = d.hidden; d.hidden = !open; el.setAttribute('aria-expanded', String(open)); el.classList.toggle('on', open); }
+    else if (a === 'cur-fix') { e.preventDefault(); e.stopPropagation();
+      const c = courseById(el.dataset.id), mod = +el.dataset.mod, x = misses(el.dataset.id, mod); if (!c || !x) return;
+      /* the lesson opens paused behind the fix, so "watch the answer" can jump straight to the moment */
+      _openPaused = true; openPlayer(c.id, mod);
+      setTimeout(() => showModuleCheck(c, mod, () => render(), { fix: x }), 450); }
     else if (a === 'cur-retake') { e.preventDefault(); e.stopPropagation(); const c = courseById(el.dataset.id); if (c) showModuleCheck(c, +el.dataset.mod, () => render(), { retake: true }); }
     else if (a === 'cur-pl-go') { e.preventDefault(); e.stopPropagation(); closePlayer(); setTimeout(() => { location.hash = el.dataset.route; }, 50); }
   }, true);

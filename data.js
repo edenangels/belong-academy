@@ -182,7 +182,7 @@ const UI = {
     comm_pinned:'Pinned', comm_official:'Official',
     cert_title:'Certificate of Completion', cert_awarded:'Awarded to', cert_for:'for completing', cert_dl:'Download certificate', cert_li:'Add to LinkedIn', certs_h:'Certificates', certs_sub:'', cert_none:'Finish a course to earn your first certificate.',
     asg_assigned:'Assigned to you', asg_due:'Due', asg_overdue:'Overdue', asg_start:'Start', dept_label:'Department', dept_none:'Choose your department', mod_locked:'Finish the previous lesson to unlock this one',
-    mis_h:'Field Mission', mis_sub:'Take what you learned onto the farm and into the houses — photo proof earns real XP.', mis_note_ph:'What did you notice? What did you do?', mis_photo:'Add photo proof', mis_submit:'Submit for review', mis_pending:'Submitted — awaiting review', mis_approved:'Mission approved!', mis_claim:'Claim', mis_declined:'Not approved this time — read the brief again and resubmit.', mis_done:'Mission complete', mis_signin:'Sign in to take on field missions', mis_photo_fail:'That photo couldn’t be used — try a JPG or PNG, or a smaller image.',
+    mis_h:'Field Mission', mis_sub:'A real task set by your team leader for this course. Send the proof and a leader reviews it.', mis_note_ph:'What did you notice? What did you do?', mis_photo:'Add photo proof', mis_submit:'Submit for review', mis_pending:'Submitted — awaiting review', mis_approved:'Mission approved!', mis_claim:'Claim', mis_declined:'Not approved this time — read the brief again and resubmit.', mis_done:'Mission complete', mis_signin:'Sign in to take on field missions', mis_photo_fail:'That photo couldn’t be used — try a JPG or PNG, or a smaller image.',
     coach_h:'Practice arena', coach_sub:'A safe place to practice the hard conversation — with an AI playing the other side.', coach_goal:'Your goal', coach_start:'Start the conversation', coach_end:'End & get feedback', coach_again:'Practice again', coach_ph:'Your reply…', coach_score:'Your feedback', coach_thinking:'…', coach_err:'Connection hiccup — your last message wasn’t lost. Send it again, or check the AI key in Settings.',
     rate_h:'How was this course?', rate_thanks:'Thank you — this helps us grow the library.',
     res_h:'Resources', cal_add:'Add to calendar',
@@ -421,7 +421,9 @@ const UI = {
     mc_conf_guess:'Guessing',
     mc_result:'Your result',
     mc_correct_was:'Correct answer:',
-    mc_moment:'Review the moment', watch_again:'Watch again', next_lesson_btn:'Next lesson →', back_to_course:'Back to the module', mc_back_result:'↩ Back to your result', cert_needs_quiz:'Certificates are issued per course: complete every lesson and reach 70% on the lesson questions.', take_cert_quiz:'Take the certification quiz', certified_lbl:'Certified', quiz_intro_h:'Certification quiz', quiz_intro_n:'questions', quiz_intro_rules:'pass mark 70% · unlimited attempts', quiz_intro_earn:'Pass it and your certificate unlocks.', quiz_start:'Start the quiz', quiz_exit:'Not now', q_right:'✓ Correct.', q_wrong:'✗ Not quite.', q_answer_is:'The answer is', optional_lbl:'optional', outcomes_h:'What you will be able to do', how_h:'How it works', how_steps:'Watch short lessons — a few minutes each.|Answer two quick questions after each lesson — that records your training hours.|Pass the final quiz (70%) and your certificate is yours.', deep_h:'Go deeper', deep_sub:'Optional long-form lessons from the original training — watch them any time.', deep_note:'Plus {n} optional deep-dive lessons ({m}) at the end.',
+    fix_eyebrow:'Fix your mistakes', fix_sub_ck:'Only the questions you missed. Tap "Watch the answer" to see that moment of the lesson, then answer. Your earlier right answers still count.', fix_watch:'Watch the answer',
+    mis_admin_h:'Field mission (admins)', mis_admin_none:'none set', mis_admin_sub:'Optional. A real task for this course with a real deliverable, set by you for your team. Learners see it at the end of the course and send proof for review. Leave it empty if the course needs none.', mis_admin_title:'Title', mis_admin_brief:'What to do', mis_admin_deliver:'Deliverable', mis_admin_save:'Save mission', mis_admin_clear:'Remove', mis_admin_saved:'Field mission saved', mis_admin_cleared:'Field mission removed',
+    mc_moment:'Review the moment', watch_again:'Watch again', next_lesson_btn:'Next lesson →', back_to_course:'Back to the module', mc_back_result:'↩ Back', cert_needs_quiz:'Certificates are issued per course: complete every lesson and reach 70% on the lesson questions.', take_cert_quiz:'Take the certification quiz', certified_lbl:'Certified', quiz_intro_h:'Certification quiz', quiz_intro_n:'questions', quiz_intro_rules:'pass mark 70% · unlimited attempts', quiz_intro_earn:'Pass it and your certificate unlocks.', quiz_start:'Start the quiz', quiz_exit:'Not now', q_right:'✓ Correct.', q_wrong:'✗ Not quite.', q_answer_is:'The answer is', optional_lbl:'optional', outcomes_h:'What you will be able to do', how_h:'How it works', how_steps:'Watch short lessons — a few minutes each.|Answer two quick questions after each lesson — that records your training hours.|Pass the final quiz (70%) and your certificate is yours.', deep_h:'Go deeper', deep_sub:'Optional long-form lessons from the original training — watch them any time.', deep_note:'Plus {n} optional deep-dive lessons ({m}) at the end.',
     mc_continue:'Continue',
     rev_h:'Review',
     rev_done:'Review done — it sticks better every round',
@@ -448,7 +450,7 @@ const UI = {
     comm_pinned:'Fixado', comm_official:'Oficial',
     cert_title:'Documento Comprovativo de Formação', cert_awarded:'Atribuído a', cert_for:'pela conclusão de', cert_dl:'Transferir comprovativo', cert_li:'Adicionar ao LinkedIn', certs_h:'Documentos comprovativos', certs_sub:'', cert_none:'Termine um curso para receber o seu primeiro documento comprovativo.',
     asg_assigned:'Atribuído a si', asg_due:'Prazo', asg_overdue:'Em atraso', asg_start:'Começar', dept_label:'Departamento', dept_none:'Escolha o seu departamento', mod_locked:'Conclua a lição anterior para desbloquear esta',
-    mis_h:'Missão de Campo', mis_sub:'Leve o que aprendeu para o terreno — a prova fotográfica vale XP real.', mis_note_ph:'O que reparou? O que fez?', mis_photo:'Adicionar foto', mis_submit:'Submeter para revisão', mis_pending:'Submetido — em revisão', mis_approved:'Missão aprovada!', mis_claim:'Reclamar', mis_declined:'Não aprovada desta vez — releia o guião e volte a submeter.', mis_done:'Missão concluída', mis_signin:'Inicie sessão para aceitar missões de campo', mis_photo_fail:'Não foi possível usar essa foto — tente um JPG ou PNG, ou uma imagem mais pequena.',
+    mis_h:'Missão de Campo', mis_sub:'Uma tarefa real definida pelo seu responsável para este curso. Envie a prova e um responsável revê-a.', mis_note_ph:'O que reparou? O que fez?', mis_photo:'Adicionar foto', mis_submit:'Submeter para revisão', mis_pending:'Submetido — em revisão', mis_approved:'Missão aprovada!', mis_claim:'Reclamar', mis_declined:'Não aprovada desta vez — releia o guião e volte a submeter.', mis_done:'Missão concluída', mis_signin:'Inicie sessão para aceitar missões de campo', mis_photo_fail:'Não foi possível usar essa foto — tente um JPG ou PNG, ou uma imagem mais pequena.',
     coach_h:'Arena de prática', coach_sub:'Um lugar seguro para praticar a conversa difícil — com uma IA do outro lado.', coach_goal:'O seu objetivo', coach_start:'Começar a conversa', coach_end:'Terminar e receber feedback', coach_again:'Praticar de novo', coach_ph:'A sua resposta…', coach_score:'O seu feedback', coach_thinking:'…', coach_err:'Falha de ligação — a sua mensagem não se perdeu. Envie de novo, ou verifique a chave de IA nas Definições.',
     rate_h:'Como foi este curso?', rate_thanks:'Obrigado — isto ajuda-nos a fazer crescer a biblioteca.',
     res_h:'Recursos', cal_add:'Adicionar ao calendário',
@@ -687,7 +689,9 @@ const UI = {
     mc_conf_guess:'A adivinhar',
     mc_result:'O seu resultado',
     mc_correct_was:'Resposta certa:',
-    mc_moment:'Rever o momento', watch_again:'Ver de novo', next_lesson_btn:'Próxima lição →', back_to_course:'Voltar ao módulo', mc_back_result:'↩ Voltar ao resultado', cert_needs_quiz:'Os comprovativos são emitidos por curso: conclua todas as lições e atinja 70% nas perguntas das lições.', take_cert_quiz:'Fazer o teste final', certified_lbl:'Aprovado', quiz_intro_h:'Teste final', quiz_intro_n:'perguntas', quiz_intro_rules:'nota mínima 70% · tentativas ilimitadas', quiz_intro_earn:'Passe e o seu comprovativo fica desbloqueado.', quiz_start:'Começar o teste', quiz_exit:'Agora não', q_right:'✓ Certo.', q_wrong:'✗ Não exatamente.', q_answer_is:'A resposta é', optional_lbl:'opcionais', outcomes_h:'O que vai conseguir fazer', how_h:'Como funciona', how_steps:'Veja lições curtas — poucos minutos cada.|Responda a duas perguntas rápidas depois de cada lição — é isso que regista as suas horas de formação.|Passe no teste final (70%) e o comprovativo é seu.', deep_h:'Aprofundar', deep_sub:'Lições longas opcionais da formação original — veja quando quiser.', deep_note:'Mais {n} lições opcionais de aprofundamento ({m}) no fim.',
+    fix_eyebrow:'Corrija os seus erros', fix_sub_ck:'Só as perguntas que falhou. Toque em "Ver a resposta" para ver esse momento da lição e responda. As respostas certas de antes continuam a contar.', fix_watch:'Ver a resposta',
+    mis_admin_h:'Missão de campo (administração)', mis_admin_none:'nenhuma definida', mis_admin_sub:'Opcional. Uma tarefa real para este curso, com uma entrega concreta, definida por si para a sua equipa. Os formandos veem-na no fim do curso e enviam a prova para revisão. Deixe vazio se o curso não precisar.', mis_admin_title:'Título', mis_admin_brief:'O que fazer', mis_admin_deliver:'Entrega', mis_admin_save:'Guardar missão', mis_admin_clear:'Remover', mis_admin_saved:'Missão de campo guardada', mis_admin_cleared:'Missão de campo removida',
+    mc_moment:'Rever o momento', watch_again:'Ver de novo', next_lesson_btn:'Próxima lição →', back_to_course:'Voltar ao módulo', mc_back_result:'↩ Voltar', cert_needs_quiz:'Os comprovativos são emitidos por curso: conclua todas as lições e atinja 70% nas perguntas das lições.', take_cert_quiz:'Fazer o teste final', certified_lbl:'Aprovado', quiz_intro_h:'Teste final', quiz_intro_n:'perguntas', quiz_intro_rules:'nota mínima 70% · tentativas ilimitadas', quiz_intro_earn:'Passe e o seu comprovativo fica desbloqueado.', quiz_start:'Começar o teste', quiz_exit:'Agora não', q_right:'✓ Certo.', q_wrong:'✗ Não exatamente.', q_answer_is:'A resposta é', optional_lbl:'opcionais', outcomes_h:'O que vai conseguir fazer', how_h:'Como funciona', how_steps:'Veja lições curtas — poucos minutos cada.|Responda a duas perguntas rápidas depois de cada lição — é isso que regista as suas horas de formação.|Passe no teste final (70%) e o comprovativo é seu.', deep_h:'Aprofundar', deep_sub:'Lições longas opcionais da formação original — veja quando quiser.', deep_note:'Mais {n} lições opcionais de aprofundamento ({m}) no fim.',
     mc_continue:'Continuar',
     rev_h:'Revisão',
     rev_done:'Revisão feita — fica mais sólido a cada volta',
@@ -708,7 +712,7 @@ const UI = {
 };
 function t(k){ const l = _lang(); return (UI[l] && UI[l][k] != null ? UI[l][k] : UI.en[k]) ?? k; }
 
-const CATS_PT = { 'Leadership':'Liderança', 'Nature Connection':'Ligação à Natureza', 'Land & Soil':'Terra e Solo', 'Water & Climate':'Água e Clima', 'Food & Forest':'Comida e Floresta', 'Stewardship':'Zeladoria', 'Craft & Hands':'Ofício e Mãos', 'Wellbeing':'Bem-estar', 'Community':'Comunidade' };
+const CATS_PT = { 'Foundations':'Fundamentos', 'Hospitality':'Hospitalidade', 'Sustainability':'Sustentabilidade', 'Food & Farm':'Comida e Quinta', 'Leadership':'Liderança', 'Nature Connection':'Ligação à Natureza', 'Land & Soil':'Terra e Solo', 'Water & Climate':'Água e Clima', 'Food & Forest':'Comida e Floresta', 'Stewardship':'Zeladoria', 'Craft & Hands':'Ofício e Mãos', 'Wellbeing':'Bem-estar', 'Community':'Comunidade' };
 const tcat = c => _lang() === 'pt' ? (CATS_PT[c] || c) : c;
 const PILLARS_PT = { 'Regenerative':'Regenerativo', 'Rooted':'Enraizado', 'Restorative':'Restaurador', 'Connected':'Conectado', 'Elemental':'Elemental', 'Meaningful':'Significativo' };
 const tpillar = l => _lang() === 'pt' ? (PILLARS_PT[l] || l) : l;
@@ -749,19 +753,15 @@ const DEPTS = [
 ];
 const tdept = k => { const d = DEPTS.find(x => x.key === k); return d ? (_lang() === 'pt' ? d.pt : d.en) : ''; };
 
-/* Field Missions — learn online, prove it on the land. One mission per course (photo-proof). */
-const MISSIONS = {
-  'craveiral-hospitality': { xp: 150,
-    en: { title: 'Three names, three stories', brief: 'Over one shift, learn the names of three guests and one true thing about each — and use the name naturally before they leave. Write the three moments down; photograph your notes as proof.' },
-    pt: { title: 'Três nomes, três histórias', brief: 'Num turno, aprenda o nome de três hóspedes e uma coisa verdadeira sobre cada um — e use o nome com naturalidade antes de partirem. Anote os três momentos; fotografe as notas como prova.' } },
-  'houses-farm-sustainability': { xp: 150,
-    en: { title: 'The sit spot', brief: 'Choose one outdoor spot on the property. Sit there 15 minutes in silence, three days in a row. Note what changes each day — light, sound, life. Photograph your notes or the spot as proof.' },
-    pt: { title: 'O lugar de estar', brief: 'Escolha um lugar ao ar livre na propriedade. Sente-se lá 15 minutos em silêncio, três dias seguidos. Anote o que muda a cada dia — luz, som, vida. Fotografe as notas ou o lugar como prova.' } },
-  'farm-to-table': { xp: 150,
-    en: { title: 'From soil to table', brief: 'Harvest (or help harvest) one thing grown on the farm and follow it to a guest\'s plate. Photograph the two ends of that journey — the plant and the plate.' },
-    pt: { title: 'Da terra à mesa', brief: 'Colha (ou ajude a colher) algo cultivado na propriedade e acompanhe-o até ao prato de um hóspede. Fotografe as duas pontas dessa viagem — a planta e o prato.' } }
-};
-const missionFor = id => { const m = MISSIONS[id]; return m ? Object.assign({ xp: m.xp }, _lang() === 'pt' ? m.pt : m.en) : null; };
+/* Field Missions — set by an ADMIN for a course (title, what to deliver, XP), never generated or
+   pre-written: a mission asks something of a person's working day, so a person who knows the team
+   decides it. Stored in the org config (EdenOrg.missions[courseId]); learners only see what an
+   admin has set. (João + Pedro, 5 Nov 2026: no AI-written missions such as "sit 15 minutes in silence".) */
+const MISSIONS = {};
+const missionFor = id => { const m = ((window.EdenOrg && window.EdenOrg.missions) || {})[id];
+  if (!m || !m.title) return null;
+  const L = _lang() === 'pt' && m.pt && m.pt.title ? m.pt : m;
+  return { xp: +m.xp || 100, title: L.title, brief: L.brief || '', deliver: L.deliver || '' }; };
 
 /* AI Role-Play Coach — practice the hard conversation before it happens */
 const ROLEPLAY = {

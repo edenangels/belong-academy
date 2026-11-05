@@ -2,7 +2,7 @@
    INSTANCE · Belong Academy  (brand pack — pure config)
    Brand from the Belong Brandbook: terracotta #BE594D, warm palette,
    Source Serif Pro + Work Sans, the circle-over-bar symbol. Pillars:
-   Staying & Feeling · Growing & Tasting · To Nature · School.
+   Foundations · Hospitality · Food & Farm · Sustainability · Community.
 ============================================================================ */
 (window.EdenBrands = window.EdenBrands || {}).belong = {
   id: 'belong',

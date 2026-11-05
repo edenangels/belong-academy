@@ -9,7 +9,7 @@
 ============================================================================ */
 const CATALOG = [
   {
-    id: 'welcome-belong', title: 'Welcome to Belong', cat: 'School', grad: 1, icon: 'compass',
+    id: 'welcome-belong', title: 'Welcome to Belong', cat: 'Foundations', grad: 1, icon: 'compass',
     outcomes: ['Tell Craveiral\'s story, and why Belong exists', 'Explain the vision, the mission and the chain in your own words', 'See why local suppliers and the land come first in every decision'],
     outcomes_pt: ['Contar a história do Craveiral, e porque existe a Belong', 'Explicar a visão, a missão e a cadeia por palavras suas', 'Perceber porque os fornecedores locais e a terra vêm primeiro em cada decisão'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09', featured: true,
@@ -24,7 +24,7 @@ const CATALOG = [
     ]
   },
   {
-    id: 'craveiral-places', title: 'Craveiral: One Single House', cat: 'School', grad: 8, icon: 'sun',
+    id: 'craveiral-places', title: 'Craveiral: One Single House', cat: 'Foundations', grad: 8, icon: 'sun',
     outcomes: ['Know every unit well enough to answer a guest without hesitating', 'Keep the Craveiral standard when the register changes, from the restaurant to the beach bar', 'Lead an experience on purpose and recover a stay when something goes wrong'],
     outcomes_pt: ['Conhecer cada unidade o suficiente para responder a um hóspede sem hesitar', 'Manter o padrão Craveiral quando o registo muda, do restaurante ao bar da praia', 'Conduzir uma experiência com intenção e recuperar uma estadia quando algo corre mal'],
     /* the trainer's second filmed course (Vimeo folder "Onboarding Course (8 Modules)", 27-28 Oct 2026): a visit to each unit of the operation */
@@ -46,7 +46,7 @@ const CATALOG = [
     ]
   },
   {
-    id: 'craveiral-hospitality', title: 'Hospitality, the Craveiral Way', cat: 'Staying & Feeling', grad: 4, icon: 'people',
+    id: 'craveiral-hospitality', title: 'Hospitality, the Craveiral Way', cat: 'Hospitality', grad: 4, icon: 'people',
     outcomes: ['Live the Belong values in everyday decisions', 'Welcome guests as friends and use their names naturally', 'Anticipate a guest\'s needs before they have to ask'],
     outcomes_pt: ['Viver os valores da Belong nas decisões de todos os dias', 'Acolher os hóspedes como amigos e usar os seus nomes com naturalidade', 'Antecipar as necessidades de um hóspede antes de as pedir'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09',
@@ -61,7 +61,7 @@ const CATALOG = [
     ]
   },
   {
-    id: 'guest-journey', title: 'The Guest Journey', cat: 'Staying & Feeling', grad: 2, icon: 'sun',
+    id: 'guest-journey', title: 'The Guest Journey', cat: 'Hospitality', grad: 2, icon: 'sun',
     outcomes: ['Keep the promises the marketing makes, from the first email to the first fifteen minutes', 'Listen fully and acknowledge honestly when a guest is upset', 'Recover a stay with a fix bigger than expected'],
     outcomes_pt: ['Cumprir as promessas que o marketing faz, do primeiro e-mail aos primeiros quinze minutos', 'Ouvir até ao fim e reconhecer com honestidade quando um hóspede está descontente', 'Recuperar uma estadia com uma solução maior do que a esperada'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09',
@@ -76,7 +76,7 @@ const CATALOG = [
     ]
   },
   {
-    id: 'houses-farm-sustainability', title: 'The Houses, the Farm & Sustainability', cat: 'To Nature', grad: 5, icon: 'tree',
+    id: 'houses-farm-sustainability', title: 'The Houses, the Farm & Sustainability', cat: 'Sustainability', grad: 5, icon: 'tree',
     outcomes: ['Know the estate and each house well enough to answer any guest question', 'Keep the standards that connect field and plate', 'Practise sustainability every day: water, energy, waste'],
     outcomes_pt: ['Conhecer a propriedade e cada casa para responder a qualquer pergunta de um hóspede', 'Manter os padrões que ligam o campo ao prato', 'Praticar a sustentabilidade todos os dias: água, energia, desperdício'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09',
@@ -91,7 +91,7 @@ const CATALOG = [
     ]
   },
   {
-    id: 'farm-to-table', title: 'FarmTable & the Constellation', cat: 'Growing & Tasting', grad: 6, icon: 'sprout',
+    id: 'farm-to-table', title: 'FarmTable & the Constellation', cat: 'Food & Farm', grad: 6, icon: 'sprout',
     outcomes: ['Explain why over 70% of what we serve grows on the property', 'Tell the story of the seasonal menu and local sourcing', 'Cross-recommend the beach bar, events and the wider constellation'],
     outcomes_pt: ['Explicar porque mais de 70% do que servimos cresce na propriedade', 'Contar a história do menu sazonal e dos fornecedores locais', 'Recomendar o Bar da Praia, os eventos e o resto da constelação'],
     level: 'All levels', learners: 0, ai: true, updated: '2026-09',
@@ -378,6 +378,30 @@ const REELS_AWAITING_VIDEO = [
     approved: true,
     deeper: 'houses-farm-sustainability' },
 ];
+
+/* each lesson's Vimeo thumbnail (linked, not stored); the app adds the size, e.g. _320x180 */
+const LESSON_THUMBS = {
+  'craveiral-hospitality:0': 'https://i.vimeocdn.com/video/2217131862-f2c8460ec7adf5fa6867d66e3d7c947cfde703a10f453a8e5048cb26bffeac86-d',
+  'craveiral-hospitality:1': 'https://i.vimeocdn.com/video/2217133437-96aba9306187b6afb2370a7d5e802c369e1b33caa2897906176a74c21d66d83d-d',
+  'craveiral-places:0': 'https://i.vimeocdn.com/video/2217445064-6d2631ee610e6bb4c4cf7f75aef3c3c0df96749c14386fcb46f8cdf24acc4cd3-d',
+  'craveiral-places:1': 'https://i.vimeocdn.com/video/2217564140-16a640f697d487623c0b06bf25d6735b3e3167fcf9c31a2ba6d52678d816caeb-d',
+  'craveiral-places:2': 'https://i.vimeocdn.com/video/2217589787-a9c877cadb8a103144cf2d551885e816d50702a8d7bbf6cfbf9a1f69a1d6f0ab-d',
+  'craveiral-places:3': 'https://i.vimeocdn.com/video/2218018792-123cc72a2bf5b14e2075f92246634eab7a4a9ec14aef84c2e655f7d2c9a3ac11-d',
+  'craveiral-places:4': 'https://i.vimeocdn.com/video/2218077155-2856bf60c1e0a7a985d60c2e0ef6a7b93ec056011c7554bedff98002e0294e24-d',
+  'craveiral-places:5': 'https://i.vimeocdn.com/video/2218078641-694e13642d23fe27f88c1d48437359b9bb7df3d510958dd6e94c172f0530b0e4-d',
+  'craveiral-places:6': 'https://i.vimeocdn.com/video/2218094023-af76d31ea7639238b55e2db3ab9e92f2e5c9c9c39cbd45f6de3629adf952f620-d',
+  'craveiral-places:7': 'https://i.vimeocdn.com/video/2218095864-1a993d08a0015d6c5a5680c95fe1ddc1e1e4e52a6587eeba9726dea994db5160-d',
+  'farm-to-table:0': 'https://i.vimeocdn.com/video/2217137213-b24eaae399c6d5bf67449dd47ef1297e53e28b97dbbb8ec3c700c516ddeeea32-d',
+  'farm-to-table:1': 'https://i.vimeocdn.com/video/2217138990-092dbfa3e787bbfb04755fc961255fc490779049ad39eece28705aa0e25857a0-d',
+  'guest-journey:0': 'https://i.vimeocdn.com/video/2217134986-44789fc68a7f7aa517a51a7a26b13c14da3e52ae2e5143c623d931d219eedc7f-d',
+  'guest-journey:1': 'https://i.vimeocdn.com/video/2217139747-5551077b54aba7f15a30ebc986d21165df7fa8048ddf1c314df547fd80468e37-d',
+  'houses-farm-sustainability:0': 'https://i.vimeocdn.com/video/2217136789-7f81ee6f41a434988b602a13975cc91e2613c02796d4605e68460413688b5766-d',
+  'houses-farm-sustainability:1': 'https://i.vimeocdn.com/video/2217141386-3b91a3adbb59e95e4b0a221b5000c3c30442833f60409fb4643598b5269f891f-d',
+  'voice-leadership:0': 'https://i.vimeocdn.com/video/2217142355-a126b5aff42ca2c381b52b5fc57bf9283d3f09c73be6e4a52e3b8d01533b2a15-d',
+  'voice-leadership:1': 'https://i.vimeocdn.com/video/2217144064-3feb332a9ff55a3e69116229f295a4d1819dff4401663c1b16bdc3b4116c536e-d',
+  'welcome-belong:0': 'https://i.vimeocdn.com/video/2217111727-b13a18eac7f9e163d01252284de6020bcd72a841d5547f60fd65954bff995ecd-d',
+  'welcome-belong:1': 'https://i.vimeocdn.com/video/2217130453-d45d0e1262ef2498e53b7e331b824b6192b71d2f693086455673cdbbe542f0e1-d'
+};
 
 const CURRICULUM = {
   passMark: 70,
