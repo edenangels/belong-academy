@@ -350,7 +350,11 @@
     const cur = pm.find(m => !moduleStats(m).complete);
     const steps = pm.map((m, k) => {
       const s = moduleStats(m), st = s.complete ? 'done' : m === cur ? 'current' : 'locked';
-      const tag = st === 'locked' ? 'div' : 'button', art = m.item.poster ? ` style="background-image:url('${(window.thumbOf || (x => x))(m.item.poster)}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"` : '';
+      /* the first two tiles are on screen; the rest of the row is off to the right
+         and fetches its art as the row scrolls (app.js lazyBackgrounds) */
+      const tag = st === 'locked' ? 'div' : 'button', thumb = (window.thumbOf || (x => x))(m.item.poster),
+        art = !m.item.poster ? '' : k < 2 ? ` style="background-image:url('${thumb}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"`
+          : ` data-bg="${thumb}"${m.item.posterPos ? ` style="background-position:${m.item.posterPos}"` : ''}`;
       const sub = st === 'done' ? L('completed') : st === 'current' ? `${s.pct}% · ${fmtMins(s.minsLeft)} ${L('left')}` : t('unlocks_after');
       return `<${tag} class="pstep ${st}${m.item.poster ? ' has-art' : ''}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}${art}>
         <span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>

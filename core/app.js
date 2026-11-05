@@ -5112,19 +5112,30 @@ const bgObserver = ('IntersectionObserver' in window) ? new IntersectionObserver
   ioEverFired = true;
   entries.forEach(e => { if (e.isIntersecting) { loadBg(e.target); bgObserver.unobserve(e.target); } });
 }, { rootMargin: '400px' }) : null;
+/* horizontal rail: a small sideways margin, so a tile is fetched as the row starts to move toward it */
+const pathTileObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(entries => {
+  ioEverFired = true;
+  entries.forEach(e => { if (e.isIntersecting) { loadBg(e.target); pathTileObserver.unobserve(e.target); } });
+}, { rootMargin: '400px 160px' }) : null;
 function lazyBackgrounds() {
   const els = [...document.querySelectorAll('.thumb[data-bg]')];
-  els.slice(0, 8).forEach(loadBg);                 /* above the fold: instant */
-  const rest = els.slice(8);
-  if (!bgObserver) { rest.forEach(loadBg); document.querySelectorAll('.reel-thumb img[data-src]').forEach(loadBg); return; }
+  /* above the fold: instant. "Above the fold" was approximated as the first
+     eight cards — right for Library, but on Home the first cards sit two
+     screens down and were fetched with the hero; ask the layout instead. */
+  const vh = innerHeight || 800, above = el => el.getBoundingClientRect().top < vh;
+  els.filter(above).forEach(loadBg);
+  const rest = els.filter(el => el.dataset.bg);
+  if (!bgObserver) { rest.forEach(loadBg); document.querySelectorAll('.reel-thumb img[data-src], .pstep[data-bg]').forEach(loadBg); return; }
   rest.forEach(el => bgObserver.observe(el));
   /* Home reel-rail posters sit ~2 screens down. Native loading="lazy" fetches
      anything within ~2500px on a slow link, so on a phone they downloaded with
      the hero and slowed it; here they load 400px before they scroll in. */
   document.querySelectorAll('.reel-thumb img[data-src]').forEach(el => bgObserver.observe(el));
+  /* Home path row: tiles past the second sit off-screen to the right */
+  document.querySelectorAll('.pstep[data-bg]').forEach(el => pathTileObserver ? pathTileObserver.observe(el) : loadBg(el));
   clearTimeout(lazyBackgrounds._t);
   lazyBackgrounds._t = setTimeout(() => {          /* observer broken? load everything (old behavior) */
-    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg], .reel-thumb img[data-src]').forEach(loadBg);
+    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg], .reel-thumb img[data-src], .pstep[data-bg]').forEach(loadBg);
   }, 2500);
 }
 /* Deep link from outside the app — LandFlow's brain sends people here.
@@ -9145,7 +9156,12 @@ function applyPendingJoin() {
     toast((_lang() === 'pt' ? 'Bem-vindo à ' : 'Welcome to ') + companyName() + ' 🏢', '✦'); render();
   }).catch(() => { localStorage.removeItem('eden-join'); toast(_lang() === 'pt' ? 'Código de convite inválido' : 'Invalid invite code', '⚠️'); });
 }
-loadGraph().then(() => { if (GRAPH) render(); });
+/* the knowledge graph (+ tags) feeds reel hand-offs, lesson "beside" shorts and
+   related modules — none of it is on the first screen. Fetched once the page
+   has loaded, so on a phone it no longer takes a connection from the hero. */
+const _kickGraph = () => loadGraph().then(() => { if (GRAPH) render(); });
+if (document.readyState === 'complete') setTimeout(_kickGraph, 0);
+else addEventListener('load', () => setTimeout(_kickGraph, 0), { once: true });
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
   /* AUTO-UPDATE: when a newer version is deployed, the new service worker
      activates (sw.js does skipWaiting + clients.claim) and takes control →
