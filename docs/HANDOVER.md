@@ -1,6 +1,6 @@
 # Belong Academy — handover
 
-Branch `restructure-hierarchy` · release `bel111` · not yet published.
+Branch `restructure-hierarchy` · release `bel112` · not yet published.
 The content map, the rules and the migration details are in [CONTENT-MAP.md](CONTENT-MAP.md).
 
 ## What it is
@@ -39,6 +39,20 @@ The structure is **Academy → Courses → Modules → Lessons**:
 - **To add one:** add an entry to `REELS` in `brands/belong/content.js`, with an MP4 and a
   poster in `media/reels/`. There are two more Mission voice versions in the Vimeo folder if
   a different voice is wanted.
+
+## Speed (AutoResearch, 5 Nov 2026)
+
+On a mid-range phone, the Home screen now shows its main content in **3.7 s instead of
+5.3 s (−30 %)**:
+- 681 KB downloaded instead of 1.34 MB;
+- 23 requests instead of 34.
+
+This was measured by a locked scorer, so the content on screen is unchanged and no new
+accessibility problem was added.
+- **Details:** `~/autoresearch-lab/targets/belong-speed/REPORT.md`
+- **New artwork:** run `python3 scripts/build-thumbs.py` after adding a cover or hero image.
+- **Cloudflare deploy:** pass `core/curriculum.js core/team.js core/localdb.js` to `cfdeploy.sh`
+  so they are minified.
 
 ## Settings that matter (`brands/belong/brand.js`)
 
