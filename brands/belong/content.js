@@ -201,6 +201,59 @@ const COURSE_SKILLS = {};
    lessons in "Guest Experience & Our Standards" (FarmTable 37% shared phrasing, the houses
    28%); they are OPTIONAL there so no learning requirement is counted twice — which
    recording to keep is Pedro's call (flagged in docs/CONTENT-MAP.md). */
+/* ===== REELS — short vertical reels (9:16, ~30 s), the swipe feed at #/reels ==========
+   Source: Vimeo folder "Belong shorts". Served as small MP4s from media/reels/ (720p, sound,
+   faststart) rather than the Vimeo player: the feed's sound button and its end-of-reel
+   check only work on a <video>, and a muted background iframe would play a narrated
+   reel in silence. vimeoId is kept so the master can be found again.
+   A reel never credits training hours (it is not in CATALOG); `deeper` points at the
+   lesson where the same idea lives at depth. Copy and checks are written from each
+   reel's own captions, quoted in `lesson`. */
+const REELS = [
+  { id: 'belong-vision', seconds: 29, vimeoId: '1242453517',
+    title: { en: 'What is left of this land?', pt: 'O que fica desta terra?' },
+    hook:  { en: 'One question behind everything we do here.', pt: 'Uma pergunta por trás de tudo o que fazemos aqui.' },
+    line:  { en: 'We do not run a hotel in the countryside. We look after a place that outlives us.', pt: 'Não gerimos um hotel no campo. Cuidamos de um lugar que vai durar mais do que nós.' },
+    lesson: { en: "Belong's vision is to regenerate the territory through a circular economy: what the land gives returns to the land, and what the house takes, the house gives back. The question behind every decision is what is left of this land after we pass through it.",
+              pt: 'A visão da Belong é regenerar o território através de uma economia circular: o que a terra dá volta à terra, e o que a casa tira, a casa devolve. A pergunta por trás de cada decisão é o que fica desta terra depois de passarmos por ela.' },
+    videoLang: 'en',
+    check: { type: 'recall', a: 1,
+      en: { q: "What is Belong's vision?", opts: ['To run the best hotel in the countryside', 'To regenerate the territory through a circular economy', 'To grow every ingredient the kitchen uses'], why: 'The reel states it directly: to regenerate the territory through a circular economy. What the land gives returns to the land.' },
+      pt: { q: 'Qual é a visão da Belong?', opts: ['Gerir o melhor hotel do campo', 'Regenerar o território através de uma economia circular', 'Produzir todos os ingredientes que a cozinha usa'], why: 'O reel di-lo diretamente: regenerar o território através de uma economia circular. O que a terra dá volta à terra.' } },
+    media: { type: 'mp4', src: 'media/reels/belong-vision.mp4' }, poster: 'media/reels/belong-vision.webp',
+    approved: true,
+    deeper: 'welcome-belong' },
+  /* the same Vision narration over real estate footage (Vimeo "Animated and Belong Footage reel");
+     its check asks a different line of the script, so the two reels never repeat a question */
+  { id: 'belong-vision-estate', seconds: 29, vimeoId: '1242451537',
+    title: { en: 'A place that outlives us', pt: 'Um lugar que vai durar mais do que nós' },
+    hook:  { en: 'What the land gives, returns to the land.', pt: 'O que a terra dá volta à terra.' },
+    line:  { en: 'What the house takes, the house gives back.', pt: 'O que a casa tira, a casa devolve.' },
+    lesson: { en: "The circular economy in one line: what the land gives returns to the land, and what the house takes, the house gives back. That is why Belong says it does not run a hotel in the countryside: it looks after a place that outlives us.",
+              pt: 'A economia circular numa frase: o que a terra dá volta à terra, e o que a casa tira, a casa devolve. É por isso que a Belong diz que não gere um hotel no campo: cuida de um lugar que vai durar mais do que nós.' },
+    videoLang: 'en',
+    check: { type: 'recall', a: 0,
+      en: { q: 'In the circular economy, what does the house do with what it takes?', opts: ['It gives it back', 'It keeps it for later seasons', 'It sells it to guests'], why: 'The reel says it plainly: what the house takes, the house gives back. What the land gives returns to the land.' },
+      pt: { q: 'Na economia circular, o que faz a casa com o que tira?', opts: ['Devolve-o', 'Guarda-o para as próximas estações', 'Vende-o aos hóspedes'], why: 'O reel di-lo claramente: o que a casa tira, a casa devolve. O que a terra dá volta à terra.' } },
+    media: { type: 'mp4', src: 'media/reels/belong-vision-estate.mp4' }, poster: 'media/reels/belong-vision-estate.webp',
+    approved: true,
+    deeper: 'welcome-belong' },
+  /* Mission: two voice versions exist in the folder (standard English 1242450043 is used here;
+     Portuguese-accented English is 1242449498). Not approved yet: admins see it marked pending. */
+  { id: 'belong-mission', seconds: 34, vimeoId: '1242450043',
+    title: { en: 'Four things that rarely travel together', pt: 'Quatro coisas que raramente andam juntas' },
+    hook:  { en: 'The vision says where we are going. The mission says what we do every day.', pt: 'A visão diz para onde vamos. A missão diz o que fazemos todos os dias.' },
+    line:  { en: 'Every gesture is a thread. Our job is to leave none of them loose.', pt: 'Cada gesto é um fio. O nosso trabalho é não deixar nenhum solto.' },
+    lesson: { en: 'The mission is to serve this community and to connect four things that rarely travel together: farming, hospitality, food and nature. The garden feeds the FarmTable, the table explains the land, and the trail returns the guest to the landscape.',
+              pt: 'A missão é servir esta comunidade e ligar quatro coisas que raramente andam juntas: agricultura, hospitalidade, comida e natureza. A horta alimenta o FarmTable, a mesa explica a terra e o trilho devolve o hóspede à paisagem.' },
+    videoLang: 'en',
+    check: { type: 'recall', a: 2,
+      en: { q: 'Which four things does the mission connect?', opts: ['Rooms, restaurant, shop and spa', 'Marketing, sales, service and reviews', 'Farming, hospitality, food and nature'], why: 'The mission is to connect four things that rarely travel together: farming, hospitality, food and nature.' },
+      pt: { q: 'Que quatro coisas liga a missão?', opts: ['Quartos, restaurante, loja e spa', 'Marketing, vendas, serviço e avaliações', 'Agricultura, hospitalidade, comida e natureza'], why: 'A missão é ligar quatro coisas que raramente andam juntas: agricultura, hospitalidade, comida e natureza.' } },
+    media: { type: 'mp4', src: 'media/reels/belong-mission.mp4' }, poster: 'media/reels/belong-mission.webp',
+    deeper: 'welcome-belong' }
+];
+
 const CURRICULUM = {
   passMark: 70,
   since: '2026-11-05T00:00:00Z',   /* item-level 'done' flags older than this count as every lesson done (pre-curriculum records) */   /* % across a course's lesson questions (best attempt per lesson) */

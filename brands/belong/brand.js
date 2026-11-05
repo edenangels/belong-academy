@@ -43,6 +43,7 @@
   backend: 'local',
   /* meeting 4 Nov 2026: the "knowledge verified · from quizzes" count is clutter; scores live on the course page */
   hideVerifiedStat: true,
+  quickWinsShelf: false,   /* the home Reels rail already shows the reels; a second shelf repeated them */
   /* local mode only: test accounts shown on the sign-in card (no passwords; this device only) */
   localSeed: {
     adminEmails: ['admin@belong.test'],

@@ -760,8 +760,15 @@ function renderHome() {
   ${reelsAll().length ? `<section class="rail-section reel-tease">
     <div class="rail-head"><h2>${t('reel_h')}</h2>
       <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
-    <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => `
-      <button class="reel-chip" data-action="goto" data-route="#/reels">
+    <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => r.poster ? `
+      <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${r.seconds || 30}s">
+        <img src="${esc(r.poster)}" alt="" loading="lazy" decoding="async">
+        <span class="rt-time">${r.seconds || 30}s</span>
+        ${reelPending(r) ? `<span class="rt-pend">${t('reel_pending')}</span>` : ''}
+        <span class="rt-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
+        <span class="rt-title">${esc(reelField(r.title))}</span>
+      </button>` : `
+      <button class="reel-chip" data-action="goto" data-route="#/reels/${esc(r.id)}">
         <div class="reel-chip-art t${toneOf(r.theme || r.id)}">
           <span>${esc(reelField(r.title))}</span></div>
         <div class="reel-chip-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${r.seconds || 30}s</div>
@@ -2761,7 +2768,7 @@ function buildCertHTML(o) {
   const facts = Array.isArray(o.facts) && o.facts.length
     ? `<div class="facts">${o.facts.map(f => `<div class="fact"><span>${esc(f.k)}</span><b>${esc(f.v)}</b></div>`).join('')}</div>`
     : `<div class="meta">${o.meta || ''}</div>`;
-  return `<!doctype html><html lang="${pt ? 'pt' : 'en'}"><head><meta charset="utf-8"><title>${esc(o.docTitle)}</title>${fontLink}
+  return `<!doctype html><html lang="${pt ? 'pt' : 'en'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(o.docTitle)}</title>${fontLink}
 <style>
   @page { size: A4 landscape; margin: 0; }
   * { margin:0; padding:0; box-sizing:border-box; print-color-adjust:exact; -webkit-print-color-adjust:exact; }
@@ -2804,7 +2811,7 @@ function buildCertHTML(o) {
   .foot { margin-bottom:9mm; }
   .print { position:fixed; top:12px; left:12px; font-family:${body}; background:var(--ink); color:#fff; border:0; border-radius:8px; padding:9px 16px; cursor:pointer; font-size:13px; }
   @media screen { body { padding:56px 0 24px; } .sheet { box-shadow:0 24px 60px rgba(40,25,15,.18); } }
-  @media print { .print { display:none; } body { background:var(--paper); display:block; min-height:0; padding:0; } .sheet { margin:0; box-shadow:none; page-break-after:avoid; } }
+  @media print { .print { display:none; } body { background:var(--paper); display:block; min-height:0; padding:0; } .sheet { margin:0; box-shadow:none; page-break-after:avoid; zoom:1 !important; } }
 </style></head><body>
 <button class="print" onclick="print()">⤓ ${pt ? 'Imprimir / Guardar PDF' : 'Print / Save as PDF'}</button>
 <div class="sheet">
@@ -2832,7 +2839,9 @@ function buildCertHTML(o) {
     </div>
   </div>
   <div class="note">${certFooterNote()}${o.extraNote ? ' · ' + o.extraNote : ''}</div>
-</div></body></html>`;
+</div>
+<script>/* on a narrow screen (a phone) the A4 sheet scales to fit; printing stays true size */
+(function(){var s=document.querySelector(".sheet");function f(){if(!s)return;s.style.zoom="";var k=Math.min(1,(innerWidth-24)/s.offsetWidth);s.style.zoom=k<1?k:"";}f();addEventListener("resize",f);})();</script></body></html>`;
 }
 /* Who supplied the content, if not the employer. Brand config so each tenant
    states the truth: a client running our library names us; a client that
@@ -3764,7 +3773,7 @@ function adminCockpitHTML() {
       <div class="cockpit-head">
         <div><h2>Team</h2><p class="sect-sub">Your real members, sorted by who needs attention. “Nudge” pings their next lesson.</p></div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <select id="ckDept" class="ck-dept"><option value="">All departments</option>${DEPTS.map(d => `<option value="${d.key}" ${cockpitDept === d.key ? 'selected' : ''}>${d.en}</option>`).join('')}</select>
+          <select id="ckDept" class="ck-dept" aria-label="Department"><option value="">All departments</option>${DEPTS.map(d => `<option value="${d.key}" ${cockpitDept === d.key ? 'selected' : ''}>${d.en}</option>`).join('')}</select>
           <button class="btn btn-glass btn-sm" data-action="export-members">⤓ Export CSV</button><button class="btn btn-glass btn-sm" data-action="ru-annex"> ${t('ru_annex_btn')}</button><button class="btn btn-glass btn-sm" data-action="art4-pack" title="EU AI Act Art. 4 — AI-literacy evidence">${t('art4_btn')}</button><button class="btn btn-glass btn-sm" data-action="gdpr-doc" data-kind="retention" title="${t('gdpr_retention')}">${t('gdpr_retention')}</button><button class="btn btn-glass btn-sm" data-action="gdpr-doc" data-kind="art30" title="${t('gdpr_art30')}">${t('gdpr_art30')}</button><button class="btn btn-glass btn-sm" data-action="gdpr-doc" data-kind="dpa" title="${t('gdpr_dpa')}">${t('gdpr_dpa')}</button>
         </div>
       </div>
@@ -3786,11 +3795,11 @@ function adminCockpitHTML() {
     <div class="admin-section">
       <h2>Assign learning</h2>
       <div class="composer">
-        <div class="field"><label>Course</label>
+        <div class="field"><label for="asgCourse">Course</label>
           <select id="asgCourse">${CATALOG.map(c => `<option value="${c.id}">${esc(c.title)}</option>`).join('')}</select></div>
-        <div class="field"><label>Team</label>
+        <div class="field"><label for="asgTeam">Team</label>
           <select id="asgTeam"><option value="everyone">Everyone</option>${DEPTS.map(d => `<option value="${d.key}">${d.en}</option>`).join('')}</select></div>
-        <div class="field"><label>Due date</label><input id="asgDue" type="date"></div>
+        <div class="field"><label for="asgDue">Due date</label><input id="asgDue" type="date"></div>
         <button class="btn btn-primary" data-action="assign">Assign →</button>
       </div>
       <div id="asgList">${assignments}</div>
@@ -5127,12 +5136,10 @@ function handlePlayLink() {
   const closeOverlays = () => { const am = $('#askModal'); if (am) am.classList.remove('open'); try { setTutorOpen(false); } catch (e) {} try { speechSynthesis.cancel(); } catch (e) {} };
   /* #/reels/<id> — one short, by id. The feed renders and scrolls to it. */
   const r = h.match(/^#\/reels\/([a-z0-9-]+)/);
-  if (r) {
-    closeOverlays();
-    location.hash = '#/reels';
-    scrollToReel(r[1]);
-    return true;
-  }
+  /* The address stays #/reels/<id> and the normal route renders it (armReelFeed opens at that reel).
+     It used to be rewritten to #/reels as a NEW history entry, so Back returned to #/reels/<id>,
+     which rewrote itself again: Back looked dead. */
+  if (r) { closeOverlays(); return false; }
   const m = h.match(/^#\/play\/([a-z0-9-]+)\/(\d+)(?:\/(\d+))?/);
   if (!m) return false;
   const [, cid, mod, sec] = m;
@@ -5192,7 +5199,11 @@ async function copyLink(hash) {
     catch (e2) { prompt(t('link_copy'), url); }
   }
 }
-addEventListener('hashchange', () => { if (!handlePlayLink()) render(); });
+/* where the reels back arrow returns to */
+let lastNonReelHash = '';
+const noteHash = () => { const h = location.hash || '#/home'; if (!/^#\/reels\b/.test(h)) lastNonReelHash = h; };
+noteHash();
+addEventListener('hashchange', () => { noteHash(); if (!handlePlayLink()) render(); });
 if (handlePlayLink()) {} 
 
 /* ---------- language (EN / PT) ---------- */
@@ -6753,7 +6764,7 @@ function reelSlideHTML(r, i) {
   const d = qwDeeper(r), e = r.educator ? Object.assign({ id: r.educator }, EDU_ALL()[r.educator] || {}) : null;
   const saved = (S.reelSaved || []).indexOf(r.id) > -1;
   const ph = !!r.placeholder;
-  return `<article class="reel" data-i="${i}" data-id="${r.id}">
+  return `<article class="reel${r.poster ? ' has-ambient' : ''}" data-i="${i}" data-id="${r.id}"${r.poster ? ` style="--reel-art:url('${esc(new URL(r.poster, location.href).href)}')"` : ''}>
     ${reelPoster(r, ph)}
     <div class="reel-media" data-media="${esc(JSON.stringify(r.media || {}).slice(0, 0))}"></div>
     <div class="reel-scrim"></div>
@@ -6910,7 +6921,10 @@ function armReelFeed() {
     if (to) to.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
   document.body.classList.add('reels-open');
-  feedIdx = -1; sync();                       /* mount + mark slide 0 on open */
+  /* #/reels/<id> opens the feed AT that reel (a tapped thumbnail), not at the top */
+  const want = decodeURIComponent((location.hash.split('/')[2] || ''));
+  if (want) { const at = [...feed.children].findIndex(el => el.dataset.id === want); if (at > 0) feed.scrollTop = at * (feed.clientHeight || 1); }
+  feedIdx = -1; sync();                       /* mount + mark the opening slide */
   try { feed.focus({ preventScroll: true }); } catch (e) {}
 }
 
@@ -7191,6 +7205,7 @@ function quickWinCardHTML(q) {
   </article>`;
 }
 function quickWinsShelfHTML() {
+  if (BRAND.quickWinsShelf === false) return '';   /* the reels rail already shows the same library */
   const ap = qwApproved(); if (!ap.length) return '';
   return `<section class="rail-section">
     <div class="rail-head"><h2>${t('qw_h')}</h2></div>
@@ -8334,8 +8349,7 @@ document.addEventListener('click', e => {
       const am = $('#askModal'); if (am) am.classList.remove('open'); setTutorOpen(false);
       const rid = el.dataset.id;
       ledgerAppend('moment_open', { reel: rid, t: +el.dataset.t, via: 'ask' });
-      location.hash = '#/reels';
-      scrollToReel(rid);
+      location.hash = '#/reels/' + encodeURIComponent(rid);   /* the feed opens at this reel */
       break;
     }
     case 'tag-seek': {
@@ -8390,7 +8404,9 @@ document.addEventListener('click', e => {
       break;
     }
     case 'reel-exit': { document.body.classList.remove('reels-open'); stopReelCheck();
-      history.length > 1 ? history.back() : (location.hash = '#/home'); break; }
+      /* back to the page the feed was opened from. history.back() could leave the app (opened from a
+         link) or land on another reels address; the last non-reels page is always the right place. */
+      location.hash = lastNonReelHash || '#/home'; break; }
     case 'rc-answer': answerReelCheck(el.dataset.id, +el.dataset.i); break;
     case 'rc-skip': { const rc = el.closest('.rc'); if (rc) rc.classList.remove('up');
       const sl = el.closest('.reel'); if (sl) sl.dataset.rcDone = '1';

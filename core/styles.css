@@ -4976,3 +4976,40 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .team-table td { vertical-align: middle; }
 /* a long lesson title in the start button (PT especially) wraps instead of running off the edge */
 .course-hero .hero-actions .btn { max-width: 100%; white-space: normal; text-align: left; height: auto; min-height: 48px; line-height: 1.3; }
+
+/* ── Reels rail: real thumbnails (9:16), title over the image, tap opens the feed at that reel ── */
+.reel-thumb { position: relative; flex: 0 0 auto; width: 168px; aspect-ratio: 9 / 16; border: 0; padding: 0; border-radius: 18px; overflow: hidden;
+  background: color-mix(in srgb, var(--text) 8%, transparent); cursor: pointer; isolation: isolate; scroll-snap-align: start;
+  box-shadow: 0 1px 0 color-mix(in srgb, #fff 8%, transparent) inset, 0 10px 30px -12px rgba(0,0,0,.55);
+  transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; }
+.reel-thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+.reel-thumb::after { content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,.18) 0%, transparent 22%, transparent 48%, rgba(10,6,4,.78) 100%); }
+.reel-thumb > span { position: absolute; z-index: 2; }
+.reel-thumb .rt-title { left: 14px; right: 14px; bottom: 14px; text-align: left; color: #fff; font-family: var(--font-display);
+  font-size: 17px; line-height: 1.18; font-weight: 500; text-shadow: 0 1px 12px rgba(0,0,0,.35); }
+.reel-thumb .rt-time { top: 10px; right: 10px; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; letter-spacing: .02em;
+  color: #fff; background: rgba(0,0,0,.38); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.reel-thumb .rt-pend { top: 10px; left: 10px; padding: 3px 8px; border-radius: 999px; font-size: 10.5px; font-weight: 700; letter-spacing: .04em;
+  text-transform: uppercase; color: #2a1a10; background: var(--accent); }
+.reel-thumb .rt-play { left: 50%; top: 50%; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; display: grid; place-items: center;
+  color: #fff; background: rgba(255,255,255,.18); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.35); opacity: 0; transform: scale(.85); transition: opacity .3s, transform .3s; }
+.reel-thumb .rt-play svg { margin-left: 2px; }
+@media (hover: hover) {
+  .reel-thumb:hover { transform: translateY(-4px); box-shadow: 0 1px 0 color-mix(in srgb, #fff 10%, transparent) inset, 0 18px 40px -14px rgba(0,0,0,.6); }
+  .reel-thumb:hover img { transform: scale(1.04); }
+  .reel-thumb:hover .rt-play { opacity: 1; transform: none; }
+}
+.reel-thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.reel-thumb:focus-visible .rt-play { opacity: 1; transform: none; }
+@media (max-width: 560px) { .reel-thumb { width: 142px; border-radius: 16px; } .reel-thumb .rt-title { font-size: 15px; left: 12px; right: 12px; bottom: 12px; } }
+
+/* Reels on a wide screen: an ambient glow of the reel itself fills the sides (as video apps do)
+   instead of hard black bars, and the 9:16 plate gets soft corners. Phones are unchanged. */
+.reel.has-ambient::before { content: ''; position: absolute; inset: -80px; z-index: -1;   /* behind every layer of the slide */
+  background: var(--reel-art) center / cover no-repeat; filter: blur(60px) saturate(1.15) brightness(.5); transform: scale(1.15); opacity: .95; }
+@media (min-aspect-ratio: 10/16) {
+  .reel.has-ambient .reel-poster, .reel.has-ambient .reel-media { top: 12px; height: calc(100% - 24px); border-radius: 22px; overflow: hidden;
+    box-shadow: 0 30px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); }
+}
