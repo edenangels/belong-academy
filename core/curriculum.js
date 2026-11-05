@@ -180,7 +180,9 @@
   /* the learner's path, as modules: each path item expands into its modules, in curriculum order */
   function pathModules() {
     const out = [];
-    (S.path || []).forEach(id => modules.filter(m => m.source === id).forEach(m => { if (!out.includes(m)) out.push(m); }));
+    /* the goal's exact modules first (S.pathMods), then anything the learner added that they don't cover */
+    (Array.isArray(S.pathMods) ? S.pathMods : []).forEach(id => { const m = moduleOf(id); if (m && !out.includes(m)) out.push(m); });
+    (S.path || []).forEach(id => { if (out.some(m => m.source === id)) return; modules.filter(m => m.source === id).forEach(m => { if (!out.includes(m)) out.push(m); }); });
     return out;
   }
   function nextLessonGlobal() {
@@ -408,16 +410,18 @@
       const s = moduleStats(m), st = s.complete ? 'done' : m === cur ? 'current' : 'locked';
       /* the first two tiles are on screen; the rest of the row is off to the right
          and fetches its art as the row scrolls (app.js lazyBackgrounds) */
+      /* artwork ABOVE the words, never words over artwork: the covers carry their own lettering, and
+         laying a second title over a cropped cover cut both (feedback 2, 5 Nov 2026). A 16:9 frame shows
+         the whole 16:9 cover; hover lifts the tile like the Explore cards; a locked step does nothing. */
       const tag = st === 'locked' ? 'div' : 'button', thumb = (window.thumbOf || (x => x))(m.item.poster),
-        art = !m.item.poster ? '' : k < 2 ? ` style="background-image:url('${thumb}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"`
-          : ` data-bg="${thumb}"${m.item.posterPos ? ` style="background-position:${m.item.posterPos}"` : ''}`;
+        art = !m.item.poster ? '' : k < 2 ? ` style="background-image:url('${thumb}')"` : ` data-bg="${thumb}"`;
       const sub = st === 'done' ? L('completed') : st === 'current' ? `${s.pct}% · ${fmtMins(s.minsLeft)} ${L('left')}` : t('unlocks_after');
-      return `<${tag} class="pstep ${st}${m.item.poster ? ' has-art' : ''}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}${art}>
-        <span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>
-        <span class="pstep-type">${L('module')} · ${esc(cTitle(courseOf(m.courseId)))}</span>
-        <span class="pstep-t">${esc(mTitle(m))}</span>
-        <span class="pstep-s">${sub}</span>
-        ${st === 'current' ? `<span class="pstep-bar"><i style="width:${s.pct}%"></i></span>` : ''}
+      return `<${tag} class="pstep ps2 ${st}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`} aria-label="${k + 1}. ${esc(mTitle(m))} · ${sub}">
+        <span class="ps-art t-grad-${m.item.grad || 1}"${art}><span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>${st === 'locked' ? '<span class="ps-lock" aria-hidden="true">🔒</span>' : ''}
+          ${st === 'current' ? `<span class="pstep-bar"><i style="width:${s.pct}%"></i></span>` : ''}</span>
+        <span class="ps-body"><span class="pstep-type">${L('module')} · ${esc(cTitle(courseOf(m.courseId)))}</span>
+          <span class="pstep-t">${esc(mTitle(m))}</span>
+          <span class="pstep-s">${sub}</span></span>
       </${tag}>`;
     }).join('');
     return `<section class="rail-section path-row-section">

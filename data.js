@@ -65,44 +65,168 @@ const PATH_RATIONALES = _PATH_RATIONALES.en.map((_, k) => k).reduce((arr, k) => 
 }), []);
 
 
-const GOAL_PRESETS = {
-  /* Belong's paths, built from the filmed courses. Every path opens with the welcome.
-     4 Nov 2026: "Belong Host" merged into "The Belong Way" — João and John saw them as the same goal. */
-  'The Belong Way':      ['welcome-belong', 'craveiral-places', 'craveiral-hospitality', 'guest-journey', 'voice-leadership'],
-  'Houses & Standards':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'craveiral-hospitality', 'guest-journey'],
-  'From Farm to Table':  ['welcome-belong', 'craveiral-places', 'farm-to-table', 'craveiral-hospitality', 'houses-farm-sustainability'],
-  'Rooted in the Land':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'farm-to-table'],
-  'Lead the Belong Way': ['welcome-belong', 'craveiral-places', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'],
-  'Safe & Sustainable':  ['welcome-belong', 'craveiral-places', 'houses-farm-sustainability', 'guest-journey', 'voice-leadership']
-};
-/* what each goal means, in one line, and the icon that tells it apart on the goal step */
-const GOAL_INFO = {
-  'The Belong Way':      { icon: 'people',   en: 'Welcome every guest the Craveiral way, from first click to farewell.', pt: 'Receber cada hóspede à maneira do Craveiral, do primeiro clique à despedida.' },
-  'Houses & Standards':  { icon: 'sun',      en: 'Know every house and keep the standard guests trust.', pt: 'Conhecer cada casa e manter o padrão em que os hóspedes confiam.' },
-  'From Farm to Table':  { icon: 'leaf',     en: 'Tell the story of what we grow, cook and serve.', pt: 'Contar a história do que cultivamos, cozinhamos e servimos.' },
-  'Rooted in the Land':  { icon: 'sprout',   en: 'Understand the farm, the place, and how the circle closes.', pt: 'Perceber a quinta, o lugar, e como o círculo se fecha.' },
-  'Lead the Belong Way': { icon: 'compass',  en: 'Lead with autonomy, speak early, and grow your team.', pt: 'Liderar com autonomia, falar cedo e fazer crescer a equipa.' },
-  'Safe & Sustainable':  { icon: 'drop',     en: 'Look after water, energy, people and the property every day.', pt: 'Cuidar da água, da energia, das pessoas e da propriedade todos os dias.' }
-};
+/* ===== Goals, tuned per department (feedback 2, 5 Nov 2026) =========================================
+   Method: what each department actually does in a hotel of this kind (front office, housekeeping,
+   kitchen, F&B service, grounds, maintenance, laundry, spa & activities, back office, HR, safety &
+   environment, purchasing & control), cut down to three concrete outcomes each, then bridged back to
+   what our lessons really teach: a goal only lists modules whose transcripts cover it (see
+   knowledge/lessons.json). Every path opens with Welcome to Belong. `mods` are curriculum MODULE ids. */
+const GOAL_DEFS = [
+  /* Hosting & Guest Care */
+  { k: 'Run a flawless arrival', icon: 'people', pt: 'Uma chegada sem falhas',
+    en_d: 'Booking to the first morning: what the guest needs at each step.', pt_d: 'Da reserva à primeira manhã: o que o hóspede precisa em cada passo.',
+    mods: ['welcome-belong', 'guest-journey', 'craveiral-hospitality', 'csh-one-house', 'voice-leadership'] },
+  { k: 'Answer any guest question', icon: 'compass', pt: 'Responder a qualquer pergunta',
+    en_d: 'Every house, unit and space, precisely enough to build trust.', pt_d: 'Cada casa, unidade e espaço, com a precisão que cria confiança.',
+    mods: ['welcome-belong', 'csh-one-house', 'csh-units', 'houses-farm-sustainability', 'farm-to-table'] },
+  { k: 'Turn a complaint around', icon: 'hands', pt: 'Resolver uma reclamação',
+    en_d: 'Listen, own it, fix it within the hour and close the loop.', pt_d: 'Ouvir, assumir, resolver dentro da hora e fechar o ciclo.',
+    mods: ['welcome-belong', 'guest-journey', 'csh-care', 'voice-leadership', 'craveiral-hospitality'] },
+  /* Housekeeping & Houses */
+  { k: 'Prepare a house to standard', icon: 'sun', pt: 'Preparar uma casa no padrão',
+    en_d: 'Each house type, its details, and why no detail is small.', pt_d: 'Cada tipo de casa, os seus detalhes, e porque nenhum detalhe é pequeno.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-units', 'csh-one-house', 'craveiral-hospitality'] },
+  { k: 'Protect every guest\'s sleep', icon: 'drop', pt: 'Proteger o sono de cada hóspede',
+    en_d: 'Linen, quiet and the details that make a stay restful.', pt_d: 'Roupa de cama, silêncio e os detalhes que tornam a estadia repousante.',
+    mods: ['welcome-belong', 'csh-units', 'csh-care', 'houses-farm-sustainability'] },
+  { k: 'Turn houses over with less waste', icon: 'leaf', pt: 'Preparar casas com menos desperdício',
+    en_d: 'Water, energy and waste streams in every turnover.', pt_d: 'Água, energia e resíduos em cada preparação.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-units', 'csh-one-house'] },
+  /* Culinary & Kitchen */
+  { k: 'Cook from what the farm gives', icon: 'leaf', pt: 'Cozinhar com o que a quinta dá',
+    en_d: 'Over 70% grown here: the menu follows the garden.', pt_d: 'Mais de 70% cultivado aqui: o menu segue a horta.',
+    mods: ['welcome-belong', 'farm-to-table', 'houses-farm-sustainability', 'csh-one-house'] },
+  { k: 'Tell the story behind every dish', icon: 'basket', pt: 'Contar a história de cada prato',
+    en_d: 'The chain from grower to plate, in a few honest sentences.', pt_d: 'A cadeia do produtor ao prato, em poucas frases honestas.',
+    mods: ['welcome-belong', 'farm-to-table', 'craveiral-hospitality', 'voice-leadership'] },
+  { k: 'Run a kitchen that wastes nothing', icon: 'sprout', pt: 'Uma cozinha sem desperdício',
+    en_d: 'Seasonal buying, routing waste and closing the circle.', pt_d: 'Compras da época, encaminhar resíduos e fechar o círculo.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'farm-to-table', 'csh-one-house'] },
+  /* Food & Beverage Service */
+  { k: 'Serve the FarmTable way', icon: 'basket', pt: 'Servir à maneira do FarmTable',
+    en_d: 'Breakfast to dinner, wine in three sentences, never rushing a table.', pt_d: 'Do pequeno-almoço ao jantar, o vinho em três frases, nunca apressar uma mesa.',
+    mods: ['welcome-belong', 'farm-to-table', 'craveiral-hospitality', 'voice-leadership'] },
+  { k: 'Run the beach bar and events', icon: 'sun', pt: 'Bar da praia e eventos',
+    en_d: 'Bar da Praia, A Mesa do CAM, catering and weddings: one standard.', pt_d: 'Bar da Praia, A Mesa do CAM, catering e casamentos: um só padrão.',
+    mods: ['welcome-belong', 'farm-to-table', 'csh-units', 'guest-journey'] },
+  { k: 'Save a service that slipped', icon: 'hands', pt: 'Salvar um serviço que correu mal',
+    en_d: 'Wait times, mistakes and complaints handled on the spot.', pt_d: 'Esperas, erros e reclamações resolvidos no momento.',
+    mods: ['welcome-belong', 'guest-journey', 'csh-care', 'craveiral-hospitality'] },
+  /* Farm & Nature */
+  { k: 'Grow for the kitchen', icon: 'sprout', pt: 'Cultivar para a cozinha',
+    en_d: 'What the farm supplies, and how it reaches the plate.', pt_d: 'O que a quinta fornece e como chega ao prato.',
+    mods: ['welcome-belong', 'farm-to-table', 'houses-farm-sustainability'] },
+  { k: 'Keep the land regenerating', icon: 'tree', pt: 'Manter a terra a regenerar',
+    en_d: 'Water, soil and waste: the circular economy in practice.', pt_d: 'Água, solo e resíduos: a economia circular na prática.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-one-house'] },
+  { k: 'Show guests the farm', icon: 'compass', pt: 'Mostrar a quinta aos hóspedes',
+    en_d: 'Turn a farm visit into an experience, not a lecture.', pt_d: 'Transformar uma visita à quinta numa experiência, não numa aula.',
+    mods: ['welcome-belong', 'csh-care', 'farm-to-table', 'voice-leadership'] },
+  /* Maintenance */
+  { k: 'Keep every house working', icon: 'mountain', pt: 'Manter cada casa a funcionar',
+    en_d: 'Know each house and space, and keep the promise it makes.', pt_d: 'Conhecer cada casa e espaço, e cumprir a promessa que fazem.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-units', 'csh-one-house'] },
+  { k: 'Save water and energy', icon: 'drop', pt: 'Poupar água e energia',
+    en_d: 'Leaks, waste and the shift test, every day.', pt_d: 'Fugas, desperdício e o teste do fim de turno, todos os dias.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-one-house'] },
+  { k: 'Fix it before a guest notices', icon: 'hands', pt: 'Resolver antes que o hóspede note',
+    en_d: 'Friction points, speaking early and solving on the spot.', pt_d: 'Pontos de atrito, falar cedo e resolver no momento.',
+    mods: ['welcome-belong', 'guest-journey', 'houses-farm-sustainability', 'voice-leadership'] },
+  /* Laundry */
+  { k: 'Run the São Teotónio laundry', icon: 'drop', pt: 'A lavandaria de São Teotónio',
+    en_d: 'Why it is local, who it serves, and the four linen standards.', pt_d: 'Porque é local, a quem serve, e os quatro padrões da roupa.',
+    mods: ['welcome-belong', 'csh-units', 'houses-farm-sustainability'] },
+  { k: 'Linen to the house standard', icon: 'sun', pt: 'Roupa no padrão das casas',
+    en_d: 'Linen and the guest\'s sleep: what the houses expect.', pt_d: 'A roupa e o sono do hóspede: o que as casas esperam.',
+    mods: ['welcome-belong', 'csh-units', 'csh-one-house', 'csh-care'] },
+  { k: 'Wash with less water and energy', icon: 'leaf', pt: 'Lavar com menos água e energia',
+    en_d: 'Daily sustainability where it counts most.', pt_d: 'Sustentabilidade diária onde mais conta.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-units'] },
+  /* Wellness & Experiences */
+  { k: 'Lead an experience guests remember', icon: 'flower', pt: 'Uma experiência que fica na memória',
+    en_d: 'The four registers, the first 90 seconds, a peak and a warm end.', pt_d: 'Os quatro registos, os primeiros 90 segundos, um pico e um final caloroso.',
+    mods: ['welcome-belong', 'csh-care', 'craveiral-hospitality', 'voice-leadership'] },
+  { k: 'Care for a guest\'s wellbeing', icon: 'drop', pt: 'Cuidar do bem-estar do hóspede',
+    en_d: 'Nature, sleep, choice and quiet, and recovering when it slips.', pt_d: 'Natureza, sono, escolha e silêncio, e recuperar quando falha.',
+    mods: ['welcome-belong', 'csh-care', 'guest-journey', 'craveiral-hospitality'] },
+  { k: 'Bring the land into every experience', icon: 'tree', pt: 'Trazer a terra a cada experiência',
+    en_d: 'Know the farm and the place, not a script.', pt_d: 'Conhecer a quinta e o lugar, não um guião.',
+    mods: ['welcome-belong', 'csh-care', 'farm-to-table', 'houses-farm-sustainability'] },
+  /* Office & Administration */
+  { k: 'Handle bookings from first click', icon: 'compass', pt: 'Reservas desde o primeiro clique',
+    en_d: 'The dream, the booking and the time before arrival.', pt_d: 'O sonho, a reserva e o tempo antes da chegada.',
+    mods: ['welcome-belong', 'guest-journey', 'csh-one-house', 'voice-leadership'] },
+  { k: 'Write to guests in our voice', icon: 'people', pt: 'Escrever aos hóspedes na nossa voz',
+    en_d: 'Calm, warm, concrete: emails, messages and replies to reviews.', pt_d: 'Calma, calorosa, concreta: emails, mensagens e respostas a avaliações.',
+    mods: ['welcome-belong', 'voice-leadership', 'guest-journey', 'craveiral-hospitality'] },
+  { k: 'Know the whole operation', icon: 'sun', pt: 'Conhecer toda a operação',
+    en_d: 'Five units, one house: what each one does.', pt_d: 'Cinco unidades, uma casa: o que cada uma faz.',
+    mods: ['welcome-belong', 'csh-one-house', 'csh-units', 'farm-to-table'] },
+  /* People, Culture & Leadership */
+  { k: 'Lead a team with autonomy', icon: 'hands', pt: 'Liderar uma equipa com autonomia',
+    en_d: 'Solve it, tell after; mistakes early; standards as respect.', pt_d: 'Resolver e contar depois; erros cedo; padrões como respeito.',
+    mods: ['welcome-belong', 'voice-leadership', 'craveiral-hospitality', 'guest-journey'] },
+  { k: 'Welcome someone new to the team', icon: 'people', pt: 'Receber alguém novo na equipa',
+    en_d: 'The story, the values and the one-house view a newcomer needs.', pt_d: 'A história, os valores e a visão de uma só casa que um recém-chegado precisa.',
+    mods: ['welcome-belong', 'craveiral-hospitality', 'csh-one-house', 'voice-leadership'] },
+  { k: 'Keep the values alive day to day', icon: 'flower', pt: 'Manter os valores vivos no dia a dia',
+    en_d: 'Values as tools for decisions, and what to do when they collide.', pt_d: 'Os valores como ferramentas de decisão, e o que fazer quando chocam.',
+    mods: ['welcome-belong', 'craveiral-hospitality', 'voice-leadership', 'csh-care'] },
+  /* Safety & Sustainability */
+  { k: 'Run sustainability every shift', icon: 'leaf', pt: 'Sustentabilidade em cada turno',
+    en_d: 'Water, energy, waste and buying local, made routine.', pt_d: 'Água, energia, resíduos e compras locais, como rotina.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'csh-one-house', 'farm-to-table'] },
+  { k: 'Close the circle on waste', icon: 'sprout', pt: 'Fechar o círculo dos resíduos',
+    en_d: 'From garden to kitchen to compost, nothing thrown away.', pt_d: 'Da horta à cozinha e ao composto, nada se deita fora.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'farm-to-table', 'csh-units'] },
+  { k: 'Explain our sustainability to guests', icon: 'compass', pt: 'Explicar a sustentabilidade aos hóspedes',
+    en_d: 'With specifics, never lectures.', pt_d: 'Com factos concretos, nunca com sermões.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'voice-leadership', 'csh-care'] },
+  /* Logistics & Management Control */
+  { k: 'Run the units as one house', icon: 'waves', pt: 'Gerir as unidades como uma só casa',
+    en_d: 'Five units, one promise, and consistency across them.', pt_d: 'Cinco unidades, uma promessa, e coerência entre elas.',
+    mods: ['welcome-belong', 'csh-one-house', 'csh-units', 'voice-leadership'] },
+  { k: 'Buy local and waste nothing', icon: 'basket', pt: 'Comprar local e não desperdiçar',
+    en_d: 'Purchasing as a vote: local, seasonal, routed.', pt_d: 'Comprar como um voto: local, da época, bem encaminhado.',
+    mods: ['welcome-belong', 'houses-farm-sustainability', 'farm-to-table', 'csh-units'] },
+  { k: 'Make regeneration pay', icon: 'mountain', pt: 'Fazer a regeneração dar resultado',
+    en_d: 'Why financial sustainability comes first, and how Belong grows.', pt_d: 'Porque a sustentabilidade financeira vem primeiro, e como a Belong cresce.',
+    mods: ['welcome-belong', 'craveiral-hospitality', 'csh-one-house', 'farm-to-table'] }
+];
+/* GOAL_PRESETS stays the catalogue-item view other screens read (an item = a lesson source); GOAL_MODS is the
+   exact module path. The curriculum builds the learner's path from GOAL_MODS. */
+const GOAL_MODS = {}, GOAL_PRESETS = {}, GOAL_INFO = {}, GOALS_PT = {};
+(function () {
+  const srcOf = id => { for (const co of (typeof CURRICULUM !== 'undefined' ? CURRICULUM.courses : [])) for (const m of co.modules) if (m.id === id) return m.source || m.id; return id; };
+  GOAL_DEFS.forEach(g => {
+    GOAL_MODS[g.k] = g.mods.slice();
+    GOAL_PRESETS[g.k] = [...new Set(g.mods.map(srcOf))];
+    GOAL_INFO[g.k] = { icon: g.icon, en: g.en_d, pt: g.pt_d };
+    GOALS_PT[g.k] = g.pt;
+  });
+})();
 
 const ROLE_OPTIONS = [
-  { key: 'hosting',      label: 'Hosting & Guest Care',             icon: 'people',   goals: ['The Belong Way', 'Houses & Standards', 'Lead the Belong Way'] },
-  { key: 'housekeeping', label: 'Housekeeping & Houses',            icon: 'sun',      goals: ['Houses & Standards', 'The Belong Way', 'Safe & Sustainable'] },
-  { key: 'culinary',     label: 'Culinary & Kitchen',               icon: 'leaf',     goals: ['From Farm to Table', 'The Belong Way', 'Rooted in the Land'] },
-  { key: 'fnb',          label: 'Food & Beverage Service',          icon: 'basket',   goals: ['From Farm to Table', 'The Belong Way', 'Lead the Belong Way'] },
-  { key: 'farm',         label: 'Farm & Nature',                    icon: 'sprout',   goals: ['Rooted in the Land', 'From Farm to Table', 'Safe & Sustainable'] },
-  { key: 'maintenance',  label: 'Maintenance',                      icon: 'mountain', goals: ['Houses & Standards', 'Safe & Sustainable', 'Lead the Belong Way'] },
-  { key: 'laundry',      label: 'Laundry',                          icon: 'drop',     goals: ['Houses & Standards', 'Safe & Sustainable', 'The Belong Way'] },
-  { key: 'wellness',     label: 'Wellness & Experiences',           icon: 'flower',   goals: ['The Belong Way', 'Rooted in the Land', 'Lead the Belong Way'] },
-  { key: 'office',       label: 'Office & Administration',          icon: 'compass',  goals: ['Lead the Belong Way', 'The Belong Way', 'Safe & Sustainable'] },
-  { key: 'people',       label: 'People, Culture & Leadership',     icon: 'hands',    goals: ['Lead the Belong Way', 'The Belong Way', 'Rooted in the Land'] },
-  { key: 'safety',       label: 'Safety & Sustainability',          icon: 'fire',     goals: ['Safe & Sustainable', 'Houses & Standards', 'Lead the Belong Way'] },
-  { key: 'logistics',    label: 'Logistics & Management Control',   icon: 'waves',    goals: ['Lead the Belong Way', 'Safe & Sustainable', 'Houses & Standards'] }
+  { key: 'hosting',      label: 'Hosting & Guest Care',           icon: 'people',   en_d: 'Reception, guest relations, requests', pt_d: 'Receção, relação com hóspedes, pedidos', goals: ['Run a flawless arrival', 'Answer any guest question', 'Turn a complaint around'] },
+  { key: 'housekeeping', label: 'Housekeeping & Houses',          icon: 'sun',      en_d: 'Preparing and caring for the houses', pt_d: 'Preparar e cuidar das casas', goals: ['Prepare a house to standard', 'Protect every guest\'s sleep', 'Turn houses over with less waste'] },
+  { key: 'culinary',     label: 'Culinary & Kitchen',             icon: 'leaf',     en_d: 'FarmTable kitchen and preparation', pt_d: 'Cozinha do FarmTable e preparação', goals: ['Cook from what the farm gives', 'Tell the story behind every dish', 'Run a kitchen that wastes nothing'] },
+  { key: 'fnb',          label: 'Food & Beverage Service',        icon: 'basket',   en_d: 'Restaurant, bar, beach bar, events', pt_d: 'Restaurante, bar, bar da praia, eventos', goals: ['Serve the FarmTable way', 'Run the beach bar and events', 'Save a service that slipped'] },
+  { key: 'farm',         label: 'Farm & Nature',                  icon: 'sprout',   en_d: 'The garden, the land, the grounds', pt_d: 'A horta, a terra, os espaços exteriores', goals: ['Grow for the kitchen', 'Keep the land regenerating', 'Show guests the farm'] },
+  { key: 'maintenance',  label: 'Maintenance',                    icon: 'mountain', en_d: 'Houses, pools, systems and repairs', pt_d: 'Casas, piscinas, sistemas e reparações', goals: ['Keep every house working', 'Save water and energy', 'Fix it before a guest notices'] },
+  { key: 'laundry',      label: 'Laundry',                        icon: 'drop',     en_d: 'The São Teotónio laundry and linen', pt_d: 'A lavandaria de São Teotónio e a roupa', goals: ['Run the São Teotónio laundry', 'Linen to the house standard', 'Wash with less water and energy'] },
+  { key: 'wellness',     label: 'Wellness & Experiences',         icon: 'flower',   en_d: 'Wellness deck, activities, experiences', pt_d: 'Deck de bem-estar, atividades, experiências', goals: ['Lead an experience guests remember', 'Care for a guest\'s wellbeing', 'Bring the land into every experience'] },
+  { key: 'office',       label: 'Office & Administration',        icon: 'compass',  en_d: 'Bookings, guest emails, admin', pt_d: 'Reservas, emails a hóspedes, administração', goals: ['Handle bookings from first click', 'Write to guests in our voice', 'Know the whole operation'] },
+  { key: 'people',       label: 'People, Culture & Leadership',   icon: 'hands',    en_d: 'Team leaders, people and culture', pt_d: 'Chefias, pessoas e cultura', goals: ['Lead a team with autonomy', 'Welcome someone new to the team', 'Keep the values alive day to day'] },
+  { key: 'safety',       label: 'Safety & Sustainability',        icon: 'fire',     en_d: 'Environment, waste, water, energy', pt_d: 'Ambiente, resíduos, água, energia', goals: ['Run sustainability every shift', 'Close the circle on waste', 'Explain our sustainability to guests'] },
+  { key: 'logistics',    label: 'Logistics & Management Control', icon: 'waves',    en_d: 'Purchasing, stock and control', pt_d: 'Compras, stock e controlo', goals: ['Run the units as one house', 'Buy local and waste nothing', 'Make regeneration pay'] }
 ];
 
 /* roles and goals that shipped before the Final 10 Departments — a stored profile keeps working */
 const ROLE_ALIASES = { houses: 'housekeeping', kitchen: 'culinary', beachbar: 'fnb', cam: 'fnb', events: 'fnb', leadership: 'office', farmhouse: 'hosting', farmtable: 'culinary' };
-const GOAL_ALIASES = { 'Belong Host': 'The Belong Way', 'Seasonal Cook': 'From Farm to Table', 'Nature Guide': 'Rooted in the Land', 'Team Lead': 'Lead the Belong Way' };
+/* every goal that ever shipped points at a current one, so a stored profile keeps a real goal */
+const GOAL_ALIASES = { 'Belong Host': 'Run a flawless arrival', 'Seasonal Cook': 'Cook from what the farm gives', 'Nature Guide': 'Show guests the farm', 'Team Lead': 'Lead a team with autonomy',
+  'The Belong Way': 'Run a flawless arrival', 'Houses & Standards': 'Prepare a house to standard', 'From Farm to Table': 'Cook from what the farm gives',
+  'Rooted in the Land': 'Keep the land regenerating', 'Lead the Belong Way': 'Lead a team with autonomy', 'Safe & Sustainable': 'Run sustainability every shift' };
 
 /* Gamification — growth-themed levels (nature) + subtle badges. Tuned to lift completion. */
 const LEVELS = [
@@ -720,7 +844,7 @@ const LEVELS_PT = ['Semente','Rebento','Broto','Muda','Árvore Jovem','Guardião
 const tlevel = i => _lang() === 'pt' ? (LEVELS_PT[i] || LEVELS[i].name) : LEVELS[i].name;
 const ROLES_PT = { hosting:'Receção e Cuidado do Hóspede', housekeeping:'Limpezas e Casas', culinary:'Cozinha e Culinária', fnb:'Serviço de Restaurante e Bar', farm:'Quinta e Natureza', maintenance:'Manutenção', laundry:'Lavandaria', logistics:'Logística e Controlo de Gestão', wellness:'Bem-estar e Experiências', office:'Escritório e Administração', people:'Pessoas, Cultura e Liderança', safety:'Segurança e Sustentabilidade' };
 const trole = r => _lang() === 'pt' ? (ROLES_PT[r.key] || r.label) : r.label;
-const GOALS_PT = { 'The Belong Way':'O Caminho Belong', 'Houses & Standards':'Casas e Padrões', 'From Farm to Table':'Da Quinta à Mesa', 'Rooted in the Land':'Enraizado na Terra', 'Lead the Belong Way':'Liderar à Maneira Belong', 'Safe & Sustainable':'Seguro e Sustentável' };
+/* GOALS_PT is built with GOAL_DEFS above */
 const tgoal = g => _lang() === 'pt' ? (GOALS_PT[g] || g) : g;
 const BADGES_PT = {
   'first-steps':['Primeiros Passos','Conclua o seu primeiro módulo'], 'rooted':['Enraizado','Termine o seu primeiro curso'],

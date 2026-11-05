@@ -33,8 +33,12 @@ function migrateState() {
   const before = JSON.stringify([S.goal, S.path, S.assignments]);
   const goals = (typeof GOAL_PRESETS === 'object' && GOAL_PRESETS) || {};
   const names = Object.keys(goals);
+  /* a renamed goal maps to its successor before anything is called "retired" */
+  if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal] && goals[GOAL_ALIASES[S.goal]]) {
+    S.goal = GOAL_ALIASES[S.goal]; if (typeof GOAL_MODS === 'object' && GOAL_MODS[S.goal]) S.pathMods = [...GOAL_MODS[S.goal]];
+  }
   const goalRetired = names.length && !goals[S.goal];
-  if (goalRetired) S.goal = names[0];
+  if (goalRetired) { S.goal = names[0]; if (typeof GOAL_MODS === 'object') S.pathMods = [...(GOAL_MODS[S.goal] || [])]; }
   const known = new Set((typeof CATALOG !== 'undefined' ? CATALOG : []).map(c => c.id));
   if (Array.isArray(S.path)) {
     const kept = S.path.filter(id => known.has(id));
@@ -830,13 +834,15 @@ function renderLibrary() {
    #/paths now opens My learning on its Path tab; pathBodyHTML is that tab. */
 function renderPaths() { meTab = 'path'; return renderMe(); }
 function pathBodyHTML() {
-  const doneCount = S.path.filter(isDone).length;
+  const _pm = window.CUR ? CUR.pathModules() : null;
+  const doneCount = _pm ? _pm.filter(m => CUR.moduleStats(m).complete).length : S.path.filter(isDone).length;
+  const pathLen = _pm ? _pm.length : S.path.length;
   return `
   <section class="path-banner">
     <div class="shimmer"></div>
     <div class="path-banner-head">
       <div class="left">
-        <span class="ai-tag">${t('active_path')} · ${doneCount}/${S.path.length}</span>
+        <span class="ai-tag">${t('active_path')} · ${doneCount}/${pathLen}</span>
         <h2>${t('your_path_to')} ${tgoal(S.goal)}</h2>
         <p class="sub">${(S.quizScores || []).length ? PATH_RATIONALES[S.rationaleIdx % PATH_RATIONALES.length] : t('path_intro')}</p>
       </div>
@@ -4811,7 +4817,9 @@ function renderProfile() {
   const doneCount = CATALOG.filter(c => isDone(c.id)).length;
   const providerLabel = p.provider === 'google.com' ? 'Google' : p.provider === 'password' ? 'Email' : (p.provider || '');
   const roleOpts = ROLE_OPTIONS.map(r => `<option value="${r.key}" ${S.role === r.key ? 'selected' : ''}>${trole(r)}</option>`).join('');
-  const goalOpts = Object.keys(GOAL_PRESETS).map(g => `<option value="${g}" ${S.goal === g ? 'selected' : ''}>${tgoal(g)}</option>`).join('');
+  const myRole = ROLE_OPTIONS.find(r => r.key === S.role) || null;
+  const goalOpts = (myRole ? myRole.goals : []).concat(Object.keys(GOAL_PRESETS).filter(g => !myRole || !myRole.goals.includes(g)))
+    .map(g => `<option value="${attr(g)}" ${S.goal === g ? 'selected' : ''}>${esc(tgoal(g))}</option>`).join('');
   return `<div class="page"><div class="page-pad">
     <h1 class="page-title">${t('prof_title')}</h1>
     <p class="page-sub">${t('prof_sub')}</p>
@@ -4933,7 +4941,7 @@ function saveProfile() {
   };
   S.profile = Object.assign({}, S.profile, { name: name || displayName(), username: user, role, phone, dept }, legal);
   if (role) S.role = role;
-  if (goal && goal !== S.goal) { S.goal = goal; S.path = [...GOAL_PRESETS[goal]]; }
+  if (goal && goal !== S.goal) { S.goal = goal; S.path = [...GOAL_PRESETS[goal]]; S.pathMods = [...((typeof GOAL_MODS === 'object' && GOAL_MODS[goal]) || [])]; }
   save();
   if (window.EdenCloud && window.EdenCloud.updateName) window.EdenCloud.updateName(name);
   EdenApp.applyProfile(S.profile);
@@ -4955,7 +4963,8 @@ function makeFocusable(root) {
    filmed. Runs on every render so a stale path (a removed course, an old re-plan) heals itself. */
 function normalizePath() {
   try {
-    if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal]) { S.goal = GOAL_ALIASES[S.goal]; if (S.profile) S.profile.goal = S.goal; save(); }
+    if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal]) { S.goal = GOAL_ALIASES[S.goal]; if (S.profile) S.profile.goal = S.goal; if (typeof GOAL_MODS === 'object' && GOAL_MODS[S.goal]) S.pathMods = [...GOAL_MODS[S.goal]]; save(); }
+    if (typeof GOAL_MODS === 'object' && S.goal && GOAL_MODS[S.goal] && !Array.isArray(S.pathMods)) { S.pathMods = [...GOAL_MODS[S.goal]]; save(); }
     if (typeof ROLE_ALIASES === 'object') {
       if (S.role && ROLE_ALIASES[S.role]) { S.role = ROLE_ALIASES[S.role]; save(); }
       if (S.profile && S.profile.role && ROLE_ALIASES[S.profile.role]) { S.profile.role = ROLE_ALIASES[S.profile.role]; save(); }
@@ -5155,17 +5164,17 @@ function lazyBackgrounds() {
   const vh = innerHeight || 800, above = el => el.getBoundingClientRect().top < vh;
   els.filter(above).forEach(loadBg);
   const rest = els.filter(el => el.dataset.bg);
-  if (!bgObserver) { rest.forEach(loadBg); document.querySelectorAll('.reel-thumb img[data-src], .pstep[data-bg]').forEach(loadBg); return; }
+  if (!bgObserver) { rest.forEach(loadBg); document.querySelectorAll('.reel-thumb img[data-src], .ps-art[data-bg]').forEach(loadBg); return; }
   rest.forEach(el => bgObserver.observe(el));
   /* Home reel-rail posters sit ~2 screens down. Native loading="lazy" fetches
      anything within ~2500px on a slow link, so on a phone they downloaded with
      the hero and slowed it; here they load 400px before they scroll in. */
   document.querySelectorAll('.reel-thumb img[data-src]').forEach(el => bgObserver.observe(el));
   /* Home path row: tiles past the second sit off-screen to the right */
-  document.querySelectorAll('.pstep[data-bg]').forEach(el => pathTileObserver ? pathTileObserver.observe(el) : loadBg(el));
+  document.querySelectorAll('.ps-art[data-bg]').forEach(el => pathTileObserver ? pathTileObserver.observe(el) : loadBg(el));
   clearTimeout(lazyBackgrounds._t);
   lazyBackgrounds._t = setTimeout(() => {          /* observer broken? load everything (old behavior) */
-    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg], .reel-thumb img[data-src], .pstep[data-bg]').forEach(loadBg);
+    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg], .reel-thumb img[data-src], .ps-art[data-bg]').forEach(loadBg);
   }, 2500);
 }
 /* Deep link from outside the app — LandFlow's brain sends people here.
@@ -9011,11 +9020,12 @@ function drawOnboard() {
       <p class="ob-sub" style="margin-top:16px;">${t('ob_role_q')}</p>
       <div class="ob-grid">${ROLE_OPTIONS.map(r => `
         <div class="ob-option ${ob.role === r.key ? 'sel' : ''}" data-role="${r.key}">
-          <span class="oi">${svgIcon(r.icon)}</span><div>${trole(r)}<div class="od">${tgoal(r.goals[0])} ${t('track_more')}</div></div>
+          <span class="oi">${svgIcon(r.icon)}</span><div>${trole(r)}<div class="od">${esc(_lang() === 'pt' ? (r.pt_d || '') : (r.en_d || ''))}</div></div>
         </div>`).join('')}
       </div>
       <div class="ob-foot">
-        <button class="ob-skip" id="obSkip">${t('ob_skip')}</button>
+        ${/* no "Skip, explore on my own": the department shapes the whole path (João + Pedro, 5 Nov 2026) */''}
+        <span class="ob-hint">${ob.role ? '' : (_lang() === 'pt' ? 'Escolha o seu departamento' : 'Choose your department')}</span>
         <span style="flex:1"></span>
         <button class="btn btn-primary" id="obNext" ${ob.role ? '' : 'data-needs="role" style="opacity:.55"'}>${t('ob_continue')}</button>
       </div>`;
@@ -9030,7 +9040,7 @@ function drawOnboard() {
   } else if (ob.step === 1) {
     const role = ROLE_OPTIONS.find(r => r.key === ob.role) || ROLE_OPTIONS[0];
     /* three goals, the department's own first; less to read, nothing that looks like a duplicate (João, 4 Nov 2026) */
-    const goals = [...new Set([...role.goals, ...Object.keys(GOAL_PRESETS)])].filter(g => GOAL_PRESETS[g]).slice(0, 3);
+    const goals = role.goals.filter(g => GOAL_PRESETS[g]).slice(0, 3);   /* the department's own three, nothing generic */
     /* the role already implies a first goal — pre-select it so the step is one click, not two */
     if (!ob.goal || !GOAL_PRESETS[ob.goal]) ob.goal = goals[0];
     body.innerHTML = `
@@ -9057,8 +9067,8 @@ function drawOnboard() {
         <div class="gen-line" id="genLine">${_lang() === 'pt' ? 'A ler o seu perfil…' : 'Reading your role profile…'}</div>
       </div>`;
     const lines = _lang() === 'pt'
-      ? ['A ler o seu perfil…', 'A percorrer a biblioteca ' + brandName() + '…', 'A ver competências que pode saltar…', 'A sequenciar 4–6 cursos…', 'Concluído ✓']
-      : ['Reading your role profile…', 'Scanning the ' + brandName() + ' library…', 'Checking skills you can skip…', 'Sequencing 4–6 courses…', 'Done ✓'];
+      ? ['A ler o seu departamento…', 'A percorrer a biblioteca ' + brandName() + '…', 'A escolher os módulos do seu objetivo…', 'A ordenar o percurso…', 'Concluído ✓']
+      : ['Reading your department…', 'Scanning the ' + brandName() + ' library…', 'Choosing the modules for your goal…', 'Putting your path in order…', 'Done ✓'];
     let i = 0;
     const iv = setInterval(() => {
       i++;
@@ -9066,6 +9076,7 @@ function drawOnboard() {
       clearInterval(iv);
       S.goal = ob.goal;
       S.path = [...GOAL_PRESETS[ob.goal]];
+      S.pathMods = [...((typeof GOAL_MODS === 'object' && GOAL_MODS[ob.goal]) || [])];
       S.role = ob.role;
       const handle = slugHandle(ob.username) || suggestHandle();
       /* guests have no auth name — the handle they just picked becomes their display name */

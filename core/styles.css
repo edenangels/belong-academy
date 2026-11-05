@@ -5112,3 +5112,61 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 
 /* the way back from a replayed moment is a small pill, not a full-width bar */
 .ck-back { width: auto; justify-content: center; margin: 0 0 10px; position: sticky; top: 0; padding: 5px 12px; font-size: 12px; min-height: 0; }
+
+/* ===== onboarding always fits the window (feedback 2, 5 Nov 2026) =====
+   The card was centred with no height limit, so on a laptop it ran off the top and bottom and only the
+   page behind it moved. Now: never taller than the viewport, the body scrolls inside, the footer stays. */
+.onboard-overlay { padding: 16px; }
+.onboard-card { display: flex; flex-direction: column; max-height: calc(100dvh - 32px); padding: 30px 34px 22px; }
+.onboard-progress { margin-bottom: 22px; flex: none; }
+#obBody { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column;
+  margin: 0 -8px; padding: 0 8px; scrollbar-width: thin; }
+#obBody .ob-foot { position: sticky; bottom: 0; margin-top: auto; padding-top: 18px; padding-bottom: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(16,21,17,.96) 30%); }
+.ob-title { font-size: 28px; }
+.ob-sub { margin-bottom: 18px; }
+.ob-grid { gap: 10px; margin-bottom: 4px; }
+.ob-option { padding: 12px 14px; gap: 12px; font-size: 14px; line-height: 1.3; }
+.ob-option .oi svg { width: 24px; height: 24px; }
+.ob-option .od { font-size: 12px; line-height: 1.35; margin-top: 3px; }
+@media (min-width: 900px) {
+  .onboard-card { width: min(860px, calc(100vw - 48px)); }
+  .ob-grid:not(.ob-goals) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .onboard-overlay { padding: 10px; }
+  .onboard-card { padding: 22px 18px 14px; max-height: calc(100dvh - 20px); }
+  .ob-title { font-size: 24px; }
+  .ob-grid:not(.ob-goals) { grid-template-columns: 1fr; }
+}
+
+/* ===== path tiles: cover above, words below (feedback 2) ===== */
+.path-row { grid-auto-columns: minmax(230px, 1fr); gap: 16px; padding-top: 10px; padding-bottom: 16px; }
+.pstep.ps2 { all: unset; box-sizing: border-box; position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0;
+  scroll-snap-align: start; cursor: pointer; border-radius: 14px; transition: transform .3s cubic-bezier(.2,.8,.2,1); font-family: var(--font-body); }
+.ps-art { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden;
+  background-size: cover; background-position: center; border: 1px solid var(--line);
+  transition: box-shadow .3s, border-color .3s, filter .3s; }
+.pstep.ps2 .pstep-n { position: absolute; left: 10px; top: 10px; width: 26px; height: 26px; font-size: 12px;
+  background: rgba(9,13,10,.66); color: var(--text); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); box-shadow: none; }
+.pstep.ps2.done .pstep-n, .pstep.ps2.current .pstep-n { background: var(--cta); color: var(--on-cta); }
+.ps-lock { position: absolute; right: 10px; top: 10px; font-size: 12px; opacity: .85; }
+.pstep.ps2 .pstep-bar { position: absolute; left: 0; right: 0; bottom: 0; margin: 0; height: 3px; border-radius: 0; background: rgba(0,0,0,.45); }
+.ps-body { display: flex; flex-direction: column; gap: 3px; padding: 0 2px; min-width: 0; }
+.pstep.ps2 .pstep-type { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pstep.ps2 .pstep-t { margin: 0; font-size: 15px; font-weight: 650; line-height: 1.3; white-space: normal;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.pstep.ps2 .pstep-s { font-size: 12px; }
+.pstep.ps2.current .pstep-s { color: var(--accent); }
+.pstep.ps2:not(.locked):hover, .pstep.ps2:not(.locked):focus-visible { transform: translateY(-6px) scale(1.025); z-index: 5; }
+.pstep.ps2:not(.locked):hover .ps-art, .pstep.ps2:not(.locked):focus-visible .ps-art {
+  border-color: rgba(231,237,227,.22); box-shadow: 0 22px 48px rgba(0,0,0,.5), 0 0 0 1px color-mix(in srgb, var(--accent) 20%, transparent); }
+.pstep.ps2.locked { cursor: default; }
+.pstep.ps2.locked .ps-art { filter: saturate(.45) brightness(.55); }
+.pstep.ps2.locked .ps-body { opacity: .6; }
+.pstep.ps2.current .ps-art { border-color: color-mix(in srgb, var(--accent) 55%, transparent); }
+@media (max-width: 640px) { .path-row { grid-auto-columns: 72%; } }
+#obBody .ob-foot { background: rgba(16,21,17,.98); border-top: 1px solid var(--line); margin-left: -8px; margin-right: -8px; padding-left: 8px; padding-right: 8px; padding-top: 14px; }
+@media (min-height: 760px) { #obBody .ob-foot { border-top-color: transparent; } }
+.ob-hint { font-size: 12px; color: var(--text-faint); }
