@@ -103,7 +103,7 @@
     const now = c.now
       ? `<div class="tm-now"><b>${esc(c.now.lesson)}</b><small>${esc(c.now.course)} › ${esc(c.now.module)} · ${W('lesson', 'lição')} ${c.now.n}/${c.now.of}</small></div>`
       : `<div class="tm-now"><b>✓ ${W('Every course complete', 'Todos os cursos concluídos')}</b></div>`;
-    return `<tr class="mrow" data-action="member-detail" data-uid="${esc(s.uid)}">
+    return `<tr class="mrow" data-action="member-detail" data-uid="${esc(s.uid)}" tabindex="0" aria-label="${esc(s.name)}">
       <td><div class="member"><span class="mi t-grad-3">${esc(s.initials)}</span><div>${esc(s.name)}<div class="mr">${esc(tdept(c.dept) || W('No department', 'Sem departamento'))}</div></div></div></td>
       <td>${now}</td>
       <td style="min-width:130px;"><div class="tm-pct"><div class="track"><div class="fill" style="width:${c.pct}%"></div></div><span>${c.done}/${c.req}</span></div>${courseDots(c)}</td>

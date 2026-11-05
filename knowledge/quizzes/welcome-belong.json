@@ -18,12 +18,12 @@
     "pt": {
      "opts": [
       "Uma invenção de marketing",
-      "Um campo de Craveiral perto de São Teotónio",
-      "Um tipo de fazenda no Alentejo",
+      "Um campo de cravos perto de São Teotónio",
+      "Um tipo de quinta no Alentejo",
       "Um nome escolhido pela família do fundador"
      ],
-     "q": "Qual é a origem do nome 'Craveiral'?",
-     "why": "O nome 'Craveiral' vem da palavra portuguesa para um campo de Craveiral, que é o que a terra era quando o fundador a encontrou pela primeira vez."
+     "q": "Qual é a origem do nome «Craveiral»?",
+     "why": "Em português, um campo de cravos chama-se «craveiral» — e era isso que o terreno era quando o fundador o encontrou."
     },
     "t0": 51,
     "type": "recall",
@@ -49,11 +49,11 @@
      "opts": [
       "Um hotel",
       "Uma relação com um pedaço de terra",
-      "Uma fazenda",
+      "Uma quinta",
       "Um empreendimento comercial"
      ],
-     "q": "O que foi que o Craveiral foi construído principalmente para ser?",
-     "why": "O Craveiral foi construído para ser uma relação com um pedaço de terra, com o hotel sendo uma forma de sustentar essa relação."
+     "q": "Antes de mais, o Craveiral foi construído para ser o quê?",
+     "why": "O Craveiral foi construído para ser uma relação com um pedaço de terra; o hotel é a forma de sustentar essa relação."
     },
     "t0": 139,
     "type": "recall",
@@ -82,8 +82,8 @@
       "Preservar a beleza natural da terra",
       "Construir mais casas"
      ],
-     "q": "Quando se tomam decisões sobre o uso da terra no Craveiral, qual deve ser a consideração principal?",
-     "why": "A consideração principal deve ser preservar a beleza natural da terra, pois esta é uma parte fundamental da experiência do Craveiral e o que a distingue."
+     "q": "Nas decisões sobre o uso da terra no Craveiral, qual deve ser a consideração principal?",
+     "why": "A consideração principal deve ser preservar a beleza natural da terra, porque é uma parte essencial da experiência do Craveiral e o que o distingue."
     },
     "t0": 169,
     "type": "application",
@@ -107,13 +107,13 @@
     },
     "pt": {
      "opts": [
-      "Usar os materiais mais rentáveis",
-      "Construir de uma forma que minimize o impacto no ambiente natural",
+      "Usar os materiais mais económicos",
+      "Construir de forma a minimizar o impacto no ambiente natural",
       "Criar uma estética moderna e elegante",
-      "Priorizar a facilidade de manutenção"
+      "Dar prioridade à facilidade de manutenção"
      ],
-     "q": "Quando se projeta nova infraestrutura no Craveiral, qual deve ser o princípio orientador?",
-     "why": "O princípio orientador deve ser construir de uma forma que minimize o impacto no ambiente natural, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra."
+     "q": "Ao projetar novas infraestruturas no Craveiral, qual deve ser o princípio orientador?",
+     "why": "O princípio orientador deve ser construir de forma a minimizar o impacto no ambiente natural, em linha com a filosofia do Craveiral de preservar a beleza natural da terra."
     },
     "t0": 198,
     "type": "application",
@@ -137,13 +137,13 @@
     },
     "pt": {
      "opts": [
-      "Aceitar a proposta e priorizar os benefícios econômicos",
-      "Rejeitar a proposta e priorizar a proteção ambiental",
-      "Tentar encontrar um compromisso que equilibre as preocupações econômicas e ambientais",
-      "Colocar a proposta em votação na comunidade"
+      "Aceitar a proposta e dar prioridade aos benefícios económicos",
+      "Rejeitar a proposta e dar prioridade à proteção ambiental",
+      "Procurar um compromisso que equilibre as preocupações económicas e ambientais",
+      "Pôr a proposta à votação da comunidade"
      ],
-     "q": "Um novo investidor está propondo construir um grande resort em um lote de terra próximo, o que aumentaria a receita para a comunidade local, mas também poderia prejudicar o meio ambiente. O que a equipe do Craveiral deve fazer?",
-     "why": "A equipe do Craveiral deve rejeitar a proposta e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "Um novo investidor propõe construir um grande resort num terreno vizinho, o que aumentaria as receitas da comunidade local, mas poderia prejudicar o ambiente. O que deve fazer a equipa do Craveiral?",
+     "why": "A equipa do Craveiral deve rejeitar a proposta e dar prioridade à proteção ambiental, em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
     },
     "t0": 139,
     "type": "scenario",
@@ -167,13 +167,13 @@
     },
     "pt": {
      "opts": [
-      "Aprovar o pedido e priorizar os desejos do hóspede",
-      "Rejeitar o pedido e priorizar a proteção ambiental",
-      "Oferecer opções alternativas que minimizem o impacto no ambiente",
-      "Cobrar do hóspede um prêmio pelo privilégio de construir na terra"
+      "Aprovar o pedido e dar prioridade aos desejos do hóspede",
+      "Recusar o pedido e dar prioridade à proteção ambiental",
+      "Propor alternativas que minimizem o impacto no ambiente",
+      "Cobrar ao hóspede um valor extra pelo privilégio de construir no terreno"
      ],
-     "q": "Um hóspede está solicitando construir uma villa privada em um lote de terra dentro da propriedade do Craveiral, o que exigiria limpar uma quantidade significativa de vegetação natural. O que a equipe do Craveiral deve fazer?",
-     "why": "A equipe do Craveiral deve rejeitar o pedido e priorizar a proteção ambiental, pois isso está em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "Um hóspede pede para construir uma moradia privada num terreno dentro da propriedade do Craveiral, o que obrigaria a desmatar uma área significativa de vegetação natural. O que deve fazer a equipa do Craveiral?",
+     "why": "A equipa do Craveiral deve recusar o pedido e dar prioridade à proteção ambiental, em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
     },
     "t0": 169,
     "type": "scenario",
@@ -199,13 +199,13 @@
     },
     "pt": {
      "opts": [
-      "Um lugar bem cuidado cuida daqueles que o habitam",
+      "Um lugar bem cuidado cuida de quem o habita",
       "A importância de palavras de marca abstratas",
       "A necessidade de uma economia circular",
-      "O valor da preservação do ambiente"
+      "O valor de preservar o ambiente"
      ],
-     "q": "Qual é a convicção fundamental em que o Belong foi fundado?",
-     "why": "A convicção fundamental é que um lugar bem cuidado cuida daqueles que o habitam, que é a base de tudo."
+     "q": "Qual é a convicção fundamental sobre a qual a Belong foi fundada?",
+     "why": "A convicção fundamental é que um lugar bem cuidado cuida de quem o habita — a base de tudo."
     },
     "t0": 29,
     "type": "recall",
@@ -230,12 +230,12 @@
     "pt": {
      "opts": [
       "Regenerar o território através de uma economia circular",
-      "Preservar o ambiente e não danificá-lo",
-      "Criar um modelo de negócios sustentável",
+      "Preservar o ambiente e não o danificar",
+      "Criar um modelo de negócio sustentável",
       "Promover o crescimento social e económico"
      ],
-     "q": "Qual é a visão da organização em uma linha?",
-     "why": "A visão é regenerar o território através de uma economia circular, que é o princípio orientador da organização."
+     "q": "Qual é a visão da organização, numa linha?",
+     "why": "A visão é regenerar o território através de uma economia circular, o princípio orientador da organização."
     },
     "t0": 109,
     "type": "recall",
@@ -259,13 +259,13 @@
     },
     "pt": {
      "opts": [
-      "Focar-se em preservar o ambiente e não danificá-lo",
-      "Dar mais do que recebe, através do compostagem e reciclagem",
-      "Apenas seguir as instruções do seu supervisor",
-      "Reduzir as suas horas de trabalho para minimizar o seu impacto"
+      "Concentrar-se em preservar o ambiente e não o danificar",
+      "Dar ativamente mais do que recebe, através da compostagem e da reciclagem",
+      "Limitar-se a seguir as instruções do seu supervisor",
+      "Reduzir as horas de trabalho para minimizar o seu impacto"
      ],
-     "q": "O que um trabalhador da Craveiral Farmhouse deve fazer para contribuir para a regeneração do território?",
-     "why": "O trabalhador deve dar mais do que recebe, através do compostagem e reciclagem, para contribuir para a regeneração do território."
+     "q": "O que deve fazer quem trabalha no Craveiral Farmhouse para contribuir para a regeneração do território?",
+     "why": "Deve dar ativamente mais do que recebe, através da compostagem e da reciclagem, para contribuir para a regeneração do território."
     },
     "t0": 134,
     "type": "application",
@@ -289,13 +289,13 @@
     },
     "pt": {
      "opts": [
-      "Comprando produtos de produtores locais e reduzindo os resíduos",
-      "Aumentando os lucros do restaurante e expandindo as suas operações",
-      "Reduzindo o número de clientes e minimizando o impacto",
-      "Doando comida excedente para caridade"
+      "Comprar a produtores locais e reduzir o desperdício",
+      "Aumentar os lucros do restaurante e expandir a operação",
+      "Reduzir o número de clientes para minimizar o impacto",
+      "Doar a comida excedente a instituições de solidariedade"
      ],
-     "q": "Como um membro da equipa do restaurante A Mesa do CAM deve apoiar a economia circular?",
-     "why": "O membro da equipa deve comprar produtos de produtores locais e reduzir os resíduos para apoiar a economia circular."
+     "q": "Como deve um membro da equipa do restaurante A Mesa do CAM apoiar a economia circular?",
+     "why": "O membro da equipa deve comprar a produtores locais e reduzir o desperdício para apoiar a economia circular."
     },
     "t0": 162,
     "type": "application",
@@ -319,13 +319,13 @@
     },
     "pt": {
      "opts": [
-      "Iniciar um novo projecto para aumentar os lucros da lavanderia",
-      "Reduzir a quantidade de água utilizada no processo de lavanderia",
-      "Comprar novas máquinas de lavar mais eficientes",
-      "Parceriar com empresas locais para oferecer serviços conjuntos"
+      "Lançar um novo projeto para aumentar os lucros da lavandaria",
+      "Reduzir a quantidade de água usada na lavagem",
+      "Comprar máquinas de lavar novas e mais eficientes",
+      "Fazer parcerias com empresas locais para oferecer serviços conjuntos"
      ],
-     "q": "Um novo empregado do serviço de lavanderia quer contribuir para a economia circular. O que deve fazer?",
-     "why": "O novo empregado deve reduzir a quantidade de água utilizada no processo de lavanderia para contribuir para a economia circular."
+     "q": "Uma pessoa que começou agora a trabalhar na lavandaria quer contribuir para a economia circular. O que deve fazer?",
+     "why": "Deve reduzir a quantidade de água usada na lavagem para contribuir para a economia circular."
     },
     "t0": 188,
     "type": "scenario",
@@ -350,12 +350,12 @@
     "pt": {
      "opts": [
       "Explicar a visão de regenerar o território através de uma economia circular",
-      "Dizer ao hóspede que a visão é preservar o ambiente e não danificá-lo",
-      "Dizer que a visão é criar um modelo de negócios sustentável",
+      "Dizer ao hóspede que a visão é preservar o ambiente e não o danificar",
+      "Dizer que a visão é criar um modelo de negócio sustentável",
       "Responder que a visão é promover o crescimento social e económico"
      ],
-     "q": "Um hóspede da Craveiral Farmhouse pergunta sobre a visão da organização. Como deve o membro da equipa responder?",
-     "why": "O membro da equipa deve explicar a visão de regenerar o território através de uma economia circular ao hóspede."
+     "q": "Um hóspede do Craveiral Farmhouse pergunta qual é a visão da organização. Como deve responder o membro da equipa?",
+     "why": "O membro da equipa deve explicar ao hóspede a visão de regenerar o território através de uma economia circular."
     },
     "t0": 109,
     "type": "scenario",

@@ -18,12 +18,12 @@
     "pt": {
      "opts": [
       "Porque é o aspeto mais importante da sustentabilidade",
-      "Porque é o mais fácil de alcançar",
-      "Porque sem ela, a quinta e a missão não sobreviveriam",
-      "Porque é a mais friendamente para o ambiente"
+      "Porque é a mais fácil de alcançar",
+      "Porque, sem ela, a quinta e a missão não sobreviveriam",
+      "Porque é a mais amiga do ambiente"
      ],
-     "q": "Por que o formador prioriza a sustentabilidade financeira?",
-     "why": "O formador prioriza a sustentabilidade financeira porque sem ela, a quinta e a missão não sobreviveriam."
+     "q": "Porque é que o formador dá prioridade à sustentabilidade financeira?",
+     "why": "O formador dá prioridade à sustentabilidade financeira porque, sem ela, a quinta e a missão não sobreviveriam."
     },
     "t0": 27,
     "type": "recall",
@@ -52,8 +52,8 @@
       "Ambiental, social e económica",
       "Tecnológica, económica e social"
      ],
-     "q": "Quais são os três aspetos da sustentabilidade mencionados pelo formador?",
-     "why": "O formador menciona a sustentabilidade financeira, ambiental e social como os três aspetos da sustentabilidade."
+     "q": "Quais são os três aspetos da sustentabilidade referidos pelo formador?",
+     "why": "O formador refere a sustentabilidade financeira, ambiental e social como os três aspetos da sustentabilidade."
     },
     "t0": 82,
     "type": "recall",
@@ -78,12 +78,12 @@
     "pt": {
      "opts": [
       "Evitar o desperdício e cuidar do equipamento",
-      "Apenas focar na sustentabilidade ambiental",
-      "Ignorar a sustentabilidade financeira e focar nos aspetos sociais",
-      "Não fazer nada e deixar que os outros lidem com isso"
+      "Concentrar-se apenas na sustentabilidade ambiental",
+      "Ignorar a sustentabilidade financeira e concentrar-se nos aspetos sociais",
+      "Não fazer nada e deixar que outros tratem do assunto"
      ],
-     "q": "O que um trabalhador deve fazer para proteger a missão da Craveiral?",
-     "why": "Um trabalhador deve evitar o desperdício e cuidar do equipamento para proteger a missão da Craveiral."
+     "q": "O que deve fazer cada pessoa da equipa para proteger a missão do Craveiral?",
+     "why": "Para proteger a missão do Craveiral, é preciso evitar o desperdício e cuidar do equipamento."
     },
     "t0": 56,
     "type": "application",
@@ -107,13 +107,13 @@
     },
     "pt": {
      "opts": [
-      "Deixá-lo como está e não questioná-lo",
+      "Deixá-lo como está e não o questionar",
       "Simplificá-lo sem perguntar a ninguém",
-      "Questioná-lo e perguntar se há uma razão para a sua complexidade",
-      "Ignorá-lo e focar em outras tarefas"
+      "Questioná-lo e perguntar se há uma razão para ser tão complexo",
+      "Ignorá-lo e concentrar-se noutras tarefas"
      ],
-     "q": "Como um trabalhador deve abordar um processo complicado no seu trabalho?",
-     "why": "Um trabalhador deve questionar um processo complicado e perguntar se há uma razão para a sua complexidade."
+     "q": "Como se deve lidar com um processo complicado no trabalho?",
+     "why": "Perante um processo complicado, deve-se questioná-lo e perguntar se há uma razão para essa complexidade."
     },
     "t0": 108,
     "type": "application",
@@ -137,13 +137,13 @@
     },
     "pt": {
      "opts": [
-      "Dizer ao hóspede que devia ter esperado uma experiência rústica",
-      "Oferecer para atualizar o hóspede para um quarto mais luxuoso",
-      "Explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema",
-      "Ignorar a reclamação do hóspede e não fazer nada"
+      "Dizer ao hóspede que devia ter contado com uma experiência rústica",
+      "Propor ao hóspede a mudança para um quarto mais luxuoso",
+      "Explicar que o conforto e a modernidade são prioridades no Craveiral e propor-se a resolver o problema",
+      "Ignorar a queixa do hóspede e não fazer nada"
      ],
-     "q": "Um hóspede está a reclamar da falta de conforto no seu quarto. O que o trabalhador deve fazer?",
-     "why": "O trabalhador deve explicar que o conforto e a modernidade são prioridades na Craveiral e oferecer para resolver o problema."
+     "q": "Um hóspede queixa-se da falta de conforto no quarto. O que se deve fazer?",
+     "why": "Deve-se explicar que o conforto e a modernidade são prioridades no Craveiral e propor-se a resolver o problema."
     },
     "t0": 135,
     "type": "scenario",
@@ -167,13 +167,13 @@
     },
     "pt": {
      "opts": [
-      "Adicionar tantas comodidades quanto possível para garantir o conforto do hóspede",
-      "Remover todos os itens desnecessários para garantir a simplicidade",
-      "Equilibrar a simplicidade e o conforto fornecendo respostas claras e comida honesta",
-      "Perguntar a um colega de trabalho para orientação sobre como preparar o quarto"
+      "Acrescentar o máximo de comodidades possível para garantir o conforto do hóspede",
+      "Retirar todos os objetos desnecessários para garantir a simplicidade",
+      "Equilibrar simplicidade e conforto, com respostas claras e comida honesta",
+      "Pedir orientação a um colega sobre como preparar o quarto"
      ],
-     "q": "Um novo trabalhador está a preparar um quarto para um hóspede e está incerto sobre como equilibrar a simplicidade e o conforto. O que ele deve fazer?",
-     "why": "O trabalhador deve equilibrar a simplicidade e o conforto fornecendo respostas claras e comida honesta."
+     "q": "Uma pessoa nova na equipa está a preparar um quarto para um hóspede e não sabe bem como equilibrar simplicidade e conforto. O que deve fazer?",
+     "why": "Deve equilibrar simplicidade e conforto, com respostas claras e comida honesta."
     },
     "t0": 162,
     "type": "scenario",
@@ -199,13 +199,13 @@
     },
     "pt": {
      "opts": [
-      "O serviço é sobre como o hóspede se sente, enquanto a hospitalidade é técnica",
-      "O serviço é técnico, enquanto a hospitalidade é sobre como o hóspede se sente",
-      "O serviço é obrigatório, enquanto a hospitalidade é opcional",
-      "O serviço é mensurável, enquanto a hospitalidade não é"
+      "O serviço tem a ver com o que o hóspede sente; a hospitalidade é técnica",
+      "O serviço é técnico; a hospitalidade tem a ver com o que o hóspede sente",
+      "O serviço é obrigatório; a hospitalidade é opcional",
+      "O serviço é mensurável; a hospitalidade não é"
      ],
      "q": "Qual é a principal diferença entre serviço e hospitalidade?",
-     "why": "A hospitalidade é sobre criar um sentimento dentro do hóspede, enquanto o serviço é sobre fornecer excelência técnica."
+     "why": "A hospitalidade consiste em criar um sentimento dentro do hóspede, enquanto o serviço consiste em garantir excelência técnica."
     },
     "t0": 29,
     "type": "recall",
@@ -229,13 +229,13 @@
     },
     "pt": {
      "opts": [
-      "Como clientes",
-      "Como clientes",
-      "Como hóspedes",
-      "Como visitantes"
+      "Consumidores",
+      "Clientes",
+      "Hóspedes",
+      "Visitantes"
      ],
-     "q": "Como os hóspedes devem ser referidos, de acordo com o treinador?",
-     "why": "O treinador enfatiza que os hóspedes devem ser referidos como 'hóspedes', não 'clientes', para transmitir um sentimento de boas-vindas e hospitalidade."
+     "q": "Segundo o formador, como devemos chamar aos hóspedes?",
+     "why": "O formador sublinha que devemos dizer «hóspedes», e não «clientes», para transmitir um sentimento de acolhimento e hospitalidade."
     },
     "t0": 83,
     "type": "recall",
@@ -259,13 +259,13 @@
     },
     "pt": {
      "opts": [
-      "Processá-los rapidamente e com eficiência",
-      "Perguntar-lhes para preencher um formulário",
-      "Oferecer-lhes algo para beber e fazê-los se sentir bem-vindos",
-      "Dizer-lhes sobre as políticas do hotel"
+      "Tratar da chegada de forma rápida e eficiente",
+      "Pedir-lhe que preencha um formulário",
+      "Oferecer-lhe algo para beber e fazê-lo sentir-se bem-vindo",
+      "Explicar-lhe as regras do hotel"
      ],
-     "q": "O que um membro da equipe deve fazer quando um hóspede chega, de acordo com o treinador?",
-     "why": "O treinador sugere que os membros da equipe devem fazer os hóspedes se sentirem bem-vindos, oferecendo-lhes algo para beber e sendo felizes em vê-los."
+     "q": "Segundo o formador, o que deve fazer um membro da equipa quando um hóspede chega?",
+     "why": "O formador sugere que a equipa faça os hóspedes sentir-se bem-vindos: oferecer-lhes algo para beber e mostrar alegria genuína por os ver."
     },
     "t0": 111,
     "type": "application",
@@ -289,13 +289,13 @@
     },
     "pt": {
      "opts": [
-      "Usar um quiosque de autoatendimento",
-      "Lembrar-se do nome de um hóspede",
-      "Perguntar a um hóspede para preencher uma pesquisa",
-      "Fornecer um presente complementar"
+      "Usar um quiosque de autosserviço",
+      "Lembrar-se do nome do hóspede",
+      "Pedir ao hóspede que preencha um inquérito",
+      "Oferecer um presente de cortesia"
      ],
-     "q": "Qual é uma maneira simples de mostrar hospitalidade, de acordo com o treinador?",
-     "why": "O treinador sugere que lembrar-se do nome de um hóspede é uma maneira simples de mostrar hospitalidade e fazê-los se sentir reconhecidos."
+     "q": "Segundo o formador, qual é uma forma simples de mostrar hospitalidade?",
+     "why": "O formador sugere que lembrar-se do nome do hóspede é uma forma simples de mostrar hospitalidade e de o fazer sentir-se reconhecido."
     },
     "t0": 138,
     "type": "application",
@@ -319,13 +319,13 @@
     },
     "pt": {
      "opts": [
-      "Dar-lhes um desconto na taxa do quarto",
-      "Oferecer-lhes um drink complementar",
-      "Deixar um presente ou nota surpresa no quarto para reconhecer a ocasião especial",
-      "Dizer-lhes sobre as comodidades do hotel"
+      "Fazer-lhes um desconto no preço do quarto",
+      "Oferecer-lhes uma bebida",
+      "Deixar no quarto uma surpresa ou um bilhete que assinale a ocasião especial",
+      "Falar-lhes das comodidades do hotel"
      ],
-     "q": "Um casal reservou um quarto para o seu aniversário. O que um membro da equipe pode fazer para mostrar hospitalidade?",
-     "why": "O treinador sugere que antecipar as necessidades de um hóspede e mostrar atenção ao detalhe, como deixar um presente ou nota surpresa, pode criar um sentimento de hospitalidade e tornar a estadia especial."
+     "q": "Um casal reservou um quarto para celebrar o aniversário. O que pode um membro da equipa fazer para mostrar hospitalidade?",
+     "why": "O formador sugere que antecipar as necessidades do hóspede e cuidar dos detalhes, como deixar uma surpresa ou um bilhete, cria um sentimento de hospitalidade e torna a estadia especial."
     },
     "t0": 166,
     "type": "scenario",
@@ -341,7 +341,7 @@
      "opts": [
       "Tell them to check the hotel's website for information",
       "Recommend a beach that is convenient for the hotel, but not necessarily suitable for small children",
-      "Recommend Carvalal beach, explaining that it has easy access and is suitable for small children",
+      "Recommend Carvalhal beach, explaining that it has easy access and is suitable for small children",
       "Suggest that they visit a different attraction, such as a museum or park"
      ],
      "q": "A guest asks for a recommendation on which beach to visit with their small children. What could a staff member say to show hospitality?",
@@ -349,13 +349,13 @@
     },
     "pt": {
      "opts": [
-      "Dizer-lhes para verificar o site do hotel para obter informações",
-      "Recomendar uma praia que é conveniente para o hotel, mas não necessariamente adequada para crianças pequenas",
-      "Recomendar a praia de Carvalal, explicando que tem acesso fácil e é adequada para crianças pequenas",
-      "Sugerir que visitem uma atração diferente, como um museu ou parque"
+      "Dizer-lhe que consulte o site do hotel",
+      "Recomendar uma praia que dá jeito ao hotel, mas que não é necessariamente adequada a crianças pequenas",
+      "Recomendar a praia do Carvalhal, explicando que tem acesso fácil e é adequada a crianças pequenas",
+      "Sugerir outra atração, como um museu ou um parque"
      ],
-     "q": "Um hóspede pergunta por uma recomendação sobre qual praia visitar com os seus filhos pequenos. O que um membro da equipe pode dizer para mostrar hospitalidade?",
-     "why": "O treinador sugere que os membros da equipe devem ser conhecedores da área local e ser capazes de fornecer recomendações que mostrem atenção às necessidades e preferências do hóspede."
+     "q": "Um hóspede pede uma recomendação sobre que praia visitar com os filhos pequenos. O que pode um membro da equipa dizer para mostrar hospitalidade?",
+     "why": "O formador sugere que a equipa conheça bem a região e saiba dar recomendações que mostrem atenção às necessidades e preferências do hóspede."
     },
     "t0": 194,
     "type": "scenario",

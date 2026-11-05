@@ -19,11 +19,11 @@
      "opts": [
       "Menos de 50%",
       "Mais de 70%",
-      "Exactamente 90%",
-      "Não especificado"
+      "Exatamente 90%",
+      "Não é referido"
      ],
-     "q": "Que percentagem da comida servida na quinta é cultivada na propriedade?",
-     "why": "A transcrição afirma que mais de 70% do que é servido é cultivado na propriedade."
+     "q": "Que percentagem da comida servida na quinta é produzida na propriedade?",
+     "why": "A transcrição afirma que mais de 70% do que se serve é produzido na propriedade."
     },
     "t0": 28,
     "type": "recall",
@@ -47,13 +47,13 @@
     },
     "pt": {
      "opts": [
-      "Para seguir as últimas tendências alimentares",
+      "Para seguir as últimas tendências gastronómicas",
       "Para reduzir custos",
-      "Porque a própria quinta roda com as estações",
-      "Para atender a diferentes preferências dos hóspedes"
+      "Porque a própria quinta muda com as estações",
+      "Para ir ao encontro das diferentes preferências dos hóspedes"
      ],
-     "q": "Por que o menu da quinta roda com as estações?",
-     "why": "A transcrição explica que o menu roda com as estações porque a própria quinta o faz."
+     "q": "Porque é que o menu da quinta muda com as estações?",
+     "why": "A transcrição explica que o menu muda com as estações porque a própria quinta também muda."
     },
     "t0": 54,
     "type": "recall",
@@ -77,13 +77,13 @@
     },
     "pt": {
      "opts": [
-      "Apressar-se a apresentar as opções para economizar tempo",
-      "Focar-se nos preços de cada prato",
+      "Passar a correr pelas opções para poupar tempo",
+      "Concentrar-se no preço de cada prato",
       "Descrever os pratos como generosos, honestos e sem pressa",
-      "Apenas mencionar os itens mais populares"
+      "Mencionar apenas os mais populares"
      ],
-     "q": "Como devem os funcionários da frente da casa abordar a descrição das opções de pequeno-almoço para os hóspedes?",
-     "why": "A transcrição descreve o pequeno-almoço como uma declaração de identidade e deve ser apresentado de forma generosa, honesta e sem pressa."
+     "q": "Como deve a equipa de sala apresentar aos hóspedes as opções do pequeno-almoço?",
+     "why": "A transcrição descreve o pequeno-almoço como uma declaração de identidade, que deve ser apresentada de forma generosa, honesta e sem pressa."
     },
     "t0": 81,
     "type": "application",
@@ -108,12 +108,12 @@
     "pt": {
      "opts": [
       "Apenas o preço e a origem",
-      "Três frases por vinho, incluindo de onde é, como é e com o que se harmoniza bem",
+      "Três frases por vinho: de onde vem, como é e com o que combina",
       "Uma história detalhada da vinha",
-      "O teor alcoólico e as calorias por porção"
+      "O teor alcoólico e as calorias por dose"
      ],
-     "q": "Que informações devem os funcionários da frente da casa ser capazes de fornecer sobre os vinhos da lista?",
-     "why": "A transcrição sugere que os funcionários devem ser capazes de guiar os hóspedes pela lista de vinhos com três frases por vinho."
+     "q": "Que informação deve a equipa de sala saber dar sobre os vinhos da carta?",
+     "why": "A transcrição sugere que a equipa saiba guiar os hóspedes pela carta de vinhos com três frases por vinho."
     },
     "t0": 161,
     "type": "application",
@@ -137,13 +137,13 @@
     },
     "pt": {
      "opts": [
-      "Dizer que são de um supermercado local",
-      "Explicar que foram cultivados na propriedade e mencionar os práticas de solo e agricultura específicas utilizadas",
-      "Dizer que não sabe e oferecer para descobrir",
-      "Dizer que são provenientes da cidade mais próxima"
+      "Dizer que são de um supermercado da zona",
+      "Explicar que foram cultivados na propriedade e mencionar o solo e as práticas agrícolas usadas",
+      "Dizer que não sabe e oferecer-se para descobrir",
+      "Dizer que vêm da cidade mais próxima"
      ],
-     "q": "Um hóspede pergunta de onde vêm os legumes na sua salada. Como deve responder?",
-     "why": "A transcrição enfatiza a importância da filosofia da quinta para a mesa e da aquisição de alimentos localmente."
+     "q": "Um hóspede pergunta de onde vêm os legumes da salada. Como se deve responder?",
+     "why": "A transcrição sublinha a importância da filosofia «da raiz à mesa» e de comprar os alimentos localmente."
     },
     "t0": 28,
     "type": "scenario",
@@ -167,13 +167,13 @@
     },
     "pt": {
      "opts": [
-      "Sugerir que façam uma caminhada na cidade próxima",
-      "Recomendar a aula de fabrico de pizzas onde as crianças podem fazer as suas próprias pizzas",
-      "Falar sobre o museu local",
+      "Sugerir um passeio pela vila mais próxima",
+      "Recomendar a aula de pizzas, onde as crianças fazem as suas próprias pizzas",
+      "Falar-lhes do museu local",
       "Sugerir um jogo de ténis"
      ],
-     "q": "Uma família com crianças pergunta sobre atividades que podem fazer juntos. Qual seria uma sugestão apropriada com base nas ofertas da quinta?",
-     "why": "A transcrição menciona as aulas de pizza como uma atividade muito apreciada na propriedade."
+     "q": "Uma família com crianças pergunta que atividades podem fazer juntos. Qual seria uma sugestão adequada, tendo em conta o que a quinta oferece?",
+     "why": "A transcrição refere as aulas de pizza como uma das atividades mais apreciadas na propriedade."
     },
     "t0": 133,
     "type": "scenario",
@@ -194,18 +194,18 @@
       "A surf school only",
       "A private event space"
      ],
-     "q": "What is the concept of the beach bar at Carvalhial?",
+     "q": "What is the concept of the beach bar at Carvalhal?",
      "why": "The beach bar is described as having honest food and drinks, and being a place where surf lessons happen, indicating a casual and welcoming atmosphere."
     },
     "pt": {
      "opts": [
       "Um restaurante de luxo",
-      "Um local de comida e bebida casual e honesto",
-      "Uma escola de surfe apenas",
-      "Um espaço de eventos privados"
+      "Um sítio descontraído, de comida e bebida honestas",
+      "Apenas uma escola de surf",
+      "Um espaço para eventos privados"
      ],
-     "q": "Qual é o conceito do bar da praia em Carvalhial?",
-     "why": "O bar da praia é descrito como tendo comida e bebida honestas, e sendo um local onde acontecem aulas de surfe, indicando uma atmosfera casual e acolhedora."
+     "q": "Qual é o conceito do bar de praia no Carvalhal?",
+     "why": "O bar de praia é descrito como um sítio de comida e bebida honestas, onde também acontecem as aulas de surf, o que indica um ambiente descontraído e acolhedor."
     },
     "t0": 26,
     "type": "recall",
@@ -220,22 +220,22 @@
     "en": {
      "opts": [
       "It's a competitor to Craveiral",
-      "It's a cultural institution that showcases the cuisine of the territory",
+      "It's Craveiral's restaurant inside a respected cultural institution, bringing the cuisine of the territory to the city",
       "It's a farm-to-table restaurant only",
       "It's a private event space"
      ],
      "q": "What is the significance of A Mesa do CAM in Lisbon?",
-     "why": "A Mesa do CAM is described as a cultural institution that serves the cuisine of the territory, indicating its significance in showcasing the local culture and food."
+     "why": "A Mesa do CAM is Craveiral's restaurant at the modern art centre (CAM) of the Calouste Gulbenkian Foundation, one of the most respected cultural institutions in the country, where the cuisine of this territory is served at a city table."
     },
     "pt": {
      "opts": [
       "É um concorrente do Craveiral",
-      "É uma instituição cultural que mostra a culinária do território",
-      "É um restaurante de comida fresca apenas",
-      "É um espaço de eventos privados"
+      "É o restaurante do Craveiral dentro de uma instituição cultural de referência, que leva a cozinha do território à cidade",
+      "É apenas um restaurante da quinta para a mesa",
+      "É um espaço para eventos privados"
      ],
-     "q": "Qual é o significado de A Mesa do CAM em Lisboa?",
-     "why": "A Mesa do CAM é descrito como uma instituição cultural que serve a culinária do território, indicando seu significado em mostrar a cultura e comida local."
+     "q": "Qual é o significado de A Mesa do CAM, em Lisboa?",
+     "why": "A Mesa do CAM é o restaurante do Craveiral no Centro de Arte Moderna (CAM) da Fundação Calouste Gulbenkian, uma das instituições culturais mais respeitadas do país, onde a cozinha deste território é servida numa mesa da cidade."
     },
     "t0": 80,
     "type": "recall",
@@ -260,12 +260,12 @@
     "pt": {
      "opts": [
       "Dizer-lhes que não faz parte da experiência do Craveiral",
-      "Enviar-lhes para a praia e esquecer deles",
-      "Mover-lhes dentro do negócio, destacando a praia como parte da experiência geral",
-      "Cobrar-lhes extra pelo acesso à praia"
+      "Mandá-los para a praia e esquecê-los",
+      "Levá-los a circular dentro da casa, apresentando a praia como parte da experiência completa",
+      "Cobrar-lhes um extra pelo acesso à praia"
      ],
-     "q": "O que deve fazer quando recomendar a praia aos hóspedes?",
-     "why": "Quando recomendar a praia, deve mover os hóspedes dentro do negócio, destacando a praia como parte da experiência geral, para fornecer uma experiência integrada e sem interrupções."
+     "q": "O que se deve fazer ao recomendar a praia aos hóspedes?",
+     "why": "Ao recomendar a praia, não se está a mandar o hóspede para fora: está-se a levá-lo a circular dentro da casa, apresentando a praia como parte de uma experiência completa e integrada."
     },
     "t0": 53,
     "type": "application",
@@ -279,23 +279,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "Same route to table kitchen, same chain, same care, wherever it happens",
+      "The same root-to-table kitchen, chain and care, wherever it happens",
       "Different standards for different events",
       "Lower standards for off-site events",
       "Higher standards for on-site events"
      ],
      "q": "What is the standard for events and catering at Craveiral?",
-     "why": "The standard for events and catering at Craveiral is the same route to table kitchen, same chain, same care, wherever it happens, to ensure consistency and quality."
+     "why": "The standard for events and catering at Craveiral is the same root-to-table kitchen, the same chain and the same care, wherever it happens, to ensure consistency and quality."
     },
     "pt": {
      "opts": [
-      "Mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça",
-      "Padrões diferentes para diferentes eventos",
-      "Padrões mais baixos para eventos fora do local",
-      "Padrões mais altos para eventos no local"
+      "A mesma cozinha «da raiz à mesa», a mesma cadeia e o mesmo cuidado, onde quer que aconteça",
+      "Padrões diferentes para eventos diferentes",
+      "Padrões mais baixos para eventos fora da quinta",
+      "Padrões mais altos para eventos na quinta"
      ],
-     "q": "Qual é o padrão para eventos e catering no Craveiral?",
-     "why": "O padrão para eventos e catering no Craveiral é o mesmo percurso para a cozinha, mesma cadeia, mesmo cuidado, onde quer que aconteça, para garantir consistência e qualidade."
+     "q": "Qual é o padrão para eventos e catering do Craveiral?",
+     "why": "O padrão para eventos e catering é a mesma cozinha «da raiz à mesa», a mesma cadeia e o mesmo cuidado, onde quer que aconteça, para garantir coerência e qualidade."
     },
     "t0": 133,
     "type": "application",
@@ -319,13 +319,13 @@
     },
     "pt": {
      "opts": [
-      "Apenas cerimônias íntimas sob os pinheiros estão disponíveis",
-      "Apenas celebrações de fim de semana com o Centro de Interpretação estão disponíveis",
-      "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana",
-      "Nenhum casamento é permitido no Craveiral"
+      "Só existem cerimónias íntimas sob os pinheiros",
+      "Só existem celebrações de fim de semana completo com o Centro de Interpretação",
+      "Existe uma gama de opções, desde cerimónias íntimas até celebrações de fim de semana completo",
+      "Não se fazem casamentos no Craveiral"
      ],
-     "q": "Um hóspede está planejando um casamento no Craveiral e quer saber quais opções estão disponíveis. O que deve dizer a eles?",
-     "why": "Uma variedade de opções estão disponíveis, desde cerimônias íntimas até celebrações de fim de semana, para atender às diferentes necessidades e preferências dos hóspedes."
+     "q": "Um hóspede está a planear um casamento no Craveiral e quer saber que opções existem. O que se lhe deve dizer?",
+     "why": "Existe uma gama de opções, desde cerimónias íntimas até celebrações de fim de semana completo, para responder às diferentes necessidades e preferências."
     },
     "t0": 160,
     "type": "scenario",
@@ -349,13 +349,13 @@
     },
     "pt": {
      "opts": [
-      "Apenas atividades de construção de equipe estão disponíveis",
-      "Uma variedade de atividades estão disponíveis, incluindo caminhadas na natureza, retiros de bem-estar e retiros no Centro de Interpretação",
-      "Apenas atividades ao ar livre estão disponíveis",
-      "Nenhuma atividade está disponível"
+      "Só existem atividades de team building",
+      "Existe uma gama de atividades, incluindo caminhadas na natureza, escapadinhas de bem-estar e retiros no Centro de Interpretação",
+      "Só existem atividades ao ar livre",
+      "Não existem atividades"
      ],
-     "q": "Uma empresa está planejando um retiro corporativo no Craveiral e quer saber quais atividades estão disponíveis. O que deve dizer a eles?",
-     "why": "Uma variedade de atividades estão disponíveis, incluindo caminhadas na natureza, retiros de bem-estar e retiros no Centro de Interpretação, para atender às diferentes necessidades e preferências das empresas."
+     "q": "Uma empresa está a planear um retiro no Craveiral e quer saber que atividades existem. O que se lhe deve dizer?",
+     "why": "Existe uma gama de atividades, incluindo caminhadas na natureza, escapadinhas de bem-estar e retiros no Centro de Interpretação, para responder às diferentes necessidades e preferências de cada empresa."
     },
     "t0": 186,
     "type": "scenario",

@@ -18,12 +18,12 @@
     "pt": {
      "opts": [
       "Formal e profissional",
-      "Calmo, quente e sem pressa",
-      "Entusiástico e promocional",
-      "Escrito e ensaiado"
+      "Calmo, caloroso e sem pressa",
+      "Entusiasta e promocional",
+      "Decorado e ensaiado"
      ],
-     "q": "Que tom deve transmitir a voz Craveiral quando interage com os hóspedes?",
-     "why": "A voz Craveiral deve transmitir um tom que é calmo, quente e sem pressa, como o local em si."
+     "q": "Que tom deve ter a voz do Craveiral nas interações com os hóspedes?",
+     "why": "A voz do Craveiral deve ter um tom calmo, caloroso e sem pressa, como o próprio lugar."
     },
     "t0": 29,
     "type": "recall",
@@ -47,13 +47,13 @@
     },
     "pt": {
      "opts": [
-      "Diga-o da maneira como diria a um amigo cujos pais estão visitando a sua casa",
-      "Use um script ou uma fórmula",
-      "Seja formal e profissional",
-      "Evite dizê-lo completamente"
+      "Dizê-lo como diria aos pais de um amigo que o visitam em casa",
+      "Usar um guião ou uma fórmula",
+      "Ser formal e profissional",
+      "Evitar dizê-lo de todo"
      ],
-     "q": "Como deve dizer algo a um hóspede se não tiver certeza de como expressá-lo?",
-     "why": "Se não tiver certeza de como dizer algo a um hóspede, deve dizê-lo da maneira como diria a um amigo cujos pais estão visitando a sua casa."
+     "q": "Como se deve dizer algo a um hóspede quando não se tem a certeza de como o formular?",
+     "why": "Quando não se tem a certeza de como dizer algo a um hóspede, deve-se dizê-lo como diria aos pais de um amigo que o visitam em casa."
     },
     "t0": 55,
     "type": "recall",
@@ -77,13 +77,13 @@
     },
     "pt": {
      "opts": [
-      "Use gramática complexa e vocabulário para impressioná-los",
-      "Fale rapidamente e de forma eficiente para transmitir a mensagem",
-      "Mantenha o inglês simples e quente, e foque na boa vontade clara",
-      "Evite falar com eles completamente"
+      "Usar gramática e vocabulário complexos para impressionar",
+      "Falar depressa e de forma eficiente para passar a mensagem",
+      "Manter o inglês simples e caloroso, com uma boa vontade clara",
+      "Evitar falar com eles de todo"
      ],
-     "q": "O que deve fazer quando fala com hóspedes internacionais que podem não falar inglês perfeito?",
-     "why": "Quando fala com hóspedes internacionais, deve manter o inglês simples e quente, e foque na boa vontade clara."
+     "q": "O que se deve fazer ao falar com hóspedes internacionais que podem não falar inglês na perfeição?",
+     "why": "Com hóspedes internacionais, deve-se manter o inglês simples e caloroso e apostar numa boa vontade clara."
     },
     "t0": 108,
     "type": "application",
@@ -107,13 +107,13 @@
     },
     "pt": {
      "opts": [
-      "Ensine-lhes frases complexas em português e gramática",
-      "Compartilhe um pouco de português quando o momento convida, como frases comuns como 'obrigado' e 'bom dia'",
-      "Evite falar com eles sobre a cultura local completamente",
-      "Apenas se concentre em falar com eles em inglês"
+      "Ensinar-lhes frases e gramática complexas de português",
+      "Partilhar um pouco de português quando o momento o pede, com expressões simples como «obrigado» e «bom dia»",
+      "Evitar falar com eles sobre a cultura local",
+      "Falar com eles apenas em inglês"
      ],
-     "q": "O que pode fazer para fazer com que os hóspedes internacionais se sintam mais bem-vindos e conectados à cultura local?",
-     "why": "Pode fazer com que os hóspedes internacionais se sintam mais bem-vindos e conectados à cultura local compartilhando um pouco de português quando o momento convida."
+     "q": "O que se pode fazer para que os hóspedes internacionais se sintam mais bem-vindos e ligados à cultura local?",
+     "why": "Partilhar um pouco de português quando o momento o pede ajuda os hóspedes internacionais a sentir-se mais bem-vindos e ligados à cultura local."
     },
     "t0": 159,
     "type": "application",
@@ -137,13 +137,13 @@
     },
     "pt": {
      "opts": [
-      "Tente forçá-los a falar e ser mais sociável",
-      "Respeite os limites deles e dê-lhes espaço",
-      "Ignore-os e foque em outros hóspedes",
-      "Tanto tente engajá-los em conversa quanto respeite os limites deles, calibrado às suas necessidades"
+      "Tentar forçá-lo a falar e a ser mais sociável",
+      "Respeitar os seus limites e dar-lhe espaço",
+      "Ignorá-lo e concentrar-se noutros hóspedes",
+      "Tentar envolvê-lo na conversa e, ao mesmo tempo, respeitar os seus limites, ajustando-se ao que precisa"
      ],
-     "q": "Um hóspede se aproxima de você e parece hesitante em se engajar em conversa. O que deve fazer?",
-     "why": "Deve tanto tentar engajá-los em conversa quanto respeite os limites deles, calibrado às suas necessidades, pois alguns hóspedes podem querer conversa enquanto outros podem querer eficiência e privacidade."
+     "q": "Um hóspede aproxima-se, mas parece pouco à vontade para conversar. O que se deve fazer?",
+     "why": "Deve-se tentar envolvê-lo na conversa e respeitar os seus limites, ajustando-se ao que precisa: há hóspedes que querem conversa e outros que preferem eficiência e privacidade."
     },
     "t0": 184,
     "type": "scenario",
@@ -167,13 +167,13 @@
     },
     "pt": {
      "opts": [
-      "Use um tom quente e concreto, com frases curtas",
-      "Use um tom formal e profissional, com gramática complexa e vocabulário",
-      "Use um tom promocional e orientado às vendas, com ênfase em comodidades e recursos",
-      "Evite escrever o e-mail completamente e use um modelo ou resposta automatizada"
+      "Com um tom caloroso e concreto, em frases curtas",
+      "Com um tom formal e profissional, com gramática e vocabulário complexos",
+      "Com um tom promocional e comercial, a destacar comodidades e características",
+      "Não escrever o e-mail e usar antes um modelo ou uma resposta automática"
      ],
-     "q": "Está escrevendo um e-mail a um hóspede que reservou uma estadia na quinta. Como deve escrever o e-mail?",
-     "why": "Deve usar um tom quente e concreto, com frases curtas, quando escreve um e-mail a um hóspede, pois isso reflete a voz e os valores Craveiral."
+     "q": "Está a escrever um e-mail a um hóspede que reservou uma estadia na quinta. Como deve escrevê-lo?",
+     "why": "Num e-mail a um hóspede, deve-se usar um tom caloroso e concreto, em frases curtas, porque isso reflete a voz e os valores do Craveiral."
     },
     "t0": 212,
     "type": "scenario",
@@ -190,22 +190,22 @@
     "en": {
      "opts": [
       "Make all the decisions yourself",
-      "Correct others' decisions rather than making all the decisions",
+      "Make the call yourself; your manager would rather correct a decision than make them all",
       "Wait for permission for every judgment call",
       "Follow the org chart strictly"
      ],
-     "q": "What is the first principle of working together according to the trainer?",
-     "why": "The trainer prefers to correct decisions rather than making all of them to encourage autonomy and decision-making among team members."
+     "q": "What is the first principle of working together, according to your manager?",
+     "why": "Your manager would rather correct your decision than make all the decisions, so that the people on the ground decide with autonomy."
     },
     "pt": {
      "opts": [
-      "Tomar todas as decisões sozinho",
-      "Corrigir as decisões dos outros em vez de tomar todas as decisões",
-      "Aguardar permissão para cada decisão",
+      "Tomar todas as decisões por conta própria",
+      "Decidir por si; o seu responsável prefere corrigir uma decisão a tomá-las todas",
+      "Esperar autorização para cada decisão",
       "Seguir rigorosamente o organograma"
      ],
-     "q": "Qual é o primeiro princípio de trabalho em equipe segundo o formador?",
-     "why": "O formador prefere corrigir decisões em vez de tomar todas para encorajar a autonomia e a tomada de decisões entre os membros da equipa."
+     "q": "Qual é o primeiro princípio do trabalho em equipa, segundo o seu responsável?",
+     "why": "O seu responsável prefere corrigir uma decisão a tomar todas as decisões, para que quem está no terreno decida com autonomia."
     },
     "t0": 52,
     "type": "recall",
@@ -219,23 +219,23 @@
     "a": 1,
     "en": {
      "opts": [
-      "The trainer will punish team members for generous decisions",
-      "The trainer will never punish team members for generous decisions made in good faith",
-      "The trainer will only punish team members for decisions that cost money",
-      "The trainer will punish team members for decisions that are not approved by a manager"
+      "Your manager will punish team members for generous decisions",
+      "Your manager will never punish team members for generous decisions made in good faith",
+      "Your manager will only punish team members for decisions that cost money",
+      "Your manager will punish team members for decisions that were not approved in advance"
      ],
-     "q": "What is the trainer's stance on punishing team members for generous decisions made in good faith?",
-     "why": "The trainer will never punish team members for generous decisions made in good faith to encourage a culture of hospitality and trust."
+     "q": "What is your manager's stance on punishing team members for generous decisions made in good faith?",
+     "why": "Your manager will never punish anyone for a generous decision made in good faith for a guest, to encourage a culture of hospitality and trust."
     },
     "pt": {
      "opts": [
-      "O formador punirá membros da equipa por decisões generosas",
-      "O formador nunca punirá membros da equipa por decisões generosas tomadas de boa fé",
-      "O formador só punirá membros da equipa por decisões que custam dinheiro",
-      "O formador punirá membros da equipa por decisões que não são aprovadas por um gestor"
+      "O seu responsável castiga membros da equipa por decisões generosas",
+      "O seu responsável nunca castigará ninguém por decisões generosas tomadas de boa-fé",
+      "O seu responsável só castiga decisões que custam dinheiro",
+      "O seu responsável castiga decisões que não foram aprovadas previamente"
      ],
-     "q": "Qual é a posição do formador em relação a punir membros da equipa por decisões generosas tomadas de boa fé?",
-     "why": "O formador nunca punirá membros da equipa por decisões generosas tomadas de boa fé para encorajar uma cultura de hospitalidade e confiança."
+     "q": "Qual é a posição do seu responsável sobre castigar membros da equipa por decisões generosas tomadas de boa-fé?",
+     "why": "O seu responsável nunca castigará ninguém por uma decisão generosa tomada de boa-fé por um hóspede, para incentivar uma cultura de hospitalidade e confiança."
     },
     "t0": 105,
     "type": "recall",
@@ -251,7 +251,7 @@
      "opts": [
       "Wait for permission from a manager",
       "Solve the problem using the company values as a compass",
-      "Call the trainer for guidance",
+      "Call your manager for guidance",
       "Do nothing and let the guest handle it"
      ],
      "q": "What should a team member do when a guest is in front of them and something needs to be solved?",
@@ -259,13 +259,13 @@
     },
     "pt": {
      "opts": [
-      "Aguardar permissão de um gestor",
-      "Resolver o problema usando os valores da empresa como bússola",
-      "Ligar para o formador para orientação",
-      "Não fazer nada e deixar que o hóspede resolva"
+      "Esperar autorização de um responsável",
+      "Resolver o problema, com os valores da empresa como bússola",
+      "Ligar ao seu responsável a pedir orientação",
+      "Não fazer nada e deixar o hóspede resolver"
      ],
-     "q": "O que deve fazer um membro da equipa quando um hóspede está na sua frente e algo precisa ser resolvido?",
-     "why": "O membro da equipa deve resolver o problema usando os valores da empresa como bússola para fornecer boa hospitalidade e serviço."
+     "q": "O que deve fazer um membro da equipa quando tem um hóspede à frente e há algo para resolver?",
+     "why": "Deve resolver o problema com os valores da empresa como bússola, para oferecer boa hospitalidade e bom serviço."
     },
     "t0": 79,
     "type": "application",
@@ -280,22 +280,22 @@
     "en": {
      "opts": [
       "Hide the mistake until it becomes a crisis",
-      "Bring the problem to the trainer while it's small",
+      "Bring the problem to your manager while it's small",
       "Try to fix the mistake on their own without telling anyone",
-      "Tell a colleague but not the trainer"
+      "Tell a colleague but not your manager"
      ],
      "q": "What should a team member do when they catch a mistake early on?",
-     "why": "The team member should bring the problem to the trainer while it's small to prevent it from becoming a crisis and to maintain trust."
+     "why": "The team member should bring the problem to their manager while it's small to prevent it from becoming a crisis and to maintain trust."
     },
     "pt": {
      "opts": [
-      "Esconder o erro até que se torne uma crise",
-      "Levar o problema ao formador enquanto ainda é pequeno",
-      "Tentar corrigir o erro sozinho sem dizer a ninguém",
-      "Dizer a um colega mas não ao formador"
+      "Esconder o erro até se tornar uma crise",
+      "Levar o problema ao seu responsável enquanto ainda é pequeno",
+      "Tentar corrigir o erro sozinho, sem dizer nada a ninguém",
+      "Contar a um colega, mas não ao seu responsável"
      ],
-     "q": "O que deve fazer um membro da equipa quando detecta um erro precocemente?",
-     "why": "O membro da equipa deve levar o problema ao formador enquanto ainda é pequeno para evitar que se torne uma crise e para manter a confiança."
+     "q": "O que deve fazer um membro da equipa quando deteta um erro cedo?",
+     "why": "Deve levar o problema ao seu responsável enquanto ainda é pequeno, para evitar que se torne uma crise e para manter a confiança."
     },
     "t0": 131,
     "type": "application",
@@ -309,23 +309,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "Speak up and tell the trainer about the mistake",
-      "Keep quiet and let the trainer figure it out",
-      "Tell a colleague but not the trainer",
+      "Speak up and tell their manager about the mistake",
+      "Keep quiet and let their manager figure it out",
+      "Tell a colleague but not their manager",
       "Wait until the mistake becomes a crisis before speaking up"
      ],
-     "q": "A team member notices that the trainer has made a mistake in a decision. What should they do?",
-     "why": "The team member should speak up and tell the trainer about the mistake to maintain trust and respect."
+     "q": "A team member notices that their manager has made a mistake in a decision. What should they do?",
+     "why": "The team member should speak up and tell their manager about the mistake to maintain trust and respect."
     },
     "pt": {
      "opts": [
-      "Falar e dizer ao formador sobre o erro",
-      "Manter-se calado e deixar que o formador descubra",
-      "Dizer a um colega mas não ao formador",
-      "Aguardar até que o erro se torne uma crise antes de falar"
+      "Falar e avisar o seu responsável do erro",
+      "Ficar calado e deixar que o responsável dê por isso",
+      "Contar a um colega, mas não ao responsável",
+      "Esperar que o erro se torne uma crise antes de falar"
      ],
-     "q": "Um membro da equipa nota que o formador cometeu um erro em uma decisão. O que deve fazer?",
-     "why": "O membro da equipa deve falar e dizer ao formador sobre o erro para manter a confiança e o respeito."
+     "q": "Um membro da equipa repara que o seu responsável cometeu um erro numa decisão. O que deve fazer?",
+     "why": "Deve falar e avisar o seu responsável do erro, para manter a confiança e o respeito."
     },
     "t0": 156,
     "type": "scenario",
@@ -344,18 +344,18 @@
       "Ignore the standards and do their own thing",
       "Complain to colleagues about the high standards"
      ],
-     "q": "A team member is struggling to meet the high standards set by the trainer. What should they do?",
+     "q": "A team member is struggling to meet the high standards set by their manager. What should they do?",
      "why": "The team member should try to meet the standards and ask for help if needed to maintain respect for themselves, their colleagues, and the guests."
     },
     "pt": {
      "opts": [
-      "Tentar atingir os padrões e pedir ajuda se necessário",
-      "Baixar os seus próprios padrões para torná-los mais fáceis",
+      "Esforçar-se por cumprir os padrões e pedir ajuda se for preciso",
+      "Baixar os próprios padrões para facilitar",
       "Ignorar os padrões e fazer as coisas à sua maneira",
-      "Queixar-se a colegas sobre os padrões elevados"
+      "Queixar-se aos colegas dos padrões elevados"
      ],
-     "q": "Um membro da equipa está a ter dificuldades em atingir os padrões elevados estabelecidos pelo formador. O que deve fazer?",
-     "why": "O membro da equipa deve tentar atingir os padrões e pedir ajuda se necessário para manter o respeito por si mesmo, pelos colegas e pelos hóspedes."
+     "q": "Um membro da equipa está a ter dificuldade em cumprir os padrões elevados definidos pelo seu responsável. O que deve fazer?",
+     "why": "Deve esforçar-se por cumprir os padrões e pedir ajuda se for preciso, por respeito por si, pelos colegas e pelos hóspedes."
     },
     "t0": 184,
     "type": "scenario",

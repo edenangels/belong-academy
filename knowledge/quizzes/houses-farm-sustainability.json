@@ -22,8 +22,8 @@
       "20%",
       "30%"
      ],
-     "q": "Qual percentagem da terra em Craveiral está construída?",
-     "why": "A resposta correcta é 4% porque o resto da terra é utilizado para a quinta em funcionamento, pomares, jardins de vegetais, animais e pinhal."
+     "q": "Que percentagem do terreno do Craveiral está construída?",
+     "why": "A resposta correta é 4%, porque o resto do terreno é a quinta em funcionamento, os pomares, as hortas, os animais e o pinhal."
     },
     "t0": 29,
     "type": "recall",
@@ -49,11 +49,11 @@
      "opts": [
       "Sustentabilidade, artesanato local e ar condicionado",
       "Sustentabilidade, artesanato local e homenagem ao património português",
-      "Comodidades orgânicas, ar condicionado e terraço privado",
-      "Cozinha equipada, comodidades orgânicas, ar condicionado e terraço privado"
+      "Produtos de higiene biológicos, ar condicionado e terraço privado",
+      "Cozinha bem equipada, produtos de higiene biológicos, ar condicionado e terraço privado"
      ],
-     "q": "Que comodidades são partilhadas por todas as unidades em Craveiral?",
-     "why": "A resposta correcta é cozinha equipada, comodidades orgânicas, ar condicionado e terraço privado porque estas são as comodidades mencionadas como sendo partilhadas por todas as unidades."
+     "q": "Que comodidades são comuns a todas as unidades do Craveiral?",
+     "why": "A resposta correta é cozinha bem equipada, produtos de higiene biológicos, ar condicionado e terraço privado, porque são estas as comodidades referidas como comuns a todas as unidades."
     },
     "t0": 57,
     "type": "recall",
@@ -77,13 +77,13 @@
     },
     "pt": {
      "opts": [
-      "Fornecer uma resposta vaga para evitar sobrecarregar o hóspede",
-      "Oferecer para mostrar a casa ao hóspede em pessoa",
-      "Responder com precisão, incluindo detalhes sobre a cama de sofa e o segundo quarto",
-      "Dizer ao hóspede para verificar o website para mais informações"
+      "Dar uma resposta vaga para não sobrecarregar o hóspede",
+      "Propor mostrar a casa ao hóspede pessoalmente",
+      "Responder com precisão, incluindo detalhes sobre o sofá-cama e o segundo quarto",
+      "Dizer ao hóspede que consulte o site para mais informações"
      ],
-     "q": "O que deve fazer um membro da equipa quando um hóspede pergunta sobre a capacidade de uma casa de dois quartos?",
-     "why": "A resposta correcta é responder com precisão, incluindo detalhes sobre a cama de sofa e o segundo quarto, porque a confiança e a precisão vendem e criam confiança com o hóspede."
+     "q": "O que deve fazer um membro da equipa quando um hóspede pergunta pela capacidade de uma casa de dois quartos?",
+     "why": "A resposta correta é responder com precisão, incluindo detalhes sobre o sofá-cama e o segundo quarto, porque a segurança e a precisão vendem e criam confiança com o hóspede."
     },
     "t0": 117,
     "type": "application",
@@ -108,12 +108,12 @@
     "pt": {
      "opts": [
       "Dizer ao hóspede que a casa não é adequada para famílias com crianças",
-      "Oferecer para fornecer camas ou berços extra",
-      "Explicar a flexibilidade da cama de sofa na sala de estar e as opções para o segundo quarto",
-      "Sugerir que o hóspede reserve um tipo diferente de alojamento"
+      "Propor camas ou berços extra",
+      "Explicar a flexibilidade do sofá-cama na sala e as opções para o segundo quarto",
+      "Sugerir que o hóspede reserve outro tipo de alojamento"
      ],
-     "q": "Como deve responder um membro da equipa a uma pergunta de um hóspede sobre a flexibilidade de uma casa de dois quartos para uma família com crianças?",
-     "why": "A resposta correcta é explicar a flexibilidade da cama de sofa na sala de estar e as opções para o segundo quarto, porque isso cria confiança e confiabilidade com o hóspede."
+     "q": "Como deve um membro da equipa responder a um hóspede que pergunta se uma casa de dois quartos é flexível para uma família com crianças?",
+     "why": "A resposta correta é explicar a flexibilidade do sofá-cama na sala e as opções para o segundo quarto, porque isso cria confiança e segurança junto do hóspede."
     },
     "t0": 146,
     "type": "application",
@@ -138,12 +138,12 @@
     "pt": {
      "opts": [
       "O deck de bem-estar",
-      "O centro de interpretação da natureza",
+      "O Centro de Interpretação da Natureza",
       "O ginásio",
       "O restaurante"
      ],
-     "q": "Um hóspede está à procura de um local para realizar um retiro de yoga para 50 pessoas. Que faculdade você recomendaria em Craveiral?",
-     "why": "A resposta correcta é o centro de interpretação da natureza porque recebe yoga duas vezes por semana e pode acomodar até 50 pessoas para um banquete ou 80 em pé."
+     "q": "Um hóspede procura um espaço para um retiro de yoga para 50 pessoas. Que espaço do Craveiral se deve recomendar?",
+     "why": "A resposta correta é o Centro de Interpretação da Natureza, que recebe yoga duas vezes por semana e tem capacidade para 50 pessoas sentadas em banquete ou 80 em pé."
     },
     "t0": 174,
     "type": "scenario",
@@ -167,13 +167,13 @@
     },
     "pt": {
      "opts": [
-      "Sim, a área de jogos pode acomodar eventos até 300 pessoas",
-      "Sim, o terraço com as fogueiras pode acomodar eventos até 300 pessoas",
-      "Não, Craveiral não tem um local que possa acomodar 300 pessoas",
-      "Talvez, depende da época do ano e da disponibilidade"
+      "Sim, a área de jogos pode acolher eventos até 300 pessoas",
+      "Sim, o terraço com as braseiras pode acolher eventos até 300 pessoas",
+      "Não, o Craveiral não tem nenhum espaço para 300 pessoas",
+      "Talvez; depende da época do ano e da disponibilidade"
      ],
-     "q": "Um hóspede está a planear uma receção de casamento para 300 pessoas e quer saber se Craveiral tem um local adequado. O que você lhes diria?",
-     "why": "A resposta correcta é sim, a área de jogos pode acomodar eventos até 300 pessoas, porque é mencionado como sendo capaz de acomodar eventos até 300 pessoas no estilo banquete."
+     "q": "Um hóspede está a planear uma receção de casamento para 300 pessoas e quer saber se o Craveiral tem um espaço adequado. O que se lhe deve dizer?",
+     "why": "A resposta correta é sim: a área de jogos é referida como tendo capacidade para eventos até 300 pessoas em formato banquete."
     },
     "t0": 200,
     "type": "scenario",
@@ -199,13 +199,13 @@
     },
     "pt": {
      "opts": [
-      "Porque é uma utilidade",
+      "Porque é um serviço básico",
       "Porque a região vive com a seca como vizinha",
-      "Porque é um capítulo num relatório",
-      "Porque é uma pequena ação física"
+      "Porque é um capítulo de um relatório",
+      "Porque é um pequeno gesto físico"
      ],
-     "q": "Por que a reciclagem de água é importante em Craveiral?",
-     "why": "A reciclagem de água é importante porque a região vive com a seca como vizinha."
+     "q": "Porque é que a reciclagem da água é importante no Craveiral?",
+     "why": "A reciclagem da água é importante porque a região vive com a seca como vizinha."
     },
     "t0": 29,
     "type": "recall",
@@ -232,10 +232,10 @@
       "Ignorá-las",
       "Assinalá-las como desperdício",
       "Desligá-las",
-      "Relatar ao equipo de housekeeping"
+      "Comunicá-las à equipa de andares"
      ],
-     "q": "O que deve fazer quando vê luzes em passeios e áreas comuns que não estão no horário?",
-     "why": "Deve assinalá-las como desperdício quando vê luzes em passeios e áreas comuns que não estão no horário."
+     "q": "O que se deve fazer ao ver luzes acesas nos passadiços e nas zonas comuns fora do horário previsto?",
+     "why": "Ao ver luzes acesas nos passadiços e nas zonas comuns fora do horário, deve-se assinalá-las como desperdício."
     },
     "t0": 80,
     "type": "recall",
@@ -259,13 +259,13 @@
     },
     "pt": {
      "opts": [
-      "Relatar no dia seguinte",
-      "Relatar na hora em que a vê",
+      "Comunicá-la no dia seguinte",
+      "Comunicá-la na mesma hora em que a vê",
       "Ignorá-la",
-      "Consertá-la sozinho"
+      "Repará-la por conta própria"
      ],
-     "q": "O que deve fazer se vê uma fuga na propriedade?",
-     "why": "Deve relatar toda a fuga na hora em que a vê."
+     "q": "O que se deve fazer ao ver uma fuga de água na propriedade?",
+     "why": "Todas as fugas devem ser comunicadas na mesma hora em que são vistas."
     },
     "t0": 29,
     "type": "application",
@@ -291,11 +291,11 @@
      "opts": [
       "Deitá-los fora",
       "Reciclá-los",
-      "Compostá-los",
+      "Pô-los na compostagem",
       "Doá-los"
      ],
      "q": "O que deve a equipa da cozinha fazer com os restos orgânicos?",
-     "why": "A equipa da cozinha deve compostar os restos orgânicos."
+     "why": "A equipa da cozinha deve pôr os restos orgânicos na compostagem."
     },
     "t0": 138,
     "type": "application",
@@ -319,13 +319,13 @@
     },
     "pt": {
      "opts": [
-      "O preço mais baixo apenas",
-      "O impacto ambiental apenas",
+      "Apenas o preço mais baixo",
+      "Apenas o impacto ambiental",
       "O impacto no território local e a sustentabilidade financeira",
-      "A qualidade do produto apenas"
+      "Apenas a qualidade do produto"
      ],
-     "q": "Um fornecedor está a oferecer um produto a um preço mais baixo, mas não é de um produtor local. O que deve considerar?",
-     "why": "Deve considerar o impacto no território local e a sustentabilidade financeira."
+     "q": "Um fornecedor oferece um produto mais barato, mas que não vem de um produtor local. O que se deve ter em conta?",
+     "why": "Deve-se ter em conta o impacto no território local e a sustentabilidade financeira."
     },
     "t0": 163,
     "type": "scenario",
@@ -349,13 +349,13 @@
     },
     "pt": {
      "opts": [
-      "Deitá-la fora no lixo regular",
+      "Deitá-la no lixo indiferenciado",
       "Reciclá-la",
-      "Compostá-la",
+      "Pô-la na compostagem",
       "Doá-la"
      ],
      "q": "Está prestes a deitar fora uma garrafa de vidro. O que deve fazer em vez disso?",
-     "why": "Deve reciclar a garrafa de vidro em vez de deitá-la fora."
+     "why": "A garrafa de vidro deve ir para a reciclagem, em vez de ir para o lixo."
     },
     "t0": 106,
     "type": "scenario",
