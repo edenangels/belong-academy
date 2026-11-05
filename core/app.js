@@ -767,7 +767,7 @@ function renderHome() {
       <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
     <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => r.poster ? `
       <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${reelLen(r)}">
-        <img src="${esc(r.poster)}" alt="" loading="lazy" decoding="async">
+        <img data-src="${esc(r.poster)}" alt="" decoding="async">
         <span class="rt-time">${reelLen(r)}</span>
         ${reelPending(r) ? `<span class="rt-pend">${t('reel_pending')}</span>` : ''}
         <span class="rt-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
@@ -5039,7 +5039,10 @@ function renderNow() {
   animateCounters();
 }
 /* covers download only as their cards approach the viewport (~1.4MB saved on Library) */
-const loadBg = el => { el.style.backgroundImage = `url('${el.dataset.bg}')`; el.removeAttribute('data-bg'); };
+const loadBg = el => {
+  if (el.dataset.src) { el.src = el.dataset.src; el.removeAttribute('data-src'); return; }   /* reel-rail posters */
+  el.style.backgroundImage = `url('${el.dataset.bg}')`; el.removeAttribute('data-bg');
+};
 let ioEverFired = false;
 /* Scroll reveal (Dream Motion cadence). The hidden class is applied by THIS
    script, never in the markup — if JS fails or the observer is unavailable,
@@ -5113,11 +5116,15 @@ function lazyBackgrounds() {
   const els = [...document.querySelectorAll('.thumb[data-bg]')];
   els.slice(0, 8).forEach(loadBg);                 /* above the fold: instant */
   const rest = els.slice(8);
-  if (!bgObserver) { rest.forEach(loadBg); return; }
+  if (!bgObserver) { rest.forEach(loadBg); document.querySelectorAll('.reel-thumb img[data-src]').forEach(loadBg); return; }
   rest.forEach(el => bgObserver.observe(el));
+  /* Home reel-rail posters sit ~2 screens down. Native loading="lazy" fetches
+     anything within ~2500px on a slow link, so on a phone they downloaded with
+     the hero and slowed it; here they load 400px before they scroll in. */
+  document.querySelectorAll('.reel-thumb img[data-src]').forEach(el => bgObserver.observe(el));
   clearTimeout(lazyBackgrounds._t);
   lazyBackgrounds._t = setTimeout(() => {          /* observer broken? load everything (old behavior) */
-    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg]').forEach(loadBg);
+    if (!ioEverFired) document.querySelectorAll('.thumb[data-bg], .reel-thumb img[data-src]').forEach(loadBg);
   }, 2500);
 }
 /* Deep link from outside the app — LandFlow's brain sends people here.
