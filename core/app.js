@@ -9159,7 +9159,10 @@ function applyPendingJoin() {
 /* the knowledge graph (+ tags) feeds reel hand-offs, lesson "beside" shorts and
    related modules — none of it is on the first screen. Fetched once the page
    has loaded, so on a phone it no longer takes a connection from the hero. */
-const _kickGraph = () => loadGraph().then(() => { if (GRAPH) render(); });
+/* Home's markup does not use the graph, and re-rendering it replays the hero's entrance animation
+   about a second after first paint; other screens use it (reel hand-offs, related modules) and refresh. */
+const _onHome = () => { const h = (location.hash || '#/home').split('/')[1] || 'home'; return h === 'home'; };
+const _kickGraph = () => loadGraph().then(() => { if (GRAPH && !_onHome()) render(); });
 if (document.readyState === 'complete') setTimeout(_kickGraph, 0);
 else addEventListener('load', () => setTimeout(_kickGraph, 0), { once: true });
 if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {

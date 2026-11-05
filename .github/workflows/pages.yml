@@ -28,6 +28,9 @@ jobs:
           npx --yes esbuild@0.24.2 core/app.js  --minify --charset=utf8 --outfile=core/app.js  --allow-overwrite
           npx --yes esbuild@0.24.2 brands/belong/content.js --minify --charset=utf8 --outfile=brands/belong/content.js --allow-overwrite
           npx --yes esbuild@0.24.2 data.js --minify --charset=utf8 --outfile=data.js --allow-overwrite
+          npx --yes esbuild@0.24.2 core/curriculum.js --minify --charset=utf8 --outfile=core/curriculum.js --allow-overwrite
+          npx --yes esbuild@0.24.2 core/team.js --minify --charset=utf8 --outfile=core/team.js --allow-overwrite
+          npx --yes esbuild@0.24.2 core/localdb.js --minify --charset=utf8 --outfile=core/localdb.js --allow-overwrite
           npx --yes esbuild@0.24.2 core/auth.js --minify --charset=utf8 --format=esm --outfile=core/auth.js --allow-overwrite
           npx --yes esbuild@0.24.2 sw.js   --minify --charset=utf8 --outfile=sw.js   --allow-overwrite
           npx --yes esbuild@0.24.2 core/styles.css --minify --outfile=core/styles.css --allow-overwrite
