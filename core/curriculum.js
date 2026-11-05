@@ -374,7 +374,7 @@
       source: m.source, title: mTitle(m), hook: mOutcome(m),
       count: `${st.lessons} ${st.lessons === 1 ? L('lesson_one') : L('lessons_lc')}`, time: `${L('est_time')} ${fmtMins(st.mins)}`,
       pct: st.pct, progress: `${L('module')} ${st.pct}% · ${fmtMins(st.minsLeft)} ${L('left')}`,
-      eyebrow: `<span class="hero-eyebrow cur-hero-ctx">${L('course')}: ${esc(cTitle(co))} · ${L('module')} ${modulesOfCourse(co.id).indexOf(m) + 1} ${t('of')} ${modulesOfCourse(co.id).length}</span>`,
+      eyebrow: `<span class="hero-eyebrow cur-hero-ctx">${esc(cTitle(co))} · ${L('module')} ${modulesOfCourse(co.id).indexOf(m) + 1} ${t('of')} ${modulesOfCourse(co.id).length}</span>`,
       play: `<button class="btn btn-primary" data-action="play" data-id="${m.source}" data-mod="${n.i}">▶&nbsp; ${st.started ? L('continue_lesson') : L('start_lesson')}: ${esc(lTitle(m.source, n.i))}</button>`,
       details: `<button class="btn btn-glass" data-action="goto" data-route="#/module/${m.id}">${L('module')}</button>`
     };

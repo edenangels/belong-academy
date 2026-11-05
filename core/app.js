@@ -761,9 +761,9 @@ function renderHome() {
     <div class="rail-head"><h2>${t('reel_h')}</h2>
       <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
     <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => r.poster ? `
-      <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${r.seconds || 30}s">
+      <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${reelLen(r)}">
         <img src="${esc(r.poster)}" alt="" loading="lazy" decoding="async">
-        <span class="rt-time">${r.seconds || 30}s</span>
+        <span class="rt-time">${reelLen(r)}</span>
         ${reelPending(r) ? `<span class="rt-pend">${t('reel_pending')}</span>` : ''}
         <span class="rt-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
         <span class="rt-title">${esc(reelField(r.title))}</span>
@@ -6740,6 +6740,8 @@ const reelsAll = () => canCurateReels() ? QW_ALL() : qwApproved();
 /* pending is only ever SHOWN to someone who can act on it */
 const reelPending = r => canCurateReels() && !qwPublished(r) && qwState().approved.indexOf(r.id) < 0;
 const reelField = v => eduField(v);
+/* a reel's length as video apps show it: 0:29 */
+const reelLen = r => { const n = Math.round(r.seconds || 30); return Math.floor(n / 60) + ':' + String(n % 60).padStart(2, '0'); };
 function reelPoster(r, showHook) {
   const tone = toneOf(r.theme || r.id);   /* same picker as the rail chip, so a reel keeps one colour in both places */
   const img = r.poster ? ` style="background-image:url('${esc(r.poster)}')"` : '';
@@ -6776,7 +6778,7 @@ function reelSlideHTML(r, i) {
     </div>
     <div class="reel-copy">
       ${ph ? `<span class="reel-ph">${t('reel_placeholder')}</span>` : ''}
-      <div class="reel-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${r.seconds || 30}s${r.theme ? ` &middot; ${esc(r.theme)}` : ''}</div>
+      <div class="reel-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${reelLen(r)}${r.theme ? ` &middot; ${esc(r.theme)}` : ''}</div>
       <h2>${esc(reelField(r.title))}</h2>
       ${ph ? '' : `<p>${esc(reelField(r.line))}</p>`}
       ${/* THE LESSON IN TEXT.

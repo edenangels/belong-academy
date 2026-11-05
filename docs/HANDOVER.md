@@ -1,6 +1,6 @@
 # Belong Academy — handover
 
-Branch `restructure-hierarchy` · release `bel101` · not yet published.
+Branch `restructure-hierarchy` · release `bel111` · not yet published.
 The content map, the rules and the migration details are in [CONTENT-MAP.md](CONTENT-MAP.md).
 
 ## What it is
@@ -25,6 +25,20 @@ The structure is **Academy → Courses → Modules → Lessons**:
 4. As admin: ☰ → **Team**. It shows people, what each is doing now, progress per course,
    scores against the 70 % pass mark, training hours and an activity feed. Click a person
    for their courses, lesson by lesson.
+
+## Reels
+
+- **What's there:** three ~30-second vertical reels from the Vimeo folder "Belong shorts":
+  - **Vision, animated** (published)
+  - **Vision, estate footage** (published)
+  - **Mission** (pending: only admins see it, marked "Pending review")
+- **Where they appear:** the Home "Reels" row shows them as thumbnails. Tapping one opens a
+  full-screen swipe feed at that reel, with sound, save, a short text version and the link
+  to the deeper lesson. One question rises at the end of each reel.
+- **Hours:** reels never credit training hours.
+- **To add one:** add an entry to `REELS` in `brands/belong/content.js`, with an MP4 and a
+  poster in `media/reels/`. There are two more Mission voice versions in the Vimeo folder if
+  a different voice is wanted.
 
 ## Settings that matter (`brands/belong/brand.js`)
 

@@ -5013,3 +5013,10 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
   .reel.has-ambient .reel-poster, .reel.has-ambient .reel-media { top: 12px; height: calc(100% - 24px); border-radius: 22px; overflow: hidden;
     box-shadow: 0 30px 80px -20px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.06); }
 }
+/* the length sits under the title: a top-corner pill covered the text burned into the reels' first frame */
+.reel-thumb .rt-title { bottom: 32px; }
+.reel-thumb .rt-time { top: auto; right: auto; left: 14px; bottom: 12px; padding: 0; background: none; backdrop-filter: none; -webkit-backdrop-filter: none;
+  color: rgba(255,255,255,.72); font-size: 11.5px; font-weight: 600; letter-spacing: .04em; }
+@media (max-width: 560px) { .reel-thumb .rt-title { bottom: 30px; } .reel-thumb .rt-time { left: 12px; bottom: 11px; } }
+/* hero context line over a photo: legible on any image (it was the dark accent on a busy picture) */
+.hero .cur-hero-ctx { color: color-mix(in srgb, var(--accent-2) 55%, #fff); text-shadow: 0 1px 2px rgba(0,0,0,.55), 0 0 18px rgba(0,0,0,.45); }
