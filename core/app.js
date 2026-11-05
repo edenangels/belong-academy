@@ -765,7 +765,7 @@ function renderHome() {
   ${reelsAll().length ? `<section class="rail-section reel-tease">
     <div class="rail-head"><h2>${t('reel_h')}</h2>
       <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
-    <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 8).map((r, i) => r.poster ? `
+    <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 12).map((r, i) => r.poster ? `
       <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${reelLen(r)}">
         <img data-src="${esc(r.poster)}" alt="" decoding="async">
         <span class="rt-time">${reelLen(r)}</span>

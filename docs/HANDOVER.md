@@ -28,17 +28,18 @@ The structure is **Academy → Courses → Modules → Lessons**:
 
 ## Reels
 
-- **What's there:** three ~30-second vertical reels from the Vimeo folder "Belong shorts":
-  - **Vision, animated** (published)
-  - **Vision, estate footage** (published)
-  - **Mission** (pending: only admins see it, marked "Pending review")
+- **What's there:** twelve ~30-second vertical reels. Reels 01–11 are the "Belong shorts"
+  series (Vimeo folder 31166999, female voice), one Belong idea each: Vision, Mission,
+  Sustainability, Simplicity, Comfort, Modernity, Freedom, Authenticity, Community,
+  Creativity, Wellbeing. The twelfth is the earlier Vision narration over estate footage,
+  kept at the end as a bonus. All are approved, so every learner sees them.
 - **Where they appear:** the Home "Reels" row shows them as thumbnails. Tapping one opens a
   full-screen swipe feed at that reel, with sound, save, a short text version and the link
   to the deeper lesson. One question rises at the end of each reel.
 - **Hours:** reels never credit training hours.
 - **To add one:** add an entry to `REELS` in `brands/belong/content.js`, with an MP4 and a
-  poster in `media/reels/`. There are two more Mission voice versions in the Vimeo folder if
-  a different voice is wanted.
+  poster in `media/reels/` (720×1280 H.264 around 800 kbps, +faststart; poster is a WebP
+  frame that shows the reel's opening caption).
 
 ## Speed (AutoResearch, 5 Nov 2026)
 
