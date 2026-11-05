@@ -163,7 +163,7 @@
 
   /* ---------- small renderers ---------- */
   const bar = pct => `<div class="cur-bar" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><i style="width:${pct}%"></i></div>`;
-  const posterStyle = (src, pos) => src ? ` data-bg="${src}"${pos ? ` style="background-position:${pos}"` : ''}` : '';
+  const posterStyle = (src, pos) => src ? ` data-bg="${(window.thumbOf || (x => x))(src)}"${pos ? ` style="background-position:${pos}"` : ''}` : '';
   const typeTag = (k, extra) => `<span class="cur-type">${L(k)}${extra ? ` · ${esc(extra)}` : ''}</span>`;
   function stateLabel(st) {
     if (st.eligible) return `<span class="cur-state ok">✓ ${L('cert_earned')}</span>`;
@@ -350,7 +350,7 @@
     const cur = pm.find(m => !moduleStats(m).complete);
     const steps = pm.map((m, k) => {
       const s = moduleStats(m), st = s.complete ? 'done' : m === cur ? 'current' : 'locked';
-      const tag = st === 'locked' ? 'div' : 'button', art = m.item.poster ? ` style="background-image:url('${m.item.poster}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"` : '';
+      const tag = st === 'locked' ? 'div' : 'button', art = m.item.poster ? ` style="background-image:url('${(window.thumbOf || (x => x))(m.item.poster)}')${m.item.posterPos ? `;background-position:${m.item.posterPos}` : ''}"` : '';
       const sub = st === 'done' ? L('completed') : st === 'current' ? `${s.pct}% · ${fmtMins(s.minsLeft)} ${L('left')}` : t('unlocks_after');
       return `<${tag} class="pstep ${st}${m.item.poster ? ' has-art' : ''}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}${art}>
         <span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>

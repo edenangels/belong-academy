@@ -16,6 +16,11 @@ const STATE_KEY = BRAND_SLUG + '-state-v2';
    it in core would have shown every returning learner the sign-in gate — a
    silent mass logout dressed as a cleanup. Default is <id>-auth-mode. */
 const MODE_KEY  = (window.BRAND && window.BRAND.authModeKey) || (BRAND_SLUG + '-auth-mode');
+/* Small-tile artwork. Path-row tiles and course cards draw a poster at about
+   300 css px, but the posters are 960-1280 px wide; media/covers/sm/ holds the
+   same pictures at 640 px (2x for a phone), built by scripts/build-thumbs.py.
+   Full-size posters stay for the course page and the hero. */
+const thumbOf = window.thumbOf = p => (typeof p === 'string' && /^media\/covers\/[^/]+\.webp$/.test(p) && !/-hero\.webp$/.test(p)) ? p.replace('media/covers/', 'media/covers/sm/') : p;
 let S;
 try { S = Object.assign({}, structuredClone(DEFAULT_STATE), JSON.parse(localStorage.getItem(STATE_KEY) || '{}')); }
 catch { S = structuredClone(DEFAULT_STATE); }
@@ -488,7 +493,7 @@ function cardHTML(c, opts = {}) {
       <button class="icon-btn" data-action="play" data-id="${c.id}" aria-label="Play ${ctitle(c)}" title="Play">▶</button>
       <button class="icon-btn ${inPath(c.id) ? 'in-path' : ''}" data-action="toggle-path" data-id="${c.id}" aria-label="${inPath(c.id) ? 'Remove from your path' : 'Add to your path'}" title="${inPath(c.id) ? 'In your path' : 'Add to path'}">${inPath(c.id) ? '✓' : '＋'}</button>
     </div>
-    <div class="thumb t-grad-${c.grad} ${c.poster ? 'has-poster' : ''}"${c.poster ? ` data-bg="${c.poster}"` : ''}>${c.poster ? '' : `<span class="big-icon">${svgIcon(c.icon)}</span>`}<div class="chip-row">${chips.join('')}</div>${bar}</div>
+    <div class="thumb t-grad-${c.grad} ${c.poster ? 'has-poster' : ''}"${c.poster ? ` data-bg="${thumbOf(c.poster)}"` : ''}>${c.poster ? '' : `<span class="big-icon">${svgIcon(c.icon)}</span>`}<div class="chip-row">${chips.join('')}</div>${bar}</div>
     <div class="card-body">
       <h3>${ctitle(c)}</h3>
       <p class="card-hook">${chook(c)}</p>
@@ -626,7 +631,7 @@ function pathRowHTML() {
        bullet — and this row is what a buyer sees before anything else. */
     /* unfilmed step: a nameless placeholder — the name on a card nobody can open reads as a broken promise (João, 14 Oct) */
     if (isComingSoon(c) && st !== 'done') return `<div class="pstep soon" aria-disabled="true"><span class="pstep-n">${n}</span><span class="pstep-t">${t('coming_soon')}</span></div>`;
-    const art = c.poster ? ` style="background-image:url('${c.poster}')"` : '';
+    const art = c.poster ? ` style="background-image:url('${thumbOf(c.poster)}')"` : '';
     /* steps ahead are shown, not opened: progress unlocks them in order (João + John, 4 Nov 2026).
        The library still lets anyone browse a course page. */
     const tag = st === 'locked' ? 'div' : 'button';
