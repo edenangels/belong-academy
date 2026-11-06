@@ -72,6 +72,7 @@
     modules_of: ['modules', 'módulos'],
     mods_in_path: ['Modules in your path', 'Módulos do seu percurso'], next_courses: ['Where to go next', 'Para onde ir a seguir'],
     explore_sub2: ['Beyond your path', 'Para além do seu percurso'],
+    up_next: ['Up next', 'A seguir'],
     videos: ['videos', 'vídeos'], video_one: ['video', 'vídeo'],
     see_more: ['See more', 'Ver mais'], see_less: ['Show less', 'Mostrar menos'],
     about_course: ['About this course', 'Sobre este curso'], chapters: ['Chapters', 'Capítulos'],
@@ -130,6 +131,10 @@
     ((S.checkRetakes || {})[lkey(src, i)] || []).forEach(a => { if (Array.isArray(a.detail)) all.push(a); });
     if (!all.length) return null;
     const b = all.reduce((x, a) => (!x || a.score / a.total >= x.score / x.total) ? a : x, null);
+    /* an older attempt without detail can be the real best (retakes before bel115): never ask to fix a lesson
+       whose best result is already full, or one whose detail-bearing attempt is worse than the best */
+    const top = best(src, i);
+    if (top && (top.score >= top.total || top.score / top.total > b.score / b.total)) return null;
     const wrong = b.detail.filter(d => !d.ok);
     return wrong.length ? { base: b, wrong } : null;
   }
@@ -141,7 +146,16 @@
       const v = ((document.querySelector('script[src*="curriculum.js"]') || {}).src || '').match(/v=(\w+)/);
       fetch('knowledge/lessons.json' + (v ? '?v=' + v[1] : '')).then(r => r.ok ? r.json() : null).then(j => {
         if (!j) return; LMETA = j;
-        if (/^#\/(course|module)\//.test(location.hash) && typeof render === 'function') render();
+        if (/^#\/(course|module)\//.test(location.hash) && typeof render === 'function') {
+          /* keep what the learner already opened: modules and lesson details survive the re-render */
+          const openMods = [...document.querySelectorAll('details.cur-module')].map(d => d.open);
+          const openRows = [...document.querySelectorAll('.cl-more.on')].map(b => b.getAttribute('aria-controls'));
+          render();
+          requestAnimationFrame(() => {
+            document.querySelectorAll('details.cur-module').forEach((d, k) => { if (openMods[k] != null) d.open = openMods[k]; });
+            openRows.forEach(id => { const b = document.querySelector(`.cl-more[aria-controls="${id}"]`), d = document.getElementById(id); if (b && d) { d.hidden = false; b.classList.add('on'); b.setAttribute('aria-expanded', 'true'); } });
+          });
+        }
       }).catch(() => {});
     }
     return LMETA && LMETA[src] && LMETA[src][String(i)] || null;
@@ -256,9 +270,9 @@
     const sum = meta && meta.summary ? (PT() ? meta.summary.pt : meta.summary.en) : '';
     const chs = meta && Array.isArray(meta.chapters) ? meta.chapters : [];
     return `<div class="cl ${done ? 'done' : ''} ${isNext ? 'current' : ''}">
-      <button class="cl-main" data-action="play" data-id="${m.source}" data-mod="${i}" aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}">
+      <button class="cl-main" data-action="play" data-id="${m.source}" data-mod="${i}" aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}${done ? ' · ' + L('completed') : ''}${b ? ` · ${b.score}/${b.total} ${L('questions')}` : ''}">
         <span class="cl-thumb"${th ? ` style="background-image:url('${th}')"` : ''}><span class="cl-len">${lMins(m.source, i)} min</span>${done ? '<span class="cl-tick" aria-hidden="true">✓</span>' : ''}</span>
-        <span class="cl-text"><span class="cl-n">${L('lesson')} ${n}${opt ? ` · ${L('optional')}` : ''}${isNext ? ` · ${L('resume')}` : ''}</span><b>${esc(lTitle(m.source, i))}</b>${q ? `<span class="cl-q">${q}</span>` : ''}</span>
+        <span class="cl-text"><span class="cl-n">${L('lesson')} ${n}${opt ? ` · ${L('optional')}` : ''}${isNext ? ` · ${(w || ((prog(m.source) || {}).pos || {}).mod === i) ? L('resume') : L('up_next')}` : ''}</span><b>${esc(lTitle(m.source, i))}</b>${q ? `<span class="cl-q">${q}</span>` : ''}</span>
       </button>
       <span class="cl-side">${act}${sum || chs.length ? `<button class="cl-more" data-action="cur-more" aria-expanded="false" aria-controls="${did}" aria-label="${L('see_more')}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>` : ''}</span>
       ${sum || chs.length ? `<div class="cl-detail" id="${did}" hidden>

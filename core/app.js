@@ -36,6 +36,7 @@ function migrateState() {
   /* a renamed goal maps to its successor before anything is called "retired" */
   if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal] && goals[GOAL_ALIASES[S.goal]]) {
     S.goal = GOAL_ALIASES[S.goal]; if (typeof GOAL_MODS === 'object' && GOAL_MODS[S.goal]) S.pathMods = [...GOAL_MODS[S.goal]];
+    S.path = [...goals[S.goal]];   /* the old goal's items would otherwise ride along outside the new goal */
   }
   const goalRetired = names.length && !goals[S.goal];
   if (goalRetired) { S.goal = names[0]; if (typeof GOAL_MODS === 'object') S.pathMods = [...(GOAL_MODS[S.goal] || [])]; }
@@ -1417,6 +1418,7 @@ function tourShow(i) {
   const ring = $('#tourRing'), card = $('#tourCard');
   const el = st.sel ? document.querySelector(st.sel.split(',').map(s => s.trim()).find(s => { const e = document.querySelector(s); return e && e.getBoundingClientRect().width > 0; }) || st.sel) : null;
   const last = tourIdx === tourList.length - 1;
+  { const ov = $('#tourOv'); if (ov) ov.setAttribute('aria-label', `${tourIdx + 1}/${tourList.length} · ${String(st.title).replace(/<[^>]+>/g, '')}`); }
   card.innerHTML = `
     <div class="tour-step">${tourIdx + 1} / ${tourList.length}</div>
     <b>${st.title}</b><p>${st.body}</p>
@@ -4964,7 +4966,7 @@ function makeFocusable(root) {
    filmed. Runs on every render so a stale path (a removed course, an old re-plan) heals itself. */
 function normalizePath() {
   try {
-    if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal]) { S.goal = GOAL_ALIASES[S.goal]; if (S.profile) S.profile.goal = S.goal; if (typeof GOAL_MODS === 'object' && GOAL_MODS[S.goal]) S.pathMods = [...GOAL_MODS[S.goal]]; save(); }
+    if (typeof GOAL_ALIASES === 'object' && S.goal && GOAL_ALIASES[S.goal]) { S.goal = GOAL_ALIASES[S.goal]; if (S.profile) S.profile.goal = S.goal; if (typeof GOAL_MODS === 'object' && GOAL_MODS[S.goal]) { S.pathMods = [...GOAL_MODS[S.goal]]; if (GOAL_PRESETS[S.goal]) S.path = [...GOAL_PRESETS[S.goal]]; } save(); }
     if (typeof GOAL_MODS === 'object' && S.goal && GOAL_MODS[S.goal] && !Array.isArray(S.pathMods)) { S.pathMods = [...GOAL_MODS[S.goal]]; save(); }
     if (typeof ROLE_ALIASES === 'object') {
       if (S.role && ROLE_ALIASES[S.role]) { S.role = ROLE_ALIASES[S.role]; save(); }
@@ -5585,11 +5587,13 @@ let _openPaused = false;   /* set by 'resume-check': open the lesson silent, sho
 function openPlayer(courseId, mod, startAt) {
   const c = courseById(courseId);
   if (!c) return;
-  _seekTo = (typeof startAt === 'number' && startAt > 2) ? startAt : null;
+  const explicitStart = typeof startAt === 'number' && !isNaN(startAt);
+  _seekTo = (explicitStart && startAt > 2) ? startAt : null;
   try { history.pushState({ overlay: 'player' }, ''); _playerPushed = true; } catch (e) {}
   if (mod == null) mod = (prog(courseId) && !isDone(courseId)) ? (prog(courseId).mod || 0) : 0;
   mod = Math.min(mod, c.modules.length - 1);
-  { const pp = prog(courseId); if (_seekTo == null && pp && pp.pos && pp.pos.mod === mod && pp.pos.t > 8) _seekTo = Math.max(0, pp.pos.t - 3); }
+  /* a chapter at 0:00 is an explicit start: do not resume from the saved position */
+  { const pp = prog(courseId); if (_seekTo == null && !explicitStart && pp && pp.pos && pp.pos.mod === mod && pp.pos.t > 8) _seekTo = Math.max(0, pp.pos.t - 3); }
   const media = modMedia(c, mod);
   clearCheckpoint();
   watchedSeconds = 0;
@@ -6042,7 +6046,7 @@ function showTakeaways(c, mod, next) {
    lesson in pendingChecks and credits nothing, which the learner is told
    plainly rather than discovering at audit time. */
 function showModuleCheck(c, mod, after, opts) {
-  const fix = (opts && opts.fix) || null;            /* { base, wrong }: re-ask only the missed questions */
+  let fix = (opts && opts.fix) || null;              /* { base, wrong }: re-ask only the missed questions */
   const retake = !!(opts && opts.retake) || !!fix;
   const ov = $('#ckOv'); if (!ov) { creditTraining(c.id, mod, null); if (after) after(); return; }
   const lang = _lang() === 'pt' ? 'pt' : 'en';
@@ -6058,6 +6062,9 @@ function showModuleCheck(c, mod, after, opts) {
       const bank = (QUIZ_V2[c.id] && QUIZ_V2[c.id].modules && QUIZ_V2[c.id].modules[mod]) || [];
       const found = fix.wrong.map(d => bank.find(q => (q.en && q.en.q === d.q) || (q.pt && q.pt.q === d.q))).filter(Boolean);
       if (found.length === fix.wrong.length) qs = found.map(q => shuffledView(q, lang));
+      /* a missed question no longer in the bank (e.g. reworded): never pretend it was fixed —
+         fall back to an honest normal retake, scored on its own */
+      else fix = null;
     }
     if (!qs) qs = v2CheckPair(c.id, mod, lang, retake ? (((S.checkRetakes || {})[c.id + ':' + mod] || []).length + 1) : 0);
     if (!qs) {
@@ -6707,7 +6714,11 @@ function armReelCheck(el, r, vid, vimeo) {
   const fire = () => { stopReelCheck(); raiseReelCheck(el, r); };
 
   if (vimeo) {
-    const onTime = d => { if (d && d.duration && d.seconds >= d.duration - 0.35) fire(); };
+    /* the reel loops, so Vimeo never sends 'ended': fire near the end, or when the clock wraps back to 0 */
+    let lastSec = 0;
+    const onTime = d => { if (!d || !d.duration) return;
+      if (d.seconds >= d.duration - 0.35 || (lastSec >= d.duration * 0.9 && d.seconds < lastSec - 2)) fire();
+      lastSec = d.seconds; };
     vimeo.on('timeupdate', onTime);
     reelCheckWatch = { stop: () => { try { vimeo.off('timeupdate', onTime); } catch (e) {} } };
     return;
@@ -6976,7 +6987,10 @@ function reelVimeo(ifr, on, el) {
        still the current slide: a swipe's pause() rejects a pending play(), and restarting then
        would leave the old reel playing under the new one. */
     pl.setMuted(!sound).then(() => still() ? pl.play() : null)
-      .catch(() => { if (still()) pl.setMuted(true).then(() => still() ? pl.play() : null).catch(() => {}); });
+      .catch(() => { if (!still()) return;
+        /* sound refused (no gesture yet): play muted, and say so — the icon must not claim sound */
+        const f = $('#reelFeed'); if (f) f.classList.remove('sound');
+        pl.setMuted(true).then(() => still() ? pl.play() : null).catch(() => {}); });
     const r = qwById(el.dataset.id); if (r && el.classList.contains('current')) armReelCheck(el, r, null, pl);
   }).catch(() => {});
 }
@@ -8319,6 +8333,9 @@ function regenPath() {
     if (rest.length > 2) { const cur = rest.shift(); rest.push(rest.shift()); rest.unshift(cur); } /* keep current, rotate the queue */
     /* (the old demo used to splice in made-up course ids here — a re-plan only reorders real courses) */
     S.path = [...done, ...rest];
+    /* keep the module path in the same order as the re-planned items */
+    if (Array.isArray(S.pathMods) && window.CUR) { const src = mid => (CUR.modules.find(x => x.id === mid) || {}).source;
+      S.pathMods = S.pathMods.map((mid, k) => [mid, k]).sort((a, b) => (S.path.indexOf(src(a[0])) - S.path.indexOf(src(b[0]))) || (a[1] - b[1])).map(x => x[0]); }
     S.rationaleIdx = (S.rationaleIdx + 1) % PATH_RATIONALES.length;
     save(); render();
     toast('Path re-planned by ' + brandName() + ' AI', '✦');
@@ -8340,7 +8357,10 @@ document.addEventListener('click', e => {
     case 'play': openPlayer(id, mod != null ? +mod : undefined); break;
     case 'toggle-path':
       if (isHowto(courseById(id))) { toast(t('howto_no_path'), 'ℹ️'); break; }
-      if (inPath(id)) { S.path = S.path.filter(x => x !== id); toast(`Removed from your path`, '－'); }
+      if (inPath(id)) { S.path = S.path.filter(x => x !== id);
+        /* the module path follows: drop this item's modules too, or "removed" would remove nothing */
+        if (Array.isArray(S.pathMods) && window.CUR) S.pathMods = S.pathMods.filter(mid => { const m = CUR.modules.find(x => x.id === mid); return !m || m.source !== id; });
+        toast(`Removed from your path`, '－'); }
       else { S.path.push(id); toast(`Added to your AI path — it'll be sequenced after your current step`, '✦'); }
       save(); render(); break;
     case 'quiz': openQuiz(id); break;
@@ -9028,6 +9048,12 @@ function startOnboarding() {
 }
 function drawOnboard() {
   const body = $('#obBody');
+  /* an existing learner reopening "Change role & goal" can always back out; a new one cannot skip */
+  { const card = $('#onboard .onboard-card'); let x = $('#obClose');
+    if (S.onboarded && card && !x) { x = document.createElement('button'); x.id = 'obClose'; x.className = 'ob-close'; x.type = 'button';
+      x.setAttribute('aria-label', _lang() === 'pt' ? 'Fechar' : 'Close'); x.innerHTML = '&times;';
+      x.addEventListener('click', () => { $('#onboard').classList.remove('open'); }); card.prepend(x); }
+    if (x) x.hidden = !S.onboarded; }
   $('#obFill').style.width = [33, 66, 100][ob.step] + '%';
   if (ob.step === 0) {
     body.innerHTML = `
