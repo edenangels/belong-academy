@@ -38,9 +38,9 @@
   certOnCompletion: false,
   /* the video ending opens the check; no separate "Mark module complete" button */
   markComplete: false,
-  /* 'local' = the internal database in core/localdb.js (accounts on this device, no Firebase).
-     For a real deploy with accounts across devices, set 'firebase' — the config below is kept. */
-  backend: 'local',
+  /* 'firebase' = real accounts across devices (the live site's accounts and progress live there).
+     'local' = the internal test database in core/localdb.js (this device only) — for demos/previews. */
+  backend: 'firebase',
   /* meeting 4 Nov 2026: the "knowledge verified · from quizzes" count is clutter; scores live on the course page */
   hideVerifiedStat: true,
   quickWinsShelf: false,   /* the home Reels rail already shows the reels; a second shelf repeated them */
