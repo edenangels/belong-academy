@@ -468,6 +468,12 @@ function updateXpChip() {
   const lv = levelFor(S.xp);
   const html = `${svgIcon('sprout')}<span>${lv.name} · ${S.xp} XP</span>`;
   [$('#xpChip'), $('#xpChipMobile')].forEach(c => { if (c) c.innerHTML = html; });
+  /* streak, Duolingo-style: a small flame in the header, always in sight, never a block in the page */
+  const sc = $('#streakChip');
+  if (sc) { const n = S.streak || 0; sc.classList.toggle('on', n > 0);
+    sc.innerHTML = `${svgIcon('fire')}<b>${n}</b>`;
+    const lbl = _lang() === 'pt' ? `Sequência: ${n} ${n === 1 ? 'dia' : 'dias'} seguidos a aprender` : `Streak: ${n} ${n === 1 ? 'day' : 'days'} in a row`;
+    sc.setAttribute('aria-label', lbl); sc.title = lbl; }
 }
 
 /* ---------- card builder ---------- */
@@ -760,22 +766,17 @@ function renderHome() {
   ${railHTML(t('assigned_you'), t('from_stewardship'), assigned.filter(notHero).map(c => cardHTML(c)))}
   ${railHTML(t('featured_h'), t('featured_sub'), featuredCourses.filter(notHero).map(c => cardHTML(c)))}
   ${/* the full path lives in My learning; home keeps the small row above (4 Nov 2026) */''}
-  <section class="stats">
-    <div class="stat"><div class="num">${S.streak || 0}d</div><div class="lbl">${t('learning_streak')}</div><div class="delta">${(S.streak || 0) > 0 && S.streak >= (S.bestStreak || 0) ? t('personal_best') : (S.bestStreak ? `${t('stats_best')} ${S.bestStreak}d` : t('no_data'))}</div></div>
-    <div class="stat"><div class="num">${fmtMins(weekMinutes())}</div><div class="lbl">${t('this_week')}</div><div class="delta">${minutesLast7()[6].v ? `▲ ${minutesLast7()[6].v}m ${t('stats_today')}` : t('no_data')}</div></div>
-    ${BRAND.hideVerifiedStat ? '' : `<div class="stat"><div class="num">${Object.values(S.progress).filter(p => p.done).length + S.quizzesPassed}</div><div class="lbl">${t('skills_verified')}</div><div class="delta">${S.quizzesPassed ? `▲ ${S.quizzesPassed} ${t('from_quizzes')}` : t('no_data')}</div></div>`}
-    <div class="stat"><div class="num">${avgQuizScore() != null ? avgQuizScore() + '%' : t('no_data')}</div><div class="lbl">${t('avg_score')}</div><div class="delta">${(S.quizScores || []).length ? (S.quizScores.length + ' ' + t('stats_quizzes')) : t('earn_first')}</div></div>
-  </section>
+  ${/* the stats row left Home (feedback 3, 6 Nov 2026): the streak lives in the header chip, the rest in My learning */''}
   ${reelsAll().length ? `<section class="rail-section reel-tease">
     <div class="rail-head"><h2>${t('reel_h')}</h2>
       <button class="see-all" data-action="goto" data-route="#/reels">${t('reel_open')}</button></div>
     <div class="rail-wrap"><div class="rail">${reelsAll().slice(0, 12).map((r, i) => r.poster ? `
-      <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.title))} · ${reelLen(r)}">
+      <button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.head) || reelField(r.title))} · ${reelLen(r)}">
         <img data-src="${esc(r.poster)}" alt="" decoding="async">
         <span class="rt-time">${reelLen(r)}</span>
         ${reelPending(r) ? `<span class="rt-pend">${t('reel_pending')}</span>` : ''}
         <span class="rt-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span>
-        <span class="rt-title">${esc(reelField(r.title))}</span>
+        <span class="rt-title">${esc(reelField(r.head) || reelField(r.title))}${reelField(r.why) ? `<small class="rt-why">${esc(reelField(r.why))}</small>` : ''}</span>
       </button>` : `
       <button class="reel-chip" data-action="goto" data-route="#/reels/${esc(r.id)}">
         <div class="reel-chip-art t${toneOf(r.theme || r.id)}">
@@ -4980,6 +4981,7 @@ function normalizePath() {
 }
 function render() {
   normalizePath();
+  try { updateXpChip(); } catch (e) {}
   /* One line of cross-route continuity. renderNow() is fully synchronous, so
      the transition captures a clean before/after with no extra bookkeeping. */
   if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -6869,8 +6871,9 @@ function reelSlideHTML(r, i) {
     <div class="reel-copy">
       ${ph ? `<span class="reel-ph">${t('reel_placeholder')}</span>` : ''}
       <div class="reel-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${reelLen(r)}${r.theme ? ` &middot; ${esc(r.theme)}` : ''}</div>
-      <h2>${esc(reelField(r.title))}</h2>
-      ${ph ? '' : `<p>${esc(reelField(r.line))}</p>`}
+      ${/* headline = the outcome, subheadline = what is in it for me (feedback 3: "why should I give it two seconds?") */''}
+      <h2>${esc(reelField(r.head) || reelField(r.title))}</h2>
+      ${ph ? '' : `<p>${esc(reelField(r.why) || reelField(r.line))}</p>`}
       ${/* THE LESSON IN TEXT.
             A reel is twenty seconds of someone talking. That is a bad format for
             a noisy tractor cab, a shared phone, a hearing aid, or anyone who
@@ -6940,6 +6943,10 @@ function renderReels() {
       <div class="reel-prog">${slides.map((_, i) => `<span data-p="${i}"></span>`).join('')}</div>
     </div>
     <div class="reel-feed" id="reelFeed">${slides.join('')}</div>
+    <div class="reel-nav" aria-label="${_lang() === 'pt' ? 'Navegar nos reels' : 'Reel navigation'}">
+      <button class="reel-nav-b" data-action="reel-step" data-d="-1" aria-label="${_lang() === 'pt' ? 'Reel anterior' : 'Previous reel'}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+      <button class="reel-nav-b" data-action="reel-step" data-d="1" aria-label="${_lang() === 'pt' ? 'Reel seguinte' : 'Next reel'}"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+    </div>
     <div class="reel-hint" id="reelHint" aria-hidden="true"><span></span></div>
   </div>`;
 }
@@ -7026,6 +7033,14 @@ function armReelFeed() {
   };
   /* keyboard parity with the swipe — a feed reachable only by thumb is a feed
      half the users cannot reach at all */
+  /* mouse swipe on desktop: drag up or down like a finger (touch already scrolls natively) */
+  let drag = null;
+  feed.onpointerdown = ev => { if (ev.pointerType !== 'mouse' || ev.button !== 0 || ev.target.closest('button, a, .rc, input')) return; drag = { y: ev.clientY, t: Date.now() }; };
+  feed.onpointerup = ev => { if (!drag) return; const dy = ev.clientY - drag.y, quick = Date.now() - drag.t < 900; drag = null;
+    if (Math.abs(dy) < 50 || !quick) return;
+    const to = feed.children[Math.max(0, Math.min(feed.children.length - 1, Math.max(0, feedIdx) + (dy < 0 ? 1 : -1)))];
+    if (to) to.scrollIntoView({ behavior: 'smooth', block: 'start' }); };
+  feed.onpointerleave = () => { drag = null; };
   feed.tabIndex = 0;
   feed.onkeydown = ev => {
     if (ev.key !== 'ArrowDown' && ev.key !== 'ArrowUp' && ev.key !== ' ') return;
@@ -8540,6 +8555,9 @@ document.addEventListener('click', e => {
     case 'reel-goto': { ledgerAppend('reel_to_course', { course: el.dataset.id, from: 'feed' });
       if (el.dataset.mod != null && el.dataset.mod !== '') { document.body.classList.remove('reels-open'); stopReelCheck(); location.hash = `#/play/${el.dataset.id}/${el.dataset.mod}`; break; }
       location.hash = '#/course/' + el.dataset.id; break; }
+    case 'reel-step': { const f = $('#reelFeed'); if (!f) break;
+      const to = f.children[Math.max(0, Math.min(f.children.length - 1, Math.max(0, feedIdx) + (+el.dataset.d)))];
+      if (to) to.scrollIntoView({ behavior: 'smooth', block: 'start' }); break; }
     case 'reel-more': { ledgerAppend('reel_continue', { after: FEED_PAUSE_AFTER });
       const p = el.closest('.reel'); const nx = p && p.nextElementSibling;
       if (nx) nx.scrollIntoView({ behavior: 'smooth', block: 'start' }); break; }

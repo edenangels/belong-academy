@@ -71,6 +71,7 @@
     course_certs_h: ['Course certificates', 'Comprovativos de curso'], none_yet: ['None yet. Complete a course and pass its assessment.', 'Ainda nenhum. Conclua um curso e passe a avaliação.'],
     modules_of: ['modules', 'módulos'],
     mods_in_path: ['Modules in your path', 'Módulos do seu percurso'], next_courses: ['Where to go next', 'Para onde ir a seguir'],
+    explore_sub2: ['Beyond your path', 'Para além do seu percurso'],
     videos: ['videos', 'vídeos'], video_one: ['video', 'vídeo'],
     see_more: ['See more', 'Ver mais'], see_less: ['Show less', 'Mostrar menos'],
     about_course: ['About this course', 'Sobre este curso'], chapters: ['Chapters', 'Capítulos'],
@@ -437,7 +438,14 @@
     return railHTML(L('mods_in_path'), t('in_order'), pm.map(moduleCardHTML), '#/library')
       + (rest.length ? railHTML(L('next_courses'), L('courses'), rest.map(courseCardHTML), '#/library') : '');
   };
-  window.curExploreHTML = () => railHTML(t('trending'), L('explore_sub'), courses.map(courseCardHTML), '#/library');
+  /* Explore more never repeats the path (feedback 3): the modules you don't have yet, then any course untouched by it */
+  window.curExploreHTML = () => {
+    const pm = pathModules();
+    const ms = modules.filter(m => !pm.includes(m));
+    const cs = courses.filter(co => !modulesOfCourse(co.id).some(m => pm.includes(m)));
+    const cards = ms.map(moduleCardHTML).concat(cs.map(courseCardHTML));
+    return cards.length ? railHTML(t('trending'), L('explore_sub2'), cards, '#/library') : '';
+  };
   /* hero: whatever it features, say which course and module it belongs to, and open the next lesson */
   window.curHero = featured => {
     const n = nextLessonGlobal(); if (!n) return null;

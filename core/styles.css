@@ -4853,7 +4853,8 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .cur-assess span { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint); }
 .cur-assess b { font-size: 22px; font-family: var(--font-display); } .cur-assess small { color: var(--text-faint); font-size: 12px; line-height: 1.4; }
 .cur-warn { margin-top: 12px; color: var(--accent); font-size: 14px; }
-.cur-modules { padding: 0 var(--edge); display: grid; gap: 10px; margin-top: 6px; max-width: calc(var(--content-w) + 0px); }
+/* no max-width here: --edge already centres the column, and capping the box too left 400px on a 1920 screen */
+.cur-modules { padding: 0 var(--edge); display: grid; gap: 10px; margin-top: 6px; }
 .cur-module { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
 .cur-module summary { list-style: none; display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: center; padding: 16px 18px; cursor: pointer; }
 .cur-module summary::-webkit-details-marker { display: none; }
@@ -5084,7 +5085,7 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 }
 
 /* course details fold away: only the title, the promise and the button stay above the modules */
-.cur-about { margin: 18px var(--gutter, 24px) 0; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+.cur-about { margin: 18px var(--edge) 0; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
 .cur-about > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
   padding: 14px 18px; font-weight: 600; color: var(--text); }
 .cur-about > summary::-webkit-details-marker { display: none; }
@@ -5170,3 +5171,41 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 #obBody .ob-foot { background: rgba(16,21,17,.98); border-top: 1px solid var(--line); margin-left: -8px; margin-right: -8px; padding-left: 8px; padding-right: 8px; padding-top: 14px; }
 @media (min-height: 760px) { #obBody .ob-foot { border-top-color: transparent; } }
 .ob-hint { font-size: 12px; color: var(--text-faint); }
+@media (max-width: 1024px) { .cur-about { margin-left: 40px; margin-right: 40px; } }
+@media (max-width: 699px) { .cur-about { margin-left: 18px; margin-right: 18px; } }
+
+/* streak chip (feedback 3) */
+.streak-chip { display: inline-flex; align-items: center; gap: 4px; height: 34px; padding: 0 10px; border-radius: 99px; cursor: pointer;
+  background: none; border: 1px solid var(--line); color: var(--text-faint); font: 600 13px var(--font-body); margin-right: 4px; }
+.streak-chip svg { width: 16px; height: 16px; }
+.streak-chip.on { color: #f59e0b; border-color: color-mix(in srgb, #f59e0b 40%, transparent); background: color-mix(in srgb, #f59e0b 10%, transparent); }
+.streak-chip b { font-weight: 700; color: var(--text); }
+.streak-chip:hover { border-color: color-mix(in srgb, #f59e0b 60%, transparent); }
+
+/* lessons bigger (feedback 3): wider list, larger thumbnails and titles on tablet and up */
+.module-list { max-width: 1000px; }
+@media (min-width: 700px) {
+  .cl { padding: 10px; gap: 6px 14px; }
+  .cl-main { gap: 18px; }
+  .cl-thumb { width: 208px; border-radius: 10px; }
+  .cl-text b { font-size: 17px; }
+  .cl-n { font-size: 12px; }
+  .cl-detail { margin-left: 226px; }
+  .cl-len { font-size: 12px; }
+}
+
+/* reels: headline + why, desktop arrows (feedback 3) */
+.reel-thumb .rt-title { display: flex; flex-direction: column; gap: 5px; }
+.reel-thumb .rt-why { font-family: var(--font-body); font-size: 11.5px; line-height: 1.35; font-weight: 500; color: rgba(255,255,255,.8);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.reel-thumb { width: 184px; }
+.reel-nav { display: none; }
+@media (hover: hover) and (min-width: 900px) {
+  .reel-nav { display: flex; flex-direction: column; gap: 12px; position: fixed; right: 32px; top: 50%; transform: translateY(-50%); z-index: 30; }
+  .reel-nav-b { width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; cursor: pointer; color: #fff;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); transition: background .15s, transform .15s; }
+  .reel-nav-b:hover { background: rgba(255,255,255,.22); transform: scale(1.06); }
+  .reel-feed { cursor: grab; }
+  .reel-feed:active { cursor: grabbing; }
+}
+.toast svg { width: 18px; height: 18px; flex: none; color: var(--accent); }
