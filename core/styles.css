@@ -5245,7 +5245,8 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .reel-ambient { position: fixed; inset: -40px; z-index: 0; background-size: cover; background-position: center;
   filter: blur(42px) saturate(1.2) brightness(.45); transform: scale(1.1); transition: background-image .5s ease; pointer-events: none; }
 .reel.has-ambient::before { display: none !important; }
-.reel-feed, .reel-top { position: relative; z-index: 1; }
+/* above the fixed backdrop WITHOUT touching their own positioning (relative here broke the swipe container in bel121) */
+.reel-feed { z-index: 1; }
 .reel-feed { scroll-behavior: smooth; }
 @media (hover: hover) and (min-width: 900px) {
   .reel-nav { right: auto; left: calc(50% + min(50vw, 100dvh * 9 / 32) + 28px); }
@@ -5259,3 +5260,15 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .ck-ov.peek .ck-peekbar { display: flex; }
 .ck-peekbar .ck-back { margin: 0; position: static; }
 .ob-axis { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }
+/* reel progress bar you can drag (9 Nov notes) */
+.reel-seek { position: absolute; left: 50%; transform: translateX(-50%); bottom: 10px; z-index: 6; width: calc(min(100vw, 100dvh * 9 / 16) - 32px);
+  -webkit-appearance: none; appearance: none; height: 18px; background: transparent; cursor: pointer; margin: 0; --p: 0%; }
+.reel-seek::-webkit-slider-runnable-track { height: 3px; border-radius: 3px; background: linear-gradient(to right, #fff var(--p), rgba(255,255,255,.28) var(--p)); }
+.reel-seek::-moz-range-track { height: 3px; border-radius: 3px; background: rgba(255,255,255,.28); }
+.reel-seek::-moz-range-progress { height: 3px; background: #fff; }
+.reel-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff; margin-top: -4.5px; opacity: 0; transition: opacity .15s; }
+.reel-seek:hover::-webkit-slider-thumb, .reel-seek:active::-webkit-slider-thumb, .reel-seek:focus-visible::-webkit-slider-thumb { opacity: 1; }
+.reel-seek::-moz-range-thumb { width: 12px; height: 12px; border: 0; border-radius: 50%; background: #fff; }
+.reel.has-ambient .reel-seek { bottom: 22px; }
+.reel-copy { padding-bottom: 34px; }
+.reel-copy { padding-bottom: 46px; } .reel-seek { bottom: 16px; } .reel.has-ambient .reel-seek { bottom: 26px; }

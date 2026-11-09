@@ -6911,12 +6911,13 @@ function reelSlideHTML(r, i) {
       <button class="reel-act" data-action="reel-mute" aria-label="${t('reel_sound')}">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path class="wave" d="M17 8.5a5 5 0 0 1 0 7"/><path class="slash" d="M18 8l4 8"/></svg></button>
     </div>
+    <input class="reel-seek" type="range" min="0" max="1000" value="0" step="1" data-id="${esc(r.id)}" aria-label="${_lang() === 'pt' ? 'Posição no reel' : 'Reel position'}">
     <div class="reel-copy">
       ${ph ? `<span class="reel-ph">${t('reel_placeholder')}</span>` : ''}
       ${reelPending(r) ? `<div class="reel-meta"><span class="pend">${t('reel_pending')}</span></div>` : ''}
       ${/* headline = the outcome, subheadline = what is in it for me (feedback 3: "why should I give it two seconds?") */''}
       <h2>${esc(reelField(r.head) || reelField(r.title))}</h2>
-      ${ph ? '' : `<p>${esc(reelField(r.why) || reelField(r.line))}</p>`}
+      ${/* 9 Nov notes: the headline alone in the feed — no subheadline over the video */''}
       ${/* THE LESSON IN TEXT.
             A reel is twenty seconds of someone talking. That is a bad format for
             a noisy tractor cab, a shared phone, a hearing aid, or anyone who
@@ -6998,7 +6999,16 @@ function reelVimeo(ifr, on, el) {
   loadVimeoSDK().then(() => {
     if (!window.Vimeo || !document.body.contains(ifr)) return;
     let pl = reelPlayers.get(ifr);
-    if (!pl) { try { pl = new Vimeo.Player(ifr); } catch (e) { return; } reelPlayers.set(ifr, pl); }
+    if (!pl) { try { pl = new Vimeo.Player(ifr); } catch (e) { return; } reelPlayers.set(ifr, pl);
+      /* the progress bar under the reel: follows playback, and dragging it moves the video (9 Nov notes) */
+      const bar = el.querySelector('.reel-seek');
+      if (bar) {
+        let dragging = false, dur = 0;
+        pl.on('timeupdate', d => { if (!d || !d.duration) return; dur = d.duration; if (!dragging) bar.value = Math.round(d.seconds / d.duration * 1000); bar.style.setProperty('--p', (bar.value / 10) + '%'); });
+        bar.addEventListener('pointerdown', e => { dragging = true; e.stopPropagation(); });
+        bar.addEventListener('input', () => { bar.style.setProperty('--p', (bar.value / 10) + '%'); });
+        bar.addEventListener('change', () => { dragging = false; if (dur) pl.setCurrentTime(bar.value / 1000 * dur).catch(() => {}); });
+      } }
     if (!on) { pl.pause().catch(() => {}); pl.setCurrentTime(0).catch(() => {}); return; }
     const sound = !!($('#reelFeed') && $('#reelFeed').classList.contains('sound'));
     const still = () => el.classList.contains('current') && document.body.contains(ifr);
