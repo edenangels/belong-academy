@@ -63,19 +63,19 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
       <div class="link-row"><b>Academy</b><a href="https://belong-academy.pages.dev">belong-academy.pages.dev</a><span>the live site the team uses</span></div>
       <div class="link-row"><b>Preview</b><a href="https://preview.belong-academy.pages.dev">preview.belong-academy.pages.dev</a><span>same build, for trying changes first</span></div>
     </div>
-    <p class="note">Works on any phone or computer browser, in English and European Portuguese. Team members sign in with their own account so their progress and hours follow them; "Continue as guest" is for a quick look.</p>
+    <p class="note">Works on any phone or computer browser, in English and European Portuguese. There is no login: people open the link, type their name, choose their department and start. Progress, hours and certificates are kept in each person's browser on their own device.</p>
   </section>
 
   <section>
     <h2>Showcase, about 20 minutes</h2>
     <ol class="show">
-      <li><span class="min">0:00 · 2 min</span><h3>Sign in and choose a department</h3><p class="say">Every person picks their department. Each department has three goals, always in the same order: the team, the land and the project, the guests. The goal builds their path.</p></li>
+      <li><span class="min">0:00 · 2 min</span><h3>Open the link, name and department</h3><p class="say">No account and no password. Each person types their name, which goes on their certificates, then picks their department. Each department has three goals, always in the same order: the team, the land and the project, the guests. The goal builds their path.</p></li>
       <li><span class="min">2:00 · 3 min</span><h3>Home and the path</h3><p class="say">The path shows the modules in order; the next one opens only when the one before is finished. The flame at the top is the learning streak.</p></li>
       <li><span class="min">5:00 · 4 min</span><h3>A module and a lesson</h3><p class="say">Lessons are short videos. The arrow on each lesson opens a summary and chapters that jump to that moment. At the end, two quick questions record the training hours.</p></li>
       <li><span class="min">9:00 · 3 min</span><h3>A mistake, then earning it</h3><p class="say">Answer one question wrong on purpose. The answer is not given away: review the moment in the video, press Continue, and answer again. Missed questions also wait in My learning, under Review.</p></li>
       <li><span class="min">12:00 · 2 min</span><h3>Module complete</h3><p class="say">Finishing a module shows a window with the next module in the person's path.</p></li>
       <li><span class="min">14:00 · 2 min</span><h3>Reels</h3><p class="say">Ten short vertical reels on Belong's values. Swipe or use the arrows; save the ones you like to My learning.</p></li>
-      <li><span class="min">16:00 · 3 min</span><h3>For leaders: the Team view</h3><p class="say">Who is doing what, progress per course, scores, hours toward the 40 a year, and who needs attention. Admins can also set an optional field mission on any course.</p></li>
+      <li><span class="min">16:00 · 3 min</span><h3>Yours to keep</h3><p class="say">The whole academy is a folder of files that Belong owns: it goes on Belong's own GitHub, its own hosting and its own website, with a guide written so that Belong's own Claude can set it up and keep improving it.</p></li>
       <li><span class="min">19:00 · 1 min</span><h3>Certificate and the hours record</h3><p class="say">A course certificate is issued when every lesson is done and the score reaches 70%. My learning, under Record, keeps the yearly training hours.</p></li>
     </ol>
   </section>
@@ -85,7 +85,7 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
     <div class="grid2">
       <div class="card"><h3>Courses</h3><ul class="plain"><li>Belong &amp; Craveiral Foundations</li><li>Guest Experience &amp; Our Standards</li><li>Craveiral: One Single House</li></ul><p class="note">9 modules, 20 lessons, about 2 hours of video.</p></div>
       <div class="card"><h3>For each person</h3><ul class="plain"><li>A path for their department and goal</li><li>Review room for missed questions</li><li>Saved reels</li><li>Course certificates and the yearly hours record</li></ul></div>
-      <div class="card"><h3>For leaders and admins</h3><ul class="plain"><li>Team view with progress and hours</li><li>Field missions set per course</li><li>Approve reels before the team sees them</li></ul></div>
+      <div class="card"><h3>Simple to run</h3><ul class="plain"><li>No login, no database, no server</li><li>Free hosting is enough</li><li>Accounts and a leaders' Team view can be switched on later</li></ul></div>
       <div class="card"><h3>The law</h3><p>Hours are credited when a lesson's questions are answered and count toward the 40 hours of continuous training a year (Labour Code, art. 131.º). Records name Craveiral as the employer delivering internal training.</p></div>
     </div>
   </section>
@@ -95,8 +95,19 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
     <div class="grid2">
       <div class="card"><h3>Adding a lesson or reel</h3><p>Upload the video to the Belong folder on Vimeo as unlisted and embeddable, then send us the link. We add it with its summary, chapters and questions in both languages.</p></div>
       <div class="card"><h3>Next videos to film</h3><p>The goals plan lists three or four video ideas for every goal. The thin spots today are maintenance, laundry, kitchen procedures and safety.</p></div>
-      <div class="card"><h3>Adding people</h3><p>Team members create their account on the sign-in page. Admins are set in Settings, under Company, by email.</p></div>
+      <div class="card"><h3>Adding people</h3><p>Share the link. Each person adds it to their phone's home screen and it opens like an app.</p></div>
       <div class="card"><h3>Feedback</h3><p>Every round of feedback so far is recorded with what changed. Keep sending notes the same way.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Taking it over</h2>
+    <p>Belong receives the academy as one zip. Inside, three files do the explaining:</p>
+    <div class="grid2">
+      <div class="card"><h3>docs/SETUP.md</h3><p>Step by step: put it on Belong's GitHub, host it for free (GitHub Pages, Cloudflare Pages, or the web host Belong already uses), and connect it to the website as <code>academy.your-site.com</code>, a menu link, or both. About 30 minutes, €0.</p></div>
+      <div class="card"><h3>CLAUDE.md</h3><p>The map for Claude. Open Claude Code in the folder and say <i>"Follow docs/SETUP.md and set this up for us."</i> It also covers adding lessons, reels and questions, and Belong's rules: European Portuguese, both languages, never revealing answers.</p></div>
+      <div class="card"><h3>docs/ACCOUNTS-LATER.md</h3><p>When Belong wants accounts, progress that follows people across devices, and the leaders' Team view: a configuration change, not a rebuild.</p></div>
+      <div class="card"><h3>extras/ai-gateway</h3><p>The free, keyless "Ask" assistant, ready for Belong to run on its own Cloudflare account.</p></div>
     </div>
   </section>
 
@@ -108,6 +119,7 @@ footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line)
       <div class="item"><span class="pill need">Needed</span><p><b>Pedro's review</b> of the questions and of how modules are grouped into courses.</p></div>
       <div class="item"><span class="pill soon">Missing</span><p><b>Reel 03, Sustainability,</b> is no longer in the Vimeo folder. Its text is ready; it goes live as soon as it is uploaded again.</p></div>
       <div class="item"><span class="pill soon">Pending</span><p><b>Vimeo's embed and share buttons</b> on the lesson videos are switched off in each video's Vimeo settings.</p></div>
+      <div class="item"><span class="pill need">Needed</span><p><b>Operator details</b> (company name, NIPC, address, contact) in section 7 of the privacy policy.</p></div>
       <div class="item"><span class="pill done">Ready</span><p><b>Everything in the showcase above</b> is live and tested in both languages, on phones and computers.</p></div>
     </div>
   </section>
