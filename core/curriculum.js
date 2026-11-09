@@ -273,8 +273,11 @@
     const meta = lessonMeta(m.source, i), th = lThumb(m.source, i), did = `cl-${m.source}-${i}`;
     const sum = meta && meta.summary ? (PT() ? meta.summary.pt : meta.summary.en) : '';
     const chs = meta && Array.isArray(meta.chapters) ? meta.chapters : [];
-    return `<div class="cl ${done ? 'done' : ''} ${isNext ? 'current' : ''}">
-      <button class="cl-main" data-action="play" data-id="${m.source}" data-mod="${i}" aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}${done ? ' · ' + L('completed') : ''}${b ? ` · ${b.score}/${b.total} ${L('questions')}` : ''}">
+    /* round 6 gate: a lesson is open when it is done, or it is the first not-done lesson of its module */
+    const firstOpen = m.lessons.find(x => !lessonDone(m.source, x));
+    const locked = !done && i !== firstOpen;
+    return `<div class="cl ${done ? 'done' : ''} ${isNext ? 'current' : ''}${locked ? ' locked' : ''}">
+      <button class="cl-main" ${locked ? 'disabled aria-disabled="true"' : `data-action="play" data-id="${m.source}" data-mod="${i}"`} aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}${done ? ' · ' + L('completed') : ''}${locked ? ' · 🔒' : ''}${b ? ` · ${b.score}/${b.total} ${L('questions')}` : ''}">
         <span class="cl-thumb"${th ? ` style="background-image:url('${th}')"` : ''}><span class="cl-len">${lMins(m.source, i)} min</span>${done ? '<span class="cl-tick" aria-hidden="true">✓</span>' : ''}</span>
         <span class="cl-text"><span class="cl-n">${L('lesson')} ${n}${opt ? ` · ${L('optional')}` : ''}${isNext ? ` · ${(w || ((prog(m.source) || {}).pos || {}).mod === i) ? L('resume') : L('up_next')}` : ''}</span><b>${esc(lTitle(m.source, i))}</b>${q ? `<span class="cl-q">${q}</span>` : ''}</span>
       </button>
@@ -516,12 +519,17 @@
     if (pt) pt.innerHTML = `<a href="#/course/${co.id}" class="cur-pl-link" data-action="cur-pl-go" data-route="#/course/${co.id}">${esc(cTitle(co))}</a> <span aria-hidden="true">›</span> <a href="#/module/${m.id}" class="cur-pl-link" data-action="cur-pl-go" data-route="#/module/${m.id}">${esc(mTitle(m))}</a>`;
     if (ps) ps.textContent = `${L('lesson')} ${pos + 1} ${t('of')} ${m.lessons.length} · ${lTitle(c.id, mod)}${lessonDone(c.id, mod) ? ' · ✓ ' + L('completed') : ''}`;
     const pills = $('#playerPills');
-    if (pills) pills.innerHTML = m.lessons.map((i, n) => `<button class="mod-pill ${i === mod ? 'current' : lessonDone(c.id, i) ? 'done' : ''}" data-action="play" data-id="${c.id}" data-mod="${i}"><span class="mp-n">${lessonDone(c.id, i) ? '✓ ' : ''}${n + 1}</span> ${esc(lTitle(c.id, i))}</button>`).join('');
+    /* round 6 gate: a lesson opens only when every lesson before it in the module is completed (its questions
+       answered). Done lessons and the current one stay open; nothing further can be skipped to. */
+    const firstOpen = m.lessons.find(i => !lessonDone(c.id, i) && i !== mod);
+    const reachable = i => i === mod || lessonDone(c.id, i) || (i === firstOpen && m.lessons.indexOf(i) <= m.lessons.indexOf(mod));
+    if (pills) pills.innerHTML = m.lessons.map((i, n) => { const ok = reachable(i);
+      return `<button class="mod-pill ${i === mod ? 'current' : lessonDone(c.id, i) ? 'done' : ''}${ok ? '' : ' locked'}" ${ok ? `data-action="play" data-id="${c.id}" data-mod="${i}"` : 'disabled aria-disabled="true"'}><span class="mp-n">${lessonDone(c.id, i) ? '✓ ' : ok ? '' : '🔒 '}${n + 1}</span> ${esc(lTitle(c.id, i))}</button>`; }).join('');
     const seq = lessonSeq(co.id), at = seq.findIndex(x => x.m === m && x.i === mod), prev = seq[at - 1], next = seq[at + 1];
     let nav = $('#curPlNav');
     if (!nav) { nav = document.createElement('div'); nav.id = 'curPlNav'; nav.className = 'cur-pl-nav'; const pb = document.querySelector('.player-bottom'); if (pb) pb.insertBefore(nav, pb.firstChild); }
     nav.innerHTML = `<button class="pl-ic" ${prev ? `data-action="play" data-id="${prev.m.source}" data-mod="${prev.i}"` : 'disabled'} aria-label="${L('prev')}" title="${L('prev')}">‹</button>
-      <button class="pl-ic" ${next ? `data-action="play" data-id="${next.m.source}" data-mod="${next.i}"` : 'disabled'} aria-label="${L('next')}" title="${next && next.m !== m ? L('next_module') : L('next')}">›</button>`;
+      <button class="pl-ic" ${next && lessonDone(c.id, mod) ? `data-action="play" data-id="${next.m.source}" data-mod="${next.i}"` : 'disabled'} aria-label="${L('next')}" title="${next && next.m !== m ? L('next_module') : L('next')}">›</button>`;
   };
 
   /* ---------- end of a lesson: the next lesson in curriculum order, no overview screens between ---------- */
@@ -530,7 +538,9 @@
     const seq = lessonSeq(m.courseId), at = seq.findIndex(x => x.m === m && x.i === mod);
     const after = seq.slice(at + 1).find(x => !lessonDone(x.m.source, x.i) && !(x.m.source === src && x.i === mod)) || seq[at + 1];
     const base = { checkFor: next && next.checkFor };
-    if (after) return Object.assign(base, { kind: 'next', courseId: after.m.source, mod: after.i, goLabel: after.m !== m ? L('next_module') : null });
+    if (after && after.m === m) return Object.assign(base, { kind: 'next', courseId: after.m.source, mod: after.i });
+    /* the module is finished (round 6): stop on a "Module complete" window that offers the next module IN THE PATH */
+    if (after) return Object.assign(base, { kind: 'cur-module-end', moduleId: m.id, courseId: src });
     return Object.assign(base, { kind: 'cur-course-end', programId: m.courseId, courseId: src });
   };
   window.curModuleToast = (src, mod) => {
@@ -539,11 +549,37 @@
   };
   /* after the last lesson's questions: the course result */
   window.curAfter = n => {
+    if (n.kind === 'cur-module-end') { closePlayer(); setTimeout(() => showModuleDone(n.moduleId), 300); return true; }
     if (n.kind !== 'cur-course-end') return false;
     closePlayer();
     setTimeout(() => showCourseResult(n.programId), 300);
     return true;
   };
+  function nextModuleAfter(m) {
+    const pm = pathModules(), k = pm.indexOf(m);
+    const inPath = pm.slice(k + 1).concat(pm.slice(0, Math.max(0, k))).find(x => !moduleStats(x).complete);
+    if (inPath) return inPath;
+    const ms = modulesOfCourse(m.courseId);
+    return ms.slice(ms.indexOf(m) + 1).find(x => !moduleStats(x).complete) || modules.find(x => !moduleStats(x).complete) || null;
+  }
+  function showModuleDone(id) {
+    const m = moduleOf(id); if (!m) return;
+    const nx = nextModuleAfter(m), first = nx && (nx.lessons.find(i => !lessonDone(nx.source, i)) ?? nx.lessons[0]);
+    let ov = $('#certEarned');
+    if (!ov) { ov = document.createElement('div'); ov.id = 'certEarned'; ov.className = 'ck-ov'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-modal', 'true'); document.body.appendChild(ov); }
+    ov.innerHTML = `<div class="ck-card cert-earned">
+      <div class="ce-seal" aria-hidden="true">✓</div>
+      <div class="ob-eyebrow">${t('mod_done_h')}</div>
+      <h2 class="ce-title">${esc(mTitle(m))}</h2>
+      <p class="ce-meta">${esc(cTitle(courseOf(m.courseId)))}</p>
+      ${nx ? `<p class="ce-meta">${L('next_in_course') === 'A seguir neste curso' ? 'A seguir' : 'Up next'}: <b>${esc(mTitle(nx))}</b></p>` : `<p class="ce-meta">${t('mod_path_done')}</p>`}
+      <div class="ce-actions">
+        ${nx ? `<button class="btn btn-primary" data-action="cur-modnext" data-id="${nx.source}" data-mod="${first}">▶ ${t('mod_next')}</button>` : ''}
+        <button class="btn btn-glass" data-action="cur-modpath">${t('mod_back_path')}</button>
+      </div></div>`;
+    ov.classList.add('on');
+    try { makeFocusable(ov); } catch (e) {}
+  }
   function showCourseResult(id) {
     const co = courseOf(id), st = courseStats(id); if (!co) return;
     if (st.complete) ledgerAppend('program_complete', { programId: id, score: st.score });
@@ -646,6 +682,10 @@
     const a = el.dataset.action;
     if (a === 'cur-cert') { e.preventDefault(); e.stopPropagation(); courseCert(el.dataset.id); }
     else if (a === 'cur-hist-dl') { e.preventDefault(); e.stopPropagation(); window.curHistoricalCert(el.dataset.id); }
+    else if (a === 'cur-modnext' || a === 'cur-modpath') { e.preventDefault(); e.stopPropagation();
+      const ov = $('#certEarned'); if (ov) ov.classList.remove('on');
+      if (a === 'cur-modpath') { meTab = 'path'; location.hash = '#/me'; render(); }
+      else { _openPaused = true; openPlayer(el.dataset.id, +el.dataset.mod); } }
     else if (a === 'cur-more') { e.preventDefault(); e.stopPropagation();
       const d = document.getElementById(el.getAttribute('aria-controls')); if (!d) return;
       const open = d.hidden; d.hidden = !open; el.setAttribute('aria-expanded', String(open)); el.classList.toggle('on', open); }

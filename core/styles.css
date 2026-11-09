@@ -5272,3 +5272,18 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 .reel.has-ambient .reel-seek { bottom: 22px; }
 .reel-copy { padding-bottom: 34px; }
 .reel-copy { padding-bottom: 46px; } .reel-seek { bottom: 16px; } .reel.has-ambient .reel-seek { bottom: 26px; }
+/* round 6: same-page redraws do not animate (no blinking) */
+body.rerender .will-reveal, body.rerender .will-reveal.in { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+body.rerender #app * { animation-duration: 0s !important; }
+/* library search suggestions */
+.lib-suggest-slot { position: relative; }
+.lib-suggest { margin: 8px 0 18px; max-width: 560px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.ls-item { all: unset; box-sizing: border-box; display: flex; align-items: baseline; gap: 12px; width: 100%; padding: 10px 14px; cursor: pointer; border-top: 1px solid var(--line); }
+.ls-item:first-child { border-top: 0; }
+.ls-item:hover, .ls-item:focus-visible { background: var(--surface-2); }
+.ls-type { flex: none; width: 64px; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.ls-label { display: flex; flex-direction: column; gap: 2px; font-size: 14px; color: var(--text); }
+.ls-label small { font-size: 12px; color: var(--text-faint); }
+.ls-empty { padding: 12px 14px; color: var(--text-dim); font-size: 13px; }
+.mod-pill.locked { opacity: .45; cursor: not-allowed; } .ce-seal { font-size: 28px; }
+.cl.locked .cl-main { cursor: not-allowed; } .cl.locked .cl-thumb { filter: saturate(.4) brightness(.55); } .cl.locked .cl-text { opacity: .55; } .cl.locked:hover { background: none; border-color: transparent; }

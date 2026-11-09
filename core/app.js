@@ -5005,9 +5005,15 @@ function normalizePath() {
     if (next.join() !== (S.path || []).join()) { S.path = next; save(); }
   } catch (e) {}
 }
+let _lastPage = null, _samePage = false;
 function render() {
   normalizePath();
   try { updateXpChip(); } catch (e) {}
+  /* round 6 "too much blinking": a redraw of the SAME page (a tab, a filter, a toggle) is instant —
+     no cross-fade, no entrance animations, no jump to the top. Only a real page change fades. */
+  _samePage = (location.hash || '#/home') === _lastPage;
+  _lastPage = location.hash || '#/home';
+  if (_samePage) { document.body.classList.add('rerender'); renderNow(); setTimeout(() => document.body.classList.remove('rerender'), 450); return; }
   /* One line of cross-route continuity. renderNow() is fully synchronous, so
      the transition captures a clean before/after with no extra bookkeeping. */
   if (document.startViewTransition && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -5055,24 +5061,8 @@ function renderNow() {
   if (route === 'progress' || route === 'me') paintLedgerCheck();
   maybeTour();
   if (route === 'community') initBoard();
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  const libInput = $('#libSearch');
-  if (libInput) {
-    libInput.oninput = e => {
-      libQuery = e.target.value;
-      const tmp = document.createElement('div');
-      tmp.innerHTML = renderLibrary();
-      /* swap the whole results block, not just .grid: the "nothing matches"
-         note lives outside it, so typing a non-matching query used to leave a
-         blank page while clicking a category chip showed the message —
-         two behaviours for one state */
-      const newPad = tmp.querySelector('.page-pad') || tmp.querySelector('.grid');
-      const oldPad = $('#app .page-pad') || $('#app .grid');
-      if (newPad && oldPad) oldPad.innerHTML = newPad.innerHTML;
-      const sub = $('#app .page-sub'), newSub = tmp.querySelector('.page-sub');
-      if (sub && newSub) sub.textContent = newSub.textContent;
-    };
-  }
+  if (!_samePage) window.scrollTo({ top: 0, behavior: 'instant' });
+  bindLibSearch();
   initMotion();
   armRails($('#app'));
   armHeroDepth();
@@ -5184,6 +5174,42 @@ const pathTileObserver = ('IntersectionObserver' in window) ? new IntersectionOb
   ioEverFired = true;
   entries.forEach(e => { if (e.isIntersecting) { loadBg(e.target); pathTileObserver.unobserve(e.target); } });
 }, { rootMargin: '400px 160px' }) : null;
+/* Library search (round 6): the box stays (it was replaced on every key, losing focus), the results keep
+   their pictures (they turned into green placeholders), and a short list of matches appears under it. */
+function libSuggestHTML(q) {
+  if (!q || q.trim().length < 2 || !window.CUR) return '';
+  const k = q.trim().toLowerCase(), out = [];
+  CUR.courses.forEach(co => { if (CUR.cTitle(co).toLowerCase().includes(k)) out.push({ type: t('lib_t_course'), label: CUR.cTitle(co), route: '#/course/' + co.id }); });
+  CUR.modules.forEach(m => {
+    if (CUR.mTitle(m).toLowerCase().includes(k)) out.push({ type: t('lib_t_module'), label: CUR.mTitle(m), route: '#/module/' + m.id });
+    m.lessons.forEach((i, n) => { const lt = CUR.lTitle(m.source, i); if (lt && lt.toLowerCase().includes(k)) out.push({ type: t('lib_t_lesson'), label: lt, sub: CUR.mTitle(m), route: '#/module/' + m.id }); });
+  });
+  if (!out.length) return `<div class="lib-suggest"><div class="ls-empty">${t('nothing_matches')}</div></div>`;
+  return `<div class="lib-suggest" role="listbox">${out.slice(0, 7).map(o => `<button class="ls-item" role="option" data-action="goto" data-route="${o.route}"><span class="ls-type">${esc(o.type)}</span><span class="ls-label">${esc(o.label)}${o.sub ? `<small>${esc(o.sub)}</small>` : ''}</span></button>`).join('')}</div>`;
+}
+function bindLibSearch() {
+  const libInput = $('#libSearch'); if (!libInput) return;
+  const box = libInput.closest('.lib-search');
+  if (box && !box.querySelector('.lib-suggest-slot')) box.insertAdjacentHTML('afterend', '<div class="lib-suggest-slot"></div>');
+  libInput.oninput = e => {
+    libQuery = e.target.value;
+    const slot = $('#app .lib-suggest-slot'); if (slot) slot.innerHTML = libSuggestHTML(libQuery);
+    const tmp = document.createElement('div');
+    tmp.innerHTML = renderLibrary();
+    /* swap every block AFTER the search box, never the box itself */
+    const oldPad = $('#app .page-pad'), newPad = tmp.querySelector('.page-pad');
+    if (oldPad && newPad) {
+      const keep = oldPad.querySelector('.lib-search'), keepSlot = oldPad.querySelector('.lib-suggest-slot');
+      [...oldPad.children].forEach(ch => { if (ch !== keep && ch !== keepSlot && !ch.matches('h1, .page-sub')) ch.remove(); });
+      let afterSearch = false;
+      [...newPad.children].forEach(ch => { if (ch.classList.contains('lib-search')) { afterSearch = true; return; } if (afterSearch) oldPad.appendChild(ch); });
+    }
+    const sub = $('#app .page-sub'), newSub = tmp.querySelector('.page-sub');
+    if (sub && newSub) sub.textContent = newSub.textContent;
+    makeFocusable($('#app')); lazyBackgrounds();
+  };
+  libInput.onkeydown = e => { if (e.key === 'Escape') { libInput.value = ''; libInput.oninput({ target: libInput }); } };
+}
 function lazyBackgrounds() {
   const els = [...document.querySelectorAll('.thumb[data-bg]')];
   /* above the fold: instant. "Above the fold" was approximated as the first
@@ -6174,9 +6200,17 @@ function showModuleCheck(c, mod, after, opts) {
             ${(!detail[i].ok && q.t0 != null) ? `<button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('mc_moment')} ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
           </div>`).join('')}
           <div class="ck-foot"><span class="ck-note">${score === fullTotal ? t('mc_all_right') : t('mc_recorded')}</span>
+            ${score < fullTotal ? `<button class="btn btn-glass btn-sm" id="mcRetry">↻ ${t('mc_retry')}</button>` : ''}
             <button class="btn btn-primary btn-sm" id="mcDone">${t('mc_continue')}</button></div>
         </div>`;
         $('#mcDone').addEventListener('click', () => { ov.classList.remove('on'); ov.innerHTML = ''; if (after) after(); });
+        /* round 6: correct a miss right here, on the first go — only the missed questions, answer still not shown */
+        const rt = $('#mcRetry');
+        if (rt) rt.addEventListener('click', () => {
+          const x = window.CUR && CUR.misses(c.id, mod);
+          ov.classList.remove('peek');
+          if (x) showModuleCheck(c, mod, after, { fix: x }); else showModuleCheck(c, mod, after, { retake: true });
+        });
       });
     };
     paint();
