@@ -5200,9 +5200,12 @@ function bindLibSearch() {
     const oldPad = $('#app .page-pad'), newPad = tmp.querySelector('.page-pad');
     if (oldPad && newPad) {
       const keep = oldPad.querySelector('.lib-search'), keepSlot = oldPad.querySelector('.lib-suggest-slot');
-      [...oldPad.children].forEach(ch => { if (ch !== keep && ch !== keepSlot && !ch.matches('h1, .page-sub')) ch.remove(); });
+      const pageSub = oldPad.querySelector(':scope > .page-sub');
+      [...oldPad.children].forEach(ch => { if (ch !== keep && ch !== keepSlot && !ch.matches('h1') && ch !== pageSub) ch.remove(); });
+      let seenSub = false;
       let afterSearch = false;
       [...newPad.children].forEach(ch => { if (ch.classList.contains('lib-search')) { afterSearch = true; return; } if (afterSearch) oldPad.appendChild(ch); });
+      void seenSub;
     }
     const sub = $('#app .page-sub'), newSub = tmp.querySelector('.page-sub');
     if (sub && newSub) sub.textContent = newSub.textContent;
@@ -6186,6 +6189,7 @@ function showModuleCheck(c, mod, after, opts) {
           ledgerAppend(fix ? 'check_fix' : 'check_retake', { courseId: c.id, mod, score, total: fullTotal });
           save();
         } else creditTraining(c.id, mod, res);
+        try { if (window.curPlayer && playing && playing.courseId === c.id && playing.mod === mod) window.curPlayer(c, mod); } catch (e) {}
         updateXpChip();
         detail.forEach((d, i) => { if (!d.ok) scheduleReview(c.id, mod, qs[i]); });
         /* feedback state: the why, and the way back to the exact moment */
@@ -6243,7 +6247,7 @@ function openReviewSession() {
     ov.querySelectorAll('.q-opt').forEach(el => el.addEventListener('click', () => {
       if (answered) return; answered = true;
       const sel = +el.dataset.o, ok = sel === v.a;
-      ov.querySelectorAll('.q-opt').forEach((x, oi) => { if (oi === v.a) x.classList.add('correct'); else if (oi === sel) x.classList.add('wrong'); });
+      ov.querySelectorAll('.q-opt').forEach((x, oi) => { if (oi === sel) x.classList.add(oi === v.a ? 'correct' : 'wrong'); });   /* merit: the right option is never revealed */
       $('#revNote').innerHTML = ok ? t('ck_right') : `${t('mc_try_later')}` +
         ((v.t0 != null) ? ` · <button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${e.courseId}" data-mod="${e.mod}" data-t="${Math.max(0, Math.floor(v.t0 - 4))}">⏱ ${t('mc_moment')}</button>` : '');
       reviewOutcome(e, ok);
@@ -7042,6 +7046,7 @@ function reelVimeo(ifr, on, el) {
         let dragging = false, dur = 0;
         pl.on('timeupdate', d => { if (!d || !d.duration) return; dur = d.duration; if (!dragging) bar.value = Math.round(d.seconds / d.duration * 1000); bar.style.setProperty('--p', (bar.value / 10) + '%'); });
         bar.addEventListener('pointerdown', e => { dragging = true; e.stopPropagation(); });
+        ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => bar.addEventListener(ev, () => setTimeout(() => { dragging = false; }, 50)));
         bar.addEventListener('input', () => { bar.style.setProperty('--p', (bar.value / 10) + '%'); });
         bar.addEventListener('change', () => { dragging = false; if (dur) pl.setCurrentTime(bar.value / 1000 * dur).catch(() => {}); });
       } }
@@ -8747,7 +8752,8 @@ document.addEventListener('click', e => {
           f.addEventListener('click', () => { try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {}
             /* round 7: after reviewing the moment, Continue opens the missed questions on the same screen */
             ck.classList.remove('peek');
-            const go = ck.querySelector('#mcRetry') || ck.querySelector('#mcDone'); if (go) go.click(); else { ck.classList.remove('on'); ck.innerHTML = ''; } });
+            /* answering again (no result buttons yet): just unfold back to the questions — never wipe them */
+            const go = ck.querySelector('#mcRetry') || ck.querySelector('#mcDone'); if (go) go.click(); });
           bar.append(b, f);
           if (ck.firstElementChild) ck.firstElementChild.prepend(bar);
         }
@@ -8918,6 +8924,13 @@ $('#playerComplete').addEventListener('click', () => {
   const c = courseById(playing.courseId), p = prog(playing.courseId);
   const doneMod = isDone(playing.courseId) || (p && !p.done && (p.mod || 0) > playing.mod) || (S.trainingLog || []).some(e => e.courseId === playing.courseId && e.mod === playing.mod);
   if (doneMod) {   /* already recorded: this button is now "next lesson" (or back to the course) */
+    if (window.curNext && window.CUR) {
+      /* curriculum: the same next step as the end of a lesson — within the module, or the Module complete window */
+      const n = window.curNext(playing.courseId, playing.mod, { checkFor: null });
+      if (n && n.kind === 'next') { _openPaused = true; openPlayer(n.courseId, n.mod); }
+      else if (!(n && window.curAfter && window.curAfter(n))) closePlayer();
+      return;
+    }
     if (c && playing.mod + 1 < c.modules.length) { _openPaused = true; openPlayer(playing.courseId, playing.mod + 1); }
     else closePlayer();
     return;

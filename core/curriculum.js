@@ -274,8 +274,9 @@
     const sum = meta && meta.summary ? (PT() ? meta.summary.pt : meta.summary.en) : '';
     const chs = meta && Array.isArray(meta.chapters) ? meta.chapters : [];
     /* round 6 gate: a lesson is open when it is done, or it is the first not-done lesson of its module */
-    const firstOpen = m.lessons.find(x => !lessonDone(m.source, x));
-    const locked = !done && i !== firstOpen;
+    /* optional lessons are always open and never block the required ones after them */
+    const firstOpen = m.lessons.find(x => !isOptional(m, x) && !lessonDone(m.source, x));
+    const locked = !done && !opt && i !== firstOpen;
     return `<div class="cl ${done ? 'done' : ''} ${isNext ? 'current' : ''}${locked ? ' locked' : ''}">
       <button class="cl-main" ${locked ? 'disabled aria-disabled="true"' : `data-action="play" data-id="${m.source}" data-mod="${i}"`} aria-label="${L('lesson')} ${n}: ${esc(lTitle(m.source, i))}${done ? ' · ' + L('completed') : ''}${locked ? ' · 🔒' : ''}${b ? ` · ${b.score}/${b.total} ${L('questions')}` : ''}">
         <span class="cl-thumb"${th ? ` style="background-image:url('${th}')"` : ''}><span class="cl-len">${lMins(m.source, i)} min</span>${done ? '<span class="cl-tick" aria-hidden="true">✓</span>' : ''}</span>
@@ -521,8 +522,8 @@
     const pills = $('#playerPills');
     /* round 6 gate: a lesson opens only when every lesson before it in the module is completed (its questions
        answered). Done lessons and the current one stay open; nothing further can be skipped to. */
-    const firstOpen = m.lessons.find(i => !lessonDone(c.id, i) && i !== mod);
-    const reachable = i => i === mod || lessonDone(c.id, i) || (i === firstOpen && m.lessons.indexOf(i) <= m.lessons.indexOf(mod));
+    const firstOpen = m.lessons.find(i => !isOptional(m, i) && !lessonDone(c.id, i));
+    const reachable = i => i === mod || lessonDone(c.id, i) || isOptional(m, i) || i === firstOpen;
     if (pills) pills.innerHTML = m.lessons.map((i, n) => { const ok = reachable(i);
       return `<button class="mod-pill ${i === mod ? 'current' : lessonDone(c.id, i) ? 'done' : ''}${ok ? '' : ' locked'}" ${ok ? `data-action="play" data-id="${c.id}" data-mod="${i}"` : 'disabled aria-disabled="true"'}><span class="mp-n">${lessonDone(c.id, i) ? '✓ ' : ok ? '' : '🔒 '}${n + 1}</span> ${esc(lTitle(c.id, i))}</button>`; }).join('');
     const seq = lessonSeq(co.id), at = seq.findIndex(x => x.m === m && x.i === mod), prev = seq[at - 1], next = seq[at + 1];
@@ -540,7 +541,11 @@
     const base = { checkFor: next && next.checkFor };
     if (after && after.m === m) return Object.assign(base, { kind: 'next', courseId: after.m.source, mod: after.i });
     /* the module is finished (round 6): stop on a "Module complete" window that offers the next module IN THE PATH */
-    if (after) return Object.assign(base, { kind: 'cur-module-end', moduleId: m.id, courseId: src });
+    if (after && moduleStats(m).complete) return Object.assign(base, { kind: 'cur-module-end', moduleId: m.id, courseId: src });
+    if (after) { /* module not finished yet (a lesson was skipped): go back to its first open lesson, never jump modules */
+      const back = m.lessons.find(i => !isOptional(m, i) && !lessonDone(m.source, i) && !(m.source === src && i === mod));
+      if (back != null) return Object.assign(base, { kind: 'next', courseId: m.source, mod: back });
+      return Object.assign(base, { kind: 'cur-module-end', moduleId: m.id, courseId: src }); }
     return Object.assign(base, { kind: 'cur-course-end', programId: m.courseId, courseId: src });
   };
   window.curModuleToast = (src, mod) => {
@@ -560,7 +565,7 @@
     const inPath = pm.slice(k + 1).concat(pm.slice(0, Math.max(0, k))).find(x => !moduleStats(x).complete);
     if (inPath) return inPath;
     const ms = modulesOfCourse(m.courseId);
-    return ms.slice(ms.indexOf(m) + 1).find(x => !moduleStats(x).complete) || modules.find(x => !moduleStats(x).complete) || null;
+    return ms.slice(ms.indexOf(m) + 1).find(x => !moduleStats(x).complete) || modules.find(x => x !== m && !moduleStats(x).complete) || null;
   }
   function showModuleDone(id) {
     const m = moduleOf(id); if (!m) return;

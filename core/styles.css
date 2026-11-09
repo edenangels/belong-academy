@@ -5287,3 +5287,4 @@ body.rerender #app * { animation-duration: 0s !important; }
 .ls-empty { padding: 12px 14px; color: var(--text-dim); font-size: 13px; }
 .mod-pill.locked { opacity: .45; cursor: not-allowed; } .ce-seal { font-size: 28px; }
 .cl.locked .cl-main { cursor: not-allowed; } .cl.locked .cl-thumb { filter: saturate(.4) brightness(.55); } .cl.locked .cl-text { opacity: .55; } .cl.locked:hover { background: none; border-color: transparent; }
+body.rerender #app * { animation: none !important; }
