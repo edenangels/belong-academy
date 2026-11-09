@@ -1,5 +1,5 @@
 {
- "generatedAt": 1793787649276,
+ "generatedAt": 1794247287655,
  "nodes": [
   {
    "id": "course:craveiral-hospitality",
@@ -12,7 +12,7 @@
    "title": "Our values, in practice",
    "course": "craveiral-hospitality",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/0",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-hospitality/0",
    "seconds": 350
   },
   {
@@ -61,7 +61,7 @@
    "title": "Hospitality, the Craveiral way",
    "course": "craveiral-hospitality",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/1",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-hospitality/1",
    "seconds": 379
   },
   {
@@ -105,7 +105,7 @@
    "title": "One single house",
    "course": "craveiral-places",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/0",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/0",
    "seconds": 287
   },
   {
@@ -139,7 +139,7 @@
    "title": "The houses",
    "course": "craveiral-places",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/1",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/1",
    "seconds": 309
   },
   {
@@ -168,7 +168,7 @@
    "title": "FarmTable",
    "course": "craveiral-places",
    "mod": 2,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/2",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/2",
    "seconds": 302
   },
   {
@@ -207,7 +207,7 @@
    "title": "Bar da Praia do Carvalhal",
    "course": "craveiral-places",
    "mod": 3,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/3",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/3",
    "seconds": 287
   },
   {
@@ -246,7 +246,7 @@
    "title": "The Shop",
    "course": "craveiral-places",
    "mod": 4,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/4",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/4",
    "seconds": 278
   },
   {
@@ -290,7 +290,7 @@
    "title": "The São Teotónio laundry",
    "course": "craveiral-places",
    "mod": 5,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/5",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/5",
    "seconds": 292
   },
   {
@@ -329,7 +329,7 @@
    "title": "Experiential tourism",
    "course": "craveiral-places",
    "mod": 6,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/6",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/6",
    "seconds": 303
   },
   {
@@ -368,7 +368,7 @@
    "title": "Wellbeing and service recovery",
    "course": "craveiral-places",
    "mod": 7,
-   "url": "https://academy.edenrise.com/#/play/craveiral-places/7",
+   "url": "https://belong-academy.pages.dev/#/play/craveiral-places/7",
    "seconds": 312
   },
   {
@@ -402,7 +402,7 @@
    "title": "FarmTable: where the philosophy becomes food",
    "course": "farm-to-table",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/farm-to-table/0",
+   "url": "https://belong-academy.pages.dev/#/play/farm-to-table/0",
    "seconds": 382
   },
   {
@@ -416,7 +416,7 @@
    "title": "The constellation: Beach Bar, A Mesa do CAM, events, and one same gesture",
    "course": "farm-to-table",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/farm-to-table/1",
+   "url": "https://belong-academy.pages.dev/#/play/farm-to-table/1",
    "seconds": 348
   },
   {
@@ -440,7 +440,7 @@
    "title": "The guest journey: from first click to farewell",
    "course": "guest-journey",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/guest-journey/0",
+   "url": "https://belong-academy.pages.dev/#/play/guest-journey/0",
    "seconds": 394
   },
   {
@@ -469,7 +469,7 @@
    "title": "When things go wrong: complaints and service recovery",
    "course": "guest-journey",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/guest-journey/1",
+   "url": "https://belong-academy.pages.dev/#/play/guest-journey/1",
    "seconds": 351
   },
   {
@@ -503,7 +503,7 @@
    "title": "The houses, the farm, and the standards we keep",
    "course": "houses-farm-sustainability",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/0",
+   "url": "https://belong-academy.pages.dev/#/play/houses-farm-sustainability/0",
    "seconds": 410
   },
   {
@@ -522,7 +522,7 @@
    "title": "Sustainability in daily practice: what the mission asks of you before lunch",
    "course": "houses-farm-sustainability",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/1",
+   "url": "https://belong-academy.pages.dev/#/play/houses-farm-sustainability/1",
    "seconds": 360
   },
   {
@@ -551,7 +551,7 @@
    "title": "How we speak: the Craveiral voice",
    "course": "voice-leadership",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/voice-leadership/0",
+   "url": "https://belong-academy.pages.dev/#/play/voice-leadership/0",
    "seconds": 335
   },
   {
@@ -580,7 +580,7 @@
    "title": "Leadership, autonomy, and how we work together",
    "course": "voice-leadership",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/voice-leadership/1",
+   "url": "https://belong-academy.pages.dev/#/play/voice-leadership/1",
    "seconds": 395
   },
   {
@@ -614,7 +614,7 @@
    "title": "Why we're here: my story, and the story of Craveiral",
    "course": "welcome-belong",
    "mod": 0,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
+   "url": "https://belong-academy.pages.dev/#/play/welcome-belong/0",
    "seconds": 297
   },
   {
@@ -648,7 +648,7 @@
    "title": "Our vision, our mission, and the chain",
    "course": "welcome-belong",
    "mod": 1,
-   "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
+   "url": "https://belong-academy.pages.dev/#/play/welcome-belong/1",
    "seconds": 386
   },
   {

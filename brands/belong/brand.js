@@ -20,7 +20,6 @@
   shortDesc: 'a community-and-hospitality school giving shape to meaning',
   realm: 'real Belong situations (hosting and making guests feel they belong, seasonal kitchens and tasting, growing and harvesting, caring for nature and place, building community and the circular economy)',
   location: 'Portugal',
-  /* Belong's OWN Firebase project (created 2026-07-17). */
   boardIndexed: true,   /* leaderboard composite index (companyId + xp) deployed 2026-09-17 */
   /* the storefront always leads with the filmed course — never with whatever a visitor opened last */
   askExamples: {
@@ -38,9 +37,13 @@
   certOnCompletion: false,
   /* the video ending opens the check; no separate "Mark module complete" button */
   markComplete: false,
-  /* 'firebase' = real accounts across devices (the live site's accounts and progress live there).
-     'local' = the internal test database in core/localdb.js (this device only) — for demos/previews. */
-  backend: 'firebase',
+  /* Backend (9 Nov 2026 — shipped without a login, for the simplest possible setup):
+     'open'     = no sign-in at all. Open the link, give your name, choose a department, learn.
+                  Progress, hours and certificates are kept in this browser on this device.
+     'local'    = the internal test database in core/localdb.js (accounts on this device; demos).
+     'firebase' = real accounts across devices — add a `firebase: { ... }` config block (see
+                  docs/ship/BACKEND-LATER.md). Nothing else in the code changes. */
+  backend: 'open',
   /* meeting 4 Nov 2026: the "knowledge verified · from quizzes" count is clutter; scores live on the course page */
   hideVerifiedStat: true,
   quickWinsShelf: false,   /* the home Reels rail already shows the reels; a second shelf repeated them */
@@ -53,16 +56,13 @@
       { email: 'learner@belong.test', name: 'Learner (test)',         role: 'learner', dept: 'housekeeping' }
     ]
   },
-  firebase: {
-    apiKey: 'AIzaSyCxZdTPs__USqmGcnf2dnKsYO6SmxHfd3w',
-    authDomain: 'belong-academy.firebaseapp.com',
-    projectId: 'belong-academy',
-    storageBucket: 'belong-academy.firebasestorage.app',
-    messagingSenderId: '306627126212',
-    appId: '1:306627126212:web:6ab4b3732bc31a58bb7a91',
-    measurementId: 'G-7WLF5ZMDPH'
-  },
-  superadmins: ['meridante.pt@gmail.com'],   /* Belong platform admin (client-side gate; mirrored in core/firestore.rules isSuper) */
+  /* The "Ask" assistant: a small keyless Cloudflare Worker (source in extras/ai-gateway). This default is
+     Meridante's copy, which only answers the domains on its allow-list. On your own domain, deploy your
+     own copy and put its address here (see docs/ship/SETUP.md, step 6). */
+  aiGateway: 'https://academy-ai.edenrise.workers.dev/',
+  /* where technical error reports go (no personal data). null = switched off. */
+  errorBeacon: 'https://academy-watch.edenrise.workers.dev/beacon',
+  superadmins: [],   /* platform-admin emails; only used with a sign-in backend */
   themeColor: '#211613',
   wordSub: 'Academy',
   /* the Belong symbol — a ring (the idea) over a bar (its place / the ground) */

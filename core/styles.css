@@ -5288,3 +5288,12 @@ body.rerender #app * { animation-duration: 0s !important; }
 .mod-pill.locked { opacity: .45; cursor: not-allowed; } .ce-seal { font-size: 28px; }
 .cl.locked .cl-main { cursor: not-allowed; } .cl.locked .cl-thumb { filter: saturate(.4) brightness(.55); } .cl.locked .cl-text { opacity: .55; } .cl.locked:hover { background: none; border-color: transparent; }
 body.rerender #app * { animation: none !important; }
+
+/* ---------- no-sign-in mode (BRAND.backend 'open', 9 Nov 2026): no login, so no sign-in or sign-out anywhere ---------- */
+.open-mode #authGate,
+.open-mode [data-m="signout"],
+.open-mode [data-action="signout"],
+.open-mode [data-action="show-login"],
+.open-mode .prof-guest,
+.open-mode .comm-signin { display: none !important; }
+.open-mode #obUsername[aria-invalid="true"] { border-color: var(--accent, #be594d); }

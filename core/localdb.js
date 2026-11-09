@@ -327,6 +327,8 @@
   function boot() {
     bootSession = db().session;
     wire();
+    /* 'open' backend: no sign-in at all — everyone goes straight in; progress stays on this device */
+    if (window.BRAND && BRAND.backend === 'open') { localStorage.setItem(MODE, 'guest'); if (db().session) { db().session = null; commit(); } }
     const u = me(), mode = localStorage.getItem(MODE);
     window.EdenCloud.loadCompany();
     window.EdenOrg = db().config[cid()] || window.EdenOrg;

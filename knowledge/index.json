@@ -1,5 +1,5 @@
 {
- "generatedAt": 1793787642465,
+ "generatedAt": 1794247287432,
  "courses": {
   "craveiral-hospitality": {
    "title": "Hospitality, the Craveiral Way",
@@ -25,36 +25,36 @@
      ],
      "regime": null,
      "summary": "Every company has values. Most of them live on a wall in a meeting room and die there. I want ours to live in your hands, in the decisions you make when nobody's watching, when the day is long, when the guest is difficult, when the easy choice",
-     "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/0",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-hospitality/0",
      "moments": [
       {
-       "t0": 27,
-       "teaches": "Why does the trainer prioritize financial sustainability?",
+       "t0": 44,
+       "teaches": "Why does financial sustainability come first at Craveiral?",
        "audit": "corrected"
       },
       {
-       "t0": 82,
-       "teaches": "What are the three aspects of sustainability mentioned by the trainer?",
+       "t0": 26,
+       "teaches": "Which three kinds of sustainability does Craveiral pursue?",
        "audit": "corrected"
       },
       {
-       "t0": 56,
-       "teaches": "What should a worker do to protect the mission of Craveiral?",
+       "t0": 61,
+       "teaches": "Why do avoiding waste and caring for equipment matter?",
        "audit": "corrected"
       },
       {
-       "t0": 108,
-       "teaches": "How should a worker approach a convoluted process in their work?",
+       "t0": 121,
+       "teaches": "A task seems convoluted and nobody knows why. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 135,
-       "teaches": "A guest is complaining about the lack of comfort in their room. What should the worker do?",
+       "t0": 154,
+       "teaches": "A guest expected a rustic place with few comforts. What is true at Craveiral?",
        "audit": "corrected"
       },
       {
-       "t0": 162,
-       "teaches": "A new worker is setting up a room for a guest and is unsure how to balance simplicity and comfort. What should they do?",
+       "t0": 165,
+       "teaches": "You are setting up a room. Which approach matches \"simplicity is not scarcity\"?",
        "audit": "corrected"
       }
      ],
@@ -81,36 +81,36 @@
      ],
      "regime": null,
      "summary": "Let's talk about hospitality. The real thing, not the industry, the craft. I want to start with a distinction that changed the way I think about this work. There is a difference between service and hospitality. Service is technical.",
-     "url": "https://academy.edenrise.com/#/play/craveiral-hospitality/1",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-hospitality/1",
      "moments": [
       {
-       "t0": 29,
-       "teaches": "What is the main difference between service and hospitality?",
+       "t0": 11,
+       "teaches": "What is the difference between service and hospitality?",
        "audit": "verified"
       },
       {
-       "t0": 83,
-       "teaches": "How should guests be referred to, according to the trainer?",
+       "t0": 89,
+       "teaches": "Why does Craveiral say \"guests\" and never \"customers\"?",
        "audit": "corrected"
       },
       {
-       "t0": 111,
-       "teaches": "What should a staff member do when a guest arrives, according to the trainer?",
+       "t0": 106,
+       "teaches": "A family arrives at 22:00 and you are tired. How do you greet them?",
        "audit": "verified"
       },
       {
-       "t0": 138,
-       "teaches": "What is a simple way to show hospitality, according to the trainer?",
+       "t0": 124,
+       "teaches": "A returning guest walks up to you. How do you greet her?",
        "audit": "verified"
       },
       {
-       "t0": 166,
-       "teaches": "A couple has booked a room for their anniversary. What could a staff member do to show hospitality?",
+       "t0": 152,
+       "teaches": "What does anticipation mean in Craveiral hospitality?",
        "audit": "verified"
       },
       {
-       "t0": 194,
-       "teaches": "A guest asks for a recommendation on which beach to visit with their small children. What could a staff member say to sh",
+       "t0": 190,
+       "teaches": "A guest asks you where to watch the sunset. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -142,26 +142,26 @@
      ],
      "regime": null,
      "summary": "Nine hectares. 38 independent houses. And only 4% of the land built on. Everything else is a working farm. Vegetable garden, orchard, animals, pinewood, stitched together by wooden",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/0",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/0",
      "moments": [
       {
-       "t0": 28,
-       "teaches": "How should staff view the multiple units of Craveiral?",
+       "t0": 27,
+       "teaches": "How does the guest see Craveiral's five units?",
        "audit": "verified"
       },
       {
-       "t0": 54,
-       "teaches": "What is the main purpose of Craveiral's hospitality?",
+       "t0": 57,
+       "teaches": "Why does Craveiral exist?",
        "audit": "corrected"
       },
       {
-       "t0": 113,
-       "teaches": "What should staff do to ensure a consistent guest experience?",
+       "t0": 130,
+       "teaches": "The shop holds one standard and the restaurant another. What does the guest think?",
        "audit": "verified"
       },
       {
-       "t0": 196,
-       "teaches": "How should staff approach waste management?",
+       "t0": 214,
+       "teaches": "Why does waste bother Craveiral so much?",
        "audit": "corrected"
       }
      ],
@@ -188,36 +188,36 @@
      ],
      "regime": null,
      "summary": "If you are going to represent Craveiral, you have to know Craveiral the way you know your own home. This module is a visit, and it has two parts: the facts and the standard.",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/1",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/1",
      "moments": [
       {
-       "t0": 33,
-       "teaches": "What are the main characteristics that the independent houses in Craveiral share?",
+       "t0": 37,
+       "teaches": "What do all the Craveiral houses share?",
        "audit": "corrected"
       },
       {
-       "t0": 60,
-       "teaches": "What type of accommodation is suitable for up to four guests and has one bedroom?",
+       "t0": 138,
+       "teaches": "Why must you know every house type precisely?",
        "audit": "verified"
       },
       {
-       "t0": 118,
-       "teaches": "A guest asks if a two-bedroom house can accommodate their family with children. What should you do?",
+       "t0": 54,
+       "teaches": "A guest wants to bring their dog. What is true?",
        "audit": "verified"
       },
       {
-       "t0": 200,
-       "teaches": "What is the importance of maintaining a high standard of cleanliness and amenities in the houses and shared spaces?",
+       "t0": 245,
+       "teaches": "A bulb is dead on a boardwalk. Why does it matter?",
        "audit": "corrected"
       },
       {
-       "t0": 118,
-       "teaches": "A guest asks if a farm loft can accommodate three adults. What should you do?",
+       "t0": 290,
+       "teaches": "Litter lies by the pool, and it's not your job. What do you do?",
        "audit": "corrected"
       },
       {
-       "t0": 200,
-       "teaches": "A guest arrives at their house and finds that the kitchen is not clean and the amenities are not complete. What should y",
+       "t0": 273,
+       "teaches": "It's 9:00 and the guest asked for nothing. May you knock?",
        "audit": "corrected"
       }
      ],
@@ -244,31 +244,31 @@
      ],
      "regime": null,
      "summary": "If Craveiral has a soul, you can taste it, literally. This module is about the farm table, and the philosophy fits in one",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/2",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/2",
      "moments": [
       {
-       "t0": 30,
-       "teaches": "What percentage of the food served at Craveiral is grown on the farm?",
+       "t0": 48,
+       "teaches": "Why does the menu change with the seasons?",
        "audit": "verified"
       },
       {
-       "t0": 163,
-       "teaches": "How many sentences are needed to describe a wine to a guest?",
+       "t0": 140,
+       "teaches": "How do you describe a wine to a guest?",
        "audit": "corrected"
       },
       {
-       "t0": 189,
-       "teaches": "What should a server do if a table is taking a long time to finish their meal?",
+       "t0": 185,
+       "teaches": "A table is lingering over a second bottle under the stars. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 189,
-       "teaches": "How should a server describe the story behind a dish to a guest?",
+       "t0": 212,
+       "teaches": "How long should the story of a dish be?",
        "audit": "corrected"
       },
       {
-       "t0": 30,
-       "teaches": "A guest asks where the cheese on their plate comes from. What should the server respond?",
+       "t0": 241,
+       "teaches": "A guest is vegetarian with an allergy. How is that treated?",
        "audit": "corrected"
       }
      ],
@@ -295,36 +295,36 @@
      ],
      "regime": null,
      "summary": "On the sand of the Costa Vicentina, minutes from Craveiral, is the beach our guests use most. The easiest access on this stretch of coast, the one families",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/3",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/3",
      "moments": [
       {
-       "t0": 28,
-       "teaches": "What does 'informal' mean in the context of the Bar da Praia do Carvalhal?",
+       "t0": 45,
+       "teaches": "At the beach bar, what does \"informal\" mean?",
        "audit": "verified"
       },
       {
-       "t0": 54,
-       "teaches": "What is the relationship between the register and the standard at the Bar da Praia do Carvalhal?",
+       "t0": 58,
+       "teaches": "Which line sums up the beach bar module?",
        "audit": "corrected"
       },
       {
-       "t0": 188,
-       "teaches": "How can you settle 90% of complaints before they exist at the Bar da Praia do Carvalhal?",
+       "t0": 190,
+       "teaches": "The food will take 20 minutes. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 134,
-       "teaches": "How can you effectively communicate the origin of the menu items at the Bar da Praia do Carvalhal?",
+       "t0": 119,
+       "teaches": "How do you tell the origin of the food at the beach bar counter?",
        "audit": "corrected"
       },
       {
-       "t0": 160,
-       "teaches": "A guest asks for recommendations on what to do during their stay. What should you suggest?",
+       "t0": 149,
+       "teaches": "A guest asks how to plan a perfect day. What do you suggest?",
        "audit": "verified"
       },
       {
-       "t0": 81,
-       "teaches": "A guest has a bad experience at the Bar da Praia do Carvalhal. What is the potential impact on the business?",
+       "t0": 71,
+       "teaches": "A beach visitor has never stayed at Craveiral. What are you to them?",
        "audit": "corrected"
       }
      ],
@@ -351,31 +351,31 @@
      ],
      "regime": null,
      "summary": "The shop is the most misunderstood thing at Craveiral. Seen as a place that sells souvenirs, it is a small shop with a tight margin. Seen as what it actually is, the territory condensed and portable.",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/4",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/4",
      "moments": [
       {
-       "t0": 2,
-       "teaches": "What is the shop at Craveiral often misunderstood as?",
+       "t0": 13,
+       "teaches": "What is the Craveiral shop, really?",
        "audit": "corrected"
       },
       {
        "t0": 62,
-       "teaches": "What is the sales technique that turns a souvenir into a relationship?",
+       "teaches": "What turns a shop product into a relationship?",
        "audit": "corrected"
       },
       {
-       "t0": 116,
-       "teaches": "What should you do when a guest hesitates after you recommend a product?",
+       "t0": 140,
+       "teaches": "You recommend a product and the guest hesitates. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 146,
-       "teaches": "What should you do if a product is not organic, but you want to highlight its origin?",
+       "t0": 160,
+       "teaches": "A guest asks if the olive oil is ours. It isn't. What do you say?",
        "audit": "verified"
       },
       {
-       "t0": 175,
-       "teaches": "You notice that one of the shelves in the shop is dusty and disorganized. What should you do?",
+       "t0": 191,
+       "teaches": "The shop doors are open all day. How often do you check for dust?",
        "audit": "verified"
       }
      ],
@@ -402,36 +402,36 @@
      ],
      "regime": null,
      "summary": "This is the module a lot of people will assume has nothing to do with them. It does. The São Teotónio Laundry is the least visible unit at Craveiral, and probably the easiest way to explain circular economy to anyone who doubts",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/5",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/5",
      "moments": [
       {
-       "t0": 83,
-       "teaches": "What is the most decisive well-being indicator of a stay at Craveiral?",
+       "t0": 96,
+       "teaches": "What is the most decisive well-being indicator of a stay?",
        "audit": "corrected"
       },
       {
        "t0": 114,
-       "teaches": "What are the four standards measured in the laundry service?",
+       "teaches": "When must a stain be treated?",
        "audit": "verified"
       },
       {
-       "t0": 142,
-       "teaches": "What should a worker do when they find a piece of linen with a hole or a set stain?",
+       "t0": 136,
+       "teaches": "You find a sheet with a small hole. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 169,
-       "teaches": "How should a worker operate the washing machines to reduce energy consumption?",
+       "t0": 159,
+       "teaches": "Which washing routine does the lesson ask for?",
        "audit": "verified"
       },
       {
        "t0": 195,
-       "teaches": "A neighbor brings in a bag of washing to the laundry service. How should the worker treat this customer?",
+       "teaches": "A neighbour brings in a bag of washing. How do you treat them?",
        "audit": "corrected"
       },
       {
-       "t0": 30,
-       "teaches": "A hotel in the Costa Vicentina is considering outsourcing its laundry service to an industrial operator in a city an hou",
+       "t0": 54,
+       "teaches": "Why does Craveiral run its own laundry in São Teotónio?",
        "audit": "corrected"
       }
      ],
@@ -458,26 +458,26 @@
      ],
      "regime": null,
      "summary": "There is a difference between an activity and an experience, and it is not vocabulary. An activity is something the guests did. An experience is something they take away.",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/6",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/6",
      "moments": [
       {
-       "t0": 2,
-       "teaches": "What is the main difference between an activity and an experience?",
+       "t0": 6,
+       "teaches": "What makes an experience different from an activity?",
        "audit": "verified"
       },
       {
-       "t0": 29,
-       "teaches": "What are the four dimensions of any moment offered to guests?",
+       "t0": 51,
+       "teaches": "Of the four registers, which one means guests take part and get their hands dirty?",
        "audit": "corrected"
       },
       {
-       "t0": 115,
-       "teaches": "How can you increase the value a guest puts on an experience?",
+       "t0": 135,
+       "teaches": "How do you tell a guest about tomorrow's harvest?",
        "audit": "corrected"
       },
       {
-       "t0": 174,
-       "teaches": "A guest arrives at the farm and seems hesitant to participate in the activities. What should you do?",
+       "t0": 245,
+       "teaches": "A guest asks a farm question you can't answer. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -504,31 +504,31 @@
      ],
      "regime": null,
      "summary": "This module has two halves that look separate and are not. The first is about wellbeing. Our stay here leaves a person better than it found them. The second is what to do when something goes wrong.",
-     "url": "https://academy.edenrise.com/#/play/craveiral-places/7",
+     "url": "https://belong-academy.pages.dev/#/play/craveiral-places/7",
      "moments": [
       {
-       "t0": 29,
-       "teaches": "What is the primary source of wellbeing offered by the farm and school?",
+       "t0": 28,
+       "teaches": "Where does most of the wellbeing we offer come from?",
        "audit": "verified"
       },
       {
-       "t0": 57,
-       "teaches": "What is the purpose of having 9 hectares with 4% build?",
+       "t0": 56,
+       "teaches": "Nine hectares with 4% built are only worth it if guests do what?",
        "audit": "corrected"
       },
       {
-       "t0": 83,
-       "teaches": "What should you do if a guest is having trouble sleeping due to maintenance noise?",
+       "t0": 140,
+       "teaches": "A colleague wants to vacuum a guest corridor at 8:30. What does the lesson say?",
        "audit": "verified"
       },
       {
-       "t0": 166,
-       "teaches": "A guest approaches you with a complaint about their room not being cleaned. What do you do first?",
+       "t0": 186,
+       "teaches": "A guest complains their house wasn't cleaned. What do you do first?",
        "audit": "corrected"
       },
       {
        "t0": 198,
-       "teaches": "A guest reports a problem with their meal, but it's not your department's responsibility. What do you do?",
+       "teaches": "A guest complains about their meal, but you work in housekeeping. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -560,36 +560,36 @@
      ],
      "regime": null,
      "summary": "If Craveiral has a soul, you can taste it, literally. This module is about the farm table and about food, which",
-     "url": "https://academy.edenrise.com/#/play/farm-to-table/0",
+     "url": "https://belong-academy.pages.dev/#/play/farm-to-table/0",
      "moments": [
       {
-       "t0": 28,
-       "teaches": "What percentage of the food served at the farm is grown on the property?",
+       "t0": 77,
+       "teaches": "What does \"root to table\" mean at Craveiral?",
        "audit": "verified"
       },
       {
-       "t0": 54,
-       "teaches": "Why does the menu at the farm rotate with the seasons?",
+       "t0": 55,
+       "teaches": "Why does the menu change with the seasons?",
        "audit": "corrected"
       },
       {
-       "t0": 81,
-       "teaches": "How should front-of-house staff approach describing the breakfast options to guests?",
+       "t0": 87,
+       "teaches": "How does Craveiral see its breakfast?",
        "audit": "verified"
       },
       {
-       "t0": 161,
-       "teaches": "What information should front-of-house staff be able to provide about the wines on the list?",
+       "t0": 182,
+       "teaches": "A guest asks about a wine. Which three things do you tell them?",
        "audit": "verified"
       },
       {
-       "t0": 28,
-       "teaches": "A guest asks where the vegetables in their salad came from. How should you respond?",
+       "t0": 272,
+       "teaches": "How do you tell the story of a dish at the table?",
        "audit": "corrected"
       },
       {
-       "t0": 133,
-       "teaches": "A family with children asks about activities they can do together. What would be an appropriate suggestion based on the ",
+       "t0": 306,
+       "teaches": "A guest has a food intolerance. How does Craveiral treat it?",
        "audit": "verified"
       }
      ],
@@ -616,36 +616,36 @@
      ],
      "regime": null,
      "summary": "So far, we've mostly stood on the farm. In this module, I want to lift your eyes to the whole constellation, because Belong is bigger than the property line, and whichever unit you work in, you're part of",
-     "url": "https://academy.edenrise.com/#/play/farm-to-table/1",
+     "url": "https://belong-academy.pages.dev/#/play/farm-to-table/1",
      "moments": [
       {
-       "t0": 26,
-       "teaches": "What is the concept of the beach bar at Carvalhial?",
+       "t0": 31,
+       "teaches": "Which standard applies at the beach bar?",
        "audit": "verified"
       },
       {
-       "t0": 80,
-       "teaches": "What is the significance of A Mesa do CAM in Lisbon?",
+       "t0": 71,
+       "teaches": "Where is A Mesa do CAM?",
        "audit": "corrected"
       },
       {
-       "t0": 53,
-       "teaches": "What should you do when recommending the beach to guests?",
+       "t0": 58,
+       "teaches": "When you recommend the beach bar to a guest, what are you doing?",
        "audit": "verified"
       },
       {
-       "t0": 133,
-       "teaches": "What is the standard for events and catering at Craveiral?",
+       "t0": 132,
+       "teaches": "We cater a dinner in a private home. Which standard applies?",
        "audit": "corrected"
       },
       {
-       "t0": 160,
-       "teaches": "A guest is planning a wedding at Craveiral and wants to know what options are available. What should you tell them?",
+       "t0": 177,
+       "teaches": "There is a wedding on the property today. Who is on the wedding team?",
        "audit": "corrected"
       },
       {
-       "t0": 186,
-       "teaches": "A company is planning a corporate retreat at Craveiral and wants to know what activities are available. What should you ",
+       "t0": 223,
+       "teaches": "A couple loves dinner here and says they just got engaged. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -677,36 +677,36 @@
      ],
      "regime": null,
      "summary": "Every guest who arrives at Craveiral is on a journey that started long before the M501 brought them to our gate and finishes long after they leave. In this module, I want to walk that whole journey with you stage by stage, because",
-     "url": "https://academy.edenrise.com/#/play/guest-journey/0",
+     "url": "https://belong-academy.pages.dev/#/play/guest-journey/0",
      "moments": [
       {
-       "t0": 32,
-       "teaches": "What promise does Craveiral's marketing make to potential guests?",
+       "t0": 42,
+       "teaches": "Who has to keep the promise that Craveiral's photos and marketing make?",
        "audit": "verified"
       },
       {
-       "t0": 90,
-       "teaches": "What type of booking does Craveiral favor and why?",
+       "t0": 88,
+       "teaches": "Which type of booking does Craveiral prefer?",
        "audit": "corrected"
       },
       {
-       "t0": 116,
-       "teaches": "What should a worker do during the first 15 minutes of a guest's arrival?",
+       "t0": 132,
+       "teaches": "A tired family arrives. What should their first 15 minutes look like?",
        "audit": "corrected"
       },
       {
-       "t0": 145,
-       "teaches": "What message should workers convey to guests during their stay?",
+       "t0": 120,
+       "teaches": "Why do the first 15 minutes after arrival matter so much?",
        "audit": "verified"
       },
       {
-       "t0": 172,
-       "teaches": "A guest arrives at Craveiral and is not impressed with the breakfast. What should a worker do?",
+       "t0": 170,
+       "teaches": "What does a guest decide, mostly unconsciously, on the first morning?",
        "audit": "corrected"
       },
       {
-       "t0": 206,
-       "teaches": "A guest wants to spend their days at Craveiral doing nothing but relaxing by the pool. What guiding principle should a w",
+       "t0": 209,
+       "teaches": "A guest only wants the pool, a book and wine. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -733,36 +733,36 @@
      ],
      "regime": null,
      "summary": "Let's talk about the moments nobody puts on Instagram. The complaint at the front desk, the dish sent back, the guest who arrives already angry, the review that stings. If you work in hospitality long enough,",
-     "url": "https://academy.edenrise.com/#/play/guest-journey/1",
+     "url": "https://belong-academy.pages.dev/#/play/guest-journey/1",
      "moments": [
       {
-       "t0": 25,
-       "teaches": "What is a complaint considered as in this lesson?",
+       "t0": 30,
+       "teaches": "In this lesson, what is a guest complaint?",
        "audit": "corrected"
       },
       {
-       "t0": 77,
-       "teaches": "What is the first step when a guest is upset?",
+       "t0": 78,
+       "teaches": "A guest is upset. What do you do first?",
        "audit": "verified"
       },
       {
-       "t0": 104,
-       "teaches": "How should you respond when a guest expresses disappointment?",
+       "t0": 119,
+       "teaches": "Which phrase must you never use when apologising?",
        "audit": "corrected"
       },
       {
-       "t0": 130,
-       "teaches": "What should you do after acknowledging a guest's disappointment?",
+       "t0": 151,
+       "teaches": "How big should the fix be, compared with the failure?",
        "audit": "verified"
       },
       {
-       "t0": 156,
-       "teaches": "A guest complains about a cold dish. What should you do?",
+       "t0": 191,
+       "teaches": "A small complaint was fully resolved. Must it still be reported?",
        "audit": "verified"
       },
       {
-       "t0": 184,
-       "teaches": "A guest had a problem with their room, but it was resolved. What should you do the next morning?",
+       "t0": 171,
+       "teaches": "Last night you fixed a guest's problem. What do you do the next morning?",
        "audit": "verified"
       }
      ],
@@ -794,36 +794,36 @@
      ],
      "regime": null,
      "summary": "If you're going to represent Craveiral, you need to know Craveiral properly, in detail, the way you know your own home. This module is a tour. Some of this you know. I want all of you to know all of it.",
-     "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/0",
+     "url": "https://belong-academy.pages.dev/#/play/houses-farm-sustainability/0",
      "moments": [
       {
-       "t0": 29,
-       "teaches": "What percentage of the land at Craveiral is built?",
+       "t0": 302,
+       "teaches": "What is a standard, in Craveiral's terms?",
        "audit": "corrected"
       },
       {
-       "t0": 57,
-       "teaches": "What amenities are shared by all units at Craveiral?",
+       "t0": 54,
+       "teaches": "What does every house at Craveiral have?",
        "audit": "corrected"
       },
       {
-       "t0": 117,
-       "teaches": "What should a team member do when a guest asks about the capacity of a two-bedroom house?",
+       "t0": 128,
+       "teaches": "Why must you know each house type in detail?",
        "audit": "corrected"
       },
       {
-       "t0": 146,
-       "teaches": "How should a team member respond to a guest's question about the flexibility of a two-bedroom house for a family with ki",
+       "t0": 60,
+       "teaches": "A guest asks if they can bring their dog. What is true?",
        "audit": "corrected"
       },
       {
-       "t0": 174,
-       "teaches": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Craveiral?",
+       "t0": 247,
+       "teaches": "A guest asks a farm question you can't answer. What do you do?",
        "audit": "corrected"
       },
       {
-       "t0": 200,
-       "teaches": "A guest is planning a wedding reception for 300 people and wants to know if Craveiral has a suitable venue. What would y",
+       "t0": 392,
+       "teaches": "A fallen branch blocks a walkway. It's not your job. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -850,36 +850,36 @@
      ],
      "regime": null,
      "summary": "We've talked about regeneration as a vision. Now let's bring it down to earth, literally, because sustainability at Craveiral isn't a chapter in a report. It's 100 small physical actions every day",
-     "url": "https://academy.edenrise.com/#/play/houses-farm-sustainability/1",
+     "url": "https://belong-academy.pages.dev/#/play/houses-farm-sustainability/1",
      "moments": [
       {
        "t0": 29,
-       "teaches": "Why is water recycling important at Craveiral?",
+       "teaches": "Why does every drop of water matter at Craveiral?",
        "audit": "verified"
       },
       {
-       "t0": 80,
-       "teaches": "What should you do when you see lights on walkways and common areas that are not on schedule?",
+       "t0": 76,
+       "teaches": "You find the air conditioning running in an empty house. What do you do?",
        "audit": "corrected"
       },
       {
-       "t0": 29,
-       "teaches": "What should you do if you see a leak in the property?",
+       "t0": 44,
+       "teaches": "You see a dripping tap. When do you report it?",
        "audit": "verified"
       },
       {
-       "t0": 138,
-       "teaches": "What should the kitchen team do with organic scraps?",
+       "t0": 105,
+       "teaches": "Where do organic kitchen scraps go?",
        "audit": "corrected"
       },
       {
-       "t0": 163,
-       "teaches": "A supplier is offering a product at a lower price, but it's not from a local producer. What should you consider?",
+       "t0": 196,
+       "teaches": "A cheaper supplier is not local. Which question must you always ask?",
        "audit": "verified"
       },
       {
-       "t0": 106,
-       "teaches": "You are about to throw away a glass bottle. What should you do instead?",
+       "t0": 119,
+       "teaches": "You find glass mixed in with the plastic. What do you do?",
        "audit": "verified"
       }
      ],
@@ -911,36 +911,36 @@
      ],
      "regime": null,
      "summary": "This module is about words. It might seem like a strange training topic, but you'll use words with guests hundreds of times a day, and the words we choose are as much a part of Craveiral as the pine trees.",
-     "url": "https://academy.edenrise.com/#/play/voice-leadership/0",
+     "url": "https://belong-academy.pages.dev/#/play/voice-leadership/0",
      "moments": [
       {
        "t0": 29,
-       "teaches": "What tone should the Craveiral voice convey when interacting with guests?",
+       "teaches": "Which words describe the Craveiral voice?",
        "audit": "verified"
       },
       {
-       "t0": 55,
-       "teaches": "How should you say something to a guest if you're unsure how to phrase it?",
+       "t0": 51,
+       "teaches": "Unsure how to say something to a guest? Say it as you would to…",
        "audit": "verified"
       },
       {
-       "t0": 108,
-       "teaches": "What should you do when speaking with international guests who may not speak perfect English?",
+       "t0": 64,
+       "teaches": "Talking to a guest, what do you call the place where they sleep?",
        "audit": "verified"
       },
       {
-       "t0": 159,
-       "teaches": "What can you do to make international guests feel more welcome and connected to the local culture?",
+       "t0": 165,
+       "teaches": "An international guest is curious about the local language. What do you do?",
        "audit": "verified"
       },
       {
        "t0": 184,
-       "teaches": "A guest approaches you and seems hesitant to engage in conversation. What should you do?",
+       "teaches": "A guest gives short answers and seems to want privacy. What do you do?",
        "audit": "corrected"
       },
       {
-       "t0": 212,
-       "teaches": "You are writing an email to a guest who has booked a stay at the farm. How should you write the email?",
+       "t0": 218,
+       "teaches": "Which email line fits the Craveiral voice?",
        "audit": "corrected"
       }
      ],
@@ -967,36 +967,36 @@
      ],
      "regime": null,
      "summary": "Last module, and I've saved the most important conversation for the end: how we work together. Not the org chart, the real thing. What I believe about leading people, what I expect from you, and what you have",
-     "url": "https://academy.edenrise.com/#/play/voice-leadership/1",
+     "url": "https://belong-academy.pages.dev/#/play/voice-leadership/1",
      "moments": [
       {
-       "t0": 52,
-       "teaches": "What is the first principle of working together according to the trainer?",
+       "t0": 46,
+       "teaches": "What is Craveiral's first principle about decisions on the ground?",
        "audit": "verified"
       },
       {
-       "t0": 105,
-       "teaches": "What is the trainer's stance on punishing team members for generous decisions made in good faith?",
+       "t0": 95,
+       "teaches": "A free dessert would save a guest's evening. What do you do?",
        "audit": "verified"
       },
       {
-       "t0": 79,
-       "teaches": "What should a team member do when a guest is in front of them and something needs to be solved?",
+       "t0": 84,
+       "teaches": "Something needs solving in front of a guest. What guides your decision?",
        "audit": "verified"
       },
       {
-       "t0": 131,
-       "teaches": "What should a team member do when they catch a mistake early on?",
+       "t0": 127,
+       "teaches": "You made a mistake at work. What do you do?",
        "audit": "corrected"
       },
       {
-       "t0": 156,
-       "teaches": "A team member notices that the trainer has made a mistake in a decision. What should they do?",
+       "t0": 155,
+       "teaches": "You think a leader's decision is wrong. What should you do?",
        "audit": "corrected"
       },
       {
-       "t0": 184,
-       "teaches": "A team member is struggling to meet the high standards set by the trainer. What should they do?",
+       "t0": 303,
+       "teaches": "For weeks your schedule has left you exhausted. What do you do?",
        "audit": "corrected"
       }
      ],
@@ -1028,36 +1028,36 @@
      ],
      "regime": null,
      "summary": "Hello, I'm Pedro, and if you're watching this, it's because you're part of Craveiral. Maybe you started this week, maybe you've been with us for years. Either way, I want to start at the beginning.",
-     "url": "https://academy.edenrise.com/#/play/welcome-belong/0",
+     "url": "https://belong-academy.pages.dev/#/play/welcome-belong/0",
      "moments": [
       {
-       "t0": 51,
+       "t0": 68,
        "teaches": "What is the origin of the name 'Craveiral'?",
        "audit": "verified"
       },
       {
-       "t0": 139,
-       "teaches": "What was Craveiral primarily built to be?",
+       "t0": 219,
+       "teaches": "Which phrase sums up Craveiral's relationship with the land?",
        "audit": "verified"
       },
       {
-       "t0": 169,
-       "teaches": "When making decisions about the use of land at Craveiral, what should be the primary consideration?",
+       "t0": 176,
+       "teaches": "A guest asks why Craveiral doesn't build more houses. What do you say?",
        "audit": "corrected"
       },
       {
-       "t0": 198,
-       "teaches": "When designing new infrastructure at Craveiral, what should be the guiding principle?",
+       "t0": 199,
+       "teaches": "A guest asks why the paths are raised wooden walkways. What do you say?",
        "audit": "verified"
       },
       {
-       "t0": 139,
-       "teaches": "A new investor is proposing to build a large resort on a nearby plot of land, which would increase revenue for the local",
+       "t0": 237,
+       "teaches": "\"We belong to the land for a while.\" What does that ask of you?",
        "audit": "verified"
       },
       {
-       "t0": 169,
-       "teaches": "A guest is requesting to build a private villa on a plot of land within the Craveiral property, which would require clea",
+       "t0": 147,
+       "teaches": "A guest asks if Craveiral is mainly a hotel. What is the right answer?",
        "audit": "corrected"
       }
      ],
@@ -1084,36 +1084,36 @@
      ],
      "regime": null,
      "summary": "Welcome back. In this module, I want to explain Belong. You've seen the word on our materials, in our communication, maybe on my email signature, Belong, giving shape to meaning.",
-     "url": "https://academy.edenrise.com/#/play/welcome-belong/1",
+     "url": "https://belong-academy.pages.dev/#/play/welcome-belong/1",
      "moments": [
       {
-       "t0": 29,
-       "teaches": "What is the core conviction that Belong was founded on?",
+       "t0": 37,
+       "teaches": "Which sentence is Belong founded on?",
        "audit": "corrected"
       },
       {
-       "t0": 109,
-       "teaches": "What is the vision of the organization in one line?",
+       "t0": 115,
+       "teaches": "What is Belong's vision, in one line?",
        "audit": "verified"
       },
       {
-       "t0": 134,
-       "teaches": "What should a worker at Craveiral Farmhouse do to contribute to the regeneration of the territory?",
+       "t0": 135,
+       "teaches": "In Belong's vision, what does \"regenerate\" mean?",
        "audit": "corrected"
       },
       {
-       "t0": 162,
-       "teaches": "How should a team member at the A Mesa do CAM restaurant support the circular economy?",
+       "t0": 211,
+       "teaches": "In the kitchen, where should food scraps go?",
        "audit": "corrected"
       },
       {
-       "t0": 188,
-       "teaches": "A new employee at the laundry service wants to contribute to the circular economy. What should they do?",
+       "t0": 196,
+       "teaches": "A São Teotónio resident asks if they can use the Belong laundry. What is true?",
        "audit": "corrected"
       },
       {
-       "t0": 109,
-       "teaches": "A guest at the Craveiral Farmhouse asks about the organization's vision. How should the staff member respond?",
+       "t0": 311,
+       "teaches": "A guest asks about a dish. What should you do?",
        "audit": "verified"
       }
      ],

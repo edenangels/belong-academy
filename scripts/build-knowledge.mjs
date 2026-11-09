@@ -25,6 +25,8 @@ import { fileURLToPath } from 'url';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const TR = join(ROOT, 'media', 'transcripts');
 const QZ = join(ROOT, 'knowledge', 'quizzes');
+/* deep links use the academy's own address (brands/belong/brand.js → domain) */
+const SITE = 'https://' + ((readFileSync(join(ROOT, 'brands', 'belong', 'brand.js'), 'utf8').match(/domain:\s*'([^']+)'/) || [])[1] || 'belong-academy.pages.dev');
 /* ---- the catalogue, EVALUATED not parsed --------------------------------
    This block used to pull titles, skills and regimes out of content.js with
    regexes. That produced a live data-corruption bug: the module-title matcher
@@ -120,7 +122,7 @@ for (const course of readdirSync(TR).filter(d => !d.includes('.') && !d.startsWi
       tags: [...new Set([...(SKILLS[course] || []), ...tagsFrom(tr.segments)])],
       regime: REGIME[course] || null,
       summary: tr.segments.slice(0, 3).map(s => s.text).join(' ').slice(0, 260),
-      url: `https://academy.edenrise.com/#/play/${course}/${mod}`,
+      url: `${SITE}/#/play/${course}/${mod}`,
       moments: qs.filter(q => q.t0 != null).map(q => ({
         t0: q.t0, teaches: (q.en?.q || '').slice(0, 120),
         audit: q.verified ? 'verified' : q.corrected ? 'corrected' : 'unaudited',
@@ -172,7 +174,7 @@ for (const r of REELS.filter(r => r.approved)) {
     tags: [...new Set([r.theme, ...tagsFrom(tr.segments, 6)].filter(Boolean))],
     deeper: r.deeper || null,
     published: r.approved === true,
-    url: `https://academy.edenrise.com/#/reels`,
+    url: `${SITE}/#/reels`,
     moments: q.en ? [{ t0: 0, teaches: (q.en.q || '').slice(0, 120),
       audit: q.audit || (q.verified ? 'verified' : q.corrected ? 'corrected' : 'unaudited') }] : [],
   });

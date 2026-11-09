@@ -16,6 +16,8 @@ const STATE_KEY = BRAND_SLUG + '-state-v2';
    it in core would have shown every returning learner the sign-in gate — a
    silent mass logout dressed as a cleanup. Default is <id>-auth-mode. */
 const MODE_KEY  = (window.BRAND && window.BRAND.authModeKey) || (BRAND_SLUG + '-auth-mode');
+/* BRAND.backend 'open': no sign-in anywhere — the link opens straight into the academy */
+const OPEN_MODE = !!(window.BRAND && window.BRAND.backend === 'open');
 /* Small-tile artwork. Path-row tiles and course cards draw a poster at about
    300 css px, but the posters are 960-1280 px wide; media/covers/sm/ holds the
    same pictures at 640 px (2x for a phone), built by scripts/build-thumbs.py.
@@ -213,9 +215,12 @@ function ledgerAppend(type, data = {}) {
     try { _origLogErr(kind, msg, src); } catch (e) {}
     try {
       const sig = kind + '|' + String(msg).slice(0, 80);
+      /* BRAND.errorBeacon: the endpoint that receives error reports; null switches reporting off */
+      const BEACON = (window.BRAND && 'errorBeacon' in window.BRAND) ? window.BRAND.errorBeacon : 'https://academy-watch.edenrise.workers.dev/beacon';
+      if (!BEACON) return;
       if (_sentSig.size >= 5 || _sentSig.has(sig)) return; _sentSig.add(sig);
       const body = JSON.stringify({ kind, msg: String(msg).slice(0, 300), src: String(src || '').slice(0, 120), v: (document.querySelector('script[src*="core/app.js"]') || {}).src, ua: navigator.userAgent.slice(0, 80), url: location.hash, brand: (window.BRAND && BRAND.id) || '' });
-      (navigator.sendBeacon && navigator.sendBeacon('https://academy-watch.edenrise.workers.dev/beacon', new Blob([body], { type: 'application/json' }))) || fetch('https://academy-watch.edenrise.workers.dev/beacon', { method: 'POST', body, keepalive: true }).catch(() => {});
+      (navigator.sendBeacon && navigator.sendBeacon(BEACON, new Blob([body], { type: 'application/json' }))) || fetch(BEACON, { method: 'POST', body, keepalive: true }).catch(() => {});
     } catch (e) {}
   };
   window.EdenBeacon = logErr;
@@ -1790,7 +1795,7 @@ function groundingText(moments) {
   return moments.slice(0, 5).map(m => `${m.title} (${m.kind === 'reel' ? 'short' : m.courseTitle}) · ${fmtTc(m.t0)}: "${m.text.slice(0, 320)}"`).join('\n');
 }
 /* ---- the free gateway: no key in the browser, grounded in Recall's moments ---- */
-const AI_GATEWAY = (typeof window !== 'undefined' && window.ACADEMY_AI_GATEWAY) || 'https://academy-ai.edenrise.workers.dev/';
+const AI_GATEWAY = (typeof window !== 'undefined' && (window.ACADEMY_AI_GATEWAY || (window.BRAND && window.BRAND.aiGateway))) || 'https://academy-ai.edenrise.workers.dev/';
 async function gatewayComplete({ messages, grounding, maxTokens }) {
   const id = currentCourseId(); const c = id && courseById(id);
   const res = await fetch(AI_GATEWAY, { method: 'POST', headers: { 'content-type': 'application/json' },
@@ -9155,8 +9160,10 @@ function drawOnboard() {
     body.innerHTML = `
       <div class="ob-eyebrow">${t('ob_step')} 1 ${t('of')} 3 · ${t('ob_welcome')}</div>
       <div class="ob-title">${t('ob_hi')} ${firstName()}</div>
-      <p class="ob-sub">${t('ob_pick_handle')}</p>
-      <div class="ob-handle"><span>@</span><input id="obUsername" class="ob-input" maxlength="20" autocomplete="off" placeholder="${suggestHandle()}" value="${esc((ob.username || '').replace(/^@/, ''))}"></div>
+      ${OPEN_MODE ? `<p class="ob-sub">${_lang() === 'pt' ? 'O seu nome — aparece no seu comprovativo de formação.' : 'Your name — it appears on your training certificate.'}</p>
+      <div class="ob-handle"><input id="obUsername" class="ob-input" maxlength="60" autocomplete="name" placeholder="${_lang() === 'pt' ? 'Nome e apelido' : 'First and last name'}" value="${esc(ob.username || ((S.profile && S.profile.name) || ''))}"></div>`
+      : `<p class="ob-sub">${t('ob_pick_handle')}</p>
+      <div class="ob-handle"><span>@</span><input id="obUsername" class="ob-input" maxlength="20" autocomplete="off" placeholder="${suggestHandle()}" value="${esc((ob.username || '').replace(/^@/, ''))}"></div>`}
       <p class="ob-sub" style="margin-top:16px;">${t('ob_role_q')}</p>
       <div class="ob-grid">${ROLE_OPTIONS.map(r => `
         <div class="ob-option ${ob.role === r.key ? 'sel' : ''}" data-role="${r.key}">
@@ -9219,8 +9226,10 @@ function drawOnboard() {
       S.pathMods = [...((typeof GOAL_MODS === 'object' && GOAL_MODS[ob.goal]) || [])];
       S.role = ob.role;
       const handle = slugHandle(ob.username) || suggestHandle();
-      /* guests have no auth name — the handle they just picked becomes their display name */
-      S.profile = Object.assign({}, S.profile, { username: handle, role: ob.role }, (S.profile && S.profile.name) ? {} : { name: handle });
+      /* guests have no auth name — the handle they just picked becomes their display name;
+         with no sign-in at all (OPEN_MODE) the field asks for the real name, used on certificates */
+      const realName = OPEN_MODE ? String(ob.username || '').replace(/\s+/g, ' ').trim().slice(0, 60) : '';
+      S.profile = Object.assign({}, S.profile, { username: handle, role: ob.role }, realName ? { name: realName } : (S.profile && S.profile.name) ? {} : { name: handle });
       S.onboarded = true;
       save();   /* → syncs the profile (name, @username, role) + path to the account in Firestore */
       $('#onboard').classList.remove('open');
@@ -9230,7 +9239,10 @@ function drawOnboard() {
   }
   const next = $('#obNext');
   if (next) next.addEventListener('click', () => {
-    if (ob.step === 0) { const u = $('#obUsername'); if (u) ob.username = u.value.trim(); if (!ob.role) return; }
+    if (ob.step === 0) { const u = $('#obUsername'); if (u) ob.username = u.value.trim();
+      /* no sign-in: the name is the only identity on the certificate, so it is required */
+      if (OPEN_MODE && u && ob.username.length < 2) { u.focus(); u.setAttribute('aria-invalid', 'true'); u.placeholder = _lang() === 'pt' ? 'Escreva o seu nome para continuar' : 'Type your name to continue'; return; }
+      if (!ob.role) return; }
     if (ob.step === 1 && !ob.goal) return;
     ob.step++; drawOnboard();
   });
