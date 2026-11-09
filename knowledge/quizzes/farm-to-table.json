@@ -4,28 +4,28 @@
  "modules": {
   "0": [
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Less than 50%",
-      "Over 70%",
-      "Exactly 90%",
-      "Not specified"
+      "About 10%",
+      "About 30%",
+      "About half",
+      "Over 70%"
      ],
-     "q": "What percentage of the food served at the farm is grown on the property?",
-     "why": "The transcript states that over 70% of what is served is grown on the property."
+     "q": "How much of the food served is grown on the property?",
+     "why": "Pedro says over 70% of what we serve is grown on this property."
     },
     "pt": {
      "opts": [
-      "Menos de 50%",
-      "Mais de 70%",
-      "Exatamente 90%",
-      "Não é referido"
+      "Cerca de 10%",
+      "Cerca de 30%",
+      "Cerca de metade",
+      "Mais de 70%"
      ],
-     "q": "Que percentagem da comida servida na quinta é produzida na propriedade?",
-     "why": "A transcrição afirma que mais de 70% do que se serve é produzido na propriedade."
+     "q": "Que parte da comida servida é cultivada na propriedade?",
+     "why": "O Pedro diz que mais de 70% do que servimos é cultivado nesta propriedade."
     },
-    "t0": 28,
+    "t0": 29,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -34,28 +34,28 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 0,
     "en": {
      "opts": [
+      "Because the farm changes with the seasons",
       "To follow the latest food trends",
-      "To reduce costs",
-      "Because the farm itself rotates with the seasons",
-      "To cater to different guest preferences"
+      "To keep food costs down",
+      "To match what guests ask for most"
      ],
-     "q": "Why does the menu at the farm rotate with the seasons?",
-     "why": "The transcript explains that the menu rotates with the seasons because the farm itself does."
+     "q": "Why does the menu change with the seasons?",
+     "why": "Pedro says the menu rotates with the seasons because the farm rotates with the seasons."
     },
     "pt": {
      "opts": [
-      "Para seguir as últimas tendências gastronómicas",
-      "Para reduzir custos",
-      "Porque a própria quinta muda com as estações",
-      "Para ir ao encontro das diferentes preferências dos hóspedes"
+      "Porque a quinta muda com as estações",
+      "Para seguir as últimas tendências",
+      "Para baixar os custos da comida",
+      "Para dar o que os hóspedes mais pedem"
      ],
-     "q": "Porque é que o menu da quinta muda com as estações?",
-     "why": "A transcrição explica que o menu muda com as estações porque a própria quinta também muda."
+     "q": "Porque é que a ementa muda com as estações?",
+     "why": "O Pedro diz que a ementa roda com as estações porque a quinta roda com as estações."
     },
-    "t0": 54,
+    "t0": 55,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -67,25 +67,25 @@
     "a": 2,
     "en": {
      "opts": [
-      "Rush through the options to save time",
-      "Focus on the prices of each dish",
-      "Describe the dishes as generous, honest, and unhurried",
-      "Only mention the most popular items"
+      "A sign dinner needs improving",
+      "A reason to raise breakfast prices",
+      "A normal compliment to protect",
+      "A hint to serve breakfast faster"
      ],
-     "q": "How should front-of-house staff approach describing the breakfast options to guests?",
-     "why": "The transcript describes breakfast as a statement of identity and should be presented in a generous, honest, and unhurried manner."
+     "q": "At checkout, a guest says breakfast was their favourite part. What is that?",
+     "why": "Pedro says many guests say breakfast was their favourite part: that's normal, and a compliment to protect."
     },
     "pt": {
      "opts": [
-      "Passar a correr pelas opções para poupar tempo",
-      "Concentrar-se no preço de cada prato",
-      "Descrever os pratos como generosos, honestos e sem pressa",
-      "Mencionar apenas os mais populares"
+      "Um sinal de que o jantar tem de melhorar",
+      "Uma razão para subir o preço do pequeno-almoço",
+      "Um elogio normal, que é preciso proteger",
+      "Uma dica para servir mais depressa"
      ],
-     "q": "Como deve a equipa de sala apresentar aos hóspedes as opções do pequeno-almoço?",
-     "why": "A transcrição descreve o pequeno-almoço como uma declaração de identidade, que deve ser apresentada de forma generosa, honesta e sem pressa."
+     "q": "No check-out, um hóspede diz que o pequeno-almoço foi o melhor da estadia. O que é isto?",
+     "why": "O Pedro diz que muitos hóspedes dizem que o pequeno-almoço foi o melhor: é normal, e é um elogio a proteger."
     },
-    "t0": 81,
+    "t0": 99,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -97,25 +97,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "Only the price and origin",
-      "Three sentences per wine, including where it's from, what it's like, and what it pairs well with",
-      "A detailed history of the vineyard",
-      "The alcohol content and calories per serving"
+      "Price, alcohol level and grape",
+      "Where it's from, what it's like, what it goes with",
+      "Vintage, awards and critic score",
+      "Winemaker's name, age and family history"
      ],
-     "q": "What information should front-of-house staff be able to provide about the wines on the list?",
-     "why": "The transcript suggests that staff should be able to guide guests through the wine list with three sentences per wine."
+     "q": "A guest asks about a wine. Which three things should you tell them?",
+     "why": "Pedro says you need three sentences per wine: where it's from, what it's like, what it loves to be eaten with."
     },
     "pt": {
      "opts": [
-      "Apenas o preço e a origem",
-      "Três frases por vinho: de onde vem, como é e com o que combina",
-      "Uma história detalhada da vinha",
-      "O teor alcoólico e as calorias por dose"
+      "Preço, teor alcoólico e casta",
+      "De onde vem, como é, com que comida combina",
+      "Ano, prémios e pontuação da crítica",
+      "Nome do produtor, idade e história da família"
      ],
-     "q": "Que informação deve a equipa de sala saber dar sobre os vinhos da carta?",
-     "why": "A transcrição sugere que a equipa saiba guiar os hóspedes pela carta de vinhos com três frases por vinho."
+     "q": "Um hóspede pergunta por um vinho. Que três coisas se devem dizer?",
+     "why": "O Pedro diz que bastam três frases por vinho: de onde vem, como é e com que comida gosta de ser bebido."
     },
-    "t0": 161,
+    "t0": 177,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -124,28 +124,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Say they are from a local supermarket",
-      "Explain that they were grown on the property and mention the specific soil and farming practices used",
-      "Tell them you don't know and offer to find out",
-      "Say they are sourced from the nearest city"
+      "From a supplier in Lisbon",
+      "From a regional wholesale market",
+      "From an organic farm in Spain",
+      "From our garden, picked this morning"
      ],
-     "q": "A guest asks where the vegetables in their salad came from. How should you respond?",
-     "why": "The transcript emphasizes the importance of the farm-to-table philosophy and sourcing food locally."
+     "q": "A guest asks where the courgettes on their plate came from. What do you say?",
+     "why": "Pedro's one-line example: \"The courgettes are from the garden, picked this morning.\""
     },
     "pt": {
      "opts": [
-      "Dizer que são de um supermercado da zona",
-      "Explicar que foram cultivados na propriedade e mencionar o solo e as práticas agrícolas usadas",
-      "Dizer que não sabe e oferecer-se para descobrir",
-      "Dizer que vêm da cidade mais próxima"
+      "De um fornecedor em Lisboa",
+      "De um mercado abastecedor regional",
+      "De uma quinta biológica em Espanha",
+      "Da nossa horta, apanhadas esta manhã"
      ],
-     "q": "Um hóspede pergunta de onde vêm os legumes da salada. Como se deve responder?",
-     "why": "A transcrição sublinha a importância da filosofia «da raiz à mesa» e de comprar os alimentos localmente."
+     "q": "Um hóspede pergunta de onde vêm as curgetes do prato. O que se responde?",
+     "why": "O exemplo de uma linha do Pedro: «As curgetes são da horta, apanhadas esta manhã.»"
     },
-    "t0": 28,
+    "t0": 275,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -154,28 +154,28 @@
     "corrected": true
    },
    {
-    "a": 1,
+    "a": 0,
     "en": {
      "opts": [
-      "Suggest they go for a walk in the nearby town",
-      "Recommend the pizza-making class where children can make their own pizzas",
-      "Tell them about the local museum",
-      "Suggest a game of tennis"
+      "The pizza class, where kids make their own",
+      "A cheese tasting in the dining room",
+      "A cooking demo for adults",
+      "A wine-pairing dinner"
      ],
-     "q": "A family with children asks about activities they can do together. What would be an appropriate suggestion based on the farm's offerings?",
-     "why": "The transcript mentions the pizza classes as a beloved activity on the property."
+     "q": "A family asks for a food activity their children can do. What do you suggest?",
+     "why": "Pedro says children make their own pizza in the pizza classes at the wood-fired oven."
     },
     "pt": {
      "opts": [
-      "Sugerir um passeio pela vila mais próxima",
-      "Recomendar a aula de pizzas, onde as crianças fazem as suas próprias pizzas",
-      "Falar-lhes do museu local",
-      "Sugerir um jogo de ténis"
+      "A aula de pizza, onde as crianças fazem a sua",
+      "Uma prova de queijos na sala de refeições",
+      "Uma demonstração de cozinha para adultos",
+      "Um jantar de harmonização de vinhos"
      ],
-     "q": "Uma família com crianças pergunta que atividades podem fazer juntos. Qual seria uma sugestão adequada, tendo em conta o que a quinta oferece?",
-     "why": "A transcrição refere as aulas de pizza como uma das atividades mais apreciadas na propriedade."
+     "q": "Uma família pede uma atividade de comida para os filhos. O que se sugere?",
+     "why": "O Pedro diz que as crianças fazem a sua própria pizza nas aulas de pizza do forno a lenha."
     },
-    "t0": 133,
+    "t0": 139,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -186,28 +186,28 @@
   ],
   "1": [
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
-      "A luxury restaurant",
-      "A casual, honest food and drink spot",
-      "A surf school only",
-      "A private event space"
+      "A separate business with its own rules",
+      "A fine-dining seafood restaurant",
+      "Craveiral's philosophy in flip-flops",
+      "A surf school that sells snacks"
      ],
-     "q": "What is the concept of the beach bar at Carvalhal?",
-     "why": "The beach bar is described as having honest food and drinks, and being a place where surf lessons happen, indicating a casual and welcoming atmosphere."
+     "q": "How does Pedro describe the Bar da Praia do Carvalhal?",
+     "why": "Pedro calls the beach bar \"Craveiral's philosophy in flip-flops\": same honest food and the same care."
     },
     "pt": {
      "opts": [
-      "Um restaurante de luxo",
-      "Um sítio descontraído, de comida e bebida honestas",
-      "Apenas uma escola de surf",
-      "Um espaço para eventos privados"
+      "Um negócio à parte, com regras próprias",
+      "Um restaurante de marisco requintado",
+      "A filosofia do Craveiral de chinelos",
+      "Uma escola de surf que vende petiscos"
      ],
-     "q": "Qual é o conceito do bar de praia no Carvalhal?",
-     "why": "O bar de praia é descrito como um sítio de comida e bebida honestas, onde também acontecem as aulas de surf, o que indica um ambiente descontraído e acolhedor."
+     "q": "Como descreve o Pedro o Bar da Praia do Carvalhal?",
+     "why": "O Pedro chama ao bar de praia «a filosofia do Craveiral de chinelos»: a mesma comida honesta e o mesmo cuidado."
     },
-    "t0": 26,
+    "t0": 31,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -219,25 +219,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "It's a competitor to Craveiral",
-      "It's Craveiral's restaurant inside a respected cultural institution, bringing the cuisine of the territory to the city",
-      "It's a farm-to-table restaurant only",
-      "It's a private event space"
+      "On the beach at Carvalhal",
+      "In Lisbon, at the Gulbenkian art centre",
+      "In the village of São Teotónio",
+      "In Porto, by the river"
      ],
-     "q": "What is the significance of A Mesa do CAM in Lisbon?",
-     "why": "A Mesa do CAM is Craveiral's restaurant at the modern art centre (CAM) of the Calouste Gulbenkian Foundation, one of the most respected cultural institutions in the country, where the cuisine of this territory is served at a city table."
+     "q": "Where is A Mesa do CAM?",
+     "why": "A Mesa do CAM is in Lisbon, at the modern art centre of the Calouste Gulbenkian Foundation."
     },
     "pt": {
      "opts": [
-      "É um concorrente do Craveiral",
-      "É o restaurante do Craveiral dentro de uma instituição cultural de referência, que leva a cozinha do território à cidade",
-      "É apenas um restaurante da quinta para a mesa",
-      "É um espaço para eventos privados"
+      "Na praia do Carvalhal",
+      "Em Lisboa, no centro de arte da Gulbenkian",
+      "Na aldeia de São Teotónio",
+      "No Porto, junto ao rio"
      ],
-     "q": "Qual é o significado de A Mesa do CAM, em Lisboa?",
-     "why": "A Mesa do CAM é o restaurante do Craveiral no Centro de Arte Moderna (CAM) da Fundação Calouste Gulbenkian, uma das instituições culturais mais respeitadas do país, onde a cozinha deste território é servida numa mesa da cidade."
+     "q": "Onde fica A Mesa do CAM?",
+     "why": "A Mesa do CAM fica em Lisboa, no Centro de Arte Moderna da Fundação Calouste Gulbenkian."
     },
-    "t0": 80,
+    "t0": 71,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -246,28 +246,28 @@
     "corrected": true
    },
    {
-    "a": 2,
+    "a": 3,
     "en": {
      "opts": [
-      "Tell them it's not part of the Craveiral experience",
-      "Send them to the beach and forget about them",
-      "Move them around inside the business, highlighting the beach as part of the overall experience",
-      "Charge them extra for the beach access"
+      "Sending business to a competitor",
+      "Losing the guest for the day",
+      "Earning a personal commission",
+      "Moving them around inside the business"
      ],
-     "q": "What should you do when recommending the beach to guests?",
-     "why": "When recommending the beach, you should move guests around inside the business, highlighting the beach as part of the overall experience, to provide a seamless and integrated experience."
+     "q": "When you recommend the beach bar to a guest, what are you doing?",
+     "why": "Pedro says recommending the beach isn't sending guests away: you're moving them around inside the business."
     },
     "pt": {
      "opts": [
-      "Dizer-lhes que não faz parte da experiência do Craveiral",
-      "Mandá-los para a praia e esquecê-los",
-      "Levá-los a circular dentro da casa, apresentando a praia como parte da experiência completa",
-      "Cobrar-lhes um extra pelo acesso à praia"
+      "Mandar clientes para a concorrência",
+      "Perder o hóspede durante o dia",
+      "Ganhar uma comissão pessoal",
+      "Mantê-lo dentro do mesmo negócio"
      ],
-     "q": "O que se deve fazer ao recomendar a praia aos hóspedes?",
-     "why": "Ao recomendar a praia, não se está a mandar o hóspede para fora: está-se a levá-lo a circular dentro da casa, apresentando a praia como parte de uma experiência completa e integrada."
+     "q": "Ao recomendar o bar de praia a um hóspede, o que se está a fazer?",
+     "why": "O Pedro diz que recomendar a praia não é mandar o hóspede embora: é movê-lo dentro do próprio negócio."
     },
-    "t0": 53,
+    "t0": 54,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -279,25 +279,25 @@
     "a": 0,
     "en": {
      "opts": [
-      "The same root-to-table kitchen, chain and care, wherever it happens",
-      "Different standards for different events",
-      "Lower standards for off-site events",
-      "Higher standards for on-site events"
+      "The same kitchen, chain and care as the farm",
+      "A simpler menu, since it is off-site",
+      "Whatever the client's own caterer uses",
+      "The standard set by the venue"
      ],
-     "q": "What is the standard for events and catering at Craveiral?",
-     "why": "The standard for events and catering at Craveiral is the same root-to-table kitchen, the same chain and the same care, wherever it happens, to ensure consistency and quality."
+     "q": "We cater a dinner in a private home. Which standard applies?",
+     "why": "Pedro says catering uses the same root-to-table kitchen, same chain, same care wherever it happens."
     },
     "pt": {
      "opts": [
-      "A mesma cozinha «da raiz à mesa», a mesma cadeia e o mesmo cuidado, onde quer que aconteça",
-      "Padrões diferentes para eventos diferentes",
-      "Padrões mais baixos para eventos fora da quinta",
-      "Padrões mais altos para eventos na quinta"
+      "A mesma cozinha, cadeia e cuidado da quinta",
+      "Uma ementa mais simples, por ser fora",
+      "O que o fornecedor habitual do cliente usar",
+      "O padrão definido pelo espaço"
      ],
-     "q": "Qual é o padrão para eventos e catering do Craveiral?",
-     "why": "O padrão para eventos e catering é a mesma cozinha «da raiz à mesa», a mesma cadeia e o mesmo cuidado, onde quer que aconteça, para garantir coerência e qualidade."
+     "q": "Fazemos o catering de um jantar numa casa particular. Que padrão se aplica?",
+     "why": "O Pedro diz que o catering usa a mesma cozinha da terra para a mesa, a mesma cadeia e o mesmo cuidado, onde quer que seja."
     },
-    "t0": 133,
+    "t0": 132,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -309,25 +309,25 @@
     "a": 2,
     "en": {
      "opts": [
-      "Only intimate ceremonies under the pines are available",
-      "Only full weekend celebrations with the Interpretation Center are available",
-      "A range of options are available, from intimate ceremonies to full weekend celebrations",
-      "No weddings are allowed at Craveiral"
+      "Only the events team",
+      "Only the kitchen and bar",
+      "Everyone, whatever their role",
+      "Only reception and the manager"
      ],
-     "q": "A guest is planning a wedding at Craveiral and wants to know what options are available. What should you tell them?",
-     "why": "A range of options are available, from intimate ceremonies to full weekend celebrations, to accommodate different guest needs and preferences."
+     "q": "There is a wedding on the property today. Who is on the wedding team?",
+     "why": "Pedro says when there's a wedding on the property, everyone, whatever their role, is on the wedding team."
     },
     "pt": {
      "opts": [
-      "Só existem cerimónias íntimas sob os pinheiros",
-      "Só existem celebrações de fim de semana completo com o Centro de Interpretação",
-      "Existe uma gama de opções, desde cerimónias íntimas até celebrações de fim de semana completo",
-      "Não se fazem casamentos no Craveiral"
+      "Só a equipa de eventos",
+      "Só a cozinha e o bar",
+      "Toda a gente, seja qual for a função",
+      "Só a receção e o gestor"
      ],
-     "q": "Um hóspede está a planear um casamento no Craveiral e quer saber que opções existem. O que se lhe deve dizer?",
-     "why": "Existe uma gama de opções, desde cerimónias íntimas até celebrações de fim de semana completo, para responder às diferentes necessidades e preferências."
+     "q": "Hoje há um casamento na propriedade. Quem faz parte da equipa do casamento?",
+     "why": "O Pedro diz que, quando há um casamento na propriedade, toda a gente, seja qual for a função, faz parte da equipa do casamento."
     },
-    "t0": 160,
+    "t0": 177,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -339,25 +339,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "Only team-building activities are available",
-      "A range of activities are available, including nature walks, wellness getaways, and retreats at the Interpretation Center",
-      "Only outdoor activities are available",
-      "No activities are available"
+      "Say nothing: that would be selling",
+      "Let them know we also host weddings",
+      "Refer them to a wedding planner",
+      "Say weddings only happen in Lisbon"
      ],
-     "q": "A company is planning a corporate retreat at Craveiral and wants to know what activities are available. What should you tell them?",
-     "why": "A range of activities are available, including nature walks, wellness getaways, and retreats at the Interpretation Center, to cater to different company needs and preferences."
+     "q": "A couple loves dinner here and says they just got engaged. What do you do?",
+     "why": "Pedro says the couple who love dinner should know we do weddings: that's not selling, it's hospitality."
     },
     "pt": {
      "opts": [
-      "Só existem atividades de team building",
-      "Existe uma gama de atividades, incluindo caminhadas na natureza, escapadinhas de bem-estar e retiros no Centro de Interpretação",
-      "Só existem atividades ao ar livre",
-      "Não existem atividades"
+      "Não dizer nada: seria vender",
+      "Dizer-lhes que também fazemos casamentos",
+      "Encaminhá-los para um organizador de casamentos",
+      "Dizer que os casamentos são só em Lisboa"
      ],
-     "q": "Uma empresa está a planear um retiro no Craveiral e quer saber que atividades existem. O que se lhe deve dizer?",
-     "why": "Existe uma gama de atividades, incluindo caminhadas na natureza, escapadinhas de bem-estar e retiros no Centro de Interpretação, para responder às diferentes necessidades e preferências de cada empresa."
+     "q": "Um casal adora o jantar e conta que acabou de ficar noivo. O que se faz?",
+     "why": "O Pedro diz que o casal que adora o jantar deve saber que fazemos casamentos: isso não é vender, é hospitalidade."
     },
-    "t0": 186,
+    "t0": 223,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

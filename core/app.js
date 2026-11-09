@@ -835,6 +835,19 @@ function renderLibrary() {
 /* Paths and My learning were two pages showing the same path (João, 4 Nov 2026).
    #/paths now opens My learning on its Path tab; pathBodyHTML is that tab. */
 function renderPaths() { meTab = 'path'; return renderMe(); }
+/* Goals are a journey too (round 5): finish one and the next opens; or switch at any time.
+   Only the learner's own department goals, so the choice stays meaningful. */
+function goalSwitchHTML(done, len) {
+  const role = (typeof ROLE_OPTIONS !== 'undefined' && ROLE_OPTIONS.find(r => r.key === (S.role || (S.profile && S.profile.role)))) || null;
+  if (!role) return '';
+  const others = role.goals.filter(g => g !== S.goal && GOAL_PRESETS[g]);
+  if (!others.length) return '';
+  const finished = len > 0 && done >= len;
+  return `<div class="goal-switch${finished ? ' done' : ''}">
+    <span class="gs-h">${finished ? `✓ ${t('goal_reached')} · ${t('goal_next')}` : t('goal_other')}</span>
+    ${others.map(g => `<button class="${finished ? 'btn btn-primary btn-sm' : 'btn btn-glass btn-sm'}" data-action="goal-switch" data-g="${attr(g)}">${esc(tgoal(g))} →</button>`).join('')}
+  </div>`;
+}
 function pathBodyHTML() {
   const _pm = window.CUR ? CUR.pathModules() : null;
   const doneCount = _pm ? _pm.filter(m => CUR.moduleStats(m).complete).length : S.path.filter(isDone).length;
@@ -845,15 +858,16 @@ function pathBodyHTML() {
     <div class="path-banner-head">
       <div class="left">
         <span class="ai-tag">${t('active_path')} · ${doneCount}/${pathLen}</span>
-        <h2>${t('your_path_to')} ${tgoal(S.goal)}</h2>
+        <h2>${t('your_path_to')} ${qgoal(S.goal)}</h2>
         <p class="sub">${(S.quizScores || []).length ? PATH_RATIONALES[S.rationaleIdx % PATH_RATIONALES.length] : t('path_intro')}</p>
       </div>
     </div>
     ${pathStepperHTML()}
+    ${goalSwitchHTML(doneCount, pathLen)}
   </section>
   ${/* Journeys left My learning (João + Pedro, 5 Nov 2026): one hierarchy only, courses → modules → lessons.
         What sits here instead is the learner's own unfinished business: the questions to fix. */''}
-  ${window.curFixHTML ? `<div class="page-pad" style="padding-top:22px;">${curFixHTML()}</div>` : ''}
+  ${/* the review list moved to its own tab (round 5) */''}
   ${window.curPathRailsHTML ? curPathRailsHTML() : railHTML(t('courses_in_path'), t('in_order'), S.path.map(id => courseById(id)).filter(Boolean).map(c => cardHTML(c)))}
   ${/* "Where to go next" = whatever is filmed and not already on your path.
         This was four hard-coded ids, all of which are now deleted, so the rail
@@ -4271,20 +4285,26 @@ function renderAdmin() {
    used to have top-level nav slots for. */
 let meTab = 'path';
 function renderMe() {
-  if (!['path', 'progress', 'record'].includes(meTab)) meTab = 'path';
-  const tabs = [['path', t('your_path')], ['progress', t('me_progress')], ['record', t('me_record')]];
+  if (!['path', 'review', 'saved', 'progress', 'record'].includes(meTab)) meTab = 'path';
+  /* Review is its own room, like Duolingo's practice: the badge says how many questions wait there (round 5) */
+  const rc = window.curReviewCount ? curReviewCount() : 0;
+  const tabs = [['path', t('your_path')], ['review', t('me_review')], ['saved', t('me_saved')], ['progress', t('me_progress')], ['record', t('me_record')]];
   const bar = `<div class="me-tabs" role="tablist">${tabs.map(([k, label]) =>
-    `<button class="me-tab ${meTab === k ? 'on' : ''}" role="tab" aria-selected="${meTab === k}" data-action="me-tab" data-v="${k}">${label}</button>`).join('')}</div>`;
+    `<button class="me-tab ${meTab === k ? 'on' : ''}" role="tab" aria-selected="${meTab === k}" data-action="me-tab" data-v="${k}">${label}${k === 'review' && rc ? `<span class="me-badge" aria-label="${rc}">${rc}</span>` : ''}</button>`).join('')}</div>`;
   let body = '';
   if (meTab === 'progress') body = renderProgress(true);
   /* the learner's own legal record — complianceHTML() is the MANAGER's view of
      the whole team and renders nothing for a learner */
   else if (meTab === 'record') body = `<div class="page-pad me-record">${compliancePanelHTML()}${verifiedPanelHTML()}${certsSectionHTML()}</div>`;   /* inside the page column (it ran off the left edge, 4 Nov 2026) */
+  else if (meTab === 'review') body = `<div class="page-pad me-record">${window.curFixHTML ? curFixHTML(true) : ''}</div>`;
+  else if (meTab === 'saved') body = `<div class="page-pad me-record">${savedReelsHTML()}</div>`;
   else body = `${pathBodyHTML()}${digestsSectionHTML()}`;
   return `<div class="page"><div class="page-pad">
     <h1 class="page-title">${t('me_h')}</h1>
     <p class="page-sub">${esc(displayName())}${S.profile && S.profile.dept ? ' · ' + esc(tdept(S.profile.dept)) : ''}</p>
-    ${(() => { if (window.CUR) { const n = CUR.courses.length, d = CUR.courses.filter(co => CUR.courseStats(co.id).complete).length; return `<p class="me-sum"><b>${d}</b> ${t('of')} ${n} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; }
+    ${(() => { if (window.CUR) { const n = CUR.courses.length, d = CUR.courses.filter(co => CUR.courseStats(co.id).complete).length; const mn = CUR.modules.length, md = CUR.modules.filter(m => CUR.moduleStats(m).complete).length;
+        /* modules first: finishing "Welcome to Belong" is a module, and a learner must see that progress (round 5) */
+        return `<p class="me-sum"><b>${md}</b> ${t('of')} ${mn} ${t('mods_done_lc')} · <b>${d}</b> ${t('of')} ${n} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; }
       const live = CATALOG.filter(cc => !isComingSoon(cc)); const done = live.filter(cc => isDone(cc.id)).length; return `<p class="me-sum"><b>${done}</b> ${t('of')} ${live.length} ${t('courses_done_lc')} · <b>${(S.xp || 0).toLocaleString()}</b> ${t('xp')}</p>`; })()}
     </div>${bar}${body}${footerHTML()}</div>`;
 }
@@ -4386,7 +4406,7 @@ function renderProgress(embedded) {
     </div>
 
     <div class="admin-section">
-      <h2>${t('your_path_to')} ${tgoal(S.goal)}</h2>
+      <h2>${t('your_path_to')} ${qgoal(S.goal)}</h2>
       <p class="sect-sub sub-auto">${t('path_points')}</p>
       ${pathStepperHTML()}
     </div>
@@ -4849,6 +4869,10 @@ function renderProfile() {
         <label>${t('prof_username')}<div class="ob-handle"><span>@</span><input class="ob-input" id="pfUser" maxlength="20" value="${esc(userHandle())}" placeholder="${suggestHandle()}"></div></label>
         <label>${t('prof_role')}<select class="auth-input" id="pfRole"><option value="">—</option>${roleOpts}</select></label>
         <label>${t('dept_label')}<select class="auth-input" id="pfDept"><option value="">${t('dept_none')}</option>${DEPTS.map(d => `<option value="${d.key}" ${(S.profile && S.profile.dept) === d.key ? 'selected' : ''}>${tdept(d.key)}</option>`).join('')}</select></label>
+        ${/* the annual training certificate (CT art. 131.º) must identify the worker: NIF + employee no. are always asked,
+              even on the lean profile, or the certificate button would send the learner to a field that is not there */''}
+        ${BRAND.leanProfile ? `<div class="pf-legal-h">${t('prof_legal_h')}</div><label>${t('prof_nif')}<input class="auth-input" id="pfNif" inputmode="numeric" maxlength="9" value="${esc((S.profile && S.profile.nif) || '')}" placeholder="123456789"></label>
+        <label>${t('prof_empno')}<input class="auth-input" id="pfEmpNo" value="${esc((S.profile && S.profile.employeeNo) || '')}"></label>` : ''}
         ${BRAND.leanProfile ? '' : `<label>${t('prof_nif')}<input class="auth-input" id="pfNif" inputmode="numeric" maxlength="9" value="${esc((S.profile && S.profile.nif) || '')}" placeholder="123456789"></label>
         <label>${t('prof_empno')}<input class="auth-input" id="pfEmpNo" value="${esc((S.profile && S.profile.employeeNo) || '')}"></label>
         <label>${t('prof_contract')}<select class="auth-input" id="pfContract">${[['permanent','contract_permanent'],['fixed_term','contract_fixed'],['part_time','contract_part']].map(([v,k])=>`<option value="${v}" ${(S.profile && S.profile.contractType)===v?'selected':''}>${t(k)}</option>`).join('')}</select></label>
@@ -5816,6 +5840,12 @@ function armVimeo(c, mod) {
       vimeoWrap.classList.add('ended');   /* our curtain over Vimeo's "more from" screen, with a replay control */
       const vn = vimeoWrap.querySelector('.veil-note'); if (vn) vn.textContent = '';
       if (done || !playing || playing.courseId !== c.id || playing.mod !== mod) return;
+      /* round 5: reviewing a moment (the result folded to the side) that runs on to the end is not finishing the
+         lesson again — it re-opened the takeaways and handed over to the NEXT module's lesson and its questions */
+      { const ck = $('#ckOv'); if (ck && ck.classList.contains('on')) return; }
+      /* and an end reached with almost nothing played (a seek, a glitch, an iframe event) never completes a lesson,
+         even with the watch rule off for testing */
+      if (!watchEv || watchEv.key !== c.id + ':' + mod || (watchEv.dur && watchCoverage() < 0.15)) return;
       /* the same discipline the <video> branch has always had: reaching the end
          of the timeline is not the same as having watched the lesson, and a
          scrubbed-through lesson must not mint a compliance hour */
@@ -6137,8 +6167,10 @@ function showModuleCheck(c, mod, after, opts) {
           <div class="ob-eyebrow">${t('mc_result')} · ${score}/${fullTotal}</div>
           ${qs.map((q, i) => `<div class="mc-fb ${detail[i].ok ? 'ok' : 'ko'}">
             <div class="ck-q">${detail[i].ok ? '✓' : '✗'} ${esc(q.q)}</div>
-            ${detail[i].ok ? '' : `<p class="mc-ans">${t('mc_correct_was')} <b>${esc(q.opts[q.a])}</b></p>`}
-            ${q.why ? `<p class="mc-why">${esc(q.why)}</p>` : ''}
+            ${/* merit (round 5): a wrong answer is never handed the right one — the learner reviews the moment
+                  and earns it in "Review" later. The explanation shows only for answers they got right. */''}
+            ${detail[i].ok && q.why ? `<p class="mc-why">${esc(q.why)}</p>` : ''}
+            ${detail[i].ok ? '' : `<p class="mc-ans">${t('mc_try_later')}</p>`}
             ${(!detail[i].ok && q.t0 != null) ? `<button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('mc_moment')} ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
           </div>`).join('')}
           <div class="ck-foot"><span class="ck-note">${score === fullTotal ? t('mc_all_right') : t('mc_recorded')}</span>
@@ -6176,7 +6208,7 @@ function openReviewSession() {
       if (answered) return; answered = true;
       const sel = +el.dataset.o, ok = sel === v.a;
       ov.querySelectorAll('.q-opt').forEach((x, oi) => { if (oi === v.a) x.classList.add('correct'); else if (oi === sel) x.classList.add('wrong'); });
-      $('#revNote').innerHTML = ok ? t('ck_right') : `${t('mc_correct_was')} <b>${esc(v.opts[v.a])}</b>` +
+      $('#revNote').innerHTML = ok ? t('ck_right') : `${t('mc_try_later')}` +
         ((v.t0 != null) ? ` · <button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${e.courseId}" data-mod="${e.mod}" data-t="${Math.max(0, Math.floor(v.t0 - 4))}">⏱ ${t('mc_moment')}</button>` : '');
       reviewOutcome(e, ok);
       $('#revNext').style.display = '';
@@ -6881,7 +6913,7 @@ function reelSlideHTML(r, i) {
     </div>
     <div class="reel-copy">
       ${ph ? `<span class="reel-ph">${t('reel_placeholder')}</span>` : ''}
-      <div class="reel-meta">${reelPending(r) ? `<span class="pend">${t('reel_pending')}</span> &middot; ` : ''}${reelLen(r)}${r.theme ? ` &middot; ${esc(r.theme)}` : ''}</div>
+      ${reelPending(r) ? `<div class="reel-meta"><span class="pend">${t('reel_pending')}</span></div>` : ''}
       ${/* headline = the outcome, subheadline = what is in it for me (feedback 3: "why should I give it two seconds?") */''}
       <h2>${esc(reelField(r.head) || reelField(r.title))}</h2>
       ${ph ? '' : `<p>${esc(reelField(r.why) || reelField(r.line))}</p>`}
@@ -6894,30 +6926,7 @@ function reelSlideHTML(r, i) {
             written from its own transcript, and a learner can take it either way.
             Collapsed by default: the feed is the feed, and a wall of text on top
             of video is neither. */''}
-      ${reelField(r.lesson) ? `<button class="reel-read" data-action="reel-read" data-id="${esc(r.id)}">${reelOpen === r.id ? t('reel_hide') : t('reel_read')}</button>` : ''}
-      ${reelOpen === r.id && reelField(r.lesson) ? `<div class="reel-lesson">${esc(reelField(r.lesson))}${
-          r.videoLang && r.videoLang !== _lang() ? `<span class="reel-vlang">${t('reel_vlang').replace('{l}', r.videoLang.toUpperCase())}</span>` : ''}</div>` : ''}
-      ${e && e.name ? `<button class="edu-byline" data-action="edu-open" data-edu="${e.id}">${eduAvatarHTML(e, 'xs')}<span class="edu-nm">${esc(e.name)}</span></button>` : ''}
-      ${/* A filled button on top of video is a colour block fighting the
-             footage — and it was the demo brand's accent, so it read as a
-             different product. The handoff is the point of a reel, but it is
-             the QUIET point: one line, the course named, an arrow. Type and
-             space, not a slab (law 3, law 8). The stop-slide keeps a real
-             button because there it IS the action, not an aside. */''}
-      ${(() => {
-        /* the graph knows which LESSON this clip sits beside; the course is the
-           fallback, not the answer. "Go deeper → Total Responsibility" is a
-           handoff; "Go deeper → Above the Line" is a shrug. */
-        const b = graphBeside(r.id);
-        if (b) return `<button class="reel-deeper" data-action="reel-goto" data-id="${esc(b.course)}" data-mod="${b.mod}">
-        <span class="rd-verb">${t('reel_beside')}</span>
-        <span class="rd-name">${esc(b.title)}</span>
-        <span class="rd-arrow" aria-hidden="true">&#8250;</span></button>`;
-        return d ? `<button class="reel-deeper" data-action="reel-goto" data-id="${d.course.id}">
-        <span class="rd-verb">${d.done ? t('qw_deeper_done') : d.started ? t('qw_deeper_resume') : t('qw_deeper')}</span>
-        <span class="rd-name">${esc(ctitle(d.course))}</span>
-        <span class="rd-arrow" aria-hidden="true">&#8250;</span></button>` : '';
-      })()}
+      ${/* minimal (round 5): headline + why only — no read-more, time, educator or deeper link over the video */''}
     </div>
   </article>`;
 }
@@ -6935,6 +6944,15 @@ function reelPauseHTML(i) {
     </div>
   </article>`;
 }
+/* per-account saved reels (S is the account's own state, synced with it) */
+function savedReelsHTML() {
+  const ids = S.reelSaved || [], list = ids.map(id => qwById(id)).filter(Boolean);
+  if (!list.length) return `<section class="admin-section"><h2>${t('me_saved')}</h2><p class="sect-sub sub-auto">${t('saved_none')}</p></section>`;
+  return `<section class="admin-section"><h2>${t('me_saved')}</h2><p class="sect-sub sub-auto">${t('saved_sub')}</p>
+    <div class="rail-wrap"><div class="rail">${list.map(r => `<button class="reel-thumb" data-action="goto" data-route="#/reels/${esc(r.id)}" aria-label="${esc(reelField(r.head) || reelField(r.title))}">
+      <img src="${esc(r.poster)}" alt="" decoding="async"><span class="rt-time">${reelLen(r)}</span>
+      <span class="rt-title">${esc(reelField(r.head) || reelField(r.title))}</span></button>`).join('')}</div></div></section>`;
+}
 function renderReels() {
   const list = reelsAll();
   if (!list.length) return `<div class="page"><div class="page-pad"><h1 class="page-title">${t('reel_h')}</h1>
@@ -6942,13 +6960,14 @@ function renderReels() {
   const slides = [];
   list.forEach((r, i) => {
     slides.push(reelSlideHTML(r, slides.length));
-    if ((i + 1) % FEED_PAUSE_AFTER === 0 && i < list.length - 1) slides.push(reelPauseHTML(slides.length));
+    /* no "take a breath" stop card (round 5: "remove this") */
   });
   /* The feed takes the whole screen and the app's chrome steps out of the way:
      the header and tutor button sat ON TOP of the first build, and the FAB
      landed on the "go deeper" button. An immersive surface has to actually be
      immersive, and it has to say how to leave. */
   return `<div class="reel-wrap">
+    <div class="reel-ambient" id="reelAmbient" aria-hidden="true"></div>
     <div class="reel-top">
       <button class="reel-x" data-action="reel-exit" aria-label="${t('close')}">&#8592;</button>
       <div class="reel-prog">${slides.map((_, i) => `<span data-p="${i}"></span>`).join('')}</div>
@@ -6991,7 +7010,7 @@ function reelVimeo(ifr, on, el) {
         /* sound refused (no gesture yet): play muted, and say so — the icon must not claim sound */
         const f = $('#reelFeed'); if (f) f.classList.remove('sound');
         pl.setMuted(true).then(() => still() ? pl.play() : null).catch(() => {}); });
-    const r = qwById(el.dataset.id); if (r && el.classList.contains('current')) armReelCheck(el, r, null, pl);
+    /* no question at the end of a reel (round 5) — reels are the hook, checks live in the lessons */
   }).catch(() => {});
 }
 function armReelFeed() {
@@ -7029,6 +7048,9 @@ function armReelFeed() {
     }
     const prog = $('.reel-prog');
     if (prog) [...prog.children].forEach((sp, k) => sp.classList.toggle('on', k <= idx));
+    /* one still backdrop for the whole feed: only the video card moves on a swipe, like Shorts (round 5) */
+    { const amb = $('#reelAmbient'), cr = slides[idx] && qwById(slides[idx].dataset.id);
+      if (amb && cr && cr.poster) amb.style.backgroundImage = `url('${new URL(cr.poster, location.href).href}')`; }
     const hint = $('#reelHint'); if (hint && idx > 0) hint.classList.add('gone');
     const cur = slides[idx];
     if (cur && cur.dataset.id && feedSeen.indexOf(cur.dataset.id) < 0) {
@@ -8390,7 +8412,9 @@ document.addEventListener('click', e => {
         playerEl.classList.add('open'); videoEl.play().catch(() => {});
       }, 600); break;
     }
-    case 'lib-filter': libFilter = cat; render(); break;
+    case 'lib-filter': { const y = scrollY; libFilter = cat; render();
+      /* the page redraw (view transition) lands after this frame: hold the position until it has */
+      [0, 60, 200, 420].forEach(ms => setTimeout(() => { if (Math.abs(scrollY - y) > 2) scrollTo({ top: y, behavior: 'instant' }); }, ms)); break; }
     case 'ai-overview': {
       const c = courseById(id);
       setTutorOpen(true);
@@ -8669,9 +8693,14 @@ document.addEventListener('click', e => {
            folds into a bottom sheet while the lesson replays, with a way back */
         ck.classList.add('peek');
         if (!ck.querySelector('.ck-back')) {
+          /* round 5 funnel: the folded card always offers the way back AND the way forward — never a dead end */
+          const bar = document.createElement('div'); bar.className = 'ck-peekbar';
           const b = document.createElement('button'); b.className = 'btn btn-glass btn-sm ck-back'; b.textContent = t('mc_back_result');
           b.addEventListener('click', () => { ck.classList.remove('peek'); try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {} try { videoEl.pause(); } catch (e) {} });
-          if (ck.firstElementChild) ck.firstElementChild.prepend(b);
+          const f = document.createElement('button'); f.className = 'btn btn-primary btn-sm ck-fwd'; f.textContent = t('mc_continue') + ' →';
+          f.addEventListener('click', () => { try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {} const go = ck.querySelector('#mcDone'); if (go) go.click(); else { ck.classList.remove('on', 'peek'); ck.innerHTML = ''; } });
+          bar.append(b, f);
+          if (ck.firstElementChild) ck.firstElementChild.prepend(bar);
         }
         const tt = +el.dataset.t;
         if (vimeoPlayer) vimeoPlayer.setCurrentTime(tt).then(() => vimeoPlayer.play()).catch(() => {});
@@ -8791,6 +8820,11 @@ document.addEventListener('click', e => {
       saveAssignments(assignments, 'Assignment removed');
       break;
     }
+    case 'goal-switch': { const g = el.dataset.g; if (!GOAL_PRESETS[g]) break;
+      S.goal = g; S.path = [...GOAL_PRESETS[g]]; S.pathMods = [...((typeof GOAL_MODS === 'object' && GOAL_MODS[g]) || [])];
+      if (S.profile) S.profile.goal = g;
+      ledgerAppend('goal_switch', { goal: g }); save(); render();
+      toast(`${t('your_path_to')} ${qgoal(g)} ${_lang() === 'pt' ? 'está pronto' : 'is ready'}`, '✦'); break; }
     case 'me-tab': meTab = el.dataset.v; if (location.hash.startsWith('#/paths')) { location.hash = '#/me'; } else render(); break;
     case 'cockpit-retry': initAdmin(); break;
     case 'reset-demo': {
@@ -9091,9 +9125,9 @@ function drawOnboard() {
       <div class="ob-eyebrow">${t('ob_step')} 2 ${t('of')} 3 · ${t('ob_destination')}</div>
       <div class="ob-title">${t('ob_q2')}</div>
       <p class="ob-sub">${t('ob_q2_sub')}</p>
-      <div class="ob-grid ob-goals">${goals.map(g => { const gi = (typeof GOAL_INFO !== 'undefined' && GOAL_INFO[g]) || null; return `
-        <div class="ob-option ${ob.goal === g ? 'sel' : ''}" data-goal="${g}">
-          <span class="oi">${svgIcon((gi && gi.icon) || (courseById(GOAL_PRESETS[g][0]) || {}).icon || 'leaf')}</span><div>${tgoal(g)}${gi ? `<div class="od">${esc(_lang() === 'pt' ? gi.pt : gi.en)}</div>` : ''}</div>
+      <div class="ob-grid ob-goals">${goals.map((g, gk) => { const gi = (typeof GOAL_INFO !== 'undefined' && GOAL_INFO[g]) || null; const ax = (t('goal_axes') || [])[gk]; return `
+        <div class="ob-option ${ob.goal === g ? 'sel' : ''}" data-goal="${attr(g)}">
+          <span class="oi">${svgIcon((gi && gi.icon) || (courseById(GOAL_PRESETS[g][0]) || {}).icon || 'leaf')}</span><div>${ax ? `<span class="ob-axis">${esc(ax)}</span>` : ''}${esc(tgoal(g))}${gi ? `<div class="od">${esc(_lang() === 'pt' ? gi.pt : gi.en)}</div>` : ''}</div>
         </div>`; }).join('')}
       </div>
       <div class="ob-foot">
@@ -9107,7 +9141,7 @@ function drawOnboard() {
     body.innerHTML = `
       <div class="ob-gen">
         <div class="orb-spin"></div>
-        <div class="ob-title" style="font-size:24px;">${t('ob_building')} ${tgoal(ob.goal)}</div>
+        <div class="ob-title" style="font-size:24px;">${t('ob_building')} ${qgoal(ob.goal)}</div>
         <div class="gen-line" id="genLine">${_lang() === 'pt' ? 'A ler o seu perfil…' : 'Reading your role profile…'}</div>
       </div>`;
     const lines = _lang() === 'pt'
@@ -9129,7 +9163,7 @@ function drawOnboard() {
       save();   /* → syncs the profile (name, @username, role) + path to the account in Firestore */
       $('#onboard').classList.remove('open');
       render();
-      toast(`${_lang() === 'pt' ? 'O seu percurso para' : 'Your AI path to'} ${tgoal(ob.goal)} ${_lang() === 'pt' ? 'está pronto' : 'is ready'}`, '✦');
+      toast(`${_lang() === 'pt' ? 'O seu percurso para' : 'Your path to'} ${qgoal(ob.goal)} ${_lang() === 'pt' ? 'está pronto' : 'is ready'}`, '✦');
     }, 750);
   }
   const next = $('#obNext');

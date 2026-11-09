@@ -363,6 +363,14 @@ const REELS = [
     media: { type: 'vimeo', id: '1243786939', h: '903deb8393' }, poster: 'https://i.vimeocdn.com/video/2222413542-a26dcb2537856cc76a00fa28e554ec53d773eb51c50ac2b438920c8faaf8f2f6-d_720x1280',
     approved: true,
     deeper: 'voice-leadership' },
+  /* belong-vision-estate removed from the feed (round 5): it repeats Reel 01's narration, so the feed felt repetitive.
+     Its entry is kept in REELS_AWAITING_VIDEO's neighbour REELS_ARCHIVE below. */
+];
+
+/* Reel 03 · Sustainability was removed from the Vimeo folder (it was 1243786077). Its copy is
+   kept here, ready: give it the new vimeoId and its `h` hash, then move it back into REELS
+   after belong-mission. */
+const REELS_ARCHIVE = [
   /* the earlier Vision narration over real estate footage, kept as a bonus at the end (Vimeo "Animated and Belong Footage reel");
      its check asks a different line of the script, so the two reels never repeat a question */
   { id: 'belong-vision-estate', seconds: 29, vimeoId: '1242451537',
@@ -382,9 +390,6 @@ const REELS = [
     deeper: 'welcome-belong' },
 ];
 
-/* Reel 03 · Sustainability was removed from the Vimeo folder (it was 1243786077). Its copy is
-   kept here, ready: give it the new vimeoId and its `h` hash, then move it back into REELS
-   after belong-mission. */
 const REELS_AWAITING_VIDEO = [
   { id: 'belong-sustainability', seconds: 32, vimeoId: '1243786077',
     head: { en: 'Keep all three legs standing', pt: 'Mantenha as três pernas de pé' },

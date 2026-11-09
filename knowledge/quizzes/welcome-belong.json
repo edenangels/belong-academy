@@ -25,7 +25,7 @@
      "q": "Qual é a origem do nome «Craveiral»?",
      "why": "Em português, um campo de cravos chama-se «craveiral» — e era isso que o terreno era quando o fundador o encontrou."
     },
-    "t0": 51,
+    "t0": 63,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -34,28 +34,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "A hotel",
-      "A relationship with a piece of land",
-      "A farm",
-      "A business venture"
+      "2010",
+      "2012",
+      "2020",
+      "2018"
      ],
-     "q": "What was Craveiral primarily built to be?",
-     "why": "Craveiral was built to be a relationship with a piece of land, with the hotel being a way to sustain that relationship."
+     "q": "In which year did Craveiral open to its first guests?",
+     "why": "Pedro found the field in 2010 and Craveiral opened in 2018, eight years later."
     },
     "pt": {
      "opts": [
-      "Um hotel",
-      "Uma relação com um pedaço de terra",
-      "Uma quinta",
-      "Um empreendimento comercial"
+      "2010",
+      "2012",
+      "2020",
+      "2018"
      ],
-     "q": "Antes de mais, o Craveiral foi construído para ser o quê?",
-     "why": "O Craveiral foi construído para ser uma relação com um pedaço de terra; o hotel é a forma de sustentar essa relação."
+     "q": "Em que ano abriu o Craveiral aos primeiros hóspedes?",
+     "why": "O Pedro encontrou o terreno em 2010 e o Craveiral abriu em 2018, oito anos depois."
     },
-    "t0": 139,
+    "t0": 98,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -64,28 +64,28 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 0,
     "en": {
      "opts": [
-      "Maximizing profit per square meter",
-      "Minimizing environmental impact",
-      "Preserving the natural beauty of the land",
-      "Building more houses"
+      "The space and silence are what guests come for",
+      "The council does not allow more building",
+      "There is no budget left to build more",
+      "More houses are planned for next year"
      ],
-     "q": "When making decisions about the use of land at Craveiral, what should be the primary consideration?",
-     "why": "The primary consideration should be preserving the natural beauty of the land, as this is a key part of the Craveiral experience and what sets it apart."
+     "q": "A guest asks why Craveiral doesn't build more houses. What do you say?",
+     "why": "Pedro says only 4% is built on purpose: the emptiness, space and silence are the product."
     },
     "pt": {
      "opts": [
-      "Maximizar o lucro por metro quadrado",
-      "Minimizar o impacto ambiental",
-      "Preservar a beleza natural da terra",
-      "Construir mais casas"
+      "O espaço e o silêncio são o que os hóspedes procuram",
+      "A câmara não permite construir mais",
+      "Não há orçamento para construir mais",
+      "Estão previstas mais casas para o próximo ano"
      ],
-     "q": "Nas decisões sobre o uso da terra no Craveiral, qual deve ser a consideração principal?",
-     "why": "A consideração principal deve ser preservar a beleza natural da terra, porque é uma parte essencial da experiência do Craveiral e o que o distingue."
+     "q": "Um hóspede pergunta porque é que o Craveiral não constrói mais casas. O que se responde?",
+     "why": "O Pedro diz que só 4% está construído de propósito: o vazio, o espaço e o silêncio são o produto."
     },
-    "t0": 169,
+    "t0": 176,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -94,28 +94,28 @@
     "corrected": true
    },
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
-      "Using the most cost-effective materials",
-      "Building in a way that minimizes the impact on the natural environment",
-      "Creating a modern and sleek aesthetic",
-      "Prioritizing ease of maintenance"
+      "Wood was cheaper than paving",
+      "It keeps the animals away from the houses",
+      "It lets the land breathe underneath",
+      "It keeps guests' shoes clean in winter"
      ],
-     "q": "When designing new infrastructure at Craveiral, what should be the guiding principle?",
-     "why": "The guiding principle should be building in a way that minimizes the impact on the natural environment, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land."
+     "q": "A guest asks why the paths are raised wooden walkways. What do you say?",
+     "why": "The lesson says raised wood lets the land breathe: water flows, plants grow, the soil stays alive."
     },
     "pt": {
      "opts": [
-      "Usar os materiais mais económicos",
-      "Construir de forma a minimizar o impacto no ambiente natural",
-      "Criar uma estética moderna e elegante",
-      "Dar prioridade à facilidade de manutenção"
+      "A madeira era mais barata do que pavimentar",
+      "Mantêm os animais longe das casas",
+      "Deixam a terra respirar por baixo",
+      "Mantêm os sapatos limpos no inverno"
      ],
-     "q": "Ao projetar novas infraestruturas no Craveiral, qual deve ser o princípio orientador?",
-     "why": "O princípio orientador deve ser construir de forma a minimizar o impacto no ambiente natural, em linha com a filosofia do Craveiral de preservar a beleza natural da terra."
+     "q": "Um hóspede pergunta porque é que os caminhos são passadiços de madeira elevados. O que se responde?",
+     "why": "A aula diz que a madeira elevada deixa a terra respirar: a água corre, as plantas crescem, o solo fica vivo."
     },
-    "t0": 198,
+    "t0": 195,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -127,25 +127,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "Accept the proposal and prioritize the economic benefits",
-      "Reject the proposal and prioritize environmental protection",
-      "Try to find a compromise that balances economic and environmental concerns",
-      "Put the proposal to a community vote"
+      "Get the most out of the land quickly",
+      "Leave the land better than you found it",
+      "Keep guests away from the farm areas",
+      "Leave land care to the farm team"
      ],
-     "q": "A new investor is proposing to build a large resort on a nearby plot of land, which would increase revenue for the local community but also potentially harm the environment. What should the Craveiral team do?",
-     "why": "The Craveiral team should reject the proposal and prioritize environmental protection, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
+     "q": "\"We belong to the land for a while.\" What does that ask of you at work?",
+     "why": "Pedro says that if we belong to the land, our job is to leave it better than we found it."
     },
     "pt": {
      "opts": [
-      "Aceitar a proposta e dar prioridade aos benefícios económicos",
-      "Rejeitar a proposta e dar prioridade à proteção ambiental",
-      "Procurar um compromisso que equilibre as preocupações económicas e ambientais",
-      "Pôr a proposta à votação da comunidade"
+      "Tirar o máximo da terra depressa",
+      "Deixar a terra melhor do que a encontrou",
+      "Manter os hóspedes longe das zonas da quinta",
+      "Deixar o cuidado da terra à equipa da quinta"
      ],
-     "q": "Um novo investidor propõe construir um grande resort num terreno vizinho, o que aumentaria as receitas da comunidade local, mas poderia prejudicar o ambiente. O que deve fazer a equipa do Craveiral?",
-     "why": "A equipa do Craveiral deve rejeitar a proposta e dar prioridade à proteção ambiental, em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "«Pertencemos à terra por um tempo.» O que é que isto pede a cada um no trabalho?",
+     "why": "O Pedro diz que, se pertencemos à terra, o nosso trabalho é deixá-la melhor do que a encontrámos."
     },
-    "t0": 139,
+    "t0": 237,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -154,28 +154,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Approve the request and prioritize the guest's desires",
-      "Reject the request and prioritize environmental protection",
-      "Offer alternative options that minimize the impact on the environment",
-      "Charge the guest a premium for the privilege of building on the land"
+      "Yes, the farm is just decoration",
+      "It is mainly a wedding venue",
+      "It is mainly a restaurant with rooms",
+      "Land first; the hotel sustains it"
      ],
-     "q": "A guest is requesting to build a private villa on a plot of land within the Craveiral property, which would require clearing a significant amount of natural vegetation. What should the Craveiral team do?",
-     "why": "The Craveiral team should reject the request and prioritize environmental protection, as this is in line with the Craveiral philosophy of preserving the natural beauty of the land and minimizing the impact on the environment."
+     "q": "A guest asks if Craveiral is mainly a hotel. What is the right answer?",
+     "why": "Pedro says Craveiral was built as a relationship with the land, and the hotel is how it is sustained: land first, hotel second."
     },
     "pt": {
      "opts": [
-      "Aprovar o pedido e dar prioridade aos desejos do hóspede",
-      "Recusar o pedido e dar prioridade à proteção ambiental",
-      "Propor alternativas que minimizem o impacto no ambiente",
-      "Cobrar ao hóspede um valor extra pelo privilégio de construir no terreno"
+      "Sim, a quinta é só decoração",
+      "É sobretudo um espaço para casamentos",
+      "É sobretudo um restaurante com quartos",
+      "Primeiro a terra; o hotel sustenta-a"
      ],
-     "q": "Um hóspede pede para construir uma moradia privada num terreno dentro da propriedade do Craveiral, o que obrigaria a desmatar uma área significativa de vegetação natural. O que deve fazer a equipa do Craveiral?",
-     "why": "A equipa do Craveiral deve recusar o pedido e dar prioridade à proteção ambiental, em linha com a filosofia do Craveiral de preservar a beleza natural da terra e minimizar o impacto no ambiente."
+     "q": "Um hóspede pergunta se o Craveiral é sobretudo um hotel. Qual é a resposta certa?",
+     "why": "O Pedro diz que o Craveiral foi construído como uma relação com a terra e que o hotel é o que a sustenta: primeiro a terra, depois o hotel."
     },
-    "t0": 169,
+    "t0": 142,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -186,28 +186,28 @@
   ],
   "1": [
    {
-    "a": 0,
+    "a": 2,
     "en": {
      "opts": [
+      "Every guest deserves to be treated like family",
+      "A full house is the sign of a good host",
       "A place well cared for cares for those who inhabit it",
-      "The importance of abstract branding words",
-      "The need for a circular economy",
-      "The value of preserving the environment"
+      "Good food and good company make a good place"
      ],
-     "q": "What is the core conviction that Belong was founded on?",
-     "why": "The core conviction is that a place well cared for cares for those who inhabit it, which is the foundation of everything."
+     "q": "Which sentence is Belong founded on?",
+     "why": "Pedro calls \"A place well cared for cares for those who inhabit it\" the foundation of everything."
     },
     "pt": {
      "opts": [
+      "Cada hóspede merece ser tratado como família",
+      "Casa cheia é sinal de bom anfitrião",
       "Um lugar bem cuidado cuida de quem o habita",
-      "A importância de palavras de marca abstratas",
-      "A necessidade de uma economia circular",
-      "O valor de preservar o ambiente"
+      "Boa comida e boa companhia fazem um bom lugar"
      ],
-     "q": "Qual é a convicção fundamental sobre a qual a Belong foi fundada?",
-     "why": "A convicção fundamental é que um lugar bem cuidado cuida de quem o habita — a base de tudo."
+     "q": "Em que frase assenta a Belong?",
+     "why": "O Pedro chama a «Um lugar bem cuidado cuida de quem o habita» a base de tudo."
     },
-    "t0": 29,
+    "t0": 37,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -216,28 +216,28 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 1,
     "en": {
      "opts": [
-      "To regenerate the territory through a circular economy",
-      "To preserve the environment and don't damage it",
-      "To create a sustainable business model",
-      "To promote social and economic growth"
+      "Become the best rural hotel in Portugal",
+      "Regenerate the territory through a circular economy",
+      "Preserve the coast by building as little as possible",
+      "Bring Lisbon's restaurants to the countryside"
      ],
-     "q": "What is the vision of the organization in one line?",
-     "why": "The vision is to regenerate the territory through a circular economy, which is the guiding principle of the organization."
+     "q": "What is Belong's vision, in one line?",
+     "why": "The vision is exactly one line: to regenerate the territory through a circular economy."
     },
     "pt": {
      "opts": [
+      "Ser o melhor hotel rural de Portugal",
       "Regenerar o território através de uma economia circular",
-      "Preservar o ambiente e não o danificar",
-      "Criar um modelo de negócio sustentável",
-      "Promover o crescimento social e económico"
+      "Preservar a costa construindo o mínimo possível",
+      "Levar os restaurantes de Lisboa para o campo"
      ],
-     "q": "Qual é a visão da organização, numa linha?",
-     "why": "A visão é regenerar o território através de uma economia circular, o princípio orientador da organização."
+     "q": "Qual é a visão da Belong, numa linha?",
+     "why": "A visão é exatamente uma linha: regenerar o território através de uma economia circular."
     },
-    "t0": 109,
+    "t0": 115,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -246,58 +246,28 @@
     "verified": true
    },
    {
-    "a": 1,
-    "en": {
-     "opts": [
-      "Focus on preserving the environment and not damaging it",
-      "Actively give back more than they take, by composting and recycling",
-      "Only follow the instructions of their supervisor",
-      "Reduce their work hours to minimize their impact"
-     ],
-     "q": "What should a worker at Craveiral Farmhouse do to contribute to the regeneration of the territory?",
-     "why": "The worker should actively give back more than they take, by composting and recycling, to contribute to the regeneration of the territory."
-    },
-    "pt": {
-     "opts": [
-      "Concentrar-se em preservar o ambiente e não o danificar",
-      "Dar ativamente mais do que recebe, através da compostagem e da reciclagem",
-      "Limitar-se a seguir as instruções do seu supervisor",
-      "Reduzir as horas de trabalho para minimizar o seu impacto"
-     ],
-     "q": "O que deve fazer quem trabalha no Craveiral Farmhouse para contribuir para a regeneração do território?",
-     "why": "Deve dar ativamente mais do que recebe, através da compostagem e da reciclagem, para contribuir para a regeneração do território."
-    },
-    "t0": 134,
-    "type": "application",
-    "gen": true,
-    "model": "llama-3.3-70b@workers-ai",
-    "src": "whisper-small",
-    "generatedAt": 1789638718086,
-    "corrected": true
-   },
-   {
     "a": 0,
     "en": {
      "opts": [
-      "By buying products from local producers and reducing waste",
-      "By increasing the restaurant's profits and expanding its operations",
-      "By reducing the number of customers and minimizing the impact",
-      "By donating excess food to charity"
+      "Actively give back more than we take",
+      "Keep the land exactly as we found it",
+      "Avoid damaging the land where possible",
+      "Build only with recycled materials"
      ],
-     "q": "How should a team member at the A Mesa do CAM restaurant support the circular economy?",
-     "why": "The team member should buy products from local producers and reduce waste to support the circular economy."
+     "q": "Pedro says \"regenerate\" is more than \"don't damage\". What does it mean?",
+     "why": "Pedro says regenerate means not just preserve or avoid damage, but actively give back more than we take."
     },
     "pt": {
      "opts": [
-      "Comprar a produtores locais e reduzir o desperdício",
-      "Aumentar os lucros do restaurante e expandir a operação",
-      "Reduzir o número de clientes para minimizar o impacto",
-      "Doar a comida excedente a instituições de solidariedade"
+      "Dar ativamente mais do que tiramos",
+      "Manter a terra exatamente como a encontrámos",
+      "Evitar estragar a terra sempre que possível",
+      "Construir só com materiais reciclados"
      ],
-     "q": "Como deve um membro da equipa do restaurante A Mesa do CAM apoiar a economia circular?",
-     "why": "O membro da equipa deve comprar a produtores locais e reduzir o desperdício para apoiar a economia circular."
+     "q": "O Pedro diz que «regenerar» é mais do que «não estragar». O que significa?",
+     "why": "O Pedro diz que regenerar não é só preservar ou não estragar: é dar ativamente mais do que tiramos."
     },
-    "t0": 162,
+    "t0": 129,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -306,28 +276,58 @@
     "corrected": true
    },
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Start a new project to increase the laundry's profits",
-      "Reduce the amount of water used in the laundry process",
-      "Buy new, more efficient washing machines",
-      "Partner with local businesses to offer joint services"
+      "In the general bin",
+      "Back to the supplier",
+      "To a nearby pig farm",
+      "To the compost, which feeds the farm"
      ],
-     "q": "A new employee at the laundry service wants to contribute to the circular economy. What should they do?",
-     "why": "The new employee should reduce the amount of water used in the laundry process to contribute to the circular economy."
+     "q": "In the kitchen, where should food scraps go?",
+     "why": "The lesson says scraps go to compost instead of the bin, and the compost feeds the farm."
     },
     "pt": {
      "opts": [
-      "Lançar um novo projeto para aumentar os lucros da lavandaria",
-      "Reduzir a quantidade de água usada na lavagem",
-      "Comprar máquinas de lavar novas e mais eficientes",
-      "Fazer parcerias com empresas locais para oferecer serviços conjuntos"
+      "Para o lixo indiferenciado",
+      "De volta para o fornecedor",
+      "Para uma pocilga das redondezas",
+      "Para o composto, que alimenta a quinta"
      ],
-     "q": "Uma pessoa que começou agora a trabalhar na lavandaria quer contribuir para a economia circular. O que deve fazer?",
-     "why": "Deve reduzir a quantidade de água usada na lavagem para contribuir para a economia circular."
+     "q": "Na cozinha, para onde devem ir os restos de comida?",
+     "why": "A aula diz que os restos vão para o composto e não para o lixo, e que o composto alimenta a quinta."
     },
-    "t0": 188,
+    "t0": 211,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789638718086,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "No, it serves hotel guests only",
+      "Only staff families can use it",
+      "Yes, it serves the hotel and the village",
+      "Only in the winter months"
+     ],
+     "q": "A São Teotónio resident asks if they can use the Belong laundry. What is true?",
+     "why": "Pedro says the laundry serves the hotel and the village."
+    },
+    "pt": {
+     "opts": [
+      "Não, serve só os hóspedes do hotel",
+      "Só as famílias da equipa a podem usar",
+      "Sim, serve o hotel e a aldeia",
+      "Só nos meses de inverno"
+     ],
+     "q": "Um morador de São Teotónio pergunta se pode usar a lavandaria da Belong. O que é verdade?",
+     "why": "O Pedro diz que a lavandaria serve o hotel e a aldeia."
+    },
+    "t0": 196,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -339,25 +339,25 @@
     "a": 0,
     "en": {
      "opts": [
-      "Explain the vision to regenerate the territory through a circular economy",
-      "Tell the guest that the vision is to preserve the environment and don't damage it",
-      "Say that the vision is to create a sustainable business model",
-      "Respond that the vision is to promote social and economic growth"
+      "Tell them where the food came from",
+      "Name the dish and its price",
+      "Recommend a wine to go with it",
+      "Explain how long it takes to cook"
      ],
-     "q": "A guest at the Craveiral Farmhouse asks about the organization's vision. How should the staff member respond?",
-     "why": "The staff member should explain the vision to regenerate the territory through a circular economy to the guest."
+     "q": "A guest asks about a dish. What should you do?",
+     "why": "Pedro says: don't just name the dish, tell them where it came from."
     },
     "pt": {
      "opts": [
-      "Explicar a visão de regenerar o território através de uma economia circular",
-      "Dizer ao hóspede que a visão é preservar o ambiente e não o danificar",
-      "Dizer que a visão é criar um modelo de negócio sustentável",
-      "Responder que a visão é promover o crescimento social e económico"
+      "Contar-lhe de onde veio a comida",
+      "Dizer o nome do prato e o preço",
+      "Recomendar um vinho para acompanhar",
+      "Explicar quanto tempo demora a cozinhar"
      ],
-     "q": "Um hóspede do Craveiral Farmhouse pergunta qual é a visão da organização. Como deve responder o membro da equipa?",
-     "why": "O membro da equipa deve explicar ao hóspede a visão de regenerar o território através de uma economia circular."
+     "q": "Um hóspede pergunta por um prato. O que se deve fazer?",
+     "why": "O Pedro diz: não basta dizer o nome do prato, é preciso contar de onde veio."
     },
-    "t0": 109,
+    "t0": 311,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

@@ -77,10 +77,11 @@
     see_more: ['See more', 'Ver mais'], see_less: ['Show less', 'Mostrar menos'],
     about_course: ['About this course', 'Sobre este curso'], chapters: ['Chapters', 'Capítulos'],
     next_in_course: ['Next in this course', 'A seguir neste curso'], more_modules: ['Other modules in this course', 'Outros módulos deste curso'],
-    fix_one: ['Fix 1 mistake', 'Corrigir 1 erro'], fix_n: ['Fix {n} mistakes', 'Corrigir {n} erros'],
-    fix_h: ['Fix your mistakes', 'Corrija os seus erros'],
-    fix_sub: ['Only the questions you missed. Each one has the moment in the video where the answer is: watch that bit, then answer again. Your best result counts.', 'Só as perguntas que falhou. Cada uma tem o momento do vídeo onde está a resposta: veja esse trecho e responda de novo. Conta o seu melhor resultado.'],
-    fix_none: ['No mistakes to fix. Every question you answered is right.', 'Não há erros para corrigir. Todas as perguntas que respondeu estão certas.'],
+    fix_one: ['Review 1 question', 'Rever 1 pergunta'], fix_n: ['Review {n} questions', 'Rever {n} perguntas'],
+    fix_h: ['Review', 'Rever'],
+    fix_sub: ['The questions you have not got yet, one lesson at a time. Watch the moment again, then answer: your best result is what counts, and it is what earns the certificate.', 'As perguntas que ainda não acertou, uma lição de cada vez. Veja o momento de novo e responda: conta o seu melhor resultado, e é ele que dá o comprovativo.'],
+    fix_none: ['Nothing to review. Every question you have answered is right.', 'Nada para rever. Todas as perguntas que respondeu estão certas.'],
+    mods_done: ['modules', 'módulos'],
     fix_item: ['{n} to fix', '{n} para corrigir'], see_course: ['See the course', 'Ver o curso'], your_path: ['Your path', 'O seu percurso']
   };
   const L = (k, vars) => { const v = (STR[k] || [k, k])[PT() ? 1 : 0]; return vars ? v.replace(/\{(\w+)\}/g, (_, n) => vars[n]) : v; };
@@ -241,10 +242,13 @@
       </div>
     </article>`;
   }
-  function moduleCardHTML(m) {
-    const st = moduleStats(m), co = courseOf(m.courseId), pos = m.item.posterPos;
-    return `<article class="card cur-card" data-action="goto" data-route="#/module/${m.id}">
-      <div class="thumb t-grad-${m.item.grad} ${m.item.poster ? 'has-poster' : ''}"${posterStyle(m.item.poster, pos)}></div>
+  /* modules cut from one item share its poster; never show the same thumbnail twice (round 5) */
+  const sharedPoster = m => modules.filter(x => x.source === m.source).length > 1;
+  const modPoster = m => (sharedPoster(m) && lThumb(m.source, m.lessons[0])) ? lThumb(m.source, m.lessons[0]).replace('_320x180', '_640x360') : m.item.poster;
+  function moduleCardHTML(m, locked) {
+    const st = moduleStats(m), co = courseOf(m.courseId), pos = sharedPoster(m) ? null : m.item.posterPos;
+    return `<article class="card cur-card${locked ? ' locked' : ''}"${locked ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`}>
+      <div class="thumb t-grad-${m.item.grad} ${modPoster(m) ? 'has-poster' : ''}"${posterStyle(modPoster(m), pos)}>${locked ? '<span class="lock-badge" aria-hidden="true">🔒</span>' : ''}</div>
       <div class="card-body">
         ${typeTag('module', cTitle(co))}
         <h3>${esc(mTitle(m))}</h3>
@@ -428,8 +432,8 @@
       /* artwork ABOVE the words, never words over artwork: the covers carry their own lettering, and
          laying a second title over a cropped cover cut both (feedback 2, 5 Nov 2026). A 16:9 frame shows
          the whole 16:9 cover; hover lifts the tile like the Explore cards; a locked step does nothing. */
-      const tag = st === 'locked' ? 'div' : 'button', thumb = (window.thumbOf || (x => x))(m.item.poster),
-        art = !m.item.poster ? '' : k < 2 ? ` style="background-image:url('${thumb}')"` : ` data-bg="${thumb}"`;
+      const tag = st === 'locked' ? 'div' : 'button', thumb = (window.thumbOf || (x => x))(modPoster(m)),
+        art = !modPoster(m) ? '' : k < 2 ? ` style="background-image:url('${thumb}')"` : ` data-bg="${thumb}"`;
       const sub = st === 'done' ? L('completed') : st === 'current' ? `${s.pct}% · ${fmtMins(s.minsLeft)} ${L('left')}` : t('unlocks_after');
       return `<${tag} class="pstep ps2 ${st}"${st === 'locked' ? ' aria-disabled="true"' : ` data-action="goto" data-route="#/module/${m.id}"`} aria-label="${k + 1}. ${esc(mTitle(m))} · ${sub}">
         <span class="ps-art t-grad-${m.item.grad || 1}"${art}><span class="pstep-n">${st === 'done' ? '✓' : k + 1}</span>${st === 'locked' ? '<span class="ps-lock" aria-hidden="true">🔒</span>' : ''}
@@ -449,7 +453,8 @@
   window.curPathRailsHTML = () => {
     const pm = pathModules();
     const rest = courses.filter(co => !modulesOfCourse(co.id).some(m => pm.includes(m)) && !courseStats(co.id).complete);
-    return railHTML(L('mods_in_path'), t('in_order'), pm.map(moduleCardHTML), '#/library')
+    const cur = pm.find(m => !moduleStats(m).complete);
+    return railHTML(L('mods_in_path'), t('in_order'), pm.map(m => moduleCardHTML(m, !moduleStats(m).complete && m !== cur)), '#/library')
       + (rest.length ? railHTML(L('next_courses'), L('courses'), rest.map(courseCardHTML), '#/library') : '');
   };
   /* Explore more never repeats the path (feedback 3): the modules you don't have yet, then any course untouched by it */
@@ -593,10 +598,13 @@
     return out.filter(x => courseById(x.courseId));
   }
   window.CUR.historical = historical;
-  window.curFixHTML = function () {
-    const items = [];
+  const reviewItems = () => { const items = [];
     modules.forEach(m => m.lessons.forEach(i => { const x = misses(m.source, i); if (x) items.push({ m, i, n: x.wrong.length }); }));
-    if (!items.length) return '';
+    return items; };
+  window.curReviewCount = () => reviewItems().reduce((a, x) => a + x.n, 0);
+  window.curFixHTML = function (full) {
+    const items = reviewItems();
+    if (!items.length) return full ? `<section class="admin-section cur-fixbox"><h2>${L('fix_h')}</h2><p class="sect-sub sub-auto">${L('fix_none')}</p></section>` : '';
     return `<section class="admin-section cur-fixbox">
       <h2>${L('fix_h')}</h2><p class="sect-sub sub-auto">${L('fix_sub')}</p>
       ${items.map(x => `<div class="cur-fixrow"><span class="cl-thumb sm"${lThumb(x.m.source, x.i) ? ` style="background-image:url('${lThumb(x.m.source, x.i)}')"` : ''}></span>
@@ -645,7 +653,13 @@
       const c = courseById(el.dataset.id), mod = +el.dataset.mod, x = misses(el.dataset.id, mod); if (!c || !x) return;
       /* the lesson opens paused behind the fix, so "watch the answer" can jump straight to the moment */
       _openPaused = true; openPlayer(c.id, mod);
-      setTimeout(() => showModuleCheck(c, mod, () => render(), { fix: x }), 450); }
+      const fromReview = /^#\/me/.test(location.hash);
+      setTimeout(() => showModuleCheck(c, mod, () => {
+        /* no dead end: close the lesson and land somewhere with a next step */
+        closePlayer();
+        const left = window.curReviewCount ? curReviewCount() : 0, m = moduleOfLesson(c.id, mod);
+        setTimeout(() => { if (fromReview || left) { meTab = 'review'; location.hash = '#/me'; render(); } else if (m) location.hash = '#/module/' + m.id; else render(); }, 120);
+      }, { fix: x }), 450); }
     else if (a === 'cur-retake') { e.preventDefault(); e.stopPropagation(); const c = courseById(el.dataset.id); if (c) showModuleCheck(c, +el.dataset.mod, () => render(), { retake: true }); }
     else if (a === 'cur-pl-go') { e.preventDefault(); e.stopPropagation(); closePlayer(); setTimeout(() => { location.hash = el.dataset.route; }, 50); }
   }, true);

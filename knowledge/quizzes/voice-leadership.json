@@ -4,26 +4,26 @@
  "modules": {
   "0": [
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
-      "Formal and professional",
-      "Calm, warm, and unhurried",
-      "Enthusiastic and promotional",
-      "Scripted and rehearsed"
+      "Formal, polished and professional",
+      "Upbeat, enthusiastic and promotional",
+      "Calm, warm, concrete and unhurried",
+      "Short, fast and efficient"
      ],
-     "q": "What tone should the Craveiral voice convey when interacting with guests?",
-     "why": "The Craveiral voice should convey a tone that is calm, warm, and unhurried, like the place itself."
+     "q": "Which words describe the Craveiral voice?",
+     "why": "Pedro says our voice is calm, warm, concrete and unhurried, like the place."
     },
     "pt": {
      "opts": [
-      "Formal e profissional",
-      "Calmo, caloroso e sem pressa",
-      "Entusiasta e promocional",
-      "Decorado e ensaiado"
+      "Formal, cuidada e profissional",
+      "Animada, entusiasta e promocional",
+      "Calma, calorosa, concreta e sem pressa",
+      "Curta, rápida e eficiente"
      ],
-     "q": "Que tom deve ter a voz do Craveiral nas interações com os hóspedes?",
-     "why": "A voz do Craveiral deve ter um tom calmo, caloroso e sem pressa, como o próprio lugar."
+     "q": "Que palavras descrevem a voz do Craveiral?",
+     "why": "O Pedro diz que a nossa voz é calma, calorosa, concreta e sem pressa, como o lugar."
     },
     "t0": 29,
     "type": "recall",
@@ -37,25 +37,25 @@
     "a": 0,
     "en": {
      "opts": [
-      "Say it the way you'd say it to a friend's parents visiting your home",
-      "Use a script or a formula",
-      "Be formal and professional",
-      "Avoid saying it altogether"
+      "A friend's parents visiting your home",
+      "A customer at a bank counter",
+      "Your manager in a formal meeting",
+      "A child on a school trip"
      ],
-     "q": "How should you say something to a guest if you're unsure how to phrase it?",
-     "why": "If you're unsure how to say something to a guest, you should say it the way you'd say it to a friend's parents visiting your home."
+     "q": "Unsure how to say something to a guest? Say it as you would to…",
+     "why": "Pedro says to say it the way you'd say it to a friend's parents visiting your home: respectful, warm, real."
     },
     "pt": {
      "opts": [
-      "Dizê-lo como diria aos pais de um amigo que o visitam em casa",
-      "Usar um guião ou uma fórmula",
-      "Ser formal e profissional",
-      "Evitar dizê-lo de todo"
+      "Os pais de um amigo de visita a sua casa",
+      "Um cliente ao balcão de um banco",
+      "Um chefe numa reunião formal",
+      "Uma criança numa visita de estudo"
      ],
-     "q": "Como se deve dizer algo a um hóspede quando não se tem a certeza de como o formular?",
-     "why": "Quando não se tem a certeza de como dizer algo a um hóspede, deve-se dizê-lo como diria aos pais de um amigo que o visitam em casa."
+     "q": "Na dúvida sobre como dizer algo a um hóspede, deve-se dizer como se diria a…",
+     "why": "O Pedro diz para falar como se falaria aos pais de um amigo de visita a nossa casa: com respeito, calor e verdade."
     },
-    "t0": 55,
+    "t0": 45,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -64,28 +64,28 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 3,
     "en": {
      "opts": [
-      "Use complex grammar and vocabulary to impress them",
-      "Speak quickly and efficiently to get the point across",
-      "Keep English simple and warm, and focus on clear goodwill",
-      "Avoid speaking with them altogether"
+      "Their unit",
+      "Their room",
+      "Their suite",
+      "Their house"
      ],
-     "q": "What should you do when speaking with international guests who may not speak perfect English?",
-     "why": "When speaking with international guests, you should keep English simple and warm, and focus on clear goodwill."
+     "q": "Talking to a guest, what do you call the place where they sleep?",
+     "why": "Pedro says we say houses, not units or rooms: each has a kitchen and a terrace."
     },
     "pt": {
      "opts": [
-      "Usar gramática e vocabulário complexos para impressionar",
-      "Falar depressa e de forma eficiente para passar a mensagem",
-      "Manter o inglês simples e caloroso, com uma boa vontade clara",
-      "Evitar falar com eles de todo"
+      "A unidade",
+      "O quarto",
+      "A suite",
+      "A casa"
      ],
-     "q": "O que se deve fazer ao falar com hóspedes internacionais que podem não falar inglês na perfeição?",
-     "why": "Com hóspedes internacionais, deve-se manter o inglês simples e caloroso e apostar numa boa vontade clara."
+     "q": "Ao falar com um hóspede, como se chama ao sítio onde dorme?",
+     "why": "O Pedro diz que dizemos casas, não unidades nem quartos: cada uma tem cozinha e terraço."
     },
-    "t0": 108,
+    "t0": 64,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -97,25 +97,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "Teach them complex Portuguese phrases and grammar",
-      "Share a little Portuguese when the moment invites it, such as common phrases like 'obrigado' and 'bom dia'",
-      "Avoid speaking with them about the local culture altogether",
-      "Only focus on speaking with them in English"
+      "Answer only in English to keep it simple",
+      "Teach them a little Portuguese, like \"obrigado\"",
+      "Suggest they download a language app",
+      "Point them to a phrasebook in the shop"
      ],
-     "q": "What can you do to make international guests feel more welcome and connected to the local culture?",
-     "why": "You can make international guests feel more welcome and connected to the local culture by sharing a little Portuguese when the moment invites it."
+     "q": "An international guest is curious about the local language. What do you do?",
+     "why": "Pedro says to teach a little Portuguese when the moment invites it: obrigado, bom dia, the story of \"Craveiral\"."
     },
     "pt": {
      "opts": [
-      "Ensinar-lhes frases e gramática complexas de português",
-      "Partilhar um pouco de português quando o momento o pede, com expressões simples como «obrigado» e «bom dia»",
-      "Evitar falar com eles sobre a cultura local",
-      "Falar com eles apenas em inglês"
+      "Responder só em inglês, para simplificar",
+      "Ensinar-lhe um pouco de português, como «obrigado»",
+      "Sugerir que descarregue uma app de línguas",
+      "Indicar-lhe um guia de conversação na loja"
      ],
-     "q": "O que se pode fazer para que os hóspedes internacionais se sintam mais bem-vindos e ligados à cultura local?",
-     "why": "Partilhar um pouco de português quando o momento o pede ajuda os hóspedes internacionais a sentir-se mais bem-vindos e ligados à cultura local."
+     "q": "Um hóspede estrangeiro tem curiosidade sobre a língua. O que se faz?",
+     "why": "O Pedro diz para ensinar um pouco de português quando o momento convida: obrigado, bom dia, a história de «Craveiral»."
     },
-    "t0": 159,
+    "t0": 165,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -124,26 +124,26 @@
     "verified": true
    },
    {
-    "a": 3,
+    "a": 2,
     "en": {
      "opts": [
-      "Try to force them to talk and be more social",
-      "Respect their boundaries and give them space",
-      "Ignore them and focus on other guests",
-      "Both try to engage them in conversation and respect their boundaries, calibrated to their needs"
+      "Keep chatting until they warm up",
+      "Ask a colleague to deal with them",
+      "Give the same care, with less conversation",
+      "Send them the full activity list"
      ],
-     "q": "A guest approaches you and seems hesitant to engage in conversation. What should you do?",
-     "why": "You should both try to engage them in conversation and respect their boundaries, calibrated to their needs, as some guests may want conversation while others may want efficiency and privacy."
+     "q": "A guest gives short answers and seems to want privacy. What do you do?",
+     "why": "Pedro says some guests want conversation, others efficiency and privacy: both get the same care, calibrated."
     },
     "pt": {
      "opts": [
-      "Tentar forçá-lo a falar e a ser mais sociável",
-      "Respeitar os seus limites e dar-lhe espaço",
-      "Ignorá-lo e concentrar-se noutros hóspedes",
-      "Tentar envolvê-lo na conversa e, ao mesmo tempo, respeitar os seus limites, ajustando-se ao que precisa"
+      "Continuar a conversar até ele se abrir",
+      "Pedir a um colega que trate dele",
+      "Dar o mesmo cuidado, com menos conversa",
+      "Enviar-lhe a lista completa de atividades"
      ],
-     "q": "Um hóspede aproxima-se, mas parece pouco à vontade para conversar. O que se deve fazer?",
-     "why": "Deve-se tentar envolvê-lo na conversa e respeitar os seus limites, ajustando-se ao que precisa: há hóspedes que querem conversa e outros que preferem eficiência e privacidade."
+     "q": "Um hóspede responde por poucas palavras e parece querer privacidade. O que se faz?",
+     "why": "O Pedro diz que uns hóspedes querem conversa e outros eficiência e privacidade: todos recebem o mesmo cuidado, ajustado."
     },
     "t0": 184,
     "type": "scenario",
@@ -157,23 +157,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "Use a warm and concrete tone, with short sentences",
-      "Use a formal and professional tone, with complex grammar and vocabulary",
-      "Use a promotional and sales-oriented tone, with emphasis on amenities and features",
-      "Avoid writing the email altogether and instead use a template or automated response"
+      "\"The pool is heated in October and the trails are lovely.\"",
+      "\"We look forward to welcoming you soon.\"",
+      "\"Your satisfaction is always guaranteed.\"",
+      "\"Dear valued guest, please find attached.\""
      ],
-     "q": "You are writing an email to a guest who has booked a stay at the farm. How should you write the email?",
-     "why": "You should use a warm and concrete tone, with short sentences, when writing an email to a guest, as this reflects the Craveiral voice and values."
+     "q": "Which email line fits the Craveiral voice?",
+     "why": "Pedro says one true, specific sentence beats empty formulas, and we avoid words like \"guaranteed\" and \"valued guest\"."
     },
     "pt": {
      "opts": [
-      "Com um tom caloroso e concreto, em frases curtas",
-      "Com um tom formal e profissional, com gramática e vocabulário complexos",
-      "Com um tom promocional e comercial, a destacar comodidades e características",
-      "Não escrever o e-mail e usar antes um modelo ou uma resposta automática"
+      "«A piscina está aquecida em outubro e os trilhos estão lindos.»",
+      "«Aguardamos com expectativa a sua visita.»",
+      "«A sua satisfação está sempre garantida.»",
+      "«Estimado cliente, segue em anexo.»"
      ],
-     "q": "Está a escrever um e-mail a um hóspede que reservou uma estadia na quinta. Como deve escrevê-lo?",
-     "why": "Num e-mail a um hóspede, deve-se usar um tom caloroso e concreto, em frases curtas, porque isso reflete a voz e os valores do Craveiral."
+     "q": "Que frase de email corresponde à voz do Craveiral?",
+     "why": "O Pedro diz que uma frase verdadeira e concreta vale mais do que fórmulas vazias, e evitamos palavras como «garantido» e «estimado cliente»."
     },
     "t0": 212,
     "type": "scenario",
@@ -189,25 +189,25 @@
     "a": 1,
     "en": {
      "opts": [
-      "Make all the decisions yourself",
-      "Make the call yourself; your manager would rather correct a decision than make them all",
-      "Wait for permission for every judgment call",
-      "Follow the org chart strictly"
+      "Always wait for a manager's approval",
+      "He'd rather correct your decision than make them all",
+      "Only managers make decisions about guests",
+      "Follow the written procedure exactly"
      ],
-     "q": "What is the first principle of working together, according to your manager?",
-     "why": "Your manager would rather correct your decision than make all the decisions, so that the people on the ground decide with autonomy."
+     "q": "What is Pedro's first principle about decisions?",
+     "why": "Pedro's first principle: \"I'd rather correct your decision than make all the decisions.\""
     },
     "pt": {
      "opts": [
-      "Tomar todas as decisões por conta própria",
-      "Decidir por si; o seu responsável prefere corrigir uma decisão a tomá-las todas",
-      "Esperar autorização para cada decisão",
-      "Seguir rigorosamente o organograma"
+      "Esperar sempre pela aprovação de um gestor",
+      "Prefere corrigir uma decisão a tomá-las todas",
+      "Só os gestores decidem sobre os hóspedes",
+      "Seguir exatamente o procedimento escrito"
      ],
-     "q": "Qual é o primeiro princípio do trabalho em equipa, segundo o seu responsável?",
-     "why": "O seu responsável prefere corrigir uma decisão a tomar todas as decisões, para que quem está no terreno decida com autonomia."
+     "q": "Qual é o primeiro princípio do Pedro sobre decisões?",
+     "why": "O primeiro princípio do Pedro: «Prefiro corrigir a vossa decisão a tomar todas as decisões.»"
     },
-    "t0": 52,
+    "t0": 46,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -216,28 +216,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Your manager will punish team members for generous decisions",
-      "Your manager will never punish team members for generous decisions made in good faith",
-      "Your manager will only punish team members for decisions that cost money",
-      "Your manager will punish team members for decisions that were not approved in advance"
+      "Ask your manager before offering it",
+      "Offer it only if the guest asks",
+      "Don't: free items need approval",
+      "Do it, and tell your manager after"
      ],
-     "q": "What is your manager's stance on punishing team members for generous decisions made in good faith?",
-     "why": "Your manager will never punish anyone for a generous decision made in good faith for a guest, to encourage a culture of hospitality and trust."
+     "q": "A free dessert would save a guest's evening. What do you do?",
+     "why": "Pedro says if a bottle of wine or a free dessert saves a guest's evening, do it and tell your manager after."
     },
     "pt": {
      "opts": [
-      "O seu responsável castiga membros da equipa por decisões generosas",
-      "O seu responsável nunca castigará ninguém por decisões generosas tomadas de boa-fé",
-      "O seu responsável só castiga decisões que custam dinheiro",
-      "O seu responsável castiga decisões que não foram aprovadas previamente"
+      "Pedir autorização ao gestor antes",
+      "Oferecer só se o hóspede pedir",
+      "Não oferecer: ofertas precisam de aprovação",
+      "Oferecer e avisar o gestor depois"
      ],
-     "q": "Qual é a posição do seu responsável sobre castigar membros da equipa por decisões generosas tomadas de boa-fé?",
-     "why": "O seu responsável nunca castigará ninguém por uma decisão generosa tomada de boa-fé por um hóspede, para incentivar uma cultura de hospitalidade e confiança."
+     "q": "Uma sobremesa oferecida salvaria a noite de um hóspede. O que se faz?",
+     "why": "O Pedro diz que, se uma garrafa de vinho ou uma sobremesa salva a noite de um hóspede, deve-se oferecer e avisar o gestor depois."
     },
-    "t0": 105,
+    "t0": 95,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -246,28 +246,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 0,
     "en": {
      "opts": [
-      "Wait for permission from a manager",
-      "Solve the problem using the company values as a compass",
-      "Call your manager for guidance",
-      "Do nothing and let the guest handle it"
+      "Our values: the long game and the relationship",
+      "The cheapest fix available",
+      "What your manager did last time",
+      "Whatever ends the conversation fastest"
      ],
-     "q": "What should a team member do when a guest is in front of them and something needs to be solved?",
-     "why": "The team member should solve the problem using the company values as a compass to provide good hospitality and service."
+     "q": "Something needs solving in front of a guest. What guides your decision?",
+     "why": "Pedro says to solve it using the values as your compass: the long game, the relationship, coherence."
     },
     "pt": {
      "opts": [
-      "Esperar autorização de um responsável",
-      "Resolver o problema, com os valores da empresa como bússola",
-      "Ligar ao seu responsável a pedir orientação",
-      "Não fazer nada e deixar o hóspede resolver"
+      "Os nossos valores: o longo prazo e a relação",
+      "A solução mais barata",
+      "O que o gestor fez da última vez",
+      "O que acabar a conversa mais depressa"
      ],
-     "q": "O que deve fazer um membro da equipa quando tem um hóspede à frente e há algo para resolver?",
-     "why": "Deve resolver o problema com os valores da empresa como bússola, para oferecer boa hospitalidade e bom serviço."
+     "q": "É preciso resolver algo à frente de um hóspede. O que deve orientar a decisão?",
+     "why": "O Pedro diz para resolver usando os valores como bússola: o longo prazo, a relação, a coerência."
     },
-    "t0": 79,
+    "t0": 84,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -276,28 +276,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
-      "Hide the mistake until it becomes a crisis",
-      "Bring the problem to your manager while it's small",
-      "Try to fix the mistake on their own without telling anyone",
-      "Tell a colleague but not your manager"
+      "Fix it quietly so nobody knows",
+      "Wait and see if anyone notices",
+      "Tell your manager early, while it's small",
+      "Tell a colleague, but not your manager"
      ],
-     "q": "What should a team member do when they catch a mistake early on?",
-     "why": "The team member should bring the problem to their manager while it's small to prevent it from becoming a crisis and to maintain trust."
+     "q": "You made a mistake at work. What do you do?",
+     "why": "Pedro says the mistake isn't the problem, hiding it is: bring it while it's small and you get calm and help."
     },
     "pt": {
      "opts": [
-      "Esconder o erro até se tornar uma crise",
-      "Levar o problema ao seu responsável enquanto ainda é pequeno",
-      "Tentar corrigir o erro sozinho, sem dizer nada a ninguém",
-      "Contar a um colega, mas não ao seu responsável"
+      "Corrigi-lo em silêncio para ninguém saber",
+      "Esperar para ver se alguém repara",
+      "Avisar o gestor cedo, enquanto é pequeno",
+      "Contar a um colega, mas não ao gestor"
      ],
-     "q": "O que deve fazer um membro da equipa quando deteta um erro cedo?",
-     "why": "Deve levar o problema ao seu responsável enquanto ainda é pequeno, para evitar que se torne uma crise e para manter a confiança."
+     "q": "Cometeu um erro no trabalho. O que se deve fazer?",
+     "why": "O Pedro diz que o problema não é o erro, é escondê-lo: comunicado cedo, recebe-se calma e ajuda."
     },
-    "t0": 131,
+    "t0": 133,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -306,28 +306,28 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 1,
     "en": {
      "opts": [
-      "Speak up and tell their manager about the mistake",
-      "Keep quiet and let their manager figure it out",
-      "Tell a colleague but not their manager",
-      "Wait until the mistake becomes a crisis before speaking up"
+      "Keep quiet to protect your job",
+      "Tell him",
+      "Discuss it only with colleagues",
+      "Wait until it causes a problem"
      ],
-     "q": "A team member notices that their manager has made a mistake in a decision. What should they do?",
-     "why": "The team member should speak up and tell their manager about the mistake to maintain trust and respect."
+     "q": "You think Pedro got a decision wrong. What does he ask you to do?",
+     "why": "Pedro says \"When I'm wrong, tell me\" and promises it won't be career-limiting."
     },
     "pt": {
      "opts": [
-      "Falar e avisar o seu responsável do erro",
-      "Ficar calado e deixar que o responsável dê por isso",
-      "Contar a um colega, mas não ao responsável",
-      "Esperar que o erro se torne uma crise antes de falar"
+      "Ficar calado para proteger o emprego",
+      "Que lhe digam",
+      "Falar disso só com colegas",
+      "Esperar até causar um problema"
      ],
-     "q": "Um membro da equipa repara que o seu responsável cometeu um erro numa decisão. O que deve fazer?",
-     "why": "Deve falar e avisar o seu responsável do erro, para manter a confiança e o respeito."
+     "q": "Acha que o Pedro tomou uma decisão errada. O que pede ele?",
+     "why": "O Pedro diz «Quando eu estiver errado, digam-me» e promete que isso não prejudica a carreira."
     },
-    "t0": 156,
+    "t0": 155,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -336,28 +336,28 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 3,
     "en": {
      "opts": [
-      "Try to meet the standards and ask for help if needed",
-      "Lower their own standards to make it easier",
-      "Ignore the standards and do their own thing",
-      "Complain to colleagues about the high standards"
+      "Keep going: busy season is like that",
+      "Quietly skip some of your tasks",
+      "Take days off without telling anyone",
+      "Escalate it, to Pedro if needed"
      ],
-     "q": "A team member is struggling to meet the high standards set by their manager. What should they do?",
-     "why": "The team member should try to meet the standards and ask for help if needed to maintain respect for themselves, their colleagues, and the guests."
+     "q": "For weeks your schedule has left you exhausted. What do you do?",
+     "why": "Pedro says well-being is non-negotiable: if the schedule isn't human, escalate it, to him if needed."
     },
     "pt": {
      "opts": [
-      "Esforçar-se por cumprir os padrões e pedir ajuda se for preciso",
-      "Baixar os próprios padrões para facilitar",
-      "Ignorar os padrões e fazer as coisas à sua maneira",
-      "Queixar-se aos colegas dos padrões elevados"
+      "Aguentar: a época alta é assim",
+      "Saltar algumas tarefas sem dizer nada",
+      "Faltar uns dias sem avisar",
+      "Comunicar o problema, ao Pedro se for preciso"
      ],
-     "q": "Um membro da equipa está a ter dificuldade em cumprir os padrões elevados definidos pelo seu responsável. O que deve fazer?",
-     "why": "Deve esforçar-se por cumprir os padrões e pedir ajuda se for preciso, por respeito por si, pelos colegas e pelos hóspedes."
+     "q": "Há semanas que o horário o deixa exausto. O que se deve fazer?",
+     "why": "O Pedro diz que o bem-estar não é negociável: se o horário não é humano, deve-se comunicar o problema, ao Pedro se for preciso."
     },
-    "t0": 184,
+    "t0": 296,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

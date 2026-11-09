@@ -5230,3 +5230,32 @@ body:has(.take-overlay.open, .ck-ov.on, #onboard.open, #quizModal.open, .daily-o
 }
 @media (max-width: 600px) { .nav-right .bell, .nav-right .streak-chip, .nav-right .avatar { flex: none; } }
 @media (max-width: 480px) { nav.topnav .logo { display: none; } }
+
+/* ===== round 5 ===== */
+.me-tab { position: relative; }
+.me-badge { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; margin-left: 6px; border-radius: 99px;
+  background: #e5484d; color: #fff; font-size: 11px; font-weight: 700; line-height: 1; vertical-align: 1px; }
+.card.cur-card.locked { cursor: default; }
+.card.cur-card.locked .thumb { filter: saturate(.45) brightness(.55); }
+.card.cur-card.locked .card-body { opacity: .6; }
+.card.cur-card.locked:hover { transform: none; box-shadow: none; }
+.lock-badge { position: absolute; top: 10px; right: 10px; font-size: 13px; z-index: 2; }
+.mc-ans { color: var(--text-dim); font-size: 13px; margin: 4px 0 8px; }
+/* reels: a fixed ambient layer, the slides carry only the plate */
+.reel-ambient { position: fixed; inset: -40px; z-index: 0; background-size: cover; background-position: center;
+  filter: blur(42px) saturate(1.2) brightness(.45); transform: scale(1.1); transition: background-image .5s ease; pointer-events: none; }
+.reel.has-ambient::before { display: none !important; }
+.reel-feed, .reel-top { position: relative; z-index: 1; }
+.reel-feed { scroll-behavior: smooth; }
+@media (hover: hover) and (min-width: 900px) {
+  .reel-nav { right: auto; left: calc(50% + min(50vw, 100dvh * 9 / 32) + 28px); }
+  .reel-nav-b { width: 56px; height: 56px; background: rgba(255,255,255,.18); }
+}
+.goal-switch { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--line); }
+.goal-switch .gs-h { font-size: 13px; color: var(--text-dim); margin-right: 4px; }
+.goal-switch.done .gs-h { color: var(--accent); font-weight: 600; }
+.pf-legal-h { grid-column: 1 / -1; margin-top: 10px; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-faint); }
+.ck-peekbar { display: none; gap: 8px; justify-content: space-between; position: sticky; top: 0; z-index: 2; margin-bottom: 10px; }
+.ck-ov.peek .ck-peekbar { display: flex; }
+.ck-peekbar .ck-back { margin: 0; position: static; }
+.ob-axis { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 2px; }

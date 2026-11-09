@@ -34,28 +34,28 @@
     "corrected": true
    },
    {
-    "a": 3,
+    "a": 1,
     "en": {
      "opts": [
-      "Sustainability, local craftsmanship, and air conditioning",
-      "Sustainability, local craftsmanship, and homage to Portuguese heritage",
-      "Organic amenities, air conditioning, and private terrace",
-      "Proper equipped kitchen, organic amenities, air conditioning, and private terrace"
+      "A private pool",
+      "An equipped kitchen and a private terrace",
+      "A wood-burning stove",
+      "Two bedrooms"
      ],
-     "q": "What amenities are shared by all units at Craveiral?",
-     "why": "The correct answer is proper equipped kitchen, organic amenities, air conditioning, and private terrace because these are the amenities mentioned as being shared by all units."
+     "q": "What does every house at Craveiral have?",
+     "why": "Every unit has a proper equipped kitchen, organic amenities, air conditioning and a private terrace."
     },
     "pt": {
      "opts": [
-      "Sustentabilidade, artesanato local e ar condicionado",
-      "Sustentabilidade, artesanato local e homenagem ao património português",
-      "Produtos de higiene biológicos, ar condicionado e terraço privado",
-      "Cozinha bem equipada, produtos de higiene biológicos, ar condicionado e terraço privado"
+      "Uma piscina privada",
+      "Uma cozinha equipada e um terraço privado",
+      "Uma salamandra a lenha",
+      "Dois quartos"
      ],
-     "q": "Que comodidades são comuns a todas as unidades do Craveiral?",
-     "why": "A resposta correta é cozinha bem equipada, produtos de higiene biológicos, ar condicionado e terraço privado, porque são estas as comodidades referidas como comuns a todas as unidades."
+     "q": "O que têm todas as casas do Craveiral?",
+     "why": "Todas as unidades têm cozinha equipada, produtos de higiene biológicos, ar condicionado e terraço privado."
     },
-    "t0": 57,
+    "t0": 54,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -64,89 +64,29 @@
     "corrected": true
    },
    {
-    "a": 2,
+    "a": 3,
     "en": {
      "opts": [
-      "Provide a vague answer to avoid overwhelming the guest",
-      "Offer to show the guest the house in person",
-      "Answer precisely, including details about the sofa bed and second bedroom",
-      "Tell the guest to check the website for more information"
+      "One",
+      "Four",
+      "Six",
+      "Two"
      ],
-     "q": "What should a team member do when a guest asks about the capacity of a two-bedroom house?",
-     "why": "The correct answer is to answer precisely, including details about the sofa bed and second bedroom, because confidence and precision sell and create trust with the guest."
+     "q": "A guest asks how many people a studio sleeps. What do you answer?",
+     "why": "The lesson says the studios are 40 square metres and sleep two."
     },
     "pt": {
      "opts": [
-      "Dar uma resposta vaga para não sobrecarregar o hóspede",
-      "Propor mostrar a casa ao hóspede pessoalmente",
-      "Responder com precisão, incluindo detalhes sobre o sofá-cama e o segundo quarto",
-      "Dizer ao hóspede que consulte o site para mais informações"
+      "Uma",
+      "Quatro",
+      "Seis",
+      "Duas"
      ],
-     "q": "O que deve fazer um membro da equipa quando um hóspede pergunta pela capacidade de uma casa de dois quartos?",
-     "why": "A resposta correta é responder com precisão, incluindo detalhes sobre o sofá-cama e o segundo quarto, porque a segurança e a precisão vendem e criam confiança com o hóspede."
+     "q": "Um hóspede pergunta quantas pessoas dormem num estúdio. O que se responde?",
+     "why": "A aula diz que os estúdios têm 40 metros quadrados e dormem duas pessoas."
     },
-    "t0": 117,
+    "t0": 72,
     "type": "application",
-    "gen": true,
-    "model": "llama-3.3-70b@workers-ai",
-    "src": "whisper-small",
-    "generatedAt": 1789644701580,
-    "corrected": true
-   },
-   {
-    "a": 2,
-    "en": {
-     "opts": [
-      "Tell the guest that the house is not suitable for families with kids",
-      "Offer to provide extra beds or cribs",
-      "Explain the flexibility of the sofa bed in the living room and the options for the second bedroom",
-      "Suggest that the guest book a different type of accommodation"
-     ],
-     "q": "How should a team member respond to a guest's question about the flexibility of a two-bedroom house for a family with kids?",
-     "why": "The correct answer is to explain the flexibility of the sofa bed in the living room and the options for the second bedroom, because this creates trust and confidence with the guest."
-    },
-    "pt": {
-     "opts": [
-      "Dizer ao hóspede que a casa não é adequada para famílias com crianças",
-      "Propor camas ou berços extra",
-      "Explicar a flexibilidade do sofá-cama na sala e as opções para o segundo quarto",
-      "Sugerir que o hóspede reserve outro tipo de alojamento"
-     ],
-     "q": "Como deve um membro da equipa responder a um hóspede que pergunta se uma casa de dois quartos é flexível para uma família com crianças?",
-     "why": "A resposta correta é explicar a flexibilidade do sofá-cama na sala e as opções para o segundo quarto, porque isso cria confiança e segurança junto do hóspede."
-    },
-    "t0": 146,
-    "type": "application",
-    "gen": true,
-    "model": "llama-3.3-70b@workers-ai",
-    "src": "whisper-small",
-    "generatedAt": 1789644701580,
-    "corrected": true
-   },
-   {
-    "a": 1,
-    "en": {
-     "opts": [
-      "The wellness deck",
-      "The nature interpretation center",
-      "The gym",
-      "The restaurant"
-     ],
-     "q": "A guest is looking for a place to host a yoga retreat for 50 people. What facility would you recommend at Craveiral?",
-     "why": "The correct answer is the nature interpretation center because it hosts yoga twice a week and can seat up to 50 people for a banquet or 80 standing."
-    },
-    "pt": {
-     "opts": [
-      "O deck de bem-estar",
-      "O Centro de Interpretação da Natureza",
-      "O ginásio",
-      "O restaurante"
-     ],
-     "q": "Um hóspede procura um espaço para um retiro de yoga para 50 pessoas. Que espaço do Craveiral se deve recomendar?",
-     "why": "A resposta correta é o Centro de Interpretação da Natureza, que recebe yoga duas vezes por semana e tem capacidade para 50 pessoas sentadas em banquete ou 80 em pé."
-    },
-    "t0": 174,
-    "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
     "src": "whisper-small",
@@ -157,25 +97,85 @@
     "a": 0,
     "en": {
      "opts": [
-      "Yes, the playground area can host events up to 300 people",
-      "Yes, the terrace with the fire pits can host events up to 300 people",
-      "No, Craveiral does not have a venue that can accommodate 300 people",
-      "Maybe, it depends on the time of year and availability"
+      "Yes: it sleeps four, up to six with the sofa bed",
+      "No: it only sleeps two people",
+      "Only if they book a second house",
+      "No: it is for couples only"
      ],
-     "q": "A guest is planning a wedding reception for 300 people and wants to know if Craveiral has a suitable venue. What would you tell them?",
-     "why": "The correct answer is yes, the playground area can host events up to 300 people, because it is mentioned as being able to host events up to 300 banquet style."
+     "q": "A family with small kids asks if the two-bedroom house works. What do you say?",
+     "why": "The two-bedroom house sleeps four comfortably, up to six, and the sofa bed gives flexibility for small kids."
     },
     "pt": {
      "opts": [
-      "Sim, a área de jogos pode acolher eventos até 300 pessoas",
-      "Sim, o terraço com as braseiras pode acolher eventos até 300 pessoas",
-      "Não, o Craveiral não tem nenhum espaço para 300 pessoas",
-      "Talvez; depende da época do ano e da disponibilidade"
+      "Sim: dorme quatro, até seis com o sofá-cama",
+      "Não: só dorme duas pessoas",
+      "Só se reservarem uma segunda casa",
+      "Não: é só para casais"
      ],
-     "q": "Um hóspede está a planear uma receção de casamento para 300 pessoas e quer saber se o Craveiral tem um espaço adequado. O que se lhe deve dizer?",
-     "why": "A resposta correta é sim: a área de jogos é referida como tendo capacidade para eventos até 300 pessoas em formato banquete."
+     "q": "Uma família com crianças pequenas pergunta se a casa de dois quartos serve. O que se responde?",
+     "why": "A casa de dois quartos dorme quatro pessoas com conforto, até seis, e o sofá-cama dá flexibilidade para crianças pequenas."
     },
-    "t0": 200,
+    "t0": 133,
+    "type": "application",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644701580,
+    "corrected": true
+   },
+   {
+    "a": 2,
+    "en": {
+     "opts": [
+      "The wellness deck",
+      "The gym",
+      "The nature interpretation centre",
+      "The restaurant terrace"
+     ],
+     "q": "A group wants to run a yoga retreat. Which space hosts yoga at Craveiral?",
+     "why": "The nature interpretation centre hosts yoga twice a week, plus retreats, workshops and meetings."
+    },
+    "pt": {
+     "opts": [
+      "O deck de bem-estar",
+      "O ginásio",
+      "O centro de interpretação da natureza",
+      "O terraço do restaurante"
+     ],
+     "q": "Um grupo quer fazer um retiro de ioga. Que espaço recebe o ioga no Craveiral?",
+     "why": "O centro de interpretação da natureza recebe ioga duas vezes por semana, além de retiros, workshops e reuniões."
+    },
+    "t0": 182,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644701580,
+    "corrected": true
+   },
+   {
+    "a": 1,
+    "en": {
+     "opts": [
+      "The nature interpretation centre",
+      "The playground area",
+      "The indoor pool area",
+      "The restaurant dining room"
+     ],
+     "q": "A couple wants a wedding banquet for 300 guests. Which space can host it?",
+     "why": "The lesson says the playground area can host events of up to 300, banquet style."
+    },
+    "pt": {
+     "opts": [
+      "O centro de interpretação da natureza",
+      "A zona do parque infantil",
+      "A zona da piscina interior",
+      "A sala do restaurante"
+     ],
+     "q": "Um casal quer um banquete de casamento para 300 convidados. Que espaço o pode receber?",
+     "why": "A aula diz que a zona do parque infantil pode receber eventos até 300 pessoas, em formato banquete."
+    },
+    "t0": 199,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -186,26 +186,26 @@
   ],
   "1": [
    {
-    "a": 1,
+    "a": 3,
     "en": {
      "opts": [
-      "Because it's a utility",
-      "Because the region lives with drought as a neighbor",
-      "Because it's a chapter in a report",
-      "Because it's a small physical action"
+      "Water bills doubled this year",
+      "The pools use too much water",
+      "The law limits water per guest",
+      "The region lives with drought"
      ],
-     "q": "Why is water recycling important at Craveiral?",
-     "why": "Water recycling is important because the region lives with drought as a neighbor."
+     "q": "Why does every drop of water matter at Craveiral?",
+     "why": "The lesson says water is the limiting factor in the Alentejo: the region lives with drought as a neighbour."
     },
     "pt": {
      "opts": [
-      "Porque é um serviço básico",
-      "Porque a região vive com a seca como vizinha",
-      "Porque é um capítulo de um relatório",
-      "Porque é um pequeno gesto físico"
+      "A fatura da água duplicou este ano",
+      "As piscinas gastam demasiada água",
+      "A lei limita a água por hóspede",
+      "A região vive com a seca"
      ],
-     "q": "Porque é que a reciclagem da água é importante no Craveiral?",
-     "why": "A reciclagem da água é importante porque a região vive com a seca como vizinha."
+     "q": "Porque é que cada gota de água conta no Craveiral?",
+     "why": "A aula diz que a água é o fator limitante no Alentejo: a região vive com a seca como vizinha."
     },
     "t0": 29,
     "type": "recall",
@@ -216,28 +216,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 0,
     "en": {
      "opts": [
-      "Ignore them",
-      "Flag them as waste",
-      "Turn them off",
-      "Report them to the housekeeping team"
+      "Switch it off and close up",
+      "Leave it on for the next guest",
+      "Wait for housekeeping to notice",
+      "Turn the temperature down a little"
      ],
-     "q": "What should you do when you see lights on walkways and common areas that are not on schedule?",
-     "why": "You should flag them as waste when you see lights on walkways and common areas that are not on schedule."
+     "q": "You find the air conditioning running in an empty house. What do you do?",
+     "why": "The lesson says AC in an empty house wastes money and carbon: check, switch off, close."
     },
     "pt": {
      "opts": [
-      "Ignorá-las",
-      "Assinalá-las como desperdício",
-      "Desligá-las",
-      "Comunicá-las à equipa de andares"
+      "Desligá-lo e fechar a casa",
+      "Deixá-lo ligado para o próximo hóspede",
+      "Esperar que a limpeza repare",
+      "Baixar um pouco a temperatura"
      ],
-     "q": "O que se deve fazer ao ver luzes acesas nos passadiços e nas zonas comuns fora do horário previsto?",
-     "why": "Ao ver luzes acesas nos passadiços e nas zonas comuns fora do horário, deve-se assinalá-las como desperdício."
+     "q": "Encontra o ar condicionado ligado numa casa vazia. O que se faz?",
+     "why": "A aula diz que o ar condicionado numa casa vazia é dinheiro e carbono desperdiçados: verificar, desligar, fechar."
     },
-    "t0": 80,
+    "t0": 70,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -246,28 +246,28 @@
     "corrected": true
    },
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
-      "Report it the next day",
-      "Report it the hour you see it",
-      "Ignore it",
-      "Fix it yourself"
+      "At the end of the week",
+      "At the next team meeting",
+      "Within the hour you see it",
+      "Only if it gets worse"
      ],
-     "q": "What should you do if you see a leak in the property?",
-     "why": "You should report every leak the hour you see it."
+     "q": "You see a dripping tap. When do you report it?",
+     "why": "The lesson says to report every leak the hour you see it: a dripping tap for a month is a scandal."
     },
     "pt": {
      "opts": [
-      "Comunicá-la no dia seguinte",
-      "Comunicá-la na mesma hora em que a vê",
-      "Ignorá-la",
-      "Repará-la por conta própria"
+      "No fim da semana",
+      "Na próxima reunião de equipa",
+      "Na mesma hora em que a vê",
+      "Só se piorar"
      ],
-     "q": "O que se deve fazer ao ver uma fuga de água na propriedade?",
-     "why": "Todas as fugas devem ser comunicadas na mesma hora em que são vistas."
+     "q": "Vê uma torneira a pingar. Quando se deve comunicar?",
+     "why": "A aula diz para comunicar cada fuga na hora em que a vê: uma torneira a pingar durante um mês é um escândalo."
     },
-    "t0": 29,
+    "t0": 44,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -276,28 +276,28 @@
     "verified": true
    },
    {
-    "a": 2,
+    "a": 1,
     "en": {
      "opts": [
-      "Throw them away",
-      "Recycle them",
-      "Compost them",
-      "Donate them"
+      "In the general waste bin",
+      "To the compost, then back to the farm",
+      "In the plastic recycling stream",
+      "Down the kitchen drain"
      ],
-     "q": "What should the kitchen team do with organic scraps?",
-     "why": "The kitchen team should compost organic scraps."
+     "q": "Where do organic kitchen scraps go?",
+     "why": "The lesson says organic scraps route to compost, compost to the farm, and the farm to the kitchen."
     },
     "pt": {
      "opts": [
-      "Deitá-los fora",
-      "Reciclá-los",
-      "Pô-los na compostagem",
-      "Doá-los"
+      "Para o lixo indiferenciado",
+      "Para o composto e depois de volta à quinta",
+      "Para a reciclagem de plástico",
+      "Pelo esgoto da cozinha"
      ],
-     "q": "O que deve a equipa da cozinha fazer com os restos orgânicos?",
-     "why": "A equipa da cozinha deve pôr os restos orgânicos na compostagem."
+     "q": "Para onde vão os restos orgânicos da cozinha?",
+     "why": "A aula diz que os restos orgânicos vão para o composto, o composto para a quinta e a quinta para a cozinha."
     },
-    "t0": 138,
+    "t0": 105,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -306,28 +306,28 @@
     "corrected": true
    },
    {
-    "a": 2,
+    "a": 3,
     "en": {
      "opts": [
-      "The lower price only",
-      "The environmental impact only",
-      "The impact on the local territory and financial sustainability",
-      "The product's quality only"
+      "Is this the cheapest option?",
+      "Can we order bigger amounts?",
+      "Will guests notice the difference?",
+      "Does this strengthen the territory?"
      ],
-     "q": "A supplier is offering a product at a lower price, but it's not from a local producer. What should you consider?",
-     "why": "You should consider the impact on the local territory and financial sustainability."
+     "q": "A cheaper supplier is not local. Which question must you always ask?",
+     "why": "The lesson says to always ask the Belong questions: does this strengthen the territory, does the value circulate here?"
     },
     "pt": {
      "opts": [
-      "Apenas o preço mais baixo",
-      "Apenas o impacto ambiental",
-      "O impacto no território local e a sustentabilidade financeira",
-      "Apenas a qualidade do produto"
+      "É a opção mais barata?",
+      "Podemos encomendar mais quantidade?",
+      "Os hóspedes vão notar a diferença?",
+      "Isto fortalece o território?"
      ],
-     "q": "Um fornecedor oferece um produto mais barato, mas que não vem de um produtor local. O que se deve ter em conta?",
-     "why": "Deve-se ter em conta o impacto no território local e a sustentabilidade financeira."
+     "q": "Um fornecedor mais barato não é local. Que pergunta se deve fazer sempre?",
+     "why": "A aula diz para fazer sempre as perguntas da Belong: isto fortalece o território? O valor circula aqui?"
     },
-    "t0": 163,
+    "t0": 190,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -336,28 +336,28 @@
     "verified": true
    },
    {
-    "a": 1,
+    "a": 0,
     "en": {
      "opts": [
-      "Throw it away in the regular trash",
-      "Recycle it",
-      "Compost it",
-      "Donate it"
+      "Separate it: each material has its own stream",
+      "Leave it: it all ends up together",
+      "Put everything in general waste",
+      "Put the glass in the compost"
      ],
-     "q": "You are about to throw away a glass bottle. What should you do instead?",
-     "why": "You should recycle the glass bottle instead of throwing it away."
+     "q": "You find glass mixed in with the plastic. What do you do?",
+     "why": "The lesson says glass, plastic, paper and oil each have their own stream, and mixing them breaks the circle."
     },
     "pt": {
      "opts": [
-      "Deitá-la no lixo indiferenciado",
-      "Reciclá-la",
-      "Pô-la na compostagem",
-      "Doá-la"
+      "Separar: cada material tem o seu circuito",
+      "Deixar: acaba tudo junto",
+      "Pôr tudo no lixo indiferenciado",
+      "Pôr o vidro no composto"
      ],
-     "q": "Está prestes a deitar fora uma garrafa de vidro. O que deve fazer em vez disso?",
-     "why": "A garrafa de vidro deve ir para a reciclagem, em vez de ir para o lixo."
+     "q": "Encontra vidro misturado com o plástico. O que se faz?",
+     "why": "A aula diz que vidro, plástico, papel e óleo têm cada um o seu circuito, e misturá-los quebra o círculo."
     },
-    "t0": 106,
+    "t0": 119,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
