@@ -6200,8 +6200,10 @@ function showModuleCheck(c, mod, after, opts) {
             ${(!detail[i].ok && q.t0 != null) ? `<button class="btn btn-glass btn-sm" data-action="review-moment" data-id="${c.id}" data-mod="${mod}" data-t="${Math.max(0, Math.floor(q.t0 - 4))}">⏱ ${t('mc_moment')} ${Math.floor(q.t0 / 60)}:${String(Math.floor(q.t0 % 60)).padStart(2, '0')}</button>` : ''}
           </div>`).join('')}
           <div class="ck-foot"><span class="ck-note">${score === fullTotal ? t('mc_all_right') : t('mc_recorded')}</span>
-            ${score < fullTotal ? `<button class="btn btn-glass btn-sm" id="mcRetry">↻ ${t('mc_retry')}</button>` : ''}
-            <button class="btn btn-primary btn-sm" id="mcDone">${t('mc_continue')}</button></div>
+            ${/* round 7: after a mistake the way forward IS the retry — review the moment, then answer again here */''}
+            ${score < fullTotal
+              ? `<button class="link-quiet" id="mcDone">${t('mc_skip_now')}</button><button class="btn btn-primary btn-sm" id="mcRetry">${t('mc_answer_again')} →</button>`
+              : `<button class="btn btn-primary btn-sm" id="mcDone">${t('mc_continue')}</button>`}</div>
         </div>`;
         $('#mcDone').addEventListener('click', () => { ov.classList.remove('on'); ov.innerHTML = ''; if (after) after(); });
         /* round 6: correct a miss right here, on the first go — only the missed questions, answer still not shown */
@@ -8742,7 +8744,10 @@ document.addEventListener('click', e => {
           const b = document.createElement('button'); b.className = 'btn btn-glass btn-sm ck-back'; b.textContent = t('mc_back_result');
           b.addEventListener('click', () => { ck.classList.remove('peek'); try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {} try { videoEl.pause(); } catch (e) {} });
           const f = document.createElement('button'); f.className = 'btn btn-primary btn-sm ck-fwd'; f.textContent = t('mc_continue') + ' →';
-          f.addEventListener('click', () => { try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {} const go = ck.querySelector('#mcDone'); if (go) go.click(); else { ck.classList.remove('on', 'peek'); ck.innerHTML = ''; } });
+          f.addEventListener('click', () => { try { vimeoPlayer && vimeoPlayer.pause(); } catch (e) {}
+            /* round 7: after reviewing the moment, Continue opens the missed questions on the same screen */
+            ck.classList.remove('peek');
+            const go = ck.querySelector('#mcRetry') || ck.querySelector('#mcDone'); if (go) go.click(); else { ck.classList.remove('on'); ck.innerHTML = ''; } });
           bar.append(b, f);
           if (ck.firstElementChild) ck.firstElementChild.prepend(bar);
         }

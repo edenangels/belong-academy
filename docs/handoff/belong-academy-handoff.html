@@ -1,0 +1,116 @@
+<title>Belong Academy Handoff</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column, a run-of-show timeline for the meeting, then reference sections. Belong's own brand. */
+:root {
+  --bg: #faf6f2; --surface: #ffffff; --ink: #2a2220; --muted: #6f625d; --line: #e8ddd5;
+  --accent: #be594d; --accent-soft: #f6e3df; --ok: #4f7a52; --warn: #a8641b;
+  --display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --body: "Work Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #1d1715; --surface: #261f1c; --ink: #f1e7e1; --muted: #b3a39b; --line: #3a302c;
+  --accent: #e07a6c; --accent-soft: #3a2421; --ok: #8fbf8f; --warn: #e3a35a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #1d1715; --surface: #261f1c; --ink: #f1e7e1; --muted: #b3a39b; --line: #3a302c;
+  --accent: #e07a6c; --accent-soft: #3a2421; --ok: #8fbf8f; --warn: #e3a35a; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 400 16px/1.6 var(--body); }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 40px 72px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 6vw, 42px); }
+h2 { font-size: 25px; }
+h3 { font-size: 18px; }
+p { margin: 0; }
+.eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.lede { color: var(--muted); font-size: 17px; max-width: 62ch; }
+section { display: grid; gap: 16px; }
+.links { display: grid; gap: 8px; }
+.link-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+.link-row b { min-width: 120px; font-weight: 600; }
+.link-row a { color: var(--accent); word-break: break-all; }
+.link-row span { color: var(--muted); font-size: 14px; }
+ol.show { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-left: 2px solid var(--line); }
+ol.show li { position: relative; padding: 0 0 22px 22px; display: grid; gap: 4px; }
+ol.show li::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.min { font-variant-numeric: tabular-nums; font-size: 13px; font-weight: 600; color: var(--accent); }
+.say { color: var(--muted); font-size: 15px; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+ul.plain { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.status { display: grid; gap: 10px; }
+.item { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.pill { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.pill.need { background: var(--accent-soft); color: var(--accent); }
+.pill.soon { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
+.pill.done { background: transparent; border: 1px solid var(--ok); color: var(--ok); }
+.note { font-size: 14px; color: var(--muted); }
+code { font-size: .9em; background: var(--accent-soft); padding: 1px 6px; border-radius: 6px; }
+footer { color: var(--muted); font-size: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+</style>
+
+<div class="wrap">
+  <header style="display:grid;gap:12px">
+    <div class="eyebrow">Handoff · November 2026</div>
+    <h1>Belong Academy</h1>
+    <p class="lede">The learning academy for the Craveiral and Belong team: short filmed lessons from Pedro, a path built for each department, quick questions that record training hours, and reels. This page is the guide for the showcase and for running the academy afterwards.</p>
+  </header>
+
+  <section>
+    <h2>Where it lives</h2>
+    <div class="links">
+      <div class="link-row"><b>Academy</b><a href="https://belong-academy.pages.dev">belong-academy.pages.dev</a><span>the live site the team uses</span></div>
+      <div class="link-row"><b>Preview</b><a href="https://preview.belong-academy.pages.dev">preview.belong-academy.pages.dev</a><span>same build, for trying changes first</span></div>
+    </div>
+    <p class="note">Works on any phone or computer browser, in English and European Portuguese. Team members sign in with their own account so their progress and hours follow them; "Continue as guest" is for a quick look.</p>
+  </section>
+
+  <section>
+    <h2>Showcase, about 20 minutes</h2>
+    <ol class="show">
+      <li><span class="min">0:00 · 2 min</span><h3>Sign in and choose a department</h3><p class="say">Every person picks their department. Each department has three goals, always in the same order: the team, the land and the project, the guests. The goal builds their path.</p></li>
+      <li><span class="min">2:00 · 3 min</span><h3>Home and the path</h3><p class="say">The path shows the modules in order; the next one opens only when the one before is finished. The flame at the top is the learning streak.</p></li>
+      <li><span class="min">5:00 · 4 min</span><h3>A module and a lesson</h3><p class="say">Lessons are short videos. The arrow on each lesson opens a summary and chapters that jump to that moment. At the end, two quick questions record the training hours.</p></li>
+      <li><span class="min">9:00 · 3 min</span><h3>A mistake, then earning it</h3><p class="say">Answer one question wrong on purpose. The answer is not given away: review the moment in the video, press Continue, and answer again. Missed questions also wait in My learning, under Review.</p></li>
+      <li><span class="min">12:00 · 2 min</span><h3>Module complete</h3><p class="say">Finishing a module shows a window with the next module in the person's path.</p></li>
+      <li><span class="min">14:00 · 2 min</span><h3>Reels</h3><p class="say">Ten short vertical reels on Belong's values. Swipe or use the arrows; save the ones you like to My learning.</p></li>
+      <li><span class="min">16:00 · 3 min</span><h3>For leaders: the Team view</h3><p class="say">Who is doing what, progress per course, scores, hours toward the 40 a year, and who needs attention. Admins can also set an optional field mission on any course.</p></li>
+      <li><span class="min">19:00 · 1 min</span><h3>Certificate and the hours record</h3><p class="say">A course certificate is issued when every lesson is done and the score reaches 70%. My learning, under Record, keeps the yearly training hours.</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>What is inside today</h2>
+    <div class="grid2">
+      <div class="card"><h3>Courses</h3><ul class="plain"><li>Belong &amp; Craveiral Foundations</li><li>Guest Experience &amp; Our Standards</li><li>Craveiral: One Single House</li></ul><p class="note">9 modules, 20 lessons, about 2 hours of video.</p></div>
+      <div class="card"><h3>For each person</h3><ul class="plain"><li>A path for their department and goal</li><li>Review room for missed questions</li><li>Saved reels</li><li>Course certificates and the yearly hours record</li></ul></div>
+      <div class="card"><h3>For leaders and admins</h3><ul class="plain"><li>Team view with progress and hours</li><li>Field missions set per course</li><li>Approve reels before the team sees them</li></ul></div>
+      <div class="card"><h3>The law</h3><p>Hours are credited when a lesson's questions are answered and count toward the 40 hours of continuous training a year (Labour Code, art. 131.º). Records name Craveiral as the employer delivering internal training.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Running it after today</h2>
+    <div class="grid2">
+      <div class="card"><h3>Adding a lesson or reel</h3><p>Upload the video to the Belong folder on Vimeo as unlisted and embeddable, then send us the link. We add it with its summary, chapters and questions in both languages.</p></div>
+      <div class="card"><h3>Next videos to film</h3><p>The goals plan lists three or four video ideas for every goal. The thin spots today are maintenance, laundry, kitchen procedures and safety.</p></div>
+      <div class="card"><h3>Adding people</h3><p>Team members create their account on the sign-in page. Admins are set in Settings, under Company, by email.</p></div>
+      <div class="card"><h3>Feedback</h3><p>Every round of feedback so far is recorded with what changed. Keep sending notes the same way.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Before the team uses it every day</h2>
+    <div class="status">
+      <div class="item"><span class="pill need">Decide</span><p><b>Watch rule.</b> It is off for the showcase, so lessons can be tried quickly. Turn it on before real use, so a lesson only counts once it has been watched.</p></div>
+      <div class="item"><span class="pill need">Needed</span><p><b>Trainer's full name</b> for the "Formador" line on certificates.</p></div>
+      <div class="item"><span class="pill need">Needed</span><p><b>Pedro's review</b> of the questions and of how modules are grouped into courses.</p></div>
+      <div class="item"><span class="pill soon">Missing</span><p><b>Reel 03, Sustainability,</b> is no longer in the Vimeo folder. Its text is ready; it goes live as soon as it is uploaded again.</p></div>
+      <div class="item"><span class="pill soon">Pending</span><p><b>Vimeo's embed and share buttons</b> on the lesson videos are switched off in each video's Vimeo settings.</p></div>
+      <div class="item"><span class="pill done">Ready</span><p><b>Everything in the showcase above</b> is live and tested in both languages, on phones and computers.</p></div>
+    </div>
+  </section>
+
+  <footer>Prepared by Meridante for Belong · Craveiral, Odemira.</footer>
+</div>
