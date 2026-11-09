@@ -13,7 +13,7 @@
       "Short, fast and efficient"
      ],
      "q": "Which words describe the Craveiral voice?",
-     "why": "Pedro says our voice is calm, warm, concrete and unhurried, like the place."
+     "why": "The Craveiral voice is calm, warm, concrete and unhurried, like the place."
     },
     "pt": {
      "opts": [
@@ -23,7 +23,7 @@
       "Curta, rápida e eficiente"
      ],
      "q": "Que palavras descrevem a voz do Craveiral?",
-     "why": "O Pedro diz que a nossa voz é calma, calorosa, concreta e sem pressa, como o lugar."
+     "why": "A voz do Craveiral é calma, calorosa, concreta e sem pressa, como o lugar."
     },
     "t0": 29,
     "type": "recall",
@@ -43,7 +43,7 @@
       "A child on a school trip"
      ],
      "q": "Unsure how to say something to a guest? Say it as you would to…",
-     "why": "Pedro says to say it the way you'd say it to a friend's parents visiting your home: respectful, warm, real."
+     "why": "When unsure, speak as to a friend's parents visiting your home."
     },
     "pt": {
      "opts": [
@@ -53,9 +53,9 @@
       "Uma criança numa visita de estudo"
      ],
      "q": "Na dúvida sobre como dizer algo a um hóspede, deve-se dizer como se diria a…",
-     "why": "O Pedro diz para falar como se falaria aos pais de um amigo de visita a nossa casa: com respeito, calor e verdade."
+     "why": "Na dúvida, fala-se como aos pais de um amigo em visita a nossa casa."
     },
-    "t0": 45,
+    "t0": 51,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -73,7 +73,7 @@
       "Their house"
      ],
      "q": "Talking to a guest, what do you call the place where they sleep?",
-     "why": "Pedro says we say houses, not units or rooms: each has a kitchen and a terrace."
+     "why": "We say houses, not units or rooms: each has a kitchen and a terrace."
     },
     "pt": {
      "opts": [
@@ -83,7 +83,7 @@
       "A casa"
      ],
      "q": "Ao falar com um hóspede, como se chama ao sítio onde dorme?",
-     "why": "O Pedro diz que dizemos casas, não unidades nem quartos: cada uma tem cozinha e terraço."
+     "why": "Diz-se casas, não unidades nem quartos: cada uma tem cozinha e terraço."
     },
     "t0": 64,
     "type": "application",
@@ -103,7 +103,7 @@
       "Point them to a phrasebook in the shop"
      ],
      "q": "An international guest is curious about the local language. What do you do?",
-     "why": "Pedro says to teach a little Portuguese when the moment invites it: obrigado, bom dia, the story of \"Craveiral\"."
+     "why": "Teach a little Portuguese when the moment invites it: it costs nothing."
     },
     "pt": {
      "opts": [
@@ -113,7 +113,7 @@
       "Indicar-lhe um guia de conversação na loja"
      ],
      "q": "Um hóspede estrangeiro tem curiosidade sobre a língua. O que se faz?",
-     "why": "O Pedro diz para ensinar um pouco de português quando o momento convida: obrigado, bom dia, a história de «Craveiral»."
+     "why": "Ensina-se um pouco de português quando o momento convida: não custa nada."
     },
     "t0": 165,
     "type": "application",
@@ -133,7 +133,7 @@
       "Send them the full activity list"
      ],
      "q": "A guest gives short answers and seems to want privacy. What do you do?",
-     "why": "Pedro says some guests want conversation, others efficiency and privacy: both get the same care, calibrated."
+     "why": "Some guests want conversation, others privacy: both get the same care."
     },
     "pt": {
      "opts": [
@@ -143,7 +143,7 @@
       "Enviar-lhe a lista completa de atividades"
      ],
      "q": "Um hóspede responde por poucas palavras e parece querer privacidade. O que se faz?",
-     "why": "O Pedro diz que uns hóspedes querem conversa e outros eficiência e privacidade: todos recebem o mesmo cuidado, ajustado."
+     "why": "Uns hóspedes querem conversa, outros privacidade: todos recebem o mesmo cuidado."
     },
     "t0": 184,
     "type": "scenario",
@@ -154,28 +154,28 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 2,
     "en": {
      "opts": [
-      "\"The pool is heated in October and the trails are lovely.\"",
-      "\"We look forward to welcoming you soon.\"",
+      "\"We look forward to welcoming you.\"",
       "\"Your satisfaction is always guaranteed.\"",
+      "\"The pool is heated; the trails are lovely.\"",
       "\"Dear valued guest, please find attached.\""
      ],
      "q": "Which email line fits the Craveiral voice?",
-     "why": "Pedro says one true, specific sentence beats empty formulas, and we avoid words like \"guaranteed\" and \"valued guest\"."
+     "why": "One true, specific sentence beats empty formulas, over-promises and corporate words."
     },
     "pt": {
      "opts": [
-      "«A piscina está aquecida em outubro e os trilhos estão lindos.»",
-      "«Aguardamos com expectativa a sua visita.»",
-      "«A sua satisfação está sempre garantida.»",
-      "«Estimado cliente, segue em anexo.»"
+      "«Esperamos recebê-lo em breve.»",
+      "«A sua satisfação é sempre garantida.»",
+      "«A piscina está aquecida; os trilhos estão ótimos.»",
+      "«Caro cliente estimado, segue em anexo.»"
      ],
      "q": "Que frase de email corresponde à voz do Craveiral?",
-     "why": "O Pedro diz que uma frase verdadeira e concreta vale mais do que fórmulas vazias, e evitamos palavras como «garantido» e «estimado cliente»."
+     "why": "Uma frase verdadeira e concreta vale mais do que fórmulas vazias, promessas e linguagem corporativa."
     },
-    "t0": 212,
+    "t0": 218,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -190,22 +190,22 @@
     "en": {
      "opts": [
       "Always wait for a manager's approval",
-      "He'd rather correct your decision than make them all",
-      "Only managers make decisions about guests",
+      "You decide; managers can correct later",
+      "Only managers decide about guests",
       "Follow the written procedure exactly"
      ],
-     "q": "What is Pedro's first principle about decisions?",
-     "why": "Pedro's first principle: \"I'd rather correct your decision than make all the decisions.\""
+     "q": "What is Craveiral's first principle about decisions on the ground?",
+     "why": "Leaders would rather correct your decision than make all the decisions."
     },
     "pt": {
      "opts": [
-      "Esperar sempre pela aprovação de um gestor",
-      "Prefere corrigir uma decisão a tomá-las todas",
-      "Só os gestores decidem sobre os hóspedes",
-      "Seguir exatamente o procedimento escrito"
+      "Esperar sempre pela aprovação da chefia",
+      "Decide quem está lá; a chefia corrige depois",
+      "Só as chefias decidem sobre hóspedes",
+      "Seguir o procedimento escrito à letra"
      ],
-     "q": "Qual é o primeiro princípio do Pedro sobre decisões?",
-     "why": "O primeiro princípio do Pedro: «Prefiro corrigir a vossa decisão a tomar todas as decisões.»"
+     "q": "Qual é o primeiro princípio do Craveiral sobre decisões no terreno?",
+     "why": "A liderança prefere corrigir uma decisão a tomar todas as decisões."
     },
     "t0": 46,
     "type": "recall",
@@ -225,7 +225,7 @@
       "Do it, and tell your manager after"
      ],
      "q": "A free dessert would save a guest's evening. What do you do?",
-     "why": "Pedro says if a bottle of wine or a free dessert saves a guest's evening, do it and tell your manager after."
+     "why": "If a free dessert saves a guest's evening, do it and tell your manager after."
     },
     "pt": {
      "opts": [
@@ -235,7 +235,7 @@
       "Oferecer e avisar o gestor depois"
      ],
      "q": "Uma sobremesa oferecida salvaria a noite de um hóspede. O que se faz?",
-     "why": "O Pedro diz que, se uma garrafa de vinho ou uma sobremesa salva a noite de um hóspede, deve-se oferecer e avisar o gestor depois."
+     "why": "Se uma sobremesa oferecida salva a noite de um hóspede, faz-se e avisa-se a chefia depois."
     },
     "t0": 95,
     "type": "recall",
@@ -255,7 +255,7 @@
       "Whatever ends the conversation fastest"
      ],
      "q": "Something needs solving in front of a guest. What guides your decision?",
-     "why": "Pedro says to solve it using the values as your compass: the long game, the relationship, coherence."
+     "why": "Solve it with the values as your compass: the long game and the relationship."
     },
     "pt": {
      "opts": [
@@ -265,7 +265,7 @@
       "O que acabar a conversa mais depressa"
      ],
      "q": "É preciso resolver algo à frente de um hóspede. O que deve orientar a decisão?",
-     "why": "O Pedro diz para resolver usando os valores como bússola: o longo prazo, a relação, a coerência."
+     "why": "Resolve-se com os valores como bússola: o longo prazo e a relação."
     },
     "t0": 84,
     "type": "application",
@@ -285,7 +285,7 @@
       "Tell a colleague, but not your manager"
      ],
      "q": "You made a mistake at work. What do you do?",
-     "why": "Pedro says the mistake isn't the problem, hiding it is: bring it while it's small and you get calm and help."
+     "why": "The mistake is not the problem, hiding it is: bring it while it's small."
     },
     "pt": {
      "opts": [
@@ -295,9 +295,9 @@
       "Contar a um colega, mas não ao gestor"
      ],
      "q": "Cometeu um erro no trabalho. O que se deve fazer?",
-     "why": "O Pedro diz que o problema não é o erro, é escondê-lo: comunicado cedo, recebe-se calma e ajuda."
+     "why": "O problema não é o erro, é escondê-lo: comunica-se enquanto é pequeno."
     },
-    "t0": 133,
+    "t0": 127,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -306,26 +306,26 @@
     "corrected": true
    },
    {
-    "a": 1,
+    "a": 2,
     "en": {
      "opts": [
       "Keep quiet to protect your job",
-      "Tell him",
       "Discuss it only with colleagues",
+      "Tell them openly and early",
       "Wait until it causes a problem"
      ],
-     "q": "You think Pedro got a decision wrong. What does he ask you to do?",
-     "why": "Pedro says \"When I'm wrong, tell me\" and promises it won't be career-limiting."
+     "q": "You think a leader's decision is wrong. What should you do?",
+     "why": "Telling leaders they are wrong is welcome and never career-limiting."
     },
     "pt": {
      "opts": [
       "Ficar calado para proteger o emprego",
-      "Que lhe digam",
       "Falar disso só com colegas",
-      "Esperar até causar um problema"
+      "Dizê-lo abertamente e cedo",
+      "Esperar que cause um problema"
      ],
-     "q": "Acha que o Pedro tomou uma decisão errada. O que pede ele?",
-     "why": "O Pedro diz «Quando eu estiver errado, digam-me» e promete que isso não prejudica a carreira."
+     "q": "Uma decisão da chefia parece errada. O que se deve fazer?",
+     "why": "Dizer à chefia que errou é bem-vindo e nunca prejudica a carreira."
     },
     "t0": 155,
     "type": "scenario",
@@ -342,22 +342,22 @@
       "Keep going: busy season is like that",
       "Quietly skip some of your tasks",
       "Take days off without telling anyone",
-      "Escalate it, to Pedro if needed"
+      "Escalate it, up the line if needed"
      ],
      "q": "For weeks your schedule has left you exhausted. What do you do?",
-     "why": "Pedro says well-being is non-negotiable: if the schedule isn't human, escalate it, to him if needed."
+     "why": "Well-being is non-negotiable: if the schedule isn't human, escalate it."
     },
     "pt": {
      "opts": [
       "Aguentar: a época alta é assim",
-      "Saltar algumas tarefas sem dizer nada",
-      "Faltar uns dias sem avisar",
-      "Comunicar o problema, ao Pedro se for preciso"
+      "Saltar algumas tarefas em silêncio",
+      "Tirar folgas sem avisar ninguém",
+      "Escalar o assunto, até ao topo se preciso"
      ],
-     "q": "Há semanas que o horário o deixa exausto. O que se deve fazer?",
-     "why": "O Pedro diz que o bem-estar não é negociável: se o horário não é humano, deve-se comunicar o problema, ao Pedro se for preciso."
+     "q": "Há semanas que o horário causa exaustão. O que se deve fazer?",
+     "why": "O bem-estar não é negociável: se o horário não é humano, escala-se o assunto."
     },
-    "t0": 296,
+    "t0": 303,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

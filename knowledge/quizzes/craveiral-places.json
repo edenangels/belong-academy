@@ -38,24 +38,24 @@
     "t0": 57,
     "a": 0,
     "en": {
-     "q": "Why does Craveiral exist, according to this lesson?",
+     "q": "Why does Craveiral exist?",
      "opts": [
       "To regenerate the territory through circular economy",
       "To run a hotel with a pretty garden",
       "To be the biggest employer in Odemira",
       "To sell farm products in Lisbon"
      ],
-     "why": "We exist to regenerate this territory through circular economy, not to run a hotel with a pretty garden."
+     "why": "We exist to regenerate this territory through circular economy, not to run a hotel."
     },
     "pt": {
-     "q": "Porque existe o Craveiral, segundo esta aula?",
+     "q": "Porque existe o Craveiral?",
      "opts": [
       "Para regenerar o território através da economia circular",
       "Para gerir um hotel com um jardim bonito",
       "Para ser o maior empregador de Odemira",
       "Para vender produtos da quinta em Lisboa"
      ],
-     "why": "Existimos para regenerar este território através da economia circular, não para gerir um hotel com um jardim bonito."
+     "why": "Existimos para regenerar este território pela economia circular, não para gerir um hotel."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -65,7 +65,7 @@
    },
    {
     "type": "application",
-    "t0": 126,
+    "t0": 130,
     "a": 3,
     "en": {
      "q": "The shop holds one standard and the restaurant another. What does the guest think?",
@@ -95,27 +95,27 @@
    },
    {
     "type": "application",
-    "t0": 208,
+    "t0": 214,
     "a": 1,
     "en": {
      "q": "Why does waste bother Craveiral so much?",
      "opts": [
       "It breaks local council rules",
-      "Waste is regeneration we can no longer pay for",
+      "Waste is regeneration we can't pay for",
       "Guests complain about full bins",
       "It hurts our online reviews"
      ],
-     "why": "The lesson says we waste nothing, because everything wasted is regeneration we can no longer pay for."
+     "why": "Everything wasted is regeneration we can no longer pay for."
     },
     "pt": {
      "q": "Porque é que o desperdício incomoda tanto o Craveiral?",
      "opts": [
-      "Viola as regras da câmara",
-      "Cada desperdício é regeneração que deixamos de poder pagar",
+      "Viola regras da câmara municipal",
+      "Desperdício é regeneração que não se paga",
       "Os hóspedes queixam-se dos caixotes cheios",
       "Prejudica as avaliações online"
      ],
-     "why": "A aula diz que não desperdiçamos nada, porque tudo o que se desperdiça é regeneração que deixamos de poder pagar."
+     "why": "Tudo o que se desperdiça é regeneração que deixa de se poder pagar."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -157,27 +157,27 @@
    },
    {
     "type": "recall",
-    "t0": 70,
-    "a": 1,
+    "t0": 138,
+    "a": 2,
     "en": {
-     "q": "What type of accommodation is suitable for up to four guests and has one bedroom?",
+     "q": "Why must you know every house type precisely?",
      "opts": [
-      "Studio",
-      "Farm house",
-      "Farm loft",
-      "Two-bedroom house"
+      "Housekeeping rotas depend on it",
+      "Guests pay per square metre",
+      "Precise answers build the guest's trust",
+      "It is checked in a yearly exam"
      ],
-     "why": "The correct answer is based on the transcript, which states that farm houses have one bedroom and can accommodate up to four guests."
+     "why": "A precise answer builds trust, and trust is the currency of this business."
     },
     "pt": {
-     "q": "Que tipo de alojamento tem um quarto e é adequado para até quatro hóspedes?",
+     "q": "Porque é preciso conhecer com precisão cada tipo de casa?",
      "opts": [
-      "Estúdio",
-      "Farmhouse",
-      "Farm Loft",
-      "Casa de dois quartos"
+      "As escalas da limpeza dependem disso",
+      "Os hóspedes pagam ao metro quadrado",
+      "Respostas precisas criam confiança no hóspede",
+      "É avaliado num exame anual"
      ],
-     "why": "Segundo a transcrição, as Farmhouses têm um quarto e acolhem até quatro hóspedes."
+     "why": "Uma resposta precisa cria confiança, e a confiança é a moeda deste negócio."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -187,27 +187,27 @@
    },
    {
     "type": "application",
-    "t0": 123,
-    "a": 3,
+    "t0": 54,
+    "a": 0,
     "en": {
-     "q": "A guest asks if the two-bedroom house works with small children. Which answer builds trust?",
+     "q": "A guest wants to bring their dog. What is true?",
      "opts": [
-      "\"Yes, I think so.\"",
-      "\"Probably, check the website.\"",
-      "\"Children usually need a bigger house.\"",
-      "\"Yes, and the sofa bed gives room to spare.\""
+      "Pets are welcome, and done properly",
+      "Pets are not allowed in the houses",
+      "Only in the studios, for a fee",
+      "Only outside the high season"
      ],
-     "why": "The lesson says the vague answer leaves the guest where they were; the precise one builds trust."
+     "why": "Pets are welcome, and Craveiral does it properly, not grudgingly."
     },
     "pt": {
-     "q": "Um hóspede pergunta se a casa de dois quartos serve com crianças pequenas. Que resposta cria confiança?",
+     "q": "Um hóspede quer trazer o cão. O que é verdade?",
      "opts": [
-      "«Sim, acho que sim.»",
-      "«Provavelmente, veja no site.»",
-      "«As crianças costumam precisar de uma casa maior.»",
-      "«Sim, e o sofá-cama dá espaço de sobra.»"
+      "Os animais são bem-vindos, e com cuidado",
+      "Não se aceitam animais nas casas",
+      "Só nos estúdios, pagando à parte",
+      "Só fora da época alta"
      ],
-     "why": "A aula diz que a resposta vaga deixa o hóspede onde estava; a resposta precisa cria confiança."
+     "why": "Os animais são bem-vindos, e o Craveiral fá-lo com cuidado, não a contragosto."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -247,27 +247,27 @@
    },
    {
     "type": "scenario",
-    "t0": 74,
-    "a": 2,
+    "t0": 290,
+    "a": 3,
     "en": {
-     "q": "Three adults want to book a farm loft. What do you tell them?",
+     "q": "Litter lies by the pool, and it's not your job. What do you do?",
      "opts": [
-      "Fine, it sleeps three easily",
-      "Fine, with an extra mattress",
-      "It sleeps two; a farm house sleeps four",
-      "It sleeps six, so plenty of room"
+      "Leave it for the pool team",
+      "Mention it at the next meeting",
+      "Ignore it: guests rarely notice",
+      "Sort it or report it within the hour"
      ],
-     "why": "Farm lofts sleep two guests; farm houses (one bedroom) sleep up to four."
+     "why": "Craveiral was built by people who sort it or report it within the hour."
     },
     "pt": {
-     "q": "Três adultos querem reservar um farm loft. O que se lhes diz?",
+     "q": "Há lixo junto à piscina e não é tarefa nossa. O que se faz?",
      "opts": [
-      "Pode ser, dorme três à vontade",
-      "Pode ser, com um colchão extra",
-      "Dorme duas pessoas; a farm house dorme quatro",
-      "Dorme seis, há espaço de sobra"
+      "Deixar para a equipa da piscina",
+      "Falar disso na próxima reunião",
+      "Ignorar: os hóspedes raramente reparam",
+      "Resolver ou comunicar dentro de uma hora"
      ],
-     "why": "Os farm lofts dormem duas pessoas; as farm houses (um quarto) dormem até quatro."
+     "why": "O Craveiral foi feito por quem resolve ou comunica dentro de uma hora."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -280,24 +280,24 @@
     "t0": 273,
     "a": 1,
     "en": {
-     "q": "It's 9:00 and a house is on your cleaning list. The guest asked for nothing. What do you do?",
+     "q": "It's 9:00 and the guest asked for nothing. May you knock?",
      "opts": [
-      "Knock, then let yourself in",
-      "Don't knock before 10:00; come back later",
-      "Knock loudly in case they're asleep",
-      "Call the house phone to check"
+      "Yes, then let yourself in",
+      "No: never before 10:00 unless asked",
+      "Yes, loudly, in case they're asleep",
+      "Yes, after calling the house"
      ],
-     "why": "The lesson says never knock on a door before 10:00 in the morning unless the guest asked."
+     "why": "Never knock on a door before 10:00 in the morning unless asked."
     },
     "pt": {
-     "q": "São 9h00 e uma casa está na sua lista de limpeza. O hóspede não pediu nada. O que se faz?",
+     "q": "São 9h00 e o hóspede não pediu nada. Pode-se bater à porta?",
      "opts": [
-      "Bater e entrar",
-      "Não bater antes das 10h00; voltar mais tarde",
-      "Bater com força, caso esteja a dormir",
-      "Ligar para o telefone da casa"
+      "Sim, e depois entrar",
+      "Não: nunca antes das 10h00 sem pedido",
+      "Sim, com força, não vá estar a dormir",
+      "Sim, depois de ligar para a casa"
      ],
-     "why": "A aula diz para nunca bater a uma porta antes das 10h00 da manhã, a não ser que o hóspede o peça."
+     "why": "Nunca se bate a uma porta antes das 10h00 sem pedido expresso."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -309,27 +309,27 @@
   "2": [
    {
     "type": "recall",
-    "t0": 15,
-    "a": 3,
+    "t0": 48,
+    "a": 2,
     "en": {
-     "q": "How much of what we serve is grown on the farm?",
+     "q": "Why does the menu change with the seasons?",
      "opts": [
-      "About 10%",
-      "About 30%",
-      "About half",
-      "More than 70%"
+      "To follow the latest food trends",
+      "To keep food costs down",
+      "Because the farm changes with them",
+      "To match what guests ask for"
      ],
-     "why": "The lesson says more than 70% of what we serve is born here."
+     "why": "The menu turns with the seasons because the farm does."
     },
     "pt": {
-     "q": "Que parte do que servimos é cultivada na quinta?",
+     "q": "Porque é que a ementa muda com as estações?",
      "opts": [
-      "Cerca de 10%",
-      "Cerca de 30%",
-      "Cerca de metade",
-      "Mais de 70%"
+      "Para seguir as modas da cozinha",
+      "Para baixar o custo da comida",
+      "Porque a quinta muda com elas",
+      "Para seguir o que os hóspedes pedem"
      ],
-     "why": "A aula diz que mais de 70% do que servimos nasce aqui."
+     "why": "A ementa muda com as estações porque a quinta também muda."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -429,27 +429,27 @@
    },
    {
     "type": "scenario",
-    "t0": 37,
-    "a": 0,
+    "t0": 241,
+    "a": 3,
     "en": {
-     "q": "A guest asks where the cheese on their plate comes from. What is true?",
+     "q": "A guest is vegetarian with an allergy. How is that treated?",
      "opts": [
-      "From the region",
-      "From our own dairy",
-      "Imported from France",
-      "From a supermarket brand"
+      "As an extra charge on the bill",
+      "As a request to politely refuse",
+      "As the guest's own problem",
+      "As hospitality, not a nuisance"
      ],
-     "why": "The lesson says what we don't grow we buy as close as possible, including cheeses from the region."
+     "why": "Dietary requirements are hospitality, not a nuisance: improvise without sighing."
     },
     "pt": {
-     "q": "Um hóspede pergunta de onde vem o queijo do prato. O que é verdade?",
+     "q": "Um hóspede é vegetariano e tem uma alergia. Como se trata isso?",
      "opts": [
-      "Da região",
-      "Da nossa própria queijaria",
-      "Importado de França",
-      "De uma marca de supermercado"
+      "Como um extra a cobrar na conta",
+      "Como um pedido a recusar com educação",
+      "Como um problema do hóspede",
+      "Como hospitalidade, não um incómodo"
      ],
-     "why": "A aula diz que o que não cultivamos compramos o mais perto possível, incluindo os queijos da região."
+     "why": "Requisitos alimentares são hospitalidade, não incómodo: improvisa-se sem suspirar."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -521,7 +521,7 @@
    },
    {
     "type": "application",
-    "t0": 187,
+    "t0": 190,
     "a": 3,
     "en": {
      "q": "The food will take 20 minutes. What do you do?",
@@ -614,7 +614,7 @@
     "t0": 71,
     "a": 0,
     "en": {
-     "q": "A beach visitor who has never stayed at Craveiral orders a drink. What are you to them?",
+     "q": "A beach visitor has never stayed at Craveiral. What are you to them?",
      "opts": [
       "The whole of Craveiral",
       "Just a beach bar worker",
@@ -624,7 +624,7 @@
      "why": "The lesson says to anyone walking off that beach into the bar, you are Craveiral: often their only sample of the brand."
     },
     "pt": {
-     "q": "Um banhista que nunca ficou no Craveiral pede uma bebida. O que é cada um de nós para ele?",
+     "q": "Um banhista nunca ficou no Craveiral. O que somos para ele?",
      "opts": [
       "Todo o Craveiral",
       "Só um empregado de bar de praia",
@@ -673,27 +673,27 @@
    },
    {
     "type": "recall",
-    "t0": 75,
+    "t0": 62,
     "a": 3,
     "en": {
-     "q": "Which sentence turns a jar of honey into a story?",
+     "q": "What turns a shop product into a relationship?",
      "opts": [
-      "\"This honey is very good.\"",
-      "\"It's our best-selling product.\"",
-      "\"It's on offer this week.\"",
-      "\"It's from a producer 20 minutes from here.\""
+      "A discount at the till",
+      "Gift wrapping at the counter",
+      "A loyalty card for next time",
+      "One sentence about its origin"
      ],
-     "why": "The lesson says one sentence about origin turns a souvenir into a relationship."
+     "why": "One sentence about origin turns a souvenir into a relationship."
     },
     "pt": {
-     "q": "Que frase transforma um frasco de mel numa história?",
+     "q": "O que transforma um produto da loja numa relação?",
      "opts": [
-      "«Este mel é muito bom.»",
-      "«É o nosso produto mais vendido.»",
-      "«Está em promoção esta semana.»",
-      "«É de um produtor a 20 minutos daqui.»"
+      "Um desconto na caixa",
+      "Um embrulho de oferta ao balcão",
+      "Um cartão de fidelização",
+      "Uma frase sobre a sua origem"
      ],
-     "why": "A aula diz que uma frase sobre a origem transforma uma recordação numa relação."
+     "why": "Uma frase sobre a origem transforma uma lembrança numa relação."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -861,21 +861,21 @@
      "q": "You find a sheet with a small hole. What do you do?",
      "opts": [
       "Use it if the hole is small",
-      "Repair it and put it back on a bed",
+      "Repair it and reuse it on a bed",
       "Use it only in the studios",
-      "Take it out of circulation for good"
+      "Remove it from circulation for good"
      ],
-     "why": "The lesson says a piece with a hole, a set stain or fraying never goes back on a bed: cheaper to lose the piece than the guest."
+     "why": "A piece with a hole never goes back on a bed: cheaper to lose it than the guest."
     },
     "pt": {
-     "q": "Encontra um lençol com um pequeno buraco. O que se faz?",
+     "q": "Encontra-se um lençol com um pequeno buraco. O que se faz?",
      "opts": [
       "Usá-lo se o buraco for pequeno",
       "Remendá-lo e voltar a pô-lo numa cama",
       "Usá-lo só nos estúdios",
       "Retirá-lo de circulação de vez"
      ],
-     "why": "A aula diz que uma peça com buraco, nódoa fixa ou desfiada nunca volta a uma cama: é mais barato perder a peça do que o hóspede."
+     "why": "Peça com buraco nunca volta a uma cama: mais vale perder a peça do que o hóspede."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -915,7 +915,7 @@
    },
    {
     "type": "scenario",
-    "t0": 185,
+    "t0": 195,
     "a": 2,
     "en": {
      "q": "A neighbour brings in a bag of washing. How do you treat them?",
@@ -948,24 +948,24 @@
     "t0": 54,
     "a": 0,
     "en": {
-     "q": "A guest asks why we don't send linen to a big city laundry. What do you say?",
+     "q": "Why does Craveiral run its own laundry in São Teotónio?",
      "opts": [
-      "Local jobs and money stay in the parish",
+      "Jobs and money stay in the parish",
       "City laundries refused the work",
       "The licence requires it",
-      "Guests asked us to do it"
+      "Guests asked for it"
      ],
-     "why": "The lesson says building the laundry here brought local jobs, money circulating in the parish and a service for the village."
+     "why": "A local laundry brings local jobs, money circulating in the parish and a village service."
     },
     "pt": {
-     "q": "Um hóspede pergunta porque não mandamos a roupa para uma grande lavandaria na cidade. O que se responde?",
+     "q": "Porque tem o Craveiral a sua própria lavandaria em São Teotónio?",
      "opts": [
-      "O emprego e o dinheiro ficam na freguesia",
-      "As lavandarias da cidade recusaram o trabalho",
+      "Empregos e dinheiro ficam na freguesia",
+      "As lavandarias da cidade recusaram",
       "A licença obriga a isso",
-      "Foram os hóspedes que pediram"
+      "Os hóspedes pediram"
      ],
-     "why": "A aula diz que construir a lavandaria aqui trouxe emprego local, dinheiro a circular na freguesia e um serviço para a aldeia."
+     "why": "Uma lavandaria local traz emprego, dinheiro a circular na freguesia e um serviço para a aldeia."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -1037,7 +1037,7 @@
    },
    {
     "type": "application",
-    "t0": 124,
+    "t0": 135,
     "a": 2,
     "en": {
      "q": "How do you tell a guest about tomorrow's harvest?",
@@ -1099,7 +1099,7 @@
   "7": [
    {
     "type": "recall",
-    "t0": 24,
+    "t0": 28,
     "a": 1,
     "en": {
      "q": "Where does most of the wellbeing we offer come from?",
@@ -1159,7 +1159,7 @@
    },
    {
     "type": "application",
-    "t0": 135,
+    "t0": 140,
     "a": 0,
     "en": {
      "q": "A colleague wants to vacuum a guest corridor at 8:30. What does the lesson say?",

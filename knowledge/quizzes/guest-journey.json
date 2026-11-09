@@ -73,19 +73,19 @@
       "Quick paperwork and payment first",
       "A full briefing on the house rules",
       "A list of every activity to book",
-      "A warm welcome, a cold drink, a calm explanation"
+      "A warm welcome, cold drink, calm explanation"
      ],
-     "why": "The lesson asks for a genuine welcome, a cold drink and a calm explanation, never a bureaucratic check-in."
+     "why": "Arrival means a genuine welcome, a cold drink and a calm explanation, never bureaucracy."
     },
     "pt": {
      "q": "Chega uma família cansada. Como devem ser os primeiros 15 minutos?",
      "opts": [
-      "Primeiro papelada e pagamento, depressa",
-      "Uma explicação completa das regras da casa",
-      "Uma lista de todas as atividades para reservar",
-      "Boas-vindas calorosas, uma bebida fresca, uma explicação calma"
+      "Papelada e pagamento primeiro",
+      "Um briefing completo das regras da casa",
+      "Uma lista de todas as atividades",
+      "Acolhimento caloroso, bebida fresca, explicação calma"
      ],
-     "why": "A aula pede umas boas-vindas genuínas, uma bebida fresca e uma explicação calma, nunca um check-in burocrático."
+     "why": "A chegada pede acolhimento genuíno, uma bebida fresca e uma explicação calma, nunca burocracia."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -95,27 +95,27 @@
    },
    {
     "type": "application",
-    "t0": 140,
+    "t0": 120,
     "a": 1,
     "en": {
-     "q": "At arrival, what message should every word and gesture carry?",
+     "q": "Why do the first 15 minutes after arrival matter so much?",
      "opts": [
-      "\"Please read the house rules first.\"",
-      "\"You made it. You can let go now.\"",
-      "\"Here is everything you can book.\"",
-      "\"Check-out is at eleven.\""
+      "That is when payment is taken",
+      "They set the tone for the whole stay",
+      "Guests then choose their activities",
+      "It's the only time guests see reception"
      ],
-     "why": "The lesson says the message underneath every word at arrival must be: \"You made it. You can let go now.\""
+     "why": "The first 15 minutes set the emotional tone for the entire stay."
     },
     "pt": {
-     "q": "À chegada, que mensagem deve estar em cada palavra e gesto?",
+     "q": "Porque é que os primeiros 15 minutos após a chegada contam tanto?",
      "opts": [
-      "«Leia primeiro as regras da casa.»",
-      "«Chegou. Agora pode descansar.»",
-      "«Aqui está tudo o que pode reservar.»",
-      "«O check-out é às onze.»"
+      "É quando se faz o pagamento",
+      "Definem o tom de toda a estadia",
+      "É quando se escolhem as atividades",
+      "É a única vez que se vê a receção"
      ],
-     "why": "A aula diz que a mensagem por baixo de cada palavra à chegada deve ser: «Chegou. Agora pode descansar.»"
+     "why": "Os primeiros 15 minutos definem o tom emocional de toda a estadia."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -125,27 +125,27 @@
    },
    {
     "type": "scenario",
-    "t0": 165,
+    "t0": 170,
     "a": 2,
     "en": {
-     "q": "At breakfast, a guest asks for their eggs a certain way. What do you do?",
+     "q": "What does a guest decide, mostly unconsciously, on the first morning?",
      "opts": [
-      "Serve the eggs already prepared",
-      "Explain eggs come only one way",
-      "Cook them exactly how they want",
-      "Suggest the cheese plate instead"
+      "Which house to book next year",
+      "Whether to extend their stay",
+      "Whether the place is what it promised",
+      "Which activities to pay for"
      ],
-     "why": "The lesson says breakfast eggs are laid that morning and cooked how the guest wants them."
+     "why": "On the first morning the guest decides whether Craveiral is what it promised."
     },
     "pt": {
-     "q": "Ao pequeno-almoço, um hóspede pede os ovos de uma certa maneira. O que se faz?",
+     "q": "O que decide o hóspede, quase sem dar por isso, na primeira manhã?",
      "opts": [
-      "Servir os ovos já preparados",
-      "Explicar que os ovos só se fazem de uma maneira",
-      "Cozinhá-los exatamente como pede",
-      "Sugerir antes a tábua de queijos"
+      "Que casa reservar no próximo ano",
+      "Se prolonga a estadia",
+      "Se o lugar é o que prometeu",
+      "Que atividades vai pagar"
      ],
-     "why": "A aula diz que os ovos do pequeno-almoço são postos nessa manhã e cozinhados como o hóspede quiser."
+     "why": "Na primeira manhã, o hóspede decide se o Craveiral é o que prometeu."
     },
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -246,26 +246,26 @@
     "verified": true
    },
    {
-    "a": 0,
+    "a": 3,
     "en": {
      "opts": [
-      "\"I'm sorry, but…\"",
       "\"Thank you for telling us.\"",
       "\"Let me fix this for you.\"",
-      "\"I understand how you feel.\""
+      "\"I understand how you feel.\"",
+      "\"I'm sorry, but…\""
      ],
-     "q": "Which phrase erases an apology, according to the lesson?",
-     "why": "The lesson says never say \"but\": \"I'm sorry, but…\" erases the apology."
+     "q": "Which phrase must you never use when apologising?",
+     "why": "\"I'm sorry, but…\" erases the apology; any context can come later."
     },
     "pt": {
      "opts": [
-      "«Peço desculpa, mas…»",
       "«Obrigado por nos dizer.»",
       "«Deixe-me resolver isto.»",
-      "«Compreendo como se sente.»"
+      "«Compreendo como se sente.»",
+      "«Lamento, mas…»"
      ],
-     "q": "Segundo a aula, que frase apaga um pedido de desculpa?",
-     "why": "A aula diz para nunca usar «mas»: «Peço desculpa, mas…» apaga o pedido de desculpa."
+     "q": "Que frase nunca se deve usar ao pedir desculpa?",
+     "why": "«Lamento, mas…» apaga o pedido de desculpa; a explicação pode vir depois."
     },
     "t0": 119,
     "type": "application",
@@ -306,28 +306,28 @@
     "verified": true
    },
    {
-    "a": 3,
+    "a": 1,
     "en": {
      "opts": [
-      "Explain the kitchen is busy tonight",
-      "Ask your manager to decide later",
-      "Reheat it and say nothing",
-      "Bring it back hot, with a glass of wine"
+      "No: only unresolved ones are reported",
+      "Yes: every complaint goes into the system",
+      "Only if the guest asks for it",
+      "Only if a manager was involved"
      ],
-     "q": "A guest's dish arrives cold. What do you do?",
-     "why": "The lesson's example: the cold dish doesn't just come back hot, it comes back with a glass of wine."
+     "q": "A small complaint was fully resolved. Must it still be reported?",
+     "why": "Every complaint is reported, however small or resolved, so root causes get fixed."
     },
     "pt": {
      "opts": [
-      "Explicar que a cozinha está cheia",
-      "Pedir ao gestor que decida mais tarde",
-      "Aquecê-lo e não dizer nada",
-      "Trazê-lo de volta quente, com um copo de vinho"
+      "Não: só as que ficam por resolver",
+      "Sim: todas as reclamações vão para o sistema",
+      "Só se o hóspede o pedir",
+      "Só se uma chefia esteve envolvida"
      ],
-     "q": "O prato de um hóspede chega frio. O que se faz?",
-     "why": "O exemplo da aula: o prato frio não volta só quente, volta com um copo de vinho."
+     "q": "Uma pequena reclamação ficou resolvida. Ainda se deve registar?",
+     "why": "Todas as reclamações se registam, por pequenas ou resolvidas que sejam, para corrigir a causa."
     },
-    "t0": 140,
+    "t0": 191,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

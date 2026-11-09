@@ -7,25 +7,25 @@
     "a": 0,
     "en": {
      "opts": [
-      "4%",
-      "10%",
-      "20%",
-      "30%"
+      "A promise made to every future guest",
+      "A rule checked only at inspections",
+      "A target for the busy season",
+      "A guideline managers may relax"
      ],
-     "q": "What percentage of the land at Craveiral is built?",
-     "why": "The correct answer is 4% because the rest of the land is used for the working farm, orchards, vegetable gardens, animals, and pine forest."
+     "q": "What is a standard, in Craveiral's terms?",
+     "why": "A standard is a promise to every future guest, based on what past guests received."
     },
     "pt": {
      "opts": [
-      "4%",
-      "10%",
-      "20%",
-      "30%"
+      "Uma promessa a cada futuro hóspede",
+      "Uma regra verificada só em inspeções",
+      "Uma meta para a época alta",
+      "Uma orientação que as chefias podem aliviar"
      ],
-     "q": "Que percentagem do terreno do Craveiral está construída?",
-     "why": "A resposta correta é 4%, porque o resto do terreno é a quinta em funcionamento, os pomares, as hortas, os animais e o pinhal."
+     "q": "O que é um padrão, nos termos do Craveiral?",
+     "why": "Um padrão é uma promessa a cada futuro hóspede, com base no que os anteriores receberam."
     },
-    "t0": 29,
+    "t0": 302,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -67,55 +67,25 @@
     "a": 3,
     "en": {
      "opts": [
-      "One",
-      "Four",
-      "Six",
-      "Two"
+      "Housekeeping rotas depend on it",
+      "Guests pay per square metre",
+      "It is checked in a yearly exam",
+      "Precise answers build guest trust"
      ],
-     "q": "A guest asks how many people a studio sleeps. What do you answer?",
-     "why": "The lesson says the studios are 40 square metres and sleep two."
+     "q": "Why must you know each house type in detail?",
+     "why": "Confidence sells and vagueness kills: precise answers create trust."
     },
     "pt": {
      "opts": [
-      "Uma",
-      "Quatro",
-      "Seis",
-      "Duas"
+      "As escalas da limpeza dependem disso",
+      "Os hóspedes pagam ao metro quadrado",
+      "É avaliado num exame anual",
+      "Respostas precisas criam confiança"
      ],
-     "q": "Um hóspede pergunta quantas pessoas dormem num estúdio. O que se responde?",
-     "why": "A aula diz que os estúdios têm 40 metros quadrados e dormem duas pessoas."
+     "q": "Porque é preciso conhecer cada tipo de casa em detalhe?",
+     "why": "A confiança vende e a imprecisão mata: respostas precisas criam confiança."
     },
-    "t0": 72,
-    "type": "application",
-    "gen": true,
-    "model": "llama-3.3-70b@workers-ai",
-    "src": "whisper-small",
-    "generatedAt": 1789644701580,
-    "corrected": true
-   },
-   {
-    "a": 0,
-    "en": {
-     "opts": [
-      "Yes: it sleeps four, up to six with the sofa bed",
-      "No: it only sleeps two people",
-      "Only if they book a second house",
-      "No: it is for couples only"
-     ],
-     "q": "A family with small kids asks if the two-bedroom house works. What do you say?",
-     "why": "The two-bedroom house sleeps four comfortably, up to six, and the sofa bed gives flexibility for small kids."
-    },
-    "pt": {
-     "opts": [
-      "Sim: dorme quatro, até seis com o sofá-cama",
-      "Não: só dorme duas pessoas",
-      "Só se reservarem uma segunda casa",
-      "Não: é só para casais"
-     ],
-     "q": "Uma família com crianças pequenas pergunta se a casa de dois quartos serve. O que se responde?",
-     "why": "A casa de dois quartos dorme quatro pessoas com conforto, até seis, e o sofá-cama dá flexibilidade para crianças pequenas."
-    },
-    "t0": 133,
+    "t0": 128,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -127,26 +97,26 @@
     "a": 2,
     "en": {
      "opts": [
-      "The wellness deck",
-      "The gym",
-      "The nature interpretation centre",
-      "The restaurant terrace"
+      "Pets are not allowed in the houses",
+      "Only in the studios, for a fee",
+      "Pets are welcome, and done properly",
+      "Only outside the high season"
      ],
-     "q": "A group wants to run a yoga retreat. Which space hosts yoga at Craveiral?",
-     "why": "The nature interpretation centre hosts yoga twice a week, plus retreats, workshops and meetings."
+     "q": "A guest asks if they can bring their dog. What is true?",
+     "why": "Pets are welcome at Craveiral, and we do it properly, not grudgingly."
     },
     "pt": {
      "opts": [
-      "O deck de bem-estar",
-      "O ginásio",
-      "O centro de interpretação da natureza",
-      "O terraço do restaurante"
+      "Não se aceitam animais nas casas",
+      "Só nos estúdios, pagando à parte",
+      "Os animais são bem-vindos, e com cuidado",
+      "Só fora da época alta"
      ],
-     "q": "Um grupo quer fazer um retiro de ioga. Que espaço recebe o ioga no Craveiral?",
-     "why": "O centro de interpretação da natureza recebe ioga duas vezes por semana, além de retiros, workshops e reuniões."
+     "q": "Um hóspede pergunta se pode trazer o cão. O que é verdade?",
+     "why": "Os animais são bem-vindos no Craveiral, com cuidado e não a contragosto."
     },
-    "t0": 182,
-    "type": "scenario",
+    "t0": 60,
+    "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
     "src": "whisper-small",
@@ -157,25 +127,55 @@
     "a": 1,
     "en": {
      "opts": [
-      "The nature interpretation centre",
-      "The playground area",
-      "The indoor pool area",
-      "The restaurant dining room"
+      "Give your best guess confidently",
+      "Walk them to someone who can, then learn",
+      "Change the subject politely",
+      "Tell them to look it up online"
      ],
-     "q": "A couple wants a wedding banquet for 300 guests. Which space can host it?",
-     "why": "The lesson says the playground area can host events of up to 300, banquet style."
+     "q": "A guest asks a farm question you can't answer. What do you do?",
+     "why": "Walk them to someone who can answer, then learn the answer for next time."
     },
     "pt": {
      "opts": [
-      "O centro de interpretação da natureza",
-      "A zona do parque infantil",
-      "A zona da piscina interior",
-      "A sala do restaurante"
+      "Dar um palpite com confiança",
+      "Levá-lo a quem saiba e aprender",
+      "Mudar de assunto com educação",
+      "Mandá-lo procurar na internet"
      ],
-     "q": "Um casal quer um banquete de casamento para 300 convidados. Que espaço o pode receber?",
-     "why": "A aula diz que a zona do parque infantil pode receber eventos até 300 pessoas, em formato banquete."
+     "q": "Um hóspede pergunta algo sobre a quinta e não se sabe a resposta. O que se faz?",
+     "why": "Leva-se o hóspede a quem saiba responder e aprende-se a resposta para a próxima."
     },
-    "t0": 199,
+    "t0": 247,
+    "type": "scenario",
+    "gen": true,
+    "model": "llama-3.3-70b@workers-ai",
+    "src": "whisper-small",
+    "generatedAt": 1789644701580,
+    "corrected": true
+   },
+   {
+    "a": 3,
+    "en": {
+     "opts": [
+      "Leave it for the garden team",
+      "Mention it at next week's meeting",
+      "Ignore it: guests rarely notice",
+      "Fix it or report it within the hour"
+     ],
+     "q": "A fallen branch blocks a walkway. It's not your job. What do you do?",
+     "why": "Whatever your role, fix it or report it within the hour."
+    },
+    "pt": {
+     "opts": [
+      "Deixar para a equipa do jardim",
+      "Falar disso na reunião da próxima semana",
+      "Ignorar: os hóspedes raramente reparam",
+      "Resolver ou comunicar dentro de uma hora"
+     ],
+     "q": "Um ramo caído bloqueia um passadiço. Não é tarefa nossa. O que se faz?",
+     "why": "Seja qual for a função, resolve-se ou comunica-se dentro de uma hora."
+    },
+    "t0": 392,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -237,7 +237,7 @@
      "q": "Encontra o ar condicionado ligado numa casa vazia. O que se faz?",
      "why": "A aula diz que o ar condicionado numa casa vazia é dinheiro e carbono desperdiçados: verificar, desligar, fechar."
     },
-    "t0": 70,
+    "t0": 76,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -327,7 +327,7 @@
      "q": "Um fornecedor mais barato não é local. Que pergunta se deve fazer sempre?",
      "why": "A aula diz para fazer sempre as perguntas da Belong: isto fortalece o território? O valor circula aqui?"
     },
-    "t0": 190,
+    "t0": 196,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

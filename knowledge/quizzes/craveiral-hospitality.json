@@ -7,23 +7,23 @@
     "a": 1,
     "en": {
      "opts": [
-      "It is the easiest of the three to measure",
-      "Without money, the farm, jobs and mission die",
-      "Banks require it in the business plan",
-      "The guests ask about it the most"
+      "It is the easiest one to measure",
+      "Without money, the farm and mission die",
+      "Banks require it in business plans",
+      "Guests ask about it the most"
      ],
-     "q": "Why does Pedro put financial sustainability first?",
-     "why": "Pedro says that if Craveiral doesn't make money, the farm, the jobs and the mission all die."
+     "q": "Why does financial sustainability come first at Craveiral?",
+     "why": "If Craveiral doesn't make money, the farm, the jobs and the mission die."
     },
     "pt": {
      "opts": [
-      "É a mais fácil das três de medir",
-      "Sem dinheiro, morrem a quinta, os empregos e a missão",
-      "Os bancos exigem-na no plano de negócio",
-      "É a que os hóspedes mais perguntam"
+      "É a mais fácil de medir",
+      "Sem dinheiro, morrem a quinta e a missão",
+      "Os bancos exigem-na nos planos de negócio",
+      "Os hóspedes perguntam mais por ela"
      ],
-     "q": "Porque é que o Pedro põe a sustentabilidade financeira em primeiro lugar?",
-     "why": "O Pedro diz que, se o Craveiral não der dinheiro, morrem a quinta, os empregos e a missão."
+     "q": "Porque é que a sustentabilidade financeira vem primeiro no Craveiral?",
+     "why": "Se o Craveiral não der dinheiro, morrem a quinta, os empregos e a missão."
     },
     "t0": 44,
     "type": "recall",
@@ -34,26 +34,26 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 2,
     "en": {
      "opts": [
-      "Financial, environmental and social",
       "Financial, technological and cultural",
       "Environmental, cultural and spiritual",
+      "Financial, environmental and social",
       "Social, technological and political"
      ],
-     "q": "Which three kinds of sustainability does Pedro name?",
-     "why": "Pedro always says it fully: financial, environmental and social sustainability."
+     "q": "Which three kinds of sustainability does Craveiral pursue?",
+     "why": "Sustainability at Craveiral is financial, environmental and social, all three together."
     },
     "pt": {
      "opts": [
-      "Financeira, ambiental e social",
       "Financeira, tecnológica e cultural",
       "Ambiental, cultural e espiritual",
+      "Financeira, ambiental e social",
       "Social, tecnológica e política"
      ],
-     "q": "Que três tipos de sustentabilidade nomeia o Pedro?",
-     "why": "O Pedro diz sempre por extenso: sustentabilidade financeira, ambiental e social."
+     "q": "Que três tipos de sustentabilidade procura o Craveiral?",
+     "why": "A sustentabilidade no Craveiral é financeira, ambiental e social, as três em conjunto."
     },
     "t0": 26,
     "type": "recall",
@@ -67,23 +67,23 @@
     "a": 3,
     "en": {
      "opts": [
-      "Running half loads to save time",
-      "Replacing tools at the first scratch",
-      "Offering free extras to every guest",
-      "Filling the washing machine properly"
+      "They are just house rules",
+      "They only matter in high season",
+      "They mainly keep managers happy",
+      "They protect the money behind the mission"
      ],
-     "q": "Which everyday habit does Pedro say protects Craveiral's mission?",
-     "why": "Pedro says avoiding waste, caring for equipment and filling the washing machine properly protect the mission."
+     "q": "Why do avoiding waste and caring for equipment matter?",
+     "why": "Avoiding waste and caring for equipment protect the money that keeps the mission alive."
     },
     "pt": {
      "opts": [
-      "Fazer meias cargas para poupar tempo",
-      "Trocar ferramentas ao primeiro risco",
-      "Oferecer extras grátis a todos os hóspedes",
-      "Encher bem a máquina de lavar"
+      "São apenas regras da casa",
+      "Só importam na época alta",
+      "Servem sobretudo para agradar às chefias",
+      "Protegem o dinheiro que sustenta a missão"
      ],
-     "q": "Que hábito do dia a dia protege a missão do Craveiral, segundo o Pedro?",
-     "why": "O Pedro diz que evitar desperdício, cuidar do equipamento e encher bem a máquina de lavar protegem a missão."
+     "q": "Porque é que evitar desperdício e cuidar do equipamento importa?",
+     "why": "Evitar desperdício e cuidar do equipamento protege o dinheiro que mantém a missão viva."
     },
     "t0": 61,
     "type": "application",
@@ -94,26 +94,26 @@
     "corrected": true
    },
    {
-    "a": 2,
+    "a": 0,
     "en": {
      "opts": [
+      "Ask why: it may be simplified",
       "Keep doing it as you were shown",
-      "Change it yourself without telling anyone",
-      "Ask why: maybe it can be simplified",
-      "Skip that step from now on"
+      "Change it without telling anyone",
+      "Quietly skip that step from now on"
      ],
-     "q": "You do a task in a complicated way and don't know why. What do you do?",
-     "why": "Pedro says to question it and ask: there may be a reason, or it may be clutter we should simplify."
+     "q": "A task seems convoluted and nobody knows why. What do you do?",
+     "why": "Simplicity means questioning convoluted processes: ask, it may be clutter to remove."
     },
     "pt": {
      "opts": [
-      "Continuar a fazer como lhe ensinaram",
-      "Mudá-la por conta própria sem dizer a ninguém",
       "Perguntar porquê: talvez se possa simplificar",
-      "Deixar de fazer esse passo"
+      "Continuar a fazer como se aprendeu",
+      "Mudá-la sem avisar ninguém",
+      "Deixar de fazer esse passo, em silêncio"
      ],
-     "q": "Faz uma tarefa de forma complicada e não sabe porquê. O que se deve fazer?",
-     "why": "O Pedro diz para questionar e perguntar: pode haver uma razão, ou pode ser complicação que devemos simplificar."
+     "q": "Uma tarefa parece complicada e ninguém sabe porquê. O que se faz?",
+     "why": "Simplicidade é questionar processos complicados: pergunta-se, pode ser desarrumação a eliminar."
     },
     "t0": 121,
     "type": "application",
@@ -133,7 +133,7 @@
       "Rustic means no Wi-Fi or heating"
      ],
      "q": "A guest expected a rustic place with few comforts. What is true at Craveiral?",
-     "why": "Pedro says we don't ask guests to trade comfort for authenticity: they get both."
+     "why": "Guests are never asked to trade comfort for authenticity: they get both."
     },
     "pt": {
      "opts": [
@@ -143,7 +143,7 @@
       "Rústico é não ter Wi-Fi nem aquecimento"
      ],
      "q": "Um hóspede esperava um sítio rústico e com pouco conforto. O que é verdade no Craveiral?",
-     "why": "O Pedro diz que não pedimos aos hóspedes que troquem conforto por autenticidade: têm as duas coisas."
+     "why": "Nunca se pede ao hóspede que troque conforto por autenticidade: tem os dois."
     },
     "t0": 154,
     "type": "scenario",
@@ -163,7 +163,7 @@
       "Like a city business hotel"
      ],
      "q": "You are setting up a room. Which approach matches \"simplicity is not scarcity\"?",
-     "why": "Pedro says simplicity is not scarcity: set up rooms warm, generous, comfortable and simple."
+     "why": "Simplicity is not scarcity: warm, generous, comfortable and simple."
     },
     "pt": {
      "opts": [
@@ -173,7 +173,7 @@
       "Como um hotel de negócios na cidade"
      ],
      "q": "Está a preparar um quarto. Que abordagem corresponde a «simplicidade não é escassez»?",
-     "why": "O Pedro diz que simplicidade não é escassez: os quartos devem ser acolhedores, generosos, confortáveis e simples."
+     "why": "Simplicidade não é escassez: acolhedor, generoso, confortável e simples."
     },
     "t0": 165,
     "type": "scenario",
@@ -189,23 +189,23 @@
     "a": 3,
     "en": {
      "opts": [
-      "Service is for guests; hospitality is for staff",
-      "Service is the kitchen; hospitality is reception",
-      "Service is free; hospitality is a paid extra",
-      "Service is technical; hospitality is how the guest feels"
+      "Service is for guests; hospitality for staff",
+      "Service is the kitchen; hospitality, reception",
+      "Service is free; hospitality is paid extra",
+      "Service is technical; hospitality is a feeling"
      ],
      "q": "What is the difference between service and hospitality?",
-     "why": "Pedro says service is technical (hot food, clean room) and hospitality is how the guest feels."
+     "why": "Service is technical and measurable; hospitality is how the guest feels."
     },
     "pt": {
      "opts": [
-      "O serviço é para os hóspedes; a hospitalidade é para a equipa",
-      "O serviço é a cozinha; a hospitalidade é a receção",
-      "O serviço é grátis; a hospitalidade paga-se à parte",
-      "O serviço é técnico; a hospitalidade é como o hóspede se sente"
+      "Serviço é para hóspedes; hospitalidade, para a equipa",
+      "Serviço é a cozinha; hospitalidade, a receção",
+      "Serviço é grátis; hospitalidade é um extra pago",
+      "Serviço é técnico; hospitalidade é o que se sente"
      ],
      "q": "Qual é a diferença entre serviço e hospitalidade?",
-     "why": "O Pedro diz que o serviço é técnico (comida quente, quarto limpo) e a hospitalidade é como o hóspede se sente."
+     "why": "O serviço é técnico e mensurável; a hospitalidade é o que o hóspede sente."
     },
     "t0": 11,
     "type": "recall",
@@ -224,18 +224,18 @@
       "A guest is someone in your home",
       "Guests stay longer than customers"
      ],
-     "q": "Why does Pedro say \"guests\" and not \"customers\"?",
-     "why": "Pedro says a customer is someone in a transaction, while a guest is someone in your home."
+     "q": "Why does Craveiral say \"guests\" and never \"customers\"?",
+     "why": "A customer is someone in a transaction; a guest is someone in your home."
     },
     "pt": {
      "opts": [
       "Os clientes pagam mais do que os hóspedes",
       "«Cliente» soa demasiado informal",
-      "Um hóspede é alguém em nossa casa",
-      "Os hóspedes ficam mais tempo do que os clientes"
+      "Um hóspede é alguém na nossa casa",
+      "Os hóspedes ficam mais tempo"
      ],
-     "q": "Porque é que o Pedro diz «hóspedes» e não «clientes»?",
-     "why": "O Pedro diz que um cliente é alguém numa transação; um hóspede é alguém em nossa casa."
+     "q": "Porque é que o Craveiral diz «hóspedes» e nunca «clientes»?",
+     "why": "Um cliente está numa transação; um hóspede é alguém na nossa casa."
     },
     "t0": 89,
     "type": "recall",
@@ -249,23 +249,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "Like friends at your door, glad to see them",
+      "Like friends arriving at your door",
       "Quickly, so everyone can rest",
       "With the paperwork ready to sign",
-      "With the keys and a short note"
+      "With just the keys and a note"
      ],
      "q": "A family arrives at 22:00 and you are tired. How do you greet them?",
-     "why": "Pedro says every arrival, even at 22:00 when you're tired, gets the posture of welcoming friends home."
+     "why": "Every arrival, even late and tired, is greeted like friends arriving at your home."
     },
     "pt": {
      "opts": [
-      "Como amigos à porta, com alegria",
+      "Como amigos que chegam à nossa porta",
       "Depressa, para todos descansarem",
-      "Com a papelada pronta para assinar",
-      "Com as chaves e um bilhete curto"
+      "Com a papelada pronta a assinar",
+      "Só com as chaves e um bilhete"
      ],
-     "q": "Chega uma família às 22h00 e está cansado. Como a recebe?",
-     "why": "O Pedro diz que todas as chegadas, mesmo às 22h00 e cansado, merecem a postura de quem recebe amigos em casa."
+     "q": "Chega uma família às 22h00 e há cansaço. Como se recebe?",
+     "why": "Cada chegada, mesmo tarde e com cansaço, recebe-se como amigos que chegam a casa."
     },
     "t0": 106,
     "type": "application",
@@ -279,23 +279,23 @@
     "a": 1,
     "en": {
      "opts": [
-      "\"Good evening, your room number?\"",
-      "\"Welcome back, Mrs. Keller.\"",
-      "\"Hello, do you have a booking?\"",
-      "\"Welcome, may I see your ID?\""
+      "By asking her room number",
+      "By name, welcoming her back",
+      "By asking to see her booking",
+      "By asking for her ID"
      ],
-     "q": "A returning guest, Mrs. Keller, walks in. How do you greet her?",
-     "why": "Pedro says to learn and use names: \"Welcome back, Mrs. Keller\" costs nothing and is worth everything."
+     "q": "A returning guest walks up to you. How do you greet her?",
+     "why": "Learn guests' names and use them: it costs nothing and is worth everything."
     },
     "pt": {
      "opts": [
-      "«Boa noite, o número do quarto?»",
-      "«Bem-vinda de volta, Sra. Keller.»",
-      "«Olá, tem reserva?»",
-      "«Bem-vinda, pode mostrar a identificação?»"
+      "Pedindo o número do quarto",
+      "Pelo nome, com um «bem-vinda de volta»",
+      "Pedindo para ver a reserva",
+      "Pedindo a identificação"
      ],
-     "q": "Uma hóspede habitual, a Sra. Keller, entra. Como a cumprimenta?",
-     "why": "O Pedro diz para aprender e usar os nomes: «Bem-vinda de volta, Sra. Keller» não custa nada e vale tudo."
+     "q": "Uma hóspede habitual aproxima-se. Como se cumprimenta?",
+     "why": "Aprender e usar os nomes dos hóspedes não custa nada e vale tudo."
     },
     "t0": 124,
     "type": "application",
@@ -309,25 +309,25 @@
     "a": 3,
     "en": {
      "opts": [
-      "A discount offered at check-out",
-      "Waiting until they ask for something",
-      "The same welcome as everyone else",
-      "Something waiting that shows we noticed"
+      "Waiting until the guest asks",
+      "Offering discounts at check-out",
+      "Giving everyone the same welcome",
+      "Meeting needs before the guest asks"
      ],
-     "q": "A couple booked a house for their anniversary. What shows anticipation?",
-     "why": "Pedro's example of anticipation: something waiting for the anniversary couple that says we noticed."
+     "q": "What does anticipation mean in Craveiral hospitality?",
+     "why": "Anticipation answers needs the guest hasn't voiced yet: attention plus initiative."
     },
     "pt": {
      "opts": [
-      "Um desconto oferecido no check-out",
-      "Esperar até pedirem alguma coisa",
-      "As mesmas boas-vindas que toda a gente",
-      "Algo à espera que mostre que reparámos"
+      "Esperar que o hóspede peça",
+      "Oferecer descontos no check-out",
+      "Dar a todos o mesmo acolhimento",
+      "Responder a necessidades antes do pedido"
      ],
-     "q": "Um casal reservou uma casa para o aniversário de casamento. O que mostra antecipação?",
-     "why": "O exemplo de antecipação do Pedro: algo à espera do casal que mostre que reparámos."
+     "q": "O que significa antecipar, na hospitalidade do Craveiral?",
+     "why": "Antecipar é responder a necessidades que o hóspede ainda não disse: atenção mais iniciativa."
     },
-    "t0": 163,
+    "t0": 152,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -339,25 +339,25 @@
     "a": 2,
     "en": {
      "opts": [
-      "Zambujeira",
-      "Odeceixe",
-      "Carvalhal",
-      "Carvoeiro"
+      "Say only reception gives tips",
+      "Tell them to search online",
+      "Tell them: everyone should know the land",
+      "Say it is not your area"
      ],
-     "q": "A family with small children asks which beach is easiest. Which do you recommend?",
-     "why": "Pedro says Carvalhal has the easiest access for small children, and our beach bar is right there."
+     "q": "A guest asks you where to watch the sunset. What do you do?",
+     "why": "Every team member should know the land and be the guest's connection to it."
     },
     "pt": {
      "opts": [
-      "Zambujeira",
-      "Odeceixe",
-      "Carvalhal",
-      "Carvoeiro"
+      "Dizer que só a receção dá dicas",
+      "Mandar procurar na internet",
+      "Responder: todos devem conhecer a terra",
+      "Dizer que não é da sua área"
      ],
-     "q": "Uma família com crianças pequenas pergunta qual é a praia mais fácil. Qual se recomenda?",
-     "why": "O Pedro diz que o Carvalhal tem o acesso mais fácil para crianças pequenas, e o nosso bar de praia fica mesmo lá."
+     "q": "Um hóspede pergunta onde ver o pôr do sol. O que se faz?",
+     "why": "Toda a equipa deve conhecer a terra e ser a ligação do hóspede ao território."
     },
-    "t0": 195,
+    "t0": 190,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",

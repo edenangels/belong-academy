@@ -7,25 +7,25 @@
     "a": 3,
     "en": {
      "opts": [
-      "About 10%",
-      "About 30%",
-      "About half",
-      "Over 70%"
+      "A marketing label for the menu",
+      "Food delivered daily from Lisbon",
+      "Only imported organic produce",
+      "A supply chain you can walk in minutes"
      ],
-     "q": "How much of the food served is grown on the property?",
-     "why": "Pedro says over 70% of what we serve is grown on this property."
+     "q": "What does \"root to table\" mean at Craveiral?",
+     "why": "Root to table is not a marketing garnish: it is a supply chain you can walk."
     },
     "pt": {
      "opts": [
-      "Cerca de 10%",
-      "Cerca de 30%",
-      "Cerca de metade",
-      "Mais de 70%"
+      "Um rótulo de marketing para a ementa",
+      "Comida entregue diariamente de Lisboa",
+      "Só produtos biológicos importados",
+      "Uma cadeia que se percorre a pé em minutos"
      ],
-     "q": "Que parte da comida servida é cultivada na propriedade?",
-     "why": "O Pedro diz que mais de 70% do que servimos é cultivado nesta propriedade."
+     "q": "O que significa «da raiz à mesa» no Craveiral?",
+     "why": "Da raiz à mesa não é enfeite de marketing: é uma cadeia que se percorre a pé."
     },
-    "t0": 29,
+    "t0": 77,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -43,7 +43,7 @@
       "To match what guests ask for most"
      ],
      "q": "Why does the menu change with the seasons?",
-     "why": "Pedro says the menu rotates with the seasons because the farm rotates with the seasons."
+     "why": "The menu rotates with the seasons because the farm does."
     },
     "pt": {
      "opts": [
@@ -53,7 +53,7 @@
       "Para dar o que os hóspedes mais pedem"
      ],
      "q": "Porque é que a ementa muda com as estações?",
-     "why": "O Pedro diz que a ementa roda com as estações porque a quinta roda com as estações."
+     "why": "A ementa muda com as estações porque a quinta também muda."
     },
     "t0": 55,
     "type": "recall",
@@ -64,28 +64,28 @@
     "corrected": true
    },
    {
-    "a": 2,
+    "a": 0,
     "en": {
      "opts": [
-      "A sign dinner needs improving",
-      "A reason to raise breakfast prices",
-      "A normal compliment to protect",
-      "A hint to serve breakfast faster"
+      "As a statement of identity",
+      "As a quick buffet before activities",
+      "As a minor meal of the day",
+      "As an optional paid extra"
      ],
-     "q": "At checkout, a guest says breakfast was their favourite part. What is that?",
-     "why": "Pedro says many guests say breakfast was their favourite part: that's normal, and a compliment to protect."
+     "q": "How does Craveiral see its breakfast?",
+     "why": "Breakfast is a statement of identity: house breads, preserves, farm eggs, unhurried."
     },
     "pt": {
      "opts": [
-      "Um sinal de que o jantar tem de melhorar",
-      "Uma razão para subir o preço do pequeno-almoço",
-      "Um elogio normal, que é preciso proteger",
-      "Uma dica para servir mais depressa"
+      "Como uma afirmação de identidade",
+      "Como um bufete rápido antes das atividades",
+      "Como uma refeição menor do dia",
+      "Como um extra opcional pago"
      ],
-     "q": "No check-out, um hóspede diz que o pequeno-almoço foi o melhor da estadia. O que é isto?",
-     "why": "O Pedro diz que muitos hóspedes dizem que o pequeno-almoço foi o melhor: é normal, e é um elogio a proteger."
+     "q": "Como vê o Craveiral o seu pequeno-almoço?",
+     "why": "O pequeno-almoço é uma afirmação de identidade: pão da casa, compotas, ovos da quinta, sem pressa."
     },
-    "t0": 99,
+    "t0": 87,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -98,24 +98,24 @@
     "en": {
      "opts": [
       "Price, alcohol level and grape",
-      "Where it's from, what it's like, what it goes with",
+      "Origin, character, and what it goes with",
       "Vintage, awards and critic score",
-      "Winemaker's name, age and family history"
+      "Winemaker's name, age and family"
      ],
-     "q": "A guest asks about a wine. Which three things should you tell them?",
-     "why": "Pedro says you need three sentences per wine: where it's from, what it's like, what it loves to be eaten with."
+     "q": "A guest asks about a wine. Which three things do you tell them?",
+     "why": "Three sentences per wine: where it's from, what it's like, what it goes with."
     },
     "pt": {
      "opts": [
       "Preço, teor alcoólico e casta",
-      "De onde vem, como é, com que comida combina",
-      "Ano, prémios e pontuação da crítica",
-      "Nome do produtor, idade e história da família"
+      "Origem, carácter e com que combina",
+      "Colheita, prémios e pontuação da crítica",
+      "Nome, idade e família do produtor"
      ],
-     "q": "Um hóspede pergunta por um vinho. Que três coisas se devem dizer?",
-     "why": "O Pedro diz que bastam três frases por vinho: de onde vem, como é e com que comida gosta de ser bebido."
+     "q": "Um hóspede pergunta por um vinho. Que três coisas se dizem?",
+     "why": "Três frases por vinho: de onde vem, como é e com que combina."
     },
-    "t0": 177,
+    "t0": 182,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -124,28 +124,28 @@
     "verified": true
    },
    {
-    "a": 3,
+    "a": 2,
     "en": {
      "opts": [
-      "From a supplier in Lisbon",
-      "From a regional wholesale market",
-      "From an organic farm in Spain",
-      "From our garden, picked this morning"
+      "As a long talk at the table",
+      "Only on the printed menu",
+      "In one true line",
+      "Never, unless the guest insists"
      ],
-     "q": "A guest asks where the courgettes on their plate came from. What do you say?",
-     "why": "Pedro's one-line example: \"The courgettes are from the garden, picked this morning.\""
+     "q": "How do you tell the story of a dish at the table?",
+     "why": "Every dish has a true story: tell it in one line, not a lecture."
     },
     "pt": {
      "opts": [
-      "De um fornecedor em Lisboa",
-      "De um mercado abastecedor regional",
-      "De uma quinta biológica em Espanha",
-      "Da nossa horta, apanhadas esta manhã"
+      "Numa longa conversa à mesa",
+      "Só na ementa impressa",
+      "Numa linha verdadeira",
+      "Nunca, a não ser que o hóspede insista"
      ],
-     "q": "Um hóspede pergunta de onde vêm as curgetes do prato. O que se responde?",
-     "why": "O exemplo de uma linha do Pedro: «As curgetes são da horta, apanhadas esta manhã.»"
+     "q": "Como se conta a história de um prato à mesa?",
+     "why": "Cada prato tem uma história verdadeira: conta-se numa linha, sem palestras."
     },
-    "t0": 275,
+    "t0": 272,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -154,28 +154,28 @@
     "corrected": true
    },
    {
-    "a": 0,
+    "a": 3,
     "en": {
      "opts": [
-      "The pizza class, where kids make their own",
-      "A cheese tasting in the dining room",
-      "A cooking demo for adults",
-      "A wine-pairing dinner"
+      "As an extra charge on the bill",
+      "As a request to politely refuse",
+      "As the guest's own problem",
+      "As hospitality, not a hassle"
      ],
-     "q": "A family asks for a food activity their children can do. What do you suggest?",
-     "why": "Pedro says children make their own pizza in the pizza classes at the wood-fired oven."
+     "q": "A guest has a food intolerance. How does Craveiral treat it?",
+     "why": "Dietary needs are hospitality, not hassle: the guest must never feel like a problem."
     },
     "pt": {
      "opts": [
-      "A aula de pizza, onde as crianças fazem a sua",
-      "Uma prova de queijos na sala de refeições",
-      "Uma demonstração de cozinha para adultos",
-      "Um jantar de harmonização de vinhos"
+      "Como um extra a cobrar na conta",
+      "Como um pedido a recusar com educação",
+      "Como um problema do hóspede",
+      "Como hospitalidade, não um incómodo"
      ],
-     "q": "Uma família pede uma atividade de comida para os filhos. O que se sugere?",
-     "why": "O Pedro diz que as crianças fazem a sua própria pizza nas aulas de pizza do forno a lenha."
+     "q": "Um hóspede tem uma intolerância alimentar. Como a trata o Craveiral?",
+     "why": "Necessidades alimentares são hospitalidade, não incómodo: o hóspede não se deve sentir um problema."
     },
-    "t0": 139,
+    "t0": 306,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -189,23 +189,23 @@
     "a": 2,
     "en": {
      "opts": [
-      "A separate business with its own rules",
-      "A fine-dining seafood restaurant",
-      "Craveiral's philosophy in flip-flops",
-      "A surf school that sells snacks"
+      "A looser one: it's the beach",
+      "Its own separate set of rules",
+      "The same care as at the farm",
+      "Speed matters more than care"
      ],
-     "q": "How does Pedro describe the Bar da Praia do Carvalhal?",
-     "why": "Pedro calls the beach bar \"Craveiral's philosophy in flip-flops\": same honest food and the same care."
+     "q": "Which standard applies at the beach bar?",
+     "why": "The beach bar is Craveiral's philosophy in flip-flops: same honest food, same care."
     },
     "pt": {
      "opts": [
-      "Um negócio à parte, com regras próprias",
-      "Um restaurante de marisco requintado",
-      "A filosofia do Craveiral de chinelos",
-      "Uma escola de surf que vende petiscos"
+      "Um mais solto: é a praia",
+      "Regras próprias e separadas",
+      "O mesmo cuidado que na quinta",
+      "A rapidez conta mais do que o cuidado"
      ],
-     "q": "Como descreve o Pedro o Bar da Praia do Carvalhal?",
-     "why": "O Pedro chama ao bar de praia «a filosofia do Craveiral de chinelos»: a mesma comida honesta e o mesmo cuidado."
+     "q": "Que padrão se aplica no bar de praia?",
+     "why": "O bar de praia é a filosofia do Craveiral de chinelos: a mesma comida honesta, o mesmo cuidado."
     },
     "t0": 31,
     "type": "recall",
@@ -255,7 +255,7 @@
       "Moving them around inside the business"
      ],
      "q": "When you recommend the beach bar to a guest, what are you doing?",
-     "why": "Pedro says recommending the beach isn't sending guests away: you're moving them around inside the business."
+     "why": "Recommending the beach moves guests around inside the business, not away from it."
     },
     "pt": {
      "opts": [
@@ -265,9 +265,9 @@
       "Mantê-lo dentro do mesmo negócio"
      ],
      "q": "Ao recomendar o bar de praia a um hóspede, o que se está a fazer?",
-     "why": "O Pedro diz que recomendar a praia não é mandar o hóspede embora: é movê-lo dentro do próprio negócio."
+     "why": "Recomendar a praia é levar o hóspede dentro do próprio negócio, não para fora dele."
     },
-    "t0": 54,
+    "t0": 58,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -279,23 +279,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "The same kitchen, chain and care as the farm",
-      "A simpler menu, since it is off-site",
-      "Whatever the client's own caterer uses",
+      "The same kitchen, chain and care",
+      "A simpler menu, since it's off-site",
+      "Whatever the client's caterer uses",
       "The standard set by the venue"
      ],
      "q": "We cater a dinner in a private home. Which standard applies?",
-     "why": "Pedro says catering uses the same root-to-table kitchen, same chain, same care wherever it happens."
+     "why": "Catering uses the same root-to-table kitchen, chain and care wherever it happens."
     },
     "pt": {
      "opts": [
-      "A mesma cozinha, cadeia e cuidado da quinta",
+      "A mesma cozinha, cadeia e cuidado",
       "Uma ementa mais simples, por ser fora",
-      "O que o fornecedor habitual do cliente usar",
+      "O que o catering do cliente usar",
       "O padrão definido pelo espaço"
      ],
      "q": "Fazemos o catering de um jantar numa casa particular. Que padrão se aplica?",
-     "why": "O Pedro diz que o catering usa a mesma cozinha da terra para a mesa, a mesma cadeia e o mesmo cuidado, onde quer que seja."
+     "why": "O catering usa a mesma cozinha da raiz à mesa, a mesma cadeia e o mesmo cuidado, onde quer que seja."
     },
     "t0": 132,
     "type": "application",
@@ -315,7 +315,7 @@
       "Only reception and the manager"
      ],
      "q": "There is a wedding on the property today. Who is on the wedding team?",
-     "why": "Pedro says when there's a wedding on the property, everyone, whatever their role, is on the wedding team."
+     "why": "When there's a wedding, everyone, whatever their role, is on the wedding team."
     },
     "pt": {
      "opts": [
@@ -325,7 +325,7 @@
       "Só a receção e o gestor"
      ],
      "q": "Hoje há um casamento na propriedade. Quem faz parte da equipa do casamento?",
-     "why": "O Pedro diz que, quando há um casamento na propriedade, toda a gente, seja qual for a função, faz parte da equipa do casamento."
+     "why": "Quando há casamento, todos, seja qual for a função, fazem parte da equipa."
     },
     "t0": 177,
     "type": "scenario",
@@ -345,7 +345,7 @@
       "Say weddings only happen in Lisbon"
      ],
      "q": "A couple loves dinner here and says they just got engaged. What do you do?",
-     "why": "Pedro says the couple who love dinner should know we do weddings: that's not selling, it's hospitality."
+     "why": "Telling a couple who love dinner that we do weddings is hospitality, not selling."
     },
     "pt": {
      "opts": [
@@ -355,7 +355,7 @@
       "Dizer que os casamentos são só em Lisboa"
      ],
      "q": "Um casal adora o jantar e conta que acabou de ficar noivo. O que se faz?",
-     "why": "O Pedro diz que o casal que adora o jantar deve saber que fazemos casamentos: isso não é vender, é hospitalidade."
+     "why": "Contar a um casal que adora o jantar que fazemos casamentos é hospitalidade, não venda."
     },
     "t0": 223,
     "type": "scenario",

@@ -13,7 +13,7 @@
       "A name chosen by the founder's family"
      ],
      "q": "What is the origin of the name 'Craveiral'?",
-     "why": "The name 'Craveiral' comes from the Portuguese word for a field of carnations, which is what the land was when the founder first found it."
+     "why": "In Portuguese, a field of carnations is a \"Craveiral\": that is what the land was."
     },
     "pt": {
      "opts": [
@@ -23,9 +23,9 @@
       "Um nome escolhido pela família do fundador"
      ],
      "q": "Qual é a origem do nome «Craveiral»?",
-     "why": "Em português, um campo de cravos chama-se «craveiral» — e era isso que o terreno era quando o fundador o encontrou."
+     "why": "Em português, um campo de cravos é um «Craveiral»: era isso que a terra era."
     },
-    "t0": 63,
+    "t0": 68,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -37,25 +37,25 @@
     "a": 3,
     "en": {
      "opts": [
-      "2010",
-      "2012",
-      "2020",
-      "2018"
+      "The land is ours to make profitable",
+      "Build first, protect what is left",
+      "The farm is a backdrop for guests",
+      "We don't own it; we belong to it"
      ],
-     "q": "In which year did Craveiral open to its first guests?",
-     "why": "Pedro found the field in 2010 and Craveiral opened in 2018, eight years later."
+     "q": "Which phrase sums up Craveiral's relationship with the land?",
+     "why": "We do not own the land; we belong to it for a while."
     },
     "pt": {
      "opts": [
-      "2010",
-      "2012",
-      "2020",
-      "2018"
+      "A terra é nossa para dar lucro",
+      "Construir primeiro, proteger o que sobra",
+      "A quinta é um cenário para hóspedes",
+      "Não a possuímos; pertencemos-lhe"
      ],
-     "q": "Em que ano abriu o Craveiral aos primeiros hóspedes?",
-     "why": "O Pedro encontrou o terreno em 2010 e o Craveiral abriu em 2018, oito anos depois."
+     "q": "Que frase resume a relação do Craveiral com a terra?",
+     "why": "Não somos donos da terra; pertencemos-lhe por um tempo."
     },
-    "t0": 98,
+    "t0": 219,
     "type": "recall",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -67,23 +67,23 @@
     "a": 0,
     "en": {
      "opts": [
-      "The space and silence are what guests come for",
+      "Space and silence are what guests come for",
       "The council does not allow more building",
-      "There is no budget left to build more",
+      "There is no budget left to build",
       "More houses are planned for next year"
      ],
      "q": "A guest asks why Craveiral doesn't build more houses. What do you say?",
-     "why": "Pedro says only 4% is built on purpose: the emptiness, space and silence are the product."
+     "why": "Building little is a choice: the space and silence are the product."
     },
     "pt": {
      "opts": [
-      "O espaço e o silêncio são o que os hóspedes procuram",
+      "O espaço e o silêncio são o que se procura",
       "A câmara não permite construir mais",
       "Não há orçamento para construir mais",
-      "Estão previstas mais casas para o próximo ano"
+      "Há mais casas previstas para o próximo ano"
      ],
      "q": "Um hóspede pergunta porque é que o Craveiral não constrói mais casas. O que se responde?",
-     "why": "O Pedro diz que só 4% está construído de propósito: o vazio, o espaço e o silêncio são o produto."
+     "why": "Construir pouco é uma escolha: o espaço e o silêncio são o produto."
     },
     "t0": 176,
     "type": "application",
@@ -115,7 +115,7 @@
      "q": "Um hóspede pergunta porque é que os caminhos são passadiços de madeira elevados. O que se responde?",
      "why": "A aula diz que a madeira elevada deixa a terra respirar: a água corre, as plantas crescem, o solo fica vivo."
     },
-    "t0": 195,
+    "t0": 199,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -132,8 +132,8 @@
       "Keep guests away from the farm areas",
       "Leave land care to the farm team"
      ],
-     "q": "\"We belong to the land for a while.\" What does that ask of you at work?",
-     "why": "Pedro says that if we belong to the land, our job is to leave it better than we found it."
+     "q": "\"We belong to the land for a while.\" What does that ask of you?",
+     "why": "If we belong to the land, our job is to leave it better than we found it."
     },
     "pt": {
      "opts": [
@@ -142,8 +142,8 @@
       "Manter os hóspedes longe das zonas da quinta",
       "Deixar o cuidado da terra à equipa da quinta"
      ],
-     "q": "«Pertencemos à terra por um tempo.» O que é que isto pede a cada um no trabalho?",
-     "why": "O Pedro diz que, se pertencemos à terra, o nosso trabalho é deixá-la melhor do que a encontrámos."
+     "q": "«Pertencemos à terra por um tempo.» O que é que isto pede a cada um?",
+     "why": "Se pertencemos à terra, o trabalho é deixá-la melhor do que a encontrámos."
     },
     "t0": 237,
     "type": "scenario",
@@ -163,7 +163,7 @@
       "Land first; the hotel sustains it"
      ],
      "q": "A guest asks if Craveiral is mainly a hotel. What is the right answer?",
-     "why": "Pedro says Craveiral was built as a relationship with the land, and the hotel is how it is sustained: land first, hotel second."
+     "why": "Craveiral was built as a relationship with the land; the hotel sustains it."
     },
     "pt": {
      "opts": [
@@ -173,9 +173,9 @@
       "Primeiro a terra; o hotel sustenta-a"
      ],
      "q": "Um hóspede pergunta se o Craveiral é sobretudo um hotel. Qual é a resposta certa?",
-     "why": "O Pedro diz que o Craveiral foi construído como uma relação com a terra e que o hotel é o que a sustenta: primeiro a terra, depois o hotel."
+     "why": "O Craveiral nasceu como uma relação com a terra; o hotel é o que a sustenta."
     },
-    "t0": 142,
+    "t0": 147,
     "type": "scenario",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -189,23 +189,23 @@
     "a": 2,
     "en": {
      "opts": [
-      "Every guest deserves to be treated like family",
-      "A full house is the sign of a good host",
-      "A place well cared for cares for those who inhabit it",
-      "Good food and good company make a good place"
+      "The customer is always right",
+      "A full house marks a good host",
+      "A well-cared-for place cares for its people",
+      "Good food makes a good place"
      ],
      "q": "Which sentence is Belong founded on?",
-     "why": "Pedro calls \"A place well cared for cares for those who inhabit it\" the foundation of everything."
+     "why": "Belong rests on one sentence: a place well cared for cares for those who inhabit it."
     },
     "pt": {
      "opts": [
-      "Cada hóspede merece ser tratado como família",
+      "O cliente tem sempre razão",
       "Casa cheia é sinal de bom anfitrião",
       "Um lugar bem cuidado cuida de quem o habita",
-      "Boa comida e boa companhia fazem um bom lugar"
+      "Boa comida faz um bom lugar"
      ],
      "q": "Em que frase assenta a Belong?",
-     "why": "O Pedro chama a «Um lugar bem cuidado cuida de quem o habita» a base de tudo."
+     "why": "A Belong assenta numa frase: um lugar bem cuidado cuida de quem o habita."
     },
     "t0": 37,
     "type": "recall",
@@ -221,21 +221,21 @@
      "opts": [
       "Become the best rural hotel in Portugal",
       "Regenerate the territory through a circular economy",
-      "Preserve the coast by building as little as possible",
+      "Preserve the coast by building little",
       "Bring Lisbon's restaurants to the countryside"
      ],
      "q": "What is Belong's vision, in one line?",
-     "why": "The vision is exactly one line: to regenerate the territory through a circular economy."
+     "why": "The vision is one line: to regenerate the territory through a circular economy."
     },
     "pt": {
      "opts": [
       "Ser o melhor hotel rural de Portugal",
-      "Regenerar o território através de uma economia circular",
-      "Preservar a costa construindo o mínimo possível",
-      "Levar os restaurantes de Lisboa para o campo"
+      "Regenerar o território através da economia circular",
+      "Preservar a costa construindo pouco",
+      "Levar os restaurantes de Lisboa ao campo"
      ],
      "q": "Qual é a visão da Belong, numa linha?",
-     "why": "A visão é exatamente uma linha: regenerar o território através de uma economia circular."
+     "why": "A visão é uma linha: regenerar o território através de uma economia circular."
     },
     "t0": 115,
     "type": "recall",
@@ -254,20 +254,20 @@
       "Avoid damaging the land where possible",
       "Build only with recycled materials"
      ],
-     "q": "Pedro says \"regenerate\" is more than \"don't damage\". What does it mean?",
-     "why": "Pedro says regenerate means not just preserve or avoid damage, but actively give back more than we take."
+     "q": "In Belong's vision, what does \"regenerate\" mean?",
+     "why": "Regenerate means more than preserving or not damaging: give back more than we take."
     },
     "pt": {
      "opts": [
-      "Dar ativamente mais do que tiramos",
-      "Manter a terra exatamente como a encontrámos",
+      "Devolver ativamente mais do que se tira",
+      "Manter a terra tal como estava",
       "Evitar estragar a terra sempre que possível",
       "Construir só com materiais reciclados"
      ],
-     "q": "O Pedro diz que «regenerar» é mais do que «não estragar». O que significa?",
-     "why": "O Pedro diz que regenerar não é só preservar ou não estragar: é dar ativamente mais do que tiramos."
+     "q": "Na visão da Belong, o que significa «regenerar»?",
+     "why": "Regenerar é mais do que preservar ou não estragar: é devolver mais do que se tira."
     },
-    "t0": 129,
+    "t0": 135,
     "type": "application",
     "gen": true,
     "model": "llama-3.3-70b@workers-ai",
@@ -315,7 +315,7 @@
       "Only in the winter months"
      ],
      "q": "A São Teotónio resident asks if they can use the Belong laundry. What is true?",
-     "why": "Pedro says the laundry serves the hotel and the village."
+     "why": "The laundry serves both the hotel and the village of São Teotónio."
     },
     "pt": {
      "opts": [
@@ -325,7 +325,7 @@
       "Só nos meses de inverno"
      ],
      "q": "Um morador de São Teotónio pergunta se pode usar a lavandaria da Belong. O que é verdade?",
-     "why": "O Pedro diz que a lavandaria serve o hotel e a aldeia."
+     "why": "A lavandaria serve o hotel e a aldeia de São Teotónio."
     },
     "t0": 196,
     "type": "scenario",
@@ -345,7 +345,7 @@
       "Explain how long it takes to cook"
      ],
      "q": "A guest asks about a dish. What should you do?",
-     "why": "Pedro says: don't just name the dish, tell them where it came from."
+     "why": "Don't just name the dish: tell the guest where it came from."
     },
     "pt": {
      "opts": [
@@ -355,7 +355,7 @@
       "Explicar quanto tempo demora a cozinhar"
      ],
      "q": "Um hóspede pergunta por um prato. O que se deve fazer?",
-     "why": "O Pedro diz: não basta dizer o nome do prato, é preciso contar de onde veio."
+     "why": "Não basta dizer o nome do prato: conta-se de onde veio."
     },
     "t0": 311,
     "type": "scenario",
