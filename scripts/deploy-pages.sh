@@ -15,7 +15,9 @@ BRANCH=${BRANCH:-main}
 if [ -n "${ACADEMY_WORK:-}" ]; then DIST="$ACADEMY_WORK/belong-dist"
 elif [ -d "/Volumes/Ultra Touch" ]; then DIST="/Volumes/Ultra Touch/Academy-OS/work/belong-dist"
 else DIST="$(mktemp -d)/belong-dist"; fi
-export npm_config_cache="${npm_config_cache:-$HOME/.npm}"   # a cache folder that always exists
+# npm's cache must be somewhere writable: a cache on an unplugged drive makes every npx fail
+NPMC="${NPM_CONFIG_CACHE:-${npm_config_cache:-$HOME/.npm}}"; mkdir -p "$NPMC" 2>/dev/null || NPMC="$HOME/.npm"
+export NPM_CONFIG_CACHE="$NPMC" npm_config_cache="$NPMC"
 node test/run.mjs >/dev/null || { echo "✗ tests failing — not deploying"; exit 1; }
 if [ "${1:-}" != "--no-bump" ]; then
   V=$(grep -o "v=bel[0-9]*" index.html | sort -u | head -1 | grep -oE "[0-9]+"); N=$((V+1))
